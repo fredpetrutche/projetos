@@ -76,6 +76,8 @@
   .story > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
   .story .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; align-self: flex-start; }
   .story .job { font-family: var(--mono); font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .story .fase { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em; text-transform: uppercase;
+                 font-weight: 700; color: var(--accent); margin: -.2rem 0 -.25rem; }
   .story .txt { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
   .story .txt em { color: var(--ink); font-style: normal; font-weight: 600; }
   .story .vid { font-size: .75rem; color: var(--ink-faint); border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
@@ -577,13 +579,23 @@
   <section id="logica">
     <h2><span class="n">1</span> A lógica das três visitas</h2>
     <p class="prose">
-      O restaurateur do vídeo não está vendendo desconto — está comprando <strong>três visitas</strong>,
-      porque descobriu que a terceira é o ponto de virada: depois dela o cliente volta sozinho em 72% das vezes.
-      Cada visita tem um trabalho diferente, e é isso que decide qual brinde entra em cada uma.
+      Não é venda de desconto — é compra de <strong>três visitas</strong>, porque a terceira é o ponto de
+      virada: depois dela o cliente volta sozinho em mais de 70% das vezes. O setor tem nome para isso —
+      a <strong>regra das três visitas</strong>, e a janela entre a 1ª e a 3ª é chamada de
+      <em>pre-loyalty gap</em>. E tem nome para cada degrau, que é o que decide qual brinde entra em cada um:
     </p>
+    <div class="notes">
+      <div class="note-item"><span class="tag acc">as três fases</span><span>
+        <strong>1ª visita é curiosidade. 2ª é confirmação. 3ª é formação de hábito.</strong>
+        A pessoa vem ver como é; volta para conferir se foi sorte; e na terceira para de decidir —
+        vira rotina. <em>Cada brinde existe para vencer a dúvida daquele degrau</em>, não para dar
+        prêmio. Errar o brinde na fase errada é gastar a bala no alvo errado.
+      </span></div>
+    </div>
     <div class="story">
       <div>
         <span class="vnum">V1</span>
+        <span class="fase">Curiosidade</span>
         <span class="job">Provar o produto</span>
         <span class="txt">A pessoa chega, <em>paga normalmente</em> e faz o cadastro (QR do display → nome e celular). Nada é dado
         nesta visita — ela deixa margem cheia, e o 1º brinde fica liberado para a próxima.</span>
@@ -591,6 +603,7 @@
       </div>
       <div>
         <span class="vnum">V2</span>
+        <span class="fase">Confirmação</span>
         <span class="job">Provar a variedade</span>
         <span class="txt">Ela volta e resgata o primeiro brinde. Aqui você <em>já sabe o que ela levou da primeira vez</em> —
         dá para sugerir o próximo sabor. Se ela só conhece um cookie, é cliente de um produto; se conhece dois, é cliente da loja.</span>
@@ -598,6 +611,7 @@
       </div>
       <div>
         <span class="vnum">V3</span>
+        <span class="fase">Formação de hábito</span>
         <span class="job">Revelar o que ela não sabia</span>
         <span class="txt">O brinde aqui deveria ser algo que ela <em>não conhece</em>. Torta e milkshake fazem esse papel:
         92% dos pedidos da loja não levam torta hoje. É o que muda a percepção de "loja de cookie" para "cafeteria".</span>
@@ -666,6 +680,25 @@
   <section>
     <h2><span class="n">7</span> Premissas</h2>
     <div class="controls" id="controls"></div>
+    <h3 class="sub">Taxas naturais — o que aconteceria sem campanha nenhuma</h3>
+    <div class="controls" id="controlsNatural"></div>
+    <div class="note-item"><span class="tag bad">a premissa mais frágil da página</span><span>
+      Estes quatro números não são de Paulínia — vieram do vídeo, e a pesquisa de setor mostra que
+      <strong>o primeiro deles está no teto otimista da faixa real</strong>. Para a 1ª → 2ª visita, a
+      Bloom Intelligence mede <strong>28,8%</strong> e diz que 77% dos clientes de primeira vez nunca
+      voltam; a coorte publicada pela Nation's Restaurant News dá <strong>47,2%</strong> (472 de cada
+      1.000). O vídeo disse 42%.
+      <br><br>
+      <em>O único dos três que a pesquisa confirma é o último</em>: acima de 70% de chance de 4ª visita
+      para quem chegou à 3ª aparece em várias fontes. A &ldquo;regra das três visitas&rdquo; é conceito
+      reconhecido do setor — <strong>mas não tem estudo de origem</strong>. É observação de mercado
+      repetida há décadas, não medição.
+      <br><br>
+      <strong>Arraste o primeiro slider para 28% e olhe a seção 6.</strong> É o teste que importa: a
+      campanha fica <em>melhor</em> no papel, porque o tracejado do &ldquo;sem campanha&rdquo; desaba —
+      mas aí o seu 50% com cupom vira uma promessa de +22 pontos, não de +8.
+    </span></div>
+
     <h3 class="sub">Venda extra por visita — medida no histórico</h3>
     <div class="controls" id="controlsExtra"></div>
     <div class="note-item"><span class="tag acc">medido</span><span>
@@ -711,7 +744,7 @@
       <li><strong>Vendas de loja</strong>: <code>vendas_consumer_itens_historico_pedido</code> e <code>vendas_consumer_pedidos_individual</code>, Paulínia, jun+jul/2026, canais <code>caixa</code> + <code>balcao</code> + <code>mesa</code> — 2.411 pedidos. Os 426 de delivery ficam de fora.</li>
       <li><strong>CMV</strong>: <code>cmv_produtos</code>, atualizado na base em 30–31/07/2026. Cookie R$ 5,01 sem os premium (mín. R$ 3,83 Churros · máx. R$ 8,71 Pistache). Fatia da Torta Perfeita R$ 9,04 — confere com a inteira (R$ 72,32 ÷ 8). Milkshake R$ 13,20 (R$ 12,04 de ingrediente + R$ 1,16 de copo/tampa/canudo; só existe copo de 440 ml).</li>
       <li><strong>Venda extra por visita</strong>: medida nos mesmos pedidos, descontando o que o brinde substitui. Compre-e-ganhe = pedido − 2 cookies = R$ 14,03; preço fixo = pedido − 1 item = R$ 24,24.</li>
-      <li><strong>Taxas naturais 42% / 47% / 72%</strong>: vêm do vídeo, não dos seus dados — o PDV registra pedido, não pessoa. <strong>É a premissa que decide a campanha inteira</strong>, e o cadastro do QR (nome + celular) é o que vai substituí-la por medição.</li>
+      <li><strong>Taxas naturais</strong>: vêm do vídeo, não dos seus dados — o PDV registra pedido, não pessoa. <strong>É a premissa que decide a campanha inteira</strong>, e o cadastro do QR (nome + celular) é o que vai substituí-la por medição. A pesquisa de setor coloca a 1ª → 2ª visita entre <strong>23% e 47%</strong> (Bloom Intelligence: 28,8%, e 77% dos clientes de primeira vez nunca voltam; coorte da Nation's Restaurant News: 472 de 1.000), e confirma só a última taxa — acima de 70% de 4ª visita para quem chegou à 3ª. A "regra das três visitas" é conceito reconhecido do setor, <strong>sem estudo de origem</strong>. Os quatro números estão em slider na seção 7.</li>
       <li><strong>Simples 8,0%</strong> (DAS ÷ faturamento de competência) · <strong>Royalties 4,0%</strong> (contrato) · <strong>Cartão 2,0%</strong> (premissa — a Stone liquida líquido) · <strong>Quebra 1,0%</strong> (premissa — não há registro no sistema).</li>
       <li><strong>Embalagem</strong>: loja não leva kraft, só a caixinha de 4 (R$ 0,85). Ao item da promoção, a divisória (R$ 0,20).</li>
     </ul>
@@ -954,11 +987,12 @@
     cookieCMVmax: 8.7100, cookieCMVmin: 3.8336,
     tortaPreco: 22.90, tortaCMV: 9.0400,
     milkPreco: 28.66, milkCMV: 13.2000,
-    baseR12: 0.42, baseR23: 0.47, baseR34: 0.72, baseR45: 0.72,
+    // as taxas naturais mudaram de constante para premissa ajustável (ver S.bR*)
   };
 
   const S = {
     novos: 200, r12: 50, r23: 55, r34: 72, r45: 80,
+    bR12: 42, bR23: 47, bR34: 72, bR45: 72,   // sem campanha nenhuma
     exGanhe: 14.03, exPreco: 24.24,
     cupomV1: false,           // a 1ª visita já vem com cupom?
     canibV1: 20,              // se sim: % dos trazidos que viriam de qualquer jeito
@@ -1037,7 +1071,7 @@
     const nV = slots.length;
 
     const tx = [S.r12, S.r23, S.r34, S.r45].map((x) => x / 100);
-    const BS = [B.baseR12, B.baseR23, B.baseR34, B.baseR45];
+    const BS = [S.bR12, S.bR23, S.bR34, S.bR45].map((x) => x / 100);
 
     // volumes: v[0] são os clientes novos; cada transição derruba uma fatia
     const v = [N], b0 = S.cupomV1 ? N * (S.canibV1 / 100) : N, b = [b0];
@@ -1263,11 +1297,11 @@
     { k: "novos", lab: "Clientes novos por mês", min: 50, max: 800, step: 10, g: "base",
       fmt: (v) => n0(v), note: () => "A loja faz ~1.200 pedidos/mês; " + pc(S.novos / B.pedidos, 0) + " seriam rostos novos." },
     { k: "r12", lab: "Voltam para a 2ª visita", min: 20, max: 95, step: 1, g: "base",
-      fmt: (v) => v + "%", note: () => "Sem incentivo o setor faz <strong>42%</strong>. Tudo depende de o cupom levantar isso." },
+      fmt: (v) => v + "%", note: () => "Sem incentivo seriam " + S.bR12 + "%. Tudo depende de o cupom levantar isso — hoje o cupom vale <strong>" + (S.r12 - S.bR12) + " pontos</strong>." },
     { k: "r23", lab: "Voltam para a 3ª visita", min: 20, max: 95, step: 1, g: "base",
-      fmt: (v) => v + "%", note: () => "Sem incentivo, <strong>47%</strong>." },
+      fmt: (v) => v + "%", note: () => "Sem incentivo, " + S.bR23 + "% — o cupom vale <strong>" + (S.r23 - S.bR23) + " pontos</strong> aqui." },
     { k: "r34", lab: () => S.cupomV1 ? "Viram fiéis (4ª visita+)" : "Voltam para a 4ª visita", min: 20, max: 95, step: 1, g: "base",
-      fmt: (v) => v + "%", note: () => "<strong>72%</strong> é a taxa natural depois da 3ª visita — o degrau que a campanha existe para alcançar." },
+      fmt: (v) => v + "%", note: () => "Depois da 3ª visita o hábito já está formado: sem incentivo seriam " + S.bR34 + "%. É o degrau que a campanha existe para alcançar." },
     { k: "r45", lab: "Viram fiéis (5ª visita+)", min: 20, max: 95, step: 1, g: "base", dep: () => !S.cupomV1,
       fmt: (v) => v + "%", note: () => "Só existe quando a 1ª visita não tem brinde: aí o 3º brinde cai na 4ª visita e o funil tem um degrau a mais. Natural: 72%." },
     { k: "freq", lab: "Visitas/mês do cliente fiel", min: 0.5, max: 4, step: 0.1, g: "base",
@@ -1278,6 +1312,15 @@
       fmt: (v) => v === 1 ? "1 mês" : v + " meses", note: () => "Quanto o cliente demora para voltar e usar o cupom seguinte." },
     { k: "cupom", lab: "Custo por cliente cadastrado", min: 0, max: 3, step: 0.05, g: "base",
       fmt: (v) => v === 0 ? "R$ 0,00" : brl(v), note: () => "<strong>Hoje é zero</strong>: o cadastro é online, não existe cartão impresso. Só mexa aqui se a campanha passar a ter algum material físico." },
+
+    { k: "bR12", lab: "Natural · voltam para a 2ª visita", min: 15, max: 90, step: 1, g: "natural",
+      fmt: (v) => v + "%", note: () => "<strong>O número mais frágil da página.</strong> A pesquisa de setor vai de <strong>23% a 47%</strong> — Bloom Intelligence mede 28,8%, a coorte da NRN dá 47,2%. O vídeo disse 42%, colado no teto. Arraste para 28% e veja o que sobra." },
+    { k: "bR23", lab: "Natural · voltam para a 3ª visita", min: 15, max: 90, step: 1, g: "natural",
+      fmt: (v) => v + "%", note: () => "Confirmação. A coorte da NRN dá <strong>59%</strong> aqui (280 de 472), contra os 47% do vídeo." },
+    { k: "bR34", lab: "Natural · voltam para a 4ª visita", min: 15, max: 95, step: 1, g: "natural",
+      fmt: (v) => v + "%", note: () => "Hábito formado. É o único dos três que a pesquisa confirma: <strong>acima de 70%</strong> em várias fontes do setor." },
+    { k: "bR45", lab: "Natural · viram fiéis", min: 15, max: 95, step: 1, g: "natural", dep: () => !S.cupomV1,
+      fmt: (v) => v + "%", note: () => "Só existe no modo sem cupom na 1ª visita, quando o funil tem um degrau a mais." },
 
     { k: "exGanhe", lab: "Venda extra · compre e ganhe", min: 0, max: 45, step: 0.5, g: "extra",
       fmt: (v) => brl(v), note: () => "Medido: <strong>R$ 14,03</strong>. O 2º cookie vira presente, então some da venda." },
@@ -1307,7 +1350,7 @@
         <input type="range" id="c-${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[c.k]}" aria-label="${lab}" ${off ? "disabled" : ""}>
         <span class="note" id="n-${c.k}">${c.note()}</span></div>`;
     };
-    for (const [id, g] of [["controls", "base"], ["controlsExtra", "extra"], ["controlsCusto", "custo"]])
+    for (const [id, g] of [["controls", "base"], ["controlsNatural", "natural"], ["controlsExtra", "extra"], ["controlsCusto", "custo"]])
       document.getElementById(id).innerHTML = CTLS.filter((c) => c.g === g).map(slider).join("");
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
@@ -1419,20 +1462,34 @@
       const antes = Object.assign({}, S); Object.assign(S, over); recalc();
       const r = calc(); Object.assign(S, antes); recalc(); return r;
     };
-    const nada = sim({ r12: 42, r23: 47, r34: 72 });
-    const mais8 = sim({ r12: Math.min(95, 50), r23: Math.min(95, 55), r34: Math.min(95, 80) });
-    const mais15 = sim({ r12: 57, r23: 62, r34: 87 });
+    const nada = sim({ r12: S.bR12, r23: S.bR23, r34: S.bR34, r45: S.bR45 });
+    const p8 = (x) => Math.min(95, x + 8), p15 = (x) => Math.min(95, x + 15);
+    const mais8 = sim({ r12: p8(S.bR12), r23: p8(S.bR23), r34: p8(S.bR34), r45: p8(S.bR45) });
+    const mais15 = sim({ r12: p15(S.bR12), r23: p15(S.bR23), r34: p15(S.bR34), r45: p15(S.bR45) });
     const comV1 = sim({ cupomV1: !S.cupomV1 });
+    const pess = sim({ bR12: 28, bR23: 59 });   // o cenário que a pesquisa de setor sugere
 
     document.getElementById("riscos").innerHTML = `
       <div class="note-item"><span class="tag bad">a aposta única</span><span>
-        <strong>Tudo depende de o cupom levantar a taxa de retorno.</strong> Se ela ficar nos 42% / 47% / 72%
-        naturais, a campanha dá <strong class="neg">${brl0(nada.saldo)}</strong> em 12 meses e
-        <strong>zero cliente fiel a mais</strong> — você distribuiu brinde para gente que voltaria de graça.
+        <strong>Tudo depende de o cupom levantar a taxa de retorno.</strong> Se ela ficar nas taxas
+        naturais (${S.bR12}% / ${S.bR23}% / ${S.bR34}%), a campanha dá
+        <strong class="neg">${brl0(nada.saldo)}</strong> em 12 meses e <strong>zero cliente fiel a
+        mais</strong> — você distribuiu brinde para gente que voltaria de graça.
         <br><br>
         Com +8 pontos em cada etapa: <strong class="${sign(mais8.saldo)}">${brl0(mais8.saldo)}</strong>.
         Com +15 pontos: <strong class="${sign(mais15.saldo)}">${brl0(mais15.saldo)}</strong>.
         Nenhuma outra escolha desta página chega perto desse impacto.
+      </span></div>
+      <div class="note-item"><span class="tag warn">e se a base for a do setor?</span><span>
+        A pesquisa de setor diz que a 1ª → 2ª visita fica mais perto de <strong>28%</strong> que dos
+        ${S.bR12}% do vídeo, e a 3ª mais perto de <strong>59%</strong> que dos ${S.bR23}%. Com essa base
+        pessimista e as mesmas taxas de campanha, a safra daria
+        <strong class="${sign(pess.saldo)}">${brl0(pess.saldo)}</strong>, contra
+        <strong class="${sign(R.saldo)}">${brl0(R.saldo)}</strong> de agora.
+        <em>Repare no contraintuitivo:</em> base pior deixa o resultado <strong>melhor</strong>, porque
+        o que a campanha ganha é a distância entre a barra e o tracejado — e o tracejado desabou.
+        O preço é a credibilidade: o mesmo 50% que era +8 pontos vira <strong>+${S.r12 - 28} pontos</strong>.
+        Antes de comemorar esse número, pergunte se o cupom levanta tanto assim.
       </span></div>
       <div class="note-item"><span class="tag ${comV1.saldo < R.saldo ? "good" : "warn"}">o modo da 1ª visita</span><span>
         Do jeito que está (${S.cupomV1 ? "cupom já na 1ª visita" : "1ª visita sem cupom"}), a safra dá
@@ -1442,7 +1499,7 @@
           : "Colocar cupom na 1ª visita só compensa se ele realmente <em>trouxer</em> gente: quanto maior a fatia que viria de qualquer jeito, pior fica."}
       </span></div>
       <div class="note-item"><span class="tag good">o cadastro resolve a premissa</span><span>
-        Hoje o PDV registra pedido, não pessoa — por isso 42% / 47% / 72% vêm do vídeo, não de Paulínia.
+        Hoje o PDV registra pedido, não pessoa — por isso as taxas naturais vêm do vídeo, não de Paulínia.
         Quem resolve isso é <strong>o cadastro da própria campanha</strong>: o QR do display pede nome e
         celular, e o resgate no balcão marca a visita. Em ~3 meses essas três taxas
         <strong>viram medição</strong> e esta página deixa de ser simulação.
