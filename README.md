@@ -1,7 +1,7 @@
 # Projetos
 
 Cardápio central dos projetos de marketing e conteúdo. Cada card abre a página do
-projeto numa aba nova. Quem não está no ar aparece no fim, com o caminho da pasta.
+projeto numa aba nova.
 
 **No ar:** https://fredpetrutche.github.io/projetos/
 

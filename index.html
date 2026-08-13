@@ -293,33 +293,6 @@ body.organizando .grade{
 body.esperando .grade{opacity:0}
 .grade{transition:opacity .2s ease}
 
-/* ---------- lista dos que ainda não estão no ar ---------- */
-.lista{
-  background:var(--ilha);
-  border-radius:var(--r-cartao);
-  box-shadow:var(--sombra);
-  overflow:hidden;
-}
-.linha{
-  display:flex;align-items:flex-start;gap:.875rem;
-  padding:.9375rem 1.25rem;
-}
-.linha+.linha{box-shadow:inset 0 .5px 0 var(--sep)}
-.linha .pt{
-  width:.4375rem;height:.4375rem;border-radius:50%;
-  background:var(--rotulo-3);
-  margin-top:.5rem;flex:0 0 auto;
-}
-.linha b{font-weight:600;font-size:.9375rem;display:block;letter-spacing:-.01em}
-.linha span{color:var(--rotulo-2);font-size:.875rem}
-.linha code{
-  font-family:var(--mono);font-size:.75rem;
-  background:var(--preench);
-  padding:.0625rem .3125rem;border-radius:5px;
-  color:var(--rotulo-2);
-  word-break:break-all;
-}
-
 footer{
   margin-top:3rem;
   color:var(--rotulo-3);
@@ -556,50 +529,6 @@ footer{
         <p class="desc">Cada projeto é um card: o que foi falado, as ações com prazo e o que ficou em aberto. As atas completas ficam na seção Reuniões.</p>
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>fredpetrutche.github.io/holy-cook-reunioes</span>
       </a>
-
-    </div>
-  </section>
-
-  <!-- ============ AINDA NO COMPUTADOR ============ -->
-  <section data-sec="local">
-    <h2>Ainda no computador</h2>
-    <div class="lista">
-
-      <div class="linha">
-        <span class="pt"></span>
-        <div>
-          <b>Ouvir a Deus — pesquisa de mercado</b>
-          <span>Pesquisa 1: a linguagem do mercado e o frame de verificação. Só documento.</span><br>
-          <code>Squad de Marketing/Ouvir a Deus/</code>
-        </div>
-      </div>
-
-      <div class="linha">
-        <span class="pt"></span>
-        <div>
-          <b>Banco de microdores — direção de Deus</b>
-          <span>105 microdores validadas para a marca pessoal.</span><br>
-          <code>Squad de Marketing/banco-microdores-direcao-de-deus.md</code>
-        </div>
-      </div>
-
-      <div class="linha">
-        <span class="pt"></span>
-        <div>
-          <b>Roteiros do Matheus</b>
-          <span>8 roteiros escritos a partir dos benchmarks transcritos.</span><br>
-          <code>Squad de Marketing/roteiros-matheus/</code>
-        </div>
-      </div>
-
-      <div class="linha">
-        <span class="pt"></span>
-        <div>
-          <b>Corte por tempo</b>
-          <span>Scripts de alinhamento e corte de vídeo por marcação de tempo. Ferramenta, não página.</span><br>
-          <code>Squad de Marketing/corte-por-tempo/</code>
-        </div>
-      </div>
 
     </div>
   </section>
