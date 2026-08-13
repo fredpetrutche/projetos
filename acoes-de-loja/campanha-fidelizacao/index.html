@@ -230,6 +230,11 @@
   .regras li::before { content: ""; position: absolute; left: 0; top: .55rem;
                        width: .3rem; height: .3rem; border-radius: 50%; background: var(--accent); }
   .regras b { color: var(--ink); font-weight: 600; }
+  .regras.tarefas { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+                    padding: 1rem 1.1rem; gap: .6rem; }
+  .regras.tarefas li { padding-left: 1.5rem; }
+  .regras.tarefas li::before { top: .3rem; width: .7rem; height: .7rem; border-radius: 2px;
+                               background: none; border: 1.5px solid var(--accent); }
 
   /* ─── script de balcão ─── */
   .fala { display: grid; gap: .45rem; margin: .6rem 0 .2rem; }
@@ -238,6 +243,11 @@
                color: var(--ink-faint); font-weight: 700; padding-top: .45rem; }
   .fala .say { font-size: .875rem; color: var(--ink); background: var(--surface-2);
                border-left: 2px solid var(--accent); padding: .4rem .65rem; border-radius: 0 3px 3px 0; }
+  .fala .l.corte { grid-template-columns: 1fr; }
+  .fala .l.corte .say { background: none; border-left: none; border-radius: 0; text-align: center;
+                        border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule);
+                        font-family: var(--mono); font-size: .6875rem; letter-spacing: .04em;
+                        color: var(--ink-faint); padding: .4rem; }
   @media (max-width: 32rem) { .fala .l { grid-template-columns: 1fr; gap: .15rem; }
                               .fala .who { padding-top: 0; } }
   @media (max-width: 32rem) {
@@ -275,11 +285,10 @@
   <section id="decidir">
     <h2><span class="n">0</span> O que falta decidir<span class="hint">antes de a campanha subir</span></h2>
     <p class="prose">
-      A conta desta página fecha. O que ainda não existe é o <strong>combinado de balcão</strong>:
-      quem fala, em que momento fala e o que responde quando o cliente empaca. São oito perguntas —
-      nenhuma depende de dado novo, todas dependem de decisão. Cada uma tem a resposta logo abaixo;
-      enquanto estiver vazia, a campanha não sobe, porque cada atendente vai responder uma coisa
-      diferente e a safra não fecha.
+      A conta desta página sempre fechou; o que faltava era o <strong>combinado de balcão</strong> —
+      quem fala, em que momento fala e o que responde quando o cliente empaca. <strong>As oito perguntas
+      estão respondidas.</strong> O que sobra agora não é decisão, é execução: o manual, o texto do
+      display, os prêmios da roda e o medidor do convite, listados no fim desta seção.
     </p>
 
     <h3 class="sub">Como o resgate funciona na loja</h3>
@@ -317,6 +326,13 @@
       preço na cabeça da pessoa e ela começa a calcular; prêmio revelado a cada visita continua sendo
       presente. <em>Cuidado com &ldquo;nível 2&rdquo;:</em> falar em nível entrega que existe um nível 3
       — e revela a escada que você acabou de decidir esconder.
+    </span></div>
+    <div class="note-item"><span class="tag warn">o convite precisa de medidor</span><span>
+      A campanha inteira depende de uma frase que <strong>o atendente pode simplesmente não falar</strong> —
+      e ninguém percebe. Por isso o sistema tem que conciliar, todo dia, <strong>quantos pedidos de loja
+      saíram</strong> contra <strong>quantas pessoas se cadastraram</strong>. Essa razão é a taxa de
+      convite: se ela cair, não é a campanha que não funciona, é o convite que não está acontecendo.
+      <em>Sem esse número, um mês ruim vira conclusão errada sobre a promoção.</em>
     </span></div>
     <div class="note-item"><span class="tag good">regra fechada</span><span>
       <strong>Cliente de casa não entra na trilha das visitas.</strong> Ele entra na pesquisa. Cadastrar
@@ -417,23 +433,31 @@
         <span class="porque">A <a href="#logica">seção 1</a> já fecha uma coisa: o convite <em>não sai
         junto com a nota</em> — sai na conversa, olhando para a pessoa. O que falta é a frase exata,
         escrita, para não virar versão de cada um.</span>
-        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Quem já está atendendo,
-        <strong>depois que a compra fecha</strong>. Uma pergunta separa tudo, e ela vem primeiro:
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Todo mundo do
+        atendimento</strong> — não dá para eleger um responsável, porque quem atende é quem estiver
+        livre. O que segura isso é <em>treinamento e um manual curto</em>, não uma pessoa.
+        <br><br>
+        E o tempo tem duas partes, que não podem se misturar: <strong>a pergunta é na chegada, a oferta
+        é depois de pagar.</strong> Oferecer antes mata a compra que a pessoa já ia fazer — o presente
+        é para a <em>próxima</em> vinda, não para a de hoje.
         <span class="fala">
-          <span class="l"><span class="who">pergunta</span><span class="say">É a sua primeira vez aqui?
-          Você já conhece a loja?</span></span>
-          <span class="l"><span class="who">se já conhece</span><span class="say">Então deixa eu te
-          contar: a gente tem uma campanha agora <strong>só para quem já é cliente</strong>. Você
-          responde uma pesquisa rapidinha e ganha um compre 1 cookie e leve 2 para a próxima vez.</span></span>
-          <span class="l"><span class="who">se é a 1ª vez</span><span class="say">Que bom que você veio!
-          Então você vai ganhar o seu <strong>presente de boas-vindas</strong>: na próxima vez que vier,
-          é compre 1 cookie e leve 2. Escaneia esse QR ali, põe nome e celular, que ele chega no seu
+          <span class="l"><span class="who">na chegada</span><span class="say">Olá, seja bem-vindo! É a
+          sua primeira vez aqui? Você já conhece os nossos cookies?</span></span>
+          <span class="l corte"><span class="say">↓ atende, monta o pedido e fecha a compra — nada de
+          campanha aqui ↓</span></span>
+          <span class="l"><span class="who">pagou · já conhece</span><span class="say">Que bom que você
+          já é da casa! A gente tem uma campanha agora <strong>só para quem já é cliente</strong>: você
+          responde uma pesquisa rapidinha e ganha um presente para a próxima vinda.</span></span>
+          <span class="l"><span class="who">pagou · 1ª vez</span><span class="say">Que bom que você veio!
+          Então você ganha o seu <strong>presente de boas-vindas</strong>: na próxima vez, compre 1
+          cookie e leve 2. Escaneia esse QR ali, põe nome e celular, que ele chega no seu
           WhatsApp.</span></span>
           <span class="l"><span class="who">na 2ª visita</span><span class="say">Ó, tô vendo aqui que
           você já veio — <strong>hoje tem outro presente</strong> pra você.</span></span>
         </span>
-        <span class="resto"><b>ainda aberto</b> Quem faz isso em cada turno — todo mundo do balcão ou
-        uma pessoa responsável por turno. É a diferença entre a frase existir no papel e existir na loja.</span></span></span>
+        <span class="resto"><b>falta fazer</b> O manual do atendimento: uma página com essas falas, as
+        quatro regras do ticket e o que responder quando o cliente perguntar. Sem ele, a frase existe no
+        papel e não existe na loja.</span></span></span>
       </li>
       <li>
         <span class="num">06</span>
@@ -441,12 +465,24 @@
         <span class="porque">Sem regra, o convite some exatamente nos horários de mais movimento —
         <em>que é quando entra mais cliente novo.</em></span>
         <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Depois que a
-        pessoa pagou</strong>, com a compra já fechada. Antes do pagamento a conversa vira negociação
-        de preço; depois, vira presente. E é o único momento em que a pessoa está parada esperando o
-        pedido sair.
-        <span class="resto"><b>ainda aberto</b> A regra de fila cheia: pular o convite naquele
-        atendimento ou ter uma versão de uma frase só (&ldquo;primeira vez? escaneia esse QR ali que
-        seu presente chega no WhatsApp&rdquo;) — que aliás funciona sem tirar ninguém do caixa.</span></span></span>
+        pessoa pagou.</strong> Antes do pagamento a conversa vira negociação de preço; depois, vira
+        presente.
+        <br><br>
+        <strong>Com fila, quem explica é o display.</strong> O QR carrega a explicação inteira da
+        campanha e as regras — então o atendente não precisa contar nada, só apontar. E dá para saber
+        de que lado a pessoa está <em>sem perguntar</em>: quem chega pedindo o produto pelo nome
+        (&ldquo;quero aquele cookie tal&rdquo;) já é cliente; quem faz perguntas sobre os produtos é
+        primeira vez.
+        <span class="fala">
+          <span class="l"><span class="who">fila · já é cliente</span><span class="say">Que legal, já é
+          cliente nossa? Escaneia esse QR ali, ó — a gente tá com uma campanha de presente pra quem é da
+          casa. <strong>Tá explicado tudo lá</strong>, que hoje tá corrido.</span></span>
+          <span class="l"><span class="who">fila · 1ª vez</span><span class="say">Primeira vez aqui?
+          Então escaneia esse display ali, ó — tem um <strong>presente de boas-vindas</strong> te
+          esperando, e as regras estão todas lá.</span></span>
+        </span>
+        Isso não tira ninguém do caixa e não some no movimento — que é justamente quando entra mais
+        cliente novo.</span></span>
       </li>
       <li>
         <span class="num">07</span>
@@ -469,13 +505,37 @@
         <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.</span>
         <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Sim, e é a
         <strong>trilha do cliente de casa</strong> (resposta 02): pesquisa no site → Google → volta e
-        marca que avaliou → sistema confere → bônus no WhatsApp. Não é desconto — é brinde, como o resto
-        da campanha. E não se mistura com os três cupons: quem é novo entra na trilha de visitas,
-        quem já é da casa entra nesta.
-        <span class="resto"><b>ainda aberto</b> Qual brinde paga a avaliação e como a conferência é
-        feita — mesmo ponto aberto da resposta 02.</span></span></span>
+        marca que avaliou → sistema confere → prêmio no WhatsApp. Não é desconto — é brinde, como o resto
+        da campanha. E não se mistura com os três cupons.
+        <br><br>
+        <strong>O prêmio sai de uma roda da fortuna.</strong> A pessoa aperta o botão, a roda gira e cai
+        num prêmio. A sacada é que <em>a roda já sabe o que ela gosta</em>: a pesquisa pergunta quais
+        produtos ela já consumiu e qual é o favorito, então a roda entrega algo que ela quer, não um
+        prêmio sorteado no escuro. A pessoa vive isso como sorte; do seu lado é pontaria.
+        <span class="resto"><b>falta fazer</b> Quais prêmios entram na roda e com que peso. Dois
+        cuidados: todo prêmio da roda tem que obedecer a regra do compre-e-ganhe (senão a roda vira a
+        porta dos fundos do desconto), e prêmio variável vira <em>custo</em> variável — hoje a conta é
+        de ~R$ 10 por avaliação, e a roda transforma isso numa faixa. Vale escrever o custo de cada
+        casa antes de montar.</span></span></span>
       </li>
     </ol>
+
+    <h3 class="sub">O que falta fazer</h3>
+    <ul class="regras tarefas">
+      <li><b>O manual do atendimento.</b> Uma página com as falas da resposta 05, as quatro regras do
+      ticket e o que responder quando o cliente perguntar. Todo mundo do atendimento treinado — é o que
+      transforma decisão em prática de balcão.</li>
+      <li><b>O texto do display.</b> Com fila, é ele quem explica a campanha inteira (resposta 06).
+      Virou peça de carga e ainda não existe.</li>
+      <li><b>O nome do presente da primeira visita.</b> &ldquo;Batismo&rdquo; foi a ideia. Falta cravar,
+      porque o nome vai no display, no ticket e na boca do atendente ao mesmo tempo.</li>
+      <li><b>Os prêmios da roda e o peso de cada um</b>, com o custo de cada casa escrito antes de
+      montar — e todos obedecendo o compre-e-ganhe.</li>
+      <li><b>A conferência da avaliação no Google:</b> automática pelo nome de exibição, ou olho no
+      painel.</li>
+      <li><b>A conciliação diária</b> de pedidos de loja contra cadastros — o medidor que mostra se o
+      convite está sendo feito.</li>
+    </ul>
   </section>
 
   <!-- ══════ 1. Como funciona ══════ -->
