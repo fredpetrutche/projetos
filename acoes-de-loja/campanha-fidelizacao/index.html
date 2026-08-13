@@ -217,6 +217,29 @@
                  border-top: 1px dashed var(--rule); font-size: .8125rem; color: var(--ink-soft); }
   .pend .resto b { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em;
                    text-transform: uppercase; color: var(--warn); font-weight: 700; margin-right: .45rem; }
+
+  /* colunas fixas: com 4 passos, auto-fit deixaria célula vazia mostrando a régua */
+  .story.fluxo { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 62rem) { .story.fluxo { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 34rem) { .story.fluxo { grid-template-columns: 1fr; } }
+
+  /* ─── regras do ticket ─── */
+  .regras { margin: .55rem 0 .1rem; padding: 0; list-style: none; display: grid; gap: .45rem; }
+  .regras li { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
+               padding-left: .85rem; position: relative; }
+  .regras li::before { content: ""; position: absolute; left: 0; top: .55rem;
+                       width: .3rem; height: .3rem; border-radius: 50%; background: var(--accent); }
+  .regras b { color: var(--ink); font-weight: 600; }
+
+  /* ─── script de balcão ─── */
+  .fala { display: grid; gap: .45rem; margin: .6rem 0 .2rem; }
+  .fala .l { display: grid; grid-template-columns: 6.5rem 1fr; gap: .7rem; align-items: start; }
+  .fala .who { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+               color: var(--ink-faint); font-weight: 700; padding-top: .45rem; }
+  .fala .say { font-size: .875rem; color: var(--ink); background: var(--surface-2);
+               border-left: 2px solid var(--accent); padding: .4rem .65rem; border-radius: 0 3px 3px 0; }
+  @media (max-width: 32rem) { .fala .l { grid-template-columns: 1fr; gap: .15rem; }
+                              .fala .who { padding-top: 0; } }
   @media (max-width: 32rem) {
     .pend > li { grid-template-columns: 1fr; }
     .pend .num { grid-row: auto; justify-self: start; }
@@ -260,7 +283,7 @@
     </p>
 
     <h3 class="sub">Como o resgate funciona na loja</h3>
-    <div class="story">
+    <div class="story fluxo">
       <div>
         <span class="vnum">1</span>
         <span class="job">Display com QR code</span>
@@ -287,6 +310,21 @@
       </div>
     </div>
     <div class="note-item"><span class="tag good">regra fechada</span><span>
+      <strong>A escada não é anunciada.</strong> O cliente nunca ouve &ldquo;você vai ganhar um brinde
+      em toda visita&rdquo; — ouve só o presente <em>daquela</em> visita. Na primeira: &ldquo;é a sua
+      primeira vez, então seu presente de boas-vindas é para a próxima&rdquo;. Na segunda:
+      &ldquo;vi que você já veio, hoje tem outro&rdquo;. Prêmio prometido de antemão vira tabela de
+      preço na cabeça da pessoa e ela começa a calcular; prêmio revelado a cada visita continua sendo
+      presente. <em>Cuidado com &ldquo;nível 2&rdquo;:</em> falar em nível entrega que existe um nível 3
+      — e revela a escada que você acabou de decidir esconder.
+    </span></div>
+    <div class="note-item"><span class="tag good">regra fechada</span><span>
+      <strong>Cliente de casa não entra na trilha das visitas.</strong> Ele entra na pesquisa. Cadastrar
+      todo mundo é dar brinde para quem já vinha sozinho — a <a href="#funil">seção 5</a> mostra isso em
+      número: o que a campanha ganha é a diferença entre a barra e o tracejado, e para cliente de casa
+      essa diferença é zero.
+    </span></div>
+    <div class="note-item"><span class="tag good">regra fechada</span><span>
       <strong>A campanha não dá desconto.</strong> A moeda é sempre <em>compre uma coisa e ganhe outra</em> —
       é isso que separa &ldquo;presente&rdquo; de &ldquo;promoção&rdquo;. Desconto ensina o cliente a esperar
       preço menor; brinde ensina ele a voltar. O <a href="#cardapio-sec">cardápio da seção 3</a> já está montado
@@ -299,11 +337,16 @@
         <span class="q">O que fazer com os clientes que falarem que não são a primeira vez?</span>
         <span class="porque">O convite pressupõe cliente novo — o funil da <a href="#funil">seção 5</a>
         começa em quem nunca entrou. <em>Sem uma resposta pronta, o atendimento improvisa.</em></span>
-        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">A pergunta não é
-        &ldquo;é a primeira vez?&rdquo; — é <strong>&ldquo;você já tem cadastro?&rdquo;</strong>.
-        Quem já tem, segue a sequência de onde parou. Quem não tem, faz o cadastro na hora e entra
-        na campanha do mesmo jeito, independente de quantas vezes já veio. O balcão não precisa
-        julgar nada: o QR code na mão da pessoa responde por ela.</span></span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">A pergunta
+        <strong>&ldquo;é a sua primeira vez aqui? você já conhece a loja?&rdquo;</strong> é a chave de
+        triagem — ela manda a pessoa para uma de duas campanhas, e nunca para as duas:
+        <br><br>
+        <strong>Já conhece</strong> → trilha da pesquisa (resposta 02). <em>Não entra nos três cupons.</em>
+        Dar os três brindes para quem já vem sozinho é pagar por visita que já aconteceria.<br>
+        <strong>Primeira vez</strong> → trilha das três visitas, começando pelo presente de boas-vindas.
+        <br><br>
+        Quem já está na trilha e volta não precisa ser perguntado de novo: o QR code dela responde —
+        o app mostra em que visita está e qual brinde entregar.</span></span>
       </li>
       <li>
         <span class="num">02</span>
@@ -314,12 +357,19 @@
         <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Cliente da casa tem
         <strong>caminho próprio, não o dos três cupons</strong>: ele responde uma pesquisa no site e,
         no fim dela, é levado para avaliar a loja no Google. Quando volta e marca que avaliou, o sistema
-        confere e libera o bônus dele no WhatsApp. Ou seja: <em>de quem é novo a campanha compra visita;
-        de quem já é de casa ela compra opinião e reputação.</em>
-        <span class="resto"><b>ainda aberto</b> Qual é o bônus dessa trilha (1 cookie? outro brinde?) e
-        como o sistema confere a avaliação — o Google devolve o nome de exibição de quem avaliou, o que
-        dá para casar com o nome do cadastro, mas não é garantido: o nome pode ser diferente e a avaliação
-        demora a aparecer. Decidir se a conferência é automática ou olho no painel.</span></span></span>
+        confere e libera o bônus no WhatsApp: <strong>compre 1 cookie, ganhe 1</strong> — o mesmo brinde
+        da primeira visita da outra trilha, e pela mesma razão (é presente, não desconto).
+        Ou seja: <em>de quem é novo a campanha compra visita; de quem já é de casa ela compra opinião
+        e reputação.</em>
+        <br><br>
+        <strong>O que essa avaliação custa:</strong> a visita em que ela resgatar o compre-1-ganhe-1
+        rende R$ 8,83 em vez dos R$ 18,85 de uma visita normal. Como cliente de casa viria de qualquer
+        jeito, <em>cada avaliação custa ~R$ 10 de margem</em> — 100 avaliações, ~R$ 1.000. É barato para
+        reputação, mas não é zero, e não está em nenhum número desta página.
+        <span class="resto"><b>ainda aberto</b> Como o sistema confere a avaliação: o Google devolve o
+        nome de exibição de quem avaliou, o que dá para casar com o nome do cadastro, mas não é garantido
+        — o nome pode ser diferente e a avaliação demora a aparecer. Decidir se a conferência é
+        automática ou olho no painel.</span></span></span>
       </li>
       <li>
         <span class="num">03</span>
@@ -331,9 +381,12 @@
         na mão — o app organiza.</strong> Cada pessoa tem um QR code próprio; o funcionário escaneia com
         o celular da loja e o sistema sabe em que visita ela está, redime o cupom e libera o próximo.
         O balcão só lê a tela.
-        <span class="resto"><b>ainda aberto</b> O que exatamente aparece na tela do funcionário no
-        momento do scan (nome, visita, brinde a entregar) e o que fazer quando a pessoa está sem o
-        WhatsApp na mão — busca por celular no app, ou não resgata?</span></span></span>
+        <br><br>
+        <strong>Na tela do scan:</strong> aparece <em>&ldquo;cupom resgatado&rdquo;</em> e <em>qual é o
+        brinde</em> — é a tela que manda o funcionário entregar a coisa certa, sem depender de decorar
+        a escada. <strong>Sem o WhatsApp na mão:</strong> dá para buscar a pessoa pelo nome no sistema e
+        aparece o botão <em>resgatar brinde</em>. Ninguém volta para casa sem o brinde por causa de
+        celular descarregado.</span></span>
       </li>
       <li>
         <span class="num">04</span>
@@ -343,32 +396,57 @@
         <em>visitas</em>, não desconto. Se o resgate vale na hora, você pagou o brinde e não comprou
         volta nenhuma.</span>
         <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Não vale no mesmo
-        dia.</strong> O ticket que ela recebe no WhatsApp vale <em>a partir do dia seguinte</em> — é a
-        prática padrão de programa por visita (uma marcação por dia, prêmio na visita seguinte), e é a
-        única regra que a pessoa do balcão consegue repetir sem errar: &ldquo;esse é para a sua próxima
-        vinda, a partir de amanhã&rdquo;. A alternativa de contar 24 horas cheias é pior na prática, porque
-        cria discussão de horário no balcão.
-        <span class="resto"><b>decisão separada</b> Liberar resgate só em alguns dias da semana é outra
-        coisa: não protege o mecanismo (isso o &ldquo;não no mesmo dia&rdquo; já faz), serve para encher
-        dia fraco. Custa atrito — dá ao cliente um motivo para não voltar hoje. Se for usar, use em
-        <em>um</em> dos três brindes, não nos três.</span></span></span>
+        dia.</strong> Daí saem as quatro regras que vão impressas no próprio ticket:
+        <ul class="regras">
+          <li><b>Vale a partir de amanhã.</b> <em>A data vem no ticket que o QR gera</em>, então não é
+          memória de ninguém — é o que está escrito. Contar 24 horas cheias seria pior: cria discussão
+          de horário no balcão.</li>
+          <li><b>Um brinde por dia.</b> Ninguém junta os três cupons e resgata tudo numa tarde — cada
+          resgate é uma visita, que é exatamente o que a campanha está comprando.</li>
+          <li><b>Só na loja.</b> Consumir ali ou retirar, tudo bem; <em>no delivery não vale.</em>
+          Combina com a conta desta página, que só considera caixa, balcão e mesa — os 426 pedidos de
+          delivery ficaram de fora desde o começo.</li>
+          <li><b>Torta só quinta e sexta</b> — os dias de torta. É o único brinde com dia marcado, e é
+          assim que deve ser: o dia fixo serve para encher dia fraco, e cobrado nos três viraria motivo
+          para a pessoa não voltar hoje.</li>
+        </ul></span></span>
       </li>
       <li>
         <span class="num">05</span>
         <span class="q">Qual funcionário vai abordar o cliente e o que ele tem que falar?</span>
-        <span class="porque">A <a href="#logica">seção 1</a> já fecha uma coisa: o convite <em>não sai no
-        caixa junto com a nota</em> — sai na conversa, olhando para a pessoa, no fim do atendimento.
-        O que falta é o nome de quem faz isso em cada turno e a frase exata, escrita, para não virar
-        versão de cada um.</span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <span class="porque">A <a href="#logica">seção 1</a> já fecha uma coisa: o convite <em>não sai
+        junto com a nota</em> — sai na conversa, olhando para a pessoa. O que falta é a frase exata,
+        escrita, para não virar versão de cada um.</span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Quem já está atendendo,
+        <strong>depois que a compra fecha</strong>. Uma pergunta separa tudo, e ela vem primeiro:
+        <span class="fala">
+          <span class="l"><span class="who">pergunta</span><span class="say">É a sua primeira vez aqui?
+          Você já conhece a loja?</span></span>
+          <span class="l"><span class="who">se já conhece</span><span class="say">Então deixa eu te
+          contar: a gente tem uma campanha agora <strong>só para quem já é cliente</strong>. Você
+          responde uma pesquisa rapidinha e ganha um compre 1 cookie e leve 2 para a próxima vez.</span></span>
+          <span class="l"><span class="who">se é a 1ª vez</span><span class="say">Que bom que você veio!
+          Então você vai ganhar o seu <strong>presente de boas-vindas</strong>: na próxima vez que vier,
+          é compre 1 cookie e leve 2. Escaneia esse QR ali, põe nome e celular, que ele chega no seu
+          WhatsApp.</span></span>
+          <span class="l"><span class="who">na 2ª visita</span><span class="say">Ó, tô vendo aqui que
+          você já veio — <strong>hoje tem outro presente</strong> pra você.</span></span>
+        </span>
+        <span class="resto"><b>ainda aberto</b> Quem faz isso em cada turno — todo mundo do balcão ou
+        uma pessoa responsável por turno. É a diferença entre a frase existir no papel e existir na loja.</span></span></span>
       </li>
       <li>
         <span class="num">06</span>
         <span class="q">Em que momentos ele tem que abordar? E se tiver fila grande?</span>
-        <span class="porque">Na entrega do pedido, na mesa, na saída? E com fila: a decisão é pular o
-        convite naquele atendimento ou ter uma versão curta de uma frase. <em>Sem regra, o convite some
-        exatamente nos horários de mais movimento</em> — que é quando entra mais cliente novo.</span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <span class="porque">Sem regra, o convite some exatamente nos horários de mais movimento —
+        <em>que é quando entra mais cliente novo.</em></span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Depois que a
+        pessoa pagou</strong>, com a compra já fechada. Antes do pagamento a conversa vira negociação
+        de preço; depois, vira presente. E é o único momento em que a pessoa está parada esperando o
+        pedido sair.
+        <span class="resto"><b>ainda aberto</b> A regra de fila cheia: pular o convite naquele
+        atendimento ou ter uma versão de uma frase só (&ldquo;primeira vez? escaneia esse QR ali que
+        seu presente chega no WhatsApp&rdquo;) — que aliás funciona sem tirar ninguém do caixa.</span></span></span>
       </li>
       <li>
         <span class="num">07</span>
