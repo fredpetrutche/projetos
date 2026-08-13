@@ -223,6 +223,21 @@
   @media (max-width: 62rem) { .story.fluxo { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 34rem) { .story.fluxo { grid-template-columns: 1fr; } }
 
+  /* ─── abas ─── */
+  .abas { display: flex; gap: .35rem; flex-wrap: wrap; border-bottom: 2px solid var(--ink);
+          margin-bottom: -1rem; }
+  .abas button { font-family: var(--mono); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+                 text-align: left; background: var(--surface-2); color: var(--ink-soft);
+                 border: 1px solid var(--rule); border-bottom: none; border-radius: 4px 4px 0 0;
+                 padding: .6rem .95rem; cursor: pointer; margin-bottom: -2px; line-height: 1.25; }
+  .abas button:hover { color: var(--ink); }
+  .abas button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .abas button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .abas .sub2 { display: block; font-size: .6875rem; font-weight: 400; letter-spacing: .01em;
+                text-transform: none; opacity: .7; margin-top: .1rem; }
+  .painel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .painel[hidden] { display: none; }
+
   /* ─── regras do ticket ─── */
   .regras { margin: .55rem 0 .1rem; padding: 0; list-style: none; display: grid; gap: .45rem; }
   .regras li { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
@@ -280,6 +295,15 @@
     <div><span class="label">Margem de contribuição</span><span class="v" id="mcPct">—</span><span class="s" id="mcPed">—</span></div>
     <div><span class="label">Margem de 1 visita normal</span><span class="v" id="margNormal">—</span><span class="s">é com isso que a visita com cupom compete</span></div>
   </div>
+
+  <div class="abas" role="tablist" aria-label="As duas campanhas">
+    <button type="button" role="tab" id="aba-ini" aria-controls="painel-iniciacao" aria-selected="true" data-hash="iniciacao">
+      Iniciação<span class="sub2">cliente novo · os 3 cupons</span></button>
+    <button type="button" role="tab" id="aba-for" aria-controls="painel-fortalecimento" aria-selected="false" data-hash="fortalecimento">
+      Fortalecimento<span class="sub2">cliente de casa · pesquisa e roda</span></button>
+  </div>
+
+  <div class="painel" id="painel-iniciacao" role="tabpanel" aria-labelledby="aba-ini">
 
   <!-- ══════ 0. O que falta decidir ══════ -->
   <section id="decidir">
@@ -372,67 +396,6 @@
         <br><br>
         Quem já está na trilha e volta não precisa ser perguntado de novo: o QR code dela responde —
         o app mostra em que visita está e qual brinde entregar.</span></span>
-      </li>
-      <li>
-        <span class="num">02</span>
-        <span class="q">O que fazer com quem já é cliente: ouvir e pedir pra participar da promo?</span>
-        <span class="porque">Diferente da de cima: aqui a pessoa já é cliente da casa. <em>Ela é a que
-        menos precisa ser comprada de volta</em> — dar os três brindes para ela é pagar por uma visita
-        que já aconteceria.</span>
-        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Cliente da casa tem
-        <strong>caminho próprio, não o dos três cupons</strong>: ele responde uma pesquisa no site e,
-        no fim dela, é levado para avaliar a loja no Google. Quando volta e marca que avaliou, o sistema
-        confere e libera o bônus no WhatsApp: <strong>compre 1 cookie, ganhe 1</strong> — o mesmo brinde
-        da primeira visita da outra trilha, e pela mesma razão (é presente, não desconto).
-        Ou seja: <em>de quem é novo a campanha compra visita; de quem já é de casa ela compra opinião
-        e reputação.</em>
-        <br><br>
-        <strong>O que essa avaliação custa:</strong> a visita em que ela resgatar o compre-1-ganhe-1
-        rende R$ 8,83 em vez dos R$ 18,85 de uma visita normal. Como cliente de casa viria de qualquer
-        jeito, <em>cada avaliação custa ~R$ 10 de margem</em> — 100 avaliações, ~R$ 1.000. É barato para
-        reputação, mas não é zero, e não está em nenhum número desta página.
-        <br><br>
-        <strong>E quando ele souber pela amiga e vier cobrar?</strong> Vai acontecer — é a objeção mais
-        difícil da campanha, porque a pessoa chega sabendo o que perdeu. A resposta não é dizer não;
-        é <em>mudar o que a campanha é</em>:
-        <span class="fala">
-          <span class="l"><span class="who">cliente</span><span class="say">Minha amiga veio aqui e
-          ganhou três prêmios — comprou um cookie e ganhou outro, ganhou uma torta. Eu não sabia disso!
-          Como faço para participar?</span></span>
-          <span class="l"><span class="who">atendente</span><span class="say">Ah, sim! Essa é a nossa
-          <strong>campanha de iniciação de novos Holy Cookers</strong> — é para quem ainda não
-          experimentou os nossos produtos. Você, que já é cliente e já conhece a marca,
-          <strong>também não vai sair de mão abanando</strong>: a gente tem um presente diferente, que
-          sai de uma pesquisa. Você responde e ganha um prêmio. Já respondeu a nossa pesquisa?</span></span>
-          <span class="l"><span class="who">cliente</span><span class="say">Já respondi!</span></span>
-          <span class="l"><span class="who">atendente</span><span class="say">Que bom! E você gostou do
-          seu prêmio?</span></span>
-        </span>
-        <strong>Ninguém sai de mão abanando</strong> — essa é a regra. A explicação sozinha soa como
-        desculpa; a explicação seguida de uma porta que tem prêmio de verdade soa como convite.
-        <br><br>
-        <strong>E quando ele já respondeu a pesquisa e mesmo assim quer os três?</strong> É o único caso
-        em que a porta de saída acabou — e vai acontecer. A saída não é ceder a escada inteira, é lembrar
-        do que a palavra <em>iniciação</em> significa: <strong>a iniciação é no produto, não na
-        pessoa</strong>. Quem só conhece cookie nunca foi iniciado na torta.
-        <span class="fala">
-          <span class="l"><span class="who">cliente</span><span class="say">Respondi, mas eu queria esses
-          três da iniciação. Eu nunca fiz essa iniciação!</span></span>
-          <span class="l"><span class="who">atendente</span><span class="say">Deixa eu ver aqui na sua
-          pesquisa… você nunca provou a nossa torta, né? <strong>Então a sua iniciação é a da torta:</strong>
-          na próxima vez, compre 1 cookie e leve uma fatia. Te mando agora no WhatsApp.</span></span>
-        </span>
-        <strong>Uma iniciação, não três.</strong> E ela é <em>cross-sell, não retenção</em>: você não
-        está comprando a visita dele (ele viria de qualquer jeito) — está comprando a primeira vez dele
-        num produto que 92% dos pedidos não levam. Custa ~R$ 9 de margem, uma vez, e o teto é claro.
-        <span class="resto"><b>cuidado</b> Quem responde &ldquo;nunca provei&rdquo; é <em>a pesquisa,
-        não a pessoa no balcão</em>. Essa é a linha entre registro e leilão: se o atendente perguntar ali
-        na hora, todo mundo aprende que basta dizer que nunca provou. Sem pesquisa respondida, não há
-        iniciação de produto — a porta continua sendo a pesquisa.</span>
-        <span class="resto"><b>ainda aberto</b> Como o sistema confere a avaliação: o Google devolve o
-        nome de exibição de quem avaliou, o que dá para casar com o nome do cadastro, mas não é garantido
-        — o nome pode ser diferente e a avaliação demora a aparecer. Decidir se a conferência é
-        automática ou olho no painel.</span></span></span>
       </li>
       <li>
         <span class="num">03</span>
@@ -566,54 +529,17 @@
         teve. <strong>Acompanhe a taxa de expiração na primeira safra:</strong> se ela vier alta, 21 dias
         é o degrau seguinte.</span></span></span>
       </li>
-      <li>
-        <span class="num">08</span>
-        <span class="q">Para os clientes que ouvem a conversa, podemos pedir avaliação no Google
-        em troca de 1 cookie ou do desconto?</span>
-        <span class="porque">Quem já está na conversa do cupom é quem tem mais chance de avaliar.
-        <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.</span>
-        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Sim, e é a
-        <strong>trilha do cliente de casa</strong> (resposta 02): pesquisa no site → Google → volta e
-        marca que avaliou → sistema confere → prêmio no WhatsApp. Não é desconto — é brinde, como o resto
-        da campanha. E não se mistura com os três cupons.
-        <br><br>
-        <strong>O prêmio sai de uma roda da fortuna.</strong> A pessoa aperta o botão, a roda gira e cai
-        num prêmio. A sacada é que <em>a roda já sabe o que ela gosta</em>: a pesquisa pergunta quais
-        produtos ela já consumiu e qual é o favorito, então a roda entrega algo que ela quer, não um
-        prêmio sorteado no escuro. A pessoa vive isso como sorte; do seu lado é pontaria.
-        <br><br>
-        E a pesquisa devolve <strong>duas informações, não uma</strong> — o que ela ama e o que ela nunca
-        provou. Use as duas: <em>o favorito escolhe a direção, o nunca-provado escolhe o item.</em> Quem
-        ama cookie de pistache e nunca tomou milkshake ganha o milkshake, não outro cookie. Assim a roda
-        faz, para o cliente de casa, o mesmo trabalho que os três cupons fazem para o cliente novo —
-        iniciação — e a campanha inteira continua contando a mesma história.
-        <span class="resto"><b>falta fazer</b> Quais prêmios entram na roda e com que peso. Dois
-        cuidados: todo prêmio da roda tem que obedecer a regra do compre-e-ganhe (senão a roda vira a
-        porta dos fundos do desconto), e prêmio variável vira <em>custo</em> variável — hoje a conta é
-        de ~R$ 10 por avaliação, e a roda transforma isso numa faixa. Vale escrever o custo de cada
-        casa antes de montar.</span></span></span>
-      </li>
     </ol>
 
-    <h3 class="sub">O que falta fazer</h3>
+    <h3 class="sub">O que falta fazer nesta trilha</h3>
     <ul class="regras tarefas">
       <li><b>O manual do atendimento.</b> Uma página com as falas da resposta 05, a resposta da objeção
       da amiga (resposta 02) e as cinco regras do ticket. Todo mundo do atendimento treinado — é o que
       transforma decisão em prática de balcão.</li>
-      <li><b>A iniciação de produto no sistema.</b> Um brinde só, liberado a partir do que a pesquisa
-      registrou que a pessoa nunca provou (resposta 02). É o que dá saída ao cliente de casa que já
-      respondeu a pesquisa e mesmo assim quer entrar — sem abrir a escada inteira.</li>
-      <li><b>Testar a frase da iniciação no balcão.</b> É a única resposta desta página que depende de
-      como soa, não de como fecha a conta. Duas semanas ouvindo a reação de quem já é cliente dizem se
-      ela convida ou se ela ofende — e se ofender, a saída é ir direto à pesquisa, sem a explicação.</li>
       <li><b>O texto do display.</b> Com fila, é ele quem explica a campanha inteira (resposta 06).
       Virou peça de carga e ainda não existe.</li>
       <li><b>O nome do presente da primeira visita.</b> &ldquo;Batismo&rdquo; foi a ideia. Falta cravar,
       porque o nome vai no display, no ticket e na boca do atendente ao mesmo tempo.</li>
-      <li><b>Os prêmios da roda e o peso de cada um</b>, com o custo de cada casa escrito antes de
-      montar — e todos obedecendo o compre-e-ganhe.</li>
-      <li><b>A conferência da avaliação no Google:</b> automática pelo nome de exibição, ou olho no
-      painel.</li>
       <li><b>A conciliação diária</b> de pedidos de loja contra cadastros — o medidor que mostra se o
       convite está sendo feito.</li>
       <li><b>A taxa de expiração dos cupons</b> na primeira safra, que é o que diz se os 15 dias da
@@ -760,6 +686,222 @@
       <li><strong>Embalagem</strong>: loja não leva kraft, só a caixinha de 4 (R$ 0,85). Ao item da promoção, a divisória (R$ 0,20).</li>
     </ul>
   </details>
+
+  </div><!-- /painel iniciacao -->
+
+  <div class="painel" id="painel-fortalecimento" role="tabpanel" aria-labelledby="aba-for" hidden>
+
+  <!-- ══════ O combinado desta trilha ══════ -->
+  <section id="forte-combinado">
+    <h2>O combinado desta trilha<span class="hint">perguntas 02 e 08</span></h2>
+    <p class="prose">
+      A outra aba compra <strong>visita</strong> de quem nunca entrou. Esta aqui não compra visita —
+      quem já é de casa viria de qualquer jeito. Ela compra <strong>opinião, reputação e a primeira vez
+      num produto</strong>. São coisas diferentes, com contas diferentes, e é por isso que moram em abas
+      separadas.
+    </p>
+
+    <h3 class="sub">Como a trilha funciona</h3>
+    <div class="story fluxo">
+      <div>
+        <span class="vnum">1</span>
+        <span class="job">A pesquisa</span>
+        <span class="txt">No balcão, depois de pagar, o cliente de casa é convidado a responder uma
+        pesquisa. Ela pergunta <em>o que ele já provou e qual é o favorito</em> — as duas informações
+        que a roda vai usar.</span>
+      </div>
+      <div>
+        <span class="vnum">2</span>
+        <span class="job">A avaliação</span>
+        <span class="txt">No fim da pesquisa, o site leva a pessoa para avaliar a loja no Google.
+        Ela avalia, <em>volta e marca que avaliou</em>.</span>
+      </div>
+      <div>
+        <span class="vnum">3</span>
+        <span class="job">A roda</span>
+        <span class="txt">O sistema confere a avaliação e libera a roda. A pessoa aperta o botão, a roda
+        gira — e cai num prêmio que <em>ela quer e ainda não provou</em>.</span>
+      </div>
+      <div>
+        <span class="vnum">4</span>
+        <span class="job">O resgate</span>
+        <span class="txt">O prêmio chega no WhatsApp como ticket, com as mesmas cinco regras da outra
+        trilha: <em>a partir de amanhã, um por dia, só na loja, sem acumular com outra promoção</em>,
+        15 dias de validade.</span>
+      </div>
+    </div>
+
+    <ol class="pend">
+      <li>
+        <span class="num">02</span>
+        <span class="q">O que fazer com quem já é cliente: ouvir e pedir pra participar da promo?</span>
+        <span class="porque">Diferente da de cima: aqui a pessoa já é cliente da casa. <em>Ela é a que
+        menos precisa ser comprada de volta</em> — dar os três brindes para ela é pagar por uma visita
+        que já aconteceria.</span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Cliente da casa tem
+        <strong>caminho próprio, não o dos três cupons</strong>: ele responde uma pesquisa no site e,
+        no fim dela, é levado para avaliar a loja no Google. Quando volta e marca que avaliou, o sistema
+        confere e libera o bônus no WhatsApp: <strong>compre 1 cookie, ganhe 1</strong> — o mesmo brinde
+        da primeira visita da outra trilha, e pela mesma razão (é presente, não desconto).
+        Ou seja: <em>de quem é novo a campanha compra visita; de quem já é de casa ela compra opinião
+        e reputação.</em>
+        <br><br>
+        <strong>O que essa avaliação custa:</strong> a visita em que ela resgatar o compre-1-ganhe-1
+        rende R$ 8,83 em vez dos R$ 18,85 de uma visita normal. Como cliente de casa viria de qualquer
+        jeito, <em>cada avaliação custa ~R$ 10 de margem</em> — 100 avaliações, ~R$ 1.000. É barato para
+        reputação, mas não é zero, e não está em nenhum número desta página.
+        <br><br>
+        <strong>E quando ele souber pela amiga e vier cobrar?</strong> Vai acontecer — é a objeção mais
+        difícil da campanha, porque a pessoa chega sabendo o que perdeu. A resposta não é dizer não;
+        é <em>mudar o que a campanha é</em>:
+        <span class="fala">
+          <span class="l"><span class="who">cliente</span><span class="say">Minha amiga veio aqui e
+          ganhou três prêmios — comprou um cookie e ganhou outro, ganhou uma torta. Eu não sabia disso!
+          Como faço para participar?</span></span>
+          <span class="l"><span class="who">atendente</span><span class="say">Ah, sim! Essa é a nossa
+          <strong>campanha de iniciação de novos Holy Cookers</strong> — é para quem ainda não
+          experimentou os nossos produtos. Você, que já é cliente e já conhece a marca,
+          <strong>também não vai sair de mão abanando</strong>: a gente tem um presente diferente, que
+          sai de uma pesquisa. Você responde e ganha um prêmio. Já respondeu a nossa pesquisa?</span></span>
+          <span class="l"><span class="who">cliente</span><span class="say">Já respondi!</span></span>
+          <span class="l"><span class="who">atendente</span><span class="say">Que bom! E você gostou do
+          seu prêmio?</span></span>
+        </span>
+        <strong>Ninguém sai de mão abanando</strong> — essa é a regra. A explicação sozinha soa como
+        desculpa; a explicação seguida de uma porta que tem prêmio de verdade soa como convite.
+        <br><br>
+        <strong>E quando ele já respondeu a pesquisa e mesmo assim quer os três?</strong> É o único caso
+        em que a porta de saída acabou — e vai acontecer. A saída não é ceder a escada inteira, é lembrar
+        do que a palavra <em>iniciação</em> significa: <strong>a iniciação é no produto, não na
+        pessoa</strong>. Quem só conhece cookie nunca foi iniciado na torta.
+        <span class="fala">
+          <span class="l"><span class="who">cliente</span><span class="say">Respondi, mas eu queria esses
+          três da iniciação. Eu nunca fiz essa iniciação!</span></span>
+          <span class="l"><span class="who">atendente</span><span class="say">Deixa eu ver aqui na sua
+          pesquisa… você nunca provou a nossa torta, né? <strong>Então a sua iniciação é a da torta:</strong>
+          na próxima vez, compre 1 cookie e leve uma fatia. Te mando agora no WhatsApp.</span></span>
+        </span>
+        <strong>Uma iniciação, não três.</strong> E ela é <em>cross-sell, não retenção</em>: você não
+        está comprando a visita dele (ele viria de qualquer jeito) — está comprando a primeira vez dele
+        num produto que 92% dos pedidos não levam. Custa ~R$ 9 de margem, uma vez, e o teto é claro.
+        <span class="resto"><b>cuidado</b> Quem responde &ldquo;nunca provei&rdquo; é <em>a pesquisa,
+        não a pessoa no balcão</em>. Essa é a linha entre registro e leilão: se o atendente perguntar ali
+        na hora, todo mundo aprende que basta dizer que nunca provou. Sem pesquisa respondida, não há
+        iniciação de produto — a porta continua sendo a pesquisa.</span>
+        <span class="resto"><b>ainda aberto</b> Como o sistema confere a avaliação: o Google devolve o
+        nome de exibição de quem avaliou, o que dá para casar com o nome do cadastro, mas não é garantido
+        — o nome pode ser diferente e a avaliação demora a aparecer. Decidir se a conferência é
+        automática ou olho no painel.</span></span></span>
+      </li>
+      <li>
+        <span class="num">08</span>
+        <span class="q">Para os clientes que ouvem a conversa, podemos pedir avaliação no Google
+        em troca de 1 cookie ou do desconto?</span>
+        <span class="porque">Quem já está na conversa do cupom é quem tem mais chance de avaliar.
+        <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.</span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Sim, e é a
+        <strong>trilha do cliente de casa</strong> (resposta 02): pesquisa no site → Google → volta e
+        marca que avaliou → sistema confere → prêmio no WhatsApp. Não é desconto — é brinde, como o resto
+        da campanha. E não se mistura com os três cupons.
+        <br><br>
+        <strong>O prêmio sai de uma roda da fortuna.</strong> A pessoa aperta o botão, a roda gira e cai
+        num prêmio. A sacada é que <em>a roda já sabe o que ela gosta</em>: a pesquisa pergunta quais
+        produtos ela já consumiu e qual é o favorito, então a roda entrega algo que ela quer, não um
+        prêmio sorteado no escuro. A pessoa vive isso como sorte; do seu lado é pontaria.
+        <br><br>
+        E a pesquisa devolve <strong>duas informações, não uma</strong> — o que ela ama e o que ela nunca
+        provou. Use as duas: <em>o favorito escolhe a direção, o nunca-provado escolhe o item.</em> Quem
+        ama cookie de pistache e nunca tomou milkshake ganha o milkshake, não outro cookie. Assim a roda
+        faz, para o cliente de casa, o mesmo trabalho que os três cupons fazem para o cliente novo —
+        iniciação — e a campanha inteira continua contando a mesma história.
+        <span class="resto"><b>falta fazer</b> Quais prêmios entram na roda e com que peso. Dois
+        cuidados: todo prêmio da roda tem que obedecer a regra do compre-e-ganhe (senão a roda vira a
+        porta dos fundos do desconto), e prêmio variável vira <em>custo</em> variável — hoje a conta é
+        de ~R$ 10 por avaliação, e a roda transforma isso numa faixa. Vale escrever o custo de cada
+        casa antes de montar.</span></span></span>
+      </li>
+    </ol>
+
+    <h3 class="sub">O que falta fazer nesta trilha</h3>
+    <ul class="regras tarefas">
+      <li><b>A iniciação de produto no sistema.</b> Um brinde só, liberado a partir do que a pesquisa
+      registrou que a pessoa nunca provou (resposta 02). É o que dá saída ao cliente de casa que já
+      respondeu a pesquisa e mesmo assim quer entrar — sem abrir a escada inteira.</li>
+      <li><b>Testar a frase da iniciação no balcão.</b> É a única resposta desta página que depende de
+      como soa, não de como fecha a conta. Duas semanas ouvindo a reação de quem já é cliente dizem se
+      ela convida ou se ela ofende — e se ofender, a saída é ir direto à pesquisa, sem a explicação.</li>
+      <li><b>Os prêmios da roda e o peso de cada um</b>, com o custo de cada casa escrito antes de
+      montar — e todos obedecendo o compre-e-ganhe.</li>
+      <li><b>A conferência da avaliação no Google:</b> automática pelo nome de exibição, ou olho no
+      painel.</li>
+    </ul>
+  </section>
+
+  <!-- ══════ A roda ══════ -->
+  <section id="roda">
+    <h2>A roda<span class="hint">o que tem em cada casa, e o que cada uma custa</span></h2>
+    <p class="prose">
+      Toda casa da roda obedece a regra da campanha: <strong>compre uma coisa e ganhe outra</strong>,
+      nunca desconto. Por isso cada prêmio ainda traz <em>um cookie de preço cheio junto</em> — o que
+      muda de casa para casa é o que vai de brinde, e é isso que faz o custo variar.
+    </p>
+    <div class="controls destaque" id="rodaPesos"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Casa da roda</th><th>Peso</th><th>Cliente<br>compra</th><th>Custo do<br>brinde</th><th>Margem da<br>visita</th><th>Custo vs<br>visita normal</th><th>Prêmio<br>percebido</th></tr></thead>
+      <tbody id="rodaTabela"></tbody>
+    </table></div>
+    <div class="notes" id="rodaNota"></div>
+  </section>
+
+  <!-- ══════ A conta do mês ══════ -->
+  <section id="forte-conta">
+    <h2>A conta do mês</h2>
+    <div class="controls" id="rodaFunil"></div>
+    <div class="results" id="rodaResultado"></div>
+    <div class="notes" id="rodaContaNota"></div>
+  </section>
+
+  <!-- ══════ O que precisa valer ══════ -->
+  <section id="forte-breakeven">
+    <h2>O que essa trilha precisa valer</h2>
+    <p class="prose">
+      Diferente da outra aba, aqui <strong>o retorno não aparece na margem</strong>. Avaliação no Google
+      não vira dinheiro no caixa — vira posição na busca, que vira cliente novo, que aí sim entra na
+      campanha de iniciação e tem valor calculado. Então a pergunta certa não é
+      &ldquo;quanto rende?&rdquo;, é <strong>&ldquo;quanto precisaria render para valer?&rdquo;</strong>.
+    </p>
+    <div class="results" id="rodaBreakeven"></div>
+    <div class="notes" id="rodaBreakevenNota"></div>
+  </section>
+
+  <!-- ══════ Cross-sell ══════ -->
+  <section id="forte-crosssell">
+    <h2>O segundo retorno: a primeira vez num produto</h2>
+    <p class="prose">
+      Este é o único retorno desta trilha que <em>dá para medir no seu próprio PDV</em>. Quando a roda
+      entrega torta ou milkshake para quem nunca provou, uma parte dessas pessoas passa a comprar o
+      produto por conta própria. Hoje <strong>92% dos pedidos da loja não levam torta</strong> — cada
+      adoção mexe nesse número e no ticket.
+    </p>
+    <div class="controls" id="rodaCross"></div>
+    <div class="results" id="rodaCrossResultado"></div>
+    <div class="notes" id="rodaCrossNota"></div>
+  </section>
+
+  <details>
+    <summary>Premissas desta aba</summary>
+    <ul>
+      <li><strong>Margens e CMV</strong>: os mesmos da aba de iniciação — cookie pago R$ 15,19 (CMV R$ 5,01), fatia de torta R$ 22,90 (CMV R$ 9,04), milkshake R$ 28,66 (CMV R$ 13,20), margem de contribuição de 48,2% e visita normal de R$ 18,85.</li>
+      <li><strong>Venda extra por visita</strong>: R$ 14,03 quando o brinde é outro cookie (pedido menos dois cookies) e R$ 24,24 quando o brinde é torta ou milkshake (pedido menos o cookie pago). Medidas nos 2.411 pedidos de jun+jul.</li>
+      <li><strong>Quantas pesquisas por mês</strong>: é premissa, não medição — a loja faz 1.200 pedidos/mês e não se sabe quantos são de cliente de casa. O número certo só existe depois que a conciliação diária estiver rodando.</li>
+      <li><strong>Só o brinde não-cookie inicia produto</strong>: quem ganha outro cookie não está sendo iniciado em nada, então não entra na conta de cross-sell.</li>
+      <li><strong>A adoção acumula sem churn</strong> nos 12 meses — de propósito, é o teto otimista. Se a pessoa provar e não adotar, ou adotar e parar, o número real fica abaixo.</li>
+      <li><strong>O valor de um cliente novo</strong> vem da outra aba: o saldo de uma safra dividido pelos clientes novos daquela safra. Se você mexer na campanha de iniciação, este número muda junto.</li>
+    </ul>
+  </details>
+
+  </div><!-- /painel fortalecimento -->
+
 
   <footer>
     Simulação — não é registro contábil. Todos os valores são margem de contribuição, antes de aluguel,
@@ -1289,10 +1431,353 @@
     syncControls();
     renderProjecao(R);
     renderRiscos(R);
+    window.__iniciacao = { saldo: R.saldo, novos: S.novos };
+    document.dispatchEvent(new CustomEvent("iniciacao"));
   }
 
   renderControls();
   update();
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   ABAS
+   ══════════════════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+  const abas = Array.from(document.querySelectorAll(".abas button"));
+  const paineis = abas.map((b) => document.getElementById(b.getAttribute("aria-controls")));
+
+  function ativa(i, comHash) {
+    abas.forEach((b, j) => {
+      b.setAttribute("aria-selected", String(j === i));
+      paineis[j].hidden = j !== i;
+    });
+    if (comHash) { try { history.replaceState(null, "", "#" + abas[i].dataset.hash); } catch (e) {} }
+    document.dispatchEvent(new CustomEvent("aba", { detail: abas[i].dataset.hash }));
+  }
+
+  abas.forEach((b, i) => {
+    b.addEventListener("click", () => { ativa(i, true); });
+    b.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      const j = (i + d + abas.length) % abas.length;
+      ativa(j, true); abas[j].focus();
+    });
+  });
+
+  // link que aponta para dentro de um painel escondido abre o painel certo
+  function porHash() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    const i = abas.findIndex((b) => b.dataset.hash === h);
+    if (i >= 0) { ativa(i, false); return; }
+    const alvo = document.getElementById(h);
+    if (!alvo) return;
+    const p = alvo.closest(".painel");
+    if (!p) return;
+    const j = paineis.indexOf(p);
+    if (j >= 0 && paineis[j].hidden) { ativa(j, false); alvo.scrollIntoView(); }
+  }
+  addEventListener("hashchange", porHash);
+  porHash();
+})();
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FORTALECIMENTO — a conta da roda da fortuna
+   Mesma base da aba de iniciação. O que muda é a pergunta: lá se compra
+   visita, aqui se compra avaliação e a primeira vez num produto.
+   ══════════════════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+
+  const B = {
+    ticket: 39.09, cmvMix: 0.3460,
+    cookiePago: 15.19, cookieTab: 17.34, cookieCMV: 5.0100,
+    tortaPreco: 22.90, tortaCMV: 9.0400,
+    milkPreco: 28.66, milkCMV: 13.2000,
+    exGanhe: 14.03, exPreco: 24.24,
+    simples: 8.0, royalty: 4.0, cartao: 2.0, quebra: 1.0,
+    embPedido: 0.85, embItem: 0.20,
+  };
+
+  const DED = (B.simples + B.royalty + B.cartao) / 100;
+  const QUEBRA = B.quebra / 100;
+  const MC = 1 - (B.cmvMix + QUEBRA + B.embPedido / B.ticket + DED);
+  const MARG_NORMAL = B.ticket * MC;
+  const custoItem = (cmv) => cmv * (1 + QUEBRA) + B.embItem;
+
+  const brl = (v, d = 2) => (v < 0 ? "−" : "") + "R$ " +
+    Math.abs(v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const brl0 = (v) => brl(v, 0);
+  const pc = (v, d = 0) => (100 * v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const n0 = (v) => Math.round(v).toLocaleString("pt-BR");
+  const n1 = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const sign = (v) => v >= 0 ? "pos" : "neg";
+
+  // ─── as casas da roda ───────────────────────────────────────────────────
+  // Todas compre-e-ganhe: a pessoa leva um cookie de preço cheio junto.
+  const CASAS = {
+    ck:  { nome: "Ganhe 1 cookie", inicia: false, exKey: "exGanhe",
+           cmv: B.cookieCMV, tab: B.cookieTab,
+           nota: "Não inicia ninguém em nada — quem chega aqui já conhece o cookie. É a casa mais barata da roda e a que menos muda o comportamento." },
+    tor: { nome: "Ganhe 1 fatia de torta", inicia: true, exKey: "exPreco",
+           cmv: B.tortaCMV, tab: B.tortaPreco,
+           nota: "A casa que faz o trabalho: 92% dos pedidos da loja não levam torta hoje. É a primeira vez de verdade — e a mais barata das duas que iniciam." },
+    mlk: { nome: "Ganhe 1 milkshake", inicia: true, exKey: "exPreco",
+           cmv: B.milkCMV, tab: B.milkPreco,
+           nota: "O maior prêmio percebido (R$ 28,66) e a casa mais cara da roda. Peso alto aqui é o que mais encarece a avaliação." },
+  };
+  const IDS = Object.keys(CASAS);
+
+  // margem de uma visita que resgata a casa k — mesma fórmula da outra aba
+  const margemVisita = (k) => {
+    const o = CASAS[k];
+    return (B.cookiePago + B[o.exKey]) * MC - custoItem(o.cmv);
+  };
+  // margem marginal de vender o item por conta própria, depois de adotado
+  const margemItemCheio = (k) => CASAS[k].tab * (1 - DED) - custoItem(CASAS[k].cmv);
+
+  const S = {
+    pesoCk: 50, pesoTor: 30, pesoMlk: 20,
+    pesquisas: 150, avalia: 60, resgata: 70,
+    incremental: 0,      // % dos resgates que trazem visita que não aconteceria
+    adota: 15, freqAdotado: 0.5,
+  };
+
+  const pesos = () => {
+    const b = { ck: S.pesoCk, tor: S.pesoTor, mlk: S.pesoMlk };
+    const t = b.ck + b.tor + b.mlk;
+    return t === 0 ? { ck: 1 / 3, tor: 1 / 3, mlk: 1 / 3 } : { ck: b.ck / t, tor: b.tor / t, mlk: b.mlk / t };
+  };
+
+  function calc() {
+    const w = pesos();
+    const inc = S.incremental / 100;
+
+    // custo de uma casa = margem que a visita deixa de render vs. uma visita normal
+    const custoCasa = (k) => MARG_NORMAL - margemVisita(k);
+    const custoMedio = IDS.reduce((a, k) => a + w[k] * custoCasa(k), 0);
+    const margemMedia = IDS.reduce((a, k) => a + w[k] * margemVisita(k), 0);
+
+    // se a visita não aconteceria, ela não custa margem — ela rende
+    const custoPorResgate = (1 - inc) * custoMedio - inc * margemMedia;
+    const incBreakeven = custoMedio / MARG_NORMAL;   // custo zera quando inc chega aqui
+
+    const avaliacoes = S.pesquisas * (S.avalia / 100);
+    const resgates = avaliacoes * (S.resgata / 100);
+    const custoMes = resgates * custoPorResgate;
+    const custoPorAvaliacao = avaliacoes ? custoMes / avaliacoes : 0;
+
+    // valor de um cliente novo, vindo da outra aba
+    const outra = window.__iniciacao || { saldo: 0, novos: 200 };
+    const valorNovo = outra.novos ? outra.saldo / outra.novos : 0;
+    const novosNecessariosMes = valorNovo > 0 ? custoMes / valorNovo : Infinity;
+    const novosPorAvaliacao = valorNovo > 0 ? custoPorAvaliacao / valorNovo : Infinity;
+
+    // cross-sell: só as casas que iniciam produto novo
+    const fatiaInicia = IDS.filter((k) => CASAS[k].inicia).reduce((a, k) => a + w[k], 0);
+    const iniciados = resgates * fatiaInicia;
+    const adotantesMes = iniciados * (S.adota / 100);
+    const margemAdotado = fatiaInicia > 0
+      ? IDS.filter((k) => CASAS[k].inicia).reduce((a, k) => a + (w[k] / fatiaInicia) * margemItemCheio(k), 0)
+      : 0;
+    const ganhoPorAdotante = S.freqAdotado * margemAdotado;
+
+    // 12 meses: cada safra de adotantes continua comprando
+    let ganho12 = 0;
+    for (let m = 1; m <= 12; m++) ganho12 += m * adotantesMes * ganhoPorAdotante;
+    const custo12 = custoMes * 12;
+    const saldo12 = ganho12 - custo12;
+    const faltam12 = valorNovo > 0 ? Math.max(0, -saldo12) / valorNovo : Infinity;
+
+    return { w, custoCasa, custoMedio, margemMedia, custoPorResgate, incBreakeven,
+             avaliacoes, resgates, custoMes, custoPorAvaliacao,
+             valorNovo, novosNecessariosMes, novosPorAvaliacao,
+             fatiaInicia, iniciados, adotantesMes, margemAdotado, ganhoPorAdotante,
+             ganho12, custo12, saldo12, faltam12 };
+  }
+
+  // ─── controles ──────────────────────────────────────────────────────────
+  const CTL = {
+    pesoCk:      { alvo: "rodaPesos", rot: "Peso · ganhe 1 cookie", min: 0, max: 100, step: 5, fmt: (v) => v + "%", nota: () => "A casa barata. Sobe o peso e a avaliação fica mais barata, mas a roda para de iniciar produto." },
+    pesoTor:     { alvo: "rodaPesos", rot: "Peso · ganhe 1 torta", min: 0, max: 100, step: 5, fmt: (v) => v + "%", nota: () => "A casa que faz o trabalho pelo menor preço entre as que iniciam." },
+    pesoMlk:     { alvo: "rodaPesos", rot: "Peso · ganhe 1 milkshake", min: 0, max: 100, step: 5, fmt: (v) => v + "%", nota: () => "A casa cara. Serve para a roda ter um prêmio grande — a graça de girar depende de existir uma casa que a pessoa quer muito." },
+    pesquisas:   { alvo: "rodaFunil", rot: "Pesquisas respondidas por mês", min: 0, max: 600, step: 10, fmt: n0, nota: (R) => "Premissa, não medição — a loja faz 1.200 pedidos/mês e ainda não se sabe quantos são de cliente de casa." },
+    avalia:      { alvo: "rodaFunil", rot: "Dos que respondem, quantos avaliam", min: 0, max: 100, step: 5, fmt: (v) => v + "%", nota: (R) => "Quem já respondeu a pesquisa inteira está a um clique da avaliação — por isso o número é alto. " + n0(R.avaliacoes) + " avaliações por mês." },
+    resgata:     { alvo: "rodaFunil", rot: "Dos que avaliam, quantos resgatam", min: 0, max: 100, step: 5, fmt: (v) => v + "%", nota: (R) => "O prêmio tem 15 dias de validade. O que não é resgatado não custa nada — e também não traz ninguém de volta." },
+    incremental: { alvo: "rodaFunil", rot: "Resgates que são visita a mais", min: 0, max: 80, step: 5, fmt: (v) => v + "%", nota: (R) => "Quantos dos resgates são uma visita que <strong>não aconteceria</strong>. A zero, a conta assume o pior: cliente de casa viria de qualquer jeito. <strong>A partir de " + pc(R.incBreakeven) + " a trilha se paga sozinha em margem.</strong>" },
+    adota:       { alvo: "rodaCross", rot: "Quantos adotam o produto novo", min: 0, max: 60, step: 5, fmt: (v) => v + "%", nota: (R) => "Dos " + n0(R.iniciados) + " que provam torta ou milkshake pela roda, quantos passam a comprar por conta própria." },
+    freqAdotado: { alvo: "rodaCross", rot: "Quantas vezes por mês compram", min: 0, max: 3, step: 0.1, fmt: n1, nota: (R) => "Cada compra dessas rende " + brl(R.margemAdotado) + " de margem — é item que entra <em>além</em> do que a pessoa já levava." },
+  };
+
+  function renderControles() {
+    const grupos = {};
+    Object.entries(CTL).forEach(([k, c]) => { (grupos[c.alvo] = grupos[c.alvo] || []).push(k); });
+    Object.entries(grupos).forEach(([alvo, chaves]) => {
+      const el = document.getElementById(alvo);
+      if (!el) return;
+      el.innerHTML = chaves.map((k) => {
+        const c = CTL[k];
+        return `<div class="ctl">
+          <div class="top"><span class="label">${c.rot}</span><span class="val" id="v-${k}">${c.fmt(S[k])}</span></div>
+          <input type="range" id="r-${k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[k]}" aria-label="${c.rot}">
+          <span class="note" id="n-${k}"></span>
+        </div>`;
+      }).join("");
+      chaves.forEach((k) => {
+        document.getElementById("r-" + k).addEventListener("input", (e) => {
+          S[k] = parseFloat(e.target.value);
+          update();
+        });
+      });
+    });
+  }
+
+  function syncControles(R) {
+    Object.entries(CTL).forEach(([k, c]) => {
+      const v = document.getElementById("v-" + k), n = document.getElementById("n-" + k),
+            r = document.getElementById("r-" + k);
+      if (!v) return;
+      v.textContent = c.fmt(S[k]);
+      if (r && parseFloat(r.value) !== S[k]) r.value = S[k];
+      n.innerHTML = c.nota(R);
+    });
+  }
+
+  // ─── tabela da roda ─────────────────────────────────────────────────────
+  function renderTabela(R) {
+    document.getElementById("rodaTabela").innerHTML = IDS.map((k) => {
+      const o = CASAS[k], mv = margemVisita(k), custo = R.custoCasa(k);
+      return `<tr class="${R.w[k] > 0 ? "mark" : ""}">
+        <td>${o.nome}${o.inicia ? ' <span class="tag good">inicia produto</span>' : ""}</td>
+        <td>${pc(R.w[k])}</td>
+        <td>${brl(B.cookiePago)}</td>
+        <td>${brl(custoItem(o.cmv))}</td>
+        <td class="${sign(mv)}"><strong>${brl(mv)}</strong></td>
+        <td class="neg">−${brl(custo)}</td>
+        <td>${brl(o.tab)}<br><span style="color:var(--ink-faint)">100%</span></td></tr>`;
+    }).join("") +
+    `<tr class="total"><td>Média da roda, com os pesos de cima</td><td>100%</td><td>${brl(B.cookiePago)}</td><td>—</td>
+      <td class="${sign(R.margemMedia)}"><strong>${brl(R.margemMedia)}</strong></td>
+      <td class="neg">−${brl(R.custoMedio)}</td><td>—</td></tr>`;
+
+    document.getElementById("rodaNota").innerHTML = `
+      <div class="note-item"><span class="tag acc">como ler o custo</span><span>
+        Uma visita normal desta pessoa renderia <strong>${brl(MARG_NORMAL)}</strong>. A visita em que
+        ela resgata o prêmio rende menos — a diferença é o que a avaliação custou. <em>Nenhuma casa dá
+        prejuízo</em>: todas ainda rendem dinheiro, só rendem menos que se ela tivesse vindo sem prêmio.
+      </span></div>
+      <div class="note-item"><span class="tag ${R.w.ck > 0.6 ? "warn" : "good"}">o dilema da roda</span><span>
+        As casas baratas são as que não iniciam nada, e as que iniciam são as caras. Com os pesos de
+        agora, <strong>${pc(R.fatiaInicia)}</strong> dos giros entregam um produto que a pessoa pode
+        nunca ter provado, ao custo médio de <strong>${brl(R.custoMedio)}</strong> por resgate.
+        ${R.w.ck > 0.6
+          ? "Do jeito que está, a roda é barata mas quase não inicia — ela virou um programa de recompensa comum."
+          : "É a proporção que decide se a roda é um programa de recompensa ou uma máquina de primeira vez."}
+      </span></div>`;
+  }
+
+  // ─── conta do mês ───────────────────────────────────────────────────────
+  function renderConta(R) {
+    document.getElementById("rodaResultado").innerHTML = `
+      <div class="cell hero"><span class="label">Custo por avaliação</span>
+        <span class="v ${R.custoPorAvaliacao > 0 ? "neg" : "pos"}">${brl(R.custoPorAvaliacao)}</span>
+        <span class="s">margem que você abre mão para ter uma avaliação no Google</span></div>
+      <div class="cell"><span class="label">Avaliações por mês</span><span class="v">${n0(R.avaliacoes)}</span>
+        <span class="s">de ${n0(S.pesquisas)} pesquisas respondidas</span></div>
+      <div class="cell"><span class="label">Prêmios resgatados</span><span class="v">${n0(R.resgates)}</span>
+        <span class="s">o que não é resgatado não custa — e não traz ninguém</span></div>
+      <div class="cell"><span class="label">Custo do mês</span>
+        <span class="v ${R.custoMes > 0 ? "neg" : "pos"}">${brl0(R.custoMes)}</span>
+        <span class="s">${brl0(R.custoMes * 12)} em 12 meses</span></div>`;
+
+    document.getElementById("rodaContaNota").innerHTML = `
+      <div class="note-item"><span class="tag ${S.incremental >= R.incBreakeven * 100 ? "good" : "warn"}">a premissa que decide</span><span>
+        A conta acima assume que <strong>${pc(1 - S.incremental / 100)} dessas visitas aconteceriam de
+        qualquer jeito</strong> — é o pior caso, e é o certo para cliente de casa. Mas se o prêmio
+        estiver <em>criando</em> visita, o custo despenca:
+        <strong>a partir de ${pc(R.incBreakeven)} de visitas a mais, a trilha se paga sozinha</strong>,
+        sem precisar de nenhuma avaliação. ${S.incremental >= R.incBreakeven * 100
+          ? "Do jeito que está no controle, ela já está pagando."
+          : "Hoje o controle está em " + pc(S.incremental / 100) + "."}
+        <em>Esse é o número para medir na primeira safra</em> — e dá para medir: é só olhar se a
+        frequência de quem resgatou subiu contra a de quem não resgatou.
+      </span></div>`;
+  }
+
+  // ─── quanto precisa valer ───────────────────────────────────────────────
+  function renderBreakeven(R) {
+    const semOutra = !window.__iniciacao;
+    document.getElementById("rodaBreakeven").innerHTML = `
+      <div class="cell hero"><span class="label">Clientes novos que a reputação precisa trazer</span>
+        <span class="v">${isFinite(R.novosNecessariosMes) ? n0(R.novosNecessariosMes) : "—"}<span style="font-size:.9rem;color:var(--ink-faint)">/mês</span></span>
+        <span class="s">para o custo desta trilha empatar</span></div>
+      <div class="cell"><span class="label">Por avaliação</span>
+        <span class="v">${isFinite(R.novosPorAvaliacao) ? n1(R.novosPorAvaliacao) : "—"}</span>
+        <span class="s">cada avaliação precisa trazer isso de cliente novo</span></div>
+      <div class="cell"><span class="label">Quanto vale um cliente novo</span>
+        <span class="v ${sign(R.valorNovo)}">${brl(R.valorNovo)}</span>
+        <span class="s">${semOutra ? "abra a aba de iniciação para calcular" : "saldo de uma safra ÷ clientes daquela safra, na aba de iniciação"}</span></div>`;
+
+    document.getElementById("rodaBreakevenNota").innerHTML = `
+      <div class="note-item"><span class="tag acc">o número honesto</span><span>
+        <strong>${isFinite(R.novosPorAvaliacao) ? n1(R.novosPorAvaliacao) : "—"} cliente novo por
+        avaliação</strong> é a conta inteira desta trilha numa frase. Se você acha que uma avaliação a
+        mais no Google traz isso ao longo da vida dela, a trilha se paga. Se acha que não, ela é custo
+        de marketing — o que também é uma resposta legítima, só precisa ser escolhida de olho aberto.
+        <br><br>
+        A favor: avaliação é <em>estoque, não fluxo</em> — ela fica lá trabalhando, e a nota da loja
+        entra na decisão de quem nunca ouviu falar de você. Contra: o elo entre nota e cliente novo é
+        o único desta página que <strong>não dá para medir no seu PDV</strong>.
+      </span></div>`;
+  }
+
+  // ─── cross-sell ─────────────────────────────────────────────────────────
+  function renderCross(R) {
+    document.getElementById("rodaCrossResultado").innerHTML = `
+      <div class="cell"><span class="label">Provam produto novo</span><span class="v">${n0(R.iniciados)}</span>
+        <span class="s">por mês, pelas casas que iniciam</span></div>
+      <div class="cell"><span class="label">Adotam de verdade</span><span class="v">${n0(R.adotantesMes)}</span>
+        <span class="s">${brl(R.ganhoPorAdotante)} de margem por mês cada um</span></div>
+      <div class="cell"><span class="label">Ganho em 12 meses</span><span class="v pos">${brl0(R.ganho12)}</span>
+        <span class="s">safras de adotantes acumulando, sem churn</span></div>
+      <div class="cell hero"><span class="label">Saldo de 12 meses</span>
+        <span class="v ${sign(R.saldo12)}">${brl0(R.saldo12)}</span>
+        <span class="s">${R.saldo12 >= 0
+          ? "o cross-sell sozinho já paga a trilha — a reputação vem de graça"
+          : "falta " + brl0(-R.saldo12) + ", que é o que a reputação precisa cobrir"}</span></div>`;
+
+    document.getElementById("rodaCrossNota").innerHTML = `
+      <div class="note-item"><span class="tag ${R.saldo12 >= 0 ? "good" : "warn"}">juntando as duas pontas</span><span>
+        Em 12 meses a trilha custa <strong>${brl0(R.custo12)}</strong> e o cross-sell devolve
+        <strong>${brl0(R.ganho12)}</strong>. ${R.saldo12 >= 0
+          ? "Ou seja: <strong>ela já se paga só com a primeira vez nos produtos</strong>, e tudo que vier de reputação é lucro."
+          : `Sobra <strong>${brl0(-R.saldo12)}</strong> para a reputação cobrir — o equivalente a
+             <strong>${isFinite(R.faltam12) ? n0(R.faltam12) : "—"} clientes novos</strong> no ano,
+             ou ${isFinite(R.faltam12) ? n0(R.faltam12 / 12) : "—"} por mês.`}
+      </span></div>
+      <div class="note-item"><span class="tag good">o que dá para medir</span><span>
+        Esta é a única parte da trilha que o seu próprio PDV responde: <strong>quantos pedidos passaram
+        a levar torta</strong> depois que a roda começou a girar. Hoje são 8%. Se esse número subir,
+        a adoção é real; se não subir, a roda está entregando prazer, não hábito — e aí a casa do
+        cookie deveria pesar mais, porque sai mais barata.
+      </span></div>`;
+  }
+
+  function update() {
+    const R = calc();
+    renderTabela(R); renderConta(R); renderBreakeven(R); renderCross(R); syncControles(R);
+  }
+
+  renderControles();
+  update();
+  // quando a outra aba recalcula, o valor do cliente novo muda aqui também
+  document.addEventListener("iniciacao", update);
+  document.addEventListener("aba", (e) => { if (e.detail === "fortalecimento") update(); });
 })();
 </script>
 
