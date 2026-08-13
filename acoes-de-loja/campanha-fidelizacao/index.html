@@ -205,8 +205,18 @@
   .pend .rl { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em; text-transform: uppercase;
               font-weight: 700; color: var(--accent); flex: none; }
   .pend .rv { font-size: .875rem; color: var(--ink); line-height: 1.5; }
+  .pend .rv { flex: 1 1 14rem; min-width: 0; }
   .pend .rv.vazia { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em;
                     text-transform: uppercase; color: var(--ink-faint); }
+  .pend .rv strong { font-weight: 600; }
+  .pend .rv em { font-style: normal; font-weight: 600; color: var(--ink); }
+  .pend .rv a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .pend .resp.ok { border-style: solid; background: var(--surface); }
+  .pend .resp.ok .rl { color: var(--good); }
+  .pend .resto { display: block; margin-top: .5rem; padding-top: .5rem;
+                 border-top: 1px dashed var(--rule); font-size: .8125rem; color: var(--ink-soft); }
+  .pend .resto b { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em;
+                   text-transform: uppercase; color: var(--warn); font-weight: 700; margin-right: .45rem; }
   @media (max-width: 32rem) {
     .pend > li { grid-template-columns: 1fr; }
     .pend .num { grid-row: auto; justify-self: start; }
@@ -244,37 +254,86 @@
     <p class="prose">
       A conta desta página fecha. O que ainda não existe é o <strong>combinado de balcão</strong>:
       quem fala, em que momento fala e o que responde quando o cliente empaca. São oito perguntas —
-      nenhuma depende de dado novo, todas dependem de decisão. Cada uma tem o espaço da resposta logo
-      abaixo; enquanto estiver vazio, a campanha não sobe, porque cada atendente vai responder uma
-      coisa diferente e a safra não fecha.
+      nenhuma depende de dado novo, todas dependem de decisão. Cada uma tem a resposta logo abaixo;
+      enquanto estiver vazia, a campanha não sobe, porque cada atendente vai responder uma coisa
+      diferente e a safra não fecha.
     </p>
+
+    <h3 class="sub">Como o resgate funciona na loja</h3>
+    <div class="story">
+      <div>
+        <span class="vnum">1</span>
+        <span class="job">Display com QR code</span>
+        <span class="txt">A pessoa chega na loja e escaneia o QR code do display. Abre um site —
+        <em>nada de app para instalar, nada de cartão de papel para perder.</em></span>
+      </div>
+      <div>
+        <span class="vnum">2</span>
+        <span class="job">Nome e celular</span>
+        <span class="txt">No site ela deixa <em>nome e número de celular</em>. É esse cadastro que
+        transforma pedido em pessoa — e é o que vai trocar as taxas do vídeo por medição de Paulínia.</span>
+      </div>
+      <div>
+        <span class="vnum">3</span>
+        <span class="job">Ticket no WhatsApp</span>
+        <span class="txt">Ela recebe no WhatsApp <em>um QR code exclusivo, com o nome dela</em>.
+        Não é um cupom genérico que circula em print: é o ticket daquela pessoa.</span>
+      </div>
+      <div>
+        <span class="vnum">4</span>
+        <span class="job">Resgate no balcão</span>
+        <span class="txt">Quem atende escaneia esse QR com o celular da loja, dentro do app:
+        <em>cupom redimido</em>. Na mesma hora, o brinde da visita seguinte é liberado para ela.</span>
+      </div>
+    </div>
+    <div class="note-item"><span class="tag good">regra fechada</span><span>
+      <strong>A campanha não dá desconto.</strong> A moeda é sempre <em>compre uma coisa e ganhe outra</em> —
+      é isso que separa &ldquo;presente&rdquo; de &ldquo;promoção&rdquo;. Desconto ensina o cliente a esperar
+      preço menor; brinde ensina ele a voltar. O <a href="#cardapio-sec">cardápio da seção 3</a> já está montado
+      nessa regra, e as linhas de preço fixo ficaram lá só como comparação, marcadas como fora da regra.
+    </span></div>
 
     <ol class="pend">
       <li>
         <span class="num">01</span>
         <span class="q">O que fazer com os clientes que falarem que não são a primeira vez?</span>
         <span class="porque">O convite pressupõe cliente novo — o funil da <a href="#funil">seção 5</a>
-        começa em quem nunca entrou. <em>Sem uma resposta pronta, o atendimento improvisa.</em>
-        Ela entra na campanha do mesmo jeito, entra numa etapa adiantada, ou não entra?</span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        começa em quem nunca entrou. <em>Sem uma resposta pronta, o atendimento improvisa.</em></span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">A pergunta não é
+        &ldquo;é a primeira vez?&rdquo; — é <strong>&ldquo;você já tem cadastro?&rdquo;</strong>.
+        Quem já tem, segue a sequência de onde parou. Quem não tem, faz o cadastro na hora e entra
+        na campanha do mesmo jeito, independente de quantas vezes já veio. O balcão não precisa
+        julgar nada: o QR code na mão da pessoa responde por ela.</span></span>
       </li>
       <li>
         <span class="num">02</span>
         <span class="q">O que fazer com quem já é cliente: ouvir e pedir pra participar da promo?</span>
-        <span class="porque">Diferente da de cima: aqui a oferta foi feita para outra pessoa e o cliente
-        de casa escutou. Vale convidar de propósito? Se sim, ele entra por onde — pela 1ª visita
-        (paga cheio, só se cadastra) ou já resgatando o primeiro brinde? <em>Ele é o que menos precisa
-        ser comprado de volta, então é o que mais custa se entrar errado.</em></span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <span class="porque">Diferente da de cima: aqui a pessoa já é cliente da casa. <em>Ela é a que
+        menos precisa ser comprada de volta</em> — dar os três brindes para ela é pagar por uma visita
+        que já aconteceria.</span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Cliente da casa tem
+        <strong>caminho próprio, não o dos três cupons</strong>: ele responde uma pesquisa no site e,
+        no fim dela, é levado para avaliar a loja no Google. Quando volta e marca que avaliou, o sistema
+        confere e libera o bônus dele no WhatsApp. Ou seja: <em>de quem é novo a campanha compra visita;
+        de quem já é de casa ela compra opinião e reputação.</em>
+        <span class="resto"><b>ainda aberto</b> Qual é o bônus dessa trilha (1 cookie? outro brinde?) e
+        como o sistema confere a avaliação — o Google devolve o nome de exibição de quem avaliou, o que
+        dá para casar com o nome do cadastro, mas não é garantido: o nome pode ser diferente e a avaliação
+        demora a aparecer. Decidir se a conferência é automática ou olho no painel.</span></span></span>
       </li>
       <li>
         <span class="num">03</span>
         <span class="q">Como o responsável vai organizar se é a 2ª, 3ª ou 4ª visita da pessoa?</span>
-        <span class="porque">Hoje o PDV registra pedido, não pessoa. O cadastro por celular no totem é a
-        peça que resolve isso — mas falta o resto: quem confere na hora do resgate, o que a pessoa do
-        balcão vê na tela e o que fazer quando o celular cadastrado não bate com o que ela informa.
-        <em>É o mesmo cadastro que, em ~3 meses, troca as taxas do vídeo por medição de Paulínia.</em></span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <span class="porque">Hoje o PDV registra pedido, não pessoa. <em>Sem esse controle, a campanha
+        não tem como saber em que etapa cada cliente está</em> — e é o mesmo registro que, em ~3 meses,
+        troca as taxas do vídeo por medição de Paulínia.</span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Ninguém organiza
+        na mão — o app organiza.</strong> Cada pessoa tem um QR code próprio; o funcionário escaneia com
+        o celular da loja e o sistema sabe em que visita ela está, redime o cupom e libera o próximo.
+        O balcão só lê a tela.
+        <span class="resto"><b>ainda aberto</b> O que exatamente aparece na tela do funcionário no
+        momento do scan (nome, visita, brinde a entregar) e o que fazer quando a pessoa está sem o
+        WhatsApp na mão — busca por celular no app, ou não resgata?</span></span></span>
       </li>
       <li>
         <span class="num">04</span>
@@ -283,7 +342,16 @@
         <span class="porque">Resgatar o cupom na mesma visita derruba a lógica inteira: a campanha compra
         <em>visitas</em>, não desconto. Se o resgate vale na hora, você pagou o brinde e não comprou
         volta nenhuma.</span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Não vale no mesmo
+        dia.</strong> O ticket que ela recebe no WhatsApp vale <em>a partir do dia seguinte</em> — é a
+        prática padrão de programa por visita (uma marcação por dia, prêmio na visita seguinte), e é a
+        única regra que a pessoa do balcão consegue repetir sem errar: &ldquo;esse é para a sua próxima
+        vinda, a partir de amanhã&rdquo;. A alternativa de contar 24 horas cheias é pior na prática, porque
+        cria discussão de horário no balcão.
+        <span class="resto"><b>decisão separada</b> Liberar resgate só em alguns dias da semana é outra
+        coisa: não protege o mecanismo (isso o &ldquo;não no mesmo dia&rdquo; já faz), serve para encher
+        dia fraco. Custa atrito — dá ao cliente um motivo para não voltar hoje. Se for usar, use em
+        <em>um</em> dos três brindes, não nos três.</span></span></span>
       </li>
       <li>
         <span class="num">05</span>
@@ -305,19 +373,29 @@
       <li>
         <span class="num">07</span>
         <span class="q">Qual o prazo de validade de cada um dos cupons?</span>
-        <span class="porque">Os três brindes precisam de prazo, um a um. Prazo curto aperta o retorno —
-        que é justamente o que a campanha está comprando; prazo longo dilui e a pessoa esquece.
-        <em>Sem prazo, o cupom vira crédito eterno e a safra nunca fecha.</em></span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <span class="porque">Prazo curto aperta o retorno — que é justamente o que a campanha está
+        comprando; prazo longo dilui e a pessoa esquece. <em>Sem prazo, o cupom vira crédito eterno e a
+        safra nunca fecha.</em></span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv"><strong>Entre 14 e 21 dias
+        — 7 é pouco, 30 é muito.</strong> Recomendação: <strong>21 dias, igual para os três</strong>.
+        A premissa da <a href="#funil">página</a> é que o cliente fiel volta 1,2 vez por mês, ou seja,
+        a cada ~25 dias: 21 dias fica logo abaixo do ritmo natural — aperta sem ficar impossível.
+        E prazo igual nos três é o que o balcão consegue repetir; três prazos diferentes viram três
+        chances de errar.</span></span>
       </li>
       <li>
         <span class="num">08</span>
         <span class="q">Para os clientes que ouvem a conversa, podemos pedir avaliação no Google
         em troca de 1 cookie ou do desconto?</span>
         <span class="porque">Quem já está na conversa do cupom é quem tem mais chance de avaliar.
-        Se for sim: qual das duas moedas, se ela acumula com o brinde da visita e quem confere que a
-        avaliação saiu. <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.</span>
-        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+        <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.</span>
+        <span class="resp ok"><span class="rl">Resposta</span><span class="rv">Sim, e é a
+        <strong>trilha do cliente de casa</strong> (resposta 02): pesquisa no site → Google → volta e
+        marca que avaliou → sistema confere → bônus no WhatsApp. Não é desconto — é brinde, como o resto
+        da campanha. E não se mistura com os três cupons: quem é novo entra na trilha de visitas,
+        quem já é da casa entra nesta.
+        <span class="resto"><b>ainda aberto</b> Qual brinde paga a avaliação e como a conferência é
+        feita — mesmo ponto aberto da resposta 02.</span></span></span>
       </li>
     </ol>
   </section>
@@ -334,7 +412,7 @@
       <div>
         <span class="vnum">V1</span>
         <span class="job">Provar o produto</span>
-        <span class="txt">A pessoa chega, <em>paga normalmente</em> e faz o cadastro (celular no totem). Nada é dado
+        <span class="txt">A pessoa chega, <em>paga normalmente</em> e faz o cadastro (QR do display → nome e celular). Nada é dado
         nesta visita — ela deixa margem cheia, e o 1º brinde fica liberado para a próxima.</span>
         <span class="vid">No vídeo: guardanapo vermelho + o gerente vem à mesa + o cartão do prato principal grátis, pelo correio.</span>
       </div>
@@ -355,9 +433,10 @@
     </div>
     <div class="note-item"><span class="tag acc">o detalhe que não é número</span><span>
       No vídeo o brinde seguinte <strong>nunca é anunciado no caixa junto com a nota</strong>. O gerente vai à mesa
-      no fim da visita, pergunta como foi, e <em>então</em> oferece. Aqui o cadastro é online e não tem cartão
-      nenhum para entregar — o que significa que essa parte precisa acontecer <strong>na conversa</strong>,
-      não no papel. Avisar "seu próximo cookie está liberado" olhando na cara da pessoa custa o mesmo que não avisar.
+      no fim da visita, pergunta como foi, e <em>então</em> oferece. Aqui o ticket chega sozinho no WhatsApp e
+      não tem cartão nenhum para entregar — o que significa que essa parte precisa acontecer
+      <strong>na conversa</strong>, não na notificação. Avisar "seu próximo cookie está liberado" olhando na
+      cara da pessoa custa o mesmo que não avisar.
     </span></div>
   </section>
 
@@ -369,7 +448,7 @@
   </section>
 
   <!-- ══════ 3. Cardápio ══════ -->
-  <section>
+  <section id="cardapio-sec">
     <h2><span class="n">3</span> Cardápio de brindes<span class="hint">só os que você definiu</span></h2>
     <div class="tablewrap"><table>
       <thead><tr><th>Brinde</th><th>Tipo</th><th>Exige<br>comprar</th><th>Cliente<br>paga</th><th>Custo do<br>item</th><th>Resultado<br>do brinde</th><th>Margem da<br>visita*</th><th>Prêmio<br>percebido</th></tr></thead>
@@ -414,9 +493,15 @@
     <div class="controls" id="controlsExtra"></div>
     <div class="note-item"><span class="tag acc">medido</span><span>
       Medido nos 2.411 pedidos de loja de jun+jul, descontando o que o brinde substitui.
-      Numa visita que resgata <strong>compre 1 ganhe 1</strong>, o segundo cookie deixa de ser venda e vira presente:
+      Quando o brinde é <strong>outro cookie</strong>, o segundo deixa de ser venda e vira presente:
       sobram <strong>R$ 14,03</strong> de média (50% dos pedidos não levam nada além dos dois cookies).
-      Numa visita de <strong>preço fixo</strong> só um item sai do preço cheio: <strong>R$ 24,24</strong>.
+      Quando o brinde é <strong>torta ou milkshake</strong>, só o cookie pago sai da conta — o item do brinde
+      não seria comprado de qualquer jeito (92% dos pedidos não levam torta): sobram <strong>R$ 24,24</strong>.
+    </span></div>
+    <div class="note-item"><span class="tag warn">a medir</span><span>
+      Os R$ 24,24 são a média de &ldquo;pedido menos um item&rdquo; do histórico, não a média de quem resgatou
+      torta de brinde — <em>essa safra ainda não existe</em>. É a premissa mais frouxa do combo novo:
+      se quem ganha torta comprar menos junto, a margem dessas visitas cai. Vale medir na primeira safra.
     </span></div>
     <h3 class="sub">Estrutura de custo</h3>
     <div class="controls" id="controlsCusto"></div>
@@ -449,7 +534,7 @@
       <li><strong>Vendas de loja</strong>: <code>vendas_consumer_itens_historico_pedido</code> e <code>vendas_consumer_pedidos_individual</code>, Paulínia, jun+jul/2026, canais <code>caixa</code> + <code>balcao</code> + <code>mesa</code> — 2.411 pedidos. Os 426 de delivery ficam de fora.</li>
       <li><strong>CMV</strong>: <code>cmv_produtos</code>, atualizado na base em 30–31/07/2026. Cookie R$ 5,01 sem os premium (mín. R$ 3,83 Churros · máx. R$ 8,71 Pistache). Fatia da Torta Perfeita R$ 9,04 — confere com a inteira (R$ 72,32 ÷ 8). Milkshake R$ 13,20 (R$ 12,04 de ingrediente + R$ 1,16 de copo/tampa/canudo; só existe copo de 440 ml).</li>
       <li><strong>Venda extra por visita</strong>: medida nos mesmos pedidos, descontando o que o brinde substitui. Compre-e-ganhe = pedido − 2 cookies = R$ 14,03; preço fixo = pedido − 1 item = R$ 24,24.</li>
-      <li><strong>Taxas naturais 42% / 47% / 72%</strong>: vêm do vídeo, não dos seus dados — o PDV registra pedido, não pessoa. <strong>É a premissa que decide a campanha inteira</strong>, e o cadastro do totem é o que vai substituí-la por medição.</li>
+      <li><strong>Taxas naturais 42% / 47% / 72%</strong>: vêm do vídeo, não dos seus dados — o PDV registra pedido, não pessoa. <strong>É a premissa que decide a campanha inteira</strong>, e o cadastro do QR (nome + celular) é o que vai substituí-la por medição.</li>
       <li><strong>Simples 8,0%</strong> (DAS ÷ faturamento de competência) · <strong>Royalties 4,0%</strong> (contrato) · <strong>Cartão 2,0%</strong> (premissa — a Stone liquida líquido) · <strong>Quebra 1,0%</strong> (premissa — não há registro no sistema).</li>
       <li><strong>Embalagem</strong>: loja não leva kraft, só a caixinha de 4 (R$ 0,85). Ao item da promoção, a divisória (R$ 0,20).</li>
     </ul>
@@ -482,7 +567,7 @@
     exGanhe: 14.03, exPreco: 24.24,
     cupomV1: false,           // a 1ª visita já vem com cupom?
     canibV1: 20,              // se sim: % dos trazidos que viriam de qualquer jeito
-    b1: "g_ck_ck", b2: "p_ck_5", b3: "p_tor_10",
+    b1: "g_ck_ck", b2: "g_ck_tor", b3: "g_ck_mlk",
     freq: 1.2, cupom: 0, lag: 1, vidaFiel: 12,
     simples: 8.0, royalty: 4.0, cartao: 2.0, quebra: 1.0,
     embPedido: 0.85, embItem: 0.20,
@@ -507,26 +592,38 @@
 
   // ─── Cardápio ──────────────────────────────────────────────────────────────
   // Só o que foi definido. Novos brindes entram aqui depois de validados.
+  // Regra do Fred: a moeda da campanha é COMPRE E GANHE, não desconto. Os de preço
+  // fixo ficam na lista só como comparação — aparecem marcados como fora da regra.
+  //
+  // exKey = qual venda extra medida se aplica à visita:
+  //   exGanhe (R$ 14,03) → pedido menos 2 cookies (o pago + o de brinde)
+  //   exPreco (R$ 24,24) → pedido menos 1 item (o cookie pago; o brinde não seria comprado)
   const BRINDES = {
-    g_ck_ck:  { nome: "Compre 1 cookie, ganhe 1 cookie", fam: "G",
+    g_ck_ck:  { nome: "Compre 1 cookie, ganhe 1 cookie", fam: "G", exKey: "exGanhe",
                 exige: () => B.cookiePago, preco: 0, cmv: () => B.cookieCMV, tab: () => B.cookieTab,
                 nota: ["good", "O clássico do vídeo. O cookie pago cobre o brinde e sobra — e ninguém precisa entender regra nenhuma."] },
-    p_ck_5:   { nome: "Cookie por R$ 5", fam: "P",
+    g_ck_tor: { nome: "Compre 1 cookie, ganhe 1 fatia de torta", fam: "G", exKey: "exPreco",
+                exige: () => B.cookiePago, preco: 0, cmv: () => B.tortaCMV, tab: () => B.tortaPreco,
+                nota: ["good", "O prêmio inteiro (R$ 22,90) num item que 92% dos pedidos <em>não</em> levam — é o que revela produto novo sem dar desconto em nada."] },
+    g_ck_mlk: { nome: "Compre 1 cookie, ganhe 1 milkshake", fam: "G", exKey: "exPreco",
+                exige: () => B.cookiePago, preco: 0, cmv: () => B.milkCMV, tab: () => B.milkPreco,
+                nota: ["warn", "O maior prêmio percebido da lista (R$ 28,66) e o mais caro de entregar. Só existe copo de 440 ml, então o custo é fixo — guarde para a última visita."] },
+    p_ck_5:   { nome: "Cookie por R$ 5 · desconto", fam: "P", exKey: "exPreco",
                 exige: () => 0, preco: 5, cmv: () => B.cookieCMV, tab: () => B.cookieTab,
-                nota: ["warn", "É o &ldquo;chicken was a wash&rdquo; do vídeo: quase empata e entrega 71% de desconto no produto que todo mundo quer."] },
-    p_tor_10: { nome: "Fatia de torta por R$ 10", fam: "P",
+                nota: ["bad", "Fora da regra: é desconto, não brinde. Fica aqui só como comparação — é o &ldquo;chicken was a wash&rdquo; do vídeo."] },
+    p_tor_10: { nome: "Fatia de torta por R$ 10 · desconto", fam: "P", exKey: "exPreco",
                 exige: () => 0, preco: 10, cmv: () => B.tortaCMV, tab: () => B.tortaPreco,
-                nota: ["good", "56% de desconto num item que 92% dos pedidos <em>não</em> levam — serve para revelar produto novo."] },
-    p_mlk_15: { nome: "Milkshake por R$ 15", fam: "P",
+                nota: ["bad", "Fora da regra: é desconto, não brinde. Fica aqui só como comparação com a versão compre-e-ganhe."] },
+    p_mlk_15: { nome: "Milkshake por R$ 15 · desconto", fam: "P", exKey: "exPreco",
                 exige: () => 0, preco: 15, cmv: () => B.milkCMV, tab: () => B.milkPreco,
-                nota: ["good", "48% no produto de maior desejo, praticamente no zero a zero. Só existe copo de 440 ml, então o custo é fixo."] },
+                nota: ["bad", "Fora da regra: é desconto, não brinde. Fica aqui só como comparação com a versão compre-e-ganhe."] },
   };
   const IDS = Object.keys(BRINDES);
 
   // margem de uma visita que resgata o brinde k
   function margemVisita(k) {
     const o = BRINDES[k];
-    const extra = o.fam === "G" ? S.exGanhe : S.exPreco;
+    const extra = S[o.exKey];
     return (o.exige() + extra) * MC + (o.preco * (1 - DED) - custoItem(o.cmv()));
   }
 
@@ -636,7 +733,7 @@
       const pos = R.slots.indexOf(k);
       return `<tr class="${pos >= 0 ? "mark" : ""}">
         <td>${pos >= 0 ? `<span class="vnum" style="background:var(--accent);color:var(--accent-ink);padding:.1rem .35rem;border-radius:2px;font-size:.625rem;margin-right:.4rem">V${pos + 1}</span>` : ""}${o.nome}</td>
-        <td><span class="tag ${o.fam === "G" ? "good" : "acc"}">${o.fam === "G" ? "compre e ganhe" : "preço fixo"}</span></td>
+        <td><span class="tag ${o.fam === "G" ? "good" : "bad"}">${o.fam === "G" ? "compre e ganhe" : "desconto · fora da regra"}</span></td>
         <td>${ex ? brl(ex) : "—"}</td><td>${brl(o.preco)}</td><td>${brl(custoItem(cmv))}</td>
         <td class="${sign(brinde)}">${brl(brinde)}</td>
         <td class="${sign(mv)}"><strong>${brl(mv)}</strong></td>
@@ -654,10 +751,12 @@
         Repare: <strong>toda visita com brinde rende menos que uma visita sem brinde.</strong> A campanha não ganha
         por visita — ganha por trazer visitas que não existiriam, e por empurrar o cliente até a 3ª.
       </span></div>
-      <div class="note-item"><span class="tag good">o formato importa</span><span>
-        "${BRINDES.g_ck_ck.nome}" é a única do tipo <em>compre e ganhe</em>, e por isso exige
-        ${brl(B.cookiePago)} de venda a preço cheio junto com o cupom. As três de preço fixo trazem só o cupom.
-        Para acrescentar qualquer brinde novo, me diga o formato, o produto e o valor — puxo o CMV da ficha.
+      <div class="note-item"><span class="tag good">a regra da campanha</span><span>
+        <strong>A moeda é compre e ganhe — a campanha não dá desconto.</strong> Toda visita com brinde exige
+        ${brl(B.cookiePago)} de cookie a preço cheio, e o brinde vai junto, de graça. As três linhas marcadas
+        como <em>desconto</em> ficam na tabela só para comparação: são o mesmo produto vendido barato, o que
+        entrega margem parecida mas ensina o cliente a esperar preço menor em vez de esperar presente.
+        Para acrescentar brinde novo, me diga o produto que a pessoa compra e o que ela ganha — puxo o CMV da ficha.
       </span></div>`;
   }
 
@@ -672,7 +771,7 @@
         <div class="risk"><span class="tag good">ok</span><span>Esta é a visita mais lucrativa da campanha, justamente porque não tem promoção. Ela existe para <strong>cadastrar o cliente e liberar o 1º brinde</strong> — e não custa nada.</span></div>
       </article>`;
       const o = BRINDES[k], cmv = o.cmv(), ex = o.exige();
-      const extra = o.fam === "G" ? S.exGanhe : S.exPreco;
+      const extra = S[o.exKey];
       const mv = R.mCom[i];
       return `<article class="offer">
         <div class="head"><span class="vnum">V${i + 1}</span><span class="name">${o.nome}</span></div>
@@ -915,7 +1014,7 @@
       <div class="note-item"><span class="tag warn">gente nova acaba</span><span>
         <strong>${n0(S.novos * 12)} rostos novos em 12 meses</strong> numa loja que faz ${n0(B.pedidos)} pedidos/mês.
         Quando a fila secar, o cupom passa a ir só para cliente da casa e o resultado das visitas piora
-        sem que ninguém perceba. Acompanhe <strong>quantos celulares novos entram por mês no totem</strong>.
+        sem que ninguém perceba. Acompanhe <strong>quantos celulares novos se cadastram por mês pelo QR</strong>.
       </span></div>`;
   }
 
