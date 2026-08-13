@@ -224,6 +224,75 @@ h2{
   font-family:var(--sans);
 }
 
+/* ---------- barra de organizar ---------- */
+.acoes{display:flex;align-items:center;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.bt{
+  font:inherit;
+  font-size:.875rem;
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--tinta);
+  background:var(--tinta-fraca);
+  border:none;
+  border-radius:980px;
+  padding:.5rem 1rem;
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:.4375rem;
+  transition:background .18s ease,transform .18s cubic-bezier(.22,1,.36,1);
+}
+.bt:hover{background:color-mix(in srgb,var(--tinta) 18%,transparent)}
+.bt:active{transform:scale(.97)}
+.bt:focus-visible{outline:2.5px solid var(--tinta);outline-offset:2px}
+.bt svg{width:.9375rem;height:.9375rem;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+body.organizando .bt{color:var(--tinta-sobre,#fff);background:var(--tinta)}
+body.organizando .bt:hover{background:color-mix(in srgb,var(--tinta) 88%,black)}
+
+.sinc{font-size:.8125rem;color:var(--rotulo-3)}
+.sinc[data-estado="salvando"]{color:var(--laranja)}
+.sinc[data-estado="erro"]{color:var(--rosa)}
+
+/* ---------- modo organizar ---------- */
+.pegar{
+  display:none;
+  position:absolute;top:.625rem;right:.625rem;
+  width:1.75rem;height:1.75rem;
+  border-radius:8px;
+  place-items:center;
+  color:var(--rotulo-3);
+  background:var(--preench);
+  cursor:grab;
+  touch-action:none;
+}
+/* alvo de dedo de 44px sem engordar o desenho */
+.pegar::after{content:"";position:absolute;inset:-.5rem}
+.pegar svg{width:1rem;height:1rem;fill:currentColor;stroke:none}
+body.organizando .pegar{display:grid}
+body.organizando .topo{padding-right:2rem}
+body.organizando .cartao{cursor:grab;user-select:none;-webkit-user-select:none}
+body.organizando .cartao:hover{transform:none;box-shadow:var(--sombra)}
+body.organizando .cartao.trancado:hover{box-shadow:none}
+body.organizando .grade{
+  border-radius:var(--r-cartao);
+  outline:1.5px dashed var(--sep);
+  outline-offset:.625rem;
+}
+
+.cartao.arrastando{opacity:.28;box-shadow:none}
+.cartao.arrastando *{visibility:hidden}
+.fantasma{
+  position:fixed;left:0;top:0;z-index:99;
+  pointer-events:none;
+  margin:0;
+  box-shadow:var(--sombra-alta);
+  transform:rotate(1.2deg) scale(1.02);
+  opacity:.96;
+}
+.fantasma .pegar{cursor:grabbing}
+
+/* esconde a grade até a ordem salva chegar, pra não pular na cara */
+body.esperando .grade{opacity:0}
+.grade{transition:opacity .2s ease}
+
 /* ---------- lista dos que ainda não estão no ar ---------- */
 .lista{
   background:var(--ilha);
@@ -264,21 +333,28 @@ footer{
 }
 </style>
 </head>
-<body>
+<body class="esperando">
 
 <div class="larg">
 
   <header>
     <h1>Projetos</h1>
     <p>Tudo num lugar só. Clique num card e ele abre numa aba nova — os trancados são os projetos que ainda não existem.</p>
+    <div class="acoes">
+      <button class="bt" id="btOrganizar" type="button">
+        <svg viewBox="0 0 24 24"><polyline points="8 6 12 2 16 6"/><polyline points="16 18 12 22 8 18"/><line x1="12" y1="2" x2="12" y2="22"/><polyline points="6 8 2 12 6 16"/><polyline points="18 16 22 12 18 8"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+        <span id="btOrganizarTxt">Organizar</span>
+      </button>
+      <span class="sinc" id="sinc"></span>
+    </div>
   </header>
 
   <!-- ============ MÉTODO & MARCA PRÓPRIA ============ -->
-  <section>
+  <section data-sec="metodo">
     <h2>Método &amp; marca própria</h2>
     <div class="grade">
 
-      <a class="cartao" style="--cor:var(--tinta)" href="https://fredpetrutche.github.io/maquina-de-conteudo/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--tinta)" href="https://fredpetrutche.github.io/maquina-de-conteudo/" target="_blank" rel="noopener" data-id="maquina-de-conteudo">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/></svg></span>
           <span class="nome">Máquina de Conteúdo</span>
@@ -287,7 +363,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>fredpetrutche.github.io/maquina-de-conteudo</span>
       </a>
 
-      <a class="cartao" style="--cor:var(--roxo)" href="https://fredpetrutche.github.io/banco-videos-casal-comida/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--roxo)" href="https://fredpetrutche.github.io/banco-videos-casal-comida/" target="_blank" rel="noopener" data-id="casal-comida">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21.4l8.8-8.7a5 5 0 0 0 0-7.1z"/></svg></span>
           <span class="nome">Banco de Vídeos — Casal + Comida</span>
@@ -300,11 +376,11 @@ footer{
   </section>
 
   <!-- ============ CONTEÚDO ============ -->
-  <section>
+  <section data-sec="conteudo">
     <h2>Conteúdo Holy Cookie</h2>
     <div class="grade">
 
-      <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-holy-cookie-lojas-fred/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-holy-cookie-lojas-fred/" target="_blank" rel="noopener" data-id="lojas-fred">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 9 15 12 10 15" fill="currentColor" stroke="none"/></svg></span>
           <span class="nome">Conteúdo das lojas do Fred</span>
@@ -313,7 +389,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-holy-cookie-lojas-fred</span>
       </a>
 
-      <a class="cartao" style="--cor:var(--laranja)" href="https://holycampinas.github.io/briefing-holy-cookie/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--laranja)" href="https://holycampinas.github.io/briefing-holy-cookie/" target="_blank" rel="noopener" data-id="marca-holy-cookie">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
           <span class="nome">Conteúdo da marca Holy Cookie</span>
@@ -322,7 +398,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-holy-cookie</span>
       </a>
 
-      <a class="cartao" style="--cor:var(--roxo)" href="https://holycampinas.github.io/influenciadores-holy-cookie/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--roxo)" href="https://holycampinas.github.io/influenciadores-holy-cookie/" target="_blank" rel="noopener" data-id="ugc-criadores">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           <span class="nome">Campanha de vídeos virais com UGC</span>
@@ -331,7 +407,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/influenciadores-holy-cookie</span>
       </a>
 
-      <div class="cartao trancado">
+      <div class="cartao trancado" data-id="anuncios-trafego">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Anúncios de tráfego</span>
@@ -344,11 +420,11 @@ footer{
   </section>
 
   <!-- ============ AÇÕES DE LOJA ============ -->
-  <section>
+  <section data-sec="acoes-loja">
     <h2>Ações de loja</h2>
     <div class="grade">
 
-      <a class="cartao" style="--cor:var(--tinta)" href="https://claude.ai/code/artifact/94ac8e1a-0906-4491-be90-aa5b3ab14a34" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--tinta)" href="https://claude.ai/code/artifact/94ac8e1a-0906-4491-be90-aa5b3ab14a34" target="_blank" rel="noopener" data-id="fidelizacao">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><circle cx="18" cy="14" r="2"/></svg></span>
           <span class="nome">Campanha de fidelização por visitas</span>
@@ -358,7 +434,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>claude.ai · artefato</span>
       </a>
 
-      <a class="cartao" style="--cor:var(--laranja)" href="https://holycampinas.github.io/briefing-campanha-holycook/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--laranja)" href="https://holycampinas.github.io/briefing-campanha-holycook/" target="_blank" rel="noopener" data-id="cookie-em-dobro">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l18-6v14L3 13z"/><path d="M7 12v6a2 2 0 0 0 4 0v-5"/></svg></span>
           <span class="nome">Semana do Cookie em Dobro</span>
@@ -367,7 +443,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-campanha-holycook</span>
       </a>
 
-      <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-flyer-holycook/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-flyer-holycook/" target="_blank" rel="noopener" data-id="flyer-cookie-em-dobro">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
           <span class="nome">Flyer do Cookie em Dobro</span>
@@ -376,7 +452,27 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-flyer-holycook</span>
       </a>
 
-      <div class="cartao trancado">
+      <a class="cartao" style="--cor:var(--laranja)" data-id="lancamento-agosto" href="https://fredpetrutche.github.io/holy-cook-reunioes/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M11 3l1.7 4.3L17 9l-4.3 1.7L11 15l-1.7-4.3L5 9l4.3-1.7z"/><path d="M18 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span>
+          <span class="nome">Lançamento de Agosto</span>
+          <span class="selo">reuniões</span>
+        </div>
+        <p class="desc">Cookie da França e Brookie entram em agosto. A divulgação sai do Instagram e vai pros quatro canais orgânicos da operação, medindo dia a dia quanto ela move a venda.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>sem página própria · vive nas Reuniões</span>
+      </a>
+
+      <a class="cartao" style="--cor:var(--rosa)" data-id="aniversario-marca" href="https://fredpetrutche.github.io/holy-cook-reunioes/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 20h16v-6a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3z"/><line x1="12" y1="3.5" x2="12" y2="8"/><line x1="8" y1="5" x2="8" y2="8"/><line x1="16" y1="5" x2="16" y2="8"/></svg></span>
+          <span class="nome">Aniversário da Marca</span>
+          <span class="selo">reuniões</span>
+        </div>
+        <p class="desc">7 de setembro, mas a campanha ocupa o mês inteiro e precisa levantar venda em todas as lojas, não só nas fortes. Tem que estar fechada até 20 de agosto pra dar tempo de produzir e chegar nas lojas.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>sem página própria · vive nas Reuniões</span>
+      </a>
+
+      <div class="cartao trancado" data-id="cookie-de-graca">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Cookie de Graça</span>
@@ -385,7 +481,7 @@ footer{
         <span class="trava">ainda não começou</span>
       </div>
 
-      <div class="cartao trancado">
+      <div class="cartao trancado" data-id="cookie-do-dia">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Cookie do Dia de graça</span>
@@ -394,7 +490,7 @@ footer{
         <span class="trava">ainda não começou</span>
       </div>
 
-      <div class="cartao trancado">
+      <div class="cartao trancado" data-id="mini-cookie">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Mini cookie na região</span>
@@ -403,7 +499,7 @@ footer{
         <span class="trava">ainda não começou</span>
       </div>
 
-      <div class="cartao trancado">
+      <div class="cartao trancado" data-id="panfleto-delivery">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Panfleto no delivery</span>
@@ -416,11 +512,11 @@ footer{
   </section>
 
   <!-- ============ PRODUTO & EXPERIÊNCIA ============ -->
-  <section>
+  <section data-sec="produto">
     <h2>Produto &amp; experiência</h2>
     <div class="grade">
 
-      <a class="cartao" style="--cor:var(--verde)" href="https://holycampinas.github.io/cardapio-verao-holy-cookie/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--verde)" href="https://holycampinas.github.io/cardapio-verao-holy-cookie/" target="_blank" rel="noopener" data-id="cardapio-verao">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 10.5h.01M15 9.5h.01M13 15h.01M9.5 15.5h.01"/></svg></span>
           <span class="nome">Cardápio de Verão</span>
@@ -429,7 +525,7 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/cardapio-verao-holy-cookie</span>
       </a>
 
-      <div class="cartao trancado">
+      <div class="cartao trancado" data-id="produto-viral">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Produto viral</span>
@@ -437,7 +533,7 @@ footer{
         <span class="trava">ainda não começou</span>
       </div>
 
-      <div class="cartao trancado">
+      <div class="cartao trancado" data-id="experiencia-loja">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <span class="nome">Experiência de loja</span>
@@ -449,11 +545,11 @@ footer{
   </section>
 
   <!-- ============ GESTÃO ============ -->
-  <section>
+  <section data-sec="gestao">
     <h2>Gestão</h2>
     <div class="grade">
 
-      <a class="cartao" style="--cor:var(--cinza)" href="https://fredpetrutche.github.io/holy-cook-reunioes/" target="_blank" rel="noopener">
+      <a class="cartao" style="--cor:var(--cinza)" href="https://fredpetrutche.github.io/holy-cook-reunioes/" target="_blank" rel="noopener" data-id="reunioes">
         <div class="topo">
           <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/></svg></span>
           <span class="nome">Reuniões Holy Cook</span>
@@ -466,7 +562,7 @@ footer{
   </section>
 
   <!-- ============ AINDA NO COMPUTADOR ============ -->
-  <section>
+  <section data-sec="local">
     <h2>Ainda no computador</h2>
     <div class="lista">
 
@@ -512,6 +608,213 @@ footer{
   <footer>Peça pra atualizar sempre que nascer um projeto novo.</footer>
 
 </div>
+
+<script>
+/* ============================================================
+   Arrastar para reordenar — e para trocar de seção.
+
+   O conteúdo dos cards mora no HTML. O que o banco guarda é só
+   o arranjo: { "<seção>": ["<id do card>", ...] }. Card que ainda
+   não aparece no arranjo fica onde o HTML o colocou, no fim da
+   seção — assim um card novo nasce visível sem mexer no banco.
+   ============================================================ */
+(() => {
+  "use strict";
+
+  const URL_BASE = "https://mkajvxyiyqxotiydkylq.supabase.co/rest/v1/hc_cardapio_ordem";
+  const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYWp2eHlpeXF4b3RpeWRreWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NTgzNzcsImV4cCI6MjEwMjAzNDM3N30.vfHCb8BRcshufnp_7eAt9ch4aVEMpcbVA5u16IS0Kao";
+  const CHAVE = "projetos";
+  const H = { apikey: ANON, Authorization: "Bearer " + ANON };
+
+  const corpo = document.body;
+  const bt = document.getElementById("btOrganizar");
+  const btTxt = document.getElementById("btOrganizarTxt");
+  const sinc = document.getElementById("sinc");
+
+  const grades = () => [...document.querySelectorAll("section[data-sec] .grade")];
+  const secDe = (grade) => grade.closest("section[data-sec]").dataset.sec;
+
+  function aviso(estado, txt) {
+    sinc.dataset.estado = estado || "";
+    sinc.textContent = txt || "";
+  }
+
+  // ---------- ler e aplicar o arranjo ----------
+  function lerLayout() {
+    const l = {};
+    for (const g of grades()) {
+      l[secDe(g)] = [...g.children].filter((c) => c.dataset.id).map((c) => c.dataset.id);
+    }
+    return l;
+  }
+
+  function aplicar(layout) {
+    if (!layout || typeof layout !== "object") return;
+    const noLayout = new Set(Object.values(layout).flat());
+    const gs = grades();
+    // quem não está no arranjo fica na seção onde o HTML o pôs
+    const soltos = gs.map((g) => [...g.children].filter((c) => c.dataset.id && !noLayout.has(c.dataset.id)));
+    gs.forEach((g, i) => {
+      for (const id of layout[secDe(g)] || []) {
+        const card = document.querySelector('.cartao[data-id="' + CSS.escape(id) + '"]');
+        if (card) g.appendChild(card);
+      }
+      for (const card of soltos[i]) g.appendChild(card);
+    });
+  }
+
+  // ---------- banco ----------
+  async function carregar() {
+    const r = await fetch(URL_BASE + "?id=eq." + CHAVE + "&select=layout", { headers: H });
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    return d[0] ? d[0].layout : null;
+  }
+
+  let salvando = null;
+  async function salvar() {
+    aviso("salvando", "salvando…");
+    const corpoReq = JSON.stringify({ id: CHAVE, layout: lerLayout() });
+    try {
+      const r = await fetch(URL_BASE, {
+        method: "POST",
+        headers: Object.assign({ "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" }, H),
+        body: corpoReq,
+      });
+      if (!r.ok) throw new Error(r.status);
+      aviso("", "ordem salva");
+      clearTimeout(salvando);
+      salvando = setTimeout(() => aviso("", ""), 2500);
+    } catch (e) {
+      aviso("erro", "não deu pra salvar — a ordem vale só nesta aba");
+    }
+  }
+
+  // ---------- alça de arrastar ----------
+  const ALCA =
+    '<span class="pegar" aria-hidden="true"><svg viewBox="0 0 24 24">' +
+    '<circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/>' +
+    '<circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/>' +
+    '<circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></span>';
+  for (const c of document.querySelectorAll(".cartao[data-id]")) c.insertAdjacentHTML("beforeend", ALCA);
+
+  // ---------- modo organizar ----------
+  let modo = false;
+  bt.addEventListener("click", () => {
+    modo = !modo;
+    corpo.classList.toggle("organizando", modo);
+    btTxt.textContent = modo ? "Concluir" : "Organizar";
+    aviso("", modo ? "arraste os cards — inclusive de uma seção para outra" : "");
+  });
+  // em modo organizar o card não navega
+  document.addEventListener("click", (e) => {
+    if (modo && e.target.closest(".cartao")) e.preventDefault();
+  }, true);
+
+  // ---------- arrastar ----------
+  let card = null, fantasma = null, dx = 0, dy = 0, mexeu = false;
+  let ultimo = null, vel = 0, laco = 0;
+
+  function posicionar(x, y) {
+    fantasma.style.transform =
+      "translate(" + (x - dx) + "px," + (y - dy) + "px) rotate(1.2deg) scale(1.02)";
+  }
+
+  function colocar(x, y) {
+    const el = document.elementFromPoint(x, y);
+    if (!el) return;
+    const outro = el.closest(".cartao[data-id]");
+    if (outro && outro !== card) {
+      const r = outro.getBoundingClientRect();
+      const depois = y > r.bottom ? true : y < r.top ? false : x > r.left + r.width / 2;
+      outro.parentNode.insertBefore(card, depois ? outro.nextSibling : outro);
+      return;
+    }
+    const sec = el.closest("section[data-sec]");
+    const g = sec && sec.querySelector(".grade");
+    if (g && !g.contains(card)) g.appendChild(card);
+  }
+
+  // rola sozinho quando o card chega perto da borda — sem isso não dá
+  // para levar um card da primeira seção até a última numa tela comum
+  function passo() {
+    if (!card) return;
+    if (vel) {
+      const antes = window.scrollY;
+      window.scrollBy(0, vel);
+      if (window.scrollY !== antes && ultimo) {
+        posicionar(ultimo.x, ultimo.y);
+        colocar(ultimo.x, ultimo.y);
+      }
+    }
+    laco = requestAnimationFrame(passo);
+  }
+
+  function aoMover(e) {
+    if (!card) return;
+    mexeu = true;
+    ultimo = { x: e.clientX, y: e.clientY };
+    posicionar(e.clientX, e.clientY);
+    colocar(e.clientX, e.clientY);
+
+    const margem = 110, teto = 26;
+    const h = window.innerHeight;
+    vel = e.clientY < margem ? -Math.ceil(((margem - e.clientY) / margem) * teto)
+        : e.clientY > h - margem ? Math.ceil(((e.clientY - (h - margem)) / margem) * teto)
+        : 0;
+  }
+
+  function aoSoltar() {
+    if (!card) return;
+    card.classList.remove("arrastando");
+    fantasma.remove();
+    cancelAnimationFrame(laco);
+    document.removeEventListener("pointermove", aoMover);
+    document.removeEventListener("pointerup", aoSoltar);
+    document.removeEventListener("pointercancel", aoSoltar);
+    const houve = mexeu;
+    card = null; fantasma = null; mexeu = false; vel = 0; ultimo = null;
+    if (houve) salvar();
+  }
+
+  for (const c of document.querySelectorAll(".cartao[data-id]")) {
+    c.addEventListener("pointerdown", (e) => {
+      if (!modo || e.button > 0 || card) return;
+      // no toque, só a alça arrasta — assim a página continua rolando normal
+      if (e.pointerType === "touch" && !e.target.closest(".pegar")) return;
+      e.preventDefault();
+
+      const r = c.getBoundingClientRect();
+      dx = e.clientX - r.left;
+      dy = e.clientY - r.top;
+      card = c;
+      mexeu = false;
+
+      fantasma = c.cloneNode(true);
+      fantasma.classList.add("fantasma");
+      fantasma.style.width = r.width + "px";
+      fantasma.style.height = r.height + "px";
+      document.body.appendChild(fantasma);
+      ultimo = { x: e.clientX, y: e.clientY };
+      posicionar(e.clientX, e.clientY);
+      c.classList.add("arrastando");
+      laco = requestAnimationFrame(passo);
+
+      document.addEventListener("pointermove", aoMover);
+      document.addEventListener("pointerup", aoSoltar);
+      document.addEventListener("pointercancel", aoSoltar);
+    });
+  }
+
+  // ---------- partida ----------
+  const solta = () => corpo.classList.remove("esperando");
+  const rede = setTimeout(solta, 2000);
+  carregar()
+    .then((l) => { aplicar(l); })
+    .catch(() => aviso("erro", "sem conexão com o banco — mostrando a ordem original"))
+    .finally(() => { clearTimeout(rede); solta(); });
+})();
+</script>
 
 </body>
 </html>
