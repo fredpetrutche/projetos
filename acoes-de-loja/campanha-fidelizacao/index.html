@@ -197,13 +197,20 @@
   .pend .porque { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
   .pend .porque em { color: var(--ink); font-style: normal; font-weight: 600; }
   .pend .porque a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
-  .pend .aberto { grid-column: 2; margin-top: .55rem; padding-top: .5rem;
-                  border-top: 1px dashed var(--rule); font-family: var(--mono); font-size: .6875rem;
-                  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); }
+  .pend .q .ideia { display: block; font-weight: 400; font-size: .8125rem; color: var(--ink-faint);
+                    font-family: var(--mono); margin-top: .15rem; }
+  .pend .resp { grid-column: 2; margin-top: .6rem; padding: .55rem .7rem;
+                background: var(--surface-2); border: 1px dashed var(--rule); border-radius: 3px;
+                display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+  .pend .rl { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em; text-transform: uppercase;
+              font-weight: 700; color: var(--accent); flex: none; }
+  .pend .rv { font-size: .875rem; color: var(--ink); line-height: 1.5; }
+  .pend .rv.vazia { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em;
+                    text-transform: uppercase; color: var(--ink-faint); }
   @media (max-width: 32rem) {
     .pend > li { grid-template-columns: 1fr; }
     .pend .num { grid-row: auto; justify-self: start; }
-    .pend .aberto { grid-column: 1; }
+    .pend .resp { grid-column: 1; }
   }
 </style>
 </head>
@@ -236,82 +243,83 @@
     <h2><span class="n">0</span> O que falta decidir<span class="hint">antes de a campanha subir</span></h2>
     <p class="prose">
       A conta desta página fecha. O que ainda não existe é o <strong>combinado de balcão</strong>:
-      quem fala, em que momento fala e o que responde quando o cliente empaca. São sete pontos, todos
-      de decisão — nenhum depende de dado novo. Enquanto estiverem em aberto, a campanha não sobe,
-      porque cada atendente vai responder uma coisa diferente e a safra não fecha.
+      quem fala, em que momento fala e o que responde quando o cliente empaca. São oito perguntas —
+      nenhuma depende de dado novo, todas dependem de decisão. Cada uma tem o espaço da resposta logo
+      abaixo; enquanto estiver vazio, a campanha não sobe, porque cada atendente vai responder uma
+      coisa diferente e a safra não fecha.
     </p>
 
     <ol class="pend">
       <li>
         <span class="num">01</span>
-        <span class="q">&ldquo;Não é a minha primeira vez aqui.&rdquo;</span>
-        <span class="porque">O convite pressupõe cliente novo — o funil da <a href="#funil">seção 5</a> começa
-        em quem nunca entrou. Quando a pessoa avisa que já veio antes, quem atende precisa de uma resposta
-        pronta: ela entra na campanha do mesmo jeito, entra numa etapa adiantada, ou não entra?
-        <em>Sem isso, o atendimento improvisa.</em></span>
-        <span class="aberto">em aberto</span>
+        <span class="q">O que fazer com os clientes que falarem que não são a primeira vez?</span>
+        <span class="porque">O convite pressupõe cliente novo — o funil da <a href="#funil">seção 5</a>
+        começa em quem nunca entrou. <em>Sem uma resposta pronta, o atendimento improvisa.</em>
+        Ela entra na campanha do mesmo jeito, entra numa etapa adiantada, ou não entra?</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
       <li>
         <span class="num">02</span>
-        <span class="q">Cliente antigo que ouve a conversa e quer entrar</span>
-        <span class="porque">Diferente do de cima: aqui a oferta foi feita para outra pessoa e o cliente
+        <span class="q">O que fazer com quem já é cliente: ouvir e pedir pra participar da promo?</span>
+        <span class="porque">Diferente da de cima: aqui a oferta foi feita para outra pessoa e o cliente
         de casa escutou. Vale convidar de propósito? Se sim, ele entra por onde — pela 1ª visita
         (paga cheio, só se cadastra) ou já resgatando o primeiro brinde? <em>Ele é o que menos precisa
         ser comprado de volta, então é o que mais custa se entrar errado.</em></span>
-        <span class="aberto">em aberto</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
       <li>
         <span class="num">03</span>
-        <span class="q">Quem controla se é a 2ª, 3ª ou 4ª visita da pessoa</span>
+        <span class="q">Como o responsável vai organizar se é a 2ª, 3ª ou 4ª visita da pessoa?</span>
         <span class="porque">Hoje o PDV registra pedido, não pessoa. O cadastro por celular no totem é a
-        peça que resolve isso — mas falta decidir o resto: quem confere na hora do resgate, o que a pessoa
-        do balcão vê na tela e o que fazer quando o celular cadastrado não é o que a pessoa está informando.
+        peça que resolve isso — mas falta o resto: quem confere na hora do resgate, o que a pessoa do
+        balcão vê na tela e o que fazer quando o celular cadastrado não bate com o que ela informa.
         <em>É o mesmo cadastro que, em ~3 meses, troca as taxas do vídeo por medição de Paulínia.</em></span>
-        <span class="aberto">em aberto</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
       <li>
         <span class="num">04</span>
-        <span class="q">&ldquo;Dá para resgatar agora mesmo?&rdquo;</span>
+        <span class="q">O que fazer se o cliente pedir para resgatar a promo na hora?
+        <span class="ideia">ideia: só em alguns dias da semana?</span></span>
         <span class="porque">Resgatar o cupom na mesma visita derruba a lógica inteira: a campanha compra
-        <em>visitas</em>, não desconto. Se o resgate vale na hora, você pagou o brinde e não comprou volta
-        nenhuma. Ideia já registrada: liberar resgate só em alguns dias da semana — falta decidir se é isso
-        e quais dias.</span>
-        <span class="aberto">em aberto · ideia: dias fixos da semana</span>
+        <em>visitas</em>, não desconto. Se o resgate vale na hora, você pagou o brinde e não comprou
+        volta nenhuma.</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
       <li>
         <span class="num">05</span>
-        <span class="q">Quem aborda o cliente e o que fala</span>
-        <span class="porque">A <a href="#logica">seção 1</a> já fecha uma coisa: o convite <em>não sai no caixa
-        junto com a nota</em> — sai na conversa, olhando para a pessoa, no fim do atendimento. O que falta
-        é o nome de quem faz isso em cada turno e a frase exata, escrita, para não virar versão de cada um.</span>
-        <span class="aberto">em aberto · falta o script</span>
+        <span class="q">Qual funcionário vai abordar o cliente e o que ele tem que falar?</span>
+        <span class="porque">A <a href="#logica">seção 1</a> já fecha uma coisa: o convite <em>não sai no
+        caixa junto com a nota</em> — sai na conversa, olhando para a pessoa, no fim do atendimento.
+        O que falta é o nome de quem faz isso em cada turno e a frase exata, escrita, para não virar
+        versão de cada um.</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
       <li>
         <span class="num">06</span>
-        <span class="q">Em que momento aborda — e o que fazer com fila grande</span>
-        <span class="porque">Na entrega do pedido, na mesa, na saída? E quando tem fila: a decisão é pular
-        o convite naquele atendimento ou ter uma versão curta de uma frase. <em>Sem regra, o convite some
+        <span class="q">Em que momentos ele tem que abordar? E se tiver fila grande?</span>
+        <span class="porque">Na entrega do pedido, na mesa, na saída? E com fila: a decisão é pular o
+        convite naquele atendimento ou ter uma versão curta de uma frase. <em>Sem regra, o convite some
         exatamente nos horários de mais movimento</em> — que é quando entra mais cliente novo.</span>
-        <span class="aberto">em aberto</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
       <li>
         <span class="num">07</span>
-        <span class="q">Prazo de validade de cada cupom</span>
+        <span class="q">Qual o prazo de validade de cada um dos cupons?</span>
         <span class="porque">Os três brindes precisam de prazo, um a um. Prazo curto aperta o retorno —
         que é justamente o que a campanha está comprando; prazo longo dilui e a pessoa esquece.
         <em>Sem prazo, o cupom vira crédito eterno e a safra nunca fecha.</em></span>
-        <span class="aberto">em aberto</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
+      </li>
+      <li>
+        <span class="num">08</span>
+        <span class="q">Para os clientes que ouvem a conversa, podemos pedir avaliação no Google
+        em troca de 1 cookie ou do desconto?</span>
+        <span class="porque">Quem já está na conversa do cupom é quem tem mais chance de avaliar.
+        Se for sim: qual das duas moedas, se ela acumula com o brinde da visita e quem confere que a
+        avaliação saiu. <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.</span>
+        <span class="resp"><span class="rl">Resposta</span><span class="rv vazia">a definir</span></span>
       </li>
     </ol>
-
-    <div class="notes">
-      <div class="note-item"><span class="tag acc">a decidir junto</span><span>
-        <strong>Avaliação no Google.</strong> Quem já está na conversa do cupom é quem tem mais chance de
-        avaliar. A troca seria por <strong>1 cookie</strong> ou pelo desconto. Falta decidir qual das duas
-        moedas, se ela acumula com o brinde da visita e quem confere que a avaliação saiu.
-        <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.
-      </span></div>
-    </div>
   </section>
 
   <!-- ══════ 1. Como funciona ══════ -->
