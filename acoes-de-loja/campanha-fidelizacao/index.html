@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Campanha de fidelizacao por visitas — Holy Cook Paulinia</title>
+<meta name="description" content="Os 3 cupons que compram as tres primeiras visitas do cliente: o que falta decidir no balcao e o simulador com os numeros reais de jun+jul da Paulinia.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='white'><rect x='24' y='28' width='14' height='44' rx='4' opacity='.45'/><rect x='43' y='28' width='14' height='44' rx='4' opacity='.72'/><rect x='62' y='28' width='14' height='44' rx='4'/></g></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='white'><rect x='24' y='28' width='14' height='44' rx='4' opacity='.45'/><rect x='43' y='28' width='14' height='44' rx='4' opacity='.72'/><rect x='62' y='28' width='14' height='44' rx='4'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --step-1:#C6CBE2; --step-2:#98A2CB; --step-3:#6975AE; --step-4:#33417E;
+    --s-visitas:#4A5AA0; --s-fieis:#A8721C;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+      --step-1:#2E3550; --step-2:#4A5580; --step-3:#6D7BB4; --step-4:#96A8E6;
+      --s-visitas:#7E8FD4; --s-fieis:#B5853A;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --step-1:#C6CBE2; --step-2:#98A2CB; --step-3:#6975AE; --step-4:#33417E;
+    --s-visitas:#4A5AA0; --s-fieis:#A8721C;
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+    --step-1:#2E3550; --step-2:#4A5580; --step-3:#6D7BB4; --step-4:#96A8E6;
+    --s-visitas:#7E8FD4; --s-fieis:#B5853A;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag, .vnum { font-family: var(--mono); }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none; color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── história das 3 visitas ─── */
+  .story { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .story > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
+  .story .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; align-self: flex-start; }
+  .story .job { font-family: var(--mono); font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .story .txt { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .story .txt em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .story .vid { font-size: .75rem; color: var(--ink-faint); border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .ledger { display: flex; flex-direction: column; gap: .75rem; }
+  .offer { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; display: grid; grid-template-columns: 1fr auto; gap: .25rem 1.5rem; padding: 1rem 1.1rem; }
+  .offer.vazio { background: var(--surface-2); }
+  .offer .head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .offer .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; }
+  .offer .name { font-weight: 600; font-size: .95rem; }
+  .offer .breakdown { grid-column: 1 / 2; font-family: var(--mono); font-size: .8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; margin-top: .3rem; }
+  .offer .result { grid-row: 1 / 3; grid-column: 2; align-self: center; text-align: right; display: flex; flex-direction: column; gap: .1rem; }
+  .offer .result .r { font-family: var(--mono); font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  .offer .risk { grid-column: 1 / -1; margin-top: .6rem; padding-top: .6rem; border-top: 1px dashed var(--rule); font-size: .8125rem; color: var(--ink-soft); display: flex; gap: .5rem; align-items: baseline; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+
+  .controls { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 1.15rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.15rem 1.75rem; }
+  .controls.destaque { border-color: var(--accent); background: var(--accent-bg); }
+  .ctl { display: flex; flex-direction: column; gap: .35rem; }
+  .ctl.off { opacity: .45; }
+  .ctl .top { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+  .ctl .top .val { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .ctl .note { font-size: .75rem; color: var(--ink-faint); line-height: 1.4; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.1rem; background: transparent; cursor: pointer; margin: 0; }
+  input[type=range]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); margin-top: -6px; box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  select { font-family: var(--mono); font-size: .75rem; color: var(--ink); background: var(--surface-2); border: 1px solid var(--rule); border-radius: 3px; padding: .42rem .5rem; width: 100%; cursor: pointer; }
+  select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  select:disabled { cursor: not-allowed; }
+  .toggle { display: flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .toggle button { flex: 1; font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; padding: .45rem .5rem; background: var(--surface-2); color: var(--ink-soft); border: none; cursor: pointer; }
+  .toggle button + button { border-left: 1px solid var(--rule); }
+  .toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .funnel { display: flex; flex-direction: column; }
+  .frow { display: grid; grid-template-columns: 16rem 1fr; align-items: center; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--rule-soft); }
+  .frow:last-child { border-bottom: none; }
+  .frow .fl { display: flex; flex-direction: column; }
+  .frow .fl .t { font-family: var(--mono); font-size: .8125rem; font-weight: 600; }
+  .frow .fl .d { font-size: .75rem; color: var(--ink-faint); }
+  .bartrack { position: relative; display: flex; align-items: center; gap: .6rem; min-width: 0; }
+  .bar { height: 22px; border-radius: 0 4px 4px 0; min-width: 2px; transition: width .22s ease; }
+  .bval { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bghost { position: absolute; top: 50%; transform: translateY(-50%); height: 22px; border: 1px dashed var(--ink-faint); border-left: none; border-radius: 0 4px 4px 0; pointer-events: none; }
+
+  .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .cell { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .25rem; }
+  .cell.hero { background: var(--surface-2); }
+  .cell .v { font-family: var(--mono); font-size: 1.55rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.025em; line-height: 1.1; }
+  .cell.hero .v { font-size: 2rem; }
+  .cell .s { font-size: .75rem; color: var(--ink-faint); line-height: 1.45; }
+
+  .chartwrap { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; gap: .8rem; }
+  .chartlegend { display: flex; flex-wrap: wrap; gap: 1.1rem; font-size: .75rem; color: var(--ink-soft); }
+  .chartlegend .lg { display: inline-flex; align-items: center; gap: .4rem; }
+  .chartlegend .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .chart { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; align-items: end; gap: 5px; height: 170px; }
+  .chart .col { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; gap: 2px; position: relative; }
+  .chart .seg { border-radius: 2px 2px 0 0; min-height: 1px; }
+  .chart .lbl { position: absolute; top: -1.15rem; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: .625rem; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .chartaxis { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 5px; font-family: var(--mono); font-size: .625rem; color: var(--ink-faint); text-align: center; }
+  .chartaxis span.mk { color: var(--ink); font-weight: 700; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 34rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: .5rem .8rem; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.total td { border-top: 2px solid var(--ink); font-weight: 700; }
+  tbody tr.mark td { background: var(--surface-2); }
+  tbody td:first-child { color: var(--ink); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start; font-size: .875rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  details { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .7rem 1rem; }
+  details summary { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); cursor: pointer; font-weight: 600; }
+  details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  details[open] summary { margin-bottom: .9rem; }
+  details ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .35rem; font-size: .8125rem; color: var(--ink-soft); }
+  details code { font-family: var(--mono); font-size: .95em; color: var(--ink); }
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 32rem) {
+    .frow { grid-template-columns: 1fr; gap: .35rem; }
+    .offer { grid-template-columns: 1fr; }
+    .offer .result { grid-row: auto; grid-column: 1; text-align: left; margin-top: .5rem; }
+  }
+
+  /* ─── volta pro cardápio ─── */
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center; gap: .45rem;
+            align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ─── o que falta decidir ─── */
+  .pend { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px;
+          background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .pend > li { background: var(--surface); padding: .95rem 1.1rem;
+               display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem; align-items: start; }
+  .pend .num { grid-row: 1 / 3; font-family: var(--mono); font-size: .6875rem; font-weight: 700;
+               letter-spacing: .06em; color: var(--accent); background: var(--accent-bg);
+               padding: .18rem .4rem; border-radius: 2px; }
+  .pend .q { font-weight: 600; font-size: .9375rem; color: var(--ink); line-height: 1.4; }
+  .pend .porque { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .pend .porque em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .pend .porque a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .pend .aberto { grid-column: 2; margin-top: .55rem; padding-top: .5rem;
+                  border-top: 1px dashed var(--rule); font-family: var(--mono); font-size: .6875rem;
+                  letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); }
+  @media (max-width: 32rem) {
+    .pend > li { grid-template-columns: 1fr; }
+    .pend .num { grid-row: auto; justify-self: start; }
+    .pend .aberto { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cook · Paulínia</div>
+    <h1>Campanha de fidelização por visitas</h1>
+    <p class="lede">
+      A lógica do vídeo aplicada à loja, com os números reais de jun + jul&nbsp;/&nbsp;2026
+      (canais caixa, balcão e mesa — delivery fora). Monte a campanha escolhendo o brinde de cada visita
+      e veja o que acontece com a margem.
+    </p>
+  </header>
+
+  <div class="strip">
+    <div><span class="label">Faturamento loja/mês</span><span class="v">R$ 46.925</span><span class="s">média de jun+jul</span></div>
+    <div><span class="label">Pedidos de loja/mês</span><span class="v">1.200</span><span class="s">~40 por dia</span></div>
+    <div><span class="label">Ticket médio</span><span class="v">R$ 39,09</span><span class="s">2,3 itens por pedido</span></div>
+    <div><span class="label">Margem de contribuição</span><span class="v" id="mcPct">—</span><span class="s" id="mcPed">—</span></div>
+    <div><span class="label">Margem de 1 visita normal</span><span class="v" id="margNormal">—</span><span class="s">é com isso que a visita com cupom compete</span></div>
+  </div>
+
+  <!-- ══════ 0. O que falta decidir ══════ -->
+  <section id="decidir">
+    <h2><span class="n">0</span> O que falta decidir<span class="hint">antes de a campanha subir</span></h2>
+    <p class="prose">
+      A conta desta página fecha. O que ainda não existe é o <strong>combinado de balcão</strong>:
+      quem fala, em que momento fala e o que responde quando o cliente empaca. São sete pontos, todos
+      de decisão — nenhum depende de dado novo. Enquanto estiverem em aberto, a campanha não sobe,
+      porque cada atendente vai responder uma coisa diferente e a safra não fecha.
+    </p>
+
+    <ol class="pend">
+      <li>
+        <span class="num">01</span>
+        <span class="q">&ldquo;Não é a minha primeira vez aqui.&rdquo;</span>
+        <span class="porque">O convite pressupõe cliente novo — o funil da <a href="#funil">seção 5</a> começa
+        em quem nunca entrou. Quando a pessoa avisa que já veio antes, quem atende precisa de uma resposta
+        pronta: ela entra na campanha do mesmo jeito, entra numa etapa adiantada, ou não entra?
+        <em>Sem isso, o atendimento improvisa.</em></span>
+        <span class="aberto">em aberto</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="q">Cliente antigo que ouve a conversa e quer entrar</span>
+        <span class="porque">Diferente do de cima: aqui a oferta foi feita para outra pessoa e o cliente
+        de casa escutou. Vale convidar de propósito? Se sim, ele entra por onde — pela 1ª visita
+        (paga cheio, só se cadastra) ou já resgatando o primeiro brinde? <em>Ele é o que menos precisa
+        ser comprado de volta, então é o que mais custa se entrar errado.</em></span>
+        <span class="aberto">em aberto</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="q">Quem controla se é a 2ª, 3ª ou 4ª visita da pessoa</span>
+        <span class="porque">Hoje o PDV registra pedido, não pessoa. O cadastro por celular no totem é a
+        peça que resolve isso — mas falta decidir o resto: quem confere na hora do resgate, o que a pessoa
+        do balcão vê na tela e o que fazer quando o celular cadastrado não é o que a pessoa está informando.
+        <em>É o mesmo cadastro que, em ~3 meses, troca as taxas do vídeo por medição de Paulínia.</em></span>
+        <span class="aberto">em aberto</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="q">&ldquo;Dá para resgatar agora mesmo?&rdquo;</span>
+        <span class="porque">Resgatar o cupom na mesma visita derruba a lógica inteira: a campanha compra
+        <em>visitas</em>, não desconto. Se o resgate vale na hora, você pagou o brinde e não comprou volta
+        nenhuma. Ideia já registrada: liberar resgate só em alguns dias da semana — falta decidir se é isso
+        e quais dias.</span>
+        <span class="aberto">em aberto · ideia: dias fixos da semana</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="q">Quem aborda o cliente e o que fala</span>
+        <span class="porque">A <a href="#logica">seção 1</a> já fecha uma coisa: o convite <em>não sai no caixa
+        junto com a nota</em> — sai na conversa, olhando para a pessoa, no fim do atendimento. O que falta
+        é o nome de quem faz isso em cada turno e a frase exata, escrita, para não virar versão de cada um.</span>
+        <span class="aberto">em aberto · falta o script</span>
+      </li>
+      <li>
+        <span class="num">06</span>
+        <span class="q">Em que momento aborda — e o que fazer com fila grande</span>
+        <span class="porque">Na entrega do pedido, na mesa, na saída? E quando tem fila: a decisão é pular
+        o convite naquele atendimento ou ter uma versão curta de uma frase. <em>Sem regra, o convite some
+        exatamente nos horários de mais movimento</em> — que é quando entra mais cliente novo.</span>
+        <span class="aberto">em aberto</span>
+      </li>
+      <li>
+        <span class="num">07</span>
+        <span class="q">Prazo de validade de cada cupom</span>
+        <span class="porque">Os três brindes precisam de prazo, um a um. Prazo curto aperta o retorno —
+        que é justamente o que a campanha está comprando; prazo longo dilui e a pessoa esquece.
+        <em>Sem prazo, o cupom vira crédito eterno e a safra nunca fecha.</em></span>
+        <span class="aberto">em aberto</span>
+      </li>
+    </ol>
+
+    <div class="notes">
+      <div class="note-item"><span class="tag acc">a decidir junto</span><span>
+        <strong>Avaliação no Google.</strong> Quem já está na conversa do cupom é quem tem mais chance de
+        avaliar. A troca seria por <strong>1 cookie</strong> ou pelo desconto. Falta decidir qual das duas
+        moedas, se ela acumula com o brinde da visita e quem confere que a avaliação saiu.
+        <em>O custo dessa troca não está em nenhuma conta desta página</em> — entra por fora.
+      </span></div>
+    </div>
+  </section>
+
+  <!-- ══════ 1. Como funciona ══════ -->
+  <section id="logica">
+    <h2><span class="n">1</span> A lógica das três visitas</h2>
+    <p class="prose">
+      O restaurateur do vídeo não está vendendo desconto — está comprando <strong>três visitas</strong>,
+      porque descobriu que a terceira é o ponto de virada: depois dela o cliente volta sozinho em 72% das vezes.
+      Cada visita tem um trabalho diferente, e é isso que decide qual brinde entra em cada uma.
+    </p>
+    <div class="story">
+      <div>
+        <span class="vnum">V1</span>
+        <span class="job">Provar o produto</span>
+        <span class="txt">A pessoa chega, <em>paga normalmente</em> e faz o cadastro (celular no totem). Nada é dado
+        nesta visita — ela deixa margem cheia, e o 1º brinde fica liberado para a próxima.</span>
+        <span class="vid">No vídeo: guardanapo vermelho + o gerente vem à mesa + o cartão do prato principal grátis, pelo correio.</span>
+      </div>
+      <div>
+        <span class="vnum">V2</span>
+        <span class="job">Provar a variedade</span>
+        <span class="txt">Ela volta e resgata o primeiro brinde. Aqui você <em>já sabe o que ela levou da primeira vez</em> —
+        dá para sugerir o próximo sabor. Se ela só conhece um cookie, é cliente de um produto; se conhece dois, é cliente da loja.</span>
+        <span class="vid">No vídeo: ela come a costela grátis. No fim, o gerente pergunta como foi e escreve à mão o desconto no frango.</span>
+      </div>
+      <div>
+        <span class="vnum">V3</span>
+        <span class="job">Revelar o que ela não sabia</span>
+        <span class="txt">O brinde aqui deveria ser algo que ela <em>não conhece</em>. Torta e milkshake fazem esse papel:
+        92% dos pedidos da loja não levam torta hoje. É o que muda a percepção de "loja de cookie" para "cafeteria".</span>
+        <span class="vid">No vídeo: o cheesecake, de graça — a sobremesa que a pessoa cortaria se estivesse sendo sensata.</span>
+      </div>
+    </div>
+    <div class="note-item"><span class="tag acc">o detalhe que não é número</span><span>
+      No vídeo o brinde seguinte <strong>nunca é anunciado no caixa junto com a nota</strong>. O gerente vai à mesa
+      no fim da visita, pergunta como foi, e <em>então</em> oferece. Aqui o cadastro é online e não tem cartão
+      nenhum para entregar — o que significa que essa parte precisa acontecer <strong>na conversa</strong>,
+      não no papel. Avisar "seu próximo cookie está liberado" olhando na cara da pessoa custa o mesmo que não avisar.
+    </span></div>
+  </section>
+
+  <!-- ══════ 2. Montagem ══════ -->
+  <section>
+    <h2><span class="n">2</span> Montar a campanha<span class="hint">escolha o brinde de cada visita</span></h2>
+    <div class="controls destaque" id="montagem"></div>
+    <div class="notes" id="montagemNota"></div>
+  </section>
+
+  <!-- ══════ 3. Cardápio ══════ -->
+  <section>
+    <h2><span class="n">3</span> Cardápio de brindes<span class="hint">só os que você definiu</span></h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Brinde</th><th>Tipo</th><th>Exige<br>comprar</th><th>Cliente<br>paga</th><th>Custo do<br>item</th><th>Resultado<br>do brinde</th><th>Margem da<br>visita*</th><th>Prêmio<br>percebido</th></tr></thead>
+      <tbody id="cardapio"></tbody>
+    </table></div>
+    <div class="notes" id="cardapioNota"></div>
+  </section>
+
+  <!-- ══════ 4. A conta de cada visita ══════ -->
+  <section>
+    <h2><span class="n">4</span> A conta de cada visita da sua campanha</h2>
+    <div class="ledger" id="ledger"></div>
+  </section>
+
+  <!-- ══════ 5. Funil ══════ -->
+  <section id="funil">
+    <h2><span class="n">5</span> O funil do mês</h2>
+    <p class="prose">
+      O tracejado é quantos clientes chegariam àquela visita <strong>sem campanha nenhuma</strong>
+      — 42% × 47% × 72%, as taxas naturais de retorno. A diferença entre a barra e o tracejado é o que
+      a campanha comprou; o resto teria acontecido de graça.
+    </p>
+    <div class="funnel" id="funnel"></div>
+  </section>
+
+  <!-- ══════ 6. Resultado ══════ -->
+  <section>
+    <h2><span class="n">6</span> Resultado de uma safra</h2>
+    <div class="results" id="results"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Visita</th><th>Com campanha</th><th>Sem campanha</th><th>Margem<br>com campanha</th><th>Margem<br>sem campanha</th><th>Diferença</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+    <div class="notes" id="resNota"></div>
+  </section>
+
+  <!-- ══════ 7. Premissas ══════ -->
+  <section>
+    <h2><span class="n">7</span> Premissas</h2>
+    <div class="controls" id="controls"></div>
+    <h3 class="sub">Venda extra por visita — medida no histórico</h3>
+    <div class="controls" id="controlsExtra"></div>
+    <div class="note-item"><span class="tag acc">medido</span><span>
+      Medido nos 2.411 pedidos de loja de jun+jul, descontando o que o brinde substitui.
+      Numa visita que resgata <strong>compre 1 ganhe 1</strong>, o segundo cookie deixa de ser venda e vira presente:
+      sobram <strong>R$ 14,03</strong> de média (50% dos pedidos não levam nada além dos dois cookies).
+      Numa visita de <strong>preço fixo</strong> só um item sai do preço cheio: <strong>R$ 24,24</strong>.
+    </span></div>
+    <h3 class="sub">Estrutura de custo</h3>
+    <div class="controls" id="controlsCusto"></div>
+  </section>
+
+  <!-- ══════ 8. Projeção ══════ -->
+  <section>
+    <h2><span class="n">8</span> Rodando todo mês<span class="hint">safras acumulam</span></h2>
+    <div class="results" id="proj"></div>
+    <div class="chartwrap">
+      <div class="chartlegend">
+        <span class="lg"><span class="sw" style="background:var(--s-visitas)"></span>Resultado das visitas da campanha</span>
+        <span class="lg"><span class="sw" style="background:var(--s-fieis)"></span>Margem dos clientes fiéis acumulados</span>
+      </div>
+      <div class="chart" id="chart"></div>
+      <div class="chartaxis" id="chartaxis"></div>
+    </div>
+    <div class="notes" id="projNotas"></div>
+  </section>
+
+  <!-- ══════ 9. Riscos ══════ -->
+  <section>
+    <h2><span class="n">9</span> O que decide tudo</h2>
+    <div class="notes" id="riscos"></div>
+  </section>
+
+  <details>
+    <summary>Premissas e origem dos números</summary>
+    <ul>
+      <li><strong>Vendas de loja</strong>: <code>vendas_consumer_itens_historico_pedido</code> e <code>vendas_consumer_pedidos_individual</code>, Paulínia, jun+jul/2026, canais <code>caixa</code> + <code>balcao</code> + <code>mesa</code> — 2.411 pedidos. Os 426 de delivery ficam de fora.</li>
+      <li><strong>CMV</strong>: <code>cmv_produtos</code>, atualizado na base em 30–31/07/2026. Cookie R$ 5,01 sem os premium (mín. R$ 3,83 Churros · máx. R$ 8,71 Pistache). Fatia da Torta Perfeita R$ 9,04 — confere com a inteira (R$ 72,32 ÷ 8). Milkshake R$ 13,20 (R$ 12,04 de ingrediente + R$ 1,16 de copo/tampa/canudo; só existe copo de 440 ml).</li>
+      <li><strong>Venda extra por visita</strong>: medida nos mesmos pedidos, descontando o que o brinde substitui. Compre-e-ganhe = pedido − 2 cookies = R$ 14,03; preço fixo = pedido − 1 item = R$ 24,24.</li>
+      <li><strong>Taxas naturais 42% / 47% / 72%</strong>: vêm do vídeo, não dos seus dados — o PDV registra pedido, não pessoa. <strong>É a premissa que decide a campanha inteira</strong>, e o cadastro do totem é o que vai substituí-la por medição.</li>
+      <li><strong>Simples 8,0%</strong> (DAS ÷ faturamento de competência) · <strong>Royalties 4,0%</strong> (contrato) · <strong>Cartão 2,0%</strong> (premissa — a Stone liquida líquido) · <strong>Quebra 1,0%</strong> (premissa — não há registro no sistema).</li>
+      <li><strong>Embalagem</strong>: loja não leva kraft, só a caixinha de 4 (R$ 0,85). Ao item da promoção, a divisória (R$ 0,20).</li>
+    </ul>
+  </details>
+
+  <footer>
+    Simulação — não é registro contábil. Todos os valores são margem de contribuição, antes de aluguel,
+    folha e demais custos fixos, que não mudam com o volume da campanha. Gerado a partir do Sistema HC.
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ─── Base real — loja Paulínia, jun+jul/2026, CMV de 31/07 ─────────────────
+  const B = {
+    fatLoja: 46925, pedidos: 1200, ticket: 39.09,
+    cmvMix: 0.3460,
+    cookiePago: 15.19, cookieTab: 17.34, cookieCMV: 5.0100,        // sem os 2 premium
+    cookieCMVmax: 8.7100, cookieCMVmin: 3.8336,
+    tortaPreco: 22.90, tortaCMV: 9.0400,
+    milkPreco: 28.66, milkCMV: 13.2000,
+    baseR12: 0.42, baseR23: 0.47, baseR34: 0.72, baseR45: 0.72,
+  };
+
+  const S = {
+    novos: 200, r12: 50, r23: 55, r34: 72, r45: 80,
+    exGanhe: 14.03, exPreco: 24.24,
+    cupomV1: false,           // a 1ª visita já vem com cupom?
+    canibV1: 20,              // se sim: % dos trazidos que viriam de qualquer jeito
+    b1: "g_ck_ck", b2: "p_ck_5", b3: "p_tor_10",
+    freq: 1.2, cupom: 0, lag: 1, vidaFiel: 12,
+    simples: 8.0, royalty: 4.0, cartao: 2.0, quebra: 1.0,
+    embPedido: 0.85, embItem: 0.20,
+  };
+
+  let DED, MC, QUEBRA, MARG_NORMAL;
+  function recalc() {
+    DED = (S.simples + S.royalty + S.cartao) / 100;
+    QUEBRA = S.quebra / 100;
+    MC = 1 - (B.cmvMix + QUEBRA + S.embPedido / B.ticket + DED);
+    MARG_NORMAL = B.ticket * MC;
+  }
+  recalc();
+
+  const brl = (v, d = 2) => (v < 0 ? "−" : "") + "R$ " +
+    Math.abs(v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const brl0 = (v) => brl(v, 0);
+  const pc = (v, d = 1) => (100 * v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const n0 = (v) => Math.round(v).toLocaleString("pt-BR");
+  const sign = (v) => v >= 0 ? "pos" : "neg";
+  const custoItem = (cmv) => cmv * (1 + QUEBRA) + S.embItem;
+
+  // ─── Cardápio ──────────────────────────────────────────────────────────────
+  // Só o que foi definido. Novos brindes entram aqui depois de validados.
+  const BRINDES = {
+    g_ck_ck:  { nome: "Compre 1 cookie, ganhe 1 cookie", fam: "G",
+                exige: () => B.cookiePago, preco: 0, cmv: () => B.cookieCMV, tab: () => B.cookieTab,
+                nota: ["good", "O clássico do vídeo. O cookie pago cobre o brinde e sobra — e ninguém precisa entender regra nenhuma."] },
+    p_ck_5:   { nome: "Cookie por R$ 5", fam: "P",
+                exige: () => 0, preco: 5, cmv: () => B.cookieCMV, tab: () => B.cookieTab,
+                nota: ["warn", "É o &ldquo;chicken was a wash&rdquo; do vídeo: quase empata e entrega 71% de desconto no produto que todo mundo quer."] },
+    p_tor_10: { nome: "Fatia de torta por R$ 10", fam: "P",
+                exige: () => 0, preco: 10, cmv: () => B.tortaCMV, tab: () => B.tortaPreco,
+                nota: ["good", "56% de desconto num item que 92% dos pedidos <em>não</em> levam — serve para revelar produto novo."] },
+    p_mlk_15: { nome: "Milkshake por R$ 15", fam: "P",
+                exige: () => 0, preco: 15, cmv: () => B.milkCMV, tab: () => B.milkPreco,
+                nota: ["good", "48% no produto de maior desejo, praticamente no zero a zero. Só existe copo de 440 ml, então o custo é fixo."] },
+  };
+  const IDS = Object.keys(BRINDES);
+
+  // margem de uma visita que resgata o brinde k
+  function margemVisita(k) {
+    const o = BRINDES[k];
+    const extra = o.fam === "G" ? S.exGanhe : S.exPreco;
+    return (o.exige() + extra) * MC + (o.preco * (1 - DED) - custoItem(o.cmv()));
+  }
+
+  // ─── Cálculo do funil ──────────────────────────────────────────────────────
+  //
+  // A campanha tem 3 visitas contadas. O cupom entregue na visita N é resgatado na N+1.
+  //   cupomV1 = false → visita 1 é normal (paga cheio) e só recebe o cartão.
+  //                     Brindes resgatados nas visitas 2 e 3.
+  //   cupomV1 = true  → a pessoa já chega com cupom. Brindes nas visitas 1, 2 e 3.
+  function calc() {
+    const N = S.novos;
+    // A campanha SEMPRE entrega 3 brindes. O modo decide onde o 1º é resgatado:
+    //   cupomV1 = true  → brindes nas visitas 1, 2 e 3  (funil de 3 visitas)
+    //   cupomV1 = false → visita 1 limpa + brindes nas visitas 2, 3 e 4  (funil de 4)
+    const slots = S.cupomV1 ? [S.b1, S.b2, S.b3] : [null, S.b1, S.b2, S.b3];
+    const nV = slots.length;
+
+    const tx = [S.r12, S.r23, S.r34, S.r45].map((x) => x / 100);
+    const BS = [B.baseR12, B.baseR23, B.baseR34, B.baseR45];
+
+    // volumes: v[0] são os clientes novos; cada transição derruba uma fatia
+    const v = [N], b0 = S.cupomV1 ? N * (S.canibV1 / 100) : N, b = [b0];
+    for (let i = 1; i < nV; i++) { v.push(v[i - 1] * tx[i - 1]); b.push(b[i - 1] * BS[i - 1]); }
+    const fieis = v[nV - 1] * tx[nV - 1];
+    const fieisBase = b[nV - 1] * BS[nV - 1];
+
+    const mCom = slots.map((k) => k ? margemVisita(k) : MARG_NORMAL);
+    const margCom = v.reduce((a, q, i) => a + q * mCom[i], 0) - N * S.cupom;
+    const margSem = b.reduce((a, q) => a + q * MARG_NORMAL, 0);
+    const incr = margCom - margSem;
+
+    const custoBrindes = slots.reduce((a, k, i) =>
+      a + (k ? v[i] * (custoItem(BRINDES[k].cmv()) - BRINDES[k].preco * (1 - DED)) : 0), 0) + N * S.cupom;
+
+    const fieisIncr = fieis - fieisBase;
+    const margPorFiel = S.freq * B.ticket * MC;
+    return { v, b, slots, nV, mCom, margCom, margSem, incr, custoBrindes,
+             fieis, fieisBase, fieisIncr, margPorFiel,
+             ltv12: fieisIncr * margPorFiel * 12, saldo: incr + fieisIncr * margPorFiel * 12 };
+  }
+
+  // ─── Montagem ──────────────────────────────────────────────────────────────
+  function renderMontagem(R) {
+    const opt = (k, atual) => `<option value="${k}" ${k === atual ? "selected" : ""}>${BRINDES[k].nome}</option>`;
+    const sel = (id, atual) => `<select id="sel-${id}" aria-label="Brinde ${id}">${
+      IDS.map((k) => opt(k, atual)).join("")}</select>`;
+    const escolhidos = [S.b1, S.b2, S.b3];
+    const dupe = (k, i) => escolhidos.filter((x, j) => x === k && j !== i).length > 0;
+
+    const off0 = !S.cupomV1;
+    const linhas = [["b1", 0], ["b2", 1], ["b3", 2]].map(([key, i]) => {
+      const visita = i + (S.cupomV1 ? 1 : 2);      // em que visita este brinde é resgatado
+      const k = S[key], idx = R.slots.indexOf(k);
+      return `<div class="ctl">
+        <div class="top"><span class="label">Brinde ${i + 1} · resgatado na ${visita}ª visita</span>${
+          dupe(k, i) ? '<span class="tag warn">repetido</span>'
+                     : `<span class="val ${sign(R.mCom[visita - 1])}">${brl(R.mCom[visita - 1])}</span>`}</div>
+        ${sel(key, k)}
+        <span class="note">${BRINDES[k].nota[1]}</span>
+      </div>`;
+    }).join("");
+
+    document.getElementById("montagem").innerHTML =
+      `<div class="ctl">
+        <div class="top"><span class="label">A 1ª visita já vem com cupom?</span></div>
+        <div class="toggle" role="group" aria-label="Cupom na primeira visita">
+          <button type="button" id="c1-off" aria-pressed="${!S.cupomV1}">Não</button>
+          <button type="button" id="c1-on" aria-pressed="${S.cupomV1}">Sim</button>
+        </div>
+        <span class="note">${S.cupomV1
+          ? "<strong>Cupom divulgado</strong> (story, status, lista, cupom no delivery): a pessoa já chega resgatando o brinde 1. Os três brindes saem nas visitas <strong>1, 2 e 3</strong>."
+          : "<strong>Cadastro feito na loja</strong>: quem chega orgânico paga cheio e se cadastra. Os três brindes saem nas visitas <strong>2, 3 e 4</strong> — uma visita a mais no caminho."}</span>
+      </div>` + linhas +
+      (S.cupomV1 ? `<div class="ctl">
+        <div class="top"><span class="label">Viriam de qualquer jeito</span><span class="val">${S.canibV1}%</span></div>
+        <input type="range" id="c-canibV1" min="0" max="80" step="1" value="${S.canibV1}" aria-label="Viriam de qualquer jeito">
+        <span class="note">Dos que chegam com o cupom divulgado, quantos entrariam na loja mesmo sem ele.
+        <strong>É a premissa mais pesada deste modo</strong>: a ${S.canibV1}% você está dizendo que o story/status
+        traz ${n0(S.novos * (1 - S.canibV1 / 100))} pessoas que nunca entrariam. Suba o número para ver o quanto isso sustenta o resultado.</span>
+      </div>` : "");
+
+    const custoTot = R.custoBrindes;
+    document.getElementById("montagemNota").innerHTML = `
+      <div class="note-item"><span class="tag ${S.cupomV1 ? "warn" : "good"}">o modo muda a conta</span><span>
+        ${S.cupomV1
+          ? `Os três brindes saem nas visitas <strong>1, 2 e 3</strong>. A 1ª deixa de render ${brl(MARG_NORMAL)}
+             para render ${brl(R.mCom[0])}, mas em troca o cupom <em>traz</em> gente que não viria —
+             ${pc(1 - S.canibV1 / 100, 0)} dos ${n0(R.v[0])}. Funil de <strong>3 visitas</strong> até virar fiel.`
+          : `A 1ª visita rende <strong>${brl(MARG_NORMAL)} de margem cheia</strong> e ${S.cupom === 0 ? "<strong>não custa nada</strong>" : "custa " + brl(S.cupom) + " por cadastro"}.
+             Os três brindes saem nas visitas <strong>2, 3 e 4</strong> — funil de <strong>4 visitas</strong>,
+             ou seja, você pede um retorno a mais antes de a pessoa virar fiel. É o modo do vídeo.`}
+      </span></div>
+      <div class="note-item"><span class="tag acc">resumo da safra</span><span>
+        ${n0(S.novos)} clientes novos por mês · ${n0(R.v.reduce((a, x) => a + x, 0))} visitas geradas ·
+        <strong>${brl0(custoTot)}</strong> de brinde ·
+        resultado das visitas <strong class="${sign(R.incr)}">${brl0(R.incr)}</strong> ·
+        <strong class="${sign(R.fieisIncr)}">${R.fieisIncr >= 0 ? "+" : ""}${n0(R.fieisIncr)}</strong> clientes fiéis a mais.
+      </span></div>`;
+  }
+
+  // ─── Cardápio ──────────────────────────────────────────────────────────────
+  function renderCardapio(R) {
+    document.getElementById("cardapio").innerHTML = IDS.map((k) => {
+      const o = BRINDES[k], cmv = o.cmv(), tab = o.tab(), ex = o.exige();
+      const brinde = o.preco * (1 - DED) - custoItem(cmv);
+      const mv = margemVisita(k);
+      const pos = R.slots.indexOf(k);
+      return `<tr class="${pos >= 0 ? "mark" : ""}">
+        <td>${pos >= 0 ? `<span class="vnum" style="background:var(--accent);color:var(--accent-ink);padding:.1rem .35rem;border-radius:2px;font-size:.625rem;margin-right:.4rem">V${pos + 1}</span>` : ""}${o.nome}</td>
+        <td><span class="tag ${o.fam === "G" ? "good" : "acc"}">${o.fam === "G" ? "compre e ganhe" : "preço fixo"}</span></td>
+        <td>${ex ? brl(ex) : "—"}</td><td>${brl(o.preco)}</td><td>${brl(custoItem(cmv))}</td>
+        <td class="${sign(brinde)}">${brl(brinde)}</td>
+        <td class="${sign(mv)}"><strong>${brl(mv)}</strong></td>
+        <td>${brl(tab - o.preco)}<br><span style="color:var(--ink-faint)">${pc(1 - o.preco / tab, 0)}</span></td></tr>`;
+    }).join("") +
+    `<tr class="total"><td>Visita normal, sem brinde</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td class="pos"><strong>${brl(MARG_NORMAL)}</strong></td><td>—</td></tr>`;
+
+    document.getElementById("cardapioNota").innerHTML = `
+      <div class="note-item"><span class="tag acc">* margem da visita</span><span>
+        Não é só o brinde: é <strong>a visita inteira</strong> — a compra exigida (quando existe) + a venda extra
+        medida + o resultado do item da promoção. É esse número que compete com os
+        <strong>${brl(MARG_NORMAL)}</strong> da última linha, que é o que a mesma pessoa deixaria numa visita sem cupom.
+        <br><br>
+        Repare: <strong>toda visita com brinde rende menos que uma visita sem brinde.</strong> A campanha não ganha
+        por visita — ganha por trazer visitas que não existiriam, e por empurrar o cliente até a 3ª.
+      </span></div>
+      <div class="note-item"><span class="tag good">o formato importa</span><span>
+        "${BRINDES.g_ck_ck.nome}" é a única do tipo <em>compre e ganhe</em>, e por isso exige
+        ${brl(B.cookiePago)} de venda a preço cheio junto com o cupom. As três de preço fixo trazem só o cupom.
+        Para acrescentar qualquer brinde novo, me diga o formato, o produto e o valor — puxo o CMV da ficha.
+      </span></div>`;
+  }
+
+  // ─── Conta de cada visita ──────────────────────────────────────────────────
+  function renderLedger(R) {
+    document.getElementById("ledger").innerHTML = R.slots.map((k, i) => {
+      if (!k) return `<article class="offer vazio">
+        <div class="head"><span class="vnum">V1</span><span class="name">Sem brinde — visita normal</span></div>
+        <div class="breakdown">a pessoa paga o ticket cheio de ${brl(B.ticket)} e faz o cadastro para receber o 1º brinde<br>
+          <span style="color:var(--ink-faint)">custo: ${S.cupom === 0 ? "zero — o cadastro é online" : brl(S.cupom) + " por cadastro"} · nenhum produto sai do estoque</span></div>
+        <div class="result"><span class="label">margem da visita</span><span class="r pos">${brl(MARG_NORMAL)}</span></div>
+        <div class="risk"><span class="tag good">ok</span><span>Esta é a visita mais lucrativa da campanha, justamente porque não tem promoção. Ela existe para <strong>cadastrar o cliente e liberar o 1º brinde</strong> — e não custa nada.</span></div>
+      </article>`;
+      const o = BRINDES[k], cmv = o.cmv(), ex = o.exige();
+      const extra = o.fam === "G" ? S.exGanhe : S.exPreco;
+      const mv = R.mCom[i];
+      return `<article class="offer">
+        <div class="head"><span class="vnum">V${i + 1}</span><span class="name">${o.nome}</span></div>
+        <div class="breakdown">
+          ${ex ? `compra exigida ${brl(ex)} · ` : ""}venda extra medida ${brl(extra)} · × ${pc(MC)} de margem = ${brl((ex + extra) * MC)}<br>
+          item da promo: entra ${brl(o.preco * (1 - DED))} ${o.preco ? `<span style="color:var(--ink-faint)">(${brl(o.preco)} − ${pc(DED, 1)})</span>` : "<span style='color:var(--ink-faint)'>(grátis)</span>"} − custo ${brl(custoItem(cmv))} = ${brl(o.preco * (1 - DED) - custoItem(cmv))}<br>
+          <span style="color:var(--ink-faint)">o cliente enxerga ${brl(o.tab() - o.preco)} de prêmio · uma visita sem cupom renderia ${brl(MARG_NORMAL)}</span>
+        </div>
+        <div class="result"><span class="label">margem da visita</span><span class="r ${sign(mv)}">${brl(mv)}</span>
+          <span class="label" style="color:var(--bad)">${brl(mv - MARG_NORMAL)} vs normal</span></div>
+        <div class="risk"><span class="tag ${o.nota[0]}">${o.nota[0] === "good" ? "ok" : o.nota[0] === "warn" ? "atenção" : "risco"}</span><span>${o.nota[1]}</span></div>
+      </article>`;
+    }).join("");
+  }
+
+  // ─── Funil ─────────────────────────────────────────────────────────────────
+  function renderFunnel(R) {
+    const cor = ["var(--step-1)", "var(--step-2)", "var(--step-3)"];
+    const steps = R.v.map((q, i) => ({
+      t: `${i + 1}ª visita`,
+      d: R.slots[i] ? BRINDES[R.slots[i]].nome : "sem brinde — paga cheio e se cadastra",
+      q, ghost: R.b[i], c: cor[i],
+    }));
+    steps.push({ t: "Clientes fiéis", d: "voltam por conta própria", q: R.fieis, ghost: R.fieisBase, c: "var(--step-4)" });
+    const max = Math.max(...steps.map((s) => Math.max(s.q, s.ghost)), 1);
+    document.getElementById("funnel").innerHTML = steps.map((s) => `
+      <div class="frow">
+        <div class="fl"><span class="t">${s.t}</span><span class="d">${s.d}</span></div>
+        <div class="bartrack">
+          <div style="position:relative;flex:1;min-width:0;">
+            <div class="bar" style="width:${100 * s.q / max}%;background:${s.c}" title="${n0(s.q)} com campanha"></div>
+            <div class="bghost" style="width:${100 * s.ghost / max}%" title="${n0(s.ghost)} sem campanha"></div>
+          </div>
+          <span class="bval">${n0(s.q)} <span style="color:var(--ink-faint);font-weight:400">vs ${n0(s.ghost)} sem campanha</span></span>
+        </div>
+      </div>`).join("");
+  }
+
+  // ─── Resultado ─────────────────────────────────────────────────────────────
+  function renderResults(R) {
+    const totV = R.v.reduce((a, x) => a + x, 0), totB = R.b.reduce((a, x) => a + x, 0);
+    document.getElementById("results").innerHTML = `
+      <div class="cell hero">
+        <span class="label">Saldo de UMA safra, seguida por 12 meses</span>
+        <span class="v ${sign(R.saldo)}">${brl0(R.saldo)}</span>
+        <span class="s">Os ${n0(S.novos)} clientes que entram <em>num mês</em>: resultado das visitas
+        (<span class="${sign(R.incr)}">${brl0(R.incr)}</span>) mais o que os ${n0(R.fieisIncr)} fiéis a mais rendem
+        em 12 meses (<span class="pos">${brl0(R.ltv12)}</span>). <strong>Não é o caixa do ano</strong> — para isso,
+        veja a seção 8.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Resultado das visitas</span>
+        <span class="v ${sign(R.incr)}">${brl0(R.incr)}</span>
+        <span class="s">${n0(totV)} visitas com campanha rendendo ${brl0(R.margCom)}, contra ${n0(totB)} visitas
+        sem campanha rendendo ${brl0(R.margSem)}. <strong>${R.incr < 0 ? "A campanha gera mais visitas e menos margem" : "A campanha gera mais visitas e mais margem"}.</strong></span>
+      </div>
+      <div class="cell">
+        <span class="label">Custo dos brindes</span>
+        <span class="v">${brl0(R.custoBrindes)}</span>
+        <span class="s">O que sai do caixa. Note que não é igual ao resultado acima: parte do custo é
+        <em>margem perdida</em> em visitas que aconteceriam de qualquer jeito.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Fiéis a mais</span>
+        <span class="v ${sign(R.fieisIncr)}">${R.fieisIncr >= 0 ? "+" : ""}${n0(R.fieisIncr)}</span>
+        <span class="s">${n0(R.fieis)} contra ${n0(R.fieisBase)} sem campanha. Cada um rende
+        <strong>${brl(R.margPorFiel)}/mês</strong> enquanto continuar voltando.</span>
+      </div>`;
+
+    document.getElementById("tbody").innerHTML = R.v.map((q, i) => {
+      const nome = R.slots[i] ? BRINDES[R.slots[i]].nome : "sem brinde";
+      const mc = q * R.mCom[i], ms = R.b[i] * MARG_NORMAL;
+      return `<tr><td>${i + 1}ª · ${nome}</td><td>${n0(q)}</td><td>${n0(R.b[i])}</td>
+        <td>${brl0(mc)}</td><td>${brl0(ms)}</td><td class="${sign(mc - ms)}">${brl0(mc - ms)}</td></tr>`;
+    }).join("") +
+    (S.cupom > 0 ? `<tr><td>Cadastro</td><td>${n0(S.novos)}</td><td>—</td><td>${brl0(-S.novos * S.cupom)}</td><td>—</td><td class="neg">${brl0(-S.novos * S.cupom)}</td></tr>` : "") +
+    `<tr class="total"><td>Total das visitas</td><td>${n0(R.v.reduce((a, x) => a + x, 0))}</td><td>${n0(R.b.reduce((a, x) => a + x, 0))}</td>
+     <td>${brl0(R.margCom)}</td><td>${brl0(R.margSem)}</td><td class="${sign(R.incr)}"><strong>${brl0(R.incr)}</strong></td></tr>`;
+
+    const desperdicio = R.b.reduce((a, q, i) => a + (R.slots[i] ? q : 0), 0);
+    const total = R.v.reduce((a, q, i) => a + (R.slots[i] ? q : 0), 0);
+    document.getElementById("resNota").innerHTML = `
+      <div class="note-item"><span class="tag warn">o custo escondido</span><span>
+        Dos <strong>${n0(total)} brindes</strong> que você entrega por mês, <strong>${n0(desperdicio)}</strong>
+        vão para gente que voltaria sem cupom nenhum — ${pc(desperdicio / Math.max(total, 1), 0)} do total.
+        Não é desperdício evitável: você não sabe quem é quem na hora de entregar. É o preço estrutural
+        de qualquer programa de cupom, e é por isso que <strong>o resultado das visitas é negativo mesmo
+        com a campanha trazendo mais gente</strong>.
+      </span></div>`;
+  }
+
+  // ─── Premissas ─────────────────────────────────────────────────────────────
+  const CTLS = [
+    { k: "novos", lab: "Clientes novos por mês", min: 50, max: 800, step: 10, g: "base",
+      fmt: (v) => n0(v), note: () => "A loja faz ~1.200 pedidos/mês; " + pc(S.novos / B.pedidos, 0) + " seriam rostos novos." },
+    { k: "r12", lab: "Voltam para a 2ª visita", min: 20, max: 95, step: 1, g: "base",
+      fmt: (v) => v + "%", note: () => "Sem incentivo o setor faz <strong>42%</strong>. Tudo depende de o cupom levantar isso." },
+    { k: "r23", lab: "Voltam para a 3ª visita", min: 20, max: 95, step: 1, g: "base",
+      fmt: (v) => v + "%", note: () => "Sem incentivo, <strong>47%</strong>." },
+    { k: "r34", lab: () => S.cupomV1 ? "Viram fiéis (4ª visita+)" : "Voltam para a 4ª visita", min: 20, max: 95, step: 1, g: "base",
+      fmt: (v) => v + "%", note: () => "<strong>72%</strong> é a taxa natural depois da 3ª visita — o degrau que a campanha existe para alcançar." },
+    { k: "r45", lab: "Viram fiéis (5ª visita+)", min: 20, max: 95, step: 1, g: "base", dep: () => !S.cupomV1,
+      fmt: (v) => v + "%", note: () => "Só existe quando a 1ª visita não tem brinde: aí o 3º brinde cai na 4ª visita e o funil tem um degrau a mais. Natural: 72%." },
+    { k: "freq", lab: "Visitas/mês do cliente fiel", min: 0.5, max: 4, step: 0.1, g: "base",
+      fmt: (v) => v.toFixed(1).replace(".", ","), note: () => "Define todo o retorno de longo prazo: cada fiel rende " + brl(S.freq * B.ticket * MC) + "/mês." },
+    { k: "vidaFiel", lab: "Vida média do cliente fiel", min: 3, max: 36, step: 1, g: "base",
+      fmt: (v) => v + " meses", note: () => "Equivale a perder " + (100 / S.vidaFiel).toFixed(1).replace(".", ",") + "% dos fiéis por mês." },
+    { k: "lag", lab: "Meses entre uma visita e outra", min: 1, max: 3, step: 1, g: "base",
+      fmt: (v) => v === 1 ? "1 mês" : v + " meses", note: () => "Quanto o cliente demora para voltar e usar o cupom seguinte." },
+    { k: "cupom", lab: "Custo por cliente cadastrado", min: 0, max: 3, step: 0.05, g: "base",
+      fmt: (v) => v === 0 ? "R$ 0,00" : brl(v), note: () => "<strong>Hoje é zero</strong>: o cadastro é online, não existe cartão impresso. Só mexa aqui se a campanha passar a ter algum material físico." },
+
+    { k: "exGanhe", lab: "Venda extra · compre e ganhe", min: 0, max: 45, step: 0.5, g: "extra",
+      fmt: (v) => brl(v), note: () => "Medido: <strong>R$ 14,03</strong>. O 2º cookie vira presente, então some da venda." },
+    { k: "exPreco", lab: "Venda extra · preço fixo", min: 0, max: 45, step: 0.5, g: "extra",
+      fmt: (v) => brl(v), note: () => "Medido: <strong>R$ 24,24</strong>. Só um item sai do preço cheio, o resto da cesta continua." },
+
+    { k: "quebra", lab: "Quebra / perda", min: 0, max: 10, step: 0.5, g: "custo",
+      fmt: (v) => v.toFixed(1).replace(".", ",") + "%", note: () => "<strong>Premissa</strong> — não há registro de quebra no sistema. A Conferência de Estoque é o que vai medir." },
+    { k: "embPedido", lab: "Embalagem por pedido", min: 0, max: 2.5, step: 0.05, g: "custo",
+      fmt: (v) => brl(v), note: () => "Loja não leva kraft: só a caixinha de 4. No delivery seria R$ 1,35." },
+    { k: "embItem", lab: "Embalagem do item da promo", min: 0, max: 1.5, step: 0.05, g: "custo",
+      fmt: (v) => brl(v), note: () => "O brinde vai na mesma caixinha do item pago — só a divisória." },
+    { k: "simples", lab: "Simples Nacional", min: 0, max: 12, step: 0.1, g: "custo",
+      fmt: (v) => v.toFixed(1).replace(".", ",") + "%", note: () => "Incide sobre venda registrada — o item grátis não paga porque não gera receita." },
+    { k: "royalty", lab: "Royalties", min: 0, max: 6, step: 0.25, g: "custo",
+      fmt: (v) => v.toFixed(2).replace(".", ",") + "%", note: () => "Contrato a 4%." },
+    { k: "cartao", lab: "Taxa de cartão", min: 0, max: 4, step: 0.1, g: "custo",
+      fmt: (v) => v.toFixed(1).replace(".", ",") + "%", note: () => "Média entre PIX, débito e crédito — não está isolada no extrato." },
+  ];
+
+  function renderControls() {
+    const slider = (c) => {
+      const lab = typeof c.lab === "function" ? c.lab() : c.lab;
+      const off = c.dep && !c.dep();
+      return `<div class="ctl ${off ? "off" : ""}">
+        <div class="top"><span class="label" id="l-${c.k}">${lab}</span><span class="val" id="v-${c.k}">${c.fmt(S[c.k])}</span></div>
+        <input type="range" id="c-${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[c.k]}" aria-label="${lab}" ${off ? "disabled" : ""}>
+        <span class="note" id="n-${c.k}">${c.note()}</span></div>`;
+    };
+    for (const [id, g] of [["controls", "base"], ["controlsExtra", "extra"], ["controlsCusto", "custo"]])
+      document.getElementById(id).innerHTML = CTLS.filter((c) => c.g === g).map(slider).join("");
+    CTLS.forEach((c) => {
+      const el = document.getElementById("c-" + c.k);
+      if (el) el.addEventListener("input", () => { S[c.k] = parseFloat(el.value); update(); });
+    });
+  }
+  function bindMontagem() {
+    const bind = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("click", () => { fn(); update(); }); };
+    bind("c1-off", () => S.cupomV1 = false);
+    bind("c1-on", () => S.cupomV1 = true);
+    for (const [id, key] of [["sel-b1", "b1"], ["sel-b2", "b2"], ["sel-b3", "b3"]]) {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener("change", () => { S[key] = el.value; update(); });
+    }
+    const cv = document.getElementById("c-canibV1");
+    if (cv) cv.addEventListener("input", () => { S.canibV1 = parseFloat(cv.value); update(); });
+  }
+  function syncControls() {
+    CTLS.forEach((c) => {
+      const v = document.getElementById("v-" + c.k), n = document.getElementById("n-" + c.k);
+      const l = document.getElementById("l-" + c.k), i = document.getElementById("c-" + c.k);
+      if (v) v.textContent = c.fmt(S[c.k]);
+      if (n) n.innerHTML = c.note();
+      if (l && typeof c.lab === "function") l.textContent = c.lab();
+      if (i && c.dep) { const off = !c.dep(); i.disabled = off; i.parentElement?.classList.toggle("off", off); }
+    });
+  }
+
+  // ─── Projeção ──────────────────────────────────────────────────────────────
+  function renderProjecao(R) {
+    const H = 12, surv = 1 - 1 / S.vidaFiel, L = S.lag;
+    const meses = []; let f = 0, acum = 0;
+    for (let m = 1; m <= H; m++) {
+      // safras entram todo mês; a de m meses atrás está na visita (m/lag)
+      let visitas = 0;
+      for (let i = 0; i < 3; i++) if (m > i * L) visitas += R.v[i] * R.mCom[i] - R.b[i] * MARG_NORMAL;
+      visitas -= S.novos * S.cupom;
+      const novosFieis = m > 3 * L ? R.fieisIncr : 0;
+      f = f * surv + novosFieis;
+      const mf = f * R.margPorFiel;
+      acum += visitas + mf;
+      meses.push({ m, visitas, mf, total: visitas + mf, acum, f });
+    }
+    const at = (m) => meses[m - 1], m3 = at(3), m6 = at(6), m12 = at(12);
+    const estavel = R.fieisIncr * S.vidaFiel;
+    // O mês 1 tem acumulado zero (a 1ª visita é neutra), então procurar o cruzamento
+    // a partir do fundo do poço — senão o payback sai como "1º mês" sempre.
+    const fundo = meses.reduce((a, x, i) => x.acum < meses[a].acum ? i : a, 0);
+    const depois = meses.slice(fundo).findIndex((x) => x.acum >= 0);
+    const payback = (meses[fundo].acum < 0 && depois >= 0) ? fundo + depois + 1 : 0;
+
+    document.getElementById("proj").innerHTML = `
+      <div class="cell hero">
+        <span class="label">Caixa acumulado em 12 meses</span>
+        <span class="v ${sign(m12.acum)}">${brl0(m12.acum)}</span>
+        <span class="s">Uma safra nova entrando <em>todo mês</em>. Fica abaixo do saldo de uma safra só porque
+        a turma que entra no 12º mês ainda não teve tempo de render.
+        3 meses: <strong>${brl0(m3.acum)}</strong> · 6 meses: <strong>${brl0(m6.acum)}</strong>.
+        ${meses[fundo].acum >= 0 ? "<strong>Nunca fica negativo</strong> — o caixa é positivo desde o primeiro mês." : payback > 0 ? `Fica negativo até o <strong>${payback}º mês</strong>, quando o acumulado volta a zero.` : (m12.total >= 0 ? `<strong>Ainda não cruzou o zero em 12 meses</strong> — o resultado mensal já virou positivo (${brl0(m12.total)}), então deve cruzar logo depois. O pior ponto é o ${fundo + 1}º mês, com ${brl0(meses[fundo].acum)}.` : "<strong>Não cruza o zero</strong> — nem o resultado mensal fica positivo.")}</span>
+      </div>
+      <div class="cell">
+        <span class="label">Fiéis acumulados</span>
+        <span class="v ${sign(m12.f)}">${n0(m12.f)}</span>
+        <span class="s">No 12º mês, já descontando quem some. Estabiliza em <strong>${n0(estavel)}</strong>
+        depois de ~${n0(S.vidaFiel)} meses.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Faturamento a mais no 12º mês</span>
+        <span class="v ${sign(m12.f)}">${brl0(m12.f * S.freq * B.ticket)}</span>
+        <span class="s">${n0(m12.f * S.freq)} pedidos/mês a mais só dos fiéis —
+        <strong>${pc(m12.f * S.freq * B.ticket / B.fatLoja, 1)}</strong> sobre os ${brl0(B.fatLoja)} de hoje.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Resultado mensal no 12º mês</span>
+        <span class="v ${sign(m12.total)}">${brl0(m12.total)}</span>
+        <span class="s">Visitas <span class="${sign(m12.visitas)}">${brl0(m12.visitas)}</span> +
+        fiéis <span class="pos">${brl0(m12.mf)}</span>. No 1º mês era ${brl0(at(1).total)}.</span>
+      </div>`;
+
+    const max = Math.max(...meses.map((x) => Math.abs(x.visitas) + Math.max(0, x.mf)), 1);
+    const marcos = new Set([3, 6, 12]);
+    document.getElementById("chart").innerHTML = meses.map((x) => {
+      const hv = 100 * Math.abs(x.visitas) / max, hf = 100 * Math.max(0, x.mf) / max;
+      return `<div class="col" title="Mês ${x.m}: visitas ${brl0(x.visitas)} + fiéis ${brl0(x.mf)} = ${brl0(x.total)}">
+        ${marcos.has(x.m) ? `<span class="lbl ${sign(x.total)}">${brl0(x.total)}</span>` : ""}
+        ${hf > 0 ? `<div class="seg" style="height:${hf}%;background:var(--s-fieis)"></div>` : ""}
+        <div class="seg" style="height:${hv}%;background:${x.visitas < 0 ? "var(--bad)" : "var(--s-visitas)"};${x.visitas < 0 ? "opacity:.55;" : ""}border-radius:0 0 2px 2px"></div>
+      </div>`;
+    }).join("");
+    document.getElementById("chartaxis").innerHTML = meses.map((x) => `<span class="${marcos.has(x.m) ? "mk" : ""}">${x.m}</span>`).join("");
+
+    document.getElementById("projNotas").innerHTML = `
+      <div class="note-item"><span class="tag ${m12.acum >= 0 ? "good" : "bad"}">a forma da curva</span><span>
+        A barra vermelha é o que as visitas custam todo mês — <strong>constante</strong>, porque você entrega
+        a mesma quantidade de brinde. A barra dourada são os fiéis acumulados, que <strong>crescem</strong>.
+        A campanha não fica lucrativa por melhorar; fica lucrativa por <em>acumular</em>.
+        ${payback > 0 ? `O ponto de virada é o ${payback}º mês.` : ""}
+      </span></div>
+      <div class="note-item"><span class="tag warn">gente nova acaba</span><span>
+        <strong>${n0(S.novos * 12)} rostos novos em 12 meses</strong> numa loja que faz ${n0(B.pedidos)} pedidos/mês.
+        Quando a fila secar, o cupom passa a ir só para cliente da casa e o resultado das visitas piora
+        sem que ninguém perceba. Acompanhe <strong>quantos celulares novos entram por mês no totem</strong>.
+      </span></div>`;
+  }
+
+  // ─── O que decide ──────────────────────────────────────────────────────────
+  function renderRiscos(R) {
+    const sim = (over) => {
+      const antes = Object.assign({}, S); Object.assign(S, over); recalc();
+      const r = calc(); Object.assign(S, antes); recalc(); return r;
+    };
+    const nada = sim({ r12: 42, r23: 47, r34: 72 });
+    const mais8 = sim({ r12: Math.min(95, 50), r23: Math.min(95, 55), r34: Math.min(95, 80) });
+    const mais15 = sim({ r12: 57, r23: 62, r34: 87 });
+    const comV1 = sim({ cupomV1: !S.cupomV1 });
+
+    document.getElementById("riscos").innerHTML = `
+      <div class="note-item"><span class="tag bad">a aposta única</span><span>
+        <strong>Tudo depende de o cupom levantar a taxa de retorno.</strong> Se ela ficar nos 42% / 47% / 72%
+        naturais, a campanha dá <strong class="neg">${brl0(nada.saldo)}</strong> em 12 meses e
+        <strong>zero cliente fiel a mais</strong> — você distribuiu brinde para gente que voltaria de graça.
+        <br><br>
+        Com +8 pontos em cada etapa: <strong class="${sign(mais8.saldo)}">${brl0(mais8.saldo)}</strong>.
+        Com +15 pontos: <strong class="${sign(mais15.saldo)}">${brl0(mais15.saldo)}</strong>.
+        Nenhuma outra escolha desta página chega perto desse impacto.
+      </span></div>
+      <div class="note-item"><span class="tag ${comV1.saldo < R.saldo ? "good" : "warn"}">o modo da 1ª visita</span><span>
+        Do jeito que está (${S.cupomV1 ? "cupom já na 1ª visita" : "1ª visita sem cupom"}), a safra dá
+        <strong>${brl0(R.saldo)}</strong>. No outro modo daria <strong>${brl0(comV1.saldo)}</strong>.
+        ${!S.cupomV1
+          ? "Deixar a 1ª visita limpa preserva a margem cheia de quem já ia entrar na loja — é o modo do vídeo e o mais barato."
+          : "Colocar cupom na 1ª visita só compensa se ele realmente <em>trouxer</em> gente: quanto maior a fatia que viria de qualquer jeito, pior fica."}
+      </span></div>
+      <div class="note-item"><span class="tag good">o totem resolve a premissa</span><span>
+        Hoje o PDV registra pedido, não pessoa — por isso 42% / 47% / 72% vêm do vídeo, não de Paulínia.
+        Com o cadastro obrigatório para retirar o brinde e o totem exigindo celular, essas três taxas
+        <strong>viram medição em ~3 meses</strong>. Aí esta página deixa de ser simulação.
+      </span></div>`;
+  }
+
+  // ─── Loop ──────────────────────────────────────────────────────────────────
+  function update() {
+    recalc();
+    const R = calc();
+    document.getElementById("mcPct").textContent = pc(MC);
+    document.getElementById("mcPed").textContent = brl(B.ticket * MC) + " por pedido";
+    document.getElementById("margNormal").textContent = brl(MARG_NORMAL);
+    renderMontagem(R); bindMontagem();
+    renderCardapio(R);
+    renderLedger(R);
+    renderFunnel(R);
+    renderResults(R);
+    syncControls();
+    renderProjecao(R);
+    renderRiscos(R);
+  }
+
+  renderControls();
+  update();
+})();
+</script>
+
+</body>
+</html>
