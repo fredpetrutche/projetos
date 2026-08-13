@@ -183,6 +183,46 @@ h2{
 .pe svg{width:.75rem;height:.75rem;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .cartao:hover .pe{color:var(--cor,var(--tinta))}
 
+/* ---------- cartão trancado: projeto que ainda não existe ---------- */
+.cartao.trancado{
+  background:transparent;
+  box-shadow:none;
+  border:1.5px dashed var(--sep);
+  cursor:default;
+  gap:.75rem;
+  justify-content:center;
+  min-height:6.5rem;
+}
+.cartao.trancado::before{display:none}
+.cartao.trancado:hover{transform:none;box-shadow:none}
+.cartao.trancado .ic{background:var(--preench);color:var(--rotulo-3)}
+.cartao.trancado .nome{color:var(--rotulo-2)}
+.trava{
+  align-self:flex-start;
+  font-size:.6875rem;
+  font-weight:600;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+  color:var(--rotulo-3);
+  background:var(--preench);
+  padding:.1875rem .5rem;
+  border-radius:6px;
+}
+
+/* selo de onde a página mora, quando não é github.io */
+.selo{
+  margin-left:auto;
+  font-size:.625rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--cor,var(--tinta));
+  background:color-mix(in srgb,var(--cor,var(--tinta)) 13%,transparent);
+  padding:.125rem .375rem;
+  border-radius:5px;
+  font-family:var(--sans);
+}
+
 /* ---------- lista dos que ainda não estão no ar ---------- */
 .lista{
   background:var(--ilha);
@@ -229,7 +269,7 @@ footer{
 
   <header>
     <h1>Projetos</h1>
-    <p>Tudo que está no ar, num lugar só. Clique num card e ele abre numa aba nova.</p>
+    <p>Tudo num lugar só. Clique num card e ele abre numa aba nova — os trancados são os projetos que ainda não existem.</p>
   </header>
 
   <!-- ============ MÉTODO & MARCA PRÓPRIA ============ -->
@@ -324,6 +364,32 @@ footer{
         <p class="desc">O que o designer precisa saber pra fazer o flyer: mensagem, hierarquia, referências e formatos de entrega.</p>
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-flyer-holycook</span>
       </a>
+
+      <a class="cartao" style="--cor:var(--tinta)" href="https://claude.ai/code/artifact/94ac8e1a-0906-4491-be90-aa5b3ab14a34" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><circle cx="18" cy="14" r="2"/></svg></span>
+          <span class="nome">Campanha de fidelização por visitas</span>
+          <span class="selo">artefato</span>
+        </div>
+        <p class="desc">Loja Paulínia: compra as 3 primeiras visitas do cliente, porque depois da terceira ele volta sozinho. Simulador com os números reais de jun+jul — escolhe o brinde de cada visita e vê a margem mexer.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>claude.ai · artefato</span>
+      </a>
+
+      <div class="cartao trancado">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="nome">Produto viral</span>
+        </div>
+        <span class="trava">ainda não começou</span>
+      </div>
+
+      <div class="cartao trancado">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="nome">Experiência de loja</span>
+        </div>
+        <span class="trava">ainda não começou</span>
+      </div>
 
     </div>
   </section>

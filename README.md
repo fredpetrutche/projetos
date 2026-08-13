@@ -17,3 +17,15 @@ Para adicionar um projeto novo, copie um bloco `<a class="cartao">` e troque:
 - o texto do `<span class="pe">` — o domínio que aparece no rodapé do card
 
 Depois: `git commit` e `git push`. O GitHub Pages publica sozinho em ~1 min.
+
+### Projeto que ainda não existe
+
+Use `<div class="cartao trancado">` no lugar do `<a>` — vira card de borda tracejada,
+com cadeado e o selo "ainda não começou". Não é clicável. Quando o projeto nascer,
+troque o `div` por um `<a href="...">`, tire a classe `trancado` e o `<span class="trava">`,
+e escreva a descrição.
+
+### Página que mora fora do GitHub
+
+Artefato do Claude, Notion, o que for: é um `<a>` normal, só acrescente
+`<span class="selo">artefato</span>` depois do nome e ponha a origem no `<span class="pe">`.
