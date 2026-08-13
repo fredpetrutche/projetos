@@ -238,6 +238,16 @@
   .painel { display: flex; flex-direction: column; gap: 2.25rem; }
   .painel[hidden] { display: none; }
 
+  /* sub-abas: dentro de um painel, mais leves que as de cima */
+  .abas.abas2 { border-bottom: 1px solid var(--rule); margin-bottom: -.75rem; gap: .3rem; }
+  .abas.abas2 button { background: none; border: none; border-bottom: 2px solid transparent;
+                       border-radius: 0; margin-bottom: -1px; padding: .5rem .8rem;
+                       font-size: .75rem; color: var(--ink-faint); }
+  .abas.abas2 button:hover { color: var(--ink); }
+  .abas.abas2 button[aria-selected="true"] { background: none; color: var(--accent);
+                                             border-bottom-color: var(--accent); }
+  .abas.abas2 .sub2 { font-size: .625rem; }
+
   /* ─── regras do ticket ─── */
   .regras { margin: .55rem 0 .1rem; padding: 0; list-style: none; display: grid; gap: .45rem; }
   .regras li { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
@@ -304,6 +314,18 @@
   </div>
 
   <div class="painel" id="painel-iniciacao" role="tabpanel" aria-labelledby="aba-ini">
+
+  <div class="abas abas2" role="tablist" aria-label="Partes da campanha de iniciação">
+    <button type="button" role="tab" id="sub-a" aria-controls="sub-combinado" aria-selected="true" data-hash="combinado">
+      Combinado de balcão<span class="sub2">as decisões de atendimento</span></button>
+    <button type="button" role="tab" id="sub-b" aria-controls="sub-campanha" aria-selected="false" data-hash="campanha">
+      A campanha<span class="sub2">a lógica, os brindes e a conta</span></button>
+    <button type="button" role="tab" id="sub-c" aria-controls="sub-resultado" aria-selected="false" data-hash="resultado">
+      O resultado<span class="sub2">funil, safra e projeção</span></button>
+  </div>
+
+  <div class="painel" id="sub-combinado" role="tabpanel" aria-labelledby="sub-a">
+
 
   <!-- ══════ 0. O que falta decidir ══════ -->
   <section id="decidir">
@@ -547,6 +569,10 @@
     </ul>
   </section>
 
+  </div><!-- /sub-combinado -->
+
+  <div class="painel" id="sub-campanha" role="tabpanel" aria-labelledby="sub-b" hidden>
+
   <!-- ══════ 1. Como funciona ══════ -->
   <section id="logica">
     <h2><span class="n">1</span> A lógica das três visitas</h2>
@@ -609,6 +635,10 @@
     <h2><span class="n">4</span> A conta de cada visita da sua campanha</h2>
     <div class="ledger" id="ledger"></div>
   </section>
+
+  </div><!-- /sub-campanha -->
+
+  <div class="painel" id="sub-resultado" role="tabpanel" aria-labelledby="sub-c" hidden>
 
   <!-- ══════ 5. Funil ══════ -->
   <section id="funil">
@@ -686,6 +716,8 @@
       <li><strong>Embalagem</strong>: loja não leva kraft, só a caixinha de 4 (R$ 0,85). Ao item da promoção, a divisória (R$ 0,20).</li>
     </ul>
   </details>
+
+  </div><!-- /sub-resultado -->
 
   </div><!-- /painel iniciacao -->
 
@@ -1446,41 +1478,54 @@
    ══════════════════════════════════════════════════════════════════════════ */
 (() => {
   "use strict";
-  const abas = Array.from(document.querySelectorAll(".abas button"));
-  const paineis = abas.map((b) => document.getElementById(b.getAttribute("aria-controls")));
+  // Vale para qualquer barra .abas, inclusive as aninhadas dentro de um painel.
+  const grupos = Array.from(document.querySelectorAll(".abas")).map((barra) => {
+    const botoes = Array.from(barra.querySelectorAll(":scope > button"));
+    return { botoes, paineis: botoes.map((b) => document.getElementById(b.getAttribute("aria-controls"))) };
+  });
+  const dono = new Map();   // painel → { g, i }
+  grupos.forEach((g) => g.paineis.forEach((p, i) => { if (p) dono.set(p, { g, i }); }));
 
-  function ativa(i, comHash) {
-    abas.forEach((b, j) => {
+  function ativa(g, i, comHash) {
+    g.botoes.forEach((b, j) => {
       b.setAttribute("aria-selected", String(j === i));
-      paineis[j].hidden = j !== i;
+      if (g.paineis[j]) g.paineis[j].hidden = j !== i;
     });
-    if (comHash) { try { history.replaceState(null, "", "#" + abas[i].dataset.hash); } catch (e) {} }
-    document.dispatchEvent(new CustomEvent("aba", { detail: abas[i].dataset.hash }));
+    if (comHash) { try { history.replaceState(null, "", "#" + g.botoes[i].dataset.hash); } catch (e) {} }
+    document.dispatchEvent(new CustomEvent("aba", { detail: g.botoes[i].dataset.hash }));
   }
 
-  abas.forEach((b, i) => {
-    b.addEventListener("click", () => { ativa(i, true); });
+  // abre todos os painéis que contêm o elemento, de dentro para fora
+  function revelar(el) {
+    let p = el.closest(".painel");
+    while (p) {
+      const r = dono.get(p);
+      if (r) ativa(r.g, r.i, false);
+      p = p.parentElement ? p.parentElement.closest(".painel") : null;
+    }
+  }
+
+  grupos.forEach((g) => g.botoes.forEach((b, i) => {
+    b.addEventListener("click", () => ativa(g, i, true));
     b.addEventListener("keydown", (e) => {
       const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
       if (!d) return;
       e.preventDefault();
-      const j = (i + d + abas.length) % abas.length;
-      ativa(j, true); abas[j].focus();
+      const j = (i + d + g.botoes.length) % g.botoes.length;
+      ativa(g, j, true); g.botoes[j].focus();
     });
-  });
+  }));
 
-  // link que aponta para dentro de um painel escondido abre o painel certo
+  // link que aponta para dentro de um painel escondido abre o caminho até ele
   function porHash() {
     const h = decodeURIComponent(location.hash.slice(1));
     if (!h) return;
-    const i = abas.findIndex((b) => b.dataset.hash === h);
-    if (i >= 0) { ativa(i, false); return; }
+    for (const g of grupos) {
+      const i = g.botoes.findIndex((b) => b.dataset.hash === h);
+      if (i >= 0) { revelar(g.paineis[i]); ativa(g, i, false); return; }
+    }
     const alvo = document.getElementById(h);
-    if (!alvo) return;
-    const p = alvo.closest(".painel");
-    if (!p) return;
-    const j = paineis.indexOf(p);
-    if (j >= 0 && paineis[j].hidden) { ativa(j, false); alvo.scrollIntoView(); }
+    if (alvo) { revelar(alvo); alvo.scrollIntoView(); }
   }
   addEventListener("hashchange", porHash);
   porHash();
