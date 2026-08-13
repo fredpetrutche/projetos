@@ -190,15 +190,16 @@ h2{
   border:1.5px dashed var(--sep);
   cursor:default;
   gap:.75rem;
-  justify-content:center;
   min-height:6.5rem;
 }
 .cartao.trancado::before{display:none}
 .cartao.trancado:hover{transform:none;box-shadow:none}
 .cartao.trancado .ic{background:var(--preench);color:var(--rotulo-3)}
 .cartao.trancado .nome{color:var(--rotulo-2)}
+.cartao.trancado .desc{color:var(--rotulo-3)}
 .trava{
   align-self:flex-start;
+  margin-top:auto;
   font-size:.6875rem;
   font-weight:600;
   letter-spacing:.045em;
@@ -298,9 +299,9 @@ footer{
     </div>
   </section>
 
-  <!-- ============ HOLY COOKIE — CONTEÚDO ============ -->
+  <!-- ============ CONTEÚDO ============ -->
   <section>
-    <h2>Holy Cookie — conteúdo</h2>
+    <h2>Conteúdo Holy Cookie</h2>
     <div class="grade">
 
       <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-holy-cookie-lojas-fred/" target="_blank" rel="noopener">
@@ -330,12 +331,84 @@ footer{
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/influenciadores-holy-cookie</span>
       </a>
 
+      <div class="cartao trancado">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="nome">Anúncios de tráfego</span>
+        </div>
+        <p class="desc">Os roteiros dos anúncios pagos: onde fica a loja, tudo que tem de Nutella, os 3 recheados mais vendidos, o que dá pra comprar com menos de R$ 50, unboxing. Todo anúncio leva o nome da cidade.</p>
+        <span class="trava">ainda não começou</span>
+      </div>
+
     </div>
   </section>
 
-  <!-- ============ HOLY COOKIE — CAMPANHAS & PRODUTO ============ -->
+  <!-- ============ AÇÕES DE LOJA ============ -->
   <section>
-    <h2>Holy Cookie — campanhas &amp; produto</h2>
+    <h2>Ações de loja</h2>
+    <div class="grade">
+
+      <a class="cartao" style="--cor:var(--tinta)" href="https://claude.ai/code/artifact/94ac8e1a-0906-4491-be90-aa5b3ab14a34" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><circle cx="18" cy="14" r="2"/></svg></span>
+          <span class="nome">Campanha de fidelização por visitas</span>
+          <span class="selo">artefato</span>
+        </div>
+        <p class="desc">Os 3 cupons: compra as 3 primeiras visitas do cliente, porque depois da terceira ele volta sozinho. Simulador com os números reais de jun+jul da Paulínia — escolhe o brinde de cada visita e vê a margem mexer.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>claude.ai · artefato</span>
+      </a>
+
+      <a class="cartao" style="--cor:var(--laranja)" href="https://holycampinas.github.io/briefing-campanha-holycook/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l18-6v14L3 13z"/><path d="M7 12v6a2 2 0 0 0 4 0v-5"/></svg></span>
+          <span class="nome">Semana do Cookie em Dobro</span>
+        </div>
+        <p class="desc">Compre 1 cookie e o segundo é por nossa conta, pra presentear alguém. O alvo é trazer pra loja física quem só pede por delivery. É o "compre 1, ganhe outro".</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-campanha-holycook</span>
+      </a>
+
+      <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-flyer-holycook/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+          <span class="nome">Flyer do Cookie em Dobro</span>
+        </div>
+        <p class="desc">Briefing pro designer da peça impressa da campanha: formato horizontal com faca, mascotes recortados nas laterais. Pra distribuir nas três unidades.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-flyer-holycook</span>
+      </a>
+
+      <div class="cartao trancado">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="nome">Cookie de Graça</span>
+        </div>
+        <p class="desc">Paulínia e Piracicaba, 11 e 12 de setembro. Vai na loja, segue no Insta, posta e marca — leva um cookie e um cupom pra próxima. Verba de R$ 5 mil; divulgação por página de indicação da cidade + 2 influenciadores.</p>
+        <span class="trava">ainda não começou</span>
+      </div>
+
+      <div class="cartao trancado">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="nome">Mini cookie na região</span>
+        </div>
+        <p class="desc">Distribuir 300 a 400 mini-cookies na região da loja, cada um com um panfleto chamando pra ir até lá nos dias seguintes. Paulínia e Piracicaba.</p>
+        <span class="trava">ainda não começou</span>
+      </div>
+
+      <div class="cartao trancado">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="nome">Panfleto no delivery</span>
+        </div>
+        <p class="desc">O panfleto que vai dentro do pedido de delivery pra puxar o cliente até a loja, no modelo do sushi: os produtos, os cupons e um prazo de validade em cada um.</p>
+        <span class="trava">ainda não começou</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ PRODUTO & EXPERIÊNCIA ============ -->
+  <section>
+    <h2>Produto &amp; experiência</h2>
     <div class="grade">
 
       <a class="cartao" style="--cor:var(--verde)" href="https://holycampinas.github.io/cardapio-verao-holy-cookie/" target="_blank" rel="noopener">
@@ -345,34 +418,6 @@ footer{
         </div>
         <p class="desc">Coleta e votação das sugestões de produto: o time cola o reel, a capa é puxada sozinha e todo mundo vota.</p>
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/cardapio-verao-holy-cookie</span>
-      </a>
-
-      <a class="cartao" style="--cor:var(--laranja)" href="https://holycampinas.github.io/briefing-campanha-holycook/" target="_blank" rel="noopener">
-        <div class="topo">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l18-6v14L3 13z"/><path d="M7 12v6a2 2 0 0 0 4 0v-5"/></svg></span>
-          <span class="nome">Campanha — Semana do Cookie em Dobro</span>
-        </div>
-        <p class="desc">O briefing completo da campanha: oferta, mecânica, peças e cronograma.</p>
-        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-campanha-holycook</span>
-      </a>
-
-      <a class="cartao" style="--cor:var(--rosa)" href="https://holycampinas.github.io/briefing-flyer-holycook/" target="_blank" rel="noopener">
-        <div class="topo">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
-          <span class="nome">Briefing para Designer — Flyer</span>
-        </div>
-        <p class="desc">O que o designer precisa saber pra fazer o flyer: mensagem, hierarquia, referências e formatos de entrega.</p>
-        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/briefing-flyer-holycook</span>
-      </a>
-
-      <a class="cartao" style="--cor:var(--tinta)" href="https://claude.ai/code/artifact/94ac8e1a-0906-4491-be90-aa5b3ab14a34" target="_blank" rel="noopener">
-        <div class="topo">
-          <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><circle cx="18" cy="14" r="2"/></svg></span>
-          <span class="nome">Campanha de fidelização por visitas</span>
-          <span class="selo">artefato</span>
-        </div>
-        <p class="desc">Loja Paulínia: compra as 3 primeiras visitas do cliente, porque depois da terceira ele volta sozinho. Simulador com os números reais de jun+jul — escolhe o brinde de cada visita e vê a margem mexer.</p>
-        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>claude.ai · artefato</span>
       </a>
 
       <div class="cartao trancado">
