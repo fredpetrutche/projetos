@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Holy Cookie que cabe no bolso — proposta</title>
+<meta name="description" content="Proposta de cardapio economico: a ocasiao do doce tem teto de preco. O raciocinio, as contas e o que precisa ser pesquisado antes de decidir.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238A5C13'/><g fill='white'><circle cx='50' cy='50' r='22'/><circle cx='42' cy='44' r='4' fill='%238A5C13'/><circle cx='58' cy='53' r='4' fill='%238A5C13'/><circle cx='47' cy='60' r='3.5' fill='%238A5C13'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--warn); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+           font-weight: 500; }
+
+  .aviso { background: var(--warn-bg); border: 1px solid var(--warn); border-radius: 3px;
+           padding: .9rem 1.1rem; display: grid; grid-template-columns: auto 1fr; gap: .8rem;
+           align-items: start; font-size: .875rem; color: var(--ink); }
+  .aviso strong { font-weight: 700; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--warn); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1px;
+           background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums;
+              letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 36rem;
+          font-variant-numeric: tabular-nums; }
+  th, td { padding: .55rem .8rem; text-align: right; vertical-align: top; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.mark td { background: var(--surface-2); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .note-item a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  ol.passos { list-style: none; display: grid; gap: 1px; background: var(--rule);
+              border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  ol.passos > li { background: var(--surface); padding: .9rem 1.1rem;
+                   display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem; align-items: start; }
+  ol.passos .num { grid-row: 1 / 3; font-family: var(--mono); font-size: .6875rem; font-weight: 700;
+                   color: var(--warn); background: var(--warn-bg); padding: .18rem .4rem; border-radius: 2px; }
+  ol.passos .q { font-weight: 600; font-size: .9375rem; color: var(--ink); }
+  ol.passos .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 32rem) { ol.passos > li { grid-template-columns: 1fr; }
+                              ol.passos .num { grid-row: auto; justify-self: start; } }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · proposta, não projeto</div>
+    <h1>Holy Cookie que cabe no bolso</h1>
+    <p class="lede">
+      Um item de entrada barato, desenhado para caber no preço da ocasião — não para dar desconto.
+      Esta página é <strong>a ideia e o raciocínio até onde ele foi</strong>: de onde veio, o que as
+      contas já descartam, os três desenhos que sobrevivem e o número que vai decidir. Nada aqui está
+      decidido.
+    </p>
+  </header>
+
+  <div class="aviso">
+    <span class="tag warn">não começou</span>
+    <span><strong>Isto é uma sugestão de ideia, registrada para não se perder.</strong> Ela exige
+    pesquisa própria antes de virar projeto — e quando virar, passa pelo mesmo funil que as outras:
+    objetivo, teste de estresse contra alternativas, validação real. Os números abaixo são cálculo em
+    cima da base de jun+jul/2026, não medição de um teste.</span>
+  </div>
+
+  <!-- ══════ 1 ══════ -->
+  <section>
+    <h2><span class="n">1</span> De onde veio a ideia</h2>
+    <p class="prose">
+      Da pesquisa de ocasião na <a href="../#ocasiao" style="color:var(--accent)">página da área</a>:
+      a pessoa não compra doce porque tem fome — compra <strong>o momento dela, na versão que cabe</strong>.
+      81% dizem que fazem lanche para achar um tempo de silêncio para si mesmas; e
+      <strong>53% compram indulgência pequena justamente porque não podem pagar as grandes</strong>.
+    </p>
+    <p class="prose">
+      Se a compra é um momento que <em>cabe no bolso</em>, então a ocasião tem <strong>teto de
+      preço</strong> — e acima dele a compra deixa de ser impulso de recompensa e vira decisão pensada,
+      que é uma ocasião muito mais rara.
+    </p>
+    <div class="note-item"><span class="tag acc">a evidência de casa</span><span>
+      Até abril/2026 o cardápio era <strong>22,5% mais barato</strong>. O cookie ia de R$ 9,90 a
+      R$ 16,90; hoje vai de R$ 12,90 a R$ 20,90 na loja, e mais no delivery. E o delivery
+      <em>vendia absurdamente</em> naquele preço — a ponto de o próprio iFood estranhar o volume.
+      É correlação observada, não medida. Mas é a observação que originou esta proposta.
+    </span></div>
+  </section>
+
+  <!-- ══════ 2 ══════ -->
+  <section>
+    <h2><span class="n">2</span> O que a conta já descarta</h2>
+    <p class="prose">
+      A primeira ideia — <em>voltar o cardápio inteiro ao preço de antes</em> — não sobrevive à
+      calculadora, e é melhor saber disso antes de discutir.
+    </p>
+    <div class="strip">
+      <div><span class="label">Cookie médio hoje</span><span class="v">R$ 15,19</span><span class="s">CMV R$ 5,01</span></div>
+      <div><span class="label">Margem por cookie hoje</span><span class="v pos">R$ 7,80</span><span class="s">depois de impostos, royalties, cartão e embalagem</span></div>
+      <div><span class="label">A 22,5% mais barato</span><span class="v">R$ 11,77</span><span class="s">margem cai para R$ 4,86</span></div>
+      <div><span class="label">Volume necessário só para empatar</span><span class="v neg">+60,5%</span><span class="s">e empatar já é pior: mesmo dinheiro, muito mais trabalho</span></div>
+    </div>
+    <div class="note-item"><span class="tag bad">remarcação geral está fora</span><span>
+      Baixar o cardápio inteiro 22,5% derruba a margem por unidade em <strong>38%</strong>. Para o mês
+      fechar igual, seria preciso vender <strong>60% a mais de cookie</strong> — com o mesmo forno, a
+      mesma geladeira e a mesma equipe. E <em>empatar em margem trabalhando 60% mais é perder</em>:
+      a margem de contribuição é o que paga o custo fixo, e ela não teria subido nada.
+    </span></div>
+  </section>
+
+  <!-- ══════ 3 ══════ -->
+  <section>
+    <h2><span class="n">3</span> Os três desenhos que sobrevivem<span class="hint">o segredo é baixar o CMV junto, não só o preço</span></h2>
+    <p class="prose">
+      O que mata a remarcação geral é aplicar preço menor em produto de custo igual. Os desenhos que
+      passam fazem outra coisa: <strong>criam um item cujo custo também é menor</strong>. E a boa notícia
+      é que ele já existe dentro da sua ficha — o Churros custa <strong>R$ 3,83</strong> de CMV contra os
+      R$ 5,01 da média e os R$ 8,71 do Pistache. <em>O barato já está no cardápio.</em>
+    </p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Desenho</th><th>Preço</th><th>CMV</th><th>Margem</th><th>vs hoje</th></tr></thead>
+      <tbody>
+        <tr class="mark">
+          <td>Cookie inteiro de sabor simples</td>
+          <td>R$ 9,90</td><td>R$ 3,83</td><td class="pos"><strong>R$ 4,44</strong></td><td>57%</td>
+        </tr>
+        <tr>
+          <td>Mini cookie <span style="font-weight:400;color:var(--ink-faint)">(CMV estimado)</span></td>
+          <td>R$ 7,90</td><td>~R$ 2,50</td><td class="pos">R$ 4,07</td><td>52%</td>
+        </tr>
+        <tr>
+          <td>Cookie normal, hoje</td>
+          <td>R$ 15,19</td><td>R$ 5,01</td><td class="pos">R$ 7,80</td><td>100%</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <div class="notes">
+      <div class="note-item"><span class="tag good">1 · cookie inteiro de sabor simples — o mais forte</span><span>
+        Preço de antes, produto inteiro, custo menor. <strong>Margem maior que a do mini</strong> e,
+        principalmente, <em>não comunica que o produto encolheu</em> — comunica que existe uma porta de
+        entrada. É a opção com a melhor história e a melhor conta ao mesmo tempo.
+      </span></div>
+      <div class="note-item"><span class="tag warn">2 · mini — parece melhor e é pior</span><span>
+        Margem menor, e diz ao cliente que ele está levando menos. <em>Atenção:</em> o CMV de ~R$ 2,50 é
+        premissa, não dado da ficha — precisa ser levantado antes de qualquer conclusão. O do Churros é
+        número real da <code>cmv_produtos</code>.
+      </span></div>
+      <div class="note-item"><span class="tag good">3 · preço de entrada em dia fixo — duas alavancas numa ação</span><span>
+        O item barato só em um ou dois dias da semana. Resolve o teto de preço <strong>e</strong> cria o
+        <a href="../#frequencia">ritual de dia fixo</a>, que a pesquisa apontou como a alavanca de
+        frequência mais barata que existe. <em>Uma ação servindo dois fatores</em> — e o dia fixo também
+        protege o preço cheio no resto da semana.
+      </span></div>
+    </div>
+  </section>
+
+  <!-- ══════ 4 ══════ -->
+  <section>
+    <h2><span class="n">4</span> O número que decide<span class="hint">canibalização</span></h2>
+    <p class="prose">
+      O risco desta ideia não é margem — é <strong>canibalização</strong>: quem ia pagar R$ 15,19
+      comprar o de R$ 9,90. Aí você não abriu porta nenhuma, só deu desconto para quem já pagava.
+    </p>
+    <div class="strip">
+      <div><span class="label">Cada troca custa</span><span class="v neg">−R$ 3,36</span><span class="s">o cliente que trocaria o cookie normal pelo simples</span></div>
+      <div><span class="label">Cada venda nova ganha</span><span class="v pos">+R$ 4,44</span><span class="s">a que não aconteceria sem o item barato</span></div>
+      <div><span class="label">Ponto de virada</span><span class="v">43%</span><span class="s">das vendas do item barato precisam ser incrementais</span></div>
+      <div><span class="label">Se for mini</span><span class="v">48%</span><span class="s">barra mais alta — mais um ponto contra o mini</span></div>
+    </div>
+    <div class="note-item"><span class="tag acc">a mesma pergunta de sempre</span><span>
+      <strong>Mais de 43% das vendas do item barato precisam ser vendas que não aconteceriam.</strong>
+      Abaixo disso, a ideia é remarcação disfarçada. É exatamente a mesma forma da conta da roda da
+      fortuna na campanha de fidelização, que empata em 55% —
+      <em>nos dois casos a pergunta é: isso está criando venda ou reetiquetando venda existente?</em>
+    </span></div>
+  </section>
+
+  <!-- ══════ 5 ══════ -->
+  <section>
+    <h2><span class="n">5</span> O que precisa ser pesquisado antes de decidir</h2>
+    <ol class="passos">
+      <li>
+        <span class="num">01</span>
+        <span class="q">Os cookies baratos já vendem desproporcionalmente hoje?</span>
+        <span class="d">É a pesquisa mais barata e a mais decisiva, e <em>não precisa de teste nenhum</em> —
+        está na base. Se os sabores de CMV e preço menores já saem acima do que a proporção do cardápio
+        explicaria, <strong>o teto de preço está provado nos seus próprios dados</strong>.</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="q">O que aconteceu com o volume depois de abril?</span>
+        <span class="d">A remarcação de abril é um experimento natural que já rodou. Comparar volume de
+        loja e de delivery antes e depois mede a elasticidade real — <em>de graça, e com os seus
+        clientes, não com os de um estudo americano</em>.</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="q">Qual é o CMV real de um mini?</span>
+        <span class="d">O número desta página é premissa. Sem a ficha do mini, a comparação entre os
+        desenhos 1 e 2 fica pela metade.</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="q">Qual é o teto de preço aqui, em real?</span>
+        <span class="d">A pesquisa de <em>little treat</em> é americana. O valor que separa "impulso" de
+        "decisão pensada" em Paulínia e Piracicaba não está em lugar nenhum — sai de teste de preço ou
+        da pesquisa do cliente de casa, que já vai existir na outra campanha.</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="q">A franquia deixa?</span>
+        <span class="d">Cardápio, preço e criação de item novo passam pelo franqueador. É filtro de
+        repertório: se não passa, os desenhos mudam antes de qualquer conta.</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ══════ 6 ══════ -->
+  <section>
+    <h2><span class="n">6</span> Por que ela merece o mesmo funil</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag acc">é rival, não complemento</span><span>
+        Esta ideia disputa com a <a href="../campanha-fidelizacao/">campanha de fidelização</a> — as duas
+        querem que a pessoa volte, por caminhos opostos. <strong>A fidelização compra a volta com
+        brinde; o cardápio econômico remove o motivo de não voltar.</strong> Uma paga pela visita, a
+        outra destrava a visita. Elas têm que ser comparadas, não somadas.
+      </span></div>
+      <div class="note-item"><span class="tag good">e ataca a causa, não o sintoma</span><span>
+        Se o teto de preço for real, a campanha de fidelização está <em>compensando</em> um problema de
+        preço com brinde — repare que compre 1 cookie e ganhe 1 dá R$ 7,60 por cookie, <strong>abaixo do
+        piso antigo de R$ 9,90</strong>. Ou seja: a campanha já está entregando o preço da ocasião, só
+        que por um caminho indireto e por tempo limitado.
+      </span></div>
+    </div>
+  </section>
+
+  <footer>
+    Proposta registrada em 14/08/2026, a partir da pesquisa de ocasião e da observação do Fred sobre a
+    remarcação de abril. Números calculados sobre a base de Paulínia, jun+jul/2026, com o CMV de 31/07.
+    Não é registro contábil, e nenhum dos desenhos foi testado.
+    Volta para <a href="../" style="color:var(--accent)">Ações de loja</a>.
+  </footer>
+
+</div>
+
+</body>
+</html>

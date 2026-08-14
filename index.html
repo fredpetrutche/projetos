@@ -194,6 +194,11 @@ h2{
 }
 .cartao.trancado::before{display:none}
 .cartao.trancado:hover{transform:none;box-shadow:none}
+/* trancado mas clicável: o projeto não começou, mas a proposta já está escrita */
+a.cartao.trancado{cursor:pointer}
+a.cartao.trancado:hover{border-color:var(--cor,var(--tinta))}
+a.cartao.trancado:hover .nome{color:var(--rotulo)}
+a.cartao.trancado:hover .trava{color:var(--cor,var(--tinta));background:color-mix(in srgb,var(--cor,var(--tinta)) 13%,transparent)}
 .cartao.trancado .ic{background:var(--preench);color:var(--rotulo-3)}
 .cartao.trancado .nome{color:var(--rotulo-2)}
 .cartao.trancado .desc{color:var(--rotulo-3)}
@@ -404,6 +409,15 @@ footer{
         </div>
         <p class="desc">Para que servem as ações desta seção: a meta de R$ 50 para R$ 80 mil de loja, os três fatores que multiplicam o faturamento, e cada ação mapeada no fator que ela move — com o que está descoberto.</p>
         <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>projetos/acoes-de-loja</span>
+      </a>
+
+      <a class="cartao trancado" style="--cor:var(--laranja)" href="acoes-de-loja/cardapio-que-cabe-no-bolso/" target="_blank" rel="noopener" data-id="cabe-no-bolso">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 9h18v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 9l2.5-5h13L21 9"/><line x1="12" y1="4" x2="12" y2="9"/></svg></span>
+          <span class="nome">Holy Cookie que cabe no bolso</span>
+        </div>
+        <p class="desc">Um item de entrada barato, desenhado para caber no preço da ocasião — não para dar desconto. A proposta já está escrita: de onde veio, o que a conta descarta, os três desenhos que sobrevivem e os 43% que decidem.</p>
+        <span class="trava">só a proposta · não começou</span>
       </a>
 
       <a class="cartao" style="--cor:var(--tinta)" href="acoes-de-loja/campanha-fidelizacao/" target="_blank" rel="noopener" data-id="fidelizacao">
