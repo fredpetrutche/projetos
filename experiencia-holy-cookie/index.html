@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Experiência Holy Cookie</title>
+<meta name="description" content="Os tres pilares que decidem se a pessoa volta: produto, experiencia e ambiente. O portao que a loja precisa passar antes de a campanha de fidelizacao subir.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232F6B4A'/><g fill='none' stroke='white' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'><polyline points='26,52 42,68 74,32'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#2F6B4A; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E4EDE6;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#74BC92; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1B2A20;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#74BC92; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1B2A20;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+           font-weight: 500; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+           color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+             background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 50rem) { .pilares { grid-template-columns: 1fr; } }
+  .pilares > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; }
+  .pilares .n { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem;
+                border-radius: 2px; align-self: flex-start; text-transform: uppercase; }
+  .pilares .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .pilares ul { list-style: none; display: grid; gap: .3rem; font-size: .8125rem; color: var(--ink-soft); }
+  .pilares li { padding-left: .8rem; position: relative; line-height: 1.45; }
+  .pilares li::before { content: ""; position: absolute; left: 0; top: .5rem; width: .28rem; height: .28rem;
+                        border-radius: 50%; background: var(--accent); }
+  .pilares li.fred::before { background: var(--warn); }
+  .pilares .fonte { font-family: var(--mono); font-size: .625rem; color: var(--ink-faint);
+                    border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 34rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  tbody tr.mark td { background: var(--surface-2); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .note-item a, .prose a, td a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  ol.perg { list-style: none; display: grid; gap: 1px; background: var(--rule);
+            border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  ol.perg > li { background: var(--surface); padding: .9rem 1.1rem;
+                 display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem; align-items: start; }
+  ol.perg .num { grid-row: 1 / 3; font-family: var(--mono); font-size: .6875rem; font-weight: 700;
+                 color: var(--bad); background: var(--bad-bg); padding: .18rem .4rem; border-radius: 2px; }
+  ol.perg .q { font-weight: 600; font-size: .9375rem; color: var(--ink); }
+  ol.perg .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  @media (max-width: 32rem) { ol.perg > li { grid-template-columns: 1fr; }
+                              ol.perg .num { grid-row: auto; justify-self: start; } }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · produto &amp; experiência</div>
+    <h1>Experiência Holy Cookie</h1>
+    <p class="lede">
+      Os três pilares que decidem se a pessoa volta — <strong>produto, experiência e ambiente</strong>.
+      Este projeto existe para transformá-los de intenção em <strong>portão medível</strong>: a loja
+      passa, e só então a campanha de fidelização sobe.
+    </p>
+  </header>
+
+  <!-- ══════ 1 ══════ -->
+  <section>
+    <h2><span class="n">1</span> Por que este projeto vem antes</h2>
+    <p class="prose">
+      A <a href="../acoes-de-loja/campanha-fidelizacao/">campanha de fidelização</a> paga para trazer a
+      pessoa de volta três vezes. Se produto, atendimento ou ambiente falhar nessas três visitas, a
+      cadeia de falha é esta:
+    </p>
+    <div class="note-item"><span class="tag bad">a cadeia de falha</span><span>
+      a campanha traz a pessoa → um dos pilares falha → ela não volta → o número da campanha vem ruim →
+      <strong>você conclui que a campanha não funciona</strong> → mata a campanha certa pelo motivo errado.
+      <br><br>
+      O último degrau é o que mata. Não é &ldquo;a campanha falha&rdquo; — é <em>a campanha leva a
+      culpa</em>. Você perde a campanha e continua sem saber que o problema era o cookie frio.
+    </span></div>
+    <div class="note-item"><span class="tag bad">e o custo maior não é dinheiro</span><span>
+      A campanha de fidelização é <strong>o único instrumento de medição de frequência</strong> que a
+      operação vai ter — é ela que instala o cadastro que transforma pedido em pessoa. Se subir numa loja
+      com pilar quebrado, os números vão medir &ldquo;loja ruim + campanha&rdquo; e não haverá como
+      separar as duas coisas, porque não existe linha de base. <em>Perde-se o dinheiro e perde-se a
+      medição.</em> Ninguém calibra termômetro dentro de forno quebrado.
+    </span></div>
+    <div class="note-item"><span class="tag warn">mas &ldquo;arrumar tudo antes&rdquo; é uma armadilha</span><span>
+      Produto, atendimento e ambiente <strong>nunca ficam prontos</strong>. Se o critério for
+      &ldquo;quando estiver bom&rdquo;, a campanha não sobe nunca — e isso não é prudência, é análise
+      virando desculpa. Por isso o projeto entrega <em>um portão com prazo</em>, não um estado de
+      perfeição.
+    </span></div>
+  </section>
+
+  <!-- ══════ 2 ══════ -->
+  <section>
+    <h2><span class="n">2</span> Os três pilares<span class="hint">em laranja, o que o Fred nomeou</span></h2>
+    <div class="pilares">
+      <div>
+        <span class="n">Pilar 1</span>
+        <span class="t">Produto</span>
+        <ul>
+          <li class="fred">Está frio?</li>
+          <li class="fred">Está velho?</li>
+          <li class="fred">Está cru?</li>
+          <li class="fred">Foi entregue do jeito que foi criado?</li>
+          <li>Ponto de forno: cru no meio ou passado</li>
+          <li>Idade na vitrine e destino da sobra</li>
+          <li>Recheio: quantidade, e se aparece ao partir</li>
+          <li>Vitrine x entrega: o que ela viu é o que recebeu</li>
+          <li>Consistência entre as 3 lojas e entre turnos</li>
+        </ul>
+        <span class="fonte">o cliente espera o doce que ela não faria em casa</span>
+      </div>
+      <div>
+        <span class="n">Pilar 2</span>
+        <span class="t">Experiência</span>
+        <ul>
+          <li class="fred">Atendimento de quem vende</li>
+          <li class="fred">Como o pedido é entregue e apresentado</li>
+          <li class="fred">Alguém voltou para perguntar se estava tudo bem?</li>
+          <li class="fred">Pediram feedback? Perguntaram se ela gostou?</li>
+          <li>Quem fala primeiro — ela é recebida ou espera ser notada</li>
+          <li>O atendente sabe recomendar? Sabe qual tem recheio?</li>
+          <li>Tempo de espera, e o que acontece durante ele</li>
+          <li>Reação quando dá errado: pedido trocado, demora</li>
+          <li>A despedida — a última frase é a que fica</li>
+        </ul>
+        <span class="fonte">o pós-pedido é o único item que hoje não existe</span>
+      </div>
+      <div>
+        <span class="n">Pilar 3</span>
+        <span class="t">Ambiente</span>
+        <ul>
+          <li class="fred">Cadeira confortável</li>
+          <li class="fred">Mesa e espaço</li>
+          <li class="fred">Som</li>
+          <li class="fred">Estava frio? Estava calor?</li>
+          <li>Cheiro — numa cookie shop é ativo, não detalhe</li>
+          <li>Luz, na vitrine e na mesa</li>
+          <li>Banheiro — é onde a percepção de limpeza se decide</li>
+          <li>Chão, mesa e vitrine visivelmente limpos</li>
+          <li>Onde a fila espera, e se dá para sentar enquanto isso</li>
+          <li>Área das crianças</li>
+        </ul>
+        <span class="fonte">a loja tem mesa, banheiro, estacionamento e área das crianças</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 3 ══════ -->
+  <section>
+    <h2><span class="n">3</span> O checklist<span class="hint">o que muda em relação aos que já existem</span></h2>
+    <p class="prose">
+      O Sistema-HC já tem checklists de loja rodando — meio do dia, fechamento diurno, fechamento
+      noturno. Eles são bons e não devem ser mexidos. Mas eles medem <strong>outra coisa</strong>:
+    </p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>&nbsp;</th><th>Checklists de hoje</th><th>Checklist de Experiência</th></tr></thead>
+      <tbody>
+        <tr><td>O que mede</td><td>Se a <strong>tarefa foi feita</strong></td><td>O que <strong>o cliente recebeu</strong></td></tr>
+        <tr><td>Exemplo</td><td>&ldquo;Conferir banheiro&rdquo;</td><td>&ldquo;O banheiro estava limpo às 19h de sábado?&rdquo;</td></tr>
+        <tr><td>Exemplo</td><td>&ldquo;Retirar cookies da vitrine&rdquo;</td><td>&ldquo;O cookie chegou morno na mão do cliente?&rdquo;</td></tr>
+        <tr class="mark"><td>Quem preenche</td><td>A equipe que executa</td><td><strong>Não pode ser quem é avaliado</strong></td></tr>
+        <tr><td>Quando</td><td>Todo dia, no horário da tarefa</td><td>Amostra: horários e dias diferentes</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note-item"><span class="tag acc">a diferença em uma frase</span><span>
+      Os checklists de hoje garantem que <strong>o serviço foi executado</strong>. Este mede
+      <strong>o resultado que chegou no cliente</strong>. Um pergunta &ldquo;varreu o chão?&rdquo;; o
+      outro pergunta &ldquo;o chão estava limpo quando ela sentou?&rdquo;. <em>Não se substituem, e o
+      novo não deve repetir item do antigo.</em>
+    </span></div>
+    <div class="note-item"><span class="tag good">o sistema já aguenta</span><span>
+      O <code>checklist_templates</code> do Sistema-HC aceita tarefa do tipo <strong>check, número, foto
+      e texto</strong>, com agendamento por dia da semana, horário e responsável, e bucket de fotos.
+      É tudo que este checklist precisa — <em>não é preciso construir sistema, só o template</em>.
+    </span></div>
+  </section>
+
+  <!-- ══════ 4 ══════ -->
+  <section>
+    <h2><span class="n">4</span> O que falta saber antes de montar<span class="hint">isto aqui trava o checklist</span></h2>
+    <ol class="perg">
+      <li>
+        <span class="num">01</span>
+        <span class="q">Existe padrão da franquia?</span>
+        <span class="d">É a pergunta que muda tudo. Se o franqueador já define tempo de forno, tempo
+        máximo em vitrine, temperatura de servir e padrão de atendimento, o checklist mede
+        <strong>conformidade com o padrão</strong>. Se não define, o checklist <strong>está criando o
+        padrão</strong> — e isso é decisão do Fred, não item de lista. <em>São dois projetos de tamanhos
+        diferentes.</em></span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="q">Quem preenche?</span>
+        <span class="d">Decide se o instrumento vale alguma coisa. Checklist de experiência preenchido
+        por quem está sendo avaliado mede teatro. As opções: cliente oculto contratado, o próprio Fred,
+        o gerente de outra loja avaliando esta, ou o cliente respondendo depois — que é a pesquisa da
+        <a href="../acoes-de-loja/campanha-fidelizacao/#fortalecimento">trilha de fortalecimento</a>.</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="q">O que o Fred viu na visita de 14/08?</span>
+        <span class="d">Ele foi à loja e listou coisas para melhorar. É o insumo mais fresco e mais
+        específico que existe, e ainda não está escrito em lugar nenhum. <em>Deve entrar antes de
+        qualquer item que eu tenha sugerido.</em></span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="q">Qual é o número que "passa"?</span>
+        <span class="d">O portão é <strong>estabilidade, não nota</strong>: o checklist segurar sem item
+        crítico aberto. Falta definir <em>quais itens são críticos</em> — os que sozinhos derrubam a
+        visita — e quais são desejáveis.</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ══════ 5 ══════ -->
+  <section>
+    <h2><span class="n">5</span> O calendário<span class="hint">portão com prazo, não estado de perfeição</span></h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Quando</th><th>O que acontece</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Semana 0</td>
+          <td>O checklist existe e começa a rodar. A <strong>trilha de fortalecimento sobe junto</strong>
+          — pesquisa e roda, <strong>sem o passo do Google</strong>.</td>
+        </tr>
+        <tr>
+          <td>Semanas 1 a N</td>
+          <td>Arruma o que aparecer, no checklist e na pesquisa. <em>O checklist cresce</em> — se a
+          pesquisa apontar algo que não estava na lista, a lista é que estava errada. Crescer nas
+          primeiras semanas é sinal bom.</td>
+        </tr>
+        <tr class="mark">
+          <td>Zerou crítico</td>
+          <td><strong>Começa o relógio: 3 semanas seguidas segurando.</strong> Não é nota 10 — é
+          estabilidade, porque a campanha promete três visitas parecidas e não adianta a loja estar boa
+          na terça e ruim no sábado.</td>
+        </tr>
+        <tr>
+          <td>Passou</td>
+          <td>Liga o passo do Google na pesquisa e <strong>sobe a campanha de fidelização</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Semana 8, aconteça o que acontecer</strong></td>
+          <td>Sobe com o que tem, <em>com o que está quebrado escrito</em>. É o teto que impede o portão
+          de virar gaveta.</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="note-item"><span class="tag warn">por que o Google espera</span><span>
+      A trilha de fortalecimento termina mandando o cliente avaliar no Google. Ligar isso enquanto a
+      loja está sendo arrumada é <strong>pedir ativamente que clientes registrem publicamente uma loja
+      que você sabe que não está pronta</strong> — e avaliação no Google é permanente. Na fase 1 a
+      pesquisa paga o prêmio da roda e entrega <em>diagnóstico</em>; a reputação entra depois, quando a
+      loja estiver de pé.
+    </span></div>
+  </section>
+
+  <footer>
+    Projeto aberto em 14/08/2026, a partir da objeção levantada pelo Fred de que os três pilares podem
+    matar a campanha de fidelização sem que ela leve a culpa certa. O checklist ainda não existe —
+    depende das quatro respostas da seção 4. Ver a
+    <a href="../acoes-de-loja/">estratégia da área de loja</a>.
+  </footer>
+
+</div>
+
+</body>
+</html>
