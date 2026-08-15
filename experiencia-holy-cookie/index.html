@@ -203,6 +203,10 @@
   .com .mtag { border: 1px solid var(--rule); border-radius: 3px; padding: 0 .3rem; }
   .com p { color: var(--ink-soft); }
   .com .mtag.forte { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+  .com .mtag.recente { background: var(--ink); border-color: var(--ink); color: var(--paper); font-weight: 700; }
+  .separador-data { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+                     color: var(--ink-faint); padding: .5rem 0 0; margin-top: .1rem; }
+  .separador-data:first-child { padding-top: 0; margin-top: 0; }
   .com .inteiro { margin-top: .5rem; }
   .com .inteiro summary { font-family: var(--mono); font-size: .6875rem; color: var(--ink-faint);
                           cursor: pointer; list-style: none; }
@@ -471,13 +475,20 @@
 
   <!-- ══════ 1 — o que as pessoas falaram ══════ -->
   <section>
-    <h2><span class="n">1</span> O que as pessoas falaram<span class="hint">Campinas e Paulínia · Google Maps, 14/08/2026</span></h2>
+    <h2><span class="n">1</span> O que as pessoas falaram<span class="hint">Campinas e Paulínia · Google Maps, 14/08/2026 · separado por data</span></h2>
     <p class="prose">
       166 avaliações puxadas via scraper (Apify) das duas lojas com ficha no Google Maps.
       <strong>Piracicaba não tem Google Maps</strong> — sem ficha, não há avaliação para puxar, então
       ela fica de fora desta leitura inteira. Das 166, <strong>111 têm texto</strong>; as outras são só
       estrela. Cada uma dessas 111 foi lida e etiquetada uma a uma — os números abaixo contam
       <em>menções</em>, não avaliações, porque um comentário costuma falar de três coisas.
+    </p>
+    <p class="prose">
+      <strong>Comentário recente pesa mais que comentário antigo</strong> — o que aconteceu há um ano
+      pode já estar resolvido, o que aconteceu essa semana ainda está acontecendo. Por isso as barras
+      acima e os cartões abaixo usam um peso que cai com o tempo (últimos 3 meses valem o cheio; depois
+      de 1 ano, quase não pesam), e os comentários de cada assunto aparecem <strong>separados por
+      janela de tempo</strong>, da mais recente pra mais antiga.
     </p>
 
     <div class="placar">
@@ -609,29 +620,42 @@
 
   function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
+  // ── peso por recência: comentário recente pesa mais que antigo ───────────
+  function peso(d) {
+    if (!d) return .15;
+    var dias = (Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000;
+    if (dias <= 90) return 1;
+    if (dias <= 180) return .65;
+    if (dias <= 365) return .35;
+    return .15;
+  }
+
   // ── contagem de menções nas lojas do Fred ────────────────────────────────
   function contar() {
     var pos = {}, neg = {};
     D.proprias.forEach(function (r) {
+      var w = peso(r.d);
       r.tags.forEach(function (t) {
         var alvo = t.p > 0 ? pos : neg;
-        alvo[t.k] = (alvo[t.k] || 0) + 1;
+        if (!alvo[t.k]) alvo[t.k] = { n: 0, w: 0 };
+        alvo[t.k].n += 1;
+        alvo[t.k].w += w;
       });
     });
     return { pos: pos, neg: neg };
   }
 
   function barras(obj, elId, qtdId, classe) {
-    var itens = Object.keys(obj).map(function (k) { return { k: k, n: obj[k] }; })
-                      .sort(function (a, b) { return b.n - a.n; });
-    var max = itens.length ? itens[0].n : 1;
+    var itens = Object.keys(obj).map(function (k) { return { k: k, n: obj[k].n, w: obj[k].w }; })
+                      .sort(function (a, b) { return b.w - a.w; });
+    var max = itens.length ? itens[0].w : 1;
     var total = itens.reduce(function (a, b) { return a + b.n; }, 0);
     document.getElementById(qtdId).textContent = total + ' menções';
     document.getElementById(elId).innerHTML = itens.map(function (it) {
       return '<button class="barra-item" type="button" data-tema="' + it.k + '">' +
              '<span class="nm">' + esc(N[it.k]) + '</span>' +
              '<span class="qt">' + it.n + '</span>' +
-             '<span class="tr"><i style="width:' + (it.n / max * 100) + '%"></i></span></button>';
+             '<span class="tr"><i style="width:' + (it.w / max * 100) + '%"></i></span></button>';
     }).join('');
   }
 
@@ -666,6 +690,7 @@
       '<div class="cab"><span class="est ' + pol + '">' + (r.e || '?') + '★</span>' +
       (r.loja ? '<span>' + esc(r.loja) + '</span>' : '') +
       '<span>' + esc(r.d || '') + '</span>' +
+      (peso(r.d) === 1 ? '<span class="mtag recente">recente</span>' : '') +
       (fala ? '<span class="mtag forte">' + esc(fala) + '</span>' : '') +
       (r.resp ? '<span class="mtag">loja respondeu</span>' : '') + tags + '</div>' +
       '<p>' + (recortado ? '&ldquo;' + esc(corpo) + '&rdquo;' : esc(corpo)) + '</p>' +
@@ -677,18 +702,21 @@
   function contaFalas(tema) {
     var pos = {}, neg = {};
     D.proprias.forEach(function (r) {
+      var w = peso(r.d);
       r.tags.forEach(function (t) {
         if (t.k !== tema || !t.f) return;
         var alvo = t.p > 0 ? pos : neg;
-        alvo[t.f] = (alvo[t.f] || 0) + 1;
+        if (!alvo[t.f]) alvo[t.f] = { n: 0, w: 0 };
+        alvo[t.f].n += 1;
+        alvo[t.f].w += w;
       });
     });
     return { pos: pos, neg: neg };
   }
 
   function chips(obj, classe) {
-    var itens = Object.keys(obj).map(function (k) { return { k: k, n: obj[k] }; })
-                      .sort(function (a, b) { return b.n - a.n; });
+    var itens = Object.keys(obj).map(function (k) { return { k: k, n: obj[k].n, w: obj[k].w }; })
+                      .sort(function (a, b) { return b.w - a.w; });
     if (!itens.length) return '<span class="nada">nada recorrente aqui</span>';
     return '<div class="chips">' + itens.map(function (it) {
       return '<button class="chip" type="button" data-fala="' + esc(it.k) + '" aria-pressed="' +
@@ -700,8 +728,8 @@
     var el = document.getElementById('falasProprias');
     if (!estados.tema) { el.innerHTML = ''; return; }
     var c = contaFalas(estados.tema);
-    var totP = Object.keys(c.pos).reduce(function (a, k) { return a + c.pos[k]; }, 0);
-    var totN = Object.keys(c.neg).reduce(function (a, k) { return a + c.neg[k]; }, 0);
+    var totP = Object.keys(c.pos).reduce(function (a, k) { return a + c.pos[k].n; }, 0);
+    var totN = Object.keys(c.neg).reduce(function (a, k) { return a + c.neg[k].n; }, 0);
     el.innerHTML =
       '<div class="falas"><div class="cab">' + esc(N[estados.tema]) +
       ' — o que exatamente dizem<small>' + totP + ' elogios · ' + totN + ' queixas</small></div>' +
@@ -711,24 +739,47 @@
       '</div></div>';
   }
 
+  // janelas de tempo usadas pra separar os cartões — mesmos cortes do peso()
+  var JANELAS = [
+    { w: 1,   label: 'Últimos 3 meses' },
+    { w: .65, label: '3–6 meses' },
+    { w: .35, label: '6–12 meses' },
+    { w: .15, label: 'Mais de 1 ano' }
+  ];
+
   function pintaComentarios() {
     var lista = D.proprias.slice();
+    var comparador;
     if (estados.tema) {
       lista = lista.filter(function (r) {
         return r.tags.some(function (t) {
           return t.k === estados.tema && (!estados.fala || t.f === estados.fala);
         });
       });
-      lista.sort(function (a, b) {
+      comparador = function (a, b) {
         var fa = a.tags.filter(function (t) { return t.k === estados.tema; })[0];
         var fb = b.tags.filter(function (t) { return t.k === estados.tema; })[0];
         return fa.p - fb.p || (a.e || 5) - (b.e || 5);
-      });
+      };
     } else {
-      lista.sort(function (a, b) { return (a.e || 5) - (b.e || 5); });
+      comparador = function (a, b) { return (a.e || 5) - (b.e || 5); };
     }
+
+    // separa por data primeiro — recente pesa mais, então a janela recente vem
+    // no topo; dentro de cada janela, mantém a ordem de gravidade de sempre
+    var janelas = JANELAS.map(function (j) { return { def: j, itens: [] }; });
+    lista.forEach(function (r) {
+      var w = peso(r.d);
+      var j = janelas.filter(function (j) { return j.def.w === w; })[0] || janelas[janelas.length - 1];
+      j.itens.push(r);
+    });
+    janelas.forEach(function (j) { j.itens.sort(comparador); });
+    var ordenado = [];
+    janelas.forEach(function (j) {
+      j.itens.forEach(function (r) { ordenado.push({ r: r, janela: j.def }); });
+    });
+
     var res = document.getElementById('resumoProprias');
-    var chave = estados.tema + '|' + (estados.polFala || 1) + '|' + estados.fala;
     var rf = estados.fala ? (D.resumoFala[estados.tema + '|1|' + estados.fala] ||
                              D.resumoFala[estados.tema + '|-1|' + estados.fala]) : null;
     res.innerHTML = estados.fala
@@ -736,12 +787,20 @@
       : (R[estados.tema]
           ? '<div class="resumo-tema"><b>' + esc(N[estados.tema]) + ' — o que se repete:</b> ' + R[estados.tema] + '</div>'
           : '');
-    var mostra = lista.slice(0, estados.limite);
+    var mostra = ordenado.slice(0, estados.limite);
+    var janelaAtual = null;
+    var partes = mostra.map(function (item) {
+      var cab = '';
+      if (item.janela !== janelaAtual) {
+        janelaAtual = item.janela;
+        cab = '<div class="separador-data">' + item.janela.label + '</div>';
+      }
+      return cab + cartaoComentario(item.r, estados.tema);
+    });
     document.getElementById('comProprias').innerHTML =
-      (mostra.length ? mostra.map(function (r) { return cartaoComentario(r, estados.tema); }).join('')
-                     : '<div class="vazio">Nada aqui.</div>') +
-      (lista.length > mostra.length
-        ? '<button class="mais-com" type="button" id="btMais">ver os outros ' + (lista.length - mostra.length) + ' comentários</button>'
+      (partes.length ? partes.join('') : '<div class="vazio">Nada aqui.</div>') +
+      (ordenado.length > mostra.length
+        ? '<button class="mais-com" type="button" id="btMais">ver os outros ' + (ordenado.length - mostra.length) + ' comentários</button>'
         : '');
   }
 
