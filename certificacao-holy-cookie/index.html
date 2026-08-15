@@ -110,6 +110,14 @@
   .pilares .fonte { font-family: var(--mono); font-size: .625rem; color: var(--ink-faint);
                     border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
 
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 26rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+
   ol.perg { list-style: none; display: grid; gap: 1px; background: var(--rule);
             border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
   ol.perg > li { background: var(--surface); padding: .9rem 1.1rem;
@@ -264,81 +272,196 @@
 
   <!-- ══════ 1 ══════ -->
   <section>
-    <h2><span class="n">1</span> As funções<span class="hint">em laranja, as que ainda não têm desenho</span></h2>
-    <p class="prose">Funções operacionais da loja — cada uma vira uma certificação própria:</p>
-    <div class="funcoes">
-      <div><span class="t">Atendimento</span><span class="d">Quem vende no balcão.</span></div>
-      <div><span class="t">Forno</span><span class="d">Quem produz.</span></div>
-      <div><span class="t">Líder de pedidos</span><span class="d">Faz o despacho dos pedidos.</span></div>
-      <div><span class="t">Líder de loja</span><span class="d">Função de liderança da unidade.</span></div>
-      <div><span class="t">Auxiliares e estagiários</span><span class="d">Função de entrada.</span></div>
-    </div>
-    <p class="prose">E duas funções que o próprio programa precisa — nasceram nesta conversa e ainda não
-      têm desenho:</p>
-    <div class="funcoes">
-      <div class="aberta"><span class="selo">sem desenho</span><span class="t">Treinador</span>
-        <span class="d">Dá o treinamento de cada função até a pessoa estar pronta pra prova.</span></div>
-      <div class="aberta"><span class="selo">sem desenho</span><span class="t">Certificador</span>
-        <span class="d">Revisa a prova oral e a prova física, e decide a aprovação. Pode ou não ser a
-        mesma pessoa que treina.</span></div>
-    </div>
+    <h2><span class="n">1</span> As fases do projeto<span class="hint">roteiro macro, do que já existe</span></h2>
+    <ol class="perg ok">
+      <li><span class="num">01</span><span class="q">Escrever e gravar os treinamentos</span>
+        <span class="d">Cozinha, Atendimento, Limpeza e Organização — aproveitando o treinamento antigo e
+        o material da franquia.</span></li>
+      <li><span class="num">02</span><span class="q">Criar as certificações</span>
+        <span class="d">Nomear cada uma, definir prazo pra se certificar, quais certificações cada área
+        exige, desenhar o passo a passo do processo.</span></li>
+      <li><span class="num">03</span><span class="q">Treinar os treinadores</span>
+        <span class="d">Como treinar uma pessoa — e a diferença entre saber fazer e saber ensinar.</span></li>
+      <li><span class="num">04</span><span class="q">Desenhar o processo seletivo</span>
+        <span class="d">O que procurar e o que não procurar em cada vaga: perguntas por fase (currículo,
+        entrevista), teste de perfil comportamental.</span></li>
+      <li><span class="num">05</span><span class="q">Treinar quem avalia candidato</span>
+        <span class="d">Relatório do dia de teste: o que observar, como dar nota, critério pra chamar a
+        pessoa de novo.</span></li>
+      <li><span class="num">06</span><span class="q">Organizar a diária-teste</span>
+        <span class="d">Vídeo específico pro dia de teste, limite de diárias-teste.</span></li>
+      <li><span class="num">07</span><span class="q">Desenhar o onboarding</span>
+        <span class="d">O que treinar em cada dia, metas de evolução, quando a pessoa passa para os 30
+        dias de experiência.</span></li>
+      <li><span class="num">08</span><span class="q">Recrutamento constante</span>
+        <span class="d">Banco de currículos e de freelas treinados em todas as áreas.</span></li>
+    </ol>
   </section>
 
   <!-- ══════ 2 ══════ -->
   <section>
-    <h2><span class="n">2</span> Como funciona o mecanismo<span class="hint">modelo OAB</span></h2>
-    <ol class="perg ok">
-      <li><span class="num">01</span><span class="q">Mapear a função</span>
-        <span class="d">O que essa função faz de verdade na loja, hoje.</span></li>
-      <li><span class="num">02</span><span class="q">Treinar</span>
-        <span class="d">O Treinador conduz o treinamento. Metodologia, duração e critério de prontidão
-        ainda em aberto.</span></li>
-      <li><span class="num">03</span><span class="q">Prova oral</span>
-        <span class="d">O funcionário é arguido sobre a função.</span></li>
-      <li><span class="num">04</span><span class="q">Prova física</span>
-        <span class="d">O funcionário faz as tarefas de verdade, sob observação.</span></li>
-      <li><span class="num">05</span><span class="q">Certificador revisa</span>
-        <span class="d">Audita as duas provas e decide a aprovação.</span></li>
-      <li><span class="num">06</span><span class="q">Certificação emitida</span>
-        <span class="d">O funcionário passa a ter o selo daquela função.</span></li>
-      <li><span class="num">07</span><span class="q">Bonificação ativa</span>
-        <span class="d">Enquanto a certificação estiver válida, o funcionário recebe bonificação salarial
-        mensal.</span></li>
-      <li><span class="num">08</span><span class="q">Revalidação periódica</span>
-        <span class="d">A certificação é revisada de tempos em tempos. Cadência ainda em aberto.</span></li>
-    </ol>
+    <h2><span class="n">2</span> Papéis e liderança<span class="hint">além das funções de balcão</span></h2>
+    <div class="funcoes">
+      <div><span class="t">Atendimento</span><span class="d">Quem vende no balcão.</span></div>
+      <div><span class="t">Forno</span><span class="d">Quem produz.</span></div>
+      <div><span class="t">Líder de pedidos</span><span class="d">Faz o despacho dos pedidos.</span></div>
+      <div><span class="t">Estagiário</span><span class="d">Função de entrada.</span></div>
+      <div><span class="t">Treinador</span><span class="d">Todas as certificações acima + certificação
+      própria de Treinador.</span></div>
+    </div>
+    <div class="note-item"><span class="tag acc">Líder de loja</span><span>
+      80% do tempo em <strong>pessoas e padrão de excelência</strong> — equipe engajada, processos com
+      qualidade e velocidade, mkt/vendas que só dá pra fazer na loja. 20% em relatório de vendas e
+      problemas pontuais. &ldquo;Vale por meio funcionário na operação&rdquo; — cobre falta com freela.
+      Lidera pelo exemplo, na convivência.
+    </span></div>
+    <div class="note-item"><span class="tag acc">Gerente geral</span><span>
+      Apoia o Líder de loja pra ele conseguir focar em pessoas e processos. Garante que os processos
+      estão sendo feitos e cria solução quando não estão.
+    </span></div>
+    <div class="note-item"><span class="tag acc">Proprietários — Débora e Fred</span><span>
+      Análise de dados, visão e expansão. Mkt e vendas — trazer gente pra dentro da loja. Relacionamento
+      com funcionários.
+    </span></div>
+    <div class="note-item"><span class="tag warn">o princípio por trás da estrutura</span><span>
+      &ldquo;Loja que cresce depende de <strong>processos</strong>, não de <strong>pessoas</strong>.&rdquo;
+    </span></div>
   </section>
 
   <!-- ══════ 3 ══════ -->
   <section>
-    <h2><span class="n">3</span> O que falta decidir<span class="hint">ninguém aqui inventa resposta — só o Fred / a operação</span></h2>
+    <h2><span class="n">3</span> As certificações previstas<span class="hint">nomes já levantados</span></h2>
+    <div class="funcoes">
+      <div><span class="t">Operador de Forno — Cookies</span></div>
+      <div><span class="t">Operador de Forno — Brownie e Torta</span></div>
+      <div><span class="t">Decoração dos Cookies</span></div>
+      <div><span class="t">Produção de Pedidos — Montagem</span></div>
+      <div><span class="t">Produção de Pedidos — Bebidas</span></div>
+      <div><span class="t">Produção de Pedidos — Lanchinhos</span></div>
+      <div><span class="t">Dinâmica de Trabalho na Cozinha</span></div>
+      <div><span class="t">Limpeza e Organização — por área</span></div>
+      <div><span class="t">Soft Skills</span></div>
+      <div><span class="t">Regulamento Interno</span></div>
+      <div><span class="t">Líder de Pedidos</span><span class="d">Certificações da cozinha + esta.</span></div>
+      <div><span class="t">Treinador</span><span class="d">Todas as certificações da área + esta.</span></div>
+    </div>
+    <p class="prose">Soft Skills e Regulamento Interno são transversais — entram na certificação de
+      qualquer função, cozinha ou atendimento.</p>
+  </section>
+
+  <!-- ══════ 4 ══════ -->
+  <section>
+    <h2><span class="n">4</span> Como a certificação funciona, na prática</h2>
+    <ol class="perg ok">
+      <li><span class="num">01</span><span class="q">Ver os vídeos</span>
+        <span class="d">O treinamento gravado da função.</span></li>
+      <li><span class="num">02</span><span class="q">Fazer na prática</span>
+        <span class="d">Do jeito que foi ensinado.</span></li>
+      <li><span class="num">03</span><span class="q">Responder questionário</span>
+        <span class="d">Escrito ou verbal.</span></li>
+      <li><span class="num">04</span><span class="q">Teste prático com nota</span>
+        <span class="d">Tipo auditoria: faz tudo que será certificado, na prática, sob observação.
+        Aprovado, certifica. Reprovado, marca pra estudar e refazer.</span></li>
+    </ol>
+    <div class="note-item"><span class="tag bad">a regra de perda da certificação</span><span>
+      &ldquo;Saber e não fazer é a mesma coisa de não saber.&rdquo; A certificação cai por deixar de
+      aplicar o que se sabe, não só por não saber.
+    </span></div>
+    <div class="note-item"><span class="tag acc">ferramenta de operação, já desenhada</span><span>
+      Painel na cozinha mostrando quem tem qual certificação — quando sai um pedido daquele tipo, chama
+      a pessoa certificada pra fazer junto com o Treinador (treino no fluxo real). Toda semana, foco
+      intencional em um treinamento específico + revisão se a equipe está seguindo o que foi ensinado.
+    </span></div>
+  </section>
+
+  <!-- ══════ 5 ══════ -->
+  <section>
+    <h2><span class="n">5</span> O molde de cada currículo<span class="hint">mesma estrutura pra todo produto/procedimento</span></h2>
+    <ol class="perg ok">
+      <li><span class="num">01</span><span class="q">Insumos, materiais e equipamentos</span>
+        <span class="d">Tudo que se usa, e onde fica armazenado.</span></li>
+      <li><span class="num">02</span><span class="q">Como fazer</span>
+        <span class="d">Passo a passo essencial — sem entrar em detalhe ou exceção.</span></li>
+      <li><span class="num">03</span><span class="q">Casos atípicos e problemas</span>
+        <span class="d">Cada caso vira um vídeo curto, com um assunto só.</span></li>
+      <li><span class="num">04</span><span class="q">Pontos mais importantes</span>
+        <span class="d">O que sempre fazer, o que nunca fazer.</span></li>
+    </ol>
+    <div class="note-item"><span class="tag warn">o detalhe fica fora desta página, de propósito</span><span>
+      Receita, gramatura e roteiro de cada vídeo já estão escritos nos documentos-fonte — não
+      reproduzidos aqui porque é conteúdo operacional específico da loja, e esta página é o plano, não
+      o manual. Fonte completa (acesso restrito): <a href="https://docs.google.com/document/d/1W8HxKW7cG_EfqXg-00-kEZAiTrRxug6tL3bFh9s-ZVY/edit">Certificações Holy Cook</a> e
+      <a href="https://docs.google.com/document/d/1SpEzsHraTRBiX7tBcSLQ7IJUBg7sY2-AbuqR61CjLAM/edit">Organização da Certificação</a>.
+    </span></div>
+  </section>
+
+  <!-- ══════ 6 ══════ -->
+  <section>
+    <h2><span class="n">6</span> O papel do Treinador</h2>
+    <div class="note-item"><span class="tag acc">quem desenha esse papel</span><span>
+      A Débora começa o desenho, o Fred dá o ajuste fino.
+    </span></div>
+    <div class="note-item"><span class="tag warn">a maldição do conhecimento</span><span>
+      Saber fazer não é o mesmo que saber ensinar — é por isso que existe um treinamento específico
+      pra quem vai treinar, não só pra quem vai ser treinado.
+    </span></div>
+    <div class="note-item"><span class="tag acc">técnicas de acompanhamento</span><span>
+      Perguntas pra checar se a pessoa aprendeu de verdade, observação direta e indireta, como dar
+      feedback. Um relatório sobre a pessoa (ainda por criar) ajuda a decidir entre treinar mais ou
+      desligar.
+    </span></div>
+  </section>
+
+  <!-- ══════ 7 ══════ -->
+  <section>
+    <h2><span class="n">7</span> Onboarding do novo funcionário</h2>
+    <p class="prose">Cozinha, 3 dias, 3 partes por dia — teoria, reforço da teoria, prática:</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Dia</th><th>Foco</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Módulo geral + treinamento básico → prática de montagem de pedidos</td></tr>
+        <tr><td>2</td><td>Equipamentos, cookies, bebidas, sorvete, salgados, brownie, torta → prática de
+        modelagem e decoração</td></tr>
+        <tr><td>3</td><td>Limpeza e organização + valores Holy Cook + atendimento</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note-item"><span class="tag acc">o teste de vaga (dia 1, freelancer/novo)</span><span>
+      5 horas: 1h assistindo vídeo, 4h de prática assistida (11h30–16h30; Treinador disponível a partir
+      das 12h30). Avalia 5 pontos: <strong>Atenção, Agilidade, Organização, Comunicação</strong> e
+      <strong>capacidade de seguir padrão</strong> (ou se improvisa errado).
+    </span></div>
+  </section>
+
+  <!-- ══════ 8 ══════ -->
+  <section>
+    <h2><span class="n">8</span> O que ainda falta<span class="hint">ninguém aqui inventa resposta — só o Fred / a Débora / a operação</span></h2>
     <ol class="perg">
-      <li><span class="num">01</span><span class="q">O currículo de cada função</span>
-        <span class="d">O que exatamente entra na prova, função por função.</span></li>
-      <li><span class="num">02</span><span class="q">A metodologia do treinamento</span>
-        <span class="d">Como o conteúdo é ensinado — não só o que é ensinado.</span></li>
-      <li><span class="num">03</span><span class="q">Quem é o Treinador</span>
-        <span class="d">A função nasceu nesta conversa e ainda não tem desenho: um por loja? um só para
-        as três? é acumulado com outra função?</span></li>
-      <li><span class="num">04</span><span class="q">Quantos dias de treinamento</span>
-        <span class="d">Por função.</span></li>
-      <li><span class="num">05</span><span class="q">Critério de prontidão</span>
-        <span class="d">Por quanto tempo treinar, e como saber que a pessoa está pronta pra prestar a
-        prova.</span></li>
-      <li><span class="num">06</span><span class="q">Quem é o Certificador</span>
-        <span class="d">E se é a mesma pessoa que treina, ou alguém de fora — a favor de separar: quem
-        treina não deveria aprovar a própria prova.</span></li>
-      <li><span class="num">07</span><span class="q">Cadência da revalidação</span>
+      <li><span class="num">01</span><span class="q">O gap dos primeiros dias</span>
+        <span class="d">Pergunta em aberto nos próprios documentos: como tratar os primeiros ~14 dias de
+        experiência, antes de a pessoa estar certificada e enquanto ela ainda não faz do jeito certo? Um
+        vídeo por dia? E se ela for desligada antes de terminar?</span></li>
+      <li><span class="num">02</span><span class="q">Quando o Treinador é pago</span>
+        <span class="d">Todo mês, fixo? Ou só quando tem vaga pra treinar?</span></li>
+      <li><span class="num">03</span><span class="q">Quem é o Certificador</span>
+        <span class="d">Quem aplica e avalia o teste prático com nota — mesma pessoa que treina, ou
+        alguém de fora?</span></li>
+      <li><span class="num">04</span><span class="q">Prazo pra se certificar</span>
+        <span class="d">Quanto tempo a pessoa tem pra assistir ao treinamento, estudar e prestar a
+        prova de cada certificação.</span></li>
+      <li><span class="num">05</span><span class="q">Kit mínimo por cargo</span>
+        <span class="d">Quais certificações, exatamente, cada pessoa precisa ter pra ser considerada
+        certificada naquela área.</span></li>
+      <li><span class="num">06</span><span class="q">Cadência da revalidação</span>
         <span class="d">De quanto em quanto tempo a certificação é reavaliada.</span></li>
-      <li><span class="num">08</span><span class="q">A regra da bonificação</span>
+      <li><span class="num">07</span><span class="q">A regra da bonificação</span>
         <span class="d">Quanto vale, e o que acontece quando a certificação cai — perde na hora ou tem
         carência.</span></li>
     </ol>
   </section>
 
-  <!-- ══════ 4 ══════ -->
+  <!-- ══════ 9 ══════ -->
   <section>
-    <h2><span class="n">4</span> Como se liga aos outros projetos</h2>
+    <h2><span class="n">9</span> Como se liga aos outros projetos</h2>
     <div class="note-item"><span class="tag good">Experiência Holy Cookie</span><span>
       Este projeto é o mecanismo por trás do item <em>&ldquo;atendimento de quem vende&rdquo;</em> do
       pilar Experiência em <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a>. O checklist
