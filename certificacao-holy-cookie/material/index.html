@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Material de Certificação Holy Cookie</title>
+<meta name="description" content="O manual real que vai para líderes, treinadores e funcionários — com o checklist do que já está pronto e do que ainda falta escrever.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238A5C13'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><rect x='26' y='18' width='48' height='64' rx='4'/><line x1='36' y1='34' x2='64' y2='34'/><line x1='36' y1='48' x2='64' y2='48'/><line x1='36' y1='62' x2='54' y2='62'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#8A5C13; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#F6EBD8;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#DBAE60; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#302516;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#DBAE60; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#302516;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  .status { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .06em;
+            text-transform: uppercase; padding: .15rem .55rem; border-radius: 999px; margin-left: auto; }
+  .status.pronto { background: var(--good-bg); color: var(--good); }
+  .status.parcial { background: var(--warn-bg); color: var(--warn); }
+  .status.falta { background: var(--bad-bg); color: var(--bad); }
+
+  .grupo { display: flex; align-items: center; gap: .75rem; font-family: var(--mono); font-size: .75rem;
+           font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+           margin-top: .5rem; }
+  .grupo::after { content: ""; flex: 1; height: 2px; background: var(--ink); }
+
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .note-item a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  h3.sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+           color: var(--accent); font-weight: 700; margin-top: .3rem; }
+
+  ol.passos, ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+                         font-size: .875rem; color: var(--ink-soft); }
+  ol.passos li::marker { font-family: var(--mono); font-weight: 700; color: var(--accent); }
+  ul.pontos li::marker { color: var(--accent); }
+  ol.passos strong, ul.pontos strong { color: var(--ink); font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 30rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+
+  .resumo { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .resumo > div { flex: 1; min-width: 8rem; background: var(--surface); border: 1px solid var(--rule);
+                  border-radius: 4px; padding: .8rem 1rem; text-align: center; }
+  .resumo .num { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; }
+  .resumo .lbl { font-size: .6875rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); }
+  .resumo .pronto .num { color: var(--good); }
+  .resumo .parcial .num { color: var(--warn); }
+  .resumo .falta .num { color: var(--bad); }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+  footer a { color: var(--ink-faint); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Certificação Holy Cookie</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · material de treinamento</div>
+    <h1>Material de Certificação Holy Cookie</h1>
+    <p class="lede">
+      Este é o documento que vai <strong>de verdade</strong> para líder, treinador e funcionário — não
+      é briefing de projeto, é o manual. Construído aos poucos, direto do que o Fred e a Débora já
+      escreveram. O checklist abaixo mostra o que já está pronto e o que ainda falta.
+    </p>
+  </header>
+
+  <!-- ══════ PROGRESSO ══════ -->
+  <section>
+    <h2>Progresso</h2>
+    <div class="resumo">
+      <div class="pronto"><div class="num">9</div><div class="lbl">prontos</div></div>
+      <div class="parcial"><div class="num">7</div><div class="lbl">parciais</div></div>
+      <div class="falta"><div class="num">10</div><div class="lbl">faltam</div></div>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Área</th><th>Tópico</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Cozinha</td><td>Cookies — Modelagem</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Cozinha</td><td>Cookies — Decoração</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Cozinha</td><td>Torta</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Cozinha</td><td>Brownie</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Cozinha</td><td>Croissant e Lanchinho</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Cozinha</td><td>Pães</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Cozinha</td><td>Bebidas</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Cozinha</td><td>Sorvetes</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Cozinha</td><td>Fluxo de Preparação dos Pedidos</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Cozinha</td><td>Organização, Estoque e Embalagem</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Cozinha</td><td>Limpeza e Organização (Konclui)</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Atendimento</td><td>Atendimento na Loja</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Atendimento</td><td>Script de Vendas</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Atendimento</td><td>WhatsApp</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Atendimento</td><td>Plataformas — iFood / 99Food / Cardápio Web</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Atendimento</td><td>Resolvendo Problemas</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Transversal</td><td>Regulamento Interno</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Transversal</td><td>Soft Skills</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Transversal</td><td>RH e Retenção</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Transversal</td><td>Módulo Geral de Onboarding</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Treinamento</td><td>O Papel do Treinador</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Treinamento</td><td>Onboarding 3 Dias — Cozinha</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Treinamento</td><td>Teste de Vaga — Forno/Cozinha</td><td><span class="tag good">pronto</span></td></tr>
+        <tr><td>Treinamento</td><td>Teste de Vaga — Atendimento</td><td><span class="tag bad">falta</span></td></tr>
+        <tr><td>Treinamento</td><td>Trilha do Freelancer</td><td><span class="tag warn">parcial</span></td></tr>
+        <tr><td>Treinamento</td><td>Trilha — Líder de Loja / Gerente</td><td><span class="tag bad">falta</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <div class="grupo">Cozinha</div>
+
+  <!-- ══════ 1 ══════ -->
+  <section>
+    <h2><span class="n">01</span> Cookies — Modelagem<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Insumos, materiais e equipamentos</h3>
+    <p class="prose">Assadeira, papel manteiga, armário de cookies, caneta, forno, luvas, espátula.
+      Feito na bancada de preparação dos cookies; materiais em frente a ela, geladeira e freezer.</p>
+    <h3 class="sub">Armazenamento</h3>
+    <ul class="pontos">
+      <li>Primeiro que entra, primeiro que sai. Guardar fechado.</li>
+      <li>Cookies moles em cima, duros embaixo, no freezer.</li>
+    </ul>
+    <h3 class="sub">Como fazer</h3>
+    <p class="prose">Por que modelar: história do produto como se fosse feito na hora — aquecer com a
+      mão, deixar a massa mole, tirar as fissuras e organizar o recheio.</p>
+    <ol class="passos">
+      <li>Pegue a assadeira e coloque papel manteiga com 3 dedos de sobra de cada lado</li>
+      <li>Pegue o pacote na geladeira/freezer e abra</li>
+      <li>Monte a assadeira com o sabor que vai assar — se for mais de um sabor, repita o processo</li>
+      <li>Escreva o sabor no papel manteiga</li>
+      <li>Faça a modelagem e espace os cookies na bandeja</li>
+      <li>Coloque no forno pré-aquecido, aperte o botão de contagem — cerca de 12 minutos</li>
+      <li>Vire a forma quando faltar 3 minutos (aos 9 minutos de forno)</li>
+      <li>Retire a assadeira e coloque na estante dos cookies</li>
+    </ol>
+    <h3 class="sub">5 pontos da modelagem perfeita</h3>
+    <ul class="pontos">
+      <li>Modelar com os dedos, desconstruindo o cookie</li>
+      <li>Modelar com a palma da mão, deixando no formato adequado</li>
+      <li>Tirar fissuras e cobrir os recheios</li>
+      <li>Formato ideal: nem achatado, nem redondo</li>
+      <li>Fazer rápido e certo ao mesmo tempo</li>
+    </ul>
+    <h3 class="sub">Quantidade e forno</h3>
+    <ul class="pontos">
+      <li>Geralmente 12 cookies por forma, máximo 15 — sempre com espaçamento correto (3 dedos da
+      borda da forma)</li>
+      <li>Dar preferência ao meio do forno, depois posições 2 e 4, por último as extremidades</li>
+      <li>Saber quantos fazer de cada sabor — olhar as bandejas do armário e priorizar os que mais
+      saem</li>
+      <li>Assando mais de uma forma ao mesmo tempo: lembrar do tempo, colocar a do meio primeiro</li>
+    </ul>
+    <h3 class="sub">Depois do forno</h3>
+    <ul class="pontos">
+      <li>Ver se está no ponto — nem cru, nem passado</li>
+      <li>Arrumar (deixar redondinhos) assim que saem</li>
+      <li>Tirar da assadeira depois de 3 minutos</li>
+      <li>Guardar no armário de cookies</li>
+    </ul>
+    <h3 class="sub">Tipos de recheio</h3>
+    <p class="prose">Recheios moles não modelam — vão direto do freezer. Recheios cremosos e recheios
+      duros têm jeito próprio de modelar (o documento-fonte não detalha qual é o jeito de cada um).</p>
+    <h3 class="sub">Entrega para o cliente</h3>
+    <ul class="pontos">
+      <li>Delivery: cuidado para não manchar a caixa. Se estiver muito quente, geladeira por 2 minutos
+      para formar casquinha antes de embalar</li>
+      <li>Na loja: prato limpo, 1 cookie por prato, apresentando o sabor ao cliente</li>
+    </ul>
+    <h3 class="sub">Casos atípicos e problemas</h3>
+    <ul class="pontos">
+      <li>Vai assar menos que a forma inteira — não vira faltando 3 minutos</li>
+      <li>Cuidado para não misturar sabor: escrever o nome assim que coloca o sabor na forma</li>
+      <li>Urgência: assar só aquele cookie, no máximo +2 do mesmo sabor</li>
+      <li>Cookie caiu no chão — descarta e assa outro</li>
+      <li>Esqueceu de virar faltando 3 minutos, ou de apertar o botão do forno</li>
+      <li>Assou demais / abriu no forno com o recheio saindo — vira perda</li>
+      <li>Encostou em outro cookie ao assar</li>
+      <li>Cuidado com papel manteiga preso embaixo do cookie</li>
+      <li>Pacote ficou mole por passar tempo demais fora da geladeira</li>
+    </ul>
+    <h3 class="sub">Sempre / nunca</h3>
+    <div class="note-item"><span class="tag good">sempre</span><span>Espaçamento correto pra não
+      grudar; nunca mais de 15 cookies na bandeja.</span></div>
+    <div class="note-item"><span class="tag bad">nunca</span><span>Esquecer de arrumar os cookies ao
+      sair do forno; esquecer de escrever o sabor no papel manteiga.</span></div>
+  </section>
+
+  <!-- ══════ 2 ══════ -->
+  <section>
+    <h2><span class="n">02</span> Cookies — Decoração<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Insumos</h3>
+    <p class="prose">Pistache triturado, coco, mistura de açúcar e canela, leite ninho, granulado,
+      Bueno, M&amp;Ms, cobertura de chocolate ao leite (pote e bisnaga), chocolate branco, moeda de
+      chocolate meio amargo. Colher de sopa, bisnaga, dosadores.</p>
+    <h3 class="sub">Armazenamento</h3>
+    <ul class="pontos">
+      <li>Coco, leite ninho, granulado, Bueno, M&amp;Ms, moeda de chocolate — já vêm prontos, só
+      colocar no pote e usar</li>
+      <li>Pistache triturado: vem em grão, tritura no liquidificador — não triturar muito de uma vez,
+      pra não ficar mole</li>
+      <li>Mistura de açúcar e canela: açúcar + canela</li>
+      <li>Coberturas de chocolate: derreter no micro-ondas, colocar no pote/bisnaga, guardar em cima
+      do forno — reaquecer quando endurecer, nunca decorar com chocolate duro</li>
+    </ul>
+    <h3 class="sub">Como decorar</h3>
+    <p class="prose"><strong>Para a equipe, mais do que para o cliente</strong> — tipos: pré-forno e
+      pós-forno / riscos e toppings.</p>
+    <ul class="pontos">
+      <li><strong>Riscos:</strong> colher na diagonal, com chocolate bem derretido/mole. Mão nem muito
+      perto nem muito alta. Traços do início ao fim do cookie, de cima para baixo, sem ir e voltar —
+      fazer rápido pra ficar reto. Tirar a colher totalmente ao terminar e voltar pro pote.</li>
+      <li><strong>Toppings:</strong> ao começar, limpar um pouco a colher para não cair sujeira.</li>
+      <li><strong>Exceções:</strong> Kinder é com bisnaga; doce de leite não tem decoração.</li>
+    </ul>
+    <h3 class="sub">Casos atípicos</h3>
+    <ul class="pontos">
+      <li>Esqueceu de decorar antes de ir para o forno</li>
+      <li>Caiu decoração de um cookie em outro</li>
+      <li>Decorou com a decoração de outro sabor</li>
+      <li>Caiu insumo demais em um cookie</li>
+      <li>A decoração ficou malfeita</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 3 ══════ -->
+  <section>
+    <h2><span class="n">03</span> Torta<span class="status parcial">parcial</span></h2>
+    <div class="note-item"><span class="tag warn">o que falta aqui</span><span>
+      O passo a passo principal (&ldquo;como fazer&rdquo;) ainda remete à ficha técnica e ao vídeo da
+      franquia — não está escrito por extenso no documento-fonte. O resto (insumos, armazenamento,
+      dicas, entrega, problemas) já está.
+    </span></div>
+    <h3 class="sub">Insumos e equipamentos</h3>
+    <p class="prose">Massa da torta, barrinhas de Kinder, Nutella, balança, colher reta
+      (&ldquo;pão-duro&rdquo;), assadeira, aro, papel manteiga, chocolate ao leite para decoração,
+      forno.</p>
+    <h3 class="sub">Armazenamento</h3>
+    <p class="prose">Kinder e Nutella em temperatura ambiente. Massa na geladeira — pegar sempre a mais
+      antiga pela validade. Chocolate de decoração em cima do forno.</p>
+    <h3 class="sub">Dicas de preparo</h3>
+    <ul class="pontos">
+      <li>Não precisa alisar demais a torta — só não deixar buracos</li>
+      <li>Espalhar bem os pedaços de Kinder para cobrir a torta toda</li>
+      <li>Sempre pesar e separar os blocos antes de preparar</li>
+      <li>Sempre virar, para assar igual dos dois lados</li>
+      <li>Desembalar os Kinders antes da produção — não pegar um a um direto da caixa</li>
+      <li>Tempo de preparo: 12 minutos</li>
+    </ul>
+    <div class="note-item"><span class="tag acc">pesando a Nutella</span><span>
+      Coloque a Nutella na balança e aperte &ldquo;TARA&rdquo;. Depois de começar a pesar, não pause —
+      a balança apaga.
+    </span></div>
+    <h3 class="sub">Entrega para o cliente</h3>
+    <ul class="pontos">
+      <li>Delivery: até 2 tortas por caixa, não colocar junto com cookie</li>
+      <li>Na loja: sempre servir com talher</li>
+    </ul>
+    <h3 class="sub">Casos atípicos</h3>
+    <ul class="pontos">
+      <li>Quanto tempo esperar depois de pronta antes de cortar</li>
+      <li>Cuidado com o plástico da massa — retirar o saquinho por completo, para não ir pedaço de
+      plástico junto na torta</li>
+      <li>Se tiver cookie assando junto e abrir muito o forno, deixar a torta mais 3 a 5 minutos</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 4 ══════ -->
+  <section>
+    <h2><span class="n">04</span> Brownie<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Insumos e equipamentos</h3>
+    <p class="prose">Assadeira de brownie, manteiga, receita do brownie, espátula/colher pão-duro,
+      forno, marcador para cortar.</p>
+    <h3 class="sub">Como fazer</h3>
+    <ol class="passos">
+      <li>Passe manteiga na assadeira, no fundo e nas laterais</li>
+      <li>Despeje 1 receita de brownie — a receita deve estar mole (fora da geladeira por 3 a 5h)</li>
+      <li>Com uma espátula, espalhe a receita de maneira uniforme na assadeira</li>
+      <li>Leve ao forno por 14 minutos</li>
+      <li>Tire do forno e, em cima de uma mesa de inox, levante a assadeira na altura do rosto e
+      solte-a — repita 4 vezes. Isso craquela a parte de cima</li>
+      <li>Leve mais 2 minutos ao forno e tire</li>
+      <li>Aguarde cerca de 15 minutos para partir o brownie</li>
+    </ol>
+    <h3 class="sub">Armazenamento</h3>
+    <p class="prose">Receita fica na geladeira — pegar sempre a mais antiga pela validade. Antes de
+      assar, a massa precisa estar mole, como se tivesse acabado de bater (deixar em temperatura
+      ambiente).</p>
+    <h3 class="sub">Entrega para o cliente</h3>
+    <ul class="pontos">
+      <li>Delivery: embalagem em saquinho autocolante</li>
+      <li>Na loja: servir com garfo e faca</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 5 ══════ -->
+  <section>
+    <h2><span class="n">05</span> Croissant e Lanchinho<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Croissant recheado</h3>
+    <p class="prose">Insumos: croissant (via planilha de pedidos), 100g de massa cookie.
+      Armazenamento: pode ser congelado por 30 dias.</p>
+    <ol class="passos">
+      <li>Tire do congelador e corte ao meio</li>
+      <li>Coloque 70g de massa cookie achatada na parte de baixo do croissant</li>
+      <li>Coloque 30g de chocolate meio amargo em pedaços, espalhados</li>
+      <li>Acrescente mais 30g de massa cookie achatada e mais 10g de chocolate meio amargo</li>
+      <li>Feche as duas partes e coloque uma bolinha de 8g de massa + 1g de chocolate em cima, como
+      decoração</li>
+      <li>Asse por 12 minutos e retire do forno</li>
+      <li>Decore com riscos lineares de chocolate ao leite até a metade</li>
+    </ol>
+    <h3 class="sub">Lanchinho de Croissant</h3>
+    <p class="prose">Insumos: croissant, presunto defumado, alface, tomate, mostarda Heinz.</p>
+    <ol class="passos">
+      <li>Tire do congelador e corte ao meio</li>
+      <li>Coloque 25g de presunto defumado e leve ao micro-ondas por 30 segundos</li>
+      <li>Retire e leve ao forno por 2 minutos</li>
+      <li>Retire e acrescente 25g de mussarela, 2 fatias finas de tomate e um pouco de alface</li>
+      <li>Feche as duas partes e sirva cortado ao meio</li>
+    </ol>
+    <h3 class="sub">Armazenamento do lanchinho</h3>
+    <ul class="pontos">
+      <li>Croissant: congelado até 30 dias — 2 minutos no forno para ficar crocante</li>
+      <li>Presunto: congelado até 30 dias, aberto consumir em 20 dias</li>
+      <li>Alface: 5 dias na geladeira</li>
+      <li>Tomate: 7 dias na geladeira</li>
+    </ul>
+    <div class="note-item"><span class="tag warn">pães (azeite, brioche, queijo, queijo quente)</span><span>
+      Treinamento já existe — o documento-fonte só pede &ldquo;atualizar&rdquo;, sem detalhar o quê.
+    </span></div>
+  </section>
+
+  <!-- ══════ 6 ══════ -->
+  <section>
+    <h2><span class="n">06</span> Pães<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O documento-fonte lista &ldquo;Pães: azeite, brioche e queijo, queijo quente — já tem, atualizar&rdquo;
+      mas não traz o conteúdo. Existe treinamento anterior a reaproveitar; falta trazer pra este
+      documento.
+    </span></div>
+  </section>
+
+  <!-- ══════ 7 ══════ -->
+  <section>
+    <h2><span class="n">07</span> Bebidas<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O documento-fonte só lista as categorias, sem passo a passo: no mixer (milkshakes — este já tem
+      vídeo e ficha técnica pronta em outro lugar); no liquidificador (frappuccino de Nutella e de doce
+      de leite, cappuccino gelado); sem liquidificador (Iced Caramel, Expresso Tônica, Soda Italiana,
+      Frozen); bebidas quentes (tirar café, vaporizar, cappuccino, chocolate cremoso/Hot Nutella, leite
+      com baunilha).
+    </span></div>
+  </section>
+
+  <!-- ══════ 8 ══════ -->
+  <section>
+    <h2><span class="n">08</span> Sorvetes<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      Mencionado como categoria de produto e de certificação, sem nenhum conteúdo no documento-fonte.
+    </span></div>
+  </section>
+
+  <!-- ══════ 9 ══════ -->
+  <section>
+    <h2><span class="n">09</span> Fluxo de Preparação dos Pedidos<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Fluxo normal</h3>
+    <ol class="passos">
+      <li>Chega o pedido</li>
+      <li>Ler a comanda/notinha — mesa, delivery ou retirada</li>
+      <li>Delegar quem vai fazer</li>
+      <li>Produção: bebidas, lanchinhos, aquecimento de cookies/torta/brownie</li>
+      <li>Montagem do pedido — mesa ou caixinha</li>
+      <li>Dupla checagem e aprovação, pelo Líder de Pedidos</li>
+      <li>Se delivery, o Líder de Pedidos aperta o botão de pronto na plataforma</li>
+      <li>Quem fez fecha o pedido</li>
+      <li>Quem fez assina e coloca a comanda no espeto</li>
+      <li>Entrega para o cliente, ou coloca no local de pedidos prontos do delivery</li>
+    </ol>
+    <h3 class="sub">Detalhes importantes</h3>
+    <ul class="pontos">
+      <li>Ficar atento à impressora o tempo todo, mesmo lavando louça</li>
+      <li>Quem pega a comanda confere: tipo de pedido, se é só cookie ou tem outros produtos,
+      observações (caixinha separada, retirar item)</li>
+      <li>Quem vai montar <strong>lê a comanda</strong> — não confia só no que o líder falou, porque a
+      responsabilidade de montar certo é de quem monta</li>
+      <li>Manter a comanda no porta-comanda, para não perder</li>
+      <li>Líder de Pedidos faz a dupla checagem: qualidade, quantidade conforme a comanda, itens
+      acessórios (canudo, talher, etc.)</li>
+    </ul>
+    <div class="note-item"><span class="tag bad">problema grave</span><span>
+      Não ver se tem cookie suficiente e não avisar para assar; desorganizar a ordem das comandas
+      (fazer primeiro o que sairia depois).
+    </span></div>
+    <h3 class="sub">Organização e regras da produção</h3>
+    <ul class="pontos">
+      <li>Nunca retirar comanda do porta-comanda antes de finalizar — evita perda de pedido e confusão</li>
+      <li>Prioridade dos pedidos: 1º mesa, 2º os mais antigos, 3º delivery</li>
+      <li>Verificação constante se há cookie suficiente. Se faltar: assar com prioridade máxima,
+      produzindo só o necessário, no máximo +2</li>
+      <li>Avisar sempre quando algo está acabando ou acabou — para pausar no delivery e não vender no
+      caixa</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 10 ══════ -->
+  <section>
+    <h2><span class="n">10</span> Organização, Estoque e Embalagem<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Organização dos cookies</h3>
+    <ul class="pontos">
+      <li>Sempre colocar cookies na assadeira certa</li>
+      <li>Primeiro que entra, primeiro que sai — os mais novos com os mais novos, os mais antigos com
+      os mais antigos</li>
+      <li>Evitar quebrar, sujar, misturar sabor. Sempre usar espátula — nunca pegar cookie com a mão</li>
+    </ul>
+    <h3 class="sub">Montagem e embalagem</h3>
+    <ul class="pontos">
+      <li>Sempre escrever o nome do cookie na caixa, na posição em que estão, com setas mostrando onde
+      cada sabor está</li>
+      <li>Sempre usar divisória quando tiver mais de 2 cookies</li>
+      <li>Cuidado para não sujar a caixa — evitar chocolate na caixa, mancha de mão, embalagem feia</li>
+    </ul>
+    <h3 class="sub">Aquecimento e tempo de preparo</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Quantidade</th><th>Tempo de aquecimento</th></tr></thead>
+      <tbody>
+        <tr><td>1 cookie</td><td>15s</td></tr>
+        <tr><td>2 a 3</td><td>20s</td></tr>
+        <tr><td>4</td><td>30s</td></tr>
+        <tr><td>5 a 6</td><td>40s</td></tr>
+        <tr><td>7</td><td>50s</td></tr>
+        <tr><td>8</td><td>60s</td></tr>
+      </tbody>
+    </table></div>
+    <ul class="pontos">
+      <li>Cuidado com pedidos com cookies de recheio mole</li>
+      <li>Cookies que acabaram de sair do forno: geladeira por 2 minutos para formar casquinha</li>
+      <li>Lanchinhos quentes: servir imediatamente após ficarem prontos</li>
+    </ul>
+    <h3 class="sub">Milkshake e bebidas</h3>
+    <ul class="pontos">
+      <li>Milkshake: fazer perto do horário do motoboy chegar, ou quando ele chega — pode ficar no
+      freezer aguardando</li>
+      <li>Bebida delivery: embalar sempre fechando bem, evitando vazamento</li>
+    </ul>
+    <h3 class="sub">Itens de acompanhamento</h3>
+    <p class="prose">Sempre conferir canudo, colher, garfo, faca — especialmente em bebida, torta e
+      sorvete.</p>
+    <h3 class="sub">Problemas e soluções</h3>
+    <ul class="pontos">
+      <li>Produto caiu no chão — descartar imediatamente</li>
+      <li>Esqueceu de enviar algo no pedido — avisar imediatamente e resolver o envio do item faltante</li>
+      <li>Falta de insumo na produção — avisar imediatamente, buscar reposição, pausar venda se
+      necessário</li>
+    </ul>
+    <h3 class="sub">Rotina de limpeza da cozinha</h3>
+    <ul class="pontos">
+      <li>Louça sempre limpa, organizada, disponível para uso</li>
+      <li>Manter a vitrine organizada, abastecida e visualmente bonita</li>
+      <li>Sempre recolher louça da loja para a cozinha, evitando acumular no salão</li>
+      <li>Sem pedido no momento: organizar a cozinha, limpar, repor insumo, verificar estoque</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 11 ══════ -->
+  <section>
+    <h2><span class="n">11</span> Limpeza e Organização — Konclui<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O documento-fonte só registra a intenção: &ldquo;Treinamento do Konclui — montar com o ChatGPT e
+      gravar na loja&rdquo;, cobrindo como usar o Konclui, limpeza do salão e limpeza da cozinha. Ainda
+      não foi montado.
+    </span></div>
+  </section>
+
+  <div class="grupo">Atendimento</div>
+
+  <!-- ══════ 12 ══════ -->
+  <section>
+    <h2><span class="n">12</span> Atendimento na Loja<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Como servir um cliente na mesa</h3>
+    <ol class="passos">
+      <li>Tentar identificar quem é, antes de servir</li>
+      <li>Chamar o cliente o mais discretamente possível — nunca gritar, muito menos da porta da
+      cozinha</li>
+      <li>Sorrir e cumprimentar: bom dia, boa tarde, olá</li>
+      <li>Ao entregar: apresentar o pedido, falar os sabores dos cookies, avisar quando o cookie
+      estiver quente</li>
+      <li>Falar &ldquo;boa sobremesa&rdquo;</li>
+      <li>Pedir licença ao se retirar</li>
+    </ol>
+    <div class="note-item"><span class="tag bad">o que nunca fazer ao servir</span><span>
+      Colocar o pedido no balcão e sair — o cliente interpreta como descaso. Chegar sem falar nada e só
+      entregar. Chegar com cara fechada.
+    </span></div>
+    <h3 class="sub">Responsabilidades do atendente</h3>
+    <ul class="pontos">
+      <li>Ficar de olho nas mesas, verificando se o pedido está saindo no prazo</li>
+      <li>Entregar os deliverys e conferir se estão no prazo</li>
+      <li>Manter salão, mesas, balcão e estufa de cookies limpos e organizados — a responsabilidade é
+      de quem está no salão, mesmo pedindo ajuda para a cozinha</li>
+      <li>Repor açúcar, guardanapo e itens do acrílico da mesa</li>
+      <li>Aumentar as vendas oferecendo outros produtos, explicando o cardápio, gerando desejo de
+      comprar mais</li>
+      <li>Manter tudo à mão — caixinhas, divisórias, saco kraft</li>
+      <li>Garantir que o pedido delivery vai chegar no prazo</li>
+      <li>Manter a vitrine com cookies, solicitando reposição à cozinha</li>
+      <li>Ser cordial com o cliente e com os motoboys, mesmo que reclamem</li>
+      <li>Sempre sorrir, dar atenção desde que a pessoa entra até se despedir</li>
+      <li>Passagem de turno: deixar quem assume ciente de tudo — mensagens em aberto, clientes na mesa,
+      algo a ser retirado</li>
+    </ul>
+    <h3 class="sub">Como explicar o cardápio</h3>
+    <p class="prose">Cookies menos doces, qual mais indicar, qual mais sai, se tem novidade,
+      combinações. Perguntas mais comuns dos clientes incluem &ldquo;vai demorar muito?&rdquo;.</p>
+  </section>
+
+  <!-- ══════ 13 ══════ -->
+  <section>
+    <h2><span class="n">13</span> Script de Vendas<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O documento-fonte pede &ldquo;scripts de vendas para aumentar o ticket médio&rdquo; como item a
+      criar — nenhum script está escrito ainda.
+    </span></div>
+  </section>
+
+  <!-- ══════ 14 ══════ -->
+  <section>
+    <h2><span class="n">14</span> Atendimento WhatsApp<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O documento-fonte descreve a tarefa, não o conteúdo: &ldquo;pegar as mensagens e criar um
+      documento com as respostas e gravar explicando uma por uma&rdquo;. Ideia de otimização já
+      anotada: usar a marcação de não lidas e ler a conversa anterior para entender o cliente antes de
+      responder.
+    </span></div>
+  </section>
+
+  <!-- ══════ 15 ══════ -->
+  <section>
+    <h2><span class="n">15</span> Plataformas — iFood / 99Food / Cardápio Web<span class="status parcial">parcial</span></h2>
+    <div class="note-item"><span class="tag warn">o que existe: o índice, não o passo a passo</span><span>
+      As três plataformas seguem a mesma estrutura de conteúdo — falta gravar o passo a passo de cada
+      item.
+    </span></div>
+    <ul class="pontos">
+      <li>Gestor de pedidos: visão geral da tela — acompanhar pedidos, cardápio, solicitar motoboy</li>
+      <li>Como acompanhar os pedidos</li>
+      <li>Como pausar ou ativar um item do cardápio</li>
+      <li>Como solicitar um motoboy pela plataforma</li>
+      <li>Como ver as informações do cliente e do pedido</li>
+      <li>Suporte da plataforma — onde falar com ela e onde falar com o cliente</li>
+      <li>Como responder um chat de chamado: quando cabe reembolso, como recusar/aceitar cancelamento,
+      quando cabe arbitragem, o que responder ao cliente em caso de problema</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 16 ══════ -->
+  <section>
+    <h2><span class="n">16</span> Resolvendo Problemas<span class="status parcial">parcial</span></h2>
+    <p class="prose">Os casos estão listados — a solução de cada um ainda não está escrita por
+      extenso.</p>
+    <h3 class="sub">Problemas de entrega</h3>
+    <ul class="pontos">
+      <li>Motoboy saiu com o pedido da loja, mas cancelou depois</li>
+      <li>Motoboy chegou na loja, mas não quis esperar</li>
+      <li>Motoboy chegou sem bag ou alterado</li>
+      <li>Cliente falou que não recebeu</li>
+    </ul>
+    <h3 class="sub">Problemas com cliente na loja</h3>
+    <ul class="pontos">
+      <li>Cliente reclamou do produto</li>
+      <li>Cliente reclamou do atraso</li>
+      <li>Cliente reclamou do atendimento</li>
+      <li>Cliente reclamou de outro cliente ou motoboy</li>
+    </ul>
+  </section>
+
+  <div class="grupo">Transversal</div>
+
+  <!-- ══════ 17 ══════ -->
+  <section>
+    <h2><span class="n">17</span> Regulamento Interno<span class="status parcial">parcial</span></h2>
+    <div class="note-item"><span class="tag warn">o que existe: os tópicos, não o texto da política</span><span>
+      O Fred faz o treinamento presencial ressaltando os principais pontos — falta transformar isso em
+      texto.
+    </span></div>
+    <ul class="pontos">
+      <li>Aviso prévio</li>
+      <li>Regras principais: celular, fumar, atrasos</li>
+      <li>Sistema de advertência, suspensão e demissão por justa causa</li>
+      <li>Explicar antes da pessoa entrar: ajudar a pegar pedido, limpar o que estiver fora do lugar
+      quando parado, lavar banheiro, estacionamento, panos de prato</li>
+      <li>Horas extras — banco de horas. Trabalho em feriado. Reposição de hora faltante ou devendo</li>
+      <li>Mostrar o lado bom: plano de carreira e para onde a pessoa pode crescer</li>
+    </ul>
+  </section>
+
+  <!-- ══════ 18 ══════ -->
+  <section>
+    <h2><span class="n">18</span> Soft Skills<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      Divisão de trabalho já definida no documento-fonte: a Débora lista o dia a dia, o Fred melhora o
+      texto. Assuntos previstos: boa convivência em equipe, como lidar com funcionário novo, como lidar
+      com problema externo que impacta a equipe, produtividade e gestão de tempo, trabalho em equipe,
+      feedback, como resolver e reportar problema. Nada disso está escrito ainda.
+    </span></div>
+  </section>
+
+  <!-- ══════ 19 ══════ -->
+  <section>
+    <h2><span class="n">19</span> RH e Retenção<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">ideia, não decisão</span><span>
+      Criar uma seção de RH levantando práticas e benefícios que fazem a pessoa gostar de trabalhar na
+      empresa. Exemplos levantados: presente no aniversário do filho, lembrancinha no Dia das Mulheres,
+      garrafinha personalizada com o nome — sempre pensando custo-benefício. Ser mais que um emprego:
+      gerar oportunidade de crescimento. No aniversário da pessoa: lembrança individual + comemoração
+      com a equipe. Ideia em aberto: pagar por &ldquo;tempo de casa&rdquo; para reter, calculando
+      distribuição de lucro para quem passa de 12 meses. Nada disso foi decidido ou formalizado.
+    </span></div>
+  </section>
+
+  <!-- ══════ 20 ══════ -->
+  <section>
+    <h2><span class="n">20</span> Módulo Geral de Onboarding<span class="status parcial">parcial</span></h2>
+    <p class="prose">Os temas estão definidos — o texto/vídeo de cada um ainda falta:</p>
+    <ul class="pontos">
+      <li><strong>Conheça a Holy Cook</strong> — da marca e das lojas, mostrando que é lugar de
+      crescimento (tem funcionário que virou franqueado)</li>
+      <li><strong>Sua missão aqui dentro</strong></li>
+      <li><strong>Você também é um cliente</strong> — tratar quem compra como você gosta de ser
+      tratado, lembrando de quando você foi maltratado num mercado, num Uber, numa loja</li>
+      <li><strong>Cargos e responsabilidades</strong></li>
+      <li><strong>Benefícios e oportunidades de crescimento</strong></li>
+      <li><strong>Como trabalhamos</strong> — o que é valorizado aqui dentro</li>
+    </ul>
+  </section>
+
+  <div class="grupo">Treinamento e Onboarding</div>
+
+  <!-- ══════ 21 ══════ -->
+  <section>
+    <h2><span class="n">21</span> O Papel do Treinador<span class="status parcial">parcial</span></h2>
+    <div class="note-item"><span class="tag acc">quem desenha esse papel</span><span>
+      A Débora começa o desenho, o Fred dá o ajuste fino.
+    </span></div>
+    <div class="note-item"><span class="tag warn">a maldição do conhecimento</span><span>
+      Saber fazer não é o mesmo que saber ensinar — por isso existe um treinamento específico para
+      quem vai treinar, não só para quem vai ser treinado.
+    </span></div>
+    <h3 class="sub">Princípios já definidos</h3>
+    <ul class="pontos">
+      <li>&ldquo;Nada é óbvio&rdquo;: delivery vai em kraft, bandeja é só para levar, sorrir para o
+      cliente — tudo precisa ser dito</li>
+      <li>Ensinar várias vezes — no mínimo 3x repassando igual, para pegar os detalhes</li>
+      <li>Reforçar o que a pessoa aprendeu, dar tempo de assimilar, fazer o próprio trabalho de olho
+      nela</li>
+      <li>Regra fixa: não deixar sair pedido da cozinha sem conferência de alguém experiente</li>
+      <li>Mesmo que a pessoa pareça boa rápido, não passar de um dia para o outro — primeiro colocar
+      em atividades que não impactam o cliente (limpeza, louça, organização, reposição, caixinha)</li>
+    </ul>
+    <h3 class="sub">Técnicas de acompanhamento</h3>
+    <ul class="pontos">
+      <li>Perguntas para checar se a pessoa aprendeu de verdade</li>
+      <li>Observação direta e observação indireta</li>
+      <li>Como dar feedback sobre o trabalho</li>
+      <li>Conversa despretensiosa e informal — vida fora do trabalho, onde trabalhava antes, se falava
+      mal de lá (sinal de alerta)</li>
+    </ul>
+    <div class="note-item"><span class="tag bad">falta</span><span>
+      Um relatório padrão sobre a pessoa em treinamento — o documento-fonte registra explicitamente
+      &ldquo;ainda por criar&rdquo;. Ele ajudaria a decidir entre treinar mais ou desligar.
+    </span></div>
+  </section>
+
+  <!-- ══════ 22 ══════ -->
+  <section>
+    <h2><span class="n">22</span> Onboarding 3 Dias — Cozinha<span class="status pronto">pronto</span></h2>
+    <p class="prose">Cada dia em 3 partes: Teoria (assistir ao treinamento) → Reforço da teoria
+      (repassar com alguém experiente) → Prática.</p>
+    <h3 class="sub">Dia 1</h3>
+    <ul class="pontos">
+      <li><strong>Teoria:</strong> dar o acesso, ajudar e garantir que a pessoa entendeu o que precisa
+      fazer</li>
+      <li><strong>Reforço:</strong> repassar na cozinha — como ler a comanda, como montar cada pedido,
+      testar se memorizou a decoração dos cookies</li>
+      <li><strong>Prática:</strong> montar os pedidos que chegarem</li>
+    </ul>
+    <div class="note-item"><span class="tag bad">o que a pessoa não faz no dia 1</span><span>
+      Montar bebida sozinha. Fechar embalagem sem alguém conferir antes. Modelar e assar cookies.
+      Entregar pedido para o motoboy sem supervisão.
+    </span></div>
+    <h3 class="sub">Dia 2</h3>
+    <ul class="pontos">
+      <li><strong>Teoria:</strong> equipamentos, insumos, boas práticas, cookies, bebidas, sorvete,
+      salgados, brownie, torta</li>
+      <li><strong>Reforço:</strong> repassar o conteúdo do dia anterior + o novo</li>
+      <li><strong>Prática:</strong> aprender modelagem e decoração de cookie na prática; toda bebida,
+      sorvete ou salgado que sair, fazer acompanhado de alguém experiente</li>
+    </ul>
+    <h3 class="sub">Dia 3</h3>
+    <p class="prose">Limpeza e Organização da Loja + Valores Holy Cook (+ Atendimento, quando o
+      treinamento de atendimento estiver pronto — ainda não está).</p>
+  </section>
+
+  <!-- ══════ 23 ══════ -->
+  <section>
+    <h2><span class="n">23</span> Teste de Vaga — Forno / Cozinha<span class="status pronto">pronto</span></h2>
+    <h3 class="sub">Estrutura do dia (freelancer ou candidato novo)</h3>
+    <p class="prose">5 horas — 1h assistindo vídeo, 4h de prática assistida. Horário: 11h30 às 16h30;
+      até 12h30 assiste ao vídeo, depois entra na produção e pega os picos. Treinador disponível de
+      12h30 às 16h30.</p>
+    <h3 class="sub">Roteiro — Preparação de Pedidos</h3>
+    <ol class="passos">
+      <li>1h de vídeo, com 10 min de conversa + revisão do que viu</li>
+      <li>10 min de apresentação da cozinha</li>
+      <li>20 min observando o trabalho acontecer</li>
+      <li>1h30 de teste prático preparando pedidos de delivery</li>
+      <li>Mais 1h30: fazer pedido de mesa e bebidas acompanhado</li>
+    </ol>
+    <h3 class="sub">Roteiro — Forno</h3>
+    <ol class="passos">
+      <li>1h de vídeo, com 10 min de conversa + revisão</li>
+      <li>10 min de apresentação da cozinha</li>
+      <li>20 min observando o trabalho — principalmente o forno, mas a cozinha como um todo</li>
+      <li>1h30 de teste prático modelando e assando cookies</li>
+      <li>1h fazendo outras tarefas do forno/cozinha</li>
+    </ol>
+    <h3 class="sub">O que avaliar</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Critério</th><th>O que observar</th></tr></thead>
+      <tbody>
+        <tr><td>Atenção</td><td>Lê a comanda direito, não esquece item, presta atenção nas instruções</td></tr>
+        <tr><td>Agilidade</td><td>Faz rápido, ou fica muito lenta</td></tr>
+        <tr><td>Organização</td><td>Mantém a bancada limpa, organiza utensílio, não faz bagunça</td></tr>
+        <tr><td>Comunicação</td><td>Pergunta quando tem dúvida, avisa quando algo acaba, fala com a equipe</td></tr>
+        <tr><td>Segue padrão</td><td>Coloca divisória, escreve sabor, embala bebida certo — ou improvisa errado</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ══════ 24 ══════ -->
+  <section>
+    <h2><span class="n">24</span> Teste de Vaga — Atendimento<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O documento-fonte marca explicitamente: &ldquo;ver depois do treinamento pronto&rdquo;. Ainda não
+      foi desenhado.
+    </span></div>
+  </section>
+
+  <!-- ══════ 25 ══════ -->
+  <section>
+    <h2><span class="n">25</span> Trilha do Freelancer<span class="status parcial">parcial</span></h2>
+    <p class="prose">A sequência está definida — o conteúdo de cada passo é o que já está (ou ainda
+      não está) escrito nas seções acima:</p>
+    <ol class="passos">
+      <li>Conhecer a Holy e se ambientar</li>
+      <li>Conhecer o cardápio e como o cliente compra</li>
+      <li>Ler comanda e montar pedido</li>
+      <li>Limpeza e organização da loja</li>
+      <li>Cozinha — boas práticas, onde fica cada insumo, como usar cada equipamento</li>
+      <li>Cookies — como assar e como decorar</li>
+      <li>Preparo de bebidas</li>
+      <li>Preparo de sorvetes</li>
+      <li>Preparo de opções salgadas</li>
+      <li>Como fazer o brownie</li>
+      <li>Como fazer a torta de cookie</li>
+    </ol>
+    <div class="note-item"><span class="tag warn">quando o freelancer vira recorrente</span><span>
+      Existe um caminho separado para quando ele passa a ser chamado com mais frequência — o critério
+      de quando isso acontece ainda não está definido.
+    </span></div>
+  </section>
+
+  <!-- ══════ 26 ══════ -->
+  <section>
+    <h2><span class="n">26</span> Trilha — Líder de Loja / Gerente<span class="status falta">falta</span></h2>
+    <div class="note-item"><span class="tag bad">falta escrever</span><span>
+      O papel está descrito filosoficamente (ver a aba Certificação Completa, seção Papéis e
+      Liderança) mas não existe trilha de treinamento formal para chegar lá.
+    </span></div>
+  </section>
+
+  <footer>
+    Documento criado em 15/08/2026, direto dos materiais que o Fred e a Débora já escreveram. É um
+    documento vivo — conforme mais conteúdo for escrito, o checklist de progresso no topo desta página
+    muda junto.
+  </footer>
+
+</div>
+
+</body>
+</html>
