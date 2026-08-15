@@ -61,13 +61,22 @@
   .resumo .parcial .num { color: var(--warn); }
   .resumo .falta .num { color: var(--bad); }
 
-  .grupo { display: flex; align-items: center; gap: .75rem; font-family: var(--mono); font-size: .75rem;
-           font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
-           margin-top: .25rem; }
-  .grupo::after { content: ""; flex: 1; height: 2px; background: var(--ink); }
+  /* ---------- grade de grupos (nível 1) ---------- */
+  .grade-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .6rem; }
+  .grupo-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+               border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
+               display: flex; flex-direction: column; gap: .55rem; color: inherit;
+               transition: border-color .15s, background .15s; }
+  .grupo-btn:hover { border-color: var(--ink-faint); }
+  .grupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .grupo-btn .gnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+                       letter-spacing: .06em; text-transform: uppercase; }
+  .gcontagem { display: flex; gap: .3rem; }
 
-  /* ---------- grade de tópicos (o checklist vira navegação) ---------- */
-  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem; }
+  /* ---------- grade de tópicos (nível 2 — sub-cards do grupo escolhido) ---------- */
+  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem;
+                    margin-top: -.5rem; padding: .9rem; background: var(--surface-2);
+                    border: 1px dashed var(--rule); border-radius: 8px; }
   .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
                 border: 1.5px solid var(--rule); border-radius: 6px; padding: .65rem .85rem;
                 display: flex; flex-direction: column; gap: .4rem; color: inherit;
@@ -161,8 +170,26 @@
     </div>
   </header>
 
-  <div class="grupo">Cozinha</div>
-  <div class="grade-topicos">
+  <div class="grade-grupos">
+    <button class="grupo-btn" data-grupo="cozinha">
+      <span class="gnome">Cozinha</span>
+      <span class="gcontagem"><span class="tag good">6</span><span class="tag warn">1</span><span class="tag bad">4</span></span>
+    </button>
+    <button class="grupo-btn" data-grupo="atendimento">
+      <span class="gnome">Atendimento</span>
+      <span class="gcontagem"><span class="tag good">1</span><span class="tag warn">2</span><span class="tag bad">2</span></span>
+    </button>
+    <button class="grupo-btn" data-grupo="transversal">
+      <span class="gnome">Transversal</span>
+      <span class="gcontagem"><span class="tag warn">2</span><span class="tag bad">2</span></span>
+    </button>
+    <button class="grupo-btn" data-grupo="treinamento">
+      <span class="gnome">Treinamento e Onboarding</span>
+      <span class="gcontagem"><span class="tag good">2</span><span class="tag warn">2</span><span class="tag bad">2</span></span>
+    </button>
+  </div>
+
+  <div class="grade-topicos" data-grupo="cozinha" hidden>
     <button class="topico-btn" data-topico="t01"><span class="tnome">Cookies — Modelagem</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t02"><span class="tnome">Cookies — Decoração</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t03"><span class="tnome">Torta</span><span class="tag warn">parcial</span></button>
@@ -176,8 +203,7 @@
     <button class="topico-btn" data-topico="t11"><span class="tnome">Limpeza e Organização (Konclui)</span><span class="tag bad">falta</span></button>
   </div>
 
-  <div class="grupo">Atendimento</div>
-  <div class="grade-topicos">
+  <div class="grade-topicos" data-grupo="atendimento" hidden>
     <button class="topico-btn" data-topico="t12"><span class="tnome">Atendimento na Loja</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t13"><span class="tnome">Script de Vendas</span><span class="tag bad">falta</span></button>
     <button class="topico-btn" data-topico="t14"><span class="tnome">WhatsApp</span><span class="tag bad">falta</span></button>
@@ -185,16 +211,14 @@
     <button class="topico-btn" data-topico="t16"><span class="tnome">Resolvendo Problemas</span><span class="tag warn">parcial</span></button>
   </div>
 
-  <div class="grupo">Transversal</div>
-  <div class="grade-topicos">
+  <div class="grade-topicos" data-grupo="transversal" hidden>
     <button class="topico-btn" data-topico="t17"><span class="tnome">Regulamento Interno</span><span class="tag warn">parcial</span></button>
     <button class="topico-btn" data-topico="t18"><span class="tnome">Soft Skills</span><span class="tag bad">falta</span></button>
     <button class="topico-btn" data-topico="t19"><span class="tnome">RH e Retenção</span><span class="tag bad">falta</span></button>
     <button class="topico-btn" data-topico="t20"><span class="tnome">Módulo Geral de Onboarding</span><span class="tag warn">parcial</span></button>
   </div>
 
-  <div class="grupo">Treinamento e Onboarding</div>
-  <div class="grade-topicos">
+  <div class="grade-topicos" data-grupo="treinamento" hidden>
     <button class="topico-btn" data-topico="t21"><span class="tnome">O Papel do Treinador</span><span class="tag warn">parcial</span></button>
     <button class="topico-btn" data-topico="t22"><span class="tnome">Onboarding 3 Dias — Cozinha</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t23"><span class="tnome">Teste de Vaga — Forno/Cozinha</span><span class="tag good">pronto</span></button>
@@ -872,6 +896,18 @@
 </div>
 
 <script>
+  function abrirGrupo(id) {
+    document.querySelectorAll('.grupo-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.grupo === id);
+    });
+    document.querySelectorAll('.grade-topicos').forEach(function (g) {
+      g.hidden = g.dataset.grupo !== id;
+    });
+  }
+  document.querySelectorAll('.grupo-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirGrupo(b.dataset.grupo); });
+  });
+
   function abrirTopico(id) {
     document.querySelectorAll('.topico-btn').forEach(function (b) {
       b.classList.toggle('ativo', b.dataset.topico === id);
@@ -897,7 +933,12 @@
   });
 
   var inicial = location.hash.replace('#', '');
-  if (/^t\d+$/.test(inicial)) abrirTopico(inicial);
+  if (/^t\d+$/.test(inicial)) {
+    var botaoInicial = document.querySelector('.topico-btn[data-topico="' + inicial + '"]');
+    var gradeInicial = botaoInicial && botaoInicial.closest('.grade-topicos');
+    if (gradeInicial) abrirGrupo(gradeInicial.dataset.grupo);
+    abrirTopico(inicial);
+  }
 </script>
 
 </body>
