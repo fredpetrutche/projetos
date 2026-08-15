@@ -120,12 +120,14 @@
   footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
            padding-top: 1rem; line-height: 1.6; }
 
-  .tabs { display: flex; gap: .3rem; border-bottom: 2px solid var(--ink); }
-  .tab-btn { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
-             font-weight: 600; color: var(--ink-faint); background: none; border: none; cursor: pointer;
-             padding: .65rem .95rem .6rem; border-bottom: 2px solid transparent; margin-bottom: -2px; }
-  .tab-btn:hover { color: var(--ink); }
-  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: 1rem; letter-spacing: .02em;
+             font-weight: 700; color: var(--ink-soft); background: var(--surface);
+             border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer;
+             padding: .7rem 1.4rem; transition: border-color .15s, color .15s, background .15s, box-shadow .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent);
+                     box-shadow: 0 1px 0 rgba(0,0,0,.08); }
   .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
   .tab-panel[hidden] { display: none; }
 </style>
