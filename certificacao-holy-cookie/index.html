@@ -114,6 +114,7 @@
 
   .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
   table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 26rem; }
+  table.tres-col { min-width: 40rem; }
   th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
   thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
              font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
@@ -270,55 +271,71 @@
 
   <!-- ══════ 3 ══════ -->
   <section>
-    <h2><span class="n">3</span> A checklist<span class="hint">rascunho — no formato dos checklists do Sistema-HC</span></h2>
+    <h2><span class="n">3</span> A checklist<span class="hint">duas colunas — quem avalia de fora vê uma coisa, quem tá dentro vê outra</span></h2>
     <p class="prose">
-      Mesmo molde dos checklists que já rodam no Sistema-HC (<em>ÁREA — pergunta objetiva</em>,
-      tipo <code>check</code>/<code>número</code>/<code>foto</code>/<code>texto</code>, evidência em
-      foto por bloco) — mas a pergunta muda de <strong>&ldquo;a tarefa foi feita?&rdquo;</strong>
-      para <strong>&ldquo;o que chegou pro cliente está bom?&rdquo;</strong>. Coluna
-      &ldquo;onde&rdquo; reaproveita o campo <code>tipo_operacao</code> que o Sistema-HC já tem
-      (loja / delivery / ambos), pra um checklist só servir os dois contextos.
+      Duas checklists lado a lado, não uma. <strong>Cliente / Avaliador</strong> é quem recebe o
+      produto e julga o resultado — cliente oculto, você. <strong>Colaborador</strong> é a equipe se
+      autoverificando todo dia, só com o que dá pra checar sem depender de opinião — fato objetivo
+      ou foto. Onde os dois pedem a mesma coisa que já existe num checklist do Sistema-HC (Abertura /
+      Meio do Dia / Fechamento), a coluna Colaborador <strong>substitui</strong> aquele item — não
+      duplica.
     </p>
 
     <h3 class="sub">Produto</h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Pergunta / critério</th><th>Tipo</th><th>Onde</th></tr></thead>
+    <div class="tablewrap"><table class="tres-col">
+      <thead><tr><th>Ponto</th><th>Cliente / Avaliador</th><th>Colaborador</th></tr></thead>
       <tbody>
-        <tr><td>Está fresco — não ressecado, não requentado?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>Fornada no ponto — nem crua, nem passada?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>O recheio aparece e está na quantidade certa ao partir?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>Chegou quente/morno na casa do cliente?</td><td>check</td><td>delivery</td></tr>
-        <tr><td>Bebida bem feita — não aguada, sabor e temperatura certos?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>Evidência: foto do produto recebido</td><td>foto</td><td>ambos</td></tr>
+        <tr><td>Frescor</td><td>Está fresco — não ressecado, não requentado? <em>· check</em></td>
+          <td>O cookie saiu do forno há menos de 2–3h? <em>· check</em></td></tr>
+        <tr><td>Ponto de forno</td><td>Fornada no ponto — nem crua, nem passada? <em>· check</em></td>
+          <td>Mesma pergunta — quem assa vê na hora <em>· check</em></td></tr>
+        <tr><td>Recheio</td><td>Aparece e está na quantidade certa ao partir? <em>· check</em></td>
+          <td>Foto do corte mostrando o recheio <em>· foto</em></td></tr>
+        <tr><td>Temperatura na entrega</td><td>Chegou quente/morno na casa do cliente? <em>· check · delivery</em></td>
+          <td>Foi aquecido conforme o padrão antes de sair? <em>· check</em> — como verificar de fato ainda em aberto</td></tr>
+        <tr><td>Bebida</td><td>Bem feita — não aguada, sabor e temperatura certos? <em>· check</em></td>
+          <td>Foto da bebida pronta <em>· foto</em></td></tr>
+        <tr><td>Evidência</td><td>Foto do produto recebido <em>· foto</em></td>
+          <td>coberta pelas fotos específicas acima</td></tr>
       </tbody>
     </table></div>
 
     <h3 class="sub">Atendimento</h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Pergunta / critério</th><th>Tipo</th><th>Onde</th></tr></thead>
+    <div class="tablewrap"><table class="tres-col">
+      <thead><tr><th>Ponto</th><th>Cliente / Avaliador</th><th>Colaborador</th></tr></thead>
       <tbody>
-        <tr><td>Foi recebido com sorriso e cumprimento?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>O atendente demonstrou conhecer o cardápio — soube indicar/recomendar?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>Alguém perguntou se precisava de algo, ou se estava tudo bem, durante ou depois do pedido?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>O tempo de espera foi razoável, sem demora longa sem explicação?</td><td>check</td><td>ambos</td></tr>
-        <tr><td>Nota de 0 a 10 para o atendimento</td><td>número</td><td>ambos</td></tr>
-        <tr><td>O que aconteceu, em poucas palavras (bom ou ruim)</td><td>texto</td><td>ambos</td></tr>
+        <tr><td>Recepção</td><td>Foi recebido com sorriso e cumprimento? <em>· check</em></td><td>— via câmera</td></tr>
+        <tr><td>Conhecimento do cardápio</td><td>Atendente soube indicar/recomendar? <em>· check</em></td><td>— via câmera</td></tr>
+        <tr><td>Pós-pedido</td><td>Perguntaram se precisava de algo, durante ou depois? <em>· check</em></td><td>— via câmera</td></tr>
+        <tr><td>Tempo de espera</td><td>Razoável, sem demora sem explicação? <em>· check</em></td><td>— via câmera</td></tr>
+        <tr><td>Nota</td><td>0 a 10 para o atendimento <em>· número</em></td><td>—</td></tr>
+        <tr><td>Relato</td><td>O que aconteceu, em poucas palavras <em>· texto</em></td><td>—</td></tr>
       </tbody>
     </table></div>
+    <div class="note-item"><span class="tag warn">não é autopreenchimento — é revisão de câmera</span><span>
+      A coluna Colaborador fica vazia de propósito: atendimento não se autoavalia direito. A câmera
+      <strong>já existe</strong>. Falta nomear quem revisa e com que frequência — em aberto, aguardando
+      validação.
+    </span></div>
     <div class="note-item"><span class="tag acc">o item que hoje não existe</span><span>
-      &ldquo;Alguém perguntou se precisava de algo&rdquo; é o pós-pedido — o único ponto do
+      &ldquo;Perguntaram se precisava de algo&rdquo; é o pós-pedido — o único ponto do
       <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a> que a operação não faz hoje.
     </span></div>
 
-    <h3 class="sub">Loja<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — só se aplica à visita presencial</span></h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Pergunta / critério</th><th>Tipo</th><th>Onde</th></tr></thead>
+    <h3 class="sub">Loja<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — Cliente/Avaliador só se aplica à visita presencial</span></h3>
+    <div class="tablewrap"><table class="tres-col">
+      <thead><tr><th>Ponto</th><th>Cliente / Avaliador</th><th>Colaborador</th></tr></thead>
       <tbody>
-        <tr><td>Balcão e vitrine limpos, sem gordura visível?</td><td>check</td><td>loja</td></tr>
-        <tr><td>Mesa e cadeira em que sentei estavam limpas?</td><td>check</td><td>loja</td></tr>
-        <tr><td>Banheiro limpo (se usado)?</td><td>check</td><td>loja</td></tr>
-        <tr><td>Temperatura do ambiente agradável?</td><td>check</td><td>loja</td></tr>
-        <tr><td>Evidência: foto da vitrine/ambiente</td><td>foto</td><td>loja</td></tr>
+        <tr><td>Balcão / vitrine</td><td>Sem gordura visível? <em>· check</em></td>
+          <td>Foto do balcão/vitrine — <strong>substitui</strong> a evidência equivalente da Abertura <em>· foto</em></td></tr>
+        <tr><td>Mesa / cadeira</td><td>Limpas? <em>· check</em></td>
+          <td>Foto das mesas — <strong>substitui</strong> item equivalente de Abertura/Meio do Dia <em>· foto</em></td></tr>
+        <tr><td>Banheiro</td><td>Limpo (se usado)? <em>· check</em></td>
+          <td>Foto do banheiro — <strong>substitui</strong> a evidência que já existe na Abertura <em>· foto</em></td></tr>
+        <tr><td>Temperatura do ambiente</td><td>Agradável? <em>· check</em></td>
+          <td>Novo — não existe hoje <em>· check</em></td></tr>
+        <tr><td>Evidência</td><td>Foto da vitrine/ambiente <em>· foto</em></td>
+          <td>mesma foto reaproveitada acima</td></tr>
       </tbody>
     </table></div>
     <div class="note-item"><span class="tag warn">candidato a item crítico</span><span>
@@ -326,19 +343,26 @@
       quais itens são críticos ainda é uma das 4 perguntas em aberto do
       <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a>. Não decidido aqui.
     </span></div>
+    <div class="note-item"><span class="tag bad">plano, não execução</span><span>
+      &ldquo;Substitui&rdquo; aqui é a intenção registrada — mexer de verdade nas tarefas do banco do
+      Sistema-HC (desativar a antiga, ligar a nova) precisa do seu aval item a item antes de rodar.
+    </span></div>
 
     <h3 class="sub">Geral</h3>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Pergunta / critério</th><th>Tipo</th><th>Onde</th></tr></thead>
+    <div class="tablewrap"><table class="tres-col">
+      <thead><tr><th>Ponto</th><th>Cliente / Avaliador</th><th>Colaborador</th></tr></thead>
       <tbody>
-        <tr><td>Você voltaria a essa loja?</td><td>check</td><td>ambos</td></tr>
+        <tr><td>NPS</td><td>Você voltaria a essa loja? <em>· número 0–10</em></td>
+          <td>não se aplica — a nota já sai das perguntas de cima</td></tr>
       </tbody>
     </table></div>
 
-    <div class="note-item"><span class="tag bad">em aberto</span><span>
-      <strong>Quem preenche</strong> — o link de checklist do Sistema-HC hoje é aberto por loja, pra
-      quem está na equipe. Esta checklist mede o que a equipe entrega, então precisa de acesso
-      separado (cliente oculto? você? gerente de outra loja?). Não decidido ainda.
+    <div class="note-item"><span class="tag bad">em aberto — aguardando validação</span><span>
+      <strong>Quem analisa isso todo dia</strong> — ainda não definido, ponto deixado em aberto de
+      propósito. <strong>Quem preenche a coluna Cliente/Avaliador</strong> — o link de checklist do
+      Sistema-HC hoje é aberto por loja, pra quem está na equipe; esta checklist mede o que a equipe
+      entrega, então precisa de acesso separado (cliente oculto? você? gerente de outra loja?). Não
+      decidido ainda.
     </span></div>
   </section>
 
