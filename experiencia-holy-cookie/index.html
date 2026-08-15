@@ -119,6 +119,15 @@
 
   footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
            padding-top: 1rem; line-height: 1.6; }
+
+  .tabs { display: flex; gap: .3rem; border-bottom: 2px solid var(--ink); }
+  .tab-btn { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+             font-weight: 600; color: var(--ink-faint); background: none; border: none; cursor: pointer;
+             padding: .65rem .95rem .6rem; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -136,6 +145,13 @@
       passa, e só então a campanha de fidelização sobe.
     </p>
   </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" type="button" data-tab="pesquisa" role="tab" aria-selected="false">Pesquisa</button>
+  </div>
+
+  <div class="tab-panel" data-panel="briefing" role="tabpanel">
 
   <!-- ══════ 1 ══════ -->
   <section>
@@ -355,6 +371,170 @@
     inclusive a regra de perguntar pela visita de 14/08 antes de sugerir item novo.
   </span></div>
 
+  </div>
+  <!-- ══════ /briefing ══════ -->
+
+  <div class="tab-panel" data-panel="pesquisa" role="tabpanel" hidden>
+
+  <!-- ══════ 1 ══════ -->
+  <section>
+    <h2><span class="n">1</span> Lojas próprias<span class="hint">Google Maps, coletado 14/08/2026</span></h2>
+    <p class="prose">
+      166 avaliações puxadas via scraper (Apify) das duas lojas com ficha no Google Maps — Piracicaba
+      não tem. <strong>Isto é matéria-prima para o checklist, não a lista final</strong> — o que o Fred
+      viu na visita presencial de 14/08 <a href="#" onclick="abrirAba('briefing');return false;">entra
+      antes</a>.
+    </p>
+
+    <h3 class="sub">Paulínia — 4.8★ · 44 avaliações</h3>
+    <div class="note-item"><span class="tag good">manter</span><span>
+      Quase sem reclamação: só 3 notas ≤3, e <strong>as três são do mesmo dia</strong> (24/11/2025) — um
+      turno específico ruim, não um padrão. Elogio dominante (31 comentários nota 5): atendimento,
+      ambiente aconchegante, embalagem cuidada para viagem, cheiro dos doces. A atendente <strong>Iara</strong>
+      foi citada nominalmente.
+    </span></div>
+    <div class="note-item"><span class="tag warn">o turno de 24/11</span><span>
+      Estufa desligada antes da hora de fechar (cookie frio), milkshake malfeito, mudança de horário sem
+      aviso, porta fechada na cara da cliente. Isolado, mas os quatro problemas do mesmo dia sugerem
+      falha de abertura/fechamento de turno, não de receita.
+    </span></div>
+
+    <h3 class="sub">Campinas — 4.4★ · 122 avaliações <span style="font-weight:400;color:var(--ink-faint)">(24% delas ≤4)</span></h3>
+    <div class="note-item"><span class="tag bad">padrão #1 — atendimento inconsistente</span><span>
+      De longe o problema mais citado. Atendentes perdidas no cardápio, mal-humoradas, um caso de
+      deboche com pedido de leite vegetal para intolerante à lactose. A própria loja confirma em várias
+      respostas que são funcionários novos, em treinamento.
+    </span></div>
+    <div class="note-item"><span class="tag bad">padrão #2 — WhatsApp / delivery sem resposta</span><span>
+      Pedido atrasado, reclamação sem retorno, cancelamento por demora — o &ldquo;pós-pedido&rdquo; que o
+      Briefing já apontava como ausente na operação aparece direto nos dados.
+    </span></div>
+    <div class="note-item"><span class="tag bad">padrão #3 — horário inconsistente</span><span>
+      Placa/Google diz um horário, a loja fecha antes, ou recusa venda presencial mesmo com a loja
+      &ldquo;aberta&rdquo; pro delivery. <strong>1 caso grave e isolado:</strong> pedaço de plástico
+      dentro de um cookie — segurança alimentar, candidato natural a item crítico.
+    </span></div>
+    <div class="note-item"><span class="tag good">manter</span><span>
+      Sabor/recheio do cookie, ambiente aconchegante, atendentes nomeadas (<strong>Carol/Carolina</strong>,
+      <strong>Giovanna</strong> a gerente, citada por resolver bem uma reclamação), preço justo.
+    </span></div>
+    <div class="note-item"><span class="tag acc">ponto forte de gestão</span><span>
+      A loja responde quase toda avaliação negativa, com cuidado, às vezes reparando o problema.
+      Reputação já é administrada ativamente — isso facilita ligar o Google mais pra frente.
+    </span></div>
+
+    <div class="tablewrap"><table>
+      <thead><tr><th>Pilar</th><th>O que os dados confirmam</th></tr></thead>
+      <tbody>
+        <tr><td>Produto</td><td>Poucas queixas de produto em si — cookie cru/frio aparece como sintoma
+        de atendimento/operação, não de receita</td></tr>
+        <tr class="mark"><td>Experiência</td><td>É onde mora quase todo problema. Atendimento
+        inconsistente é o item #1; o pós-pedido ausente aparece nos dados</td></tr>
+        <tr><td>Ambiente</td><td>Sinal fraco nas lojas próprias, mas específico quando aparece: mesa
+        suja, barulho, espaço pequeno, área kids em conflito com adultos</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ══════ 2 ══════ -->
+  <section>
+    <h2><span class="n">2</span> Concorrentes<span class="hint">planilha de preços de abr/2026 → Google Maps</span></h2>
+    <p class="prose">
+      Da planilha antiga de preços (19 concorrentes de Campinas), <strong>15 foram confirmados</strong>
+      no Google Maps com dados reais (~1.500 avaliações). <strong>4 não localizei com confiança:</strong>
+      Free Taste, Mafi Confeitaria e Prazer Cacau não retornaram nenhum resultado mesmo com busca ampla
+      — podem ter fechado ou mudado de nome; &ldquo;Miami Cookies&rdquo; caiu numa loja de departamento
+      de 5.370 avaliações, claramente outro negócio, e foi descartado.
+    </p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Loja</th><th>Nota</th><th>Amostra</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Journey Cookies</td><td>5.0</td><td>23</td><td>zero nota ≤4 na amostra</td></tr>
+        <tr><td>Agda's Candy</td><td>5.0</td><td>9</td><td>amostra pequena</td></tr>
+        <tr><td>Monide</td><td>4.9</td><td>150/153</td><td>&ldquo;boutique&rdquo; premium, Barão Geraldo</td></tr>
+        <tr><td>Mestre Poke</td><td>4.9</td><td>150/233</td><td>loja mista (poke + tacos/burritos)</td></tr>
+        <tr><td>Cookie O'Clock</td><td>4.9</td><td>42</td><td>produção à vista é o diferencial mais citado</td></tr>
+        <tr><td>Desejo Açucarado</td><td>4.8</td><td>117</td><td>confeitaria, Vila Itapura</td></tr>
+        <tr class="mark"><td>Holy Cookie Paulínia</td><td>4.8</td><td>44</td><td>—</td></tr>
+        <tr><td>Giralda Doceira</td><td>4.6</td><td>95</td><td>Cambuí</td></tr>
+        <tr><td>Guaco</td><td>4.6</td><td>150/3.381</td><td>maior volume de longe, loja grande</td></tr>
+        <tr><td>Mundo dos Cookies II</td><td>4.6</td><td>7</td><td>amostra pequena</td></tr>
+        <tr><td>More Cookies</td><td>4.5</td><td>88</td><td>mesmo bairro da Holy Campinas (Jd. Guanabara)</td></tr>
+        <tr><td>Q! Donuts</td><td>4.5</td><td>150/308</td><td>queixa forte de ambiente (ver seção 3)</td></tr>
+        <tr class="mark"><td>Holy Cookie Campinas</td><td>4.4</td><td>122</td><td>—</td></tr>
+        <tr><td>American Cookies</td><td>4.4</td><td>27</td><td>Shopping Iguatemi</td></tr>
+        <tr><td>Mr. Cheney (Iguatemi)</td><td>4.3</td><td>150/254</td><td>atendimento é o problema recorrente</td></tr>
+        <tr><td>Biscoitê</td><td>3.8</td><td>41</td><td>delivery mal resolvido puxa a nota pra baixo</td></tr>
+        <tr><td>Bulk Cookies</td><td>2.7</td><td>6</td><td>amostra pequena, telefone não atende</td></tr>
+      </tbody>
+    </table></div>
+    <p class="prose">
+      As duas lojas Holy ficam no meio do grupo — nem no fundo, nem isoladas na frente. A More Cookies,
+      a poucos metros da Holy Campinas, está em 4.5.
+    </p>
+  </section>
+
+  <!-- ══════ 3 ══════ -->
+  <section>
+    <h2><span class="n">3</span> Sinais de ambiente<span class="hint">o que se repete no grupo inteiro</span></h2>
+    <div class="pilares" style="grid-template-columns:repeat(2,1fr)">
+      <div>
+        <span class="n" style="background:var(--good);color:var(--accent-ink)">puxa pra cima</span>
+        <span class="t">Elogio recorrente</span>
+        <ul>
+          <li>Ver o produto sendo feito — Cookie O'Clock (&ldquo;poder ver as bolachas sendo feitas é
+          genial&rdquo;) e Journey Cookies. Produção à vista vira parte da experiência, não só cheiro</li>
+          <li>Decoração com identidade própria — não &ldquo;limpo e organizado&rdquo; genérico, e sim algo
+          que vira motivo de comentário (Monide &ldquo;boutique&rdquo;, Giralda com decoração sazonal)</li>
+          <li>Climatização — ar-condicionado citado como diferencial positivo várias vezes</li>
+          <li>Pet friendly — citado uma vez, positivo (Giralda)</li>
+          <li>Mesas suficientes e confortáveis — quando existe, vira elogio explícito</li>
+        </ul>
+      </div>
+      <div>
+        <span class="n" style="background:var(--bad);color:var(--accent-ink)">puxa pra baixo</span>
+        <span class="t">Queixa recorrente</span>
+        <ul>
+          <li><strong>Estacionamento</strong> — de longe a queixa física mais repetida no grupo todo (Mr.
+          Cheney, Q! Donuts, Biscoitê, Desejo Açucarado)</li>
+          <li>Poucas mesas / não convidativo pra ficar — segunda queixa física mais repetida</li>
+          <li>Som alto / música incômoda — motivo isolado de nota 1 num concorrente (&ldquo;som alto e
+          música irritante... odor incômodo... ar-condicionado desligado&rdquo;)</li>
+          <li>Banheiro sujo — sempre junto de &ldquo;sujeira nas paredes&rdquo;, contamina a percepção do
+          produto todo</li>
+          <li>Manutenção do espaço — &ldquo;paredes descascando, precisa de manutenção urgente&rdquo;
+          (More Cookies) — cookie bom não segura ambiente mal cuidado</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 4 ══════ -->
+  <section>
+    <h2><span class="n">4</span> Candidatos a item — pilar Ambiente<span class="hint">matéria-prima, não a lista final</span></h2>
+    <p class="prose">
+      Cruzando os dois levantamentos acima. <strong>Isto não substitui a seção 4.3 do Briefing</strong> —
+      o que o Fred viu com os próprios olhos entra antes do que veio de fora.
+    </p>
+    <div class="pilares" style="grid-template-columns:1fr">
+      <div>
+        <ul>
+          <li>Estufa/vitrine ligada e na temperatura certa no horário de funcionamento anunciado</li>
+          <li>Mesas suficientes para o movimento do horário, e mesa limpa quando o cliente senta</li>
+          <li>Volume de música — existe faixa aceitável, não é ausência de música</li>
+          <li>Banheiro limpo e com papel disponível</li>
+          <li>Ar-condicionado ligado e funcionando</li>
+          <li>Estado de conservação de parede/piso/mobiliário — não só limpeza, manutenção</li>
+          <li>Área kids não conflitar com o espaço do público adulto</li>
+          <li>Cheiro do ambiente — positivo (forno/produção) vs. odor incômodo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </div>
+  <!-- ══════ /pesquisa ══════ -->
+
   <footer>
     Projeto aberto em 14/08/2026, a partir da objeção levantada pelo Fred de que os três pilares podem
     matar a campanha de fidelização sem que ela leve a culpa certa. O checklist ainda não existe —
@@ -363,6 +543,25 @@
   </footer>
 
 </div>
+
+<script>
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome; else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); });
+  });
+  var inicial = location.hash.replace('#', '');
+  if (inicial === 'pesquisa') abrirAba('pesquisa');
+</script>
 
 </body>
 </html>
