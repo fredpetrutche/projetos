@@ -5,6 +5,16 @@
 > projeto pronto, como card novo da seção **Produto & Experiência**.
 >
 > Página no ar: https://fredpetrutche.github.io/projetos/certificacao-holy-cookie/
+> Material real (manual): https://fredpetrutche.github.io/projetos/certificacao-holy-cookie/material/
+
+**Duas páginas, papéis diferentes — não confundir:**
+- **A página principal** (Briefing / 80-20 / Completa) é o **plano do projeto** — fases, papéis,
+  processo, o que falta decidir. É o que se mostra pra entender o projeto.
+- **O Material** (`material/index.html`) é o **manual de verdade** — o que vai pra líder, treinador
+  e funcionário: receita, script, passo a passo. Tem um checklist de progresso no topo (X prontos /
+  Y parciais / Z faltam) porque é um documento vivo, construído aos poucos. **Sempre que mais
+  conteúdo for escrito nos documentos-fonte do Fred/Débora, atualizar o Material e o checklist
+  junto** — não deixar o checklist ficar desatualizado.
 
 ---
 
@@ -192,17 +202,35 @@ local:
    nomeadas, e o roteiro macro em 8 passos.
    Fonte: `docs.google.com/document/d/1SpEzsHraTRBiX7tBcSLQ7IJUBg7sY2-AbuqR61CjLAM`
 
-**Decisão tomada sem perguntar, registrada aqui para revisão:** os dois documentos têm receita e
-gramatura detalhada de cada produto (cookies, torta, brownie, croissant, bebidas). Isso **não foi
-publicado na página** — é conteúdo operacional proprietário, e a página vive numa URL do GitHub
-Pages que, mesmo sem estar linkada em lugar nenhum, é tecnicamente pública. A aba "Certificação
-completa" traz a **estrutura** (fases, papéis, lista de certificações, o processo de 4 passos, o
-molde de currículo, o papel do Treinador, o onboarding de 3 dias) com link pros dois documentos
-como fonte completa. **Se o Fred quiser o detalhe de receita na página também, é só pedir** — a
-omissão foi uma escolha de segurança, não falta de conteúdo.
+**Decisão inicial (revertida pelo Fred):** a primeira versão manteve receita e gramatura fora da
+página, por ser conteúdo operacional numa URL tecnicamente pública. Perguntei explicitamente — o
+Fred escolheu **trazer tudo pra página mesmo assim**. Está publicado em `material/index.html`.
 
-Os arquivos `.md` ficaram só no Downloads do Fred — não foram commitados no repo `projetos`
-(mesma lógica: não colocar receita em repositório público).
+Os arquivos `.md` originais ficaram só no Downloads do Fred — não foram commitados no repo
+`projetos` (o conteúdo deles já foi extraído e organizado no Material; não há motivo pra duplicar
+o arquivo bruto no repo).
+
+---
+
+## 11. O MATERIAL DE CERTIFICAÇÃO — o manual, separado do plano
+
+Pedido explícito do Fred em 15/08/2026: a página principal (Briefing/80-20/Completa) é o
+**plano**; o manual que vai pra líder, treinador e funcionário é **um documento separado**, porque
+ele mesmo vai continuar preenchendo/construindo esse material ao longo do tempo — junto com a
+Débora.
+
+Está em `certificacao-holy-cookie/material/index.html`. Estrutura:
+- Um **checklist de progresso** no topo (tabela Área/Tópico/Status + resumo numérico), porque
+  montar o manual inteiro é muito trabalho e o Fred pediu visibilidade do que falta
+- 26 tópicos mapeados em 15/08/2026, agrupados em Cozinha / Atendimento / Transversal /
+  Treinamento e Onboarding — cada um com status **pronto** (conteúdo completo no
+  documento-fonte), **parcial** (estrutura existe, falta preencher) ou **falta** (só a intenção
+  está registrada)
+
+**Como manter isso vivo:** toda vez que o Fred/Débora escreverem mais conteúdo (nos documentos
+originais ou direto numa conversa), atualizar a seção correspondente no Material **e** o status
+dela no checklist do topo — os dois são a mesma fonte de verdade, não deixar dessincronizar. Não
+inventar conteúdo pra fechar um item "parcial" ou "falta" — copiar apenas o que existir na fonte.
 
 ---
 
