@@ -87,6 +87,22 @@
                    background: var(--surface); border: 1px solid var(--accent); border-radius: 2px;
                    padding: .1rem .4rem; }
 
+  .pilares { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+             background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 50rem) { .pilares { grid-template-columns: 1fr; } }
+  .pilares > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .5rem; }
+  .pilares .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .pilares ul { list-style: none; display: grid; gap: .3rem; font-size: .8125rem; color: var(--ink-soft); }
+  .pilares li { padding-left: .8rem; position: relative; line-height: 1.45; }
+  .pilares li::before { content: ""; position: absolute; left: 0; top: .5rem; width: .28rem; height: .28rem;
+                        border-radius: 50%; background: var(--accent); }
+  .pilares .fonte { font-family: var(--mono); font-size: .625rem; color: var(--ink-faint);
+                    border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .divisor { display: flex; align-items: center; gap: .75rem; font-family: var(--mono); font-size: .6875rem;
+             letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
+  .divisor::before, .divisor::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
   ol.perg { list-style: none; display: grid; gap: 1px; background: var(--rule);
             border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
   ol.perg > li { background: var(--surface); padding: .9rem 1.1rem;
@@ -117,7 +133,8 @@
       Nos comentários das lojas — elogio e reclamação — <strong>atendimento</strong> é o assunto que mais
       aparece, e o problema se repete em todas: falta de <strong>uniformidade</strong>. A resposta é treinar
       até a pessoa provar que sabe, com prova oral e prova física, e credenciá-la — como uma <em>OAB da
-      loja</em>.
+      loja</em>. O projeto entra em duas camadas: primeiro um MVP — a <strong>Certificação 80/20</strong> —,
+      depois a certificação master completa.
     </p>
   </header>
 
@@ -154,7 +171,80 @@
 
   <!-- ══════ 3 ══════ -->
   <section>
-    <h2><span class="n">3</span> As funções<span class="hint">em laranja, as que ainda não têm desenho</span></h2>
+    <h2><span class="n">3</span> Duas camadas<span class="hint">o 80/20 vem primeiro</span></h2>
+    <p class="prose">
+      Tudo que vem depois da seção 5 — funções, provas, certificador, bonificação — é o
+      <strong>projeto master</strong>: a certificação completa. Antes dele entra uma camada mais rasa,
+      que já pode rodar: a <strong>Certificação 80/20</strong>, o mínimo viável de uma boa experiência
+      de loja.
+    </p>
+    <div class="note-item"><span class="tag acc">o alvo do 80/20, na frase do Fred</span><span>
+      &ldquo;Não estou trabalhando agora em como ser a loja Conceito Master perfeita — preciso garantir
+      pra não deixar cair aqui todo dia. Cliente chega, a loja tá minimamente limpa, o produto tá bom, o
+      atendimento é razoável pra bom. <em>Pronto — voltaria nessa loja.</em>&rdquo;
+    </span></div>
+  </section>
+
+  <!-- ══════ 4 ══════ -->
+  <section>
+    <h2><span class="n">4</span> O 80/20<span class="hint">os três pilares mínimos</span></h2>
+    <div class="pilares">
+      <div>
+        <span class="t">Produto</span>
+        <ul>
+          <li>Toda fornada sai boa — nem queimada, nem crua</li>
+          <li>Quantidade certa de insumos — não &ldquo;no olho&rdquo;</li>
+          <li>Bebidas bem feitas</li>
+          <li>Cookie chega quente na casa do cliente, no delivery</li>
+        </ul>
+        <span class="fonte">o critério real não é &ldquo;idade&rdquo; — é execução: produto novo mal
+        assado também é ruim</span>
+      </div>
+      <div>
+        <span class="t">Atendimento</span>
+        <ul>
+          <li>Sorriso no rosto, prestativo</li>
+          <li>Dar atenção ao cliente</li>
+          <li>Perguntar se tá tudo certo, se precisa de algo</li>
+          <li>Ser anfitrião — quem atende gosta do produto</li>
+        </ul>
+        <span class="fonte">&ldquo;isso aqui já resolve 90% dos problemas&rdquo; — o nível excepcional
+        fica pra depois</span>
+      </div>
+      <div>
+        <span class="t">Loja</span>
+        <ul>
+          <li>Minimamente limpa nas coisas mais importantes — não em tudo</li>
+          <li>Balcão e vitrine limpos vêm antes da cozinha — é o que o cliente vê</li>
+          <li>Vitrine gordurosa passa a mesma sensação de &ldquo;copo sujo&rdquo;</li>
+        </ul>
+        <span class="fonte">bagunça de cozinha é interna — fica de fora do 80/20</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 5 ══════ -->
+  <section>
+    <h2><span class="n">5</span> O que fica de fora do 80/20</h2>
+    <div class="note-item"><span class="tag warn">cada loja tem o seu</span><span>
+      Calor em Piracicaba, fachada em Campinas — são específicos de cada loja e viram item daquela loja,
+      não critério geral.
+    </span></div>
+    <div class="note-item"><span class="tag warn">fica pra depois</span><span>
+      O nível &ldquo;excepcional&rdquo; de atendimento — conversa de nível com cada cliente — é outro
+      patamar, fora do 80/20 por agora.
+    </span></div>
+    <div class="note-item"><span class="tag acc">ferramenta planejada</span><span>
+      Montar a lista com <strong>fotos de referência</strong> (ex.: foto de vitrine bonita), pra dar
+      padrão visual — não só descrição em texto.
+    </span></div>
+  </section>
+
+  <div class="divisor"><span>Certificação master — o desenho completo</span></div>
+
+  <!-- ══════ 6 ══════ -->
+  <section>
+    <h2><span class="n">6</span> As funções<span class="hint">em laranja, as que ainda não têm desenho</span></h2>
     <p class="prose">Funções operacionais da loja — cada uma vira uma certificação própria:</p>
     <div class="funcoes">
       <div><span class="t">Atendimento</span><span class="d">Quem vende no balcão.</span></div>
@@ -176,7 +266,7 @@
 
   <!-- ══════ 4 ══════ -->
   <section>
-    <h2><span class="n">4</span> Como funciona o mecanismo<span class="hint">modelo OAB</span></h2>
+    <h2><span class="n">7</span> Como funciona o mecanismo<span class="hint">modelo OAB</span></h2>
     <ol class="perg ok">
       <li><span class="num">01</span><span class="q">Mapear a função</span>
         <span class="d">O que essa função faz de verdade na loja, hoje.</span></li>
@@ -201,7 +291,7 @@
 
   <!-- ══════ 5 ══════ -->
   <section>
-    <h2><span class="n">5</span> O que falta decidir<span class="hint">ninguém aqui inventa resposta — só o Fred / a operação</span></h2>
+    <h2><span class="n">8</span> O que falta decidir<span class="hint">ninguém aqui inventa resposta — só o Fred / a operação</span></h2>
     <ol class="perg">
       <li><span class="num">01</span><span class="q">O currículo de cada função</span>
         <span class="d">O que exatamente entra na prova, função por função.</span></li>
@@ -228,7 +318,7 @@
 
   <!-- ══════ 6 ══════ -->
   <section>
-    <h2><span class="n">6</span> Como se liga aos outros projetos</h2>
+    <h2><span class="n">9</span> Como se liga aos outros projetos</h2>
     <div class="note-item"><span class="tag good">Experiência Holy Cookie</span><span>
       Este projeto é o mecanismo por trás do item <em>&ldquo;atendimento de quem vende&rdquo;</em> do
       pilar Experiência em <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a>. O checklist

@@ -44,7 +44,52 @@ que o Fred definiu.
 
 ---
 
-## 4. AS FUNÇÕES
+## 4. DUAS CAMADAS — o 80/20 vem primeiro
+
+Definido em 15/08/2026, numa segunda conversa em que o Fred trouxe a transcrição (mal transcrita
+pelo áudio) de uma conversa com a **Deborah**. Os trechos incompreensíveis foram reconstruídos e
+confirmados com o Fred antes de entrar aqui — não inventar interpretação de trecho que não foi
+confirmado.
+
+- **Certificação 80/20 (MVP)** — o mínimo viável de uma boa experiência de loja. Não é sobre virar
+  a loja perfeita; é garantir que nada empurre o cliente pra fora. Frase do Fred: *"não estou
+  trabalhando em como ser a loja Conceito Master perfeita — preciso garantir pra não deixar cair
+  aqui todo dia. Cliente chega, a loja tá minimamente limpa, o produto tá bom, o atendimento é
+  razoável pra bom. Pronto — voltaria nessa loja."*
+- **Certificação master** — o projeto completo (seções 5 e 6 daqui): funções, provas,
+  certificador, bonificação.
+
+### Os três pilares do 80/20
+
+**Produto**
+- Toda fornada sai boa — nem queimada, nem crua
+- Quantidade certa de insumos — não "no olho" (confirmado pelo Fred: é sobre isso mesmo)
+- Bebidas bem feitas
+- Cookie chega quente na casa do cliente, no delivery
+- O critério real não é "idade" do produto — é execução: um produto novo mal assado também é ruim
+
+**Atendimento**
+- Sorriso no rosto, prestativo, dar atenção, perguntar se tá tudo certo / se precisa de algo —
+  "isso aqui já resolve 90% dos problemas"
+- Ser anfitrião — quem atende gosta do produto
+- O nível "excepcional" (conversa de nível com cada cliente) é outro patamar — fica de fora do
+  80/20 por agora
+
+**Loja**
+- Minimamente limpa nas coisas mais importantes — não em tudo
+- Prioridade: balcão/vitrine limpo antes da cozinha — é o que o cliente vê
+- Vitrine gordurosa passa a mesma sensação de "copo sujo"
+- Bagunça/barulho de cozinha é interno — fica de fora do 80/20
+
+### O que fica de fora do 80/20
+- Itens específicos de cada loja (calor em Piracicaba, fachada em Campinas) não entram na régua
+  geral — cada um vira item daquela loja
+- Ferramenta planejada: lista com **fotos de referência** (ex.: foto de vitrine bonita) — padrão
+  visual, não só descrição em texto
+
+---
+
+## 5. AS FUNÇÕES
 
 ### Funções operacionais da loja (viram certificação)
 1. **Atendimento** — quem vende no balcão
@@ -66,7 +111,7 @@ deveria aprovar a própria prova — mas isso não foi decidido, não inventar r
 
 ---
 
-## 5. O MECANISMO, PASSO A PASSO
+## 6. O MECANISMO, PASSO A PASSO
 
 1. Mapear a função — o que ela faz de verdade na loja, hoje
 2. Treinar — o Treinador conduz
@@ -79,7 +124,7 @@ deveria aprovar a própria prova — mas isso não foi decidido, não inventar r
 
 ---
 
-## 6. O QUE AINDA TRAVA — nenhuma pergunta pode ser respondida pelo assistente
+## 7. O QUE AINDA TRAVA — nenhuma pergunta pode ser respondida pelo assistente
 
 Todas dependem do Fred ou da operação. Não inventar resposta para nenhuma.
 
@@ -99,7 +144,7 @@ são o roteiro natural da próxima sessão sobre este projeto, na ordem que ele 
 
 ---
 
-## 7. COMO ESTE PROJETO SE LIGA AOS OUTROS
+## 8. COMO ESTE PROJETO SE LIGA AOS OUTROS
 
 - **[Experiência Holy Cookie](../experiencia-holy-cookie/LEIA-ME.md)** — este projeto é o
   mecanismo por trás do item "atendimento de quem vende" do pilar Experiência daquele portão. O
@@ -112,16 +157,43 @@ são o roteiro natural da próxima sessão sobre este projeto, na ordem que ele 
 
 ---
 
-## 8. ARMADILHAS — o que não fazer
+## 9. ARMADILHAS — o que não fazer
 
 1. **Não chamar de "equipe de alta performance".** O Fred corrigiu isso explicitamente — é
    homogeneidade, não elite.
 2. **Não inventar o currículo, a metodologia, os dias ou os critérios.** As 8 perguntas da seção
-   6 são do Fred ou da operação, não do assistente.
+   7 são do Fred ou da operação, não do assistente.
 3. **Não assumir que Treinador e Certificador são a mesma pessoa** — nem o contrário. Está em
    aberto.
 4. **Não tratar isto como concorrente do checklist de Experiência Holy Cookie.** São camadas
    diferentes do mesmo problema (atendimento inconsistente): um mede, o outro forma.
+5. **Não confundir o 80/20 com o master.** O 80/20 é o piso mínimo pra não perder cliente; o
+   master é a certificação completa com prova e bonificação. Não misturar os dois na mesma seção.
+6. **Não inventar conteúdo de trecho não confirmado da transcrição da Deborah.** A transcrição de
+   áudio veio ruim; dois pontos ficaram incompreensíveis na primeira leitura (quantidade de
+   insumos e um trecho sobre salário) — o primeiro foi confirmado pelo Fred (seção 4), o segundo
+   foi descartado a pedido dele. Se aparecer nova transcrição malfeita, seguir o mesmo processo:
+   reconstruir, marcar o que não fechou, e confirmar antes de publicar.
+
+---
+
+## 10. DOCUMENTOS PENDENTES — Google Docs sem acesso ainda
+
+O Fred citou dois documentos do Google Docs que ainda não entraram na página porque o WebFetch
+retornou 401 (não são públicos, e o conector do Google Drive não estava autorizado na sessão em
+que foram pedidos, 15/08/2026):
+
+1. **Plano de certificação completo** —
+   `docs.google.com/document/d/1W8HxKW7cG_EfqXg-00-kEZAiTrRxug6tL3bFh9s-ZVY`
+   Deve virar uma aba própria na página ("Plano completo"), ao lado da visão geral — o Fred pediu
+   explicitamente uma aba nova pra isso, não pra misturar com o conteúdo já escrito.
+2. **Organização da Certificação** —
+   `docs.google.com/document/d/1SpEzsHraTRBiX7tBcSLQ7IJUBg7sY2-AbuqR61CjLAM`
+
+**Próximo passo:** pedir pro Fred compartilhar como "qualquer pessoa com o link pode ver", ou
+autorizar o conector do Google Drive (`/mcp` numa sessão interativa). Depois buscar o conteúdo dos
+dois e montar a página com abas, no mesmo padrão do Experiência Holy Cookie (Briefing / Pesquisa /
+Avaliação) — aqui seria algo como Visão geral / Plano completo.
 
 ---
 
