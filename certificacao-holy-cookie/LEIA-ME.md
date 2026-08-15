@@ -219,18 +219,27 @@ Pedido explícito do Fred em 15/08/2026: a página principal (Briefing/80-20/Com
 ele mesmo vai continuar preenchendo/construindo esse material ao longo do tempo — junto com a
 Débora.
 
-Está em `certificacao-holy-cookie/material/index.html`. Estrutura:
-- Um **checklist de progresso** no topo (tabela Área/Tópico/Status + resumo numérico), porque
-  montar o manual inteiro é muito trabalho e o Fred pediu visibilidade do que falta
-- 26 tópicos mapeados em 15/08/2026, agrupados em Cozinha / Atendimento / Transversal /
-  Treinamento e Onboarding — cada um com status **pronto** (conteúdo completo no
-  documento-fonte), **parcial** (estrutura existe, falta preencher) ou **falta** (só a intenção
-  está registrada)
+Está em `certificacao-holy-cookie/material/index.html`. Estrutura (versão final, depois do Fred
+pedir para tirar a rolagem longa — ver [[feedback_layout-paginas-projeto]]):
+- Resumo numérico no topo (9 prontos / 7 parciais / 10 faltam)
+- **Grade de botões** — um por tópico/área certificável (26, `data-topico="t01"`…`"t26"`),
+  agrupados visualmente por rótulo (Cozinha / Atendimento / Transversal / Treinamento e
+  Onboarding), cada um já mostrando o status (pronto/parcial/falta) no próprio botão
+- Clicar num botão mostra o conteúdo daquele tópico no `#visor`, escondendo os outros
+  (`abrirTopico()`, mesmo princípio do `abrirAba()` da página principal)
+- Processos em sequência (modelagem de cookie, brownie, croissant/lanchinho, fluxo de pedidos,
+  atendimento na mesa, onboarding em dias, teste de vaga, trilha do freelancer — 10 fluxos ao
+  todo) viram fileira de caixinha→seta→caixinha (`.fluxo`/`.passo-caixa`); clicar numa caixinha
+  mostra o detalhe daquele passo no `.passo-detalhe` logo abaixo
 
 **Como manter isso vivo:** toda vez que o Fred/Débora escreverem mais conteúdo (nos documentos
-originais ou direto numa conversa), atualizar a seção correspondente no Material **e** o status
-dela no checklist do topo — os dois são a mesma fonte de verdade, não deixar dessincronizar. Não
-inventar conteúdo pra fechar um item "parcial" ou "falta" — copiar apenas o que existir na fonte.
+originais ou direto numa conversa), atualizar o conteúdo do tópico correspondente **e** o status
+no botão dele — os dois vivem no mesmo arquivo, não deixar dessincronizar. Se o conteúdo novo for
+uma sequência de passos, usar o padrão `.fluxo`/`.passo-caixa` (`data-detalhe` no botão, HTML
+inline é permitido ali — ex. `<strong>`, `<br><br>`); se for enumeração sem ordem, lista normal
+(`ul.pontos`). Não inventar conteúdo pra fechar um item "parcial" ou "falta" — copiar apenas o que
+existir na fonte. Tópico novo = novo par botão (`.topico-btn`, no grupo certo) + painel
+(`.topico-conteudo`, mesmo `data-topico`) — os dois IDs têm que bater.
 
 ---
 
