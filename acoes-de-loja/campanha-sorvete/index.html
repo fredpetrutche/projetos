@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Tá calor, tem Holy — campanha de sorvete</title>
+<meta name="description" content="Degustação, displays e conteúdo para divulgar o sorvete que já está na loja — com o custo real por loja de Campinas, Paulínia e Piracicaba.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23146A7C'/><g fill='white'><path d='M50 20a17 17 0 0 1 17 17H33a17 17 0 0 1 17-17z'/><path d='M34 43h32L54 80a4 4 0 0 1-8 0z'/></g></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23146A7C'/><g fill='white'><path d='M50 20a17 17 0 0 1 17 17H33a17 17 0 0 1 17-17z'/><path d='M34 43h32L54 80a4 4 0 0 1-8 0z'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#146A7C; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#DEEAED;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#7ECAD9; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#17262B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#7ECAD9; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#17262B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag, .vnum { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .75rem; color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center; gap: .35rem; }
+  .voltar:hover { color: var(--accent); }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none; color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  .acoes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .acoes-grid > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
+  .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; align-self: flex-start; }
+  .job { font-family: var(--mono); font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .txt { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .txt em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .custo-tag { font-size: .75rem; color: var(--ink-faint); border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .controls { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 1.15rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.15rem 1.75rem; }
+  .controls.destaque { border-color: var(--accent); background: var(--accent-bg); }
+  .ctl { display: flex; flex-direction: column; gap: .35rem; }
+  .ctl .top { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+  .ctl .top .val { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .ctl .note { font-size: .75rem; color: var(--ink-faint); line-height: 1.4; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.1rem; background: transparent; cursor: pointer; margin: 0; }
+  input[type=range]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); margin-top: -6px; box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  .toggle { display: flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .toggle button { flex: 1; font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; padding: .45rem .5rem; background: var(--surface-2); color: var(--ink-soft); border: none; cursor: pointer; }
+  .toggle button + button { border-left: 1px solid var(--rule); }
+  .toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 40rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: .55rem .8rem; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.total td { border-top: 2px solid var(--ink); font-weight: 700; }
+  tbody td:first-child { color: var(--ink); }
+  td .sub2 { display: block; font-size: .6875rem; color: var(--ink-faint); font-weight: 400; }
+
+  .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .cell { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .25rem; }
+  .cell.hero { background: var(--surface-2); }
+  .cell .v { font-family: var(--mono); font-size: 1.55rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.025em; line-height: 1.1; }
+  .cell.hero .v { font-size: 2rem; }
+  .cell .s { font-size: .75rem; color: var(--ink-faint); line-height: 1.45; }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start; font-size: .875rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+
+  details { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .7rem 1rem; }
+  details summary { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); cursor: pointer; font-weight: 600; }
+  details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  details[open] summary { margin-bottom: .9rem; }
+  details ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .35rem; font-size: .8125rem; color: var(--ink-soft); }
+  details code { font-family: var(--mono); font-size: .95em; color: var(--ink); }
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 32rem) { .wrap { padding: 1.5rem 1rem 4rem; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../../">← Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cook · Campinas, Paulínia e Piracicaba</div>
+    <h1>Tá calor, tem Holy</h1>
+    <p class="lede">
+      O sorvete já está na loja e quase ninguém sabe. Esta campanha não cria produto —
+      ela pega o que já existe e faz aparecer, por três caminhos ao mesmo tempo:
+      colocando na boca, colocando na parede e colocando no feed.
+    </p>
+  </header>
+
+  <div class="strip">
+    <div><span class="label">Custo de 1 copinho</span><span class="v">R$ 1,61</span><span class="s">sorvete + copinho + colherinha</span></div>
+    <div><span class="label">Visitas de loja/mês</span><span class="v">3.152</span><span class="s">as três lojas somadas</span></div>
+    <div><span class="label">Custo da degustação</span><span class="v" id="sCusto">—</span><span class="s" id="sCustoSub">—</span></div>
+    <div><span class="label">Peso no faturamento</span><span class="v" id="sPeso">—</span><span class="s">do faturamento de loja</span></div>
+    <div><span class="label">Precisa vender a mais</span><span class="v" id="sBreak">—</span><span class="s">por visita, só pra empatar</span></div>
+  </div>
+
+  <!-- ══════ 1. O que é ══════ -->
+  <section>
+    <h2><span class="n">1</span> O que é — e o que não é</h2>
+    <p class="prose">
+      É fácil confundir com o <strong>Cardápio de Verão</strong>, e são coisas diferentes.
+      O Cardápio de Verão decide <em>quais produtos entram</em> — é coleta e votação, olha para frente.
+      Esta campanha não decide nada de cardápio: o sorvete <strong>já está lá</strong>, com três sabores,
+      e o problema é que o cliente entra na loja sem saber disso. Aqui o trabalho é de divulgação.
+    </p>
+    <div class="note-item"><span class="tag acc">a frase</span><span>
+      <strong>"Tá calor, tem Holy."</strong> A campanha não vende sorvete como produto novo —
+      vende a Holy como a resposta óbvia para o calor. O sorvete é a prova, não o argumento.
+    </span></div>
+  </section>
+
+  <!-- ══════ 2. As três ações ══════ -->
+  <section>
+    <h2><span class="n">2</span> As três ações<span class="hint">só a primeira tem custo por cliente</span></h2>
+    <div class="acoes-grid">
+      <div>
+        <span class="vnum">A1</span>
+        <span class="job">Degustação no balcão</span>
+        <span class="txt">Todo mundo que entra na loja recebe um <em>potinho de 30 ml</em> para provar.
+        São três sabores, e a loja vai <em>rotacionando</em> — quem volta prova outro. É a única
+        das três que escala com o número de clientes, e é ela que a conta abaixo mede.</span>
+        <span class="custo-tag">R$ 1,61 por pessoa · o resto desta página é sobre isso</span>
+      </div>
+      <div>
+        <span class="vnum">A2</span>
+        <span class="job">Displays na loja</span>
+        <span class="txt">Foto dos sorvetes da Holy em cada display da loja. É a ação <em>mais simples
+        das três</em>: custo único, não por cliente, e resolve o problema de quem entra e não repara
+        que existe sorvete. Sem isso, a degustação vira surpresa solta em vez de virar pedido.</span>
+        <span class="custo-tag">custo único por loja — <b>ainda não orçado</b></span>
+      </div>
+      <div>
+        <span class="vnum">A3</span>
+        <span class="job">Sorvete em tudo, no conteúdo</span>
+        <span class="txt">Sorvete <em>na torta</em> e <em>no cookie</em> — os dois carros-chefe — mais
+        milkshake e as bebidas geladas, que já são frias e nunca foram tratadas como parte do verão.
+        Foto e vídeo com o combo montado, não com o sorvete sozinho.</span>
+        <span class="custo-tag">sem custo novo: usa produto que já sai</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 3. A conta do copinho ══════ -->
+  <section>
+    <h2><span class="n">3</span> A conta de um copinho<span class="hint">cotação de Campinas</span></h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Item</th><th>Como foi cotado</th><th>Rende</th><th>Custo unitário</th></tr></thead>
+      <tbody>
+        <tr><td>Sorvete (30 ml)</td><td>R$ 0,038 por ml</td><td>30 ml</td><td>R$ 1,15</td></tr>
+        <tr><td>Copinho de plástico 30 ml</td><td>R$ 32,00 o pacote</td><td>100 un</td><td>R$ 0,32</td></tr>
+        <tr><td>Colherinha</td><td>R$ 42,00 o pacote</td><td>300 un</td><td>R$ 0,14</td></tr>
+        <tr class="total"><td>Total por pessoa</td><td></td><td></td><td>R$ 1,61</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note-item"><span class="tag warn">preço de quando?</span><span>
+      Esta cotação é <strong>de Campinas e de uma época anterior</strong> — foi o que veio junto com a ideia.
+      Antes de fechar a compra, vale revalidar os três preços, e conferir se Paulínia e Piracicaba
+      compram pelos mesmos valores. O copinho e a colherinha são commodity; o <strong>sorvete é o item que manda</strong>
+      na conta (71% do custo) e é o que mais varia.
+    </span></div>
+  </section>
+
+  <!-- ══════ 4. Quanto custa por loja ══════ -->
+  <section>
+    <h2><span class="n">4</span> Quanto custa, loja por loja<span class="hint">mexa nos controles</span></h2>
+    <div class="controls destaque" id="controles"></div>
+    <div class="tablewrap"><table>
+      <thead><tr>
+        <th>Loja</th><th>Visitas no período</th><th>Copinhos</th>
+        <th>Custo do sorvete</th><th>% do faturamento</th><th>Custo por visita</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+    <div class="notes" id="notasTabela"></div>
+  </section>
+
+  <!-- ══════ 5. O que precisa voltar ══════ -->
+  <section>
+    <h2><span class="n">5</span> O que a campanha precisa devolver</h2>
+    <p class="prose">
+      O copinho não é grátis para a loja: ele sai da margem. Para empatar, cada visita precisa
+      gerar <strong>R$ 1,61 a mais de margem</strong> — o que, na margem de contribuição da loja,
+      significa vender mais do que isso em produto. Abaixo, o tamanho do empurrão necessário.
+    </p>
+    <div class="results" id="resultados"></div>
+    <div class="notes" id="notasBreak"></div>
+  </section>
+
+  <!-- ══════ 6. O que falta ══════ -->
+  <section>
+    <h2><span class="n">6</span> O que ainda falta decidir</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag bad">falta orçar</span><span>
+        <strong>Os displays (A2).</strong> Não existe cotação — nem quantos displays por loja, nem o custo
+        de impressão. É a ação mais barata das três em custo total, mas hoje é a única sem número nenhum.
+      </span></div>
+      <div class="note-item"><span class="tag bad">falta decidir</span><span>
+        <strong>Quem entrega o copinho, e quando.</strong> No balcão junto com o pedido? Na fila?
+        Depois de pagar? A degustação só vira venda se vier com uma frase — a mesma pergunta de balcão
+        que trava a campanha de fidelização vale aqui.
+      </span></div>
+      <div class="note-item"><span class="tag warn">premissa frágil</span><span>
+        <strong>Uma pessoa por pedido é o piso, não a realidade.</strong> O sistema registra pedido, não pessoa.
+        Um casal que divide uma comanda são duas pessoas e dois copinhos. Por isso o controle
+        "pessoas por pedido" começa em 1,0 — o número mais baixo possível — e não em uma estimativa.
+      </span></div>
+      <div class="note-item"><span class="tag warn">dado curto</span><span>
+        <strong>Piracicaba só tem julho.</strong> Campinas e Paulínia têm junho e julho na base;
+        Piracicaba entrou depois. A média dela é de um mês só, então é a menos confiável das três.
+      </span></div>
+      <div class="note-item"><span class="tag good">fora desta conta</span><span>
+        <strong>A planilha trazia uma segunda campanha</strong> — brownie, saquinho e panfleto para o
+        primeiro cliente, R$ 1,18 por pessoa e R$ 591,50 para 500 clientes. Aquilo é a ação do
+        <b>Primeiro Cookie do Dia</b>, não esta. Deixei separado de propósito.
+      </span></div>
+    </div>
+  </section>
+
+  <details>
+    <summary>Premissas e origem dos números</summary>
+    <ul>
+      <li><strong>Visitas de loja</strong>: tabela <code>vendas_consumer_pedidos_individual</code> do Sistema HC, canais <code>caixa</code> + <code>balcao</code> + <code>mesa</code>. Delivery fica de fora — não tem como entregar copinho de degustação por delivery.</li>
+      <li><strong>Campinas</strong>: 1.606 pedidos em junho e 1.299 em julho → média de <b>1.452/mês</b>. Faturamento de loja médio R$ 50.771,89.</li>
+      <li><strong>Paulínia</strong>: 1.270 em junho e 1.145 em julho → média de <b>1.208/mês</b>. Faturamento de loja médio R$ 51.365,45. (Confere com os 1.200 usados na campanha de fidelização.)</li>
+      <li><strong>Piracicaba</strong>: 492 em julho, único mês na base → <b>492/mês</b>. Faturamento de loja R$ 18.580,87.</li>
+      <li><strong>As três lojas fecham domingo</strong> — 28 a 29 dias abertos por mês. Agosto foi ignorado porque o mês ainda está correndo.</li>
+      <li><strong>Custo do copinho</strong>: cotação de Campinas trazida junto com a ideia — sorvete R$ 0,038/ml (R$ 1,15 em 30 ml), copinho R$ 32,00/100 un, colherinha R$ 42,00/300 un.</li>
+      <li><strong>Margem de contribuição 48%</strong>: vem do modelo da campanha de fidelização da Paulínia (CMV 34,6% + Simples 8% + royalties 4% + cartão 2% + quebra 1% + embalagem). É premissa, não medição — por isso é ajustável.</li>
+    </ul>
+  </details>
+
+  <footer>
+    Simulação — não é registro contábil. Os custos são de material de degustação; não incluem
+    hora de funcionário, freezer, display nem produção de conteúdo. Números de venda gerados a
+    partir do Sistema HC, junho e julho de 2026.
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ─── Base real — Sistema HC, canais de loja, jun+jul/2026 ──────────────────
+  const LOJAS = [
+    { nome: "Campinas",   pedidos: 1452, fat: 50771.89, meses: "jun+jul" },
+    { nome: "Paulínia",   pedidos: 1208, fat: 51365.45, meses: "jun+jul" },
+    { nome: "Piracicaba", pedidos:  492, fat: 18580.87, meses: "só jul"  },
+  ];
+  const COPINHO = { sorvete: 1.15, copo: 0.32, colher: 0.14 };
+  const UNIT = COPINHO.sorvete + COPINHO.copo + COPINHO.colher;   // 1,61
+
+  const S = { porPedido: 1.0, aceita: 100, dias: 30, mc: 48 };
+
+  const brl = (v, d = 2) => "R$ " + v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const n0  = (v) => Math.round(v).toLocaleString("pt-BR");
+  const pc  = (v, d = 1) => v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+
+  // ─── Cálculo ───────────────────────────────────────────────────────────────
+  function calc() {
+    const fator = S.dias / 30;                     // o mês-base tem 30 dias corridos
+    const linhas = LOJAS.map((l) => {
+      const visitas  = l.pedidos * fator;
+      const copinhos = visitas * S.porPedido * (S.aceita / 100);
+      const custo    = copinhos * UNIT;
+      const fat      = l.fat * fator;
+      return { ...l, visitas, copinhos, custo, fat, peso: custo / fat * 100, porVisita: custo / visitas };
+    });
+    const t = linhas.reduce((a, l) => ({
+      visitas: a.visitas + l.visitas, copinhos: a.copinhos + l.copinhos,
+      custo: a.custo + l.custo, fat: a.fat + l.fat,
+    }), { visitas: 0, copinhos: 0, custo: 0, fat: 0 });
+    t.peso = t.custo / t.fat * 100;
+    t.porVisita = t.custo / t.visitas;
+    // para empatar: a margem extra por visita tem de cobrir o custo por visita
+    t.vendaExtra = t.porVisita / (S.mc / 100);
+    t.altaPct = t.vendaExtra / (t.fat / t.visitas) * 100;
+    return { linhas, t };
+  }
+
+  // ─── Controles ─────────────────────────────────────────────────────────────
+  function renderControles(R) {
+    document.getElementById("controles").innerHTML = `
+      <div class="ctl">
+        <div class="top"><span class="label">Pessoas por pedido</span><span class="val">${S.porPedido.toLocaleString("pt-BR", {minimumFractionDigits:1})}</span></div>
+        <input type="range" id="c-porPedido" min="1" max="2.5" step="0.1" value="${S.porPedido}" aria-label="Pessoas por pedido">
+        <span class="note">O sistema conta pedido, não pessoa. Em 1,0 você assume que cada comanda é uma pessoa — <strong>é o piso</strong>. Um casal que divide a conta são dois copinhos.</span>
+      </div>
+      <div class="ctl">
+        <div class="top"><span class="label">Quantos aceitam</span><span class="val">${S.aceita}%</span></div>
+        <input type="range" id="c-aceita" min="40" max="100" step="5" value="${S.aceita}" aria-label="Quantos aceitam">
+        <span class="note">Nem todo mundo quer. Quem está com pressa, quem já está comendo, criança pequena — a recusa é normal e derruba o custo.</span>
+      </div>
+      <div class="ctl">
+        <div class="top"><span class="label">Duração</span><span class="val">${S.dias} dias</span></div>
+        <div class="toggle" role="group" aria-label="Duração da campanha">
+          ${[7, 15, 30, 60, 90].map((d) => `<button type="button" data-dias="${d}" aria-pressed="${S.dias === d}">${d}</button>`).join("")}
+        </div>
+        <span class="note">O verão inteiro são ~90 dias. Uma semana de teste custa um quinto de um mês e já mostra se o copinho vira pedido.</span>
+      </div>
+      <div class="ctl">
+        <div class="top"><span class="label">Margem de contribuição</span><span class="val">${S.mc}%</span></div>
+        <input type="range" id="c-mc" min="30" max="60" step="1" value="${S.mc}" aria-label="Margem de contribuição">
+        <span class="note">Quanto sobra de cada real vendido depois de CMV, impostos, royalties, cartão e embalagem. Vem do modelo da fidelização.</span>
+      </div>`;
+  }
+
+  // ─── Tabela ────────────────────────────────────────────────────────────────
+  function renderTabela(R) {
+    document.getElementById("tbody").innerHTML =
+      R.linhas.map((l) => `
+        <tr>
+          <td>${l.nome}<span class="sub2">base ${l.meses}</span></td>
+          <td>${n0(l.visitas)}</td>
+          <td>${n0(l.copinhos)}</td>
+          <td>${brl(l.custo, 0)}</td>
+          <td>${pc(l.peso, 2)}</td>
+          <td>${brl(l.porVisita)}</td>
+        </tr>`).join("") + `
+        <tr class="total">
+          <td>As três lojas</td>
+          <td>${n0(R.t.visitas)}</td>
+          <td>${n0(R.t.copinhos)}</td>
+          <td>${brl(R.t.custo, 0)}</td>
+          <td>${pc(R.t.peso, 2)}</td>
+          <td>${brl(R.t.porVisita)}</td>
+        </tr>`;
+
+    const maisCara = R.linhas.reduce((a, b) => (a.custo > b.custo ? a : b));
+    document.getElementById("notasTabela").innerHTML = `
+      <div class="note-item"><span class="tag acc">leitura</span><span>
+        Em ${S.dias} dias, com ${S.porPedido.toLocaleString("pt-BR",{minimumFractionDigits:1})} pessoa(s) por pedido e ${S.aceita}% aceitando,
+        a degustação sai por <strong>${brl(R.t.custo, 0)}</strong> nas três lojas —
+        <strong>${n0(R.t.copinhos)} copinhos</strong>. ${maisCara.nome} é a mais cara
+        (${brl(maisCara.custo, 0)}), porque é onde mais gente entra.
+      </span></div>
+      <div class="note-item"><span class="tag ${R.t.peso > 3 ? "warn" : "good"}">peso</span><span>
+        Isso é <strong>${pc(R.t.peso, 2)} do faturamento de loja</strong> do mesmo período.
+        ${R.t.peso > 3
+          ? "Não é troco: está na faixa em que a campanha precisa mesmo levantar venda para se pagar — não dá para tratar como brinde institucional."
+          : "Está numa faixa em que a campanha se paga com um empurrão pequeno na venda."}
+      </span></div>`;
+  }
+
+  // ─── Break-even ────────────────────────────────────────────────────────────
+  function renderResultados(R) {
+    const t = R.t;
+    document.getElementById("resultados").innerHTML = `
+      <div class="cell hero">
+        <span class="label">Venda extra por visita</span>
+        <span class="v">${brl(t.vendaExtra)}</span>
+        <span class="s">é o quanto cada visita precisa vender a mais para o copinho se pagar</span>
+      </div>
+      <div class="cell">
+        <span class="label">Em % do ticket</span>
+        <span class="v">${pc(t.altaPct, 1)}</span>
+        <span class="s">sobre o ticket médio de ${brl(t.fat / t.visitas)}</span>
+      </div>
+      <div class="cell">
+        <span class="label">Ou, em gente nova</span>
+        <span class="v">${n0(t.custo / ((t.fat / t.visitas) * (S.mc / 100)))}</span>
+        <span class="s">visitas a mais no período pagariam a campanha inteira, sem subir o ticket</span>
+      </div>
+      <div class="cell">
+        <span class="label">Custo total</span>
+        <span class="v">${brl(t.custo, 0)}</span>
+        <span class="s">só material da degustação, em ${S.dias} dias</span>
+      </div>`;
+
+    document.getElementById("notasBreak").innerHTML = `
+      <div class="note-item"><span class="tag acc">o jeito honesto de ler</span><span>
+        <strong>${pc(t.altaPct, 1)} de ticket</strong> é pouco ou muito? Um copinho de 30 ml que faz uma
+        pessoa em cada oito levar uma bola de sorvete junto já resolve. O risco não é o custo —
+        é a degustação acontecer <em>calada</em>, sem ninguém dizer que dá para comprar.
+        Aí vira R$ ${n0(t.custo)} de simpatia.
+      </span></div>
+      <div class="note-item"><span class="tag good">o teste barato</span><span>
+        Antes de comprometer o verão inteiro: <strong>7 dias em uma loja só</strong>.
+        Em Campinas, que é a de maior movimento, isso custa
+        <strong>${brl(LOJAS[0].pedidos * (7 / 30) * S.porPedido * (S.aceita / 100) * UNIT, 0)}</strong>
+        e já responde se o copinho vira pedido de sorvete no balcão.
+      </span></div>`;
+  }
+
+  // ─── Topo ──────────────────────────────────────────────────────────────────
+  function renderTopo(R) {
+    document.getElementById("sCusto").textContent = brl(R.t.custo, 0);
+    document.getElementById("sCustoSub").textContent = n0(R.t.copinhos) + " copinhos em " + S.dias + " dias";
+    document.getElementById("sPeso").textContent = pc(R.t.peso, 2);
+    document.getElementById("sBreak").textContent = brl(R.t.vendaExtra);
+  }
+
+  function tudo() {
+    const R = calc();
+    renderControles(R);
+    renderTabela(R);
+    renderResultados(R);
+    renderTopo(R);
+  }
+
+  document.addEventListener("input", (e) => {
+    const id = e.target.id || "";
+    if (!id.startsWith("c-")) return;
+    const chave = id.slice(2);
+    S[chave] = parseFloat(e.target.value);
+    tudo();
+  });
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-dias]");
+    if (!b) return;
+    S.dias = parseInt(b.dataset.dias, 10);
+    tudo();
+  });
+
+  tudo();
+})();
+</script>
+
+</body>
+</html>
