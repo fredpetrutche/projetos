@@ -177,23 +177,32 @@ são o roteiro natural da próxima sessão sobre este projeto, na ordem que ele 
 
 ---
 
-## 10. DOCUMENTOS PENDENTES — Google Docs sem acesso ainda
+## 10. OS DOIS DOCUMENTOS-FONTE — resolvido em 15/08/2026
 
-O Fred citou dois documentos do Google Docs que ainda não entraram na página porque o WebFetch
-retornou 401 (não são públicos, e o conector do Google Drive não estava autorizado na sessão em
-que foram pedidos, 15/08/2026):
+O WebFetch nos dois Google Docs deu 401 (não são públicos, conector do Google Drive não
+autorizado nesta sessão). O Fred contornou exportando os dois como markdown e passando o caminho
+local:
 
-1. **Plano de certificação completo** —
-   `docs.google.com/document/d/1W8HxKW7cG_EfqXg-00-kEZAiTrRxug6tL3bFh9s-ZVY`
-   Deve virar uma aba própria na página ("Plano completo"), ao lado da visão geral — o Fred pediu
-   explicitamente uma aba nova pra isso, não pra misturar com o conteúdo já escrito.
-2. **Organização da Certificação** —
-   `docs.google.com/document/d/1SpEzsHraTRBiX7tBcSLQ7IJUBg7sY2-AbuqR61CjLAM`
+1. **Certificações Holy Cook** (`~/Downloads/Certificações Holy Cook.md`) — o plano detalhado:
+   fases do projeto, processo de certificação, currículo por produto (cozinha inteira, com
+   receita e gramatura), atendimento, onboarding, teste de vaga.
+   Fonte: `docs.google.com/document/d/1W8HxKW7cG_EfqXg-00-kEZAiTrRxug6tL3bFh9s-ZVY`
+2. **Organização da Certificação e etc** (`~/Downloads/Organização da Certificação e etc.md`) —
+   a visão de liderança (Líder de loja, Gerente geral, Proprietários), a lista de certificações
+   nomeadas, e o roteiro macro em 8 passos.
+   Fonte: `docs.google.com/document/d/1SpEzsHraTRBiX7tBcSLQ7IJUBg7sY2-AbuqR61CjLAM`
 
-**Próximo passo:** pedir pro Fred compartilhar como "qualquer pessoa com o link pode ver", ou
-autorizar o conector do Google Drive (`/mcp` numa sessão interativa). Depois buscar o conteúdo dos
-dois e montar a página com abas, no mesmo padrão do Experiência Holy Cookie (Briefing / Pesquisa /
-Avaliação) — aqui seria algo como Visão geral / Plano completo.
+**Decisão tomada sem perguntar, registrada aqui para revisão:** os dois documentos têm receita e
+gramatura detalhada de cada produto (cookies, torta, brownie, croissant, bebidas). Isso **não foi
+publicado na página** — é conteúdo operacional proprietário, e a página vive numa URL do GitHub
+Pages que, mesmo sem estar linkada em lugar nenhum, é tecnicamente pública. A aba "Certificação
+completa" traz a **estrutura** (fases, papéis, lista de certificações, o processo de 4 passos, o
+molde de currículo, o papel do Treinador, o onboarding de 3 dias) com link pros dois documentos
+como fonte completa. **Se o Fred quiser o detalhe de receita na página também, é só pedir** — a
+omissão foi uma escolha de segurança, não falta de conteúdo.
+
+Os arquivos `.md` ficaram só no Downloads do Fred — não foram commitados no repo `projetos`
+(mesma lógica: não colocar receita em repositório público).
 
 ---
 
