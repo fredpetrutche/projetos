@@ -166,16 +166,16 @@
       sequência aparecem como fluxo: clique numa caixinha para ver o que é aquele passo.
     </p>
     <div class="resumo">
-      <div class="pronto"><div class="num">9</div><div class="lbl">prontos</div></div>
+      <div class="pronto"><div class="num">10</div><div class="lbl">prontos</div></div>
       <div class="parcial"><div class="num">7</div><div class="lbl">parciais</div></div>
-      <div class="falta"><div class="num">10</div><div class="lbl">faltam</div></div>
+      <div class="falta"><div class="num">9</div><div class="lbl">faltam</div></div>
     </div>
   </header>
 
   <div class="grade-grupos">
     <button class="grupo-btn" data-grupo="cozinha">
       <span class="gnome">Cozinha</span>
-      <span class="gcontagem"><span class="tag good">6</span><span class="tag warn">1</span><span class="tag bad">4</span></span>
+      <span class="gcontagem"><span class="tag good">7</span><span class="tag warn">1</span><span class="tag bad">3</span></span>
     </button>
     <button class="grupo-btn" data-grupo="atendimento">
       <span class="gnome">Atendimento</span>
@@ -202,7 +202,7 @@
     <button class="topico-btn" data-topico="t08"><span class="tnome">Sorvetes</span><span class="tag bad">falta</span></button>
     <button class="topico-btn" data-topico="t09"><span class="tnome">Fluxo de Preparação dos Pedidos</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t10"><span class="tnome">Organização, Estoque e Embalagem</span><span class="tag good">pronto</span></button>
-    <button class="topico-btn" data-topico="t11"><span class="tnome">Limpeza e Organização (Konclui)</span><span class="tag bad">falta</span></button>
+    <button class="topico-btn" data-topico="t11"><span class="tnome">Limpeza e Organização</span><span class="tag good">pronto</span></button>
   </div>
 
   <div class="grade-topicos" data-grupo="atendimento" hidden>
@@ -590,11 +590,29 @@
 
     <!-- ══════ t11 ══════ -->
     <div class="topico-conteudo" data-topico="t11" hidden>
-      <h2>Limpeza e Organização — Konclui<span class="status falta">falta</span></h2>
-      <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        O documento-fonte só registra a intenção: &ldquo;Treinamento do Konclui — montar com o ChatGPT
-        e gravar na loja&rdquo;, cobrindo como usar o Konclui, limpeza do salão e limpeza da cozinha.
-        Ainda não foi montado.
+      <h2>Limpeza e Organização<span class="status pronto">pronto</span></h2>
+      <div class="note-item"><span class="tag good">já roda no Sistema-HC</span><span>
+        O documento-fonte falava em treinar o uso do &ldquo;Konclui&rdquo; — mas essa ferramenta foi
+        substituída: a checklist de limpeza e organização já existe e roda de verdade nos checklists
+        de <strong>Abertura</strong>, <strong>Meio do Dia</strong> e <strong>Fechamento</strong> do
+        Sistema-HC, com foto como evidência.
+      </span></div>
+      <h3 class="sub">O que já está coberto</h3>
+      <ul class="pontos">
+        <li><strong>Banheiro</strong> — lavar vaso, pia e chão; limpar espelho, tampa do lixo,
+        saboneteira; repor papel higiênico, papel toalha e sabonete; foto geral do banheiro</li>
+        <li><strong>Salão</strong> — limpar mesas, cadeiras e vidros; verificar lixo; organizar área
+        das crianças; varrer o chão; foto geral do salão</li>
+        <li><strong>Balcão</strong> — limpar estufas de cookies e salgados, máquina de café,
+        superfície do balcão; foto do balcão organizado</li>
+        <li><strong>Cozinha</strong> — limpar bancadas, máquinas e micro-ondas; repor prateleiras de
+        insumos e montagem de pedidos; foto da cozinha organizada</li>
+        <li><strong>Estacionamento</strong> — varrer/lavar, tirar sujeira dos canteiros, limpar
+        vidros e parapeitos externos; foto do estacionamento</li>
+      </ul>
+      <div class="note-item"><span class="tag acc">onde ver</span><span>
+        Sistema-HC → checklists de loja (Abertura, Meio do Dia — Salão, Fechamento diurno/noturno).
+        Não precisa criar nada novo aqui — é reaproveitar o que já roda.
       </span></div>
     </div>
 
