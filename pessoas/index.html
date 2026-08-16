@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
 <title>Pessoas Holy Cookie</title>
-<meta name="description" content="O descritivo de cada cargo da Holy Cookie: o que a pessoa faz, dia a dia, categoria por categoria. Começa pela Gerência.">
+<meta name="description" content="O descritivo de cada cargo da Holy Cookie: o que a pessoa faz, dia a dia, categoria por categoria, item por item. Começa pela Gerência.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238A5C13'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><rect x='30' y='24' width='40' height='54' rx='6'/><circle cx='50' cy='42' r='8'/><line x1='38' y1='62' x2='62' y2='62'/><line x1='42' y1='70' x2='58' y2='70'/></g></svg>">
 <style>
   :root {
@@ -141,6 +141,22 @@
   .status.pronto { background: var(--good-bg); color: var(--good); }
   .status.falta { background: var(--bad-bg); color: var(--bad); }
 
+  /* ---------- nível 4 — grade de itens dentro de uma categoria ---------- */
+  .grade-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: .45rem; }
+  .item-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+              border: 1.5px solid var(--rule); border-radius: 6px; padding: .55rem .75rem;
+              font-size: .8125rem; font-weight: 600; color: inherit; line-height: 1.3;
+              transition: border-color .15s, background .15s; }
+  .item-btn:hover { border-color: var(--ink-faint); }
+  .item-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+
+  .item-visor { border: 1px dashed var(--rule); border-radius: 6px; background: var(--surface-2);
+                padding: 1rem 1.1rem; }
+  .item-visor-vazio { color: var(--ink-faint); font-size: .8125rem; text-align: center; padding: .35rem 0; }
+  .item-conteudo { display: flex; flex-direction: column; gap: .65rem; font-size: .875rem; color: var(--ink-soft); }
+  .item-conteudo[hidden] { display: none; }
+  .item-conteudo strong { color: var(--ink); font-weight: 600; }
+
   ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
               font-size: .875rem; color: var(--ink-soft); }
   ul.pontos li::marker { color: var(--accent); }
@@ -178,8 +194,8 @@
     <h1>Pessoas Holy Cookie</h1>
     <p class="lede">
       O descritivo de cada cargo da empresa — o que a pessoa faz, <strong>dia a dia</strong>,
-      categoria por categoria. Começa pela <strong>Gerência</strong>; as demais funções entram aqui
-      conforme forem escritas. Não confundir com a
+      categoria por categoria, item por item. Começa pela <strong>Gerência</strong>; as demais
+      funções entram aqui conforme forem escritas. Não confundir com a
       <a href="../certificacao-holy-cookie/">Certificação de Funções</a>: lá é prova, credencial e
       bônus pras funções operacionais da loja — aqui é o que cada cargo faz de verdade, da liderança
       ao balcão.
@@ -221,9 +237,10 @@
     <p class="prose">
       Na aba <strong>Cargos</strong>, cada card é uma função. Clique num cargo pra ver as categorias
       daquele cargo — Compras, Estoque, Gestão de equipe etc. — cada uma em seu próprio card. Clique
-      numa categoria pra ver o descritivo completo dela. Sempre dois cliques até o conteúdo: cargo →
-      categoria. Se um cargo ainda não tem categorias escritas, o clique já mostra direto que falta
-      escrever.
+      numa categoria pra ver os itens dela — cada responsabilidade também é o seu próprio card, ex.:
+      dentro de Estoque tem Contagem mensal, Controle de estoque, Organização, Cálculo do CMV. Clique
+      num item pra ver o detalhe. O aprofundamento continua enquanto houver mais de uma coisa nomeada
+      dentro de um card — nunca vira lista comprida empilhada.
     </p>
   </section>
 
@@ -285,13 +302,26 @@
   </div>
 
   <div id="visor">
-    <p class="visor-vazio">Clique num cargo e depois numa categoria para ver o descritivo.</p>
+    <p class="visor-vazio">Clique num cargo e depois numa categoria para ver os itens.</p>
 
     <!-- ══════ t-compras ══════ -->
     <div class="topico-conteudo" data-topico="t-compras" hidden>
       <h2>Compras<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Realizar compras de insumos e produtos de venda na loja
+      <div class="note-item"><span class="tag acc">cadência</span><span>
+        Compra de insumos da fábrica: 1x por semana. Outras compras: 1 a 2x por mês, verificando
+        semanalmente o que falta.
+      </span></div>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="compras-insumos">Compras de insumos e produtos de venda</button>
+        <button class="item-btn" data-item="compras-pedido-fabrica">Pedido semanal na fábrica</button>
+        <button class="item-btn" data-item="compras-fornecedores">Fornecedores</button>
+        <button class="item-btn" data-item="compras-datas-especiais">Pedidos de datas especiais — Páscoa e Natal</button>
+        <button class="item-btn" data-item="compras-equipamentos">Compras de equipamentos e utensílios</button>
+        <button class="item-btn" data-item="compras-reducao-custos">Redução de custos</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="compras-insumos" hidden>
           <ul class="pontos">
             <li><a href="https://docs.google.com/spreadsheets/d/1vCwpMCoStQ_x8jSss0M1sG__sCKu3o3lhiWIiji8F88/edit?gid=0#gid=0">Planilha de Compras e Estoque</a></li>
             <li><a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit?gid=1859455979#gid=1859455979">Docs de recebimento de mercadoria</a> — nada entra ou sai da loja sem contabilizar</li>
@@ -301,31 +331,45 @@
               <a href="https://docs.google.com/spreadsheets/d/1jRZ1-Ac6-sn3a8YjM3GLav847GgLCA9Vs1L3F9GK5GI/edit?gid=0#gid=0">documentar pagamentos</a>.
               Obs: no recebimento, sempre verificar item exato, quantidade e preço</li>
           </ul>
-        </li>
-        <li>Realizar Pedido Semanal na Fábrica
+        </div>
+        <div class="item-conteudo" data-item="compras-pedido-fabrica" hidden>
           <ul class="pontos">
             <li><a href="https://docs.google.com/spreadsheets/d/19qEUuGVV_leOEvQOpPa-40SJ3n48esm_LFZH4zz1ewg/edit?gid=0#gid=0">Planilha Interna de Pedidos</a> — usa, mas precisa melhorar.
               Contagem de estoque terça ou quarta; pedido sai quarta até 14h</li>
             <li>Processo de como fazer o pedido semanal pra fábrica <em class="pendente">(link a criar)</em></li>
           </ul>
-        </li>
-        <li><a href="https://docs.google.com/spreadsheets/d/1BSCEuWTDF2k5uMyB3QIe1NlVP-YBfK41vJPT3ugOLvs/edit?gid=0#gid=0">Fornecedores</a></li>
-        <li>Realizar pedidos de datas especiais: Páscoa e Natal — <a href="https://docs.google.com/spreadsheets/d/1pHA_vkbFJzZgFH7b9g6wMYHWXDW16a5U11iEdp0cXOc/edit?gid=78927272#gid=78927272">planilha de pedidos</a>;
-          processo próprio, incluindo backup diário de segurança</li>
-        <li>Realizar todas as compras de equipamentos e utensílios necessários</li>
-        <li>Redução de custos — buscar novos fornecedores ou renegociar preços periodicamente</li>
-      </ul>
-      <div class="note-item"><span class="tag acc">cadência</span><span>
-        Compra de insumos da fábrica: 1x por semana. Outras compras: 1 a 2x por mês, verificando
-        semanalmente o que falta.
-      </span></div>
+        </div>
+        <div class="item-conteudo" data-item="compras-fornecedores" hidden>
+          <p class="prose"><a href="https://docs.google.com/spreadsheets/d/1BSCEuWTDF2k5uMyB3QIe1NlVP-YBfK41vJPT3ugOLvs/edit?gid=0#gid=0">Planilha de Fornecedores</a></p>
+        </div>
+        <div class="item-conteudo" data-item="compras-datas-especiais" hidden>
+          <p class="prose"><a href="https://docs.google.com/spreadsheets/d/1pHA_vkbFJzZgFH7b9g6wMYHWXDW16a5U11iEdp0cXOc/edit?gid=78927272#gid=78927272">Planilha de pedidos de Natal/Páscoa</a>.
+            Processo próprio, incluindo backup diário de segurança.</p>
+        </div>
+        <div class="item-conteudo" data-item="compras-equipamentos" hidden>
+          <p class="prose">Realizar todas as compras de equipamentos e utensílios necessários pra loja.</p>
+        </div>
+        <div class="item-conteudo" data-item="compras-reducao-custos" hidden>
+          <p class="prose">Buscar novos fornecedores ou renegociar preços periodicamente.</p>
+        </div>
+      </div>
     </div>
 
     <!-- ══════ t-estoque ══════ -->
     <div class="topico-conteudo" data-topico="t-estoque" hidden>
       <h2>Estoque<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Contagem mensal de estoque
+      <div class="grade-itens">
+        <button class="item-btn" data-item="estoque-contagem">Contagem mensal de estoque</button>
+        <button class="item-btn" data-item="estoque-controle">Controle de estoque</button>
+        <button class="item-btn" data-item="estoque-organizacao">Organização do estoque</button>
+        <button class="item-btn" data-item="estoque-cmv">Cálculo do CMV</button>
+        <button class="item-btn" data-item="estoque-reducao-cmv">Redução de CMV e desperdícios</button>
+        <button class="item-btn" data-item="estoque-auditorias">Auditorias surpresa</button>
+        <button class="item-btn" data-item="estoque-fifo">Sistema FIFO</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="estoque-contagem" hidden>
           <ul class="pontos">
             <li><a href="https://drive.google.com/file/d/1VlGsyUKQViXgcHnAGC23d-Xi9hrnEsUN/view?usp=sharing">Docs para contagem de estoque</a></li>
             <li><a href="https://docs.google.com/spreadsheets/d/1vCwpMCoStQ_x8jSss0M1sG__sCKu3o3lhiWIiji8F88/edit?gid=0#gid=0">Planilha de Compras e Estoque</a></li>
@@ -335,145 +379,256 @@
             <li><a href="https://docs.google.com/document/d/1MM9cT63tifXy7AWGtm3t8kJNwCfCNQpM8RN4E3RLLIQ/edit?tab=t.0">Docs de Perdas</a></li>
             <li><a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit">Planilha de todas as saídas de produto</a> (aba 2)</li>
           </ul>
-        </li>
-        <li>Controle de estoque: verificar o que está faltando</li>
-        <li>Manter a organização do estoque</li>
-        <li>Cálculo do CMV — <a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit">planilha &ldquo;Saiu, deveria ter saído&rdquo;</a> (aba 3)</li>
-        <li>Redução de CMV e controle de desperdícios — verificar se estão usando a quantidade certa
-          (nem pra mais, nem pra menos)</li>
-        <li>Auditorias surpresa pra garantir precisão nas contagens</li>
-        <li>Sistema FIFO (primeiro que entra, primeiro que sai) pra evitar perdas por validade</li>
-      </ul>
+        </div>
+        <div class="item-conteudo" data-item="estoque-controle" hidden>
+          <p class="prose">Verificar o que está faltando.</p>
+        </div>
+        <div class="item-conteudo" data-item="estoque-organizacao" hidden>
+          <p class="prose">Manter a organização do estoque.</p>
+        </div>
+        <div class="item-conteudo" data-item="estoque-cmv" hidden>
+          <p class="prose"><a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit">Planilha &ldquo;Saiu, deveria ter saído&rdquo;</a> (aba 3).</p>
+        </div>
+        <div class="item-conteudo" data-item="estoque-reducao-cmv" hidden>
+          <p class="prose">Verificar se estão usando a quantidade certa — nem pra mais, nem pra menos.</p>
+        </div>
+        <div class="item-conteudo" data-item="estoque-auditorias" hidden>
+          <p class="prose">Pra garantir precisão nas contagens.</p>
+        </div>
+        <div class="item-conteudo" data-item="estoque-fifo" hidden>
+          <p class="prose">Primeiro que entra, primeiro que sai — pra evitar perdas por validade.</p>
+        </div>
+      </div>
     </div>
 
     <!-- ══════ t-dia-a-dia ══════ -->
     <div class="topico-conteudo" data-topico="t-dia-a-dia" hidden>
       <h2>Gestão do dia a dia — produção e vendas<span class="status pronto">pronto</span></h2>
       <p class="prose">Cozinha e atendimento.</p>
-      <ul class="pontos">
-        <li>Garantir que as atividades rotineiras de limpeza sejam executadas com qualidade —
-          <a href="https://docs.google.com/spreadsheets/d/1a25-U-xnWJ8N4gNgZAwDPBnt1GgtHOyB/edit?gid=2084525984#gid=2084525984">planilha pra impressão</a>,
-          <a href="https://docs.google.com/document/d/1fY8_-L5NUjziyyRf2HqgdKo98hu6Pbi6zoSI2eQISP0/edit?tab=t.0">docs com checklist de atividades</a> e
-          <a href="https://docs.google.com/document/d/19fSNLrjbcJYiNKU-RFU5Bi95XkXMcmbaiB-xUGIOCZc/edit?tab=t.0">rotinas diárias, semanais e mensais</a></li>
-        <li>Garantir que todos os dias, todos cumpram aquilo que é seu dever dentro da função</li>
-        <li>Criação e conferência dos checklists diários pra cada função</li>
-        <li>Organização da produção diária</li>
-        <li>Otimização e eficiência do trabalho pra gerar rapidez</li>
-        <li>Acompanhamento da gestão dos pedidos pela líder da produção</li>
-        <li><a href="https://docs.google.com/document/d/1Z1Q1kxdPT5MyFRFbgIpL4a3B-1KSUEfCnV4udUUDlAk/edit?tab=t.0">Registro de ocorrências diárias</a>,
-          pra solução e discussão posterior</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="diaadia-limpeza">Atividades rotineiras de limpeza</button>
+        <button class="item-btn" data-item="diaadia-dever">Cumprimento do dever de cada função</button>
+        <button class="item-btn" data-item="diaadia-checklists">Checklists diários por função</button>
+        <button class="item-btn" data-item="diaadia-producao">Organização da produção diária</button>
+        <button class="item-btn" data-item="diaadia-eficiencia">Otimização e eficiência do trabalho</button>
+        <button class="item-btn" data-item="diaadia-pedidos">Acompanhamento da gestão de pedidos</button>
+        <button class="item-btn" data-item="diaadia-ocorrencias">Registro de ocorrências diárias</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="diaadia-limpeza" hidden>
+          <ul class="pontos">
+            <li><a href="https://docs.google.com/spreadsheets/d/1a25-U-xnWJ8N4gNgZAwDPBnt1GgtHOyB/edit?gid=2084525984#gid=2084525984">Planilha pra impressão</a></li>
+            <li><a href="https://docs.google.com/document/d/1fY8_-L5NUjziyyRf2HqgdKo98hu6Pbi6zoSI2eQISP0/edit?tab=t.0">Docs com checklist de atividades</a></li>
+            <li><a href="https://docs.google.com/document/d/19fSNLrjbcJYiNKU-RFU5Bi95XkXMcmbaiB-xUGIOCZc/edit?tab=t.0">Rotinas diárias, semanais e mensais</a></li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="diaadia-dever" hidden>
+          <p class="prose">Garantir que todos os dias, todos cumpram aquilo que é seu dever dentro da função.</p>
+        </div>
+        <div class="item-conteudo" data-item="diaadia-checklists" hidden>
+          <p class="prose">Criação e conferência dos checklists diários pra cada função.</p>
+        </div>
+        <div class="item-conteudo" data-item="diaadia-producao" hidden>
+          <p class="prose">Organização da produção diária.</p>
+        </div>
+        <div class="item-conteudo" data-item="diaadia-eficiencia" hidden>
+          <p class="prose">Otimização e eficiência do trabalho pra gerar rapidez.</p>
+        </div>
+        <div class="item-conteudo" data-item="diaadia-pedidos" hidden>
+          <p class="prose">Acompanhamento da gestão dos pedidos pela líder da produção.</p>
+        </div>
+        <div class="item-conteudo" data-item="diaadia-ocorrencias" hidden>
+          <p class="prose"><a href="https://docs.google.com/document/d/1Z1Q1kxdPT5MyFRFbgIpL4a3B-1KSUEfCnV4udUUDlAk/edit?tab=t.0">Registro de ocorrências diárias</a>,
+            pra solução e discussão posterior.</p>
+        </div>
+      </div>
     </div>
 
     <!-- ══════ t-equipe ══════ -->
     <div class="topico-conteudo" data-topico="t-equipe" hidden>
       <h2>Gestão de equipe<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Onboarding e treinamentos</li>
-        <li>Reuniões de feedback e acompanhamento</li>
-        <li>Manutenção de banco de freelancers — Ficha Freelancer <em class="pendente">(link a criar)</em>,
-          <a href="https://docs.google.com/document/d/1vtKRdHjsirGFXUjm5K92-iZybmD0I-yTBEdz3B9jmTY/edit?tab=t.0">regulamento interno Freelancer</a></li>
-        <li>Garantia do <a href="https://docs.google.com/document/d/1nE_GvW9qLYJEgaI8TDtiCUWtuFTm2kCzFVQmqFfg2wU/edit?tab=t.0">regulamento interno</a></li>
-        <li>Escala da equipe: férias, feriados</li>
-        <li>Garantir que todos estejam desempenhando as atividades conforme treinados</li>
-        <li>Lidar com os problemas/conflitos entre funcionários — resolve diretamente com o funcionário
-          algum problema específico que ele esteja causando</li>
-        <li>Banco de horas: horas extras e faltantes, fechamento do relógio de ponto, otimização de
-          folgas — <a href="https://docs.google.com/document/d/1BPgbOk0NG_H4rBrJnQnX4sV_qZcZr8ZqrKIwQ_O5NAU/edit?tab=t.0">folha de ajuste de ponto</a></li>
-        <li>Comemorações de datas especiais e aniversários</li>
-        <li>Incentivos à equipe: bônus, metas — bônus de 150, ainda por definir como distribuir</li>
-        <li>Aplicação de advertências e demissões</li>
-        <li>Cobrir função de funcionário que faltou ou está em processo de contratação</li>
-        <li>Planos de desenvolvimento individual pra crescimento da equipe</li>
-        <li>Reuniões periódicas de alinhamento</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="equipe-onboarding">Onboarding e treinamentos</button>
+        <button class="item-btn" data-item="equipe-feedback">Reuniões de feedback e acompanhamento</button>
+        <button class="item-btn" data-item="equipe-freelancers">Banco de freelancers</button>
+        <button class="item-btn" data-item="equipe-regulamento">Regulamento interno</button>
+        <button class="item-btn" data-item="equipe-escala">Escala da equipe</button>
+        <button class="item-btn" data-item="equipe-desempenho">Desempenho conforme treinado</button>
+        <button class="item-btn" data-item="equipe-conflitos">Conflitos entre funcionários</button>
+        <button class="item-btn" data-item="equipe-banco-horas">Banco de horas</button>
+        <button class="item-btn" data-item="equipe-comemoracoes">Comemorações</button>
+        <button class="item-btn" data-item="equipe-incentivos">Incentivos à equipe</button>
+        <button class="item-btn" data-item="equipe-advertencias">Advertências e demissões</button>
+        <button class="item-btn" data-item="equipe-cobrir-funcao">Cobrir função em falta</button>
+        <button class="item-btn" data-item="equipe-desenvolvimento">Planos de desenvolvimento individual</button>
+        <button class="item-btn" data-item="equipe-reunioes-periodicas">Reuniões periódicas de alinhamento</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="equipe-onboarding" hidden><p class="prose">Onboarding e treinamentos.</p></div>
+        <div class="item-conteudo" data-item="equipe-feedback" hidden><p class="prose">Reuniões de feedback e acompanhamento.</p></div>
+        <div class="item-conteudo" data-item="equipe-freelancers" hidden>
+          <ul class="pontos">
+            <li>Ficha Freelancer <em class="pendente">(link a criar)</em></li>
+            <li><a href="https://docs.google.com/document/d/1vtKRdHjsirGFXUjm5K92-iZybmD0I-yTBEdz3B9jmTY/edit?tab=t.0">Regulamento interno Freelancer</a></li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="equipe-regulamento" hidden>
+          <p class="prose"><a href="https://docs.google.com/document/d/1nE_GvW9qLYJEgaI8TDtiCUWtuFTm2kCzFVQmqFfg2wU/edit?tab=t.0">Regulamento interno</a></p>
+        </div>
+        <div class="item-conteudo" data-item="equipe-escala" hidden><p class="prose">Escala da equipe: férias, feriados.</p></div>
+        <div class="item-conteudo" data-item="equipe-desempenho" hidden><p class="prose">Garantir que todos estejam desempenhando as atividades conforme treinados.</p></div>
+        <div class="item-conteudo" data-item="equipe-conflitos" hidden><p class="prose">Lidar com os problemas/conflitos entre funcionários — resolve diretamente com o funcionário algum problema específico que ele esteja causando.</p></div>
+        <div class="item-conteudo" data-item="equipe-banco-horas" hidden>
+          <p class="prose">Horas extras e faltantes, fechamento do relógio de ponto, otimização de folgas —
+            <a href="https://docs.google.com/document/d/1BPgbOk0NG_H4rBrJnQnX4sV_qZcZr8ZqrKIwQ_O5NAU/edit?tab=t.0">folha de ajuste de ponto</a>.</p>
+        </div>
+        <div class="item-conteudo" data-item="equipe-comemoracoes" hidden><p class="prose">Comemorações de datas especiais e aniversários.</p></div>
+        <div class="item-conteudo" data-item="equipe-incentivos" hidden><p class="prose">Bônus e metas — bônus de 150, ainda por definir como distribuir.</p></div>
+        <div class="item-conteudo" data-item="equipe-advertencias" hidden><p class="prose">Aplicação de advertências e demissões.</p></div>
+        <div class="item-conteudo" data-item="equipe-cobrir-funcao" hidden><p class="prose">Cobrir função de funcionário que faltou ou está em processo de contratação.</p></div>
+        <div class="item-conteudo" data-item="equipe-desenvolvimento" hidden><p class="prose">Planos de desenvolvimento individual pra crescimento da equipe.</p></div>
+        <div class="item-conteudo" data-item="equipe-reunioes-periodicas" hidden><p class="prose">Reuniões periódicas de alinhamento.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-treinamentos ══════ -->
     <div class="topico-conteudo" data-topico="t-treinamentos" hidden>
       <h2>Treinamentos e processos<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Criar e documentar todos os processos rotineiros da loja, pra que qualquer pessoa consiga
-          fazer aquela atividade</li>
-        <li>Melhorar o treinamento pra funcionários</li>
-        <li>Inspeções regulares nos processos, pra manter a qualidade e evitar desperdícios</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="trein-documentar">Documentar processos rotineiros</button>
+        <button class="item-btn" data-item="trein-melhorar">Melhorar o treinamento</button>
+        <button class="item-btn" data-item="trein-inspecoes">Inspeções regulares nos processos</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="trein-documentar" hidden><p class="prose">Criar e documentar todos os processos rotineiros da loja, pra que qualquer pessoa consiga fazer aquela atividade.</p></div>
+        <div class="item-conteudo" data-item="trein-melhorar" hidden><p class="prose">Melhorar o treinamento pra funcionários.</p></div>
+        <div class="item-conteudo" data-item="trein-inspecoes" hidden><p class="prose">Inspeções regulares nos processos, pra manter a qualidade e evitar desperdícios.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-contratacoes ══════ -->
     <div class="topico-conteudo" data-topico="t-contratacoes" hidden>
       <h2>Contratações<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Manter um banco de freelancers treinados pra cozinha e atendimento</li>
-        <li>Realizar o processo de contratação</li>
-        <li>Fazer onboarding pra garantir integração de qualidade</li>
-        <li>Acompanhar se o funcionário é bom — caso não seja, trocar rápido</li>
-        <li>Gestão e feedback do período de experiência</li>
-        <li>Desligamento de funcionários</li>
-        <li>Dar entrada e acompanhar processos de licença por saúde ou gravidez</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="contrat-banco-freelancers">Banco de freelancers treinados</button>
+        <button class="item-btn" data-item="contrat-processo">Processo de contratação</button>
+        <button class="item-btn" data-item="contrat-onboarding">Onboarding de integração</button>
+        <button class="item-btn" data-item="contrat-acompanhar">Acompanhar e trocar rápido se não for bom</button>
+        <button class="item-btn" data-item="contrat-experiencia">Gestão do período de experiência</button>
+        <button class="item-btn" data-item="contrat-desligamento">Desligamento de funcionários</button>
+        <button class="item-btn" data-item="contrat-licencas">Licenças de saúde ou gravidez</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="contrat-banco-freelancers" hidden><p class="prose">Manter um banco de freelancers treinados pra cozinha e atendimento.</p></div>
+        <div class="item-conteudo" data-item="contrat-processo" hidden><p class="prose">Realizar o processo de contratação.</p></div>
+        <div class="item-conteudo" data-item="contrat-onboarding" hidden><p class="prose">Fazer onboarding pra garantir integração de qualidade.</p></div>
+        <div class="item-conteudo" data-item="contrat-acompanhar" hidden><p class="prose">Acompanhar se o funcionário é bom — caso não seja, trocar rápido.</p></div>
+        <div class="item-conteudo" data-item="contrat-experiencia" hidden><p class="prose">Gestão e feedback do período de experiência.</p></div>
+        <div class="item-conteudo" data-item="contrat-desligamento" hidden><p class="prose">Desligamento de funcionários.</p></div>
+        <div class="item-conteudo" data-item="contrat-licencas" hidden><p class="prose">Dar entrada e acompanhar processos de licença por saúde ou gravidez.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-documentacoes ══════ -->
     <div class="topico-conteudo" data-topico="t-documentacoes" hidden>
       <h2>Documentações<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Cadastro e documentação dos dados pessoais dos funcionários</li>
-        <li>Coletar assinatura de documentos: pagamento, benefícios, vale, produtos consumidos,
-          ocorrências</li>
-        <li>Planilhas de informações: fornecedores, notas fiscais, consumo de funcionários, perdas,
-          ocorrências, contagem de estoque</li>
-        <li>Cadastrar notas fiscais no Drive</li>
-        <li>Verificar folha de consumo de funcionários, folha de perdas e folha de ocorrências</li>
-        <li>Passar toda documentação pro Drive</li>
-        <li>Agendar e manter atualizados os exames periódicos de saúde</li>
-        <li>Revisões periódicas das planilhas, pra garantir precisão e atualização</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="doc-cadastro">Cadastro de dados pessoais</button>
+        <button class="item-btn" data-item="doc-assinaturas">Assinatura de documentos</button>
+        <button class="item-btn" data-item="doc-planilhas">Planilhas de informações</button>
+        <button class="item-btn" data-item="doc-notas-fiscais">Notas fiscais no Drive</button>
+        <button class="item-btn" data-item="doc-consumo">Folha de consumo de funcionários</button>
+        <button class="item-btn" data-item="doc-perdas">Folha de perdas</button>
+        <button class="item-btn" data-item="doc-ocorrencias">Folha de ocorrências</button>
+        <button class="item-btn" data-item="doc-estoque">Contagem de estoque</button>
+        <button class="item-btn" data-item="doc-drive">Documentação geral no Drive</button>
+        <button class="item-btn" data-item="doc-exames">Exames periódicos de saúde</button>
+        <button class="item-btn" data-item="doc-revisoes">Revisões periódicas das planilhas</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="doc-cadastro" hidden><p class="prose">Cadastro e documentação dos dados pessoais dos funcionários.</p></div>
+        <div class="item-conteudo" data-item="doc-assinaturas" hidden><p class="prose">Coletar assinatura de documentos: pagamento, benefícios, vale, produtos consumidos, ocorrências.</p></div>
+        <div class="item-conteudo" data-item="doc-planilhas" hidden><p class="prose">Planilhas de informações: fornecedores, notas fiscais, consumo de funcionários, perdas, ocorrências, contagem de estoque.</p></div>
+        <div class="item-conteudo" data-item="doc-notas-fiscais" hidden><p class="prose">Cadastrar notas fiscais no Drive.</p></div>
+        <div class="item-conteudo" data-item="doc-consumo" hidden><p class="prose">Verificar folha de consumo de funcionários.</p></div>
+        <div class="item-conteudo" data-item="doc-perdas" hidden><p class="prose">Folha de perdas.</p></div>
+        <div class="item-conteudo" data-item="doc-ocorrencias" hidden><p class="prose">Folha de ocorrências.</p></div>
+        <div class="item-conteudo" data-item="doc-estoque" hidden><p class="prose">Contagem de estoque.</p></div>
+        <div class="item-conteudo" data-item="doc-drive" hidden><p class="prose">Passar toda documentação pro Drive.</p></div>
+        <div class="item-conteudo" data-item="doc-exames" hidden><p class="prose">Agendar e manter atualizados os exames periódicos de saúde.</p></div>
+        <div class="item-conteudo" data-item="doc-revisoes" hidden><p class="prose">Revisões periódicas das planilhas, pra garantir precisão e atualização.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-relatorios ══════ -->
     <div class="topico-conteudo" data-topico="t-relatorios" hidden>
       <h2>Relatórios<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Criar relatórios solicitados — exemplo: relatórios de vendas mensais</li>
-      </ul>
+      <p class="prose">Criar relatórios solicitados — exemplo: relatórios de vendas mensais. Categoria com um
+        item só, sem grade adicional.</p>
     </div>
 
     <!-- ══════ t-estrutura ══════ -->
     <div class="topico-conteudo" data-topico="t-estrutura" hidden>
       <h2>Estrutura e manutenção<span class="status pronto">pronto</span></h2>
       <p class="prose">Espaço físico, utilitários e equipamentos.</p>
-      <ul class="pontos">
-        <li>Inventário de todos os equipamentos da loja</li>
-        <li>Controle de equipamentos, utensílios e uniformes da loja: assinatura do funcionário que
-          está pegando o uniforme, devolução de avental, touca, uniformes</li>
-        <li>Consertos e substituições na estrutura e equipamentos</li>
-        <li>Cronograma de manutenção preventiva, pra evitar problemas inesperados</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="estrutura-inventario">Inventário de equipamentos</button>
+        <button class="item-btn" data-item="estrutura-controle">Controle de uniformes e utensílios</button>
+        <button class="item-btn" data-item="estrutura-consertos">Consertos e substituições</button>
+        <button class="item-btn" data-item="estrutura-cronograma">Cronograma de manutenção preventiva</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="estrutura-inventario" hidden><p class="prose">Inventário de todos os equipamentos da loja.</p></div>
+        <div class="item-conteudo" data-item="estrutura-controle" hidden><p class="prose">Controle de equipamentos, utensílios e uniformes da loja: assinatura do funcionário que está pegando o uniforme, devolução de avental, touca, uniformes.</p></div>
+        <div class="item-conteudo" data-item="estrutura-consertos" hidden><p class="prose">Consertos e substituições na estrutura e equipamentos.</p></div>
+        <div class="item-conteudo" data-item="estrutura-cronograma" hidden><p class="prose">Cronograma de manutenção preventiva, pra evitar problemas inesperados.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-experiencia-cliente ══════ -->
     <div class="topico-conteudo" data-topico="t-experiencia-cliente" hidden>
       <h2>Experiência do cliente<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Garantir que a experiência do cliente é a melhor: qualidade, velocidade e bem-estar na loja</li>
-        <li>Passar nas mesas vendo se está tudo bem</li>
-        <li>Resolver conflitos entre funcionários e cliente</li>
-        <li>Acompanhar e responder notas e comentários nos aplicativos (Google, iFood, Food to Save)</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="exp-qualidade">Qualidade, velocidade e bem-estar na loja</button>
+        <button class="item-btn" data-item="exp-mesas">Passar nas mesas</button>
+        <button class="item-btn" data-item="exp-conflitos">Resolver conflitos com cliente</button>
+        <button class="item-btn" data-item="exp-comentarios">Responder comentários nos apps</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="exp-qualidade" hidden><p class="prose">Garantir que a experiência do cliente é a melhor: qualidade, velocidade e bem-estar na loja.</p></div>
+        <div class="item-conteudo" data-item="exp-mesas" hidden><p class="prose">Passar nas mesas vendo se está tudo bem.</p></div>
+        <div class="item-conteudo" data-item="exp-conflitos" hidden><p class="prose">Resolver conflitos entre funcionários e cliente.</p></div>
+        <div class="item-conteudo" data-item="exp-comentarios" hidden><p class="prose">Acompanhar e responder notas e comentários nos aplicativos (Google, iFood, Food to Save).</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-financeiro ══════ -->
     <div class="topico-conteudo" data-topico="t-financeiro" hidden>
       <h2>Financeiro<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Abertura e fechamento de caixa</li>
-        <li>Providenciar troco</li>
-        <li>Repassar boletos pra Débora pagar</li>
-        <li>Fazer pagamentos e prestação de contas desses pagamentos</li>
-        <li>Fazer contas de valores a serem pagos pro funcionário/freelancer</li>
-        <li>Fechamento financeiro de folha</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="fin-caixa">Abertura e fechamento de caixa</button>
+        <button class="item-btn" data-item="fin-troco">Providenciar troco</button>
+        <button class="item-btn" data-item="fin-boletos">Repassar boletos</button>
+        <button class="item-btn" data-item="fin-pagamentos">Fazer pagamentos e prestar contas</button>
+        <button class="item-btn" data-item="fin-freelancer">Contas de funcionário/freelancer</button>
+        <button class="item-btn" data-item="fin-folha">Fechamento financeiro de folha</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="fin-caixa" hidden><p class="prose">Abertura e fechamento de caixa.</p></div>
+        <div class="item-conteudo" data-item="fin-troco" hidden><p class="prose">Providenciar troco.</p></div>
+        <div class="item-conteudo" data-item="fin-boletos" hidden><p class="prose">Repassar boletos pra Débora pagar.</p></div>
+        <div class="item-conteudo" data-item="fin-pagamentos" hidden><p class="prose">Fazer pagamentos e prestação de contas desses pagamentos.</p></div>
+        <div class="item-conteudo" data-item="fin-freelancer" hidden><p class="prose">Fazer contas de valores a serem pagos pro funcionário/freelancer.</p></div>
+        <div class="item-conteudo" data-item="fin-folha" hidden><p class="prose">Fechamento financeiro de folha.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-contabil ══════ -->
@@ -487,35 +642,57 @@
     <!-- ══════ t-marketing ══════ -->
     <div class="topico-conteudo" data-topico="t-marketing" hidden>
       <h2>Marketing<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Apoiar a execução de ações promocionais e datas especiais (festa junina, cookie de graça)</li>
-        <li>Organizar, acompanhar e promover ações de marketing em datas especiais (Páscoa, Dia das
-          Mães, Dia das Crianças, Natal etc.)</li>
-        <li>Gestão de influenciadores: captação diária de novos influenciadores, manter contato com os
-          ativos, enviar materiais promocionais/fotos/textos/ofertas atualizadas, garantir que todos
-          estejam postando conforme combinado, acompanhar entregas e performance das postagens, manter
-          banco atualizado (contato, tipo de público, desempenho) e repassar os resultados pra
-          liderança</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="mkt-promocionais">Apoiar ações promocionais</button>
+        <button class="item-btn" data-item="mkt-datas-especiais">Ações de marketing em datas especiais</button>
+        <button class="item-btn" data-item="mkt-influenciadores">Gestão de influenciadores</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="mkt-promocionais" hidden><p class="prose">Apoiar a execução de ações promocionais e datas especiais (festa junina, cookie de graça).</p></div>
+        <div class="item-conteudo" data-item="mkt-datas-especiais" hidden><p class="prose">Organizar, acompanhar e promover ações de marketing em datas especiais (Páscoa, Dia das Mães, Dia das Crianças, Natal etc.).</p></div>
+        <div class="item-conteudo" data-item="mkt-influenciadores" hidden>
+          <ul class="pontos">
+            <li>Captação diária de novos influenciadores</li>
+            <li>Manter contato com influenciadores ativos</li>
+            <li>Enviar materiais promocionais, fotos, textos e ofertas atualizadas</li>
+            <li>Garantir que todos estejam postando conforme combinado</li>
+            <li>Acompanhar entregas e performance das postagens</li>
+            <li>Manter banco atualizado com informações dos influenciadores (contato, tipo de público, desempenho)</li>
+            <li>Repassar os resultados pra liderança</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- ══════ t-vendas ══════ -->
     <div class="topico-conteudo" data-topico="t-vendas" hidden>
       <h2>Vendas<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Constante treinamento de vendas pra equipe</li>
-        <li>Trazer ideias de novas fontes de receita pra empresa</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="vendas-treinamento">Treinamento de vendas pra equipe</button>
+        <button class="item-btn" data-item="vendas-receita">Novas fontes de receita</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="vendas-treinamento" hidden><p class="prose">Constante treinamento de vendas pra equipe.</p></div>
+        <div class="item-conteudo" data-item="vendas-receita" hidden><p class="prose">Trazer ideias de novas fontes de receita pra empresa.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-repasses ══════ -->
     <div class="topico-conteudo" data-topico="t-repasses" hidden>
       <h2>Reunir repasses para Débora e Fred<span class="status pronto">pronto</span></h2>
-      <ul class="pontos">
-        <li>Repasse diário de vendas e fechamento de caixa</li>
-        <li>Repasse de ocorrências pra melhorias</li>
-        <li>Reuniões semanais de acompanhamento e foco da semana</li>
-      </ul>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="repasses-diario">Repasse diário de vendas e caixa</button>
+        <button class="item-btn" data-item="repasses-ocorrencias">Repasse de ocorrências</button>
+        <button class="item-btn" data-item="repasses-reunioes">Reuniões semanais de acompanhamento</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="repasses-diario" hidden><p class="prose">Repasse diário de vendas e fechamento de caixa.</p></div>
+        <div class="item-conteudo" data-item="repasses-ocorrencias" hidden><p class="prose">Repasse de ocorrências pra melhorias.</p></div>
+        <div class="item-conteudo" data-item="repasses-reunioes" hidden><p class="prose">Reuniões semanais de acompanhamento e foco da semana.</p></div>
+      </div>
     </div>
 
     <!-- ══════ t-principios ══════ -->
@@ -549,40 +726,40 @@
     <div class="topico-conteudo" data-topico="atendimento" hidden>
       <h2>Atendimento<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
-        trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias e itens, quando o
+        Fred/Débora trouxer o conteúdo.
       </span></div>
     </div>
 
     <div class="topico-conteudo" data-topico="forno" hidden>
       <h2>Forno<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
-        trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias e itens, quando o
+        Fred/Débora trouxer o conteúdo.
       </span></div>
     </div>
 
     <div class="topico-conteudo" data-topico="lider-pedidos" hidden>
       <h2>Líder de pedidos<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
-        trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias e itens, quando o
+        Fred/Débora trouxer o conteúdo.
       </span></div>
     </div>
 
     <div class="topico-conteudo" data-topico="lider-loja" hidden>
       <h2>Líder de loja<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
-        trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias e itens, quando o
+        Fred/Débora trouxer o conteúdo.
       </span></div>
     </div>
 
     <div class="topico-conteudo" data-topico="auxiliares" hidden>
       <h2>Auxiliares e estagiários<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
-        trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias e itens, quando o
+        Fred/Débora trouxer o conteúdo.
       </span></div>
     </div>
 
@@ -592,9 +769,10 @@
 
   <footer>
     Página criada em 16/08/2026, a partir do documento &ldquo;Gerência Holy Cook — Responsabilidades e
-    dia a dia&rdquo;. É um documento vivo — conforme mais cargos e categorias forem escritos, o
-    resumo e as grades acima mudam junto. Padrão de navegação: cargo → categoria → conteúdo, sempre
-    em cards, nunca em rolagem única.
+    dia a dia&rdquo;. É um documento vivo — conforme mais cargos, categorias e itens forem escritos,
+    o resumo e as grades acima mudam junto. Padrão de navegação: cargo → categoria → item → detalhe,
+    sempre em cards, nunca em rolagem única — aprofunda mais um nível sempre que houver mais de uma
+    coisa nomeada dentro de um card.
   </footer>
 
 </div>
@@ -652,6 +830,18 @@
   }
   document.querySelectorAll('.grupo-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirGrupo(b.dataset.grupo); });
+  });
+
+  // nível 4 — itens dentro de uma categoria (escopado ao painel da categoria, ids só precisam
+  // ser únicos dentro do próprio painel)
+  document.querySelectorAll('.item-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var painel = b.closest('.topico-conteudo');
+      painel.querySelectorAll('.item-btn').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      painel.querySelectorAll('.item-conteudo').forEach(function (c) { c.hidden = c.dataset.item !== b.dataset.item; });
+      var vazio = painel.querySelector('.item-visor-vazio');
+      if (vazio) vazio.hidden = true;
+    });
   });
 
   document.querySelectorAll('.passo-caixa').forEach(function (b) {
