@@ -509,25 +509,74 @@
     <div class="lista-com" id="comProprias"></div>
   </section>
 
-  <!-- ══════ 2 — concorrentes ══════ -->
+  <!-- ══════ 2 — manter e não repetir ══════ -->
   <section>
-    <h2><span class="n">2</span> Concorrentes<span class="hint">15 lojas de Campinas · 728 comentários</span></h2>
+    <h2><span class="n">2</span> O que manter e o que não repetir<span class="hint">veredito das lojas próprias · peso maior pro recente</span></h2>
+    <p class="prose">
+      Resumo de cima pra baixo da seção 1 — não é leitura nova, é a mesma base organizada em dois
+      lados. Como comentário recente pesa mais, o que está em <strong>não repetir</strong> prioriza o
+      que ainda está acontecendo, não o que já foi resolvido.
+    </p>
+    <div class="pilares" style="grid-template-columns:repeat(2,1fr)">
+      <div>
+        <span class="n" style="background:var(--good);color:var(--accent-ink)">manter</span>
+        <span class="t">O que puxa a régua pra cima</span>
+        <ul>
+          <li><strong>Sabor e massa</strong> — o ativo da marca, quase unânime nas duas lojas, em
+          toda janela de tempo</li>
+          <li><strong>Atendimento com nome próprio</strong> — quando alguém é citada (Carol/Carolina,
+          Giovanna, Iara), o comentário vira elogio explícito</li>
+          <li><strong>Ambiente aconchegante</strong> — a palavra que mais se repete na base inteira</li>
+          <li><strong>Preço justo</strong> — comparação favorável até com concorrentes maiores</li>
+          <li><strong>Cookie quente e recém-assado na entrega</strong> — é o que mais aparece como
+          diferencial, quando a operação funciona</li>
+          <li><strong>Loja responde as reclamações no Google</strong> — reputação já é administrada
+          ativamente, o que facilita ligar o Google mais pra frente</li>
+        </ul>
+      </div>
+      <div>
+        <span class="n" style="background:var(--bad);color:var(--accent-ink)">não repetir</span>
+        <span class="t">O que não pode acontecer de novo</span>
+        <ul>
+          <li><strong>Atendente perdida no cardápio, sem nome</strong> — o padrão #1 de reclamação, e
+          aparece em toda janela de tempo desde 2025 (Campinas). Não é &ldquo;funcionário novo&rdquo;
+          pontual, é crônico</li>
+          <li><strong>Cookie frio ou cru na entrega</strong> — inclui o caso mais recente da base
+          inteira (12/06/2026)</li>
+          <li><strong>Corpo estranho no produto</strong> — pedaço de plástico dentro de um cookie
+          (24/05/2026), recente e sem segunda chance</li>
+          <li><strong>Silêncio no WhatsApp/delivery depois do pedido</strong> — atraso, reclamação
+          sem resposta, cancelamento por demora</li>
+          <li><strong>Horário anunciado diferente do horário real</strong> — placa diz uma coisa, a
+          loja fecha antes, ou só vende pro delivery com a loja &ldquo;aberta&rdquo;</li>
+          <li><strong>O turno de 24/11 em Paulínia</strong> — estufa desligada, mudança de horário sem
+          aviso. Isolado e sem repetição em ~9 meses, mas grave o bastante pra virar item de
+          checklist</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 3 — concorrentes ══════ -->
+  <section>
+    <h2><span class="n">3</span> Concorrentes<span class="hint">15 lojas de Campinas · 728 comentários</span></h2>
     <p class="prose">
       15 concorrentes de Campinas confirmados no Google Maps, com <strong>728 comentários com texto</strong>.
       Aqui a etiqueta é <strong>automática</strong>, por palavra-chave — o volume não permitiu ler um a um,
       então trate como direção, não como sentença. O que <em>não</em> é automático é a separação entre elogio
       e queixa: ela usa a estrela que a própria pessoa deu.
-      <strong>Clique numa loja para ler os dois lados</strong> — os negativos mostram a brecha deles,
-      os positivos mostram a régua que você precisa alcançar.
+      <strong>Clique numa loja</strong> e depois escolha <strong>reclamações ou elogios</strong> — os
+      negativos mostram a brecha deles, os positivos mostram a régua que você precisa alcançar. Não
+      aparecem misturados: um lado de cada vez.
     </p>
     <div class="conc-lista" id="listaConc"></div>
     <div id="resumoConc"></div>
     <div class="lista-com" id="comConc"></div>
   </section>
 
-  <!-- ══════ 3 ══════ -->
+  <!-- ══════ 4 ══════ -->
   <section>
-    <h2><span class="n">3</span> Sinais de ambiente<span class="hint">o que se repete no grupo inteiro</span></h2>
+    <h2><span class="n">4</span> Sinais de ambiente<span class="hint">o que se repete no grupo inteiro</span></h2>
     <div class="pilares" style="grid-template-columns:repeat(2,1fr)">
       <div>
         <span class="n" style="background:var(--good);color:var(--accent-ink)">puxa pra cima</span>
@@ -616,7 +665,7 @@
 (function () {
   "use strict";
   var D = window.__DADOS__, N = D.nomes, R = D.resumos;
-  var estados = { tema: null, fala: null, conc: null, temaC: null, limite: 12, limiteC: 12 };
+  var estados = { tema: null, fala: null, conc: null, temaC: null, polConc: -1, limite: 12, limiteC: 12 };
 
   function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
@@ -819,13 +868,23 @@
       return c.temas.filter(function (t) { return t.p === p; }).slice(0, 6)
               .map(function (t) { return esc(N[t.k] || t.k) + ' (' + t.n + ')'; }).join(' · ') || '—';
     };
+    var qtdPos = c.coment.filter(function (r) { return (r.e || 5) >= 4; }).length;
+    var qtdNeg = c.coment.filter(function (r) { return (r.e || 5) <= 3; }).length;
     res.innerHTML = '<div class="resumo-tema"><b>' + esc(c.nome) + '</b> — ' + (c.media || '—') + '★ em ' + c.n +
       ' comentários com texto, ' + c.neg + ' deles com 3★ ou menos.<br>' +
-      '<b>Elogiam:</b> ' + top(1) + '<br><b>Reclamam:</b> ' + top(-1) + '</div>';
-    var mostra = c.coment.slice(0, estados.limiteC);
-    lst.innerHTML = mostra.map(function (r) { return cartaoComentario(r, estados.temaC); }).join('') +
-      (c.coment.length > mostra.length
-        ? '<button class="mais-com" type="button" id="btMaisC">ver os outros ' + (c.coment.length - mostra.length) + ' comentários</button>'
+      '<b>Elogiam:</b> ' + top(1) + '<br><b>Reclamam:</b> ' + top(-1) + '</div>' +
+      '<div class="tags" style="margin:.6rem 0">' +
+        '<button class="tg" type="button" data-polconc="-1" aria-pressed="' + (estados.polConc !== 1) + '">Reclamações <b>' + qtdNeg + '</b></button>' +
+        '<button class="tg" type="button" data-polconc="1" aria-pressed="' + (estados.polConc === 1) + '">Elogios <b>' + qtdPos + '</b></button>' +
+      '</div>';
+    var filtrados = c.coment.filter(function (r) {
+      return estados.polConc === 1 ? (r.e || 5) >= 4 : (r.e || 5) <= 3;
+    });
+    var mostra = filtrados.slice(0, estados.limiteC);
+    lst.innerHTML = (mostra.length ? mostra.map(function (r) { return cartaoComentario(r, estados.temaC); }).join('')
+                                   : '<div class="vazio">Nada aqui.</div>') +
+      (filtrados.length > mostra.length
+        ? '<button class="mais-com" type="button" id="btMaisC">ver os outros ' + (filtrados.length - mostra.length) + ' comentários</button>'
         : '');
   }
 
@@ -846,6 +905,12 @@
     if (c) {
       var i = +c.dataset.conc;
       estados.conc = (estados.conc === i) ? null : i;
+      estados.limiteC = 12; estados.polConc = -1; pintaConc();
+      return;
+    }
+    var pc = e.target.closest('[data-polconc]');
+    if (pc) {
+      estados.polConc = +pc.dataset.polconc;
       estados.limiteC = 12; pintaConc();
       return;
     }
