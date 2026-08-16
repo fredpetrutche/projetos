@@ -181,6 +181,34 @@
 
   footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
            padding-top: 1rem; line-height: 1.6; }
+
+  /* ---------- aba de configuração — interna, não pra navegação normal ---------- */
+  .tab-btn.config { margin-left: auto; border-style: dashed; color: var(--ink-faint); font-size: .8125rem; }
+  .tab-btn.config:hover { color: var(--ink); }
+  .tab-btn.config.active { border-style: solid; color: var(--accent-ink); background: var(--accent); }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+  table.tabela-config { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 42rem; }
+  table.tabela-config th, table.tabela-config td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  table.tabela-config thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+           color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule);
+           font-family: var(--mono); white-space: nowrap; }
+  table.tabela-config tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  table.tabela-config .cel-categoria { color: var(--ink-faint); white-space: nowrap; }
+
+  .cargo-resumo { font: inherit; font-size: .8125rem; text-align: left; cursor: pointer; background: none;
+                  border: none; color: var(--ink-soft); padding: 0; }
+  .cargo-resumo:hover { color: var(--ink); }
+  .cargo-resumo strong { color: var(--ink); font-weight: 600; }
+  .editar-ic { color: var(--ink-faint); font-size: .75rem; }
+  .cargo-seletores { display: flex; gap: .75rem; margin-top: .5rem; flex-wrap: wrap; }
+  .cargo-seletores[hidden] { display: none; }
+  .cargo-seletores label { display: flex; flex-direction: column; gap: .2rem; font-size: .625rem;
+                            letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint);
+                            font-family: var(--mono); }
+  .cargo-seletores select { font-family: var(--sans); font-size: .8125rem; padding: .3rem .5rem;
+                             border: 1px solid var(--rule); border-radius: 4px; background: var(--surface);
+                             color: var(--ink); }
 </style>
 </head>
 <body>
@@ -205,6 +233,7 @@
   <div class="tabs" role="tablist">
     <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
     <button class="tab-btn" type="button" data-tab="cargos" role="tab" aria-selected="false">Cargos</button>
+    <button class="tab-btn config" type="button" data-tab="config" role="tab" aria-selected="false">⚙ Config: quem executa</button>
   </div>
 
   <div class="tab-panel" data-panel="briefing" role="tabpanel">
@@ -249,7 +278,7 @@
   <div class="tab-panel" data-panel="cargos" role="tabpanel" hidden>
 
   <div class="resumo">
-    <div class="pronto"><div class="num">1</div><div class="lbl">cargo pronto</div></div>
+    <div class="pronto"><div class="num">2</div><div class="lbl">cargos prontos</div></div>
     <div class="falta"><div class="num">5</div><div class="lbl">cargos faltam</div></div>
   </div>
 
@@ -257,6 +286,10 @@
     <button class="grupo-btn" data-grupo="gerencia">
       <span class="gnome">Gerência</span>
       <span class="gcontagem"><span class="tag good">16</span><span class="tag bad">1</span></span>
+    </button>
+    <button class="grupo-btn" data-grupo="administrativo">
+      <span class="gnome">Administrativo</span>
+      <span class="gcontagem"><span class="tag good">6</span></span>
     </button>
     <button class="grupo-btn" data-grupo="atendimento">
       <span class="gnome">Atendimento</span>
@@ -299,6 +332,16 @@
     <button class="topico-btn" data-topico="t-repasses"><span class="tnome">Reunir repasses p/ Débora e Fred</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t-principios"><span class="tnome">Princípios da função</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="t-trilha"><span class="tnome">Trilha de treinamento</span><span class="tag good">pronto</span></button>
+  </div>
+
+  <!-- categorias do Administrativo (nível 2) -->
+  <div class="grade-topicos" data-grupo="administrativo" hidden>
+    <button class="topico-btn" data-topico="a-missao"><span class="tnome">Missão e escopo do cargo</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="a-dp"><span class="tnome">Departamento Pessoal</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="a-financeiro"><span class="tnome">Financeiro</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="a-compras"><span class="tnome">Compras, cotações e fornecedores</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="a-predio"><span class="tnome">Administração do local físico</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="a-vaga"><span class="tnome">Vaga em aberto</span><span class="tag good">pronto</span></button>
   </div>
 
   <div id="visor">
@@ -755,6 +798,343 @@
       <div class="passo-detalhe"></div>
     </div>
 
+    <!-- ══════ a-missao ══════ -->
+    <div class="topico-conteudo" data-topico="a-missao" hidden>
+      <h2>Missão e escopo do cargo<span class="status pronto">pronto</span></h2>
+      <p class="prose">Garantir controle financeiro, conformidade trabalhista, organização
+        administrativa e compras eficientes, assegurando que a operação funcione com
+        previsibilidade, organização e otimização de recursos.</p>
+      <div class="note-item"><span class="tag warn">não é decisor estratégico</span><span>
+        Este cargo é <strong>executor, controlador e organizador</strong> — não decide sozinho.
+        Decisões relevantes (valores, exceções, fornecedores críticos) precisam de aprovação da
+        gerência/direção.
+      </span></div>
+    </div>
+
+    <!-- ══════ a-dp ══════ -->
+    <div class="topico-conteudo" data-topico="a-dp" hidden>
+      <h2>Departamento Pessoal<span class="status pronto">pronto</span></h2>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="adm-dp-recrutamento">Auxiliar no recrutamento de vaga</button>
+        <button class="item-btn" data-item="adm-dp-admissao">Admissão e demissão</button>
+        <button class="item-btn" data-item="adm-dp-pagamentos">Pagamento de salários, vales e benefícios</button>
+        <button class="item-btn" data-item="adm-dp-folha">Controle mensal de folha</button>
+        <button class="item-btn" data-item="adm-dp-ponto">Controle de ponto eletrônico</button>
+        <button class="item-btn" data-item="adm-dp-banco-horas">Controle de banco de horas</button>
+        <button class="item-btn" data-item="adm-dp-ferias">Controle de férias, avisos e vencimentos</button>
+        <button class="item-btn" data-item="adm-dp-arquivamento">Arquivamento de documentos trabalhistas</button>
+        <button class="item-btn" data-item="adm-dp-notificar">Notificar a contabilidade</button>
+        <button class="item-btn" data-item="adm-dp-exames">Controle de vencimento de exames</button>
+        <button class="item-btn" data-item="adm-dp-esocial">Interface com contabilidade e eSocial</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="adm-dp-recrutamento" hidden>
+          <p class="prose">Apoiar a operação quando uma vaga abre — sem tocar o processo sozinho, é
+            auxílio, não condução completa.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-admissao" hidden>
+          <p class="prose">Cuidar da parte documental de quem entra e de quem sai: contrato,
+            documentação, comunicação com a contabilidade.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-pagamentos" hidden>
+          <p class="prose">Executar o pagamento de salário, vale e benefício de cada funcionário, no
+            prazo certo.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-folha" hidden>
+          <p class="prose">Fechar e conferir a folha de pagamento todo mês.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-ponto" hidden>
+          <p class="prose">Conferir o ponto eletrônico de todo mundo e pegar inconsistência antes que
+            vire problema no fechamento.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-banco-horas" hidden>
+          <p class="prose">Manter o controle de banco de horas de cada funcionário em dia.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-ferias" hidden>
+          <p class="prose">Saber quando as férias de cada um vencem e avisar a tempo, sem deixar
+            acumular.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-arquivamento" hidden>
+          <p class="prose">Organizar e arquivar digitalmente todo documento trabalhista, pra achar
+            qualquer coisa rápido depois.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-notificar" hidden>
+          <p class="prose">Passar pra contabilidade, todo mês, tudo que afeta a folha e o eSocial.</p>
+          <ul class="pontos">
+            <li>Horas extras</li>
+            <li>Faltas</li>
+            <li>Atrasos</li>
+            <li>Afastamentos</li>
+            <li>Advertências</li>
+            <li>Suspensões</li>
+            <li>Desligamentos</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-exames" hidden>
+          <p class="prose">Controlar o vencimento dos exames admissionais, periódicos e demissionais
+            de cada funcionário.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-dp-esocial" hidden>
+          <p class="prose">Ser a ponte com a contabilidade e o eSocial — enviar e conferir as
+            informações trabalhistas.</p>
+        </div>
+      </div>
+      <div class="note-item"><span class="tag acc">e mais</span><span>
+        Entre outras tarefas administrativas da parte de Departamento Pessoal, conforme surgirem.
+      </span></div>
+    </div>
+
+    <!-- ══════ a-financeiro ══════ -->
+    <div class="topico-conteudo" data-topico="a-financeiro" hidden>
+      <h2>Financeiro<span class="status pronto">pronto</span></h2>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="adm-fin-conciliacao">Conciliação bancária</button>
+        <button class="item-btn" data-item="adm-fin-pagamentos">Programação de pagamentos</button>
+        <button class="item-btn" data-item="adm-fin-devolucoes">Devoluções e reembolsos</button>
+        <button class="item-btn" data-item="adm-fin-trocos">Conciliação de pagamento de trocos</button>
+        <button class="item-btn" data-item="adm-fin-extratos">Envio de extratos bancários</button>
+        <button class="item-btn" data-item="adm-fin-comprovantes">Organização de comprovantes</button>
+        <button class="item-btn" data-item="adm-fin-notas">Notas fiscais pra contabilidade</button>
+        <button class="item-btn" data-item="adm-fin-cobranca-nf">Cobrança de NF de fornecedores</button>
+        <button class="item-btn" data-item="adm-fin-interface-contabil">Interface com a contabilidade</button>
+        <button class="item-btn" data-item="adm-fin-auditoria-caixa">Auditoria de fechamento de caixa</button>
+        <button class="item-btn" data-item="adm-fin-contratos">Controle de contratos recorrentes</button>
+        <button class="item-btn" data-item="adm-fin-alertar">Alertar a gerência</button>
+        <button class="item-btn" data-item="adm-fin-relatorios">Relatórios</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="adm-fin-conciliacao" hidden>
+          <p class="prose">Bater banco × sistema × caixa pra garantir que o dinheiro registrado é o
+            dinheiro real, 2x por semana.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-pagamentos" hidden>
+          <p class="prose">Programar os pagamentos da loja com antecedência, sem deixar pra última
+            hora.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-devolucoes" hidden>
+          <p class="prose">Processar devolução e reembolso em até 24h — fazendo na hora ou conciliando
+            depois.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-trocos" hidden>
+          <p class="prose">Conciliar o pagamento de trocos — mecânica ainda a combinar.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-extratos" hidden>
+          <p class="prose">Enviar os extratos bancários pra contabilidade regularmente.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-comprovantes" hidden>
+          <p class="prose">Manter os comprovantes de pagamento organizados e fáceis de achar.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-notas" hidden>
+          <p class="prose">Organizar e enviar as notas fiscais pra contabilidade.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-cobranca-nf" hidden>
+          <p class="prose">Cobrar do fornecedor a nota fiscal que ainda não chegou.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-interface-contabil" hidden>
+          <p class="prose">Ser o ponto de contato com a contabilidade sobre a emissão das notas
+            fiscais da própria Holy Cook.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-auditoria-caixa" hidden>
+          <p class="prose">Auditar o fechamento de caixa com regularidade diária/semanal, pra pegar
+            erro cedo.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-contratos" hidden>
+          <p class="prose">Controlar os contratos que se repetem todo mês — aluguel, sistemas,
+            fornecedores fixos — pra nenhum passar batido.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-alertar" hidden>
+          <p class="prose">Avisar a gerência assim que perceber um risco financeiro, não depois que
+            ele já virou problema.</p>
+          <ul class="pontos">
+            <li>Desvios de orçamento</li>
+            <li>Riscos de falta de caixa</li>
+            <li>Pagamentos fora do padrão</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-fin-relatorios" hidden>
+          <p class="prose">Montar os relatórios financeiros que dão visão de conjunto pra liderança.</p>
+          <ul class="pontos">
+            <li>DRE (Excel)</li>
+            <li>Orçamento previsto x realizado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ a-compras ══════ -->
+    <div class="topico-conteudo" data-topico="a-compras" hidden>
+      <h2>Compras, cotações e fornecedores<span class="status pronto">pronto</span></h2>
+      <div class="note-item"><span class="tag acc">divisão de papel</span><span>
+        O consumo é informado pela operação, o administrativo compra, a gerência valida exceções.
+      </span></div>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="adm-compras-insumos">Compra de insumos e materiais</button>
+        <button class="item-btn" data-item="adm-compras-cotacao">Cotação de preços</button>
+        <button class="item-btn" data-item="adm-compras-comparacao">Comparação periódica de preços</button>
+        <button class="item-btn" data-item="adm-compras-cadastro">Cadastro de fornecedores</button>
+        <button class="item-btn" data-item="adm-compras-pedidos">Controle de pedidos realizados</button>
+        <button class="item-btn" data-item="adm-compras-prazos">Controle de prazos de entrega</button>
+        <button class="item-btn" data-item="adm-compras-sinalizar">Sinalizar à gerência</button>
+        <button class="item-btn" data-item="adm-compras-emergenciais">Evitar compras emergenciais</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="adm-compras-insumos" hidden>
+          <p class="prose">Comprar insumos e materiais administrativos e operacionais conforme a
+            operação solicita — não decide o quê nem quanto, decide onde e por quanto.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-cotacao" hidden>
+          <p class="prose">Levantar preço com mais de um fornecedor antes de fechar compra.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-comparacao" hidden>
+          <p class="prose">Revisitar periodicamente preço, prazo e condição dos fornecedores, não só
+            na hora de comprar.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-cadastro" hidden>
+          <p class="prose">Manter fornecedor cadastrado e organizado num lugar centralizado — pra não
+            ficar só na cabeça do gerente da loja e se perder.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-pedidos" hidden>
+          <p class="prose">Conferir se pedido, entrega e nota fiscal batem — quantidade, valor e
+            condição negociada.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-prazos" hidden>
+          <p class="prose">Acompanhar se cada pedido está chegando dentro do prazo combinado.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-sinalizar" hidden>
+          <p class="prose">Levar pra gerência o que aparecer de relevante na relação com fornecedor.</p>
+          <ul class="pontos">
+            <li>Aumentos de custo</li>
+            <li>Oportunidades de economia</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-compras-emergenciais" hidden>
+          <p class="prose">Planejar com antecedência pra nunca precisar comprar no desespero, pagando
+            mais caro por falha de planejamento.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ a-predio ══════ -->
+    <div class="topico-conteudo" data-topico="a-predio" hidden>
+      <h2>Administração do local físico<span class="status pronto">pronto</span></h2>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="adm-predio-manutencoes">Manutenções periódicas</button>
+        <button class="item-btn" data-item="adm-predio-servicos">Cotação e contratação de serviços</button>
+        <button class="item-btn" data-item="adm-predio-acompanhamento">Acompanhamento de prazo e qualidade</button>
+        <button class="item-btn" data-item="adm-predio-documentacao">Documentação obrigatória</button>
+        <button class="item-btn" data-item="adm-predio-vencimentos">Vencimentos e renovações</button>
+        <button class="item-btn" data-item="adm-predio-fiscalizacoes">Organização pra fiscalizações</button>
+        <button class="item-btn" data-item="adm-predio-uniformes">Inventário de uniformes e EPIs</button>
+        <button class="item-btn" data-item="adm-predio-moveis">Inventário de móveis e equipamentos</button>
+        <button class="item-btn" data-item="adm-predio-avarias">Registro de avarias e quebras</button>
+        <button class="item-btn" data-item="adm-predio-demandas">Receber demandas de manutenção</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="adm-predio-manutencoes" hidden>
+          <p class="prose">Ter um calendário e agendar sozinho as manutenções que a loja precisa
+            regularmente, sem esperar dar problema.</p>
+          <ul class="pontos">
+            <li>Dedetização periódica</li>
+            <li>Limpeza de calhas</li>
+            <li>Limpeza da caixa de gordura</li>
+            <li>Equipamentos elétricos</li>
+            <li>Freezers, geladeiras e fornos</li>
+            <li>Extintores (validade e recarga)</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-servicos" hidden>
+          <p class="prose">Cotar, contratar e acompanhar o prestador certo quando a loja precisa de
+            um serviço específico.</p>
+          <ul class="pontos">
+            <li>Pintura</li>
+            <li>Manutenção de ar-condicionado</li>
+            <li>Manutenção elétrica</li>
+            <li>Manutenção hidráulica</li>
+            <li>Pequenos reparos estruturais</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-acompanhamento" hidden>
+          <p class="prose">Acompanhar prazo, execução e qualidade de cada serviço contratado até o
+            fim, não só contratar e esquecer.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-documentacao" hidden>
+          <p class="prose">Manter em dia a documentação que a loja é obrigada a ter.</p>
+          <ul class="pontos">
+            <li>Alvarás</li>
+            <li>Licenças sanitárias</li>
+            <li>AVCB / Corpo de Bombeiros (se aplicável)</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-vencimentos" hidden>
+          <p class="prose">Saber quando cada documento vence e renovar a tempo, sem deixar expirar.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-fiscalizacoes" hidden>
+          <p class="prose">Deixar os documentos organizados e acessíveis pra uma fiscalização não
+            pegar a loja de surpresa.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-uniformes" hidden>
+          <p class="prose">Supervisionar o inventário de uniformes e EPIs — saber quanto tem e o que
+            falta repor.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-moveis" hidden>
+          <p class="prose">Supervisionar o inventário de móveis, equipamentos e utensílios de alto
+            valor da loja.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-avarias" hidden>
+          <p class="prose">Registrar toda avaria, quebra ou substituição, e cotar/repor quando for
+            necessário.</p>
+        </div>
+        <div class="item-conteudo" data-item="adm-predio-demandas" hidden>
+          <p class="prose">Receber e resolver as demandas físicas que a gerência, a coordenação e os
+            líderes reportam — ex.: &ldquo;ar não está gelando&rdquo;, &ldquo;vazamento&rdquo;, &ldquo;luz
+            queimada&rdquo;.</p>
+          <ul class="pontos">
+            <li><strong>Urgente:</strong> 2h</li>
+            <li><strong>Prazo normal:</strong> 24h</li>
+            <li><strong>Casos que precisam de mais cotação</strong> (ex.: serviço de manutenção de
+              ar-condicionado): 3 a 5 dias</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ a-vaga ══════ -->
+    <div class="topico-conteudo" data-topico="a-vaga" hidden>
+      <h2>Vaga em aberto<span class="status pronto">pronto</span></h2>
+      <p class="prose">Assistente Administrativo/Financeiro e Departamento Pessoal.</p>
+      <div class="grade-itens">
+        <button class="item-btn" data-item="adm-vaga-condicoes">Condições da vaga</button>
+        <button class="item-btn" data-item="adm-vaga-perfil">Perfil ideal do candidato</button>
+      </div>
+      <div class="item-visor">
+        <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+        <div class="item-conteudo" data-item="adm-vaga-condicoes" hidden>
+          <p class="prose">O pacote oferecido pra quem assume a vaga.</p>
+          <ul class="pontos">
+            <li><strong>Remuneração:</strong> R$ 2.500,00</li>
+            <li><strong>Modelo de contratação:</strong> PJ</li>
+            <li><strong>Horário:</strong> segunda a sexta, das 9h às 18h (flexível)</li>
+            <li><strong>Formato:</strong> 80% remoto, com deslocamento pontual pela cidade (compras e
+              acompanhamento de serviços)</li>
+            <li><strong>Início:</strong> imediato</li>
+          </ul>
+        </div>
+        <div class="item-conteudo" data-item="adm-vaga-perfil" hidden>
+          <p class="prose">O que se busca em quem vai assumir a vaga.</p>
+          <ul class="pontos">
+            <li>Experiência prévia em rotinas administrativas, financeiro e DP</li>
+            <li>Perfil organizado, responsável e executor</li>
+            <li>Domínio de Excel</li>
+            <li>Disponibilidade pra deslocamentos pontuais pela cidade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <!-- ══════ cargos ainda sem categorias ══════ -->
     <div class="topico-conteudo" data-topico="atendimento" hidden>
       <h2>Atendimento<span class="status falta">falta</span></h2>
@@ -798,6 +1178,26 @@
 
   </div>
 
+  </div>
+
+  <div class="tab-panel" data-panel="config" role="tabpanel" hidden>
+    <div class="note-item"><span class="tag warn">tela interna — não é conteúdo pra loja</span><span>
+      Serve só pra decidir quem executa e quem supervisiona cada atividade da Gerência no dia a
+      dia. Fica salva neste navegador — não sincroniza entre aparelhos, nem aparece pra ninguém
+      além de quem abrir esta aba.
+    </span></div>
+    <p class="prose">
+      Clique na coluna <strong>Cargo</strong> pra trocar quem executa e quem supervisiona cada
+      atividade. Por padrão toda atividade está com a Gerência como executora e sem supervisor —
+      mude só o que for delegado de verdade pra outra função (ex.: Contagem mensal de estoque pode
+      ser executada pelo Líder de pedidos ou pelo Forno, com a Gerência como supervisora).
+    </p>
+    <div class="tablewrap">
+      <table class="tabela-config">
+        <thead><tr><th>Atividade</th><th>Categoria</th><th>Cargo</th></tr></thead>
+        <tbody id="corpoConfig"></tbody>
+      </table>
+    </div>
   </div>
 
   <footer>
@@ -888,7 +1288,138 @@
   });
 
   var inicial = location.hash.replace('#', '');
-  if (inicial === 'cargos') abrirAba('cargos');
+  if (inicial === 'cargos' || inicial === 'config') abrirAba(inicial);
+
+  // ============================================================
+  // Aba Config — quem executa / quem supervisiona cada atividade
+  // da Gerência. Lê a lista de atividades direto do DOM da aba
+  // Cargos (fonte única, sem duplicar os 77 itens aqui). Guarda a
+  // escolha no localStorage deste navegador — não sincroniza entre
+  // aparelhos nem tem base de dados por trás, de propósito: é uma
+  // tela de decisão pessoal, não um recurso pra equipe usar.
+  // ============================================================
+  var CARGOS = [
+    { id: 'gerencia', nome: 'Gerência' },
+    { id: 'administrativo', nome: 'Administrativo' },
+    { id: 'atendimento', nome: 'Atendimento' },
+    { id: 'forno', nome: 'Forno' },
+    { id: 'lider-pedidos', nome: 'Líder de pedidos' },
+    { id: 'lider-loja', nome: 'Líder de loja' },
+    { id: 'auxiliares', nome: 'Auxiliares e estagiários' }
+  ];
+  var CHAVE_CONFIG = 'pessoas-holycookie-atribuicoes-gerencia';
+
+  function nomeCargo(id) {
+    for (var i = 0; i < CARGOS.length; i++) if (CARGOS[i].id === id) return CARGOS[i].nome;
+    return '—';
+  }
+
+  function carregarAtribuicoes() {
+    try { return JSON.parse(localStorage.getItem(CHAVE_CONFIG)) || {}; }
+    catch (e) { return {}; }
+  }
+
+  function salvarAtribuicao(itemId, papel, valor) {
+    var mapa = carregarAtribuicoes();
+    var reg = mapa[itemId] || { executor: 'gerencia', supervisor: '' };
+    reg[papel] = valor;
+    mapa[itemId] = reg;
+    localStorage.setItem(CHAVE_CONFIG, JSON.stringify(mapa));
+  }
+
+  function coletarAtividadesGerencia() {
+    var linhas = [];
+    document.querySelectorAll('#visor .topico-conteudo').forEach(function (painel) {
+      var topicoId = painel.dataset.topico || '';
+      if (topicoId.indexOf('t-') !== 0) return; // só categorias da Gerência
+      if (topicoId === 't-principios' || topicoId === 't-trilha') return; // sem itens
+      var h2 = painel.querySelector('h2');
+      var categoria = (h2 && h2.childNodes[0] && h2.childNodes[0].textContent.trim()) || topicoId;
+      painel.querySelectorAll('.item-btn').forEach(function (btn) {
+        linhas.push({ id: btn.dataset.item, categoria: categoria, nome: btn.textContent.trim() });
+      });
+    });
+    return linhas;
+  }
+
+  function montarConfig() {
+    var corpo = document.getElementById('corpoConfig');
+    if (!corpo) return;
+    var atividades = coletarAtividadesGerencia();
+    corpo.innerHTML = '';
+
+    atividades.forEach(function (a) {
+      var tr = document.createElement('tr');
+
+      var tdNome = document.createElement('td');
+      tdNome.textContent = a.nome;
+      tr.appendChild(tdNome);
+
+      var tdCategoria = document.createElement('td');
+      tdCategoria.textContent = a.categoria;
+      tdCategoria.className = 'cel-categoria';
+      tr.appendChild(tdCategoria);
+
+      var tdCargo = document.createElement('td');
+
+      var resumo = document.createElement('button');
+      resumo.type = 'button';
+      resumo.className = 'cargo-resumo';
+      tdCargo.appendChild(resumo);
+
+      var seletores = document.createElement('div');
+      seletores.className = 'cargo-seletores';
+      seletores.hidden = true;
+      tdCargo.appendChild(seletores);
+      tr.appendChild(tdCargo);
+      corpo.appendChild(tr);
+
+      function atual() {
+        return carregarAtribuicoes()[a.id] || { executor: 'gerencia', supervisor: '' };
+      }
+
+      function atualizarResumo() {
+        var reg = atual();
+        resumo.innerHTML = 'Executor: <strong>' + nomeCargo(reg.executor) + '</strong> · Supervisor: <strong>' +
+          (reg.supervisor ? nomeCargo(reg.supervisor) : '—') + '</strong> <span class="editar-ic">✎</span>';
+      }
+
+      function criarSelect(papel, comVazio) {
+        var label = document.createElement('label');
+        label.textContent = papel === 'executor' ? 'Executor' : 'Supervisor';
+        var select = document.createElement('select');
+        if (comVazio) {
+          var optVazio = document.createElement('option');
+          optVazio.value = '';
+          optVazio.textContent = '— nenhum —';
+          select.appendChild(optVazio);
+        }
+        CARGOS.forEach(function (c) {
+          var opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.nome;
+          select.appendChild(opt);
+        });
+        select.value = atual()[papel] || '';
+        select.addEventListener('change', function () {
+          salvarAtribuicao(a.id, papel, select.value);
+          atualizarResumo();
+        });
+        label.appendChild(select);
+        return label;
+      }
+
+      seletores.appendChild(criarSelect('executor', false));
+      seletores.appendChild(criarSelect('supervisor', true));
+      atualizarResumo();
+
+      resumo.addEventListener('click', function () {
+        seletores.hidden = !seletores.hidden;
+      });
+    });
+  }
+
+  montarConfig();
 </script>
 
 </body>
