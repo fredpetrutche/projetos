@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Pessoas Holy Cookie</title>
+<meta name="description" content="O descritivo de cada cargo da Holy Cookie: o que a pessoa faz, dia a dia, responsabilidade por responsabilidade. Começa pela Gerência.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238A5C13'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><rect x='30' y='24' width='40' height='54' rx='6'/><circle cx='50' cy='42' r='8'/><line x1='38' y1='62' x2='62' y2='62'/><line x1='42' y1='70' x2='58' y2='70'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#8A5C13; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#F6EBD8;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#DBAE60; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#302516;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#DBAE60; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#302516;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .01em;
+             font-weight: 700; color: var(--ink-soft); background: var(--surface);
+             border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer;
+             padding: .6rem 1.2rem; transition: border-color .15s, color .15s, background .15s, box-shadow .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent);
+                     box-shadow: 0 1px 0 rgba(0,0,0,.08); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+           color: var(--accent); font-weight: 700; margin-top: .2rem; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface-2);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item a { color: var(--accent); }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono);
+         align-self: flex-start; }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover { opacity: .8; }
+  em.pendente { font-style: normal; color: var(--ink-faint); font-size: .85em; }
+
+  /* ---------- resumo numérico ---------- */
+  .resumo { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .resumo > div { flex: 1; min-width: 8rem; background: var(--surface); border: 1px solid var(--rule);
+                  border-radius: 4px; padding: .7rem 1rem; text-align: center; }
+  .resumo .num { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; }
+  .resumo .lbl { font-size: .6875rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); }
+  .resumo .pronto .num { color: var(--good); }
+  .resumo .falta .num { color: var(--bad); }
+
+  /* ---------- grade de cargos ---------- */
+  .grade-cargos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem; }
+  .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+                border: 1.5px solid var(--rule); border-radius: 6px; padding: .75rem .9rem;
+                display: flex; flex-direction: column; gap: .4rem; color: inherit;
+                transition: border-color .15s, background .15s; }
+  .topico-btn:hover { border-color: var(--ink-faint); }
+  .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .topico-btn .tnome { font-size: .9375rem; font-weight: 600; line-height: 1.3; }
+
+  /* ---------- visor de conteúdo ---------- */
+  #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
+           padding: 1.5rem 1.5rem 1.75rem; scroll-margin-top: 1.5rem; }
+  .visor-vazio { color: var(--ink-faint); font-size: .9375rem; text-align: center; padding: 2rem 0; }
+  .topico-conteudo { display: flex; flex-direction: column; gap: 1.1rem; }
+  .topico-conteudo[hidden] { display: none; }
+  .topico-conteudo h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.01em;
+                        padding-bottom: .6rem; border-bottom: 2px solid var(--ink);
+                        display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+                        font-family: var(--sans); text-transform: none; }
+  .topico-conteudo h2 .status { margin-left: auto; font-family: var(--mono); font-size: .625rem;
+                        font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+                        padding: .15rem .55rem; border-radius: 999px; }
+  .status.pronto { background: var(--good-bg); color: var(--good); }
+  .status.falta { background: var(--bad-bg); color: var(--bad); }
+
+  ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+              font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos li::marker { color: var(--accent); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+  ul.pontos ul.pontos { margin-top: .35rem; }
+
+  /* ---------- fluxo: caixinha → seta → caixinha ---------- */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 15rem; transition: border-color .15s, background .15s, color .15s; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft);
+                   margin-top: .6rem; }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
+  .passo-detalhe a { color: var(--accent); }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · pessoas</div>
+    <h1>Pessoas Holy Cookie</h1>
+    <p class="lede">
+      O descritivo de cada cargo da empresa — o que a pessoa faz, <strong>dia a dia</strong>,
+      responsabilidade por responsabilidade. Começa pela <strong>Gerência</strong>; as demais funções
+      entram aqui conforme forem escritas. Não confundir com a
+      <a href="../certificacao-holy-cookie/">Certificação de Funções</a>: lá é prova, credencial e
+      bônus pras funções operacionais da loja — aqui é o que cada cargo faz de verdade, da liderança
+      ao balcão.
+    </p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" type="button" data-tab="cargos" role="tab" aria-selected="false">Cargos</button>
+  </div>
+
+  <div class="tab-panel" data-panel="briefing" role="tabpanel">
+
+  <!-- ══════ 1 ══════ -->
+  <section>
+    <h2><span class="n">1</span> O que é, em uma frase</h2>
+    <p class="prose">
+      O descritivo de cargo de cada função da Holy Cookie — o que a pessoa faz, dia a dia, categoria
+      por categoria, com as planilhas e documentos que ela usa pra fazer aquilo. Primeira função
+      documentada: <strong>Gerência</strong>.
+    </p>
+  </section>
+
+  <!-- ══════ 2 ══════ -->
+  <section>
+    <h2><span class="n">2</span> Como se liga à Certificação de Funções<span class="hint">são coisas diferentes</span></h2>
+    <div class="note-item"><span class="tag acc">cargo é o que a função faz — certificação é a prova de que a pessoa sabe fazer</span><span>
+      A <a href="../certificacao-holy-cookie/">Certificação de Funções Holy Cookie</a> treina e credencia
+      as funções operacionais da loja (Atendimento, Forno, Líder de pedidos, Líder de loja,
+      Auxiliares/Estagiários) com prova oral, prova física e bonificação salarial. Esta página
+      documenta o <strong>cargo em si</strong> — o que cada função faz na prática, incluindo papéis que
+      não entram na certificação operacional, como a Gerência.
+    </span></div>
+  </section>
+
+  <!-- ══════ 3 ══════ -->
+  <section>
+    <h2><span class="n">3</span> Como usar esta página</h2>
+    <p class="prose">
+      Na aba <strong>Cargos</strong>, cada card é uma função. Clique num card pra ver o descritivo
+      completo — responsabilidades por categoria, links das planilhas e documentos usados e, quando
+      existe, o roteiro de treinamento daquele cargo.
+    </p>
+  </section>
+
+  </div>
+
+  <div class="tab-panel" data-panel="cargos" role="tabpanel" hidden>
+
+  <div class="resumo">
+    <div class="pronto"><div class="num">1</div><div class="lbl">pronto</div></div>
+    <div class="falta"><div class="num">5</div><div class="lbl">faltam</div></div>
+  </div>
+
+  <div class="grade-cargos">
+    <button class="topico-btn" data-topico="gerencia"><span class="tnome">Gerência</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="atendimento"><span class="tnome">Atendimento</span><span class="tag bad">falta</span></button>
+    <button class="topico-btn" data-topico="forno"><span class="tnome">Forno</span><span class="tag bad">falta</span></button>
+    <button class="topico-btn" data-topico="lider-pedidos"><span class="tnome">Líder de pedidos</span><span class="tag bad">falta</span></button>
+    <button class="topico-btn" data-topico="lider-loja"><span class="tnome">Líder de loja</span><span class="tag bad">falta</span></button>
+    <button class="topico-btn" data-topico="auxiliares"><span class="tnome">Auxiliares e estagiários</span><span class="tag bad">falta</span></button>
+  </div>
+
+  <div id="visor">
+    <p class="visor-vazio">Clique num cargo acima para ver o descritivo.</p>
+
+    <!-- ══════ gerência ══════ -->
+    <div class="topico-conteudo" data-topico="gerencia" hidden>
+      <h2>Gerência<span class="status pronto">pronto</span></h2>
+      <p class="prose">Fonte: documento do Fred e da Débora, &ldquo;Gerência Holy Cook — Responsabilidades
+        e dia a dia&rdquo;.</p>
+
+      <h3 class="sub">Compras</h3>
+      <ul class="pontos">
+        <li>Realizar compras de insumos e produtos de venda na loja
+          <ul class="pontos">
+            <li><a href="https://docs.google.com/spreadsheets/d/1vCwpMCoStQ_x8jSss0M1sG__sCKu3o3lhiWIiji8F88/edit?gid=0#gid=0">Planilha de Compras e Estoque</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit?gid=1859455979#gid=1859455979">Docs de recebimento de mercadoria</a> — nada entra ou sai da loja sem contabilizar</li>
+            <li><a href="https://docs.google.com/document/d/1P3jSjXKTcRXOcbvDydVAnpEPrSmiClyQekuXPx5PycU/edit?tab=t.0">Docs Procedimento de Compras e Conferência</a></li>
+            <li>Documentar o que entrou na loja: Grupo de Compras e Conferência <em class="pendente">(link a criar)</em>,
+              Pasta do Drive para notas fiscais <em class="pendente">(a criar)</em> e
+              <a href="https://docs.google.com/spreadsheets/d/1jRZ1-Ac6-sn3a8YjM3GLav847GgLCA9Vs1L3F9GK5GI/edit?gid=0#gid=0">documentar pagamentos</a>.
+              Obs: no recebimento, sempre verificar item exato, quantidade e preço</li>
+          </ul>
+        </li>
+        <li>Realizar Pedido Semanal na Fábrica
+          <ul class="pontos">
+            <li><a href="https://docs.google.com/spreadsheets/d/19qEUuGVV_leOEvQOpPa-40SJ3n48esm_LFZH4zz1ewg/edit?gid=0#gid=0">Planilha Interna de Pedidos</a> — usa, mas precisa melhorar.
+              Contagem de estoque terça ou quarta; pedido sai quarta até 14h</li>
+            <li>Processo de como fazer o pedido semanal pra fábrica <em class="pendente">(link a criar)</em></li>
+          </ul>
+        </li>
+        <li><a href="https://docs.google.com/spreadsheets/d/1BSCEuWTDF2k5uMyB3QIe1NlVP-YBfK41vJPT3ugOLvs/edit?gid=0#gid=0">Fornecedores</a></li>
+        <li>Realizar pedidos de datas especiais: Páscoa e Natal — <a href="https://docs.google.com/spreadsheets/d/1pHA_vkbFJzZgFH7b9g6wMYHWXDW16a5U11iEdp0cXOc/edit?gid=78927272#gid=78927272">planilha de pedidos</a>;
+          processo próprio, incluindo backup diário de segurança</li>
+        <li>Realizar todas as compras de equipamentos e utensílios necessários</li>
+        <li>Redução de custos — buscar novos fornecedores ou renegociar preços periodicamente</li>
+      </ul>
+      <div class="note-item"><span class="tag acc">cadência</span><span>
+        Compra de insumos da fábrica: 1x por semana. Outras compras: 1 a 2x por mês, verificando
+        semanalmente o que falta.
+      </span></div>
+
+      <h3 class="sub">Estoque</h3>
+      <ul class="pontos">
+        <li>Contagem mensal de estoque
+          <ul class="pontos">
+            <li><a href="https://drive.google.com/file/d/1VlGsyUKQViXgcHnAGC23d-Xi9hrnEsUN/view?usp=sharing">Docs para contagem de estoque</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1vCwpMCoStQ_x8jSss0M1sG__sCKu3o3lhiWIiji8F88/edit?gid=0#gid=0">Planilha de Compras e Estoque</a></li>
+            <li><a href="https://docs.google.com/document/d/1xqFQVFMqNoDaP1SUOSNk3THSC0HO32Z86F4bTXhvn8M/edit?tab=t.0">Procedimento de Controle de Estoque</a>, com
+              <a href="https://docs.google.com/document/d/1DFZ-ZDxchx2KnobNnReJqHcdzA71U-hmYEVPyoMW9bY/edit?tab=t.0">docs de consumo de funcionário</a> e o
+              <a href="https://docs.google.com/document/d/1U94IK4CJqbJecF1NTFkcXrkUWPIjZBTekqZdVU0ynvE/edit?tab=t.0">processo de consumo de funcionário</a></li>
+            <li><a href="https://docs.google.com/document/d/1MM9cT63tifXy7AWGtm3t8kJNwCfCNQpM8RN4E3RLLIQ/edit?tab=t.0">Docs de Perdas</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit">Planilha de todas as saídas de produto</a> (aba 2)</li>
+          </ul>
+        </li>
+        <li>Controle de estoque: verificar o que está faltando</li>
+        <li>Manter a organização do estoque</li>
+        <li>Cálculo do CMV — <a href="https://docs.google.com/spreadsheets/d/1H4gBl8E2kpCPtpkQYbusIvXLlxMbumJF5hzfo_XGMPk/edit">planilha &ldquo;Saiu, deveria ter saído&rdquo;</a> (aba 3)</li>
+        <li>Redução de CMV e controle de desperdícios — verificar se estão usando a quantidade certa
+          (nem pra mais, nem pra menos)</li>
+        <li>Auditorias surpresa pra garantir precisão nas contagens</li>
+        <li>Sistema FIFO (primeiro que entra, primeiro que sai) pra evitar perdas por validade</li>
+      </ul>
+
+      <h3 class="sub">Gestão de atividades do dia a dia — produção e vendas (cozinha e atendimento)</h3>
+      <ul class="pontos">
+        <li>Garantir que as atividades rotineiras de limpeza sejam executadas com qualidade —
+          <a href="https://docs.google.com/spreadsheets/d/1a25-U-xnWJ8N4gNgZAwDPBnt1GgtHOyB/edit?gid=2084525984#gid=2084525984">planilha pra impressão</a>,
+          <a href="https://docs.google.com/document/d/1fY8_-L5NUjziyyRf2HqgdKo98hu6Pbi6zoSI2eQISP0/edit?tab=t.0">docs com checklist de atividades</a> e
+          <a href="https://docs.google.com/document/d/19fSNLrjbcJYiNKU-RFU5Bi95XkXMcmbaiB-xUGIOCZc/edit?tab=t.0">rotinas diárias, semanais e mensais</a></li>
+        <li>Garantir que todos os dias, todos cumpram aquilo que é seu dever dentro da função</li>
+        <li>Criação e conferência dos checklists diários pra cada função</li>
+        <li>Organização da produção diária</li>
+        <li>Otimização e eficiência do trabalho pra gerar rapidez</li>
+        <li>Acompanhamento da gestão dos pedidos pela líder da produção</li>
+        <li><a href="https://docs.google.com/document/d/1Z1Q1kxdPT5MyFRFbgIpL4a3B-1KSUEfCnV4udUUDlAk/edit?tab=t.0">Registro de ocorrências diárias</a>,
+          pra solução e discussão posterior</li>
+      </ul>
+
+      <h3 class="sub">Gestão de equipe</h3>
+      <ul class="pontos">
+        <li>Onboarding e treinamentos</li>
+        <li>Reuniões de feedback e acompanhamento</li>
+        <li>Manutenção de banco de freelancers — Ficha Freelancer <em class="pendente">(link a criar)</em>,
+          <a href="https://docs.google.com/document/d/1vtKRdHjsirGFXUjm5K92-iZybmD0I-yTBEdz3B9jmTY/edit?tab=t.0">regulamento interno Freelancer</a></li>
+        <li>Garantia do <a href="https://docs.google.com/document/d/1nE_GvW9qLYJEgaI8TDtiCUWtuFTm2kCzFVQmqFfg2wU/edit?tab=t.0">regulamento interno</a></li>
+        <li>Escala da equipe: férias, feriados</li>
+        <li>Garantir que todos estejam desempenhando as atividades conforme treinados</li>
+        <li>Lidar com os problemas/conflitos entre funcionários — resolve diretamente com o funcionário
+          algum problema específico que ele esteja causando</li>
+        <li>Banco de horas: horas extras e faltantes, fechamento do relógio de ponto, otimização de
+          folgas — <a href="https://docs.google.com/document/d/1BPgbOk0NG_H4rBrJnQnX4sV_qZcZr8ZqrKIwQ_O5NAU/edit?tab=t.0">folha de ajuste de ponto</a></li>
+        <li>Comemorações de datas especiais e aniversários</li>
+        <li>Incentivos à equipe: bônus, metas — bônus de 150, ainda por definir como distribuir</li>
+        <li>Aplicação de advertências e demissões</li>
+        <li>Cobrir função de funcionário que faltou ou está em processo de contratação</li>
+        <li>Planos de desenvolvimento individual pra crescimento da equipe</li>
+        <li>Reuniões periódicas de alinhamento</li>
+      </ul>
+
+      <h3 class="sub">Treinamentos e processos</h3>
+      <ul class="pontos">
+        <li>Criar e documentar todos os processos rotineiros da loja, pra que qualquer pessoa consiga
+          fazer aquela atividade</li>
+        <li>Melhorar o treinamento pra funcionários</li>
+        <li>Inspeções regulares nos processos, pra manter a qualidade e evitar desperdícios</li>
+      </ul>
+
+      <h3 class="sub">Contratações</h3>
+      <ul class="pontos">
+        <li>Manter um banco de freelancers treinados pra cozinha e atendimento</li>
+        <li>Realizar o processo de contratação</li>
+        <li>Fazer onboarding pra garantir integração de qualidade</li>
+        <li>Acompanhar se o funcionário é bom — caso não seja, trocar rápido</li>
+        <li>Gestão e feedback do período de experiência</li>
+        <li>Desligamento de funcionários</li>
+        <li>Dar entrada e acompanhar processos de licença por saúde ou gravidez</li>
+      </ul>
+
+      <h3 class="sub">Documentações</h3>
+      <ul class="pontos">
+        <li>Cadastro e documentação dos dados pessoais dos funcionários</li>
+        <li>Coletar assinatura de documentos: pagamento, benefícios, vale, produtos consumidos,
+          ocorrências</li>
+        <li>Planilhas de informações: fornecedores, notas fiscais, consumo de funcionários, perdas,
+          ocorrências, contagem de estoque</li>
+        <li>Cadastrar notas fiscais no Drive</li>
+        <li>Verificar folha de consumo de funcionários, folha de perdas e folha de ocorrências</li>
+        <li>Passar toda documentação pro Drive</li>
+        <li>Agendar e manter atualizados os exames periódicos de saúde</li>
+        <li>Revisões periódicas das planilhas, pra garantir precisão e atualização</li>
+      </ul>
+
+      <h3 class="sub">Relatórios</h3>
+      <ul class="pontos">
+        <li>Criar relatórios solicitados — exemplo: relatórios de vendas mensais</li>
+      </ul>
+
+      <h3 class="sub">Estrutura e manutenção — espaço físico, utilitários e equipamentos</h3>
+      <ul class="pontos">
+        <li>Inventário de todos os equipamentos da loja</li>
+        <li>Controle de equipamentos, utensílios e uniformes da loja: assinatura do funcionário que
+          está pegando o uniforme, devolução de avental, touca, uniformes</li>
+        <li>Consertos e substituições na estrutura e equipamentos</li>
+        <li>Cronograma de manutenção preventiva, pra evitar problemas inesperados</li>
+      </ul>
+
+      <h3 class="sub">Experiência do cliente</h3>
+      <ul class="pontos">
+        <li>Garantir que a experiência do cliente é a melhor: qualidade, velocidade e bem-estar na loja</li>
+        <li>Passar nas mesas vendo se está tudo bem</li>
+        <li>Resolver conflitos entre funcionários e cliente</li>
+        <li>Acompanhar e responder notas e comentários nos aplicativos (Google, iFood, Food to Save)</li>
+      </ul>
+
+      <h3 class="sub">Financeiro</h3>
+      <ul class="pontos">
+        <li>Abertura e fechamento de caixa</li>
+        <li>Providenciar troco</li>
+        <li>Repassar boletos pra Débora pagar</li>
+        <li>Fazer pagamentos e prestação de contas desses pagamentos</li>
+        <li>Fazer contas de valores a serem pagos pro funcionário/freelancer</li>
+        <li>Fechamento financeiro de folha</li>
+      </ul>
+
+      <h3 class="sub">Contábil</h3>
+      <div class="note-item"><span class="tag bad">falta escrever</span><span>
+        Categoria prevista no documento-fonte, sem conteúdo ainda.
+      </span></div>
+
+      <h3 class="sub">Marketing</h3>
+      <ul class="pontos">
+        <li>Apoiar a execução de ações promocionais e datas especiais (festa junina, cookie de graça)</li>
+        <li>Organizar, acompanhar e promover ações de marketing em datas especiais (Páscoa, Dia das
+          Mães, Dia das Crianças, Natal etc.)</li>
+        <li>Gestão de influenciadores: captação diária de novos influenciadores, manter contato com os
+          ativos, enviar materiais promocionais/fotos/textos/ofertas atualizadas, garantir que todos
+          estejam postando conforme combinado, acompanhar entregas e performance das postagens, manter
+          banco atualizado (contato, tipo de público, desempenho) e repassar os resultados pra
+          liderança</li>
+      </ul>
+
+      <h3 class="sub">Vendas</h3>
+      <ul class="pontos">
+        <li>Constante treinamento de vendas pra equipe</li>
+        <li>Trazer ideias de novas fontes de receita pra empresa</li>
+      </ul>
+
+      <h3 class="sub">Reunir repasses para Débora e Fred</h3>
+      <ul class="pontos">
+        <li>Repasse diário de vendas e fechamento de caixa</li>
+        <li>Repasse de ocorrências pra melhorias</li>
+        <li>Reuniões semanais de acompanhamento e foco da semana</li>
+      </ul>
+
+      <h3 class="sub">Princípios da função</h3>
+      <div class="note-item"><span class="tag acc">autonomia</span><span>
+        Não centralizar conhecimento — a empresa é autogerenciável.
+      </span></div>
+      <div class="note-item"><span class="tag acc">processo de tudo</span><span>
+        Vídeos e documentos pra que qualquer pessoa consiga fazer essas atividades.
+      </span></div>
+      <div class="note-item"><span class="tag acc">pela última vez</span><span>
+        Fazer com que um problema não aconteça repetidas vezes — exemplo: anotar o que aconteceu e
+        fazer uma reunião diária de 10 minutos pra repassar.
+      </span></div>
+
+      <h3 class="sub">Trilha de treinamento do gerente — clique nas caixinhas</h3>
+      <div class="fluxo">
+        <button class="passo-caixa" data-detalhe="<strong>Objetivo:</strong> ao final, entender na teoria como funciona a operação e o que a Holy valoriza.<br><br><strong>Tempo aproximado:</strong> 2 dias.<br><br>Treinamento Loja Campinas + Treinamento Vídeos Franquia, via Hotmart:<br>&bull; <a href='https://drive.google.com/drive/folders/1406Y5j0hxi9X4objcrHZSchLcG5hURYj?usp=drive_link' target='_blank' rel='noopener'>Material da Franquia — Treinamento em Vídeos, Atendimento</a><br>&bull; <a href='https://docs.google.com/document/d/1yKdmcJRt2Lde2zrMBtmezYYqVgA7VBRw/edit#heading=h.gjdgxs' target='_blank' rel='noopener'>Manual da Franquia</a> (algumas partes desatualizadas)">1. Treinamento operação em vídeo</button><span class="seta">→</span>
+        <button class="passo-caixa" data-detalhe="<strong>Objetivo:</strong> entender o que já existe na parte gerencial e propor melhorias pra cada ponto apresentado, sem entrar em detalhamento. Ao final, o gerente apresenta o que pensou de melhoria e monta um plano de ação junto com a liderança.<br><br><strong>Tempo aproximado:</strong> 3 dias.<br><br>Vídeos por categoria, no Loom:<br>&bull; <a href='https://www.loom.com/share/839478d49a434104a474be142a265d78?sid=76f2461d-e5ca-4d46-865c-3bb03d749ffc' target='_blank' rel='noopener'>Compras</a><br>&bull; <a href='https://www.loom.com/share/616e82169e3844649c98a4e2b9c7b3ed?sid=14aff0be-c0f8-4ada-ae51-f09e496cf2ca' target='_blank' rel='noopener'>Estoque</a><br>&bull; <a href='https://www.loom.com/share/62fa095e20e8484f937df3a9d3af11e7?sid=c5800e63-5b98-4490-b121-7bc3da3bff07' target='_blank' rel='noopener'>Gestão dia a dia da Equipe</a><br>&bull; <a href='https://www.loom.com/share/79d7a778aca346dca4cf0dd8696aa361?sid=066d2ddd-44a0-44da-addc-421ea8f29473' target='_blank' rel='noopener'>Equipe, treinamentos e processos</a><br>&bull; <a href='https://www.loom.com/share/acf613d16a5944b9ba3d1ce794d991e4?sid=9f646636-41f0-40f8-9509-001b525a6eac' target='_blank' rel='noopener'>Demais responsabilidades</a><br>&bull; <a href='https://www.loom.com/share/18db1057b64f48e2817e8d7445f05a97?sid=f5c6cd3b-376e-4e7a-9aa1-74da85d141ea' target='_blank' rel='noopener'>Problemas da loja</a>">2. Apresentação Gerência + mapeamento de melhorias</button><span class="seta">→</span>
+        <button class="passo-caixa" data-detalhe="<strong>Objetivo:</strong> conhecer na prática como funciona a operação e fazer os ajustes necessários no plano de ação gerencial.<br><br><strong>Tempo aproximado:</strong> 1 semana — ir à loja 4 dias durante o dia, 1 à noite e 1 domingo.">3. Treinamento presencial</button>
+      </div>
+      <div class="passo-detalhe"></div>
+    </div>
+
+    <!-- ══════ atendimento ══════ -->
+    <div class="topico-conteudo" data-topico="atendimento" hidden>
+      <h2>Atendimento<span class="status falta">falta</span></h2>
+      <div class="note-item"><span class="tag bad">falta escrever</span><span>
+        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+      </span></div>
+    </div>
+
+    <!-- ══════ forno ══════ -->
+    <div class="topico-conteudo" data-topico="forno" hidden>
+      <h2>Forno<span class="status falta">falta</span></h2>
+      <div class="note-item"><span class="tag bad">falta escrever</span><span>
+        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+      </span></div>
+    </div>
+
+    <!-- ══════ líder de pedidos ══════ -->
+    <div class="topico-conteudo" data-topico="lider-pedidos" hidden>
+      <h2>Líder de pedidos<span class="status falta">falta</span></h2>
+      <div class="note-item"><span class="tag bad">falta escrever</span><span>
+        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+      </span></div>
+    </div>
+
+    <!-- ══════ líder de loja ══════ -->
+    <div class="topico-conteudo" data-topico="lider-loja" hidden>
+      <h2>Líder de loja<span class="status falta">falta</span></h2>
+      <div class="note-item"><span class="tag bad">falta escrever</span><span>
+        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+      </span></div>
+    </div>
+
+    <!-- ══════ auxiliares e estagiários ══════ -->
+    <div class="topico-conteudo" data-topico="auxiliares" hidden>
+      <h2>Auxiliares e estagiários<span class="status falta">falta</span></h2>
+      <div class="note-item"><span class="tag bad">falta escrever</span><span>
+        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+      </span></div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <footer>
+    Página criada em 16/08/2026, a partir do documento &ldquo;Gerência Holy Cook — Responsabilidades e
+    dia a dia&rdquo;. É um documento vivo — conforme mais cargos forem escritos, o resumo e a grade de
+    cargos acima mudam junto.
+  </footer>
+
+</div>
+
+<script>
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome; else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); });
+  });
+
+  function abrirTopico(id) {
+    document.querySelectorAll('.topico-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.topico === id);
+    });
+    document.querySelectorAll('.topico-conteudo').forEach(function (c) {
+      c.hidden = c.dataset.topico !== id;
+    });
+    document.querySelector('.visor-vazio').hidden = true;
+    document.getElementById('visor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('.topico-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirTopico(b.dataset.topico); });
+  });
+
+  document.querySelectorAll('.passo-caixa').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var fluxo = b.closest('.fluxo');
+      var detalhe = fluxo.nextElementSibling;
+      fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      detalhe.innerHTML = b.dataset.detalhe;
+      detalhe.classList.add('aberto');
+    });
+  });
+
+  var inicial = location.hash.replace('#', '');
+  if (inicial === 'cargos') abrirAba('cargos');
+</script>
+
+</body>
+</html>
