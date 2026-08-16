@@ -112,6 +112,10 @@
                        letter-spacing: .06em; text-transform: uppercase; }
   .gcontagem { display: flex; gap: .3rem; }
 
+  /* ---------- descrição fixa do cargo (missão/escopo) — não é atividade, não vira card ---------- */
+  .grupo-descricao { display: flex; flex-direction: column; gap: .75rem; margin-top: -.5rem; }
+  .grupo-descricao[hidden] { display: none; }
+
   /* ---------- nível 2 — grade de categorias do cargo escolhido ---------- */
   .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem;
                     margin-top: -.5rem; padding: .9rem; background: var(--surface-2);
@@ -289,7 +293,7 @@
     </button>
     <button class="grupo-btn" data-grupo="administrativo">
       <span class="gnome">Administrativo</span>
-      <span class="gcontagem"><span class="tag good">6</span></span>
+      <span class="gcontagem"><span class="tag good">5</span></span>
     </button>
     <button class="grupo-btn" data-grupo="atendimento">
       <span class="gnome">Atendimento</span>
@@ -334,9 +338,20 @@
     <button class="topico-btn" data-topico="t-trilha"><span class="tnome">Trilha de treinamento</span><span class="tag good">pronto</span></button>
   </div>
 
+  <!-- descrição fixa do cargo Administrativo — não é atividade, não vira card -->
+  <div class="grupo-descricao" data-grupo="administrativo" hidden>
+    <p class="prose">Garantir controle financeiro, conformidade trabalhista, organização
+      administrativa e compras eficientes, assegurando que a operação funcione com
+      previsibilidade, organização e otimização de recursos.</p>
+    <div class="note-item"><span class="tag warn">não é decisor estratégico</span><span>
+      Este cargo é <strong>executor, controlador e organizador</strong> — não decide sozinho.
+      Decisões relevantes (valores, exceções, fornecedores críticos) precisam de aprovação da
+      gerência/direção.
+    </span></div>
+  </div>
+
   <!-- categorias do Administrativo (nível 2) -->
   <div class="grade-topicos" data-grupo="administrativo" hidden>
-    <button class="topico-btn" data-topico="a-missao"><span class="tnome">Missão e escopo do cargo</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="a-dp"><span class="tnome">Departamento Pessoal</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="a-financeiro"><span class="tnome">Financeiro</span><span class="tag good">pronto</span></button>
     <button class="topico-btn" data-topico="a-compras"><span class="tnome">Compras, cotações e fornecedores</span><span class="tag good">pronto</span></button>
@@ -798,19 +813,6 @@
       <div class="passo-detalhe"></div>
     </div>
 
-    <!-- ══════ a-missao ══════ -->
-    <div class="topico-conteudo" data-topico="a-missao" hidden>
-      <h2>Missão e escopo do cargo<span class="status pronto">pronto</span></h2>
-      <p class="prose">Garantir controle financeiro, conformidade trabalhista, organização
-        administrativa e compras eficientes, assegurando que a operação funcione com
-        previsibilidade, organização e otimização de recursos.</p>
-      <div class="note-item"><span class="tag warn">não é decisor estratégico</span><span>
-        Este cargo é <strong>executor, controlador e organizador</strong> — não decide sozinho.
-        Decisões relevantes (valores, exceções, fornecedores críticos) precisam de aprovação da
-        gerência/direção.
-      </span></div>
-    </div>
-
     <!-- ══════ a-dp ══════ -->
     <div class="topico-conteudo" data-topico="a-dp" hidden>
       <h2>Departamento Pessoal<span class="status pronto">pronto</span></h2>
@@ -1253,6 +1255,9 @@
     var temCategorias = !!document.querySelector('.grade-topicos[data-grupo="' + id + '"]');
     document.querySelectorAll('.grade-topicos').forEach(function (g) {
       g.hidden = g.dataset.grupo !== id;
+    });
+    document.querySelectorAll('.grupo-descricao').forEach(function (d) {
+      d.hidden = d.dataset.grupo !== id;
     });
     if (temCategorias) {
       fecharTopico();
