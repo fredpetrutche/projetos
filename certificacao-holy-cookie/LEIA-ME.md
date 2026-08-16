@@ -221,7 +221,9 @@ Débora.
 
 Está em `certificacao-holy-cookie/material/index.html`. Estrutura (versão final, depois do Fred
 pedir para tirar a rolagem longa — ver [[feedback_layout-paginas-projeto]]):
-- Resumo numérico no topo (9 prontos / 7 parciais / 10 faltam)
+- Resumo numérico no topo (10 prontos / 7 parciais / 9 faltam — Limpeza e Organização virou
+  "pronto" em 16/08/2026: o Fred apontou que já roda de verdade nos checklists de Abertura/Meio do
+  Dia/Fechamento do Sistema-HC, o "Konclui" do documento-fonte foi substituído)
 - **Grade de botões** — um por tópico/área certificável (26, `data-topico="t01"`…`"t26"`),
   agrupados visualmente por rótulo (Cozinha / Atendimento / Transversal / Treinamento e
   Onboarding), cada um já mostrando o status (pronto/parcial/falta) no próprio botão
