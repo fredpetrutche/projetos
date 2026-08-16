@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
 <title>Pessoas Holy Cookie</title>
-<meta name="description" content="O descritivo de cada cargo da Holy Cookie: o que a pessoa faz, dia a dia, responsabilidade por responsabilidade. Começa pela Gerência.">
+<meta name="description" content="O descritivo de cada cargo da Holy Cookie: o que a pessoa faz, dia a dia, categoria por categoria. Começa pela Gerência.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238A5C13'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><rect x='30' y='24' width='40' height='54' rx='6'/><circle cx='50' cy='42' r='8'/><line x1='38' y1='62' x2='62' y2='62'/><line x1='42' y1='70' x2='58' y2='70'/></g></svg>">
 <style>
   :root {
@@ -71,8 +71,6 @@
   h2 .n { color: var(--accent); font-weight: 700; }
   h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
              color: var(--ink-faint); font-weight: 400; }
-  h3.sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
-           color: var(--accent); font-weight: 700; margin-top: .2rem; }
   .prose { color: var(--ink-soft); max-width: 68ch; }
   .prose strong { color: var(--ink); font-weight: 600; }
 
@@ -102,17 +100,32 @@
   .resumo .pronto .num { color: var(--good); }
   .resumo .falta .num { color: var(--bad); }
 
-  /* ---------- grade de cargos ---------- */
-  .grade-cargos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem; }
+  /* ---------- nível 1 — grade de cargos ---------- */
+  .grade-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .6rem; }
+  .grupo-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+               border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
+               display: flex; flex-direction: column; gap: .55rem; color: inherit;
+               transition: border-color .15s, background .15s; }
+  .grupo-btn:hover { border-color: var(--ink-faint); }
+  .grupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .grupo-btn .gnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+                       letter-spacing: .06em; text-transform: uppercase; }
+  .gcontagem { display: flex; gap: .3rem; }
+
+  /* ---------- nível 2 — grade de categorias do cargo escolhido ---------- */
+  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem;
+                    margin-top: -.5rem; padding: .9rem; background: var(--surface-2);
+                    border: 1px dashed var(--rule); border-radius: 8px; }
+  .grade-topicos[hidden] { display: none; }
   .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
-                border: 1.5px solid var(--rule); border-radius: 6px; padding: .75rem .9rem;
+                border: 1.5px solid var(--rule); border-radius: 6px; padding: .65rem .85rem;
                 display: flex; flex-direction: column; gap: .4rem; color: inherit;
                 transition: border-color .15s, background .15s; }
   .topico-btn:hover { border-color: var(--ink-faint); }
   .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
-  .topico-btn .tnome { font-size: .9375rem; font-weight: 600; line-height: 1.3; }
+  .topico-btn .tnome { font-size: .875rem; font-weight: 600; line-height: 1.3; }
 
-  /* ---------- visor de conteúdo ---------- */
+  /* ---------- nível 3 — visor de conteúdo da categoria ---------- */
   #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
            padding: 1.5rem 1.5rem 1.75rem; scroll-margin-top: 1.5rem; }
   .visor-vazio { color: var(--ink-faint); font-size: .9375rem; text-align: center; padding: 2rem 0; }
@@ -165,8 +178,8 @@
     <h1>Pessoas Holy Cookie</h1>
     <p class="lede">
       O descritivo de cada cargo da empresa — o que a pessoa faz, <strong>dia a dia</strong>,
-      responsabilidade por responsabilidade. Começa pela <strong>Gerência</strong>; as demais funções
-      entram aqui conforme forem escritas. Não confundir com a
+      categoria por categoria. Começa pela <strong>Gerência</strong>; as demais funções entram aqui
+      conforme forem escritas. Não confundir com a
       <a href="../certificacao-holy-cookie/">Certificação de Funções</a>: lá é prova, credencial e
       bônus pras funções operacionais da loja — aqui é o que cada cargo faz de verdade, da liderança
       ao balcão.
@@ -204,11 +217,13 @@
 
   <!-- ══════ 3 ══════ -->
   <section>
-    <h2><span class="n">3</span> Como usar esta página</h2>
+    <h2><span class="n">3</span> Como usar esta página<span class="hint">nunca uma tela corrida — sempre card dentro de card</span></h2>
     <p class="prose">
-      Na aba <strong>Cargos</strong>, cada card é uma função. Clique num card pra ver o descritivo
-      completo — responsabilidades por categoria, links das planilhas e documentos usados e, quando
-      existe, o roteiro de treinamento daquele cargo.
+      Na aba <strong>Cargos</strong>, cada card é uma função. Clique num cargo pra ver as categorias
+      daquele cargo — Compras, Estoque, Gestão de equipe etc. — cada uma em seu próprio card. Clique
+      numa categoria pra ver o descritivo completo dela. Sempre dois cliques até o conteúdo: cargo →
+      categoria. Se um cargo ainda não tem categorias escritas, o clique já mostra direto que falta
+      escrever.
     </p>
   </section>
 
@@ -217,29 +232,64 @@
   <div class="tab-panel" data-panel="cargos" role="tabpanel" hidden>
 
   <div class="resumo">
-    <div class="pronto"><div class="num">1</div><div class="lbl">pronto</div></div>
-    <div class="falta"><div class="num">5</div><div class="lbl">faltam</div></div>
+    <div class="pronto"><div class="num">1</div><div class="lbl">cargo pronto</div></div>
+    <div class="falta"><div class="num">5</div><div class="lbl">cargos faltam</div></div>
   </div>
 
-  <div class="grade-cargos">
-    <button class="topico-btn" data-topico="gerencia"><span class="tnome">Gerência</span><span class="tag good">pronto</span></button>
-    <button class="topico-btn" data-topico="atendimento"><span class="tnome">Atendimento</span><span class="tag bad">falta</span></button>
-    <button class="topico-btn" data-topico="forno"><span class="tnome">Forno</span><span class="tag bad">falta</span></button>
-    <button class="topico-btn" data-topico="lider-pedidos"><span class="tnome">Líder de pedidos</span><span class="tag bad">falta</span></button>
-    <button class="topico-btn" data-topico="lider-loja"><span class="tnome">Líder de loja</span><span class="tag bad">falta</span></button>
-    <button class="topico-btn" data-topico="auxiliares"><span class="tnome">Auxiliares e estagiários</span><span class="tag bad">falta</span></button>
+  <div class="grade-grupos">
+    <button class="grupo-btn" data-grupo="gerencia">
+      <span class="gnome">Gerência</span>
+      <span class="gcontagem"><span class="tag good">16</span><span class="tag bad">1</span></span>
+    </button>
+    <button class="grupo-btn" data-grupo="atendimento">
+      <span class="gnome">Atendimento</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="forno">
+      <span class="gnome">Forno</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="lider-pedidos">
+      <span class="gnome">Líder de pedidos</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="lider-loja">
+      <span class="gnome">Líder de loja</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="auxiliares">
+      <span class="gnome">Auxiliares e estagiários</span>
+      <span class="tag bad">falta</span>
+    </button>
+  </div>
+
+  <!-- categorias da Gerência (nível 2) -->
+  <div class="grade-topicos" data-grupo="gerencia" hidden>
+    <button class="topico-btn" data-topico="t-compras"><span class="tnome">Compras</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-estoque"><span class="tnome">Estoque</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-dia-a-dia"><span class="tnome">Gestão do dia a dia — produção e vendas</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-equipe"><span class="tnome">Gestão de equipe</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-treinamentos"><span class="tnome">Treinamentos e processos</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-contratacoes"><span class="tnome">Contratações</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-documentacoes"><span class="tnome">Documentações</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-relatorios"><span class="tnome">Relatórios</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-estrutura"><span class="tnome">Estrutura e manutenção</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-experiencia-cliente"><span class="tnome">Experiência do cliente</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-financeiro"><span class="tnome">Financeiro</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-contabil"><span class="tnome">Contábil</span><span class="tag bad">falta</span></button>
+    <button class="topico-btn" data-topico="t-marketing"><span class="tnome">Marketing</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-vendas"><span class="tnome">Vendas</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-repasses"><span class="tnome">Reunir repasses p/ Débora e Fred</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-principios"><span class="tnome">Princípios da função</span><span class="tag good">pronto</span></button>
+    <button class="topico-btn" data-topico="t-trilha"><span class="tnome">Trilha de treinamento</span><span class="tag good">pronto</span></button>
   </div>
 
   <div id="visor">
-    <p class="visor-vazio">Clique num cargo acima para ver o descritivo.</p>
+    <p class="visor-vazio">Clique num cargo e depois numa categoria para ver o descritivo.</p>
 
-    <!-- ══════ gerência ══════ -->
-    <div class="topico-conteudo" data-topico="gerencia" hidden>
-      <h2>Gerência<span class="status pronto">pronto</span></h2>
-      <p class="prose">Fonte: documento do Fred e da Débora, &ldquo;Gerência Holy Cook — Responsabilidades
-        e dia a dia&rdquo;.</p>
-
-      <h3 class="sub">Compras</h3>
+    <!-- ══════ t-compras ══════ -->
+    <div class="topico-conteudo" data-topico="t-compras" hidden>
+      <h2>Compras<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Realizar compras de insumos e produtos de venda na loja
           <ul class="pontos">
@@ -269,8 +319,11 @@
         Compra de insumos da fábrica: 1x por semana. Outras compras: 1 a 2x por mês, verificando
         semanalmente o que falta.
       </span></div>
+    </div>
 
-      <h3 class="sub">Estoque</h3>
+    <!-- ══════ t-estoque ══════ -->
+    <div class="topico-conteudo" data-topico="t-estoque" hidden>
+      <h2>Estoque<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Contagem mensal de estoque
           <ul class="pontos">
@@ -291,8 +344,12 @@
         <li>Auditorias surpresa pra garantir precisão nas contagens</li>
         <li>Sistema FIFO (primeiro que entra, primeiro que sai) pra evitar perdas por validade</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Gestão de atividades do dia a dia — produção e vendas (cozinha e atendimento)</h3>
+    <!-- ══════ t-dia-a-dia ══════ -->
+    <div class="topico-conteudo" data-topico="t-dia-a-dia" hidden>
+      <h2>Gestão do dia a dia — produção e vendas<span class="status pronto">pronto</span></h2>
+      <p class="prose">Cozinha e atendimento.</p>
       <ul class="pontos">
         <li>Garantir que as atividades rotineiras de limpeza sejam executadas com qualidade —
           <a href="https://docs.google.com/spreadsheets/d/1a25-U-xnWJ8N4gNgZAwDPBnt1GgtHOyB/edit?gid=2084525984#gid=2084525984">planilha pra impressão</a>,
@@ -306,8 +363,11 @@
         <li><a href="https://docs.google.com/document/d/1Z1Q1kxdPT5MyFRFbgIpL4a3B-1KSUEfCnV4udUUDlAk/edit?tab=t.0">Registro de ocorrências diárias</a>,
           pra solução e discussão posterior</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Gestão de equipe</h3>
+    <!-- ══════ t-equipe ══════ -->
+    <div class="topico-conteudo" data-topico="t-equipe" hidden>
+      <h2>Gestão de equipe<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Onboarding e treinamentos</li>
         <li>Reuniões de feedback e acompanhamento</li>
@@ -327,16 +387,22 @@
         <li>Planos de desenvolvimento individual pra crescimento da equipe</li>
         <li>Reuniões periódicas de alinhamento</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Treinamentos e processos</h3>
+    <!-- ══════ t-treinamentos ══════ -->
+    <div class="topico-conteudo" data-topico="t-treinamentos" hidden>
+      <h2>Treinamentos e processos<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Criar e documentar todos os processos rotineiros da loja, pra que qualquer pessoa consiga
           fazer aquela atividade</li>
         <li>Melhorar o treinamento pra funcionários</li>
         <li>Inspeções regulares nos processos, pra manter a qualidade e evitar desperdícios</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Contratações</h3>
+    <!-- ══════ t-contratacoes ══════ -->
+    <div class="topico-conteudo" data-topico="t-contratacoes" hidden>
+      <h2>Contratações<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Manter um banco de freelancers treinados pra cozinha e atendimento</li>
         <li>Realizar o processo de contratação</li>
@@ -346,8 +412,11 @@
         <li>Desligamento de funcionários</li>
         <li>Dar entrada e acompanhar processos de licença por saúde ou gravidez</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Documentações</h3>
+    <!-- ══════ t-documentacoes ══════ -->
+    <div class="topico-conteudo" data-topico="t-documentacoes" hidden>
+      <h2>Documentações<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Cadastro e documentação dos dados pessoais dos funcionários</li>
         <li>Coletar assinatura de documentos: pagamento, benefícios, vale, produtos consumidos,
@@ -360,13 +429,20 @@
         <li>Agendar e manter atualizados os exames periódicos de saúde</li>
         <li>Revisões periódicas das planilhas, pra garantir precisão e atualização</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Relatórios</h3>
+    <!-- ══════ t-relatorios ══════ -->
+    <div class="topico-conteudo" data-topico="t-relatorios" hidden>
+      <h2>Relatórios<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Criar relatórios solicitados — exemplo: relatórios de vendas mensais</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Estrutura e manutenção — espaço físico, utilitários e equipamentos</h3>
+    <!-- ══════ t-estrutura ══════ -->
+    <div class="topico-conteudo" data-topico="t-estrutura" hidden>
+      <h2>Estrutura e manutenção<span class="status pronto">pronto</span></h2>
+      <p class="prose">Espaço físico, utilitários e equipamentos.</p>
       <ul class="pontos">
         <li>Inventário de todos os equipamentos da loja</li>
         <li>Controle de equipamentos, utensílios e uniformes da loja: assinatura do funcionário que
@@ -374,16 +450,22 @@
         <li>Consertos e substituições na estrutura e equipamentos</li>
         <li>Cronograma de manutenção preventiva, pra evitar problemas inesperados</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Experiência do cliente</h3>
+    <!-- ══════ t-experiencia-cliente ══════ -->
+    <div class="topico-conteudo" data-topico="t-experiencia-cliente" hidden>
+      <h2>Experiência do cliente<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Garantir que a experiência do cliente é a melhor: qualidade, velocidade e bem-estar na loja</li>
         <li>Passar nas mesas vendo se está tudo bem</li>
         <li>Resolver conflitos entre funcionários e cliente</li>
         <li>Acompanhar e responder notas e comentários nos aplicativos (Google, iFood, Food to Save)</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Financeiro</h3>
+    <!-- ══════ t-financeiro ══════ -->
+    <div class="topico-conteudo" data-topico="t-financeiro" hidden>
+      <h2>Financeiro<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Abertura e fechamento de caixa</li>
         <li>Providenciar troco</li>
@@ -392,13 +474,19 @@
         <li>Fazer contas de valores a serem pagos pro funcionário/freelancer</li>
         <li>Fechamento financeiro de folha</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Contábil</h3>
+    <!-- ══════ t-contabil ══════ -->
+    <div class="topico-conteudo" data-topico="t-contabil" hidden>
+      <h2>Contábil<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
         Categoria prevista no documento-fonte, sem conteúdo ainda.
       </span></div>
+    </div>
 
-      <h3 class="sub">Marketing</h3>
+    <!-- ══════ t-marketing ══════ -->
+    <div class="topico-conteudo" data-topico="t-marketing" hidden>
+      <h2>Marketing<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Apoiar a execução de ações promocionais e datas especiais (festa junina, cookie de graça)</li>
         <li>Organizar, acompanhar e promover ações de marketing em datas especiais (Páscoa, Dia das
@@ -409,21 +497,30 @@
           banco atualizado (contato, tipo de público, desempenho) e repassar os resultados pra
           liderança</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Vendas</h3>
+    <!-- ══════ t-vendas ══════ -->
+    <div class="topico-conteudo" data-topico="t-vendas" hidden>
+      <h2>Vendas<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Constante treinamento de vendas pra equipe</li>
         <li>Trazer ideias de novas fontes de receita pra empresa</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Reunir repasses para Débora e Fred</h3>
+    <!-- ══════ t-repasses ══════ -->
+    <div class="topico-conteudo" data-topico="t-repasses" hidden>
+      <h2>Reunir repasses para Débora e Fred<span class="status pronto">pronto</span></h2>
       <ul class="pontos">
         <li>Repasse diário de vendas e fechamento de caixa</li>
         <li>Repasse de ocorrências pra melhorias</li>
         <li>Reuniões semanais de acompanhamento e foco da semana</li>
       </ul>
+    </div>
 
-      <h3 class="sub">Princípios da função</h3>
+    <!-- ══════ t-principios ══════ -->
+    <div class="topico-conteudo" data-topico="t-principios" hidden>
+      <h2>Princípios da função<span class="status pronto">pronto</span></h2>
       <div class="note-item"><span class="tag acc">autonomia</span><span>
         Não centralizar conhecimento — a empresa é autogerenciável.
       </span></div>
@@ -434,8 +531,12 @@
         Fazer com que um problema não aconteça repetidas vezes — exemplo: anotar o que aconteceu e
         fazer uma reunião diária de 10 minutos pra repassar.
       </span></div>
+    </div>
 
-      <h3 class="sub">Trilha de treinamento do gerente — clique nas caixinhas</h3>
+    <!-- ══════ t-trilha ══════ -->
+    <div class="topico-conteudo" data-topico="t-trilha" hidden>
+      <h2>Trilha de treinamento<span class="status pronto">pronto</span></h2>
+      <p class="prose">Clique nas caixinhas pra ver o objetivo, o tempo e os materiais de cada etapa.</p>
       <div class="fluxo">
         <button class="passo-caixa" data-detalhe="<strong>Objetivo:</strong> ao final, entender na teoria como funciona a operação e o que a Holy valoriza.<br><br><strong>Tempo aproximado:</strong> 2 dias.<br><br>Treinamento Loja Campinas + Treinamento Vídeos Franquia, via Hotmart:<br>&bull; <a href='https://drive.google.com/drive/folders/1406Y5j0hxi9X4objcrHZSchLcG5hURYj?usp=drive_link' target='_blank' rel='noopener'>Material da Franquia — Treinamento em Vídeos, Atendimento</a><br>&bull; <a href='https://docs.google.com/document/d/1yKdmcJRt2Lde2zrMBtmezYYqVgA7VBRw/edit#heading=h.gjdgxs' target='_blank' rel='noopener'>Manual da Franquia</a> (algumas partes desatualizadas)">1. Treinamento operação em vídeo</button><span class="seta">→</span>
         <button class="passo-caixa" data-detalhe="<strong>Objetivo:</strong> entender o que já existe na parte gerencial e propor melhorias pra cada ponto apresentado, sem entrar em detalhamento. Ao final, o gerente apresenta o que pensou de melhoria e monta um plano de ação junto com a liderança.<br><br><strong>Tempo aproximado:</strong> 3 dias.<br><br>Vídeos por categoria, no Loom:<br>&bull; <a href='https://www.loom.com/share/839478d49a434104a474be142a265d78?sid=76f2461d-e5ca-4d46-865c-3bb03d749ffc' target='_blank' rel='noopener'>Compras</a><br>&bull; <a href='https://www.loom.com/share/616e82169e3844649c98a4e2b9c7b3ed?sid=14aff0be-c0f8-4ada-ae51-f09e496cf2ca' target='_blank' rel='noopener'>Estoque</a><br>&bull; <a href='https://www.loom.com/share/62fa095e20e8484f937df3a9d3af11e7?sid=c5800e63-5b98-4490-b121-7bc3da3bff07' target='_blank' rel='noopener'>Gestão dia a dia da Equipe</a><br>&bull; <a href='https://www.loom.com/share/79d7a778aca346dca4cf0dd8696aa361?sid=066d2ddd-44a0-44da-addc-421ea8f29473' target='_blank' rel='noopener'>Equipe, treinamentos e processos</a><br>&bull; <a href='https://www.loom.com/share/acf613d16a5944b9ba3d1ce794d991e4?sid=9f646636-41f0-40f8-9509-001b525a6eac' target='_blank' rel='noopener'>Demais responsabilidades</a><br>&bull; <a href='https://www.loom.com/share/18db1057b64f48e2817e8d7445f05a97?sid=f5c6cd3b-376e-4e7a-9aa1-74da85d141ea' target='_blank' rel='noopener'>Problemas da loja</a>">2. Apresentação Gerência + mapeamento de melhorias</button><span class="seta">→</span>
@@ -444,43 +545,44 @@
       <div class="passo-detalhe"></div>
     </div>
 
-    <!-- ══════ atendimento ══════ -->
+    <!-- ══════ cargos ainda sem categorias ══════ -->
     <div class="topico-conteudo" data-topico="atendimento" hidden>
       <h2>Atendimento<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
+        trouxer o conteúdo.
       </span></div>
     </div>
 
-    <!-- ══════ forno ══════ -->
     <div class="topico-conteudo" data-topico="forno" hidden>
       <h2>Forno<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
+        trouxer o conteúdo.
       </span></div>
     </div>
 
-    <!-- ══════ líder de pedidos ══════ -->
     <div class="topico-conteudo" data-topico="lider-pedidos" hidden>
       <h2>Líder de pedidos<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
+        trouxer o conteúdo.
       </span></div>
     </div>
 
-    <!-- ══════ líder de loja ══════ -->
     <div class="topico-conteudo" data-topico="lider-loja" hidden>
       <h2>Líder de loja<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
+        trouxer o conteúdo.
       </span></div>
     </div>
 
-    <!-- ══════ auxiliares e estagiários ══════ -->
     <div class="topico-conteudo" data-topico="auxiliares" hidden>
       <h2>Auxiliares e estagiários<span class="status falta">falta</span></h2>
       <div class="note-item"><span class="tag bad">falta escrever</span><span>
-        Descritivo ainda não trazido. Entra aqui quando o Fred/Débora trouxer o conteúdo.
+        Descritivo ainda não trazido. Entra aqui, já dividido em categorias, quando o Fred/Débora
+        trouxer o conteúdo.
       </span></div>
     </div>
 
@@ -490,8 +592,9 @@
 
   <footer>
     Página criada em 16/08/2026, a partir do documento &ldquo;Gerência Holy Cook — Responsabilidades e
-    dia a dia&rdquo;. É um documento vivo — conforme mais cargos forem escritos, o resumo e a grade de
-    cargos acima mudam junto.
+    dia a dia&rdquo;. É um documento vivo — conforme mais cargos e categorias forem escritos, o
+    resumo e as grades acima mudam junto. Padrão de navegação: cargo → categoria → conteúdo, sempre
+    em cards, nunca em rolagem única.
   </footer>
 
 </div>
@@ -512,6 +615,12 @@
     b.addEventListener('click', function () { abrirAba(b.dataset.tab); });
   });
 
+  function fecharTopico() {
+    document.querySelectorAll('.topico-btn').forEach(function (b) { b.classList.remove('ativo'); });
+    document.querySelectorAll('.topico-conteudo').forEach(function (c) { c.hidden = true; });
+    document.querySelector('.visor-vazio').hidden = false;
+  }
+
   function abrirTopico(id) {
     document.querySelectorAll('.topico-btn').forEach(function (b) {
       b.classList.toggle('ativo', b.dataset.topico === id);
@@ -524,6 +633,25 @@
   }
   document.querySelectorAll('.topico-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirTopico(b.dataset.topico); });
+  });
+
+  function abrirGrupo(id) {
+    document.querySelectorAll('.grupo-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.grupo === id);
+    });
+    var temCategorias = !!document.querySelector('.grade-topicos[data-grupo="' + id + '"]');
+    document.querySelectorAll('.grade-topicos').forEach(function (g) {
+      g.hidden = g.dataset.grupo !== id;
+    });
+    if (temCategorias) {
+      fecharTopico();
+    } else {
+      // cargo sem categorias escritas ainda: mostra direto o aviso de "falta"
+      abrirTopico(id);
+    }
+  }
+  document.querySelectorAll('.grupo-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirGrupo(b.dataset.grupo); });
   });
 
   document.querySelectorAll('.passo-caixa').forEach(function (b) {
