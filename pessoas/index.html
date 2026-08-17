@@ -192,13 +192,15 @@
   .tab-btn.config.active { border-style: solid; color: var(--accent-ink); background: var(--accent); }
 
   .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
-  table.tabela-config { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 42rem; }
+  table.tabela-config { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 48rem; }
   table.tabela-config th, table.tabela-config td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
   table.tabela-config thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
            color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule);
            font-family: var(--mono); white-space: nowrap; }
   table.tabela-config tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
   table.tabela-config .cel-categoria { color: var(--ink-faint); white-space: nowrap; }
+  .nome-atividade { color: var(--ink); font-weight: 500; }
+  .desc-atividade { color: var(--ink-faint); font-size: .75rem; margin-top: .2rem; max-width: 26rem; }
 
   table.tabela-config .cel-papel select { font-family: var(--sans); font-size: .8125rem;
                              padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
@@ -1327,7 +1329,9 @@
       var h2 = painel.querySelector('h2');
       var categoria = (h2 && h2.childNodes[0] && h2.childNodes[0].textContent.trim()) || topicoId;
       painel.querySelectorAll('.item-btn').forEach(function (btn) {
-        linhas.push({ id: btn.dataset.item, categoria: categoria, nome: btn.textContent.trim() });
+        var conteudo = document.querySelector('.item-conteudo[data-item="' + btn.dataset.item + '"] p.prose');
+        var descricao = conteudo ? conteudo.textContent.trim() : '';
+        linhas.push({ id: btn.dataset.item, categoria: categoria, nome: btn.textContent.trim(), descricao: descricao });
       });
     });
     return linhas;
@@ -1343,7 +1347,16 @@
       var tr = document.createElement('tr');
 
       var tdNome = document.createElement('td');
-      tdNome.textContent = a.nome;
+      var nomeSpan = document.createElement('div');
+      nomeSpan.className = 'nome-atividade';
+      nomeSpan.textContent = a.nome;
+      tdNome.appendChild(nomeSpan);
+      if (a.descricao) {
+        var descSpan = document.createElement('div');
+        descSpan.className = 'desc-atividade';
+        descSpan.textContent = a.descricao;
+        tdNome.appendChild(descSpan);
+      }
       tr.appendChild(tdNome);
 
       var tdCategoria = document.createElement('td');
