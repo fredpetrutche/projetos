@@ -246,9 +246,13 @@
                 letter-spacing: .04em; text-transform: uppercase; }
   .caixa { fill: var(--surface); stroke: var(--rule); stroke-width: 1.5; }
   .caixa-pendente { fill: var(--surface); stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .caixa-duvida { fill: var(--surface); stroke: var(--warn); stroke-width: 1.5; stroke-dasharray: 2 2; }
+  .caixa-externa { fill: var(--surface); stroke: var(--warn); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .lane-banda-externa { fill: var(--surface-2); stroke: var(--warn); stroke-width: 1.3; stroke-dasharray: 5 4; }
   .caixa-texto { fill: var(--ink); font-family: var(--sans); font-size: 10.5px; text-anchor: middle; }
   .caixa-selo { fill: var(--bad); font-family: var(--mono); font-size: 7.5px; text-anchor: middle;
                 text-transform: uppercase; letter-spacing: .03em; }
+  .caixa-selo.duvida { fill: var(--warn); }
   .seta { stroke: var(--accent); stroke-width: 1.8; fill: none; }
   .seta-tracejada { stroke: var(--ink-faint); stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
   .seta-externa { stroke: var(--warn); stroke-width: 1.8; fill: none; }
@@ -1237,7 +1241,7 @@
     <div class="grade-areas">
       <button class="area-btn" data-area="compras">
         <span class="anome">Compras</span>
-        <span class="adesc">3 raias · 7 atividades</span>
+        <span class="adesc">5 raias · 11 atividades</span>
       </button>
       <button class="area-btn" data-area="estoque">
         <span class="anome">Estoque</span>
@@ -1246,7 +1250,7 @@
     </div>
 
     <div class="area-fluxo" data-area="compras" hidden>
-      <div class="fluxo-svg-wrap"><svg viewBox="0 -35 920 375" xmlns="http://www.w3.org/2000/svg">
+      <div class="fluxo-svg-wrap"><svg viewBox="0 -35 1100 600" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="pontaC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
@@ -1256,56 +1260,92 @@
           </marker>
         </defs>
 
-        <rect class="lane-banda" x="10" y="20" width="900" height="100" rx="4"/>
-        <text class="lane-label" x="30" y="38">Gerência</text>
-        <rect class="lane-banda" x="10" y="130" width="900" height="100" rx="4"/>
-        <text class="lane-label" x="30" y="148">Administrativo</text>
-        <rect class="lane-banda" x="10" y="240" width="900" height="100" rx="4"/>
-        <text class="lane-label" x="30" y="258">Líder de pedidos</text>
+        <!-- raias, operacional em cima, oversight embaixo -->
+        <rect class="lane-banda" x="10" y="20" width="1080" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="38">Líder de pedidos / Forno</text>
+        <rect class="lane-banda" x="10" y="130" width="1080" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="148">Marketing</text>
+        <rect class="lane-banda-externa" x="10" y="240" width="1080" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="258">Fábrica (externo)</text>
+        <rect class="lane-banda" x="10" y="350" width="1080" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="368">Administrativo</text>
+        <rect class="lane-banda" x="10" y="460" width="1080" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="478">Gerência</text>
 
         <!-- entrada externa: Estoque → Pedido semanal -->
         <text class="seta-label-externa" x="285" y="-22" text-anchor="middle">Estoque</text>
         <text class="seta-label-externa" x="285" y="-11" text-anchor="middle">Controle de estoque</text>
-        <path class="seta-externa" d="M285,-4 L285,153" marker-end="url(#pontaCExt)"/>
+        <path class="seta-externa" d="M285,-4 L285,373" marker-end="url(#pontaCExt)"/>
 
-        <!-- caixas: Gerência -->
-        <rect class="caixa" x="40" y="45" width="150" height="50" rx="5"/>
-        <text class="caixa-texto" x="115" y="74">Redução de custos</text>
+        <!-- caixas: Líder de pedidos / Forno (pendentes — ainda não existem) -->
+        <rect class="caixa-pendente" x="720" y="45" width="150" height="50" rx="5"/>
+        <text class="caixa-selo" x="795" y="38">pendente</text>
+        <text class="caixa-texto" x="795" y="66">Lançar perdas e</text>
+        <text class="caixa-texto" x="795" y="80">baixas de estoque</text>
+
+        <rect class="caixa-pendente" x="890" y="45" width="150" height="50" rx="5"/>
+        <text class="caixa-selo" x="965" y="38">pendente</text>
+        <text class="caixa-texto" x="965" y="66">Reportar perda de</text>
+        <text class="caixa-texto" x="965" y="80">equipamento</text>
+
+        <!-- caixa: Marketing -->
+        <rect class="caixa" x="380" y="155" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="455" y="176">Cronograma datas</text>
+        <text class="caixa-texto" x="455" y="190">especiais (briefing)</text>
+
+        <!-- caixa: Fábrica (externo) -->
+        <rect class="caixa-externa" x="380" y="265" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="455" y="286">Disponibiliza</text>
+        <text class="caixa-texto" x="455" y="300">produtos</text>
 
         <!-- caixas: Administrativo -->
-        <rect class="caixa" x="40" y="155" width="150" height="50" rx="5"/>
-        <text class="caixa-texto" x="115" y="184">Fornecedores</text>
+        <rect class="caixa" x="40" y="375" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="115" y="404">Fornecedores</text>
 
-        <rect class="caixa" x="210" y="155" width="150" height="50" rx="5"/>
-        <text class="caixa-texto" x="285" y="177">Pedido semanal</text>
-        <text class="caixa-texto" x="285" y="191">na fábrica</text>
+        <rect class="caixa" x="210" y="375" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="285" y="396">Pedido semanal</text>
+        <text class="caixa-texto" x="285" y="410">na fábrica</text>
 
-        <rect class="caixa" x="380" y="155" width="150" height="50" rx="5"/>
-        <text class="caixa-texto" x="455" y="177">Datas especiais</text>
-        <text class="caixa-texto" x="455" y="191">(Páscoa/Natal)</text>
+        <rect class="caixa-duvida" x="380" y="375" width="150" height="50" rx="5"/>
+        <text class="caixa-selo duvida" x="455" y="368">confirmar quem</text>
+        <text class="caixa-texto" x="455" y="396">Sugerir quantidade</text>
+        <text class="caixa-texto" x="455" y="410">e projeção</text>
 
-        <rect class="caixa" x="550" y="155" width="150" height="50" rx="5"/>
-        <text class="caixa-texto" x="625" y="177">Compras de insumos</text>
-        <text class="caixa-texto" x="625" y="191">e produtos de venda</text>
+        <rect class="caixa" x="550" y="375" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="625" y="396">Compra de datas</text>
+        <text class="caixa-texto" x="625" y="410">especiais</text>
 
-        <rect class="caixa" x="720" y="155" width="150" height="50" rx="5"/>
-        <text class="caixa-texto" x="795" y="177">Compras de</text>
-        <text class="caixa-texto" x="795" y="191">equip. e utensílios</text>
+        <rect class="caixa" x="720" y="375" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="795" y="396">Compras de insumos</text>
+        <text class="caixa-texto" x="795" y="410">e produtos de venda</text>
 
-        <!-- caixa: Líder de pedidos (pendente) -->
-        <rect class="caixa-pendente" x="720" y="265" width="150" height="50" rx="5"/>
-        <text class="caixa-selo" x="795" y="260">pendente</text>
-        <text class="caixa-texto" x="795" y="287">Reportar perda de</text>
-        <text class="caixa-texto" x="795" y="301">equipamento</text>
+        <rect class="caixa" x="890" y="375" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="965" y="396">Compras de</text>
+        <text class="caixa-texto" x="965" y="410">equip. e utensílios</text>
+
+        <!-- caixa: Gerência -->
+        <rect class="caixa" x="40" y="485" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="115" y="514">Redução de custos</text>
 
         <!-- setas internas -->
-        <path class="seta" d="M115,95 L115,153" marker-end="url(#pontaC)"/>
-        <path class="seta" d="M795,265 L795,207" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M115,485 L115,427" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M455,205 L455,263" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M455,315 L455,373" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M530,400 L548,400" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M795,95 L795,373" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M965,95 L965,373" marker-end="url(#pontaC)"/>
       </svg></div>
       <p class="prose" style="margin-top:.75rem">
-        A caixa tracejada &ldquo;Reportar perda de equipamento&rdquo; ainda não existe como
-        atividade — é o que o Fred apontou faltando (quem compra é o Administrativo, mas quem
-        reporta a necessidade/perda é o Líder de pedidos). Falta criar de verdade na aba Cargos.
+        Raias reordenadas a pedido do Fred: operacional em cima (Líder de pedidos/Forno), oversight
+        embaixo (Gerência). As duas caixas tracejadas em vermelho — <strong>&ldquo;Reportar perda de
+        equipamento&rdquo;</strong> e <strong>&ldquo;Lançar perdas e baixas de estoque&rdquo;</strong>
+        — ainda não existem como atividade, precisam ser criadas de verdade na aba Cargos.
+      </p>
+      <p class="prose">
+        A caixa tracejada em laranja <strong>&ldquo;Sugerir quantidade e projeção&rdquo;</strong> é
+        um chute meu de onde ela cai no fluxo (depois que a Fábrica confirma disponibilidade,
+        Administrativo fecha quantidade antes de comprar) — o Fred não disse quem faz essa etapa
+        especificamente. Confirmar se é Administrativo mesmo, ou se volta pro Marketing.
       </p>
     </div>
 
@@ -1519,7 +1559,8 @@
     { id: 'forno', nome: 'Forno' },
     { id: 'lider-pedidos', nome: 'Líder de pedidos' },
     { id: 'lider-loja', nome: 'Líder de loja' },
-    { id: 'auxiliares', nome: 'Auxiliares e estagiários' }
+    { id: 'auxiliares', nome: 'Auxiliares e estagiários' },
+    { id: 'marketing', nome: 'Marketing' }
   ];
   var CHAVE_CONFIG = 'pessoas-holycookie-atribuicoes-gerencia';
 
