@@ -258,6 +258,39 @@
   .seta-externa { stroke: var(--warn); stroke-width: 1.8; fill: none; }
   .seta-label { fill: var(--ink-soft); font-family: var(--mono); font-size: 9px; }
   .seta-label-externa { fill: var(--warn); font-family: var(--mono); font-size: 9px; font-weight: 700; }
+
+  /* ---------- organograma — árvore hierárquica em CSS puro ---------- */
+  .org-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px;
+              background: var(--surface); padding: 1.5rem 1.25rem; }
+  .org-tree, .org-tree ul { list-style: none; margin: 0; padding: 0; display: flex; }
+  .org-tree { padding-top: 0; min-width: max-content; }
+  .org-tree ul { padding-top: 2.25rem; position: relative; }
+  .org-tree li { position: relative; padding: 2.25rem .6rem 0; display: flex; flex-direction: column;
+                 align-items: center; text-align: center; }
+  .org-tree li::before, .org-tree li::after { content: ""; position: absolute; top: 0; right: 50%;
+                 border-top: 1px solid var(--rule); width: 50%; height: 2.25rem; }
+  .org-tree li::after { right: auto; left: 50%; border-left: 1px solid var(--rule); }
+  .org-tree li:only-child { padding-top: 0; }
+  .org-tree li:only-child::before, .org-tree li:only-child::after { display: none; }
+  .org-tree li:first-child::before, .org-tree li:last-child::after { border: 0 none; }
+  .org-tree li:last-child::before { border-right: 1px solid var(--rule); border-radius: 0 6px 0 0; }
+  .org-tree li:first-child::after { border-radius: 6px 0 0 0; }
+  .org-tree ul::before { content: ""; position: absolute; top: 0; left: 50%; border-left: 1px solid var(--rule);
+                 width: 0; height: 2.25rem; }
+  .org-tree > li { padding-top: 0; }
+  .org-node { display: inline-flex; flex-direction: column; gap: .15rem; background: var(--surface);
+              border: 1.5px solid var(--rule); border-radius: 7px; padding: .6rem .85rem;
+              min-width: 8.5rem; }
+  .org-node .titulo { font-family: var(--mono); font-size: .8125rem; font-weight: 700; color: var(--ink);
+              white-space: nowrap; }
+  .org-node .sub { font-size: .6875rem; color: var(--ink-faint); white-space: nowrap; }
+  .org-node .sal { font-family: var(--mono); font-size: .6875rem; color: var(--good); font-weight: 600;
+              white-space: nowrap; }
+  .org-node.raiz { border-color: var(--accent); background: var(--accent-bg); }
+  .org-node.pendente { border-style: dashed; border-color: var(--bad); }
+  .org-node.pendente .titulo { color: var(--bad); }
+  .org-node.externo { border-style: dashed; border-color: var(--warn); }
+  .org-node.externo .sub { color: var(--warn); }
 </style>
 </head>
 <body>
@@ -283,6 +316,7 @@
     <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
     <button class="tab-btn" type="button" data-tab="cargos" role="tab" aria-selected="false">Cargos</button>
     <button class="tab-btn" type="button" data-tab="fluxograma" role="tab" aria-selected="false">Fluxograma</button>
+    <button class="tab-btn" type="button" data-tab="organograma" role="tab" aria-selected="false">Organograma</button>
     <button class="tab-btn config" type="button" data-tab="config" role="tab" aria-selected="false">⚙ Config: quem executa</button>
   </div>
 
@@ -1408,6 +1442,138 @@
     </div>
   </div>
 
+  <div class="tab-panel" data-panel="organograma" role="tabpanel" hidden>
+    <div class="note-item"><span class="tag acc">como ler</span><span>
+      Estrutura que o Fred descreveu de cabeça, com salário do documento &ldquo;Cargos e Salários
+      2026&rdquo; anexado onde bateu com um cargo da árvore. Borda tracejada vermelha = função que
+      <strong>ainda não existe</strong> hoje. Borda tracejada laranja = prestador de serviço
+      <strong>externo</strong>, não é funcionário. &ldquo;Loja&rdquo; aparece uma vez só, mas
+      representa as três (Campinas, Paulínia, Piracicaba) — a mesma estrutura se repete nas três.
+    </span></div>
+
+    <div class="org-wrap">
+      <ul class="org-tree">
+        <li>
+          <div class="org-node raiz">
+            <span class="titulo">Direção</span>
+            <span class="sub">Fred + Débora</span>
+          </div>
+          <ul>
+            <li>
+              <div class="org-node">
+                <span class="titulo">Gerente Geral</span>
+              </div>
+              <ul>
+                <li>
+                  <div class="org-node">
+                    <span class="titulo">Loja</span>
+                    <span class="sub">Campinas · Paulínia · Piracicaba</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="org-node pendente">
+                        <span class="titulo">Líder de Loja</span>
+                        <span class="sub">não existe hoje</span>
+                        <span class="sal">planejado: líq. R$ 3.000</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="org-node">
+                        <span class="titulo">Líder de Pedidos</span>
+                        <span class="sal">líq. R$ 2.478</span>
+                      </div>
+                      <ul>
+                        <li>
+                          <div class="org-node">
+                            <span class="titulo">Auxiliar / Estagiário</span>
+                            <span class="sal">R$ 2.328 · R$ 1.150</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="org-node">
+                        <span class="titulo">Forno</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="org-node">
+                        <span class="titulo">Atendimento</span>
+                      </div>
+                      <ul>
+                        <li>
+                          <div class="org-node">
+                            <span class="titulo">Auxiliar / Estagiário</span>
+                            <span class="sal">R$ 2.328 · R$ 1.150</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="org-node">
+                    <span class="titulo">Administrativo</span>
+                    <span class="sub">DP · Financeiro · Compras · Adm. local físico</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="org-node">
+                    <span class="titulo">Marketing</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="org-node externo">
+                    <span class="titulo">Contabilidade</span>
+                    <span class="sub">prestador de serviço</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="org-node externo">
+                    <span class="titulo">Jurídico</span>
+                    <span class="sub">prestador de serviço</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div class="org-node">
+                <span class="titulo">Gerente de Expansão</span>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <p class="prose" style="margin-top:.75rem">
+      <strong>Auxiliar / Estagiário</strong> mostra os dois números do documento de salários:
+      efetivo com certificação (R$ 2.328 líquido, com bônus e benefícios) e estagiário (R$ 1.000 de
+      bolsa + até R$ 150 de bônus de produtividade = R$ 1.150).
+    </p>
+    <div class="note-item"><span class="tag bad">Líder de Loja é planejamento, não realidade hoje</span><span>
+      O documento de salários já tem valor calculado pra esse cargo — inclusive dividido em
+      <strong>Líder de Loja — Manhã</strong> e <strong>Líder de Turno — Noite e Domingo</strong>,
+      ambos com líquido R$ 3.000 — mas o próprio Fred confirmou que hoje ninguém ocupa essa função.
+      Tratei como o mesmo cargo pendente; se forem dois cargos diferentes (turno manhã vs.
+      noite/domingo), é ajuste rápido.
+    </span></div>
+    <div class="note-item"><span class="tag warn">o que ficou de fora da árvore, e por quê</span><span>
+      O documento de salários tem 3 entradas que não encaixam como caixa própria no organograma que
+      o Fred descreveu: <strong>Treinador</strong> (parece ser um bônus por cima de um cargo já
+      existente — &ldquo;certificação no cargo + certificação no outro cargo + bônus por ser
+      treinador&rdquo; — não uma posição separada na hierarquia), <strong>Motoboy</strong> (não foi
+      mencionado na estrutura verbal) e uma linha solta &ldquo;henrique... salário 2000, 500
+      bônus&rdquo; que parece anotação pessoal sobre alguém específico, não um cargo. Nenhum dos três
+      foi inventado um lugar na árvore — ficam de fora até o Fred confirmar onde entram.
+    </span></div>
+    <div class="note-item"><span class="tag good">a conexão com a Certificação</span><span>
+      Todo bônus do documento de salários é &ldquo;R$ 50 da certificação no cargo + produtividade&rdquo;
+      — é a bonificação salarial mensal enquanto a certificação estiver ativa, do
+      <a href="../certificacao-holy-cookie/">projeto de Certificação</a>, já com valor real em reais.
+    </span></div>
+  </div>
+
   <div class="tab-panel" data-panel="config" role="tabpanel" hidden>
     <div class="note-item"><span class="tag warn">tela interna — não é conteúdo pra loja</span><span>
       Serve só pra decidir quem executa e quem supervisiona cada atividade da Gerência no dia a
@@ -1525,7 +1691,7 @@
   });
 
   var inicial = location.hash.replace('#', '');
-  if (inicial === 'cargos' || inicial === 'fluxograma' || inicial === 'config') abrirAba(inicial);
+  if (inicial === 'cargos' || inicial === 'fluxograma' || inicial === 'organograma' || inicial === 'config') abrirAba(inicial);
 
   // ============================================================
   // Aba Fluxograma — seleciona a área (Compras/Estoque) e mostra
