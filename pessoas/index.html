@@ -209,6 +209,12 @@
                              padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
                              background: var(--surface); color: var(--ink); max-width: 11rem; }
 
+  .cel-executor { min-width: 14rem; }
+  .multi-cargo { display: flex; flex-wrap: wrap; gap: .25rem .7rem; }
+  .multi-cargo label { display: inline-flex; align-items: center; gap: .3rem; font-size: .75rem;
+                        color: var(--ink-soft); white-space: nowrap; cursor: pointer; }
+  .multi-cargo input[type="checkbox"] { width: .9rem; height: .9rem; cursor: pointer; }
+
   /* ---------- fluxograma — swimlane por área ---------- */
   .grade-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .6rem; }
   .area-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
@@ -1361,12 +1367,14 @@
     </span></div>
     <p class="prose">
       Marque <strong>Sistema</strong> quando a única coisa que a pessoa precisa fazer é consultar o
-      sistema — ele já fala o que fazer, sem precisar de decisão ou execução manual. Nas colunas
-      <strong>Executor</strong> e <strong>Supervisor</strong>, escolha quem faz e quem acompanha
-      cada atividade. Por padrão toda atividade está com a Gerência como executora e sem
-      supervisor — mude só o que for delegado de verdade pra outra função (ex.: Contagem mensal de
-      estoque pode ser executada pelo Líder de pedidos ou pelo Forno, com a Gerência como
-      supervisora).
+      sistema — ele já fala o que fazer, sem precisar de decisão ou execução manual. Em
+      <strong>Executor</strong> dá pra marcar mais de uma função — útil quando a atividade é
+      rotineira e cada área tem seu próprio responsável (ex.: limpeza, em que Atendimento cuida do
+      salão e Forno cuida da cozinha, cada um executando a mesma atividade na sua área).
+      <strong>Supervisor</strong> continua sendo uma pessoa só. Por padrão toda atividade está com a
+      Gerência como executora e sem supervisor — mude só o que for delegado de verdade pra outra
+      função (ex.: Contagem mensal de estoque pode ser executada pelo Líder de pedidos ou pelo
+      Forno, com a Gerência como supervisora).
     </p>
     <div class="tablewrap">
       <table class="tabela-config">
@@ -1512,8 +1520,19 @@
 
   function salvarAtribuicao(itemId, papel, valor) {
     var mapa = carregarAtribuicoes();
-    var reg = mapa[itemId] || { executor: 'gerencia', supervisor: '' };
+    var reg = mapa[itemId] || { sistema: false, executor: ['gerencia'], supervisor: '' };
     reg[papel] = valor;
+    mapa[itemId] = reg;
+    localStorage.setItem(CHAVE_CONFIG, JSON.stringify(mapa));
+  }
+
+  function alternarExecutor(itemId, cargoId, marcado) {
+    var mapa = carregarAtribuicoes();
+    var reg = mapa[itemId] || { sistema: false, executor: ['gerencia'], supervisor: '' };
+    if (!Array.isArray(reg.executor)) reg.executor = reg.executor ? [reg.executor] : [];
+    var lista = reg.executor.filter(function (c) { return c !== cargoId; });
+    if (marcado) lista.push(cargoId);
+    reg.executor = lista;
     mapa[itemId] = reg;
     localStorage.setItem(CHAVE_CONFIG, JSON.stringify(mapa));
   }
@@ -1563,7 +1582,9 @@
       tr.appendChild(tdCategoria);
 
       function atual() {
-        return carregarAtribuicoes()[a.id] || { sistema: false, executor: 'gerencia', supervisor: '' };
+        var reg = carregarAtribuicoes()[a.id] || { sistema: false, executor: ['gerencia'], supervisor: '' };
+        if (!Array.isArray(reg.executor)) reg.executor = reg.executor ? [reg.executor] : ['gerencia']; // migra formato antigo (1 pessoa só)
+        return reg;
       }
 
       var tdSistema = document.createElement('td');
@@ -1600,8 +1621,23 @@
       }
 
       var tdExecutor = document.createElement('td');
-      tdExecutor.className = 'cel-papel';
-      tdExecutor.appendChild(criarSelect('executor', false));
+      tdExecutor.className = 'cel-papel cel-executor';
+      var grupoExecutor = document.createElement('div');
+      grupoExecutor.className = 'multi-cargo';
+      CARGOS.forEach(function (c) {
+        var label = document.createElement('label');
+        var chk = document.createElement('input');
+        chk.type = 'checkbox';
+        chk.value = c.id;
+        chk.checked = atual().executor.indexOf(c.id) !== -1;
+        chk.addEventListener('change', function () {
+          alternarExecutor(a.id, c.id, chk.checked);
+        });
+        label.appendChild(chk);
+        label.appendChild(document.createTextNode(c.nome));
+        grupoExecutor.appendChild(label);
+      });
+      tdExecutor.appendChild(grupoExecutor);
       tr.appendChild(tdExecutor);
 
       var tdSupervisor = document.createElement('td');
