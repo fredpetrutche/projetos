@@ -201,6 +201,8 @@
   table.tabela-config .cel-categoria { color: var(--ink-faint); white-space: nowrap; }
   .nome-atividade { color: var(--ink); font-weight: 500; }
   .desc-atividade { color: var(--ink-faint); font-size: .75rem; margin-top: .2rem; max-width: 26rem; }
+  table.tabela-config .cel-sistema { text-align: center; }
+  table.tabela-config .cel-sistema input[type="checkbox"] { width: 1.05rem; height: 1.05rem; cursor: pointer; }
 
   table.tabela-config .cel-papel select { font-family: var(--sans); font-size: .8125rem;
                              padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
@@ -1181,15 +1183,17 @@
       além de quem abrir esta aba.
     </span></div>
     <p class="prose">
-      Escolha nas colunas <strong>Executor</strong> e <strong>Supervisor</strong> quem faz e quem
-      acompanha cada atividade. Por padrão toda atividade está com a Gerência como executora e sem
+      Marque <strong>Sistema</strong> quando a única coisa que a pessoa precisa fazer é consultar o
+      sistema — ele já fala o que fazer, sem precisar de decisão ou execução manual. Nas colunas
+      <strong>Executor</strong> e <strong>Supervisor</strong>, escolha quem faz e quem acompanha
+      cada atividade. Por padrão toda atividade está com a Gerência como executora e sem
       supervisor — mude só o que for delegado de verdade pra outra função (ex.: Contagem mensal de
       estoque pode ser executada pelo Líder de pedidos ou pelo Forno, com a Gerência como
       supervisora).
     </p>
     <div class="tablewrap">
       <table class="tabela-config">
-        <thead><tr><th>Atividade</th><th>Categoria</th><th>Executor</th><th>Supervisor</th></tr></thead>
+        <thead><tr><th>Atividade</th><th>Categoria</th><th>Sistema</th><th>Executor</th><th>Supervisor</th></tr></thead>
         <tbody id="corpoConfig"></tbody>
       </table>
     </div>
@@ -1366,8 +1370,20 @@
       tr.appendChild(tdCategoria);
 
       function atual() {
-        return carregarAtribuicoes()[a.id] || { executor: 'gerencia', supervisor: '' };
+        return carregarAtribuicoes()[a.id] || { sistema: false, executor: 'gerencia', supervisor: '' };
       }
+
+      var tdSistema = document.createElement('td');
+      tdSistema.className = 'cel-sistema';
+      var chkSistema = document.createElement('input');
+      chkSistema.type = 'checkbox';
+      chkSistema.title = 'A única coisa que a pessoa precisa fazer é consultar o sistema — ele já fala o que fazer';
+      chkSistema.checked = !!atual().sistema;
+      chkSistema.addEventListener('change', function () {
+        salvarAtribuicao(a.id, 'sistema', chkSistema.checked);
+      });
+      tdSistema.appendChild(chkSistema);
+      tr.appendChild(tdSistema);
 
       function criarSelect(papel, comVazio) {
         var select = document.createElement('select');
