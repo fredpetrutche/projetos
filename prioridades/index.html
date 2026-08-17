@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Prioridades Holy Cookie</title>
+<meta name="description" content="Duas crises simultâneas — faturamento e equipe — e a ordem sugerida pra organizar o tempo entre elas.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%238A5C13'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><line x1='30' y1='14' x2='30' y2='86'/><path d='M30 18 L74 28 L58 40 L74 52 L30 60'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#8A5C13; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#F6EBD8;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#DBAE60; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#302516;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#DBAE60; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#302516;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 1.75rem; }
+  h1, h2, h3, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2.titulo { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; }
+  h2.titulo .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono);
+         align-self: flex-start; }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+              font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos li::marker { color: var(--accent); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- fluxo: caixinha → seta → caixinha ---------- */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 14rem; transition: border-color .15s, background .15s, color .15s; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft);
+                   margin-top: .6rem; }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
+
+  /* ---------- grade de grupos (nível 1) ---------- */
+  .grade-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grupo-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+               border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
+               display: flex; flex-direction: column; gap: .55rem; color: inherit;
+               transition: border-color .15s, background .15s; }
+  .grupo-btn:hover { border-color: var(--ink-faint); }
+  .grupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .grupo-btn .gnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+                       letter-spacing: .06em; text-transform: uppercase; }
+  .gcontagem { display: flex; gap: .3rem; }
+
+  /* ---------- grade de tópicos (nível 2 — sub-cards do grupo escolhido) ---------- */
+  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .5rem;
+                    margin-top: -.5rem; padding: .9rem; background: var(--surface-2);
+                    border: 1px dashed var(--rule); border-radius: 8px; }
+  .grade-topicos[hidden] { display: none; }
+  .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+                border: 1.5px solid var(--rule); border-radius: 6px; padding: .65rem .85rem;
+                display: flex; flex-direction: column; gap: .4rem; color: inherit;
+                transition: border-color .15s, background .15s; }
+  .topico-btn:hover { border-color: var(--ink-faint); }
+  .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .topico-btn .tnome { font-size: .875rem; font-weight: 600; line-height: 1.3; }
+
+  /* ---------- visor de conteúdo ---------- */
+  #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
+           padding: 1.5rem 1.5rem 1.75rem; scroll-margin-top: 1.5rem; }
+  .visor-vazio { color: var(--ink-faint); font-size: .9375rem; text-align: center; padding: 2rem 0; }
+  .topico-conteudo { display: flex; flex-direction: column; gap: 1.1rem; }
+  .topico-conteudo[hidden] { display: none; }
+  .topico-conteudo h3 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.01em;
+                        padding-bottom: .6rem; border-bottom: 2px solid var(--ink);
+                        display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+                        font-family: var(--sans); text-transform: none; }
+  h4.sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+           color: var(--accent); font-weight: 700; margin-top: .2rem; }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · gestão</div>
+    <h1>Prioridades</h1>
+    <p class="lede">
+      O negócio roda em 4 pilares — faturamento, caixa, equipe, qualidade — resolvidos em sequência, não em
+      paralelo. Caixa (dados de venda) e CMV (visibilidade de margem) já viraram <strong>manutenção</strong>.
+      Sobraram, em 17/08/2026, <strong>duas crises simultâneas</strong> disputando o mesmo tempo do Fred e da
+      Débora: faturamento e equipe. Esta página é só isso — os cards de cada frente e a ordem sugerida de
+      ataque.
+    </p>
+  </header>
+
+  <section>
+    <h2 class="titulo">Ordem sugerida<span class="hint">clique nas caixinhas</span></h2>
+    <div class="fluxo">
+      <button class="passo-caixa" data-detalhe="Bloqueador comum às duas lojas em crise — sem ele, contratação em Piracicaba e Paulínia fica no escuro. Já está em andamento na tela de mão-de-obra do fluxo de caixa do Sistema-HC; é terminar, não começar do zero. Pouco tempo seu pra travar o maior efeito destravador.">1. Fechar cálculo de salário</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Decidir a data de saída do Henrique e quantos dias o Eduardo tem pra cobrir Piracicaba interinamente — é essa cobertura que evita o líder contaminado passar a cultura ruim pra funcionária nova antes da troca dele.">2. Decidir saída do Henrique</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Calendário não espera — venda de cookie é inversamente proporcional ao calor. Entra na fila de marketing agora, na frente até da Máquina de Conteúdo.">3. Cardápio de Verão fura a fila</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Não precisa esperar Piracicaba fechar — só precisa do Eduardo livre se for apoio presencial. A Certificação 80/20, já com 10 dos 26 tópicos prontos, vira currículo de onboarding do time novo.">4. Paulínia recruta em paralelo</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Fachada (capex) e o resto da certificação seguem dentro do teto de 8 semanas já definido pro Experiência Holy Cookie — sem tomar tempo de decisão contínuo do Fred e da Débora.">5. Campinas e o resto no fundo</button>
+    </div>
+    <div class="passo-detalhe"></div>
+  </section>
+
+  <section>
+    <h2 class="titulo">As duas crises<span class="hint">clique num grupo</span></h2>
+    <div class="grade-grupos">
+      <button class="grupo-btn" data-grupo="faturamento">
+        <span class="gnome">Crise de Faturamento</span>
+        <span class="gcontagem"><span class="tag warn">1 sazonal</span><span class="tag acc">1 bloqueio</span><span class="tag good">1 manutenção</span></span>
+      </button>
+      <button class="grupo-btn" data-grupo="equipe">
+        <span class="gnome">Crise de Equipe</span>
+        <span class="gcontagem"><span class="tag bad">1 piora sozinho</span><span class="tag acc">1 bloqueio</span><span class="tag good">2 estável</span></span>
+      </button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="faturamento" hidden>
+      <button class="topico-btn" data-topico="cardapio-verao"><span class="tnome">Cardápio de Verão / Ação de Calor</span><span class="tag warn">sazonal — não espera</span></button>
+      <button class="topico-btn" data-topico="campanhas-manutencao"><span class="tnome">Campanhas em manutenção</span><span class="tag good">proteger piso mínimo</span></button>
+      <button class="topico-btn" data-topico="campinas-fachada"><span class="tnome">Campinas — fachada</span><span class="tag acc">bloqueador local</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="equipe" hidden>
+      <button class="topico-btn" data-topico="piracicaba"><span class="tnome">Piracicaba</span><span class="tag bad">piora a cada dia</span></button>
+      <button class="topico-btn" data-topico="paulinia"><span class="tnome">Paulínia</span><span class="tag good">não piora sozinho</span></button>
+      <button class="topico-btn" data-topico="campinas-equipe"><span class="tnome">Campinas — atendimento</span><span class="tag good">sem crise ativa</span></button>
+      <button class="topico-btn" data-topico="salario"><span class="tnome">Bloqueador: salário</span><span class="tag acc">trava as duas lojas</span></button>
+    </div>
+
+    <div id="visor">
+      <p class="visor-vazio">Clique num grupo e depois num card pra ver a situação e a próxima ação.</p>
+
+      <div class="topico-conteudo" data-topico="cardapio-verao" hidden>
+        <h3>Cardápio de Verão / Ação de Calor</h3>
+        <div class="note-item"><span class="tag warn">por que não espera</span><span>
+          Urgência de calendário, não de gente — cada dia de calor sem ação é venda de cookie perdida.
+          Diferente da crise de equipe, não exige Fred/Débora fisicamente numa loja.
+        </span></div>
+        <div class="note-item"><span class="tag acc">próxima ação</span><span>
+          Definir o escopo mínimo — o que lança primeiro (sorvete? promo?) — e furar a fila de marketing,
+          na frente até da Máquina de Conteúdo.
+        </span></div>
+        <div class="note-item"><span class="tag good">projeto de base já existe</span><span>
+          A página <a href="https://holycampinas.github.io/cardapio-verao-holy-cookie/">Cardápio de Verão</a>
+          (coleta/votação de produto) já está no ar — a ação de calor usa essa base.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="campanhas-manutencao" hidden>
+        <h3>Campanhas em manutenção</h3>
+        <div class="note-item"><span class="tag bad">o que já esfriou uma vez</span><span>
+          A <a href="https://fredpetrutche.github.io/maquina-de-conteudo/">Máquina de Conteúdo</a> ficou 4
+          dias seguidos sem nenhum toque em agosto/2026; a
+          <a href="../acoes-de-loja/campanha-fidelizacao/">campanha de fidelização por visitas</a> segue
+          travada na Etapa 2.
+        </span></div>
+        <div class="note-item"><span class="tag acc">por que precisa de piso mínimo</span><span>
+          Campanha parada perde força — retomar do zero custa mais caro que manter uma cadência baixa e
+          constante.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="campinas-fachada" hidden>
+        <h3>Campinas — fachada</h3>
+        <div class="note-item"><span class="tag acc">o bloqueio</span><span>
+          A fachada da loja precisa ficar pronta antes de um bom marketing local ali — é capex, não gente,
+          então resolve em paralelo, sem tomar tempo de decisão contínuo.
+        </span></div>
+        <div class="note-item"><span class="tag warn">alternativa enquanto isso</span><span>
+          Dá pra fazer marketing das outras lojas nesse meio-tempo, mas com custo à parte.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="piracicaba" hidden>
+        <h3>Piracicaba</h3>
+        <div class="note-item"><span class="tag bad">a situação</span><span>
+          O líder <strong>Henrique</strong> e uma funcionária estão contaminando a cultura da loja — atitude
+          ruim, sem os padrões da operação. Os dois precisam ser trocados.
+        </span></div>
+        <div class="note-item"><span class="tag warn">o risco identificado</span><span>
+          Trocar só a funcionária primeiro expõe a pessoa nova ao mesmo líder contaminado antes da troca dele
+          acontecer — ele contamina de novo antes de sair.
+        </span></div>
+        <div class="note-item"><span class="tag acc">o mecanismo</span><span>
+          <strong>Eduardo</strong> (gerente geral) cobre a loja interinamente: Henrique sai → Eduardo assume →
+          a funcionária nova entra sob o Eduardo, não sob o Henrique → recruta o líder definitivo em paralelo.
+          Não precisa ser simultâneo — precisa que o líder contaminado esteja fora <strong>antes</strong> da
+          pessoa nova chegar.
+        </span></div>
+        <div class="note-item"><span class="tag good">próxima ação</span><span>
+          Decidir a data de saída do Henrique e quantos dias o Eduardo tem pra cobrir.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="paulinia" hidden>
+        <h3>Paulínia</h3>
+        <div class="note-item"><span class="tag warn">a situação</span><span>
+          A líder já foi trocada recentemente, e as 3 funcionárias atuais pediram demissão por conta própria —
+          vai precisar contratar líder novo e equipe nova ao mesmo tempo.
+        </span></div>
+        <div class="note-item"><span class="tag good">diferente de Piracicaba</span><span>
+          Não tem contaminação ativa — o time já saiu sozinho, não piora dia a dia. O risco é outro: falta de
+          qualquer pessoa experiente pra ancorar o padrão da loja com tudo novo de uma vez.
+        </span></div>
+        <div class="note-item"><span class="tag acc">a oportunidade</span><span>
+          A <a href="../certificacao-holy-cookie/">Certificação 80/20</a> já tem 10 dos 26 tópicos prontos,
+          incluindo <strong>Atendimento</strong>, <strong>Forno</strong> e <strong>Líder de pedidos</strong> —
+          exatamente as funções sendo recontratadas. Dá pra usar como currículo de onboarding agora, em vez de
+          esperar o programa completo.
+        </span></div>
+        <div class="note-item"><span class="tag good">próxima ação</span><span>
+          Recrutar em paralelo a Piracicaba — não depende do Eduardo estar livre, só se o apoio for presencial.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="campinas-equipe" hidden>
+        <h3>Campinas — atendimento</h3>
+        <div class="note-item"><span class="tag warn">a situação</span><span>
+          Atendimento também não é excelente, mas sem crise ativa — ninguém pedindo pra sair.
+        </span></div>
+        <div class="note-item"><span class="tag acc">a decisão do Fred</span><span>
+          Contratar uma pessoa boa em vez de só treinar a equipe atual.
+        </span></div>
+        <div class="note-item"><span class="tag good">quando entra</span><span>
+          Depois de Piracicaba e Paulínia na fila, dentro do teto de 8 semanas já definido pro
+          <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a>.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="salario" hidden>
+        <h3>Bloqueador: salário</h3>
+        <div class="note-item"><span class="tag bad">a situação</span><span>
+          Dificuldade número 1 pra resolver as duas crises de loja: não dá pra atrair gente boa pelo salário
+          atual.
+        </span></div>
+        <div class="note-item"><span class="tag acc">já em andamento</span><span>
+          Fred está calculando quanto dá pra aumentar sem onerar o custo da loja — projeto já rodando dentro
+          do Sistema-HC (tela de mão-de-obra, no fluxo de caixa).
+        </span></div>
+        <div class="note-item"><span class="tag good">por que priorizar</span><span>
+          Trava a contratação em Piracicaba <strong>e</strong> Paulínia ao mesmo tempo — fechar esse número
+          antes de qualquer vaga sair no ar, senão contrata no escuro duas vezes.
+        </span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    Documento criado em 17/08/2026, a partir da conversa em que o Fred desenhou as duas crises simultâneas
+    (faturamento e equipe) e a ordem sugerida de ataque entre elas. Se algo aqui estiver desatualizado, esta
+    página é a fonte da verdade.
+  </footer>
+
+</div>
+
+<script>
+  function abrirGrupo(id) {
+    document.querySelectorAll('.grupo-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.grupo === id);
+    });
+    document.querySelectorAll('.grade-topicos').forEach(function (g) {
+      g.hidden = g.dataset.grupo !== id;
+    });
+  }
+  document.querySelectorAll('.grupo-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirGrupo(b.dataset.grupo); });
+  });
+
+  function abrirTopico(id) {
+    document.querySelectorAll('.topico-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.topico === id);
+    });
+    document.querySelectorAll('.topico-conteudo').forEach(function (c) {
+      c.hidden = c.dataset.topico !== id;
+    });
+    document.querySelector('.visor-vazio').hidden = true;
+    document.getElementById('visor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('.topico-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirTopico(b.dataset.topico); });
+  });
+
+  document.querySelectorAll('.passo-caixa').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var fluxo = b.closest('.fluxo');
+      var detalhe = fluxo.nextElementSibling;
+      fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      detalhe.innerHTML = b.dataset.detalhe;
+      detalhe.classList.add('aberto');
+    });
+  });
+
+  var inicial = location.hash.replace('#', '');
+  if (inicial === 'faturamento' || inicial === 'equipe') abrirGrupo(inicial);
+</script>
+
+</body>
+</html>
