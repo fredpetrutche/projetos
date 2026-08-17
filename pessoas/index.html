@@ -208,6 +208,37 @@
   table.tabela-config .cel-papel select { font-family: var(--sans); font-size: .8125rem;
                              padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
                              background: var(--surface); color: var(--ink); max-width: 11rem; }
+
+  /* ---------- fluxograma — swimlane por área ---------- */
+  .grade-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .6rem; }
+  .area-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+              border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
+              display: flex; flex-direction: column; gap: .3rem; color: inherit;
+              transition: border-color .15s, background .15s; }
+  .area-btn:hover { border-color: var(--ink-faint); }
+  .area-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .area-btn .anome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+                      letter-spacing: .06em; text-transform: uppercase; }
+  .area-btn .adesc { font-size: .75rem; color: var(--ink-faint); }
+
+  .area-fluxo { margin-top: -.5rem; }
+  .area-fluxo[hidden] { display: none; }
+  .fluxo-svg-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px;
+                    background: var(--surface); padding: .75rem; }
+  .fluxo-svg-wrap svg { display: block; min-width: 56rem; }
+  .lane-banda { fill: var(--surface-2); }
+  .lane-label { fill: var(--ink-faint); font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+                letter-spacing: .04em; text-transform: uppercase; }
+  .caixa { fill: var(--surface); stroke: var(--rule); stroke-width: 1.5; }
+  .caixa-pendente { fill: var(--surface); stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .caixa-texto { fill: var(--ink); font-family: var(--sans); font-size: 10.5px; text-anchor: middle; }
+  .caixa-selo { fill: var(--bad); font-family: var(--mono); font-size: 7.5px; text-anchor: middle;
+                text-transform: uppercase; letter-spacing: .03em; }
+  .seta { stroke: var(--accent); stroke-width: 1.8; fill: none; }
+  .seta-tracejada { stroke: var(--ink-faint); stroke-width: 1.4; fill: none; stroke-dasharray: 3 3; }
+  .seta-externa { stroke: var(--warn); stroke-width: 1.8; fill: none; }
+  .seta-label { fill: var(--ink-soft); font-family: var(--mono); font-size: 9px; }
+  .seta-label-externa { fill: var(--warn); font-family: var(--mono); font-size: 9px; font-weight: 700; }
 </style>
 </head>
 <body>
@@ -232,6 +263,7 @@
   <div class="tabs" role="tablist">
     <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
     <button class="tab-btn" type="button" data-tab="cargos" role="tab" aria-selected="false">Cargos</button>
+    <button class="tab-btn" type="button" data-tab="fluxograma" role="tab" aria-selected="false">Fluxograma</button>
     <button class="tab-btn config" type="button" data-tab="config" role="tab" aria-selected="false">⚙ Config: quem executa</button>
   </div>
 
@@ -1177,6 +1209,150 @@
 
   </div>
 
+  <div class="tab-panel" data-panel="fluxograma" role="tabpanel" hidden>
+    <div class="note-item"><span class="tag acc">o que é isso</span><span>
+      Fluxograma de processo, no modelo &ldquo;raia&rdquo; (swimlane) usado por empresa grande: cada
+      linha horizontal é uma área/cargo, cada caixinha é uma atividade, e as setas mostram quem
+      passa bastão pra quem. Começando por <strong>Compras</strong> e <strong>Estoque</strong> — as
+      outras áreas entram depois. As setas aqui só ligam o que já está escrito nas descrições das
+      atividades (aba Cargos) — onde não havia dependência explícita, a caixa fica solta na sua
+      raia, sem inventar conexão.
+    </span></div>
+
+    <div class="grade-areas">
+      <button class="area-btn" data-area="compras">
+        <span class="anome">Compras</span>
+        <span class="adesc">3 raias · 7 atividades</span>
+      </button>
+      <button class="area-btn" data-area="estoque">
+        <span class="anome">Estoque</span>
+        <span class="adesc">1 raia · 7 atividades</span>
+      </button>
+    </div>
+
+    <div class="area-fluxo" data-area="compras" hidden>
+      <div class="fluxo-svg-wrap"><svg viewBox="0 -35 920 375" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="pontaC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+          <marker id="pontaCExt" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warn)"/>
+          </marker>
+        </defs>
+
+        <rect class="lane-banda" x="10" y="20" width="900" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="38">Gerência</text>
+        <rect class="lane-banda" x="10" y="130" width="900" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="148">Administrativo</text>
+        <rect class="lane-banda" x="10" y="240" width="900" height="100" rx="4"/>
+        <text class="lane-label" x="30" y="258">Líder de pedidos</text>
+
+        <!-- entrada externa: Estoque → Pedido semanal -->
+        <text class="seta-label-externa" x="285" y="-22" text-anchor="middle">Estoque</text>
+        <text class="seta-label-externa" x="285" y="-11" text-anchor="middle">Controle de estoque</text>
+        <path class="seta-externa" d="M285,-4 L285,153" marker-end="url(#pontaCExt)"/>
+
+        <!-- caixas: Gerência -->
+        <rect class="caixa" x="40" y="45" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="115" y="74">Redução de custos</text>
+
+        <!-- caixas: Administrativo -->
+        <rect class="caixa" x="40" y="155" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="115" y="184">Fornecedores</text>
+
+        <rect class="caixa" x="210" y="155" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="285" y="177">Pedido semanal</text>
+        <text class="caixa-texto" x="285" y="191">na fábrica</text>
+
+        <rect class="caixa" x="380" y="155" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="455" y="177">Datas especiais</text>
+        <text class="caixa-texto" x="455" y="191">(Páscoa/Natal)</text>
+
+        <rect class="caixa" x="550" y="155" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="625" y="177">Compras de insumos</text>
+        <text class="caixa-texto" x="625" y="191">e produtos de venda</text>
+
+        <rect class="caixa" x="720" y="155" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="795" y="177">Compras de</text>
+        <text class="caixa-texto" x="795" y="191">equip. e utensílios</text>
+
+        <!-- caixa: Líder de pedidos (pendente) -->
+        <rect class="caixa-pendente" x="720" y="265" width="150" height="50" rx="5"/>
+        <text class="caixa-selo" x="795" y="260">pendente</text>
+        <text class="caixa-texto" x="795" y="287">Reportar perda de</text>
+        <text class="caixa-texto" x="795" y="301">equipamento</text>
+
+        <!-- setas internas -->
+        <path class="seta" d="M115,95 L115,153" marker-end="url(#pontaC)"/>
+        <path class="seta" d="M795,265 L795,207" marker-end="url(#pontaC)"/>
+      </svg></div>
+      <p class="prose" style="margin-top:.75rem">
+        A caixa tracejada &ldquo;Reportar perda de equipamento&rdquo; ainda não existe como
+        atividade — é o que o Fred apontou faltando (quem compra é o Administrativo, mas quem
+        reporta a necessidade/perda é o Líder de pedidos). Falta criar de verdade na aba Cargos.
+      </p>
+    </div>
+
+    <div class="area-fluxo" data-area="estoque" hidden>
+      <div class="fluxo-svg-wrap"><svg viewBox="0 0 920 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="pontaE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+          </marker>
+          <marker id="pontaEExt" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--warn)"/>
+          </marker>
+        </defs>
+
+        <rect class="lane-banda" x="10" y="20" width="900" height="180" rx="4"/>
+        <text class="lane-label" x="30" y="38">Gerência</text>
+
+        <!-- linha A -->
+        <rect class="caixa" x="40" y="50" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="115" y="72">Organização do</text>
+        <text class="caixa-texto" x="115" y="86">estoque</text>
+
+        <rect class="caixa" x="210" y="50" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="285" y="79">Sistema FIFO</text>
+
+        <rect class="caixa" x="380" y="50" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="455" y="72">Contagem mensal</text>
+        <text class="caixa-texto" x="455" y="86">de estoque</text>
+
+        <rect class="caixa" x="550" y="50" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="625" y="72">Controle de</text>
+        <text class="caixa-texto" x="625" y="86">estoque</text>
+
+        <!-- linha B -->
+        <rect class="caixa" x="40" y="120" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="115" y="149">Cálculo do CMV</text>
+
+        <rect class="caixa" x="210" y="120" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="285" y="142">Redução de CMV</text>
+        <text class="caixa-texto" x="285" y="156">e desperdícios</text>
+
+        <rect class="caixa" x="380" y="120" width="150" height="50" rx="5"/>
+        <text class="caixa-texto" x="455" y="142">Auditorias</text>
+        <text class="caixa-texto" x="455" y="156">surpresa</text>
+
+        <!-- setas internas -->
+        <path class="seta" d="M530,75 L548,75" marker-end="url(#pontaE)"/>
+        <path class="seta-tracejada" d="M455,120 L455,102" marker-end="url(#pontaE)"/>
+        <text class="seta-label" x="465" y="114">confere</text>
+
+        <!-- saída externa: Controle de estoque → Compras -->
+        <path class="seta-externa" d="M625,100 L625,222" marker-end="url(#pontaEExt)"/>
+        <text class="seta-label-externa" x="625" y="238" text-anchor="middle">→ Compras · Pedido semanal na fábrica</text>
+      </svg></div>
+      <p class="prose" style="margin-top:.75rem">
+        Só uma raia por enquanto (Gerência) — nenhuma outra área aparece nas descrições de Estoque
+        como responsável. Se isso mudar quando você atribuir Executor/Supervisor na aba Config, essa
+        raia se abre.
+      </p>
+    </div>
+  </div>
+
   <div class="tab-panel" data-panel="config" role="tabpanel" hidden>
     <div class="note-item"><span class="tag warn">tela interna — não é conteúdo pra loja</span><span>
       Serve só pra decidir quem executa e quem supervisiona cada atividade da Gerência no dia a
@@ -1291,7 +1467,23 @@
   });
 
   var inicial = location.hash.replace('#', '');
-  if (inicial === 'cargos' || inicial === 'config') abrirAba(inicial);
+  if (inicial === 'cargos' || inicial === 'fluxograma' || inicial === 'config') abrirAba(inicial);
+
+  // ============================================================
+  // Aba Fluxograma — seleciona a área (Compras/Estoque) e mostra
+  // o swimlane daquela área só.
+  // ============================================================
+  function abrirFluxo(id) {
+    document.querySelectorAll('.area-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.area === id);
+    });
+    document.querySelectorAll('.area-fluxo').forEach(function (f) {
+      f.hidden = f.dataset.area !== id;
+    });
+  }
+  document.querySelectorAll('.area-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirFluxo(b.dataset.area); });
+  });
 
   // ============================================================
   // Aba Config — quem executa / quem supervisiona cada atividade
