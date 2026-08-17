@@ -235,15 +235,15 @@
 
   /* ---------- fluxograma — swimlane por área ---------- */
   .grade-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .6rem; }
-  .area-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+  .area-btn, .org-area-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
               border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
               display: flex; flex-direction: column; gap: .3rem; color: inherit;
               transition: border-color .15s, background .15s; }
-  .area-btn:hover { border-color: var(--ink-faint); }
-  .area-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
-  .area-btn .anome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+  .area-btn:hover, .org-area-btn:hover { border-color: var(--ink-faint); }
+  .area-btn.ativo, .org-area-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .area-btn .anome, .org-area-btn .anome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
                       letter-spacing: .06em; text-transform: uppercase; }
-  .area-btn .adesc { font-size: .75rem; color: var(--ink-faint); }
+  .area-btn .adesc, .org-area-btn .adesc { font-size: .75rem; color: var(--ink-faint); }
 
   .area-fluxo { margin-top: -.5rem; }
   .area-fluxo[hidden] { display: none; }
@@ -300,6 +300,9 @@
   .org-node.pendente .titulo { color: var(--bad); }
   .org-node.externo { border-style: dashed; border-color: var(--warn); }
   .org-node.externo .sub { color: var(--warn); }
+  .org-node.duvida { border-style: dashed; border-color: var(--warn); }
+  .org-node.duvida .sub { color: var(--warn); }
+  .org-area[hidden] { display: none; }
 </style>
 </head>
 <body>
@@ -1453,11 +1456,221 @@
 
   <div class="tab-panel" data-panel="organograma" role="tabpanel" hidden>
     <div class="note-item"><span class="tag acc">como ler</span><span>
+      Borda tracejada vermelha = função que <strong>ainda não existe</strong> hoje. Borda tracejada
+      laranja = <strong>externo</strong> (prestador de serviço) ou <strong>ainda não mapeado</strong>
+      (aguardando cargo). Valor mostrado é <strong>líquido pago em julho/2026</strong>, sem nome —
+      só cargo e valor, por decisão do Fred (dado de RH de pessoa real não vai identificado).
+    </span></div>
+
+    <div class="grade-areas">
+      <button class="org-area-btn ativo" data-orgarea="campinas">
+        <span class="anome">Campinas</span>
+      </button>
+      <button class="org-area-btn" data-orgarea="piracicaba">
+        <span class="anome">Piracicaba</span>
+      </button>
+      <button class="org-area-btn" data-orgarea="paulinia">
+        <span class="anome">Paulínia</span>
+      </button>
+      <button class="org-area-btn" data-orgarea="modelo">
+        <span class="anome">Modelo (genérico)</span>
+      </button>
+    </div>
+
+    <div class="org-area" data-orgarea="campinas">
+      <div class="org-wrap">
+        <ul class="org-tree">
+          <li>
+            <div class="org-node raiz">
+              <span class="titulo">Loja Campinas</span>
+            </div>
+            <ul>
+              <li>
+                <div class="org-node pendente">
+                  <span class="titulo">Líder de Loja</span>
+                  <span class="sub">não existe hoje</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Líder de Pedidos</span>
+                  <span class="sal">líq. R$ 2.170,78</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Forno</span>
+                  <span class="sub">freelancer</span>
+                  <span class="sal">R$ 2.640,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Atendimento</span>
+                  <span class="sal">líq. R$ 1.714,84</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Atendimento Noturno</span>
+                  <span class="sal">líq. R$ 2.405,69</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Folguista Atendimento</span>
+                  <span class="sub">domingo e segunda à noite</span>
+                  <span class="sal">R$ 120,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Folguista Atendimento</span>
+                  <span class="sub">domingo e segunda à noite</span>
+                  <span class="sal">R$ 980,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node">
+                  <span class="titulo">Estagiária de Cozinha</span>
+                  <span class="sal">R$ 1.358,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node pendente">
+                  <span class="titulo">Estagiária de Atendimento</span>
+                  <span class="sub">vaga em aberto</span>
+                  <span class="sal">histórico: R$ 1.204,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">Nova contratação</span>
+                  <span class="sub">cargo a confirmar</span>
+                  <span class="sal">sem valor ainda</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <p class="prose" style="margin-top:.75rem">
+        Um salário de julho (R$ 1.446,55) era de alguém que já saiu — não entrou na árvore. A nova
+        contratação ainda não tem cargo confirmado nem pagamento registrado.
+      </p>
+    </div>
+
+    <div class="org-area" data-orgarea="piracicaba" hidden>
+      <div class="org-wrap">
+        <ul class="org-tree">
+          <li>
+            <div class="org-node raiz">
+              <span class="titulo">Loja Piracicaba</span>
+            </div>
+            <ul>
+              <li>
+                <div class="org-node pendente">
+                  <span class="titulo">Líder de Loja</span>
+                  <span class="sub">não existe hoje</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">salário</span>
+                  <span class="sal">líq. R$ 1.738,72</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">salário</span>
+                  <span class="sal">líq. R$ 1.709,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">freelancer</span>
+                  <span class="sal">R$ 3.325,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">freelancer</span>
+                  <span class="sal">R$ 2.047,22</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <p class="prose" style="margin-top:.75rem">Ainda não mapeado — falta o Fred dizer o cargo de cada um.</p>
+    </div>
+
+    <div class="org-area" data-orgarea="paulinia" hidden>
+      <div class="org-wrap">
+        <ul class="org-tree">
+          <li>
+            <div class="org-node raiz">
+              <span class="titulo">Loja Paulínia</span>
+            </div>
+            <ul>
+              <li>
+                <div class="org-node pendente">
+                  <span class="titulo">Líder de Loja</span>
+                  <span class="sub">não existe hoje</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">salário</span>
+                  <span class="sal">líq. R$ 2.421,60</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">salário</span>
+                  <span class="sal">líq. R$ 1.096,00</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">salário</span>
+                  <span class="sal">líq. R$ 2.042,80</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">salário</span>
+                  <span class="sal">líq. R$ 3.409,20</span>
+                </div>
+              </li>
+              <li>
+                <div class="org-node duvida">
+                  <span class="titulo">a mapear</span>
+                  <span class="sub">freelancer</span>
+                  <span class="sal">R$ 110,00</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <p class="prose" style="margin-top:.75rem">Ainda não mapeado — falta o Fred dizer o cargo de cada um.</p>
+    </div>
+
+    <div class="org-area" data-orgarea="modelo" hidden>
+    <div class="note-item"><span class="tag acc">o que é este modelo</span><span>
       Estrutura que o Fred descreveu de cabeça, com salário do documento &ldquo;Cargos e Salários
-      2026&rdquo; anexado onde bateu com um cargo da árvore. Borda tracejada vermelha = função que
-      <strong>ainda não existe</strong> hoje. Borda tracejada laranja = prestador de serviço
-      <strong>externo</strong>, não é funcionário. &ldquo;Loja&rdquo; aparece uma vez só, mas
-      representa as três (Campinas, Paulínia, Piracicaba) — a mesma estrutura se repete nas três.
+      2026&rdquo; anexado onde bateu com um cargo da árvore — é o genérico/institucional, sem os
+      dados reais de cada loja (esses estão nas outras 3 abas). &ldquo;Loja&rdquo; aqui representa
+      as três de forma abstrata, não uma loja específica.
     </span></div>
 
     <div class="org-wrap">
@@ -1617,6 +1830,7 @@
         <tr><td>Líder de Loja — Manhã / Noite e Domingo <em>(pendente)</em></td><td class="num">R$ 2.500</td><td class="num">R$ 726</td><td class="num">R$ 3.226</td><td class="num">R$ 3.726</td></tr>
       </tbody>
     </table></div>
+    </div>
   </div>
 
   <div class="tab-panel" data-panel="config" role="tabpanel" hidden>
@@ -1752,6 +1966,18 @@
   }
   document.querySelectorAll('.area-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirFluxo(b.dataset.area); });
+  });
+
+  function abrirOrgArea(id) {
+    document.querySelectorAll('.org-area-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.orgarea === id);
+    });
+    document.querySelectorAll('.org-area').forEach(function (a) {
+      a.hidden = a.dataset.orgarea !== id;
+    });
+  }
+  document.querySelectorAll('.org-area-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirOrgArea(b.dataset.orgarea); });
   });
 
   // ============================================================
