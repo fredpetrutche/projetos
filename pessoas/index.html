@@ -1584,10 +1584,9 @@
           <tr><td>Atendimento Noturno</td><td class="num">R$ 2.405,69</td><td class="num">R$ 481,14</td><td class="num">R$ 192,46</td><td class="num">R$ 200,47</td><td class="num">R$ 267,30</td><td class="num">R$ 38,49</td><td class="num">R$ 3.585,55</td></tr>
         </tbody>
       </table></div>
-      <div class="note-item"><span class="tag bad">o mesmo alerta de antes: INSS patronal depende do regime tributário</span><span>
-        Usei 20% (regime CLT tradicional). Se a Holy Cookie está no Simples Nacional, isso já vem
-        embutido no DAS e não deveria somar separado — a coluna INSS (R$343 a R$481, dependendo do
-        cargo) sai inteira do custo total. Ainda não confirmei qual regime vocês usam.
+      <div class="note-item"><span class="tag good">INSS confirmado</span><span>
+        Fred confirmou: mesmo sendo Simples Nacional, a loja paga FGTS e INSS patronal separados —
+        os 20% de INSS ficam no cálculo.
       </span></div>
     </div>
 
@@ -1840,41 +1839,48 @@
       <a href="../certificacao-holy-cookie/">projeto de Certificação</a>, já com valor real em reais.
     </span></div>
 
-    <h2 style="margin-top:1.5rem">Encargos sobre o salário bruto em carteira</h2>
+    <h2 style="margin-top:1.5rem">Remuneração total e encargos, por cargo</h2>
     <p class="prose">
-      Calculado só sobre o <strong>bruto em carteira</strong> (não sobre líquido, bônus, VA ou
-      cesta básica — esses têm tratamento fiscal diferente). Estagiário fica de fora: não é
-      celetista, não gera FGTS/INSS patronal do mesmo jeito.
+      Fred confirmou: a loja é Simples Nacional, mas <strong>paga FGTS e INSS patronal
+      separados</strong> — então os dois entram no cálculo. Encargos incidem só sobre o
+      <strong>salário base</strong> (não sobre bônus/VA/cesta, que têm tratamento fiscal
+      diferente). Estagiário fica de fora da tabela de encargos: não é celetista, não gera
+      FGTS/INSS patronal do mesmo jeito.
     </p>
     <div class="tablewrap"><table class="tabela-encargos">
-      <thead><tr><th>Componente</th><th>% do bruto</th><th>Como calculei</th></tr></thead>
+      <thead><tr><th>Componente</th><th>% do salário base</th><th>Como calculei</th></tr></thead>
       <tbody>
+        <tr><td>INSS patronal</td><td class="num">20,00%</td><td>Confirmado pelo Fred — pago separado</td></tr>
         <tr><td>FGTS</td><td class="num">8,00%</td><td>Depósito mensal padrão</td></tr>
-        <tr><td>13º salário — provisão mensal</td><td class="num">8,33%</td><td>1/12 do bruto</td></tr>
+        <tr><td>13º salário — provisão mensal</td><td class="num">8,33%</td><td>1/12 do salário base</td></tr>
         <tr><td>Férias + 1/3 constitucional — provisão mensal</td><td class="num">11,11%</td>
           <td>1/12 (férias) + 1/3 disso (adicional)</td></tr>
         <tr><td>Multa rescisória (40% do FGTS acumulado), provisionada a 50%</td><td class="num">1,60%</td>
           <td>8% × 40% × 50% — a metade é porque você pediu pra provisionar só a parte das saídas
           que são demissão por vocês, não pedido de conta ou justa causa</td></tr>
-        <tr class="linha-total"><td>Subtotal, sem INSS patronal</td><td class="num">29,04%</td><td></td></tr>
+        <tr class="linha-total"><td>Subtotal de encargos</td><td class="num">49,04%</td><td></td></tr>
       </tbody>
     </table></div>
 
-    <div class="note-item"><span class="tag bad">falta confirmar: entra INSS patronal ou não?</span><span>
-      Se a Holy Cookie está no <strong>Simples Nacional</strong>, o INSS patronal já vem embutido
-      na alíquota única do DAS — não soma separado. Se está em <strong>Lucro Presumido/Real</strong>,
-      soma <strong>+20% do bruto</strong>, quase dobrando o encargo total. Não sei o regime de
-      vocês, então calculei os dois cenários abaixo — me fala qual se aplica que eu tiro o outro.
-    </span></div>
-
+    <p class="prose" style="margin-top:1rem">
+      Remuneração total por cargo, com todos os componentes do documento &ldquo;Cargos e Salários
+      2026&rdquo; — salário base, bonificação (valor máximo, nem sempre pago cheio), Vale
+      Alimentação e Cesta Básica. <strong>Vale Transporte não consta no documento pra nenhum
+      desses 3 cargos</strong> — não inventei valor, fica em branco até você passar o número.
+    </p>
     <div class="tablewrap"><table class="tabela-encargos">
-      <thead><tr><th>Cargo</th><th>Bruto</th><th>Encargos (29,04%)</th><th>Custo total, sem INSS patronal</th><th>Custo total, com INSS patronal (+20%)</th></tr></thead>
+      <thead><tr><th>Cargo</th><th>Salário base</th><th>Bonificação (até)</th><th>Vale Transporte</th><th>Vale Alimentação</th><th>Cesta Básica</th><th>Encargos (49,04% do base)</th><th>Custo total/mês</th></tr></thead>
       <tbody>
-        <tr><td>Líder de Pedidos</td><td class="num">R$ 2.066</td><td class="num">R$ 600</td><td class="num">R$ 2.666</td><td class="num">R$ 3.079</td></tr>
-        <tr><td>Auxiliar de Cozinha e Atendimento (com certificação)</td><td class="num">R$ 2.066</td><td class="num">R$ 600</td><td class="num">R$ 2.666</td><td class="num">R$ 3.079</td></tr>
-        <tr><td>Líder de Loja — Manhã / Noite e Domingo <em>(pendente)</em></td><td class="num">R$ 2.500</td><td class="num">R$ 726</td><td class="num">R$ 3.226</td><td class="num">R$ 3.726</td></tr>
+        <tr><td>Auxiliar de Cozinha e Atendimento (com certificação)</td><td class="num">R$ 2.066,00</td><td class="num">R$ 200,00</td><td class="num">—</td><td class="num">R$ 250,00</td><td class="num">R$ 101,00</td><td class="num">R$ 1.013,27</td><td class="num">R$ 3.630,27</td></tr>
+        <tr><td>Líder de Pedidos</td><td class="num">R$ 2.066,00</td><td class="num">R$ 300,00</td><td class="num">—</td><td class="num">R$ 300,00</td><td class="num">R$ 101,00</td><td class="num">R$ 1.013,27</td><td class="num">R$ 3.780,27</td></tr>
+        <tr><td>Líder de Loja — Manhã <em>(pendente)</em></td><td class="num">R$ 2.500,00</td><td class="num">R$ 350,00</td><td class="num">—</td><td class="num">R$ 400,00</td><td class="num">R$ 101,00</td><td class="num">R$ 1.226,11</td><td class="num">R$ 4.577,11</td></tr>
       </tbody>
     </table></div>
+    <div class="note-item"><span class="tag warn">Líder de Turno — Noite e Domingo é parecido, não igual</span><span>
+      Mesmo salário base (R$ 2.500) e mesma Cesta Básica, mas VA diferente (R$ 250, não R$ 400) e
+      bonificação máxima maior (até R$ 500, não R$ 350). Hoje a árvore trata os dois turnos de
+      Líder de Loja como um nó só — se quiser a conta separada desse turno, é só pedir.
+    </span></div>
     </div>
   </div>
 
