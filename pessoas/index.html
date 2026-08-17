@@ -2063,6 +2063,97 @@
   ];
   var CHAVE_CONFIG = 'pessoas-holycookie-atribuicoes-gerencia';
 
+  // Quem faz o quê na prática, hoje na operação (ditado pelo Fred em ago/2026).
+  // Itens não listados aqui caem no fallback genérico (gerência, sem supervisor).
+  var DEFAULT_ATRIBUICOES = {
+    'compras-insumos': { executor: ['administrativo', 'lider-loja'], supervisor: 'gerencia' },
+    'compras-pedido-fabrica': { executor: ['lider-loja'], supervisor: 'gerencia' },
+    'compras-fornecedores': { executor: ['administrativo'], supervisor: '' },
+    'compras-datas-especiais': { executor: ['lider-loja'], supervisor: 'gerencia' },
+    'compras-equipamentos': { executor: ['administrativo', 'lider-loja'], supervisor: '' },
+    'compras-reducao-custos': { executor: ['administrativo'], supervisor: '' },
+
+    'estoque-contagem': { executor: ['lider-loja'], supervisor: '' },
+    'estoque-controle': { executor: ['lider-loja', 'lider-pedidos'], supervisor: '' },
+    'estoque-cmv': { executor: ['gerencia'], supervisor: '' },
+    'estoque-reducao-cmv': { executor: ['gerencia', 'lider-loja', 'lider-pedidos'], supervisor: '' },
+    'estoque-auditorias': { executor: ['administrativo'], supervisor: '' },
+    'estoque-fifo': { executor: ['lider-pedidos'], supervisor: '' },
+
+    'diaadia-limpeza': { executor: ['atendimento', 'forno'], supervisor: 'lider-loja' },
+    'diaadia-dever': { executor: ['lider-loja'], supervisor: '' },
+    'diaadia-checklists': { executor: ['lider-loja'], supervisor: '' },
+    'diaadia-producao': { executor: ['lider-pedidos'], supervisor: '' },
+    'diaadia-eficiencia': { executor: ['lider-loja', 'gerencia'], supervisor: '' },
+    'diaadia-pedidos': { executor: ['lider-pedidos'], supervisor: '' },
+    'diaadia-ocorrencias': { executor: ['lider-loja'], supervisor: '' },
+
+    'equipe-onboarding': { executor: ['lider-loja'], supervisor: '' },
+    'equipe-feedback': { executor: ['lider-loja', 'gerencia', 'administrativo'], supervisor: '' },
+    'equipe-freelancers': { executor: ['administrativo'], supervisor: '' },
+    'equipe-regulamento': { executor: ['gerencia'], supervisor: 'lider-loja' },
+    'equipe-escala': { executor: ['lider-loja'], supervisor: '' },
+    'equipe-desempenho': { executor: ['lider-loja', 'lider-pedidos'], supervisor: '' },
+    'equipe-conflitos': { executor: ['lider-loja'], supervisor: '' },
+    'equipe-banco-horas': { executor: ['lider-loja', 'administrativo'], supervisor: '' },
+    'equipe-comemoracoes': { executor: ['lider-loja'], supervisor: '' },
+    'equipe-incentivos': { executor: ['lider-loja'], supervisor: 'gerencia' },
+    'equipe-advertencias': { executor: ['lider-loja', 'gerencia', 'administrativo'], supervisor: '' },
+    'equipe-cobrir-funcao': { executor: ['lider-loja'], supervisor: '' },
+    'equipe-desenvolvimento': { executor: ['lider-loja', 'gerencia', 'administrativo'], supervisor: '' },
+
+    'trein-melhorar': { executor: ['gerencia', 'lider-loja'], supervisor: '' },
+    'trein-inspecoes': { executor: ['gerencia', 'administrativo'], supervisor: '' },
+
+    'contrat-banco-freelancers': { executor: ['administrativo'], supervisor: '' },
+    'contrat-processo': { executor: ['administrativo'], supervisor: '' },
+    'contrat-onboarding': { executor: ['lider-loja'], supervisor: '' },
+    'contrat-acompanhar': { executor: ['lider-loja'], supervisor: 'gerencia' },
+    'contrat-experiencia': { executor: ['lider-loja', 'administrativo', 'lider-pedidos'], supervisor: '' },
+    'contrat-desligamento': { executor: ['lider-loja', 'administrativo'], supervisor: '' },
+    'contrat-licencas': { executor: ['lider-loja', 'administrativo'], supervisor: '' },
+
+    'doc-cadastro': { executor: ['administrativo'], supervisor: '' },
+    'doc-assinaturas': { executor: ['administrativo'], supervisor: '' },
+    'doc-planilhas': { executor: ['administrativo'], supervisor: '' },
+    'doc-notas-fiscais': { executor: ['administrativo', 'lider-loja'], supervisor: '' },
+    'doc-consumo': { executor: ['lider-loja'], supervisor: '' },
+    'doc-perdas': { executor: ['lider-loja', 'lider-pedidos'], supervisor: '' },
+    'doc-ocorrencias': { executor: ['lider-loja', 'lider-pedidos'], supervisor: '' },
+    'doc-estoque': { executor: ['lider-pedidos'], supervisor: '' },
+    'doc-drive': { executor: ['lider-loja'], supervisor: '' },
+    'doc-exames': { executor: ['lider-loja'], supervisor: '' },
+
+    'exp-qualidade': { executor: ['lider-pedidos', 'lider-loja'], supervisor: '' },
+    'exp-mesas': { executor: ['lider-loja'], supervisor: '' },
+    'exp-conflitos': { executor: ['lider-loja'], supervisor: '' },
+    'exp-comentarios': { executor: ['atendimento'], supervisor: 'lider-loja' },
+
+    'fin-caixa': { executor: ['atendimento', 'lider-loja'], supervisor: '' },
+    'fin-troco': { executor: ['lider-loja'], supervisor: '' },
+    'fin-boletos': { executor: ['lider-loja'], supervisor: '' },
+    'fin-pagamentos': { executor: ['administrativo'], supervisor: '' },
+    'fin-freelancer': { executor: ['lider-loja', 'administrativo'], supervisor: '' },
+    'fin-folha': { executor: ['administrativo'], supervisor: '' },
+
+    'mkt-promocionais': { executor: ['atendimento', 'forno', 'lider-pedidos', 'lider-loja'], supervisor: '' },
+    'mkt-datas-especiais': { executor: ['gerencia', 'marketing'], supervisor: '' },
+    'mkt-influenciadores': { executor: ['marketing', 'atendimento'], supervisor: '' },
+
+    'vendas-treinamento': { executor: ['gerencia'], supervisor: '' },
+    'vendas-receita': { executor: ['gerencia'], supervisor: '' },
+
+    'repasses-diario': { executor: ['administrativo'], supervisor: '' },
+    'repasses-ocorrencias': { executor: ['lider-loja'], supervisor: '' }
+  };
+
+  function padraoAtribuicao(itemId) {
+    var p = DEFAULT_ATRIBUICOES[itemId];
+    return p
+      ? { sistema: false, executor: p.executor.slice(), supervisor: p.supervisor || '' }
+      : { sistema: false, executor: ['gerencia'], supervisor: '' };
+  }
+
   function carregarAtribuicoes() {
     try { return JSON.parse(localStorage.getItem(CHAVE_CONFIG)) || {}; }
     catch (e) { return {}; }
@@ -2070,7 +2161,7 @@
 
   function salvarAtribuicao(itemId, papel, valor) {
     var mapa = carregarAtribuicoes();
-    var reg = mapa[itemId] || { sistema: false, executor: ['gerencia'], supervisor: '' };
+    var reg = mapa[itemId] || padraoAtribuicao(itemId);
     reg[papel] = valor;
     mapa[itemId] = reg;
     localStorage.setItem(CHAVE_CONFIG, JSON.stringify(mapa));
@@ -2121,8 +2212,8 @@
       tr.appendChild(tdCategoria);
 
       function atual() {
-        var reg = carregarAtribuicoes()[a.id] || { sistema: false, executor: ['gerencia'], supervisor: '' };
-        if (!Array.isArray(reg.executor)) reg.executor = reg.executor ? [reg.executor] : ['gerencia']; // migra formato antigo (1 pessoa só)
+        var reg = carregarAtribuicoes()[a.id] || padraoAtribuicao(a.id);
+        if (!Array.isArray(reg.executor)) reg.executor = reg.executor ? [reg.executor] : padraoAtribuicao(a.id).executor; // migra formato antigo (1 pessoa só)
         return reg;
       }
 
