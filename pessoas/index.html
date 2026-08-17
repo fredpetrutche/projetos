@@ -209,11 +209,20 @@
                              padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
                              background: var(--surface); color: var(--ink); max-width: 11rem; }
 
-  .cel-executor { min-width: 14rem; }
-  .multi-cargo { display: flex; flex-wrap: wrap; gap: .25rem .7rem; }
-  .multi-cargo label { display: inline-flex; align-items: center; gap: .3rem; font-size: .75rem;
-                        color: var(--ink-soft); white-space: nowrap; cursor: pointer; }
-  .multi-cargo input[type="checkbox"] { width: .9rem; height: .9rem; cursor: pointer; }
+  .cel-executor { min-width: 12rem; }
+  .lista-executores { display: flex; flex-direction: column; gap: .35rem; align-items: flex-start; }
+  .linha-executor { display: flex; align-items: center; gap: .35rem; }
+  .linha-executor select { font-family: var(--sans); font-size: .8125rem; padding: .3rem .5rem;
+                            border: 1px solid var(--rule); border-radius: 4px; background: var(--surface);
+                            color: var(--ink); max-width: 10rem; }
+  .btn-remover-executor { font: inherit; font-size: .9375rem; line-height: 1; width: 1.5rem; height: 1.5rem;
+                           border: 1px solid var(--rule); border-radius: 4px; background: var(--surface);
+                           color: var(--ink-faint); cursor: pointer; flex: 0 0 auto; }
+  .btn-remover-executor:hover { color: var(--bad); border-color: var(--bad); }
+  .btn-add-executor { font: inherit; font-size: .75rem; font-weight: 600; color: var(--accent);
+                       background: var(--accent-bg); border: none; border-radius: 999px;
+                       padding: .3rem .65rem; cursor: pointer; align-self: flex-start; }
+  .btn-add-executor:hover { filter: brightness(0.95); }
 
   /* ---------- fluxograma — swimlane por área ---------- */
   .grade-areas { display: grid; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); gap: .6rem; }
@@ -1368,9 +1377,10 @@
     <p class="prose">
       Marque <strong>Sistema</strong> quando a única coisa que a pessoa precisa fazer é consultar o
       sistema — ele já fala o que fazer, sem precisar de decisão ou execução manual. Em
-      <strong>Executor</strong> dá pra marcar mais de uma função — útil quando a atividade é
-      rotineira e cada área tem seu próprio responsável (ex.: limpeza, em que Atendimento cuida do
-      salão e Forno cuida da cozinha, cada um executando a mesma atividade na sua área).
+      <strong>Executor</strong> aceita mais de uma função — clique em &ldquo;+ adicionar&rdquo; pra
+      abrir outro seletor, útil quando a atividade é rotineira e cada área tem seu próprio
+      responsável (ex.: limpeza, em que Atendimento cuida do salão e Forno cuida da cozinha, cada um
+      executando a mesma atividade na sua área).
       <strong>Supervisor</strong> continua sendo uma pessoa só. Por padrão toda atividade está com a
       Gerência como executora e sem supervisor — mude só o que for delegado de verdade pra outra
       função (ex.: Contagem mensal de estoque pode ser executada pelo Líder de pedidos ou pelo
@@ -1526,17 +1536,6 @@
     localStorage.setItem(CHAVE_CONFIG, JSON.stringify(mapa));
   }
 
-  function alternarExecutor(itemId, cargoId, marcado) {
-    var mapa = carregarAtribuicoes();
-    var reg = mapa[itemId] || { sistema: false, executor: ['gerencia'], supervisor: '' };
-    if (!Array.isArray(reg.executor)) reg.executor = reg.executor ? [reg.executor] : [];
-    var lista = reg.executor.filter(function (c) { return c !== cargoId; });
-    if (marcado) lista.push(cargoId);
-    reg.executor = lista;
-    mapa[itemId] = reg;
-    localStorage.setItem(CHAVE_CONFIG, JSON.stringify(mapa));
-  }
-
   function coletarAtividadesGerencia() {
     var linhas = [];
     document.querySelectorAll('#visor .topico-conteudo').forEach(function (painel) {
@@ -1622,23 +1621,64 @@
 
       var tdExecutor = document.createElement('td');
       tdExecutor.className = 'cel-papel cel-executor';
-      var grupoExecutor = document.createElement('div');
-      grupoExecutor.className = 'multi-cargo';
-      CARGOS.forEach(function (c) {
-        var label = document.createElement('label');
-        var chk = document.createElement('input');
-        chk.type = 'checkbox';
-        chk.value = c.id;
-        chk.checked = atual().executor.indexOf(c.id) !== -1;
-        chk.addEventListener('change', function () {
-          alternarExecutor(a.id, c.id, chk.checked);
-        });
-        label.appendChild(chk);
-        label.appendChild(document.createTextNode(c.nome));
-        grupoExecutor.appendChild(label);
-      });
-      tdExecutor.appendChild(grupoExecutor);
       tr.appendChild(tdExecutor);
+
+      function renderExecutores() {
+        tdExecutor.innerHTML = '';
+        var lista = document.createElement('div');
+        lista.className = 'lista-executores';
+
+        atual().executor.forEach(function (cargoAtual, idx) {
+          var linha = document.createElement('div');
+          linha.className = 'linha-executor';
+
+          var select = document.createElement('select');
+          CARGOS.forEach(function (c) {
+            var opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.nome;
+            select.appendChild(opt);
+          });
+          select.value = cargoAtual;
+          select.addEventListener('change', function () {
+            var novaLista = atual().executor.slice();
+            novaLista[idx] = select.value;
+            salvarAtribuicao(a.id, 'executor', novaLista);
+          });
+          linha.appendChild(select);
+
+          var btnRemover = document.createElement('button');
+          btnRemover.type = 'button';
+          btnRemover.className = 'btn-remover-executor';
+          btnRemover.title = 'Remover';
+          btnRemover.textContent = '×';
+          btnRemover.addEventListener('click', function () {
+            var novaLista = atual().executor.slice();
+            novaLista.splice(idx, 1);
+            salvarAtribuicao(a.id, 'executor', novaLista);
+            renderExecutores();
+          });
+          linha.appendChild(btnRemover);
+
+          lista.appendChild(linha);
+        });
+
+        var btnAdd = document.createElement('button');
+        btnAdd.type = 'button';
+        btnAdd.className = 'btn-add-executor';
+        btnAdd.textContent = '+ adicionar';
+        btnAdd.addEventListener('click', function () {
+          var novaLista = atual().executor.slice();
+          novaLista.push('gerencia');
+          salvarAtribuicao(a.id, 'executor', novaLista);
+          renderExecutores();
+        });
+        lista.appendChild(btnAdd);
+
+        tdExecutor.appendChild(lista);
+      }
+
+      renderExecutores();
 
       var tdSupervisor = document.createElement('td');
       tdSupervisor.className = 'cel-papel';
