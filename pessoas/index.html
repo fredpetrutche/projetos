@@ -375,8 +375,14 @@
 
   <div class="resumo">
     <div class="pronto"><div class="num">2</div><div class="lbl">cargos prontos</div></div>
-    <div class="falta"><div class="num">5</div><div class="lbl">cargos faltam</div></div>
+    <div class="falta"><div class="num">8</div><div class="lbl">cargos faltam</div></div>
   </div>
+
+  <p class="prose" style="margin:.5rem 0 1rem">
+    A loja tem <strong>2 áreas operacionais</strong>: Cozinha e Atendimento, as duas sob o Líder de
+    Loja. Cozinha = Líder de Pedidos (diurno e noturno) com Forneiro ao lado e Auxiliar/estagiário e
+    Folguista por baixo. Atendimento = Anfitrião e Auxiliar de atendimento.
+  </p>
 
   <div class="grade-grupos">
     <button class="grupo-btn" data-grupo="gerencia">
@@ -387,24 +393,32 @@
       <span class="gnome">Administrativo</span>
       <span class="gcontagem"><span class="tag good">5</span></span>
     </button>
-    <button class="grupo-btn" data-grupo="atendimento">
-      <span class="gnome">Atendimento</span>
-      <span class="tag bad">falta</span>
-    </button>
-    <button class="grupo-btn" data-grupo="forno">
-      <span class="gnome">Forno</span>
+    <button class="grupo-btn" data-grupo="lider-loja">
+      <span class="gnome">Líder de loja</span>
       <span class="tag bad">falta</span>
     </button>
     <button class="grupo-btn" data-grupo="lider-pedidos">
       <span class="gnome">Líder de pedidos</span>
       <span class="tag bad">falta</span>
     </button>
-    <button class="grupo-btn" data-grupo="lider-loja">
-      <span class="gnome">Líder de loja</span>
+    <button class="grupo-btn" data-grupo="forneiro">
+      <span class="gnome">Forneiro</span>
       <span class="tag bad">falta</span>
     </button>
-    <button class="grupo-btn" data-grupo="auxiliares">
-      <span class="gnome">Auxiliares e estagiários</span>
+    <button class="grupo-btn" data-grupo="aux-cozinha">
+      <span class="gnome">Auxiliar/estagiário de cozinha</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="folguista-cozinha">
+      <span class="gnome">Folguista (líder de pedidos / auxiliar de cozinha)</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="anfitriao">
+      <span class="gnome">Anfitrião</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="aux-atendimento">
+      <span class="gnome">Auxiliar de atendimento</span>
       <span class="tag bad">falta</span>
     </button>
   </div>
@@ -1493,17 +1507,57 @@
                 <ul>
                   <li>
                     <div class="org-node">
-                      <span class="titulo">Líder de Pedidos</span>
-                      <span class="sal">líq. R$ 2.170,78</span>
-                      <span class="sal">custo empresa: R$ 3.235,43</span>
+                      <span class="titulo">Cozinha</span>
                     </div>
-                  </li>
-                  <li>
-                    <div class="org-node">
-                      <span class="titulo">Forno</span>
-                      <span class="sub">freelancer</span>
-                      <span class="sal">R$ 2.640,00</span>
-                    </div>
+                    <ul>
+                      <li>
+                        <div class="org-node">
+                          <span class="titulo">Líder de Pedidos</span>
+                        </div>
+                        <ul>
+                          <li>
+                            <div class="org-node">
+                              <span class="titulo">Líder de Pedidos Diurno</span>
+                              <span class="sal">líq. R$ 2.170,78</span>
+                              <span class="sal">custo empresa: R$ 3.235,43</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node">
+                              <span class="titulo">Líder de Pedidos Noturno</span>
+                              <span class="sal">líq. R$ 2.405,69</span>
+                              <span class="sal">custo empresa: R$ 3.585,55</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node">
+                              <span class="titulo">Estagiário de Cozinha</span>
+                              <span class="sal">R$ 1.358,00</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node pendente">
+                              <span class="titulo">Auxiliar de Cozinha</span>
+                              <span class="sub">vaga em aberto</span>
+                              <span class="sal">histórico: R$ 1.204,00</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node duvida">
+                              <span class="titulo">Folguista (cozinha)</span>
+                              <span class="sub">existe hoje — aguardando quem/quanto</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <div class="org-node">
+                          <span class="titulo">Forneiro</span>
+                          <span class="sub">freelancer</span>
+                          <span class="sal">R$ 2.640,00</span>
+                        </div>
+                      </li>
+                    </ul>
                   </li>
                   <li>
                     <div class="org-node">
@@ -1512,43 +1566,16 @@
                     <ul>
                       <li>
                         <div class="org-node">
-                          <span class="titulo">Atendimento Diurno</span>
+                          <span class="titulo">Auxiliar de Atendimento</span>
                           <span class="sal">líq. R$ 1.714,84</span>
                           <span class="sal">custo empresa: R$ 2.555,87</span>
                         </div>
                       </li>
                       <li>
                         <div class="org-node">
-                          <span class="titulo">Atendimento Noturno</span>
-                          <span class="sal">líq. R$ 2.405,69</span>
-                          <span class="sal">custo empresa: R$ 3.585,55</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <div class="org-node">
-                      <span class="titulo">Folguista de Atendimento</span>
-                      <span class="sub">freelancer · domingo e segunda à noite</span>
-                      <span class="sal">R$ 1.100,00</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="org-node">
-                      <span class="titulo">Auxiliar</span>
-                    </div>
-                    <ul>
-                      <li>
-                        <div class="org-node">
-                          <span class="titulo">Estagiário de Cozinha</span>
-                          <span class="sal">R$ 1.358,00</span>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="org-node pendente">
-                          <span class="titulo">Auxiliar</span>
-                          <span class="sub">vaga em aberto</span>
-                          <span class="sal">histórico: R$ 1.204,00</span>
+                          <span class="titulo">Folguista de Atendimento</span>
+                          <span class="sub">freelancer · domingo e segunda à noite</span>
+                          <span class="sal">R$ 1.100,00</span>
                         </div>
                       </li>
                     </ul>
@@ -1563,16 +1590,18 @@
         Um salário de julho (R$ 1.446,55) era de alguém que já saiu — não entrou na árvore. A
         contratação nova que ainda não tem cargo/valor confirmado ficou de fora, a seu pedido.
         &ldquo;Folguista de Atendimento&rdquo; soma as duas pessoas que cobrem domingo e segunda à
-        noite — é uma função, não duas pessoas separadas. Todo mundo aqui embaixo fica sob o Líder
-        de Loja, que está vago — hoje ninguém supervisiona de verdade.
+        noite — é uma função, não duas pessoas separadas. O valor antes rotulado &ldquo;Atendimento
+        Noturno&rdquo; (R$ 2.405,69) é a Alice, líder de pedidos noturna — à noite só tem líder de
+        pedidos, não tem atendimento nem anfitrião. Todo mundo aqui embaixo fica sob o Líder de Loja,
+        que está vago — hoje ninguém supervisiona de verdade.
       </p>
 
       <h2 style="margin-top:1.5rem">Encargos — Campinas, cargos CLT (Salário)</h2>
       <p class="prose">
-        Só entra quem está no regime <strong>CLT via folha de Salário</strong> — Líder de Pedidos e
-        as duas variantes de Atendimento. <strong>Freelancer (Forno, Folguista) e Estágio
-        (Auxiliar) não entram aqui</strong>: são regimes diferentes, sem FGTS/INSS
-        patronal/13º/férias/multa da mesma forma que um CLT. &ldquo;Bruto&rdquo; é uma
+        Só entra quem está no regime <strong>CLT via folha de Salário</strong> — Líder de Pedidos
+        (diurno e noturno) e Auxiliar de Atendimento. <strong>Freelancer (Forneiro, Folguista) e
+        Estágio (Estagiário de Cozinha) não entram aqui</strong>: são regimes diferentes, sem
+        FGTS/INSS patronal/13º/férias/multa da mesma forma que um CLT. &ldquo;Bruto&rdquo; é uma
         <strong>estimativa</strong> — usei o valor líquido pago via Pix como base, porque o
         financeiro não separa salário-base de bônus por pessoa, e Vale Alimentação/Vale Transporte
         são pagos em lote pra operadora do benefício (ZOOP/iFood Benefícios/Transurc), não por
@@ -1582,9 +1611,9 @@
       <div class="tablewrap"><table class="tabela-encargos">
         <thead><tr><th>Cargo</th><th>Bruto (estimado)</th><th>INSS 20%</th><th>FGTS 8%</th><th>13º 8,33%</th><th>Férias+1/3 11,11%</th><th>Multa 50% (1,6%)</th><th>Custo total</th></tr></thead>
         <tbody>
-          <tr><td>Líder de Pedidos</td><td class="num">R$ 2.170,78</td><td class="num">R$ 434,16</td><td class="num">R$ 173,66</td><td class="num">R$ 180,90</td><td class="num">R$ 241,20</td><td class="num">R$ 34,73</td><td class="num">R$ 3.235,43</td></tr>
-          <tr><td>Atendimento Diurno</td><td class="num">R$ 1.714,84</td><td class="num">R$ 342,97</td><td class="num">R$ 137,19</td><td class="num">R$ 142,90</td><td class="num">R$ 190,54</td><td class="num">R$ 27,44</td><td class="num">R$ 2.555,87</td></tr>
-          <tr><td>Atendimento Noturno</td><td class="num">R$ 2.405,69</td><td class="num">R$ 481,14</td><td class="num">R$ 192,46</td><td class="num">R$ 200,47</td><td class="num">R$ 267,30</td><td class="num">R$ 38,49</td><td class="num">R$ 3.585,55</td></tr>
+          <tr><td>Líder de Pedidos Diurno</td><td class="num">R$ 2.170,78</td><td class="num">R$ 434,16</td><td class="num">R$ 173,66</td><td class="num">R$ 180,90</td><td class="num">R$ 241,20</td><td class="num">R$ 34,73</td><td class="num">R$ 3.235,43</td></tr>
+          <tr><td>Líder de Pedidos Noturno</td><td class="num">R$ 2.405,69</td><td class="num">R$ 481,14</td><td class="num">R$ 192,46</td><td class="num">R$ 200,47</td><td class="num">R$ 267,30</td><td class="num">R$ 38,49</td><td class="num">R$ 3.585,55</td></tr>
+          <tr><td>Auxiliar de Atendimento</td><td class="num">R$ 1.714,84</td><td class="num">R$ 342,97</td><td class="num">R$ 137,19</td><td class="num">R$ 142,90</td><td class="num">R$ 190,54</td><td class="num">R$ 27,44</td><td class="num">R$ 2.555,87</td></tr>
         </tbody>
       </table></div>
       <div class="note-item"><span class="tag good">INSS confirmado</span><span>
@@ -1610,26 +1639,34 @@
                 <ul>
                   <li>
                     <div class="org-node">
-                      <span class="titulo">Forno</span>
-                      <span class="sub">diurno</span>
-                      <span class="sal">líq. R$ 1.738,72</span>
+                      <span class="titulo">Cozinha</span>
                     </div>
-                  </li>
-                  <li>
-                    <div class="org-node">
-                      <span class="titulo">Líder de Pedidos Noturna</span>
-                      <span class="sal">R$ 3.325,00</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="org-node pendente">
-                      <span class="titulo">Auxiliar de Cozinha</span>
-                      <span class="sub">vaga, sem gente</span>
-                    </div>
+                    <ul>
+                      <li>
+                        <div class="org-node">
+                          <span class="titulo">Forneiro</span>
+                          <span class="sub">diurno</span>
+                          <span class="sal">líq. R$ 1.738,72</span>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="org-node">
+                          <span class="titulo">Líder de Pedidos Noturna</span>
+                          <span class="sal">R$ 3.325,00</span>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="org-node pendente">
+                          <span class="titulo">Auxiliar de Cozinha</span>
+                          <span class="sub">vaga, sem gente</span>
+                        </div>
+                      </li>
+                    </ul>
                   </li>
                   <li>
                     <div class="org-node duvida">
                       <span class="titulo">a confirmar</span>
+                      <span class="sub">Cozinha ou Atendimento — cargo ainda não identificado</span>
                       <span class="sal">líq. R$ 1.709,00</span>
                     </div>
                   </li>
@@ -1662,20 +1699,39 @@
                 <ul>
                   <li>
                     <div class="org-node">
-                      <span class="titulo">Líder de Pedidos</span>
+                      <span class="titulo">Cozinha</span>
                     </div>
                     <ul>
                       <li>
-                        <div class="org-node duvida">
-                          <span class="titulo">Líder de Pedidos Diurno</span>
-                          <span class="sub">era a Ana (demitida) — agora, possivelmente, a Renata</span>
-                          <span class="sal">histórico Ana: R$ 2.421,60 · Renata: sem valor ainda</span>
+                        <div class="org-node">
+                          <span class="titulo">Líder de Pedidos</span>
+                        </div>
+                        <ul>
+                          <li>
+                            <div class="org-node duvida">
+                              <span class="titulo">Líder de Pedidos Diurno</span>
+                              <span class="sub">era a Ana (demitida) — agora, possivelmente, a Renata</span>
+                              <span class="sal">histórico Ana: R$ 2.421,60 · Renata: sem valor ainda</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node">
+                              <span class="titulo">Líder de Pedidos Noturno</span>
+                              <span class="sal">líq. R$ 2.042,80</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <div class="org-node pendente">
+                          <span class="titulo">Auxiliar de Cozinha</span>
+                          <span class="sub">vaga, sem gente</span>
                         </div>
                       </li>
                       <li>
-                        <div class="org-node">
-                          <span class="titulo">Líder de Pedidos Noturno</span>
-                          <span class="sal">líq. R$ 2.042,80</span>
+                        <div class="org-node pendente">
+                          <span class="titulo">Estágio</span>
+                          <span class="sub">vaga, sem gente</span>
                         </div>
                       </li>
                     </ul>
@@ -1683,27 +1739,15 @@
                   <li>
                     <div class="org-node duvida">
                       <span class="titulo">a mapear</span>
-                      <span class="sub">salário</span>
+                      <span class="sub">salário — Cozinha ou Atendimento, cargo ainda não identificado</span>
                       <span class="sal">líq. R$ 3.409,20</span>
                     </div>
                   </li>
                   <li>
                     <div class="org-node duvida">
                       <span class="titulo">a confirmar</span>
-                      <span class="sub">freelancer — talvez cobertura do Líder de Pedidos Noturno</span>
+                      <span class="sub">freelancer — talvez cobertura do Líder de Pedidos Noturno, ou o Folguista (cozinha)</span>
                       <span class="sal">R$ 110,00</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="org-node pendente">
-                      <span class="titulo">Auxiliar de Cozinha</span>
-                      <span class="sub">vaga, sem gente</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="org-node pendente">
-                      <span class="titulo">Estágio</span>
-                      <span class="sub">vaga, sem gente</span>
                     </div>
                   </li>
                 </ul>
@@ -1754,22 +1798,35 @@
                       <ul>
                         <li>
                           <div class="org-node">
-                            <span class="titulo">Líder de Pedidos</span>
-                            <span class="sal">líq. R$ 2.478</span>
+                            <span class="titulo">Cozinha</span>
                           </div>
                           <ul>
                             <li>
                               <div class="org-node">
-                                <span class="titulo">Auxiliar / Estagiário</span>
-                                <span class="sal">R$ 2.328 · R$ 1.150</span>
+                                <span class="titulo">Líder de Pedidos</span>
+                                <span class="sal">líq. R$ 2.478</span>
+                              </div>
+                              <ul>
+                                <li>
+                                  <div class="org-node">
+                                    <span class="titulo">Auxiliar de Cozinha / Estagiário</span>
+                                    <span class="sal">R$ 2.328 · R$ 1.150</span>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="org-node pendente">
+                                    <span class="titulo">Folguista (cozinha)</span>
+                                    <span class="sub">sem valor no documento de cargos</span>
+                                  </div>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <div class="org-node">
+                                <span class="titulo">Forneiro</span>
                               </div>
                             </li>
                           </ul>
-                        </li>
-                        <li>
-                          <div class="org-node">
-                            <span class="titulo">Forno</span>
-                          </div>
                         </li>
                         <li>
                           <div class="org-node">
@@ -1777,8 +1834,14 @@
                           </div>
                           <ul>
                             <li>
+                              <div class="org-node pendente">
+                                <span class="titulo">Anfitrião</span>
+                                <span class="sub">sem valor no documento de cargos</span>
+                              </div>
+                            </li>
+                            <li>
                               <div class="org-node">
-                                <span class="titulo">Auxiliar / Estagiário</span>
+                                <span class="titulo">Auxiliar de Atendimento / Estagiário</span>
                                 <span class="sal">R$ 2.328 · R$ 1.150</span>
                               </div>
                             </li>
@@ -2055,7 +2118,7 @@
     { id: 'gerencia', nome: 'Gerência' },
     { id: 'administrativo', nome: 'Administrativo' },
     { id: 'atendimento', nome: 'Atendimento' },
-    { id: 'forno', nome: 'Forno' },
+    { id: 'forneiro', nome: 'Forneiro' },
     { id: 'lider-pedidos', nome: 'Líder de pedidos' },
     { id: 'lider-loja', nome: 'Líder de loja' },
     { id: 'auxiliares', nome: 'Auxiliares e estagiários' },
@@ -2080,7 +2143,7 @@
     'estoque-auditorias': { executor: ['administrativo'], supervisor: '' },
     'estoque-fifo': { executor: ['lider-pedidos'], supervisor: '' },
 
-    'diaadia-limpeza': { executor: ['atendimento', 'forno'], supervisor: 'lider-loja' },
+    'diaadia-limpeza': { executor: ['atendimento', 'forneiro'], supervisor: 'lider-loja' },
     'diaadia-dever': { executor: ['lider-loja'], supervisor: '' },
     'diaadia-checklists': { executor: ['lider-loja'], supervisor: '' },
     'diaadia-producao': { executor: ['lider-pedidos'], supervisor: '' },
@@ -2136,7 +2199,7 @@
     'fin-freelancer': { executor: ['lider-loja', 'administrativo'], supervisor: '' },
     'fin-folha': { executor: ['administrativo'], supervisor: '' },
 
-    'mkt-promocionais': { executor: ['atendimento', 'forno', 'lider-pedidos', 'lider-loja'], supervisor: '' },
+    'mkt-promocionais': { executor: ['atendimento', 'forneiro', 'lider-pedidos', 'lider-loja'], supervisor: '' },
     'mkt-datas-especiais': { executor: ['gerencia', 'marketing'], supervisor: '' },
     'mkt-influenciadores': { executor: ['marketing', 'atendimento'], supervisor: '' },
 
