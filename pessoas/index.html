@@ -381,7 +381,8 @@
   <p class="prose" style="margin:.5rem 0 1rem">
     A loja tem <strong>2 áreas operacionais</strong>: Cozinha e Atendimento, as duas sob o Líder de
     Loja. Cozinha = Líder de Pedidos (diurno e noturno) com Forneiro ao lado e Auxiliar/estagiário e
-    Folguista por baixo. Atendimento = Anfitrião e Auxiliar de atendimento.
+    Folguista por baixo. Atendimento = Líder de Atendimento com Anfitrião e Auxiliar de atendimento
+    por baixo.
   </p>
 
   <div class="grade-grupos">
@@ -411,6 +412,10 @@
     </button>
     <button class="grupo-btn" data-grupo="folguista-cozinha">
       <span class="gnome">Folguista (líder de pedidos / auxiliar de cozinha)</span>
+      <span class="tag bad">falta</span>
+    </button>
+    <button class="grupo-btn" data-grupo="lider-atendimento">
+      <span class="gnome">Líder de atendimento</span>
       <span class="tag bad">falta</span>
     </button>
     <button class="grupo-btn" data-grupo="anfitriao">
@@ -1565,18 +1570,26 @@
                     </div>
                     <ul>
                       <li>
-                        <div class="org-node">
-                          <span class="titulo">Auxiliar de Atendimento</span>
-                          <span class="sal">líq. R$ 1.714,84</span>
-                          <span class="sal">custo empresa: R$ 2.555,87</span>
+                        <div class="org-node duvida">
+                          <span class="titulo">Líder de Atendimento</span>
+                          <span class="sub">Manu — sem valor informado ainda</span>
                         </div>
-                      </li>
-                      <li>
-                        <div class="org-node">
-                          <span class="titulo">Folguista de Atendimento</span>
-                          <span class="sub">freelancer · domingo e segunda à noite</span>
-                          <span class="sal">R$ 1.100,00</span>
-                        </div>
+                        <ul>
+                          <li>
+                            <div class="org-node">
+                              <span class="titulo">Auxiliar de Atendimento</span>
+                              <span class="sal">líq. R$ 1.714,84</span>
+                              <span class="sal">custo empresa: R$ 2.555,87</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="org-node">
+                              <span class="titulo">Folguista de Atendimento</span>
+                              <span class="sub">freelancer · domingo e segunda à noite</span>
+                              <span class="sal">R$ 1.100,00</span>
+                            </div>
+                          </li>
+                        </ul>
                       </li>
                     </ul>
                   </li>
@@ -1694,6 +1707,7 @@
               <li>
                 <div class="org-node">
                   <span class="titulo">Líder de Loja</span>
+                  <span class="sub">Luciana — acumula também Líder de Atendimento</span>
                   <span class="sal">líq. R$ 1.096,00</span>
                 </div>
                 <ul>
@@ -1737,6 +1751,19 @@
                     </ul>
                   </li>
                   <li>
+                    <div class="org-node">
+                      <span class="titulo">Atendimento</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="org-node">
+                          <span class="titulo">Líder de Atendimento</span>
+                          <span class="sub">Luciana — mesma pessoa que a Líder de Loja, valor já contado lá</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
                     <div class="org-node duvida">
                       <span class="titulo">a mapear</span>
                       <span class="sub">salário — Cozinha ou Atendimento, cargo ainda não identificado</span>
@@ -1757,8 +1784,10 @@
         </ul>
       </div>
       <p class="prose" style="margin-top:.75rem">
-        Ainda faltam: quem é a pessoa de R$ 3.409,20 (salário), e como entra a de R$ 110,00
-        (freelancer) — se é cobertura ocasional do Líder de Pedidos Noturno ou outra coisa.
+        A Luciana acumula Líder de Loja e Líder de Atendimento — por isso não tem valor duplicado no
+        nó de Atendimento, o salário dela já está contado no topo da árvore. Ainda faltam: quem é a
+        pessoa de R$ 3.409,20 (salário), e como entra a de R$ 110,00 (freelancer) — se é cobertura
+        ocasional do Líder de Pedidos Noturno ou outra coisa.
       </p>
     </div>
 
@@ -1835,15 +1864,23 @@
                           <ul>
                             <li>
                               <div class="org-node pendente">
-                                <span class="titulo">Anfitrião</span>
+                                <span class="titulo">Líder de Atendimento</span>
                                 <span class="sub">sem valor no documento de cargos</span>
                               </div>
-                            </li>
-                            <li>
-                              <div class="org-node">
-                                <span class="titulo">Auxiliar de Atendimento / Estagiário</span>
-                                <span class="sal">R$ 2.328 · R$ 1.150</span>
-                              </div>
+                              <ul>
+                                <li>
+                                  <div class="org-node pendente">
+                                    <span class="titulo">Anfitrião</span>
+                                    <span class="sub">sem valor no documento de cargos</span>
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="org-node">
+                                    <span class="titulo">Auxiliar de Atendimento / Estagiário</span>
+                                    <span class="sal">R$ 2.328 · R$ 1.150</span>
+                                  </div>
+                                </li>
+                              </ul>
                             </li>
                           </ul>
                         </li>
@@ -2120,6 +2157,7 @@
     { id: 'atendimento', nome: 'Atendimento' },
     { id: 'forneiro', nome: 'Forneiro' },
     { id: 'lider-pedidos', nome: 'Líder de pedidos' },
+    { id: 'lider-atendimento', nome: 'Líder de atendimento' },
     { id: 'lider-loja', nome: 'Líder de loja' },
     { id: 'auxiliares', nome: 'Auxiliares e estagiários' },
     { id: 'marketing', nome: 'Marketing' }
