@@ -148,10 +148,11 @@
     <h1>Prioridades</h1>
     <p class="lede">
       O negócio roda em 4 pilares — faturamento, caixa, equipe, qualidade — resolvidos em sequência, não em
-      paralelo. Caixa (dados de venda) e CMV (visibilidade de margem) já viraram <strong>manutenção</strong>.
-      Sobraram, em 17/08/2026, <strong>duas crises simultâneas</strong> disputando o mesmo tempo do Fred e da
-      Débora: faturamento e equipe. Esta página é só isso — os cards de cada frente e a ordem sugerida de
-      ataque.
+      paralelo. Caixa (dados de venda) já virou <strong>manutenção</strong>. Sobraram, em 17/08/2026,
+      <strong>duas crises simultâneas</strong> disputando o mesmo tempo do Fred e da Débora — faturamento e
+      equipe — mais o <strong>CMV</strong>, que não é crise mas também não pode sair da lista: a visibilidade
+      já existe, faltam os últimos detalhes pra fechar, e segue em cima da mesa. Esta página é só isso — os
+      cards de cada frente e a ordem sugerida de ataque.
     </p>
   </header>
 
@@ -168,7 +169,7 @@
   </section>
 
   <section>
-    <h2 class="titulo">As duas crises<span class="hint">clique num grupo</span></h2>
+    <h2 class="titulo">O que está na mesa agora<span class="hint">clique num card</span></h2>
     <div class="grade-grupos">
       <button class="grupo-btn" data-grupo="faturamento">
         <span class="gnome">Crise de Faturamento</span>
@@ -177,6 +178,10 @@
       <button class="grupo-btn" data-grupo="equipe">
         <span class="gnome">Crise de Equipe</span>
         <span class="gcontagem"><span class="tag bad">1 piora sozinho</span><span class="tag acc">1 bloqueio</span><span class="tag good">2 estável</span></span>
+      </button>
+      <button class="grupo-btn" data-topico-direto="cmv">
+        <span class="gnome">CMV</span>
+        <span class="gcontagem"><span class="tag warn">finalizando os últimos detalhes</span></span>
       </button>
     </div>
 
@@ -309,6 +314,18 @@
         </span></div>
       </div>
 
+      <div class="topico-conteudo" data-topico="cmv" hidden>
+        <h3>CMV</h3>
+        <div class="note-item"><span class="tag warn">onde estamos</span><span>
+          O problema de visibilidade foi resolvido — já dá pra ver a margem direito. Ainda não é manutenção
+          pura: faltam os últimos detalhes pra fechar, e isso segue em cima da mesa do Fred.
+        </span></div>
+        <div class="note-item"><span class="tag acc">por que não pode sumir da lista</span><span>
+          Não é uma crise como Piracicaba ou Paulínia, mas também não é um item que se resolve e é esquecido —
+          mesmo depois de fechado, CMV pede acompanhamento contínuo.
+        </span></div>
+      </div>
+
     </div>
   </section>
 
@@ -329,8 +346,18 @@
       g.hidden = g.dataset.grupo !== id;
     });
   }
+  function abrirTopicoDireto(id, btn) {
+    document.querySelectorAll('.grupo-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b === btn);
+    });
+    document.querySelectorAll('.grade-topicos').forEach(function (g) { g.hidden = true; });
+    abrirTopico(id);
+  }
   document.querySelectorAll('.grupo-btn').forEach(function (b) {
-    b.addEventListener('click', function () { abrirGrupo(b.dataset.grupo); });
+    b.addEventListener('click', function () {
+      if (b.dataset.topicoDireto) { abrirTopicoDireto(b.dataset.topicoDireto, b); }
+      else { abrirGrupo(b.dataset.grupo); }
+    });
   });
 
   function abrirTopico(id) {
@@ -359,6 +386,7 @@
 
   var inicial = location.hash.replace('#', '');
   if (inicial === 'faturamento' || inicial === 'equipe') abrirGrupo(inicial);
+  else if (inicial === 'cmv') abrirTopicoDireto('cmv', document.querySelector('.grupo-btn[data-topico-direto="cmv"]'));
 </script>
 
 </body>
