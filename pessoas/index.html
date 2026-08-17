@@ -200,19 +200,9 @@
   table.tabela-config tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
   table.tabela-config .cel-categoria { color: var(--ink-faint); white-space: nowrap; }
 
-  .cargo-resumo { font: inherit; font-size: .8125rem; text-align: left; cursor: pointer; background: none;
-                  border: none; color: var(--ink-soft); padding: 0; }
-  .cargo-resumo:hover { color: var(--ink); }
-  .cargo-resumo strong { color: var(--ink); font-weight: 600; }
-  .editar-ic { color: var(--ink-faint); font-size: .75rem; }
-  .cargo-seletores { display: flex; gap: .75rem; margin-top: .5rem; flex-wrap: wrap; }
-  .cargo-seletores[hidden] { display: none; }
-  .cargo-seletores label { display: flex; flex-direction: column; gap: .2rem; font-size: .625rem;
-                            letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint);
-                            font-family: var(--mono); }
-  .cargo-seletores select { font-family: var(--sans); font-size: .8125rem; padding: .3rem .5rem;
-                             border: 1px solid var(--rule); border-radius: 4px; background: var(--surface);
-                             color: var(--ink); }
+  table.tabela-config .cel-papel select { font-family: var(--sans); font-size: .8125rem;
+                             padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
+                             background: var(--surface); color: var(--ink); max-width: 11rem; }
 </style>
 </head>
 <body>
@@ -1189,14 +1179,15 @@
       além de quem abrir esta aba.
     </span></div>
     <p class="prose">
-      Clique na coluna <strong>Cargo</strong> pra trocar quem executa e quem supervisiona cada
-      atividade. Por padrão toda atividade está com a Gerência como executora e sem supervisor —
-      mude só o que for delegado de verdade pra outra função (ex.: Contagem mensal de estoque pode
-      ser executada pelo Líder de pedidos ou pelo Forno, com a Gerência como supervisora).
+      Escolha nas colunas <strong>Executor</strong> e <strong>Supervisor</strong> quem faz e quem
+      acompanha cada atividade. Por padrão toda atividade está com a Gerência como executora e sem
+      supervisor — mude só o que for delegado de verdade pra outra função (ex.: Contagem mensal de
+      estoque pode ser executada pelo Líder de pedidos ou pelo Forno, com a Gerência como
+      supervisora).
     </p>
     <div class="tablewrap">
       <table class="tabela-config">
-        <thead><tr><th>Atividade</th><th>Categoria</th><th>Cargo</th></tr></thead>
+        <thead><tr><th>Atividade</th><th>Categoria</th><th>Executor</th><th>Supervisor</th></tr></thead>
         <tbody id="corpoConfig"></tbody>
       </table>
     </div>
@@ -1314,11 +1305,6 @@
   ];
   var CHAVE_CONFIG = 'pessoas-holycookie-atribuicoes-gerencia';
 
-  function nomeCargo(id) {
-    for (var i = 0; i < CARGOS.length; i++) if (CARGOS[i].id === id) return CARGOS[i].nome;
-    return '—';
-  }
-
   function carregarAtribuicoes() {
     try { return JSON.parse(localStorage.getItem(CHAVE_CONFIG)) || {}; }
     catch (e) { return {}; }
@@ -1365,33 +1351,11 @@
       tdCategoria.className = 'cel-categoria';
       tr.appendChild(tdCategoria);
 
-      var tdCargo = document.createElement('td');
-
-      var resumo = document.createElement('button');
-      resumo.type = 'button';
-      resumo.className = 'cargo-resumo';
-      tdCargo.appendChild(resumo);
-
-      var seletores = document.createElement('div');
-      seletores.className = 'cargo-seletores';
-      seletores.hidden = true;
-      tdCargo.appendChild(seletores);
-      tr.appendChild(tdCargo);
-      corpo.appendChild(tr);
-
       function atual() {
         return carregarAtribuicoes()[a.id] || { executor: 'gerencia', supervisor: '' };
       }
 
-      function atualizarResumo() {
-        var reg = atual();
-        resumo.innerHTML = 'Executor: <strong>' + nomeCargo(reg.executor) + '</strong> · Supervisor: <strong>' +
-          (reg.supervisor ? nomeCargo(reg.supervisor) : '—') + '</strong> <span class="editar-ic">✎</span>';
-      }
-
       function criarSelect(papel, comVazio) {
-        var label = document.createElement('label');
-        label.textContent = papel === 'executor' ? 'Executor' : 'Supervisor';
         var select = document.createElement('select');
         if (comVazio) {
           var optVazio = document.createElement('option');
@@ -1408,19 +1372,21 @@
         select.value = atual()[papel] || '';
         select.addEventListener('change', function () {
           salvarAtribuicao(a.id, papel, select.value);
-          atualizarResumo();
         });
-        label.appendChild(select);
-        return label;
+        return select;
       }
 
-      seletores.appendChild(criarSelect('executor', false));
-      seletores.appendChild(criarSelect('supervisor', true));
-      atualizarResumo();
+      var tdExecutor = document.createElement('td');
+      tdExecutor.className = 'cel-papel';
+      tdExecutor.appendChild(criarSelect('executor', false));
+      tr.appendChild(tdExecutor);
 
-      resumo.addEventListener('click', function () {
-        seletores.hidden = !seletores.hidden;
-      });
+      var tdSupervisor = document.createElement('td');
+      tdSupervisor.className = 'cel-papel';
+      tdSupervisor.appendChild(criarSelect('supervisor', true));
+      tr.appendChild(tdSupervisor);
+
+      corpo.appendChild(tr);
     });
   }
 
