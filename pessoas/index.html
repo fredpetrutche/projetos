@@ -220,6 +220,24 @@
   table.tabela-config .cel-papel select { font-family: var(--sans); font-size: .8125rem;
                              padding: .3rem .5rem; border: 1px solid var(--rule); border-radius: 4px;
                              background: var(--surface); color: var(--ink); max-width: 11rem; }
+  table.tabela-config .cel-num { color: var(--ink-faint); font-family: var(--mono); font-size: .75rem;
+                             text-align: right; white-space: nowrap; }
+  table.tabela-config tbody tr[hidden] { display: none; }
+
+  .filtros-config { display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; align-items: end;
+                     margin: 1rem 0 .75rem; padding: .75rem 1rem; border: 1px solid var(--rule);
+                     border-radius: 6px; background: var(--surface-2); }
+  .filtros-config label { display: flex; flex-direction: column; gap: .3rem; font-size: .75rem;
+                     color: var(--ink-faint); font-family: var(--mono); text-transform: uppercase;
+                     letter-spacing: .06em; }
+  .filtros-config select { font-family: var(--sans); font-size: .8125rem; padding: .35rem .5rem;
+                     border: 1px solid var(--rule); border-radius: 4px; background: var(--surface);
+                     color: var(--ink); text-transform: none; letter-spacing: normal; min-width: 9rem; }
+  .btn-limpar-filtros { font: inherit; font-size: .8125rem; cursor: pointer; background: var(--surface);
+                     border: 1px solid var(--rule); border-radius: 4px; padding: .4rem .75rem;
+                     color: var(--ink); align-self: end; }
+  .btn-limpar-filtros:hover { border-color: var(--ink-faint); }
+  .filtros-contagem { font-size: .8125rem; color: var(--ink-faint); align-self: end; margin-left: auto; }
 
   .cel-executor { min-width: 12rem; }
   .lista-executores { display: flex; flex-direction: column; gap: .35rem; align-items: flex-start; }
@@ -2242,9 +2260,32 @@
       função (ex.: Contagem mensal de estoque pode ser executada pelo Líder de pedidos ou pelo
       Forno, com a Gerência como supervisora).
     </p>
+    <div class="filtros-config">
+      <label>Categoria
+        <select id="filtroCategoria"><option value="">Todas</option></select>
+      </label>
+      <label>Sistema
+        <select id="filtroSistema">
+          <option value="">Todos</option>
+          <option value="sim">Sim</option>
+          <option value="nao">Não</option>
+        </select>
+      </label>
+      <label>Executor
+        <select id="filtroExecutor"><option value="">Todos</option></select>
+      </label>
+      <label>Supervisor
+        <select id="filtroSupervisor">
+          <option value="">Todos</option>
+          <option value="__nenhum__">— nenhum —</option>
+        </select>
+      </label>
+      <button type="button" id="btnLimparFiltros" class="btn-limpar-filtros">Limpar filtros</button>
+      <span class="filtros-contagem" id="filtrosContagem"></span>
+    </div>
     <div class="tablewrap">
       <table class="tabela-config">
-        <thead><tr><th>Atividade</th><th>Categoria</th><th>Sistema</th><th>Executor</th><th>Supervisor</th></tr></thead>
+        <thead><tr><th>Nº</th><th>Atividade</th><th>Categoria</th><th>Sistema</th><th>Executor</th><th>Supervisor</th></tr></thead>
         <tbody id="corpoConfig"></tbody>
       </table>
     </div>
@@ -2679,8 +2720,13 @@
     if (!corpo) return;
     corpo.innerHTML = '';
 
-    atividades.forEach(function (a) {
+    atividades.forEach(function (a, idx) {
       var tr = document.createElement('tr');
+
+      var tdNum = document.createElement('td');
+      tdNum.className = 'cel-num';
+      tdNum.textContent = idx + 1;
+      tr.appendChild(tdNum);
 
       var tdNome = document.createElement('td');
       var nomeSpan = document.createElement('div');
@@ -2706,6 +2752,15 @@
         return reg;
       }
 
+      function atualizarDatasetFiltro() {
+        var reg = atual();
+        tr.dataset.categoria = a.categoria;
+        tr.dataset.sistema = reg.sistema ? 'sim' : 'nao';
+        tr.dataset.executores = ',' + reg.executor.join(',') + ',';
+        tr.dataset.supervisor = reg.supervisor || '';
+      }
+      atualizarDatasetFiltro();
+
       var tdSistema = document.createElement('td');
       tdSistema.className = 'cel-sistema';
       var chkSistema = document.createElement('input');
@@ -2714,6 +2769,8 @@
       chkSistema.checked = !!atual().sistema;
       chkSistema.addEventListener('change', function () {
         salvarAtribuicao(a.id, 'sistema', chkSistema.checked);
+        atualizarDatasetFiltro();
+        aplicarFiltrosConfig();
       });
       tdSistema.appendChild(chkSistema);
       tr.appendChild(tdSistema);
@@ -2735,6 +2792,8 @@
         select.value = atual()[papel] || '';
         select.addEventListener('change', function () {
           salvarAtribuicao(a.id, papel, select.value);
+          atualizarDatasetFiltro();
+          aplicarFiltrosConfig();
         });
         return select;
       }
@@ -2764,6 +2823,8 @@
             var novaLista = atual().executor.slice();
             novaLista[idx] = select.value;
             salvarAtribuicao(a.id, 'executor', novaLista);
+            atualizarDatasetFiltro();
+            aplicarFiltrosConfig();
           });
           linha.appendChild(select);
 
@@ -2777,6 +2838,8 @@
             novaLista.splice(idx, 1);
             salvarAtribuicao(a.id, 'executor', novaLista);
             renderExecutores();
+            atualizarDatasetFiltro();
+            aplicarFiltrosConfig();
           });
           linha.appendChild(btnRemover);
 
@@ -2792,6 +2855,8 @@
           novaLista.push('gerencia');
           salvarAtribuicao(a.id, 'executor', novaLista);
           renderExecutores();
+          atualizarDatasetFiltro();
+          aplicarFiltrosConfig();
         });
         lista.appendChild(btnAdd);
 
@@ -2807,6 +2872,79 @@
 
       corpo.appendChild(tr);
     });
+
+    montarFiltrosConfig(atividades);
+    aplicarFiltrosConfig();
+  }
+
+  function montarFiltrosConfig(atividades) {
+    var selCategoria = document.getElementById('filtroCategoria');
+    var selExecutor = document.getElementById('filtroExecutor');
+    if (!selCategoria || !selExecutor) return;
+    if (selCategoria.dataset.montado) return; // só popula uma vez
+    selCategoria.dataset.montado = '1';
+
+    var categorias = [];
+    atividades.forEach(function (a) {
+      if (categorias.indexOf(a.categoria) === -1) categorias.push(a.categoria);
+    });
+    categorias.forEach(function (cat) {
+      var opt = document.createElement('option');
+      opt.value = cat;
+      opt.textContent = cat;
+      selCategoria.appendChild(opt);
+    });
+
+    CARGOS.forEach(function (c) {
+      var opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.nome;
+      selExecutor.appendChild(opt);
+      var opt2 = opt.cloneNode(true);
+      document.getElementById('filtroSupervisor').appendChild(opt2);
+    });
+
+    ['filtroCategoria', 'filtroSistema', 'filtroExecutor', 'filtroSupervisor'].forEach(function (id) {
+      document.getElementById(id).addEventListener('change', aplicarFiltrosConfig);
+    });
+    document.getElementById('btnLimparFiltros').addEventListener('click', function () {
+      ['filtroCategoria', 'filtroSistema', 'filtroExecutor', 'filtroSupervisor'].forEach(function (id) {
+        document.getElementById(id).value = '';
+      });
+      aplicarFiltrosConfig();
+    });
+  }
+
+  function aplicarFiltrosConfig() {
+    var corpo = document.getElementById('corpoConfig');
+    var selCategoria = document.getElementById('filtroCategoria');
+    if (!corpo || !selCategoria) return;
+    var fCategoria = selCategoria.value;
+    var fSistema = document.getElementById('filtroSistema').value;
+    var fExecutor = document.getElementById('filtroExecutor').value;
+    var fSupervisor = document.getElementById('filtroSupervisor').value;
+
+    var visiveis = 0;
+    corpo.querySelectorAll('tr').forEach(function (tr) {
+      var bate = true;
+      if (fCategoria && tr.dataset.categoria !== fCategoria) bate = false;
+      if (fSistema && tr.dataset.sistema !== fSistema) bate = false;
+      if (fExecutor && tr.dataset.executores.indexOf(',' + fExecutor + ',') === -1) bate = false;
+      if (fSupervisor === '__nenhum__' && tr.dataset.supervisor !== '') bate = false;
+      else if (fSupervisor && fSupervisor !== '__nenhum__' && tr.dataset.supervisor !== fSupervisor) bate = false;
+
+      tr.hidden = !bate;
+      if (bate) {
+        visiveis++;
+        tr.querySelector('.cel-num').textContent = visiveis;
+      }
+    });
+
+    var total = corpo.querySelectorAll('tr').length;
+    var contagem = document.getElementById('filtrosContagem');
+    if (contagem) {
+      contagem.textContent = (visiveis === total) ? total + ' atividades' : visiveis + ' de ' + total + ' atividades';
+    }
   }
 
   var ATIVIDADES_GERENCIA = coletarAtividadesGerencia();
