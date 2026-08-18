@@ -326,6 +326,10 @@
   .org-node.externo .sub { color: var(--warn); }
   .org-node.duvida { border-style: dashed; border-color: var(--warn); }
   .org-node.duvida .sub { color: var(--warn); }
+  .org-node.expansivel { cursor: pointer; }
+  .org-node.expansivel:hover { border-color: var(--ink-faint); }
+  .org-toggle { font-size: .625rem; color: var(--ink-faint); margin-top: .1rem; }
+  .org-tree ul[hidden] { display: none; }
   .org-area[hidden] { display: none; }
 </style>
 </head>
@@ -3131,6 +3135,22 @@
   montarConfig(ATIVIDADES_GERENCIA);
   sincronizarArvorePaulinia();
   montarTabelaRemuneracaoPaulinia();
+
+  (function tornarOrgTreeExpansivel() {
+    document.querySelectorAll('.org-tree .org-node').forEach(function (node) {
+      var filhos = node.nextElementSibling;
+      if (!filhos || filhos.tagName !== 'UL') return;
+      node.classList.add('expansivel');
+      var toggle = document.createElement('span');
+      toggle.className = 'org-toggle';
+      toggle.textContent = '▾ recolher';
+      node.appendChild(toggle);
+      node.addEventListener('click', function () {
+        filhos.hidden = !filhos.hidden;
+        toggle.textContent = filhos.hidden ? '▸ expandir' : '▾ recolher';
+      });
+    });
+  })();
 
   (function atualizarResumoCargos() {
     var botoes = document.querySelectorAll('.grupo-btn');
