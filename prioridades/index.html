@@ -185,7 +185,7 @@
       </button>
       <button class="grupo-btn" data-grupo="equipe">
         <span class="gnome">Crise de Equipe</span>
-        <span class="gcontagem"><span class="tag bad">1 piora sozinho</span><span class="tag acc">1 bloqueio</span><span class="tag good">2 estável</span><span class="tag acc">1 processo novo</span></span>
+        <span class="gcontagem"><span class="tag bad">1 piora sozinho</span><span class="tag bad">1 trava as 3 lojas</span><span class="tag acc">1 bloqueio</span><span class="tag good">2 estável</span><span class="tag acc">1 processo novo</span></span>
       </button>
       <button class="grupo-btn" data-topico-direto="cmv">
         <span class="gnome">CMV</span>
@@ -205,6 +205,7 @@
       <button class="topico-btn" data-topico="campinas-equipe"><span class="tnome">Campinas — atendimento</span><span class="tag good">sem crise ativa</span></button>
       <button class="topico-btn" data-topico="salario"><span class="tnome">Bloqueador: salário</span><span class="tag acc">trava as duas lojas</span></button>
       <button class="topico-btn" data-topico="processo-visitas"><span class="tnome">Novo hábito: visita semanal + checklist de equipe</span><span class="tag acc">processo novo</span></button>
+      <button class="topico-btn" data-topico="dividir-cargos"><span class="tnome">Base: dividir atividades por cargo</span><span class="tag bad">hoje — trava as 3 lojas</span></button>
     </div>
 
     <div id="visor">
@@ -335,6 +336,14 @@
         <div class="note-item"><span class="tag acc">a decisão do Fred</span><span>
           Contratar uma pessoa boa em vez de só treinar a equipe atual.
         </span></div>
+        <div class="note-item"><span class="tag warn">ideia em consideração</span><span>
+          A <strong>Manu</strong> é uma excelente pessoa, mas o perfil dela é mais de processos do que de
+          pessoas/atendimento. A ideia: traz um atendente novo, e a Manu migra pra processos e cozinha.
+        </span></div>
+        <div class="note-item"><span class="tag bad">ponto em aberto</span><span>
+          Essa mudança aumenta o custo de equipe sem necessidade real hoje — ainda sem solução de como
+          equacionar isso.
+        </span></div>
         <div class="note-item"><span class="tag good">quando entra</span><span>
           Depois de Piracicaba e Paulínia na fila, dentro do teto de 8 semanas já definido pro
           <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a>.
@@ -367,6 +376,23 @@
           <li><label><input type="checkbox" data-id="processo-visita-semanal">1 dia inteiro do gerente por semana em cada loja — 1 dia Paulínia, 1 dia Piracicaba, 1 dia Campinas</label></li>
           <li><label><input type="checkbox" data-id="processo-checklist-equipe">Avaliação periódica de equipe (quinzenal, não pesa pro funcionário), feita pelo líder de loja — ferramenta já pronta, é a checklist de Pessoas</label></li>
         </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="dividir-cargos" hidden>
+        <h3>Base: dividir atividades por cargo</h3>
+        <div class="note-item"><span class="tag bad">o problema comum às 3 lojas</span><span>
+          Falta uma divisão clara das atividades de cada cargo/função — isso trava colocar a pessoa certa na
+          função certa, e é o que impede o Eduardo de contratar com critério.
+        </span></div>
+        <ul class="checklist">
+          <li><label><input type="checkbox" data-id="cargos-separar">Separar as atividades de cada cargo/função — hoje, Fred + Débora</label></li>
+          <li><label><input type="checkbox" data-id="cargos-eduardo">Com isso, o Eduardo sabe o que procurar em cada contratação</label></li>
+          <li><label><input type="checkbox" data-id="cargos-classificar">Com isso, dá pra classificar os funcionários atuais de Piracicaba, Paulínia e Campinas nas funções certas</label></li>
+        </ul>
+        <div class="note-item"><span class="tag acc">onde isso vive</span><span>
+          É a continuação do trabalho já em andamento na página <a href="../pessoas/">Pessoas Holy Cookie</a>
+          — descritivo de cargo + aba Config.
+        </span></div>
       </div>
 
       <div class="topico-conteudo" data-topico="cmv" hidden>
