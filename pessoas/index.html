@@ -87,6 +87,9 @@
   .tag.warn { background: var(--warn-bg); color: var(--warn); }
   .tag.good { background: var(--good-bg); color: var(--good); }
   .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .item-btn .tag { margin-left: .4rem; }
+  .papel-badge { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; margin-bottom: .75rem; }
+  .papel-junto { font-size: .8rem; color: var(--ink-faint); }
 
   a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
   a:hover { opacity: .8; }
@@ -374,8 +377,8 @@
   <div class="tab-panel" data-panel="cargos" role="tabpanel" hidden>
 
   <div class="resumo">
-    <div class="pronto"><div class="num">2</div><div class="lbl">cargos prontos</div></div>
-    <div class="falta"><div class="num">8</div><div class="lbl">cargos faltam</div></div>
+    <div class="pronto"><div class="num" id="numCargosProntos">2</div><div class="lbl">cargos prontos</div></div>
+    <div class="falta"><div class="num" id="numCargosFaltam">8</div><div class="lbl">cargos faltam</div></div>
   </div>
 
   <p class="prose" style="margin:.5rem 0 1rem">
@@ -2511,10 +2514,169 @@
     return linhas;
   }
 
-  function montarConfig() {
+  // ============================================================
+  // Sincronização Cargos ↔ Config: cada atividade da Gerência aparece também
+  // no(s) cargo(s) que a executam/supervisionam, sempre lendo do mesmo lugar
+  // (DEFAULT_ATRIBUICOES + o que foi salvo no navegador) — nunca duplicado à mão.
+  // ============================================================
+
+  function obterAtribuicao(itemId) {
+    var salvo = carregarAtribuicoes()[itemId];
+    var reg = salvo || padraoAtribuicao(itemId);
+    if (!Array.isArray(reg.executor)) reg.executor = reg.executor ? [reg.executor] : padraoAtribuicao(itemId).executor;
+    return reg;
+  }
+
+  function nomeCargo(id) {
+    var c = CARGOS.filter(function (x) { return x.id === id; })[0];
+    return c ? c.nome : id;
+  }
+
+  // a granularidade do Config (quem decide uma atividade) é mais grossa do que a
+  // da aba Cargos (que tem Anfitrião/Auxiliar/Líder separados) — mapeia onde não bate 1:1.
+  var ROTA_CONFIG_PARA_GRUPO = { atendimento: 'aux-atendimento' };
+
+  function grupoDestino(cargoIdConfig) {
+    return ROTA_CONFIG_PARA_GRUPO[cargoIdConfig] || cargoIdConfig;
+  }
+
+  function papelBadgeHTML(reg, cargoIdDoGrupo, todasAtividades) {
+    // cargoIdDoGrupo é o id do grupo-btn (ex.: 'aux-atendimento'); pode receber atividades
+    // roteadas de mais de um id do Config (hoje só 'atendimento' → 'aux-atendimento').
+    var executorAqui = reg.executor.some(function (e) { return grupoDestino(e) === cargoIdDoGrupo; });
+    var supervisorAqui = grupoDestino(reg.supervisor) === cargoIdDoGrupo;
+    if (!executorAqui && !supervisorAqui) return null;
+    var partes = [];
+    if (executorAqui) {
+      var outros = reg.executor.filter(function (e) { return grupoDestino(e) !== cargoIdDoGrupo; }).map(nomeCargo);
+      partes.push('<span class="tag acc">executor</span>' + (outros.length ? ' <span class="papel-junto">junto com ' + outros.join(', ') + '</span>' : ''));
+    }
+    if (supervisorAqui) {
+      var executores = reg.executor.map(nomeCargo).join(', ');
+      partes.push('<span class="tag warn">supervisor</span>' + (executores ? ' <span class="papel-junto">quem executa: ' + executores + '</span>' : ''));
+    }
+    return { html: partes.join(' '), executorAqui: executorAqui, supervisorAqui: supervisorAqui };
+  }
+
+  function marcarPapeisGerencia(atividades) {
+    atividades.forEach(function (a) {
+      var reg = obterAtribuicao(a.id);
+      var badge = papelBadgeHTML(reg, 'gerencia', null);
+      if (!badge) return;
+      var btn = document.querySelector('#visor .item-btn[data-item="' + a.id + '"]');
+      if (btn) {
+        var tagBtn = document.createElement('span');
+        tagBtn.className = badge.supervisorAqui ? 'tag warn' : 'tag acc';
+        tagBtn.textContent = badge.supervisorAqui ? 'supervisor' : 'executor';
+        btn.appendChild(document.createTextNode(' '));
+        btn.appendChild(tagBtn);
+      }
+      var conteudo = document.querySelector('#visor .item-conteudo[data-item="' + a.id + '"]');
+      if (conteudo) {
+        var div = document.createElement('div');
+        div.className = 'papel-badge';
+        div.innerHTML = badge.html;
+        conteudo.insertBefore(div, conteudo.firstChild);
+      }
+    });
+  }
+
+  function montarCargoDinamico(cargoIdDoGrupo, atividades) {
+    var relevantes = atividades.map(function (a) {
+      var reg = obterAtribuicao(a.id);
+      var badge = papelBadgeHTML(reg, cargoIdDoGrupo, atividades);
+      return badge ? { a: a, badge: badge } : null;
+    }).filter(Boolean);
+
+    if (!relevantes.length) return;
+
+    var porCategoria = {}, ordem = [];
+    relevantes.forEach(function (r) {
+      if (!porCategoria[r.a.categoria]) { porCategoria[r.a.categoria] = []; ordem.push(r.a.categoria); }
+      porCategoria[r.a.categoria].push(r);
+    });
+
+    var visorEl = document.getElementById('visor');
+    var gradeExistente = document.querySelector('.grade-topicos[data-grupo="' + cargoIdDoGrupo + '"]');
+    var grade = gradeExistente || document.createElement('div');
+    if (!gradeExistente) {
+      grade.className = 'grade-topicos';
+      grade.dataset.grupo = cargoIdDoGrupo;
+      grade.hidden = true;
+    }
+    var conteudos = [];
+
+    ordem.forEach(function (categoria, idx) {
+      var topicoId = cargoIdDoGrupo + '__t' + idx;
+      var btn = document.createElement('button');
+      btn.className = 'topico-btn';
+      btn.dataset.topico = topicoId;
+      btn.innerHTML = '<span class="tnome">' + categoria + '</span>';
+      grade.appendChild(btn);
+
+      var conteudo = document.createElement('div');
+      conteudo.className = 'topico-conteudo';
+      conteudo.dataset.topico = topicoId;
+      conteudo.hidden = true;
+      conteudo.innerHTML = '<h2>' + categoria + '</h2><div class="grade-itens"></div>' +
+        '<div class="item-visor"><p class="item-visor-vazio">Clique num item para ver o detalhe.</p></div>';
+      var gradeItens = conteudo.querySelector('.grade-itens');
+      var itemVisor = conteudo.querySelector('.item-visor');
+
+      porCategoria[categoria].forEach(function (r) {
+        var itemId = cargoIdDoGrupo + '__' + r.a.id;
+        var itemBtn = document.createElement('button');
+        itemBtn.className = 'item-btn';
+        itemBtn.dataset.item = itemId;
+        itemBtn.textContent = r.a.nome + ' ';
+        var tagBtn = document.createElement('span');
+        tagBtn.className = r.badge.supervisorAqui && !r.badge.executorAqui ? 'tag warn' : 'tag acc';
+        tagBtn.textContent = r.badge.supervisorAqui && !r.badge.executorAqui ? 'supervisor' : 'executor';
+        itemBtn.appendChild(tagBtn);
+        gradeItens.appendChild(itemBtn);
+
+        var itemConteudo = document.createElement('div');
+        itemConteudo.className = 'item-conteudo';
+        itemConteudo.dataset.item = itemId;
+        itemConteudo.hidden = true;
+        itemConteudo.innerHTML = '<div class="papel-badge">' + r.badge.html + '</div>' +
+          '<p class="prose">' + (r.a.descricao || '(sem descrição ainda)') + '</p>';
+        itemVisor.appendChild(itemConteudo);
+      });
+
+      conteudos.push(conteudo);
+    });
+
+    if (!gradeExistente) visorEl.parentNode.insertBefore(grade, visorEl);
+    conteudos.forEach(function (c) { visorEl.appendChild(c); });
+
+    grade.querySelectorAll('.topico-btn').forEach(function (b) {
+      if (b.dataset.ligado) return;
+      b.dataset.ligado = '1';
+      b.addEventListener('click', function () { abrirTopico(b.dataset.topico); });
+    });
+    conteudos.forEach(function (c) {
+      c.querySelectorAll('.item-btn').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var painel = b.closest('.topico-conteudo');
+          painel.querySelectorAll('.item-btn').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+          painel.querySelectorAll('.item-conteudo').forEach(function (cc) { cc.hidden = cc.dataset.item !== b.dataset.item; });
+          var vazio = painel.querySelector('.item-visor-vazio');
+          if (vazio) vazio.hidden = true;
+        });
+      });
+    });
+
+    var grupoBtn = document.querySelector('.grupo-btn[data-grupo="' + cargoIdDoGrupo + '"]');
+    if (grupoBtn && grupoBtn.querySelector('.tag.bad')) {
+      var gnome = grupoBtn.querySelector('.gnome') ? grupoBtn.querySelector('.gnome').outerHTML : '<span class="gnome">' + nomeCargo(cargoIdDoGrupo) + '</span>';
+      grupoBtn.innerHTML = gnome + '<span class="gcontagem"><span class="tag good">' + relevantes.length + '</span></span>';
+    }
+  }
+
+  function montarConfig(atividades) {
     var corpo = document.getElementById('corpoConfig');
     if (!corpo) return;
-    var atividades = coletarAtividadesGerencia();
     corpo.innerHTML = '';
 
     atividades.forEach(function (a) {
@@ -2647,7 +2809,24 @@
     });
   }
 
-  montarConfig();
+  var ATIVIDADES_GERENCIA = coletarAtividadesGerencia();
+  ['lider-loja', 'lider-pedidos', 'forneiro', 'lider-atendimento', 'aux-atendimento', 'administrativo'].forEach(function (id) {
+    montarCargoDinamico(id, ATIVIDADES_GERENCIA);
+  });
+  marcarPapeisGerencia(ATIVIDADES_GERENCIA);
+  montarConfig(ATIVIDADES_GERENCIA);
+
+  (function atualizarResumoCargos() {
+    var botoes = document.querySelectorAll('.grupo-btn');
+    var prontos = 0, faltam = 0;
+    botoes.forEach(function (b) {
+      if (b.querySelector('.tag.good')) prontos++; else faltam++;
+    });
+    var elProntos = document.getElementById('numCargosProntos');
+    var elFaltam = document.getElementById('numCargosFaltam');
+    if (elProntos) elProntos.textContent = prontos;
+    if (elFaltam) elFaltam.textContent = faltam;
+  })();
 </script>
 
 </body>
