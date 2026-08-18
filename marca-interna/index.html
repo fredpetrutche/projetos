@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#150D10" media="(prefers-color-scheme: dark)">
+<title>Construção da Marca Interna</title>
+<meta name="description" content="Retenção de talento pela cultura: cultura não se anuncia, se ritualiza. O que In-N-Out, Chick-fil-A e Starbucks fazem — e o que dá pra trazer pra Holy Cookie.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23A8305B'/><path d='M38 62a12 12 0 0 0 12-12c0-6-2.5-9-5-14-5-10-1-19 9-28 2.5 12 9.5 23 19 30 9.5 7.6 14 16.6 14 26a33 33 0 1 1-66 0c0-5.5 2-11 4.7-14A12 12 0 0 0 38 62z' transform='scale(.72) translate(8 10)' fill='white'/></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#A8305B; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#F6E1E9;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#150D10; --surface:#1E1418; --surface-2:#251A1F; --ink:#F0E6EA;
+      --ink-soft:#A08D96; --ink-faint:#6F5D66; --rule:#3A2A31; --rule-soft:#2C2026;
+      --accent:#E88FB0; --accent-ink:#14090E; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#33202A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#150D10; --surface:#1E1418; --surface-2:#251A1F; --ink:#F0E6EA;
+    --ink-soft:#A08D96; --ink-faint:#6F5D66; --rule:#3A2A31; --rule-soft:#2C2026;
+    --accent:#E88FB0; --accent-ink:#14090E; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#33202A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 1.75rem; }
+  h1, h2, h3, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+
+  .resumo { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .5rem; }
+  .resumo > div { flex: 1; min-width: 9rem; background: var(--surface); border: 1px solid var(--rule);
+                  border-radius: 4px; padding: .7rem 1rem; text-align: center; }
+  .resumo .num { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; }
+  .resumo .lbl { font-size: .6875rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); }
+  .resumo .ruim .num, .resumo div.ruim .num { color: var(--bad); }
+  .resumo .bom .num, .resumo div.bom .num { color: var(--good); }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .01em;
+             font-weight: 700; color: var(--ink-soft); background: var(--surface);
+             border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer;
+             padding: .6rem 1.2rem; transition: border-color .15s, color .15s, background .15s, box-shadow .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent);
+                     box-shadow: 0 1px 0 rgba(0,0,0,.08); }
+  .tab-panel { display: flex; flex-direction: column; gap: 1.75rem; }
+  .tab-panel[hidden] { display: none; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2.sec { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink); }
+  h3.sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+           color: var(--accent); font-weight: 700; margin-top: .2rem; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  blockquote.tese { border-left: 3px solid var(--accent); background: var(--surface);
+                    border-radius: 0 4px 4px 0; padding: 1rem 1.25rem; color: var(--ink-soft);
+                    max-width: 68ch; display: flex; flex-direction: column; gap: .75rem; }
+  blockquote.tese strong { color: var(--ink); font-weight: 600; }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface-2);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono);
+         align-self: flex-start; }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+
+  ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+              font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos li::marker { color: var(--accent); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 26rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+
+  /* ---------- grade de marcas (nível 1 da aba Referências) ---------- */
+  .grade-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .6rem; }
+  .grupo-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+               border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
+               display: flex; flex-direction: column; gap: .55rem; color: inherit;
+               transition: border-color .15s, background .15s; }
+  .grupo-btn:hover { border-color: var(--ink-faint); }
+  .grupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .grupo-btn .gnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+                       letter-spacing: .06em; text-transform: uppercase; }
+  .grupo-btn .gdesc { font-size: .8125rem; color: var(--ink-soft); line-height: 1.45; }
+
+  /* ---------- grade de tópicos (nível 2 — sub-cards) ---------- */
+  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem;
+                    margin-top: -.5rem; padding: .9rem; background: var(--surface-2);
+                    border: 1px dashed var(--rule); border-radius: 8px; }
+  .grade-topicos[hidden] { display: none; }
+  .grade-principios { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem; }
+  .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+                border: 1.5px solid var(--rule); border-radius: 6px; padding: .65rem .85rem;
+                display: flex; flex-direction: column; gap: .4rem; color: inherit;
+                transition: border-color .15s, background .15s; }
+  .topico-btn:hover { border-color: var(--ink-faint); }
+  .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .topico-btn .tnome { font-size: .875rem; font-weight: 600; line-height: 1.3; }
+
+  /* ---------- visor de conteúdo ---------- */
+  .visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
+           padding: 1.5rem 1.5rem 1.75rem; scroll-margin-top: 1.5rem; }
+  .visor-vazio { color: var(--ink-faint); font-size: .9375rem; text-align: center; padding: 2rem 0; }
+  .topico-conteudo { display: flex; flex-direction: column; gap: 1.1rem; }
+  .topico-conteudo[hidden] { display: none; }
+  .topico-conteudo h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.01em;
+                        padding-bottom: .6rem; border-bottom: 2px solid var(--ink);
+                        display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+                        font-family: var(--sans); text-transform: none; }
+  .topico-conteudo h2 .status { margin-left: auto; font-family: var(--mono); font-size: .625rem;
+                        font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+                        padding: .15rem .55rem; border-radius: 999px; }
+  .status.decidir { background: var(--warn-bg); color: var(--warn); }
+  .status.feito { background: var(--good-bg); color: var(--good); }
+
+  /* ---------- fluxo: caixinha → seta → caixinha ---------- */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 11rem; transition: border-color .15s, background .15s, color .15s; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .passo-caixa.feito { border-color: var(--good); }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft);
+                   margin-top: .6rem; }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · Pessoas · retenção de talento</div>
+    <h1>Construção da Marca Interna</h1>
+    <p class="lede">
+      Fazer quem já está na Holy <strong>ficar — e ficar com orgulho do crachá</strong>. Cultura não se
+      anuncia, se ritualiza: este projeto estuda as três marcas de comida com a melhor retenção de
+      funcionário do mundo e extrai o que dá pra trazer pra loja.
+    </p>
+    <div class="resumo">
+      <div class="ruim"><div class="num">130–150%</div><div class="lbl">turnover/ano do fast food</div></div>
+      <div class="bom"><div class="num">14 anos</div><div class="lbl">gerente fica no In-N-Out</div></div>
+      <div class="bom"><div class="num">~60%</div><div class="lbl">turnover Chick-fil-A</div></div>
+      <div class="bom"><div class="num">49%</div><div class="lbl">turnover Starbucks (2024)</div></div>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" type="button" data-tab="referencias" role="tab" aria-selected="false">As três referências</button>
+    <button class="tab-btn" type="button" data-tab="holy" role="tab" aria-selected="false">O que levar pra Holy</button>
+  </div>
+
+  <!-- ══════════════════════ BRIEFING ══════════════════════ -->
+  <div class="tab-panel" data-panel="briefing" role="tabpanel">
+
+    <section>
+      <h2 class="sec">Por que este projeto existe</h2>
+      <p class="prose">
+        Equipe é uma das duas crises da empresa agora — time inteiro novo em Paulínia, contaminação em
+        Piracicaba, salário aparecendo como bloqueio. E o ciclo mais caro do fast food é exatamente esse:
+        contratar, treinar, perder, recomeçar. O setor troca o funcionário inteiro <strong>1,3 a 1,5 vez
+        por ano</strong>. Este projeto ataca o outro lado da equação: em vez de só repor gente, construir
+        o motivo pra ficar.
+      </p>
+      <p class="prose">
+        A <a href="../certificacao-holy-cookie/" style="color:var(--accent)">Certificação de Funções</a>
+        já cuida da capacidade e do degrau pago. A Marca Interna cuida do <em>pertencimento</em>: a pessoa
+        vestir a camisa da Holy do jeito que o barista veste o avental verde do Starbucks — como
+        identidade, não como obrigação.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="sec">A tese: cultura se faz com rituais</h2>
+      <blockquote class="tese">
+        <p><strong>Cultura se faz com uma coisa só: rituais.</strong> Ninguém cria cultura anunciando
+        valores — cria ritualizando os valores.</p>
+        <p>A reunião semanal é um ritual. Ler a missão juntos é um ritual. A camiseta com o logo é uma
+        veste ritual. O grupo no WhatsApp, a viagem da empresa, o jogo do time, a tradição de
+        aniversário, a piada interna que só quem é de dentro entende — tudo isso é ritual. <strong>Cada
+        vez que a pessoa participa de um deles, ela se realinha com a empresa e com a missão.</strong></p>
+        <p>Cultura não se constrói com mesa de sinuca nem com pôster de palavra bonita na parede.
+        <strong>Você não constrói cultura dizendo no que acredita — constrói criando experiências
+        repetidas que demonstram no que você acredita.</strong></p>
+      </blockquote>
+      <p class="prose">
+        As três marcas da aba ao lado são a prova de que isso funciona <em>em loja de comida</em> — não em
+        startup de tecnologia. As três pagam bem, mas nenhuma retém só por salário: retêm por escada
+        visível, por símbolo conquistado e por ritual repetido em data fixa.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="sec">O caminho do projeto — clique nas caixinhas</h2>
+      <div class="fluxo">
+        <button class="passo-caixa feito" data-detalhe="<strong>Feito.</strong> In-N-Out, Chick-fil-A e Starbucks pesquisados com fontes públicas (Glassdoor, Forbes, CNBC, sites oficiais). Está tudo na aba &ldquo;As três referências&rdquo;.">1. Estudar as referências</button><span class="seta">→</span>
+        <button class="passo-caixa feito" data-detalhe="<strong>Feito.</strong> Os 6 princípios que se repetem nas três marcas estão na aba &ldquo;O que levar pra Holy&rdquo; — cada um com a prova e com a pergunta aberta pra Holy.">2. Extrair os princípios</button><span class="seta">→</span>
+        <button class="passo-caixa" data-detalhe="Com o Fred, custo-benefício item a item: quais rituais e símbolos a Holy adota, com que nome e a partir de quando. <strong>Nada está decidido ainda.</strong>">3. Escolher os rituais</button><span class="seta">→</span>
+        <button class="passo-caixa" data-detalhe="Ritual só vira cultura com repetição em data fixa — o que entrar no calendário não pode furar. O Starbucks cortou o Coffee Master uma vez e os funcionários cobraram a volta: ritual sem manutenção morre.">4. Implantar e repetir</button><span class="seta">→</span>
+        <button class="passo-caixa" data-detalhe="Medir tempo de casa e saída voluntária, loja a loja. É o mesmo placar que as três referências usam: gente boa ficando mais tempo.">5. Medir</button>
+      </div>
+      <div class="passo-detalhe"></div>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════ AS TRÊS REFERÊNCIAS ══════════════════════ -->
+  <div class="tab-panel" data-panel="referencias" role="tabpanel" hidden>
+
+    <p class="prose">
+      Três marcas de loja de comida onde as pessoas <strong>têm orgulho de trabalhar</strong> — cada uma
+      com um mecanismo próprio. Clique numa marca pra abrir os tópicos dela.
+    </p>
+
+    <div class="grade-grupos">
+      <button class="grupo-btn" data-grupo="inout">
+        <span class="gnome">In-N-Out</span>
+        <span class="gdesc">A escada: 8 níveis pagos, gerente 100% de dentro ganhando US$ 160 mil/ano — e a chapa é o prêmio.</span>
+      </button>
+      <button class="grupo-btn" data-grupo="cfa">
+        <span class="gnome">Chick-fil-A</span>
+        <span class="gdesc">O dono presente: 1 operador por loja, seleção mais difícil que Harvard, bolsa de estudo e domingo fechado.</span>
+      </button>
+      <button class="grupo-btn" data-grupo="sbux">
+        <span class="gnome">Starbucks</span>
+        <span class="gdesc">A identidade: &ldquo;partner&rdquo; com ação da empresa, avental como escada de honra e um papel épico pro barista.</span>
+      </button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="inout" hidden>
+      <button class="topico-btn" data-topico="inout-placar"><span class="tnome">O placar</span><span class="tag good">números</span></button>
+      <button class="topico-btn" data-topico="inout-escada"><span class="tnome">A escada de 8 níveis</span><span class="tag acc">mecanismo</span></button>
+      <button class="topico-btn" data-topico="inout-rituais"><span class="tnome">Rituais e símbolos</span><span class="tag acc">rituais</span></button>
+      <button class="topico-btn" data-topico="inout-filosofia"><span class="tnome">A filosofia dos Snyder</span><span class="tag warn">fundamento</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="cfa" hidden>
+      <button class="topico-btn" data-topico="cfa-placar"><span class="tnome">O placar</span><span class="tag good">números</span></button>
+      <button class="topico-btn" data-topico="cfa-operador"><span class="tnome">O Operador único</span><span class="tag acc">mecanismo</span></button>
+      <button class="topico-btn" data-topico="cfa-rituais"><span class="tnome">Rituais e linguagem</span><span class="tag acc">rituais</span></button>
+      <button class="topico-btn" data-topico="cfa-bolsa"><span class="tnome">Bolsa + domingo fechado</span><span class="tag acc">mecanismo</span></button>
+      <button class="topico-btn" data-topico="cfa-filosofia"><span class="tnome">A filosofia de Truett Cathy</span><span class="tag warn">fundamento</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="sbux" hidden>
+      <button class="topico-btn" data-topico="sbux-placar"><span class="tnome">O placar</span><span class="tag good">números</span></button>
+      <button class="topico-btn" data-topico="sbux-lastro"><span class="tnome">&ldquo;Partner&rdquo; com lastro</span><span class="tag acc">mecanismo</span></button>
+      <button class="topico-btn" data-topico="sbux-avental"><span class="tnome">O avental como escada de honra</span><span class="tag acc">rituais</span></button>
+      <button class="topico-btn" data-topico="sbux-rituais"><span class="tnome">Rituais diários</span><span class="tag acc">rituais</span></button>
+      <button class="topico-btn" data-topico="sbux-papel"><span class="tnome">O papel épico do barista</span><span class="tag warn">fundamento</span></button>
+    </div>
+
+    <div class="visor">
+      <p class="visor-vazio">Clique numa marca e depois num tópico pra ver o conteúdo.</p>
+
+      <!-- ══════ In-N-Out ══════ -->
+      <div class="topico-conteudo" data-topico="inout-placar" hidden>
+        <h2>In-N-Out — O placar</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Métrica</th><th>In-N-Out</th><th>Setor de fast food</th></tr></thead>
+          <tbody>
+            <tr><td>Tempo de casa do gerente</td><td><strong>14 anos</strong> (fontes de 2018 citavam 17)</td><td>só 25% dos trabalhadores passam de 2 anos</td></tr>
+            <tr><td>Tempo de casa geral</td><td>~3,7 a 5 anos</td><td>tipicamente menos de 1 ano</td></tr>
+            <tr><td>Turnover</td><td>um dos mais baixos do setor (sem % oficial)</td><td>130–150% ao ano</td></tr>
+            <tr><td>Glassdoor 2026</td><td><strong>#2 melhor empresa dos EUA</strong> (nota 4,5), na frente de Nvidia e Google</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <ul class="pontos">
+          <li><strong>63% não sairiam nem com oferta de salário maior</strong> (Comparably — top 5% de retenção entre empresas do porte)</li>
+          <li>Existem múltiplos associates com <strong>mais de 50 anos de casa</strong></li>
+          <li>92–96% de aprovação da CEO Lynsi Snyder — já foi a CEO mulher mais bem avaliada do Glassdoor</li>
+          <li>A reclamação mais comum nas reviews é reveladora: a vaga de gerente demora a abrir <em>porque ninguém sai</em></li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="inout-escada" hidden>
+        <h2>In-N-Out — A escada de 8 níveis</h2>
+        <p class="prose">Promoção de gerente é <strong>100% interna</strong> — não existe contratação de
+          fora pra gestão de loja, e não se exige faculdade nem experiência prévia.</p>
+        <ul class="pontos">
+          <li><strong>Níveis 1 a 8:</strong> todo mundo entra no Nível 1 (balcão, limpeza) e sobe nível a
+          nível — <strong>com aumento de salário a cada posição dominada</strong></li>
+          <li><strong>A chapa é o prêmio:</strong> leva 1 a 2 anos de treino pra &ldquo;merecer a
+          chapa&rdquo; — internamente chamada de <em>cadeira do capitão</em>. O posto operacional mais
+          difícil é o de mais status, o contrário do fast food comum (onde a chapa é o começo)</li>
+          <li><strong>In-N-Out University (1984):</strong> nenhum gerente é promovido sem se formar nela —
+          currículo de escala, gestão de gente difícil e finanças</li>
+          <li>Gerente ganha em média <strong>US$ 160 mil/ano</strong> (dado de 2018 — mais de 3x a média do
+          setor); com participação nos lucros, passou de <strong>US$ 180 mil</strong> em 2023</li>
+          <li>Salário de entrada sempre <strong>acima do piso legal por decisão própria</strong>: US$ 22–23/h
+          contra mínimo de US$ 20 na Califórnia</li>
+          <li>A empresa declara que só cresce na velocidade em que consegue <strong>formar líderes de
+          dentro</strong> — por isso nunca franqueou</li>
+        </ul>
+        <div class="note-item"><span class="tag acc">o mecanismo</span><span>
+          Cada gerente sem faculdade ganhando US$ 160 mil é <strong>prova viva, na frente do atendente de
+          19 anos, de que a escada existe</strong>. Não precisa de discurso motivacional: a carreira está
+          andando na loja.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="inout-rituais" hidden>
+        <h2>In-N-Out — Rituais e símbolos</h2>
+        <ul class="pontos">
+          <li><strong>&ldquo;Associates&rdquo;, nunca &ldquo;employees&rdquo;</strong> — desde a fundação,
+          em 1948</li>
+          <li><strong>Uniforme branco imutável desde 1948</strong> + chapéu de papel: o branco mostra
+          qualquer mancha, então força o padrão de limpeza — e o chapéu virou ícone de orgulho, não
+          relíquia</li>
+          <li><strong>Family Picnic anual</strong> por região — a própria dona (Lynsi Snyder) posta
+          abrindo a temporada de piqueniques</li>
+          <li><strong>Galas com traje formal e viagens à Europa</strong> pros melhores gerentes, com
+          cônjuge — gerente de hamburgueria tratado como executivo de multinacional; existe o Harry
+          Snyder Award pra gerentes destaque</li>
+          <li>Shows de rock, exposições de carros (a família corre arrancada), torneios de basquete</li>
+          <li><strong>Palmeiras cruzadas em X</strong> na frente de cada loja, desde 1972 — piada interna
+          de um filme: o tesouro enterrado embaixo das palmeiras cruzadas. Harry dizia que o In-N-Out era
+          o tesouro dele</li>
+          <li><strong>Versículos bíblicos discretos nas embalagens</strong> — tradição dos anos 80,
+          ampliada pela neta</li>
+          <li><strong>O 0800 só é atendido por gente que já trabalhou no balcão</strong> — quem viveu a
+          loja é a autoridade</li>
+          <li><strong>Menu secreto</strong> (Animal Style, 4x4): um dialeto que funcionário e cliente fiel
+          dominam juntos — código de tribo aberto pro cliente entrar</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="inout-filosofia" hidden>
+        <h2>In-N-Out — A filosofia dos Snyder</h2>
+        <ul class="pontos">
+          <li><strong>Harry Snyder (fundador, 1948):</strong> pagar acima do mercado desde o início.
+          Frase da casa: &ldquo;serviço de qualidade exige funcionário de qualidade com pagamento de
+          qualidade&rdquo;</li>
+          <li><strong>Rich Snyder (filho):</strong> criou a University, as galas e as viagens de
+          incentivo; recusou franquear pra não diluir a cultura</li>
+          <li><strong>Lynsi Snyder (neta, presidente desde 2010):</strong> adolescente, encarou 2 horas de
+          fila pra conseguir emprego na loja da própria família — história usada internamente como
+          símbolo de que <em>todo mundo começa no balcão</em></li>
+          <li>Sem franquia, sem dívida, sem acionista: cresce devagar de propósito, porque o gargalo
+          declarado é <strong>formar líder</strong>, não capital</li>
+          <li>Benefícios <strong>inclusive pra meio período</strong>: refeição grátis nos dias de
+          trabalho, plano dental e de visão, participação nos lucros, férias proporcionais — e até a
+          calça do uniforme é de graça</li>
+        </ul>
+      </div>
+
+      <!-- ══════ Chick-fil-A ══════ -->
+      <div class="topico-conteudo" data-topico="cfa-placar" hidden>
+        <h2>Chick-fil-A — O placar</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Métrica</th><th>Chick-fil-A</th><th>Setor</th></tr></thead>
+          <tbody>
+            <tr><td>Turnover de operadores (donos de loja)</td><td><strong>menos de 5% ao ano</strong></td><td>35–40% ao ano</td></tr>
+            <tr><td>Turnover de funcionários horistas</td><td><strong>~60% ao ano</strong></td><td>~107% (fontes citam 150%+)</td></tr>
+            <tr><td>Faturamento por loja (2023)</td><td><strong>US$ 9,4 milhões em 6 dias/semana</strong></td><td>McDonald's: ~US$ 4 milhões em 7 dias</td></tr>
+            <tr><td>Glassdoor (18,6 mil reviews)</td><td>nota 3,9 — <strong>72% recomendariam a um amigo</strong>, topo do fast food</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note-item"><span class="tag warn">ressalva honesta</span><span>
+          A experiência <strong>varia por loja</strong>, porque é o Operador quem define tom, escala e
+          salário — há reviews ruins de lojas específicas. O sistema retém porque seleciona o dono, não
+          porque padroniza tudo.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="cfa-operador" hidden>
+        <h2>Chick-fil-A — O Operador único</h2>
+        <ul class="pontos">
+          <li><strong>60 mil candidaturas por ano pra 75–80 vagas de operador: 0,25% de aceitação</strong>
+          — mais difícil que entrar em Harvard (3,4%)</li>
+          <li>Seleção de <strong>12 a 18 meses</strong>: várias rodadas de entrevista, avaliação
+          psicológica, checagem financeira — e <strong>entrevistam até a família do candidato</strong>.
+          Houve caso de 17 entrevistas, a última de 5 horas</li>
+          <li>Taxa de só <strong>US$ 10 mil</strong> — a empresa banca terreno, obra e equipamento. Em
+          troca, o operador não é dono do imóvel e não pode vender a franquia: leva ~50% do lucro
+          (US$ 200–300 mil/ano)</li>
+          <li><strong>Obrigado a trabalhar dentro da loja</strong>, e só pode ter uma — o resultado é um
+          dono presente que sabe o nome de cada funcionário</li>
+          <li><strong>Mais da metade dos operadores novos veio do balcão</strong> — o programa de
+          liderança (LDP, ~2 anos) transforma horista em operador. Exemplo: Stanley Webster entrou
+          adolescente pra ajudar a mãe e virou operador aos 26</li>
+          <li>Truett Cathy sobre operadores: <strong>&ldquo;se você não pretende ficar a vida toda, nem
+          se candidate&rdquo;</strong></li>
+        </ul>
+        <div class="note-item"><span class="tag acc">o mecanismo</span><span>
+          <strong>1 dono-líder por loja, presente e muito bem pago</strong>, selecionado com brutalidade —
+          e ele é quem escolhe, desenvolve e segura os adolescentes da equipe. A retenção da base começa
+          na seleção do topo.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="cfa-rituais" hidden>
+        <h2>Chick-fil-A — Rituais e linguagem</h2>
+        <ul class="pontos">
+          <li><strong>&ldquo;My pleasure&rdquo;</strong> no lugar de &ldquo;de nada&rdquo; — Truett ouviu a
+          frase num hotel Ritz-Carlton e contou a história no seminário de operadores de 2001; virou
+          padrão de treinamento (chegaram a contratar o CEO do Ritz pra ensinar hospitalidade)</li>
+          <li><strong>Vocabulário controlado:</strong> Team Members (nunca employees), Guests (nunca
+          customers), Operators (nunca franchisees)</li>
+          <li><strong>Core 4</strong>, repetido em todo atendimento: contato visual, sorriso genuíno,
+          falar com entusiasmo, chamar o cliente pelo nome</li>
+          <li><strong>Second Mile Service</strong> (nome bíblico — Mateus 5:41, andar a segunda milha):
+          escoltar cliente até o carro com guarda-chuva, levar bandeja à mesa, flores frescas na mesa</li>
+          <li><strong>Seminário anual (hoje &ldquo;NEXT&rdquo;) há quase 50 anos:</strong> 4 dias, todos os
+          operadores <em>com cônjuges, tudo pago</em> — incluindo o ritual coletivo de empacotar 1 milhão
+          de refeições pra crianças carentes</li>
+          <li><strong>First 100:</strong> em cada inauguração, 100 pessoas acampam 24h no estacionamento e
+          ganham 1 ano de refeições — e é a equipe da loja nova que opera a festa: rito de fundação do
+          time</li>
+          <li><strong>WinShape</strong> (fundação da família): retiros de casamento (1/3 dos operadores já
+          participou), acampamentos de verão, bolsas</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="cfa-bolsa" hidden>
+        <h2>Chick-fil-A — Bolsa de estudo + domingo fechado</h2>
+        <ul class="pontos">
+          <li><strong>Bolsa de estudo pra funcionário desde 1973</strong> — hoje de US$ 1.000 a US$ 25.000;
+          <strong>US$ 245 milhões acumulados</strong>, US$ 29 milhões pra 16 mil funcionários só em 2026</li>
+          <li><strong>90% dos bolsistas dizem que pretendem continuar na empresa depois de formados</strong>
+          — o benefício que mais aparece como razão de ficar</li>
+          <li><strong>Fechado aos domingos desde 1946:</strong> todo funcionário tem 1 dia de folga
+          coletiva, previsível e garantida por semana — um benefício estrutural que concorrente nenhum
+          copia</li>
+          <li>E a conta fecha: a loja média fatura <strong>mais que o dobro do McDonald's</strong> operando
+          6 dias contra 7</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="cfa-filosofia" hidden>
+        <h2>Chick-fil-A — A filosofia de Truett Cathy</h2>
+        <ul class="pontos">
+          <li><strong>Propósito corporativo escrito em 1982</strong>, quando a empresa quase quebrou:
+          &ldquo;glorificar a Deus sendo um administrador fiel de tudo que nos foi confiado; ter
+          influência positiva sobre todos que entrarem em contato com o Chick-fil-A&rdquo; — usado até
+          hoje como teste de decisão</li>
+          <li><strong>&ldquo;Não estamos no negócio de frango. Estamos no negócio de gente.&rdquo;</strong></li>
+          <li>Coerência pessoal que lastreia o discurso: Truett deu aula de escola dominical pra meninos
+          de 13 anos por <strong>mais de 50 anos</strong> e acolheu com a esposa <strong>mais de 150
+          crianças</strong> em lares adotivos</li>
+          <li>Título de livro dele que resume a visão de formar gente: <strong>&ldquo;é melhor construir
+          meninos do que consertar homens&rdquo;</strong></li>
+        </ul>
+      </div>
+
+      <!-- ══════ Starbucks ══════ -->
+      <div class="topico-conteudo" data-topico="sbux-placar" hidden>
+        <h2>Starbucks — O placar</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Métrica</th><th>Starbucks</th><th>Setor</th></tr></thead>
+          <tbody>
+            <tr><td>Turnover EUA+Canadá</td><td><strong>49%</strong> (2024); 65% em 2022</td><td>150%+ no fast food</td></tr>
+            <tr><td>Lealdade (Comparably)</td><td><strong>41% não sairiam por mais dinheiro</strong></td><td>—</td></tr>
+            <tr><td>Gerentes de loja</td><td>a esmagadora maioria <strong>promovida de dentro</strong></td><td>—</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note-item"><span class="tag warn">ressalva honesta</span><span>
+          Mesmo assim, metade da loja ainda troca por ano — identidade forte convive com salário de
+          varejo, e a onda de sindicalização (2021+) nasceu da distância entre o discurso de
+          &ldquo;partner&rdquo; e a realidade da escala. E o Coffee Master chegou a ser cortado antes de
+          voltar: <strong>ritual sem manutenção morre</strong>.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="sbux-lastro" hidden>
+        <h2>Starbucks — &ldquo;Partner&rdquo; com lastro</h2>
+        <p class="prose">Todo funcionário — inclusive o barista de meio período — é chamado de
+          <strong>partner (sócio)</strong>. E não é apelido de RH: o nome nasceu de um fato financeiro.</p>
+        <ul class="pontos">
+          <li><strong>Bean Stock (1991):</strong> ações da empresa pra todos, inclusive meio período — a
+          primeira grande varejista dos EUA a fazer isso. Hoje são RSUs anuais com carência de 2 anos:
+          <em>pra receber, tem que ficar</em></li>
+          <li><strong>Plano de saúde pra meio período desde 1988</strong> — resposta direta à história do
+          pai do Schultz, caminhoneiro que quebrou o quadril sem seguro nenhum. A empresa conta essa
+          história internamente como mito fundador</li>
+          <li><strong>Faculdade 100% paga</strong> (ASU, desde 2014), elegível desde o primeiro dia mesmo
+          em meio período: ~20 mil formados e 27 mil cursando</li>
+          <li><strong>CUP Fund (1998):</strong> fundo de emergência <em>financiado pelos próprios
+          partners</em> pra socorrer colegas (incêndio, doença, morte na família) — 83 mil auxílios e
+          US$ 60 milhões na história. Ajuda mútua, não caridade da empresa</li>
+          <li>Bebida e comida grátis no turno + 1 pacote de café por semana pra levar pra casa; 20 sessões
+          de terapia por ano pro partner e família; Spotify e Headspace grátis</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="sbux-avental" hidden>
+        <h2>Starbucks — O avental como escada de honra</h2>
+        <ul class="pontos">
+          <li><strong>Avental verde desde 1987</strong> — símbolo oficial da missão; nome bordado sinaliza
+          senioridade e pertencimento</li>
+          <li><strong>Avental preto = Coffee Master:</strong> conquistado, não dado — exige cursos da
+          Coffee Academy, 1+ ano de casa, prova escrita, prova de degustação e indicação do gerente. O
+          partner ganha um <em>&ldquo;passaporte de café&rdquo;</em> pra preencher com degustações</li>
+          <li><strong>Prêmio máximo:</strong> ser selecionado pra conhecer a fazenda própria da empresa na
+          Costa Rica — a viagem à origem como topo da honra</li>
+          <li><strong>Pins colecionáveis</strong> pendurados no avental (de campanhas, conquistas, lojas)
+          — existe até mercado de colecionador no eBay</li>
+          <li>O programa foi cortado uma vez e <strong>os próprios funcionários pediram a volta</strong>
+          (2022) — prova de que o ritual virou identidade de verdade</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="sbux-rituais" hidden>
+        <h2>Starbucks — Rituais diários</h2>
+        <ul class="pontos">
+          <li><strong>First Sip:</strong> o primeiro dia de <em>todo</em> contratado começa parando pra
+          cheirar e provar um café com a equipe — antes de operar caixa, você degusta como profissional</li>
+          <li><strong>Coffee tastings recorrentes</strong> nas lojas — até aniversário de tempo de casa se
+          comemora com degustação</li>
+          <li><strong>Nome no copo:</strong> nasceu como controle de pedidos e virou ritual de relação — e
+          em 2024-25 a empresa trouxe de volta a caneta e o bilhete escrito à mão no copo,
+          explicitamente como <em>resgate de ritual</em></li>
+          <li><strong>Tall / grande / venti:</strong> dialeto próprio herdado da Itália — o barista é o
+          falante nativo de uma língua que o cliente só arranha</li>
+          <li><strong>Reconhecimento entre pares, não só de chefe pra baixo:</strong> Green Apron Cards
+          (colega elogia colega por viver a missão), MUG Award e Partner of the Quarter (US$ 75 + pin
+          exclusivo)</li>
+          <li><strong>2008:</strong> Schultz fechou as 7.100 lojas dos EUA por 3h30 ao mesmo tempo pra
+          retreinar todos os baristas no espresso — milhões em venda perdida pra dizer <em>&ldquo;o
+          ofício importa mais que a receita do dia&rdquo;</em></li>
+          <li><strong>2025:</strong> 14 mil líderes de loja reunidos em Las Vegas + primeiro campeonato
+          mundial de baristas internos — o ofício elevado a esporte</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="sbux-papel" hidden>
+        <h2>Starbucks — O papel épico do barista</h2>
+        <ul class="pontos">
+          <li>Frase-mantra da casa: <strong>&ldquo;não estamos no negócio de café servindo pessoas;
+          estamos no negócio de pessoas servindo café&rdquo;</strong></li>
+          <li><strong>Third place</strong> — o lugar que não é casa nem trabalho: a Starbucks declara que
+          não compete em café, compete em <em>lugar</em></li>
+          <li>Consequência pra identidade: se o produto é o lugar e a conexão, <strong>o barista não é
+          atendente — é o anfitrião</strong>. A missão oficial (&ldquo;inspirar e nutrir o espírito
+          humano — uma pessoa, uma xícara e uma vizinhança por vez&rdquo;) só pode ser executada por
+          ele</li>
+        </ul>
+        <div class="note-item"><span class="tag acc">o mecanismo</span><span>
+          Dar ao posto operacional um <strong>papel épico com nome próprio</strong>. Ninguém veste com
+          orgulho a camisa de &ldquo;atendente de fast food&rdquo; — mas veste a de barista, de anfitrião,
+          de guardião da receita.
+        </span></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════ O QUE LEVAR PRA HOLY ══════════════════════ -->
+  <div class="tab-panel" data-panel="holy" role="tabpanel" hidden>
+
+    <p class="prose">
+      Os <strong>6 princípios que se repetem nas três marcas</strong>, cada um com a prova e com a
+      pergunta aberta pra Holy. Clique num princípio pra ver o detalhe.
+    </p>
+    <div class="note-item"><span class="tag warn">nada decidido</span><span>
+      Esta aba é o cardápio de princípios, <strong>não</strong> um plano aprovado — cada aplicação na Holy
+      é uma proposta pra decidir com o Fred, custo-benefício item a item. As ideias que já existiam no
+      tópico &ldquo;RH e Retenção&rdquo; do <a href="../certificacao-holy-cookie/material/#t19">Material de
+      Certificação</a> (presente no aniversário do filho, garrafinha com nome, pagar tempo de casa)
+      entram neste mesmo funil.
+    </span></div>
+
+    <div class="grade-principios">
+      <button class="topico-btn" data-topico="p-titulo"><span class="tnome">1. Um título com lastro</span><span class="tag warn">para decidir</span></button>
+      <button class="topico-btn" data-topico="p-escada"><span class="tnome">2. Escada visível, com degrau pago</span><span class="tag warn">para decidir</span></button>
+      <button class="topico-btn" data-topico="p-honra"><span class="tnome">3. Honra conquistada, não dada</span><span class="tag warn">para decidir</span></button>
+      <button class="topico-btn" data-topico="p-rituais"><span class="tnome">4. Repetição marcada no calendário</span><span class="tag warn">para decidir</span></button>
+      <button class="topico-btn" data-topico="p-beneficio"><span class="tnome">5. Benefício que conta uma história</span><span class="tag warn">para decidir</span></button>
+      <button class="topico-btn" data-topico="p-lingua"><span class="tnome">6. Língua e símbolos de tribo</span><span class="tag warn">para decidir</span></button>
+    </div>
+
+    <div class="visor">
+      <p class="visor-vazio">Clique num princípio acima pra ver o detalhe.</p>
+
+      <div class="topico-conteudo" data-topico="p-titulo" hidden>
+        <h2>1. Um título com lastro<span class="status decidir">para decidir</span></h2>
+        <p class="prose">Nenhuma das três chama alguém de &ldquo;funcionário&rdquo;: é <em>associate</em>
+          (In-N-Out, desde 1948), <em>team member</em> (Chick-fil-A) e <em>partner</em> (Starbucks). Mas o
+          nome só funciona porque tem uma coisa real atrás — o partner virou sócio de verdade quando
+          ganhou ação da empresa; o associate tem participação nos lucros; o team member tem bolsa de
+          estudo. <strong>Título sem lastro é pôster na parede.</strong></p>
+        <h3 class="sub">A prova</h3>
+        <ul class="pontos">
+          <li>Starbucks: &ldquo;partner&rdquo; nasceu junto com o Bean Stock (1991) — ações inclusive pra
+          meio período, com carência que premia quem fica</li>
+          <li>In-N-Out: &ldquo;associate&rdquo; vem com participação nos lucros e benefício de meio
+          período</li>
+          <li>Chick-fil-A: &ldquo;team member&rdquo; vem com bolsa de estudo desde 1973</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">na Holy — para decidir</span><span>
+          Como a equipe da Holy se chama? E <strong>o que lastreia esse nome</strong>? A bonificação da
+          Certificação já é um lastro possível; participação em meta de loja é outro. O nome sem o lastro
+          não vale a pena lançar.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p-escada" hidden>
+        <h2>2. Escada visível, com degrau pago<span class="status decidir">para decidir</span></h2>
+        <p class="prose">Nas três marcas, a pessoa consegue apontar <strong>onde está e qual é o próximo
+          degrau — e cada degrau paga</strong>. E o degrau final existe de verdade: ninguém de fora vira
+          chefe.</p>
+        <h3 class="sub">A prova</h3>
+        <ul class="pontos">
+          <li>In-N-Out: Níveis 1–8 com aumento por posição dominada; University antes da gerência;
+          <strong>100% dos gerentes vindos do balcão</strong>, ganhando US$ 160 mil+</li>
+          <li>Chick-fil-A: mais da metade dos operadores novos veio de dentro — de horista a dono</li>
+          <li>Starbucks: quase todos os gerentes promovidos de dentro</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">na Holy — para decidir</span><span>
+          A <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já é o primeiro degrau
+          (prova + bonificação enquanto ativa). O que falta é <strong>dar nome e rosto à escada
+          inteira</strong> — do primeiro dia até Líder de Loja — e assumir a regra das referências: antes
+          de contratar líder de fora, olhar pra dentro.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p-honra" hidden>
+        <h2>3. Honra conquistada, não dada<span class="status decidir">para decidir</span></h2>
+        <p class="prose">As três invertem o status do trabalho operacional: <strong>o posto mais difícil é
+          o prêmio, não o castigo</strong> — e o símbolo de quem chegou lá é visível e só se ganha por
+          prova.</p>
+        <h3 class="sub">A prova</h3>
+        <ul class="pontos">
+          <li>In-N-Out: a chapa é a <em>cadeira do capitão</em> — 1 a 2 anos de treino pra merecer fritar
+          hambúrguer</li>
+          <li>Starbucks: avental preto de Coffee Master — prova escrita, degustação, tempo mínimo de casa
+          e indicação; prêmio máximo é a viagem à fazenda na Costa Rica</li>
+          <li>Chick-fil-A: virar Operador é mais difícil que entrar em Harvard — e todo mundo sabe
+          disso</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">na Holy — para decidir</span><span>
+          Qual posto é a &ldquo;chapa&rdquo; da Holy — o forno? E qual símbolo visível marca quem
+          conquistou (avental diferente, nome bordado, pin)? A regra das referências: <strong>símbolo se
+          conquista por prova, nunca se distribui</strong> — a Certificação já dá a prova pronta.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p-rituais" hidden>
+        <h2>4. Repetição marcada no calendário<span class="status decidir">para decidir</span></h2>
+        <p class="prose">Cultura é o que se repete. As três têm rituais de entrada, rituais diários e
+          rituais anuais — e levam todos a sério o suficiente pra não furar.</p>
+        <h3 class="sub">A prova</h3>
+        <ul class="pontos">
+          <li>Entrada: First Sip no primeiro dia (Starbucks); First 100 na inauguração (Chick-fil-A)</li>
+          <li>Diário: Core 4 e &ldquo;my pleasure&rdquo; em toda interação; nome no copo; tasting</li>
+          <li>Entre pares: Green Apron Cards — colega reconhece colega, não só o chefe</li>
+          <li>Anual: Family Picnic (In-N-Out), seminário NEXT com cônjuges e tudo pago (Chick-fil-A)</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">na Holy — candidatos para decidir</span><span>
+          Rito de primeiro dia (ex.: <strong>a primeira fornada</strong> — provar o cookie que a própria
+          pessoa assou); reconhecimento entre colegas com nome próprio; uma celebração fixa que nunca
+          fura; aniversário do funcionário com liturgia própria. O critério é o da tese: <strong>cada
+          participação realinha a pessoa com a missão</strong> — e ritual que fura uma vez perde o
+          poder.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p-beneficio" hidden>
+        <h2>5. Benefício que conta uma história<span class="status decidir">para decidir</span></h2>
+        <p class="prose">O benefício certo não é o mais caro — é o que <strong>carrega uma história que a
+          equipe reconta</strong>. Benefício com história vira identidade; agrado genérico vira custo.</p>
+        <h3 class="sub">A prova</h3>
+        <ul class="pontos">
+          <li>Starbucks: plano de saúde pra meio período (1988) porque o pai do Schultz quebrou o quadril
+          sem seguro — a empresa conta essa cena como mito fundador</li>
+          <li>Chick-fil-A: domingo fechado porque Truett trabalhou 7 dias por semana em restaurante 24h —
+          virou a folga coletiva garantida que nenhum concorrente copia</li>
+          <li>Chick-fil-A: bolsa de estudo desde 1973 — &ldquo;é melhor construir meninos do que consertar
+          homens&rdquo;</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">na Holy — para decidir</span><span>
+          Qual história do Fred / da Holy vira benefício? As ideias já anotadas (presente no aniversário
+          do filho, garrafinha com nome, pagar tempo de casa a partir de 12 meses) ganham força quando
+          <strong>amarradas numa história só</strong> — hoje são agrados soltos, sem narrativa que os
+          una.
+        </span></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p-lingua" hidden>
+        <h2>6. Língua e símbolos de tribo<span class="status decidir">para decidir</span></h2>
+        <p class="prose">Tribo tem dialeto e tem uniforme. Quem domina a língua e veste o símbolo é de
+          dentro — e o cliente fiel é convidado a arranhar a língua também.</p>
+        <h3 class="sub">A prova</h3>
+        <ul class="pontos">
+          <li>Starbucks: tall/grande/venti — o barista é o falante nativo</li>
+          <li>In-N-Out: menu secreto (Animal Style, 4x4) que funcionário e cliente fiel dominam juntos;
+          uniforme branco imutável há 77 anos; palmeiras em X; versículo discreto na embalagem</li>
+          <li>Chick-fil-A: &ldquo;my pleasure&rdquo; — duas palavras que identificam a marca no ouvido</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">na Holy — para decidir</span><span>
+          Quais palavras são <strong>só da Holy</strong> (nomes internos de produto, de função, de posto,
+          de cliente)? O uniforme é tratado como veste ritual ou como obrigação? E existe um símbolo
+          discreto da casa — o &ldquo;versículo na embalagem&rdquo; da Holy?
+        </span></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    Página criada em 18/08/2026. Fontes da pesquisa: Glassdoor, Forbes, CNBC, Workforce, QSR Magazine,
+    Comparably e os sites oficiais das três marcas. Os números são dos EUA e servem de referência de
+    <em>mecanismo</em>, não de meta. Nada na aba &ldquo;O que levar pra Holy&rdquo; está decidido.
+  </footer>
+
+</div>
+
+<script>
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome; else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); });
+  });
+
+  function abrirGrupo(id) {
+    document.querySelectorAll('.grupo-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.grupo === id);
+    });
+    document.querySelectorAll('.grade-topicos').forEach(function (g) {
+      g.hidden = g.dataset.grupo !== id;
+    });
+  }
+  document.querySelectorAll('.grupo-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirGrupo(b.dataset.grupo); });
+  });
+
+  function abrirTopico(btn) {
+    var painel = btn.closest('.tab-panel');
+    painel.querySelectorAll('.topico-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b === btn);
+    });
+    painel.querySelectorAll('.topico-conteudo').forEach(function (c) {
+      c.hidden = c.dataset.topico !== btn.dataset.topico;
+    });
+    var vazio = painel.querySelector('.visor-vazio');
+    if (vazio) vazio.hidden = true;
+    painel.querySelector('.visor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('.topico-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirTopico(b); });
+  });
+
+  document.querySelectorAll('.passo-caixa').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var fluxo = b.closest('.fluxo');
+      var detalhe = fluxo.nextElementSibling;
+      fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      detalhe.innerHTML = b.dataset.detalhe;
+      detalhe.classList.add('aberto');
+    });
+  });
+
+  var inicial = location.hash.replace('#', '');
+  if (inicial === 'referencias' || inicial === 'holy') {
+    abrirAba(inicial);
+  } else if (inicial) {
+    var botaoInicial = document.querySelector('.topico-btn[data-topico="' + inicial + '"]');
+    if (botaoInicial) {
+      abrirAba(botaoInicial.closest('.tab-panel').dataset.panel);
+      var gradeInicial = botaoInicial.closest('.grade-topicos');
+      if (gradeInicial) abrirGrupo(gradeInicial.dataset.grupo);
+      abrirTopico(botaoInicial);
+    }
+  }
+</script>
+
+</body>
+</html>
