@@ -87,6 +87,9 @@
   .checklist input[type="checkbox"] { margin-top: .15rem; width: 1rem; height: 1rem; flex: 0 0 auto;
                                        accent-color: var(--accent); cursor: pointer; }
   .checklist li.marcado label { color: var(--ink-faint); text-decoration: line-through; }
+  .checklist input[type="checkbox"]:disabled { cursor: default; opacity: .5; }
+  .checklist li:has(input:disabled) { background: var(--surface-2); border-style: dashed; }
+  .checklist li:has(input:disabled) label { cursor: default; }
 
   /* ---------- fluxo: caixinha → seta → caixinha ---------- */
   .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
@@ -259,6 +262,17 @@
           loja. Em vez de trocar os dois de uma vez, o plano virou faseado: resolve o atendimento primeiro,
           só depois decide o que fazer com o Henrique.
         </span></div>
+
+        <h4 class="sub">Fase 0 — Pré-requisitos<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — antes de começar a seleção</span></h4>
+        <div class="note-item"><span class="tag warn">por que</span><span>
+          Nenhuma das fases seguintes funciona direito sem isso resolvido: o Eduardo precisa saber o que
+          procurar, quanto pode oferecer, e como avaliar quem aparece.
+        </span></div>
+        <ul class="checklist">
+          <li><label><input type="checkbox" disabled>Dividir atividades por cargo — acompanhar no card &ldquo;Base: dividir atividades por cargo&rdquo;, no mesmo grupo</label></li>
+          <li><label><input type="checkbox" disabled>Validar salários — acompanhar no card &ldquo;Bloqueador: salário&rdquo;, no mesmo grupo</label></li>
+          <li><label><input type="checkbox" data-id="piracicaba-f0-checklist">Definir a checklist de pessoas — mesma avaliação periódica do card &ldquo;Novo hábito&rdquo;; falta deixar definida e ativa antes do Eduardo começar</label></li>
+        </ul>
 
         <h4 class="sub">Fase 1 — Selecionar o atendente (freelancer primeiro)</h4>
         <ul class="checklist">
