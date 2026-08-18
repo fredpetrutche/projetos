@@ -224,6 +224,51 @@
   .conc[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-bg); }
   .conc .n1 { font-size: .875rem; font-weight: 600; }
   .conc .n2 { font-family: var(--mono); font-size: .6875rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+  /* ── blindagem: cards de instrumento ── */
+  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .5rem; }
+  .grade-topicos[hidden] { display: none; }
+  .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+                border: 1.5px solid var(--rule); border-radius: 6px; padding: .65rem .85rem;
+                display: flex; flex-direction: column; gap: .45rem; color: inherit;
+                transition: border-color .15s, background .15s; }
+  .topico-btn:hover { border-color: var(--ink-faint); }
+  .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .topico-btn .tnome { font-size: .875rem; font-weight: 600; line-height: 1.3; }
+  .topico-btn .trow { display: flex; gap: .3rem; flex-wrap: wrap; margin-top: auto; }
+  .tag.neutro { background: var(--surface-2); color: var(--ink-soft); border: 1px solid var(--rule); }
+  #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
+           padding: 1.35rem 1.35rem 1.5rem; scroll-margin-top: 1.5rem; }
+  .visor-vazio { color: var(--ink-faint); font-size: .9375rem; text-align: center; padding: 1.6rem 0; }
+  .visor-vazio[hidden] { display: none; }
+  .topico-conteudo { display: flex; flex-direction: column; gap: 1rem; }
+  .topico-conteudo[hidden] { display: none; }
+  .ttitulo { font-family: var(--sans); font-size: 1.0625rem; font-weight: 600; letter-spacing: -.01em;
+             text-transform: none; padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+             display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .ttitulo .tag { margin-left: auto; }
+  .ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px;
+           background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .ficha > div { background: var(--surface-2); padding: .7rem .95rem; display: flex;
+                 flex-direction: column; gap: .2rem; }
+  .ficha .k { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em; text-transform: uppercase;
+              color: var(--ink-faint); font-weight: 600; }
+  .ficha .v { font-size: .875rem; color: var(--ink); line-height: 1.5; }
+  .ficha .v em { font-style: normal; color: var(--warn); font-weight: 600; }
+
+  /* ── fluxo: caixinha → seta → caixinha ── */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 11rem; transition: border-color .15s, background .15s, color .15s; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft); }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -616,15 +661,284 @@
 
   <section>
     <p class="prose">
-      Esta aba é a <strong>visita</strong> — o que se vê estando na loja, não o que veio do Google.
-      É a lista que o Fred levanta com os próprios olhos e que, por decisão dele,
-      <strong>entra antes</strong> do que a pesquisa sugere.
+      Esta aba é a <strong>medição</strong> — como a experiência é vigiada o tempo todo.
+      Primeiro a <strong>blindagem</strong>: os sete instrumentos, quem faz o quê, quando e como.
+      Depois, a matéria-prima de itens levantada na pesquisa. O que o Fred viu com os próprios
+      olhos continua <strong>entrando antes</strong> do que veio de fora.
     </p>
   </section>
 
+  <!-- ══════ blindagem ══════ -->
+  <section>
+    <h2><span class="n">1</span> Blindagem da Experiência<span class="hint">sete instrumentos medindo a temperatura o tempo todo</span></h2>
+    <p class="prose">
+      Nenhum instrumento sozinho conta a verdade: quem executa tende a medir o próprio teatro,
+      quem visita vê um recorte, quem comenta em público é minoria. A blindagem é a soma de
+      <strong>sete camadas independentes</strong> — da equipe se conferindo todo dia ao olhar de fora
+      que ninguém espera — todas desaguando no mesmo lugar: <strong>item crítico aberto ou fechado
+      no portão</strong>. Durante as 8 semanas, é ela que decide se a loja passa; depois, continua
+      rodando como alarme — a experiência não regride sem alguém ver.
+    </p>
+
+    <h3 class="sub">O mapa — quem faz o quê, quando</h3>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Instrumento</th><th>Frequência</th><th>Quem faz</th><th>Hoje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Checklist diário dos processos</td><td>Todo dia, 3 momentos</td><td>Equipe do turno</td><td><span class="tag good">roda</span></td></tr>
+          <tr><td>Checklist de experiência</td><td>2–3 visitas/semana, por amostra <em>(proposta)</em></td><td>Nunca quem é avaliado</td><td><span class="tag warn">em construção</span></td></tr>
+          <tr><td>Avaliação do gerente</td><td>1 visita/semana, sem aviso <em>(proposta)</em></td><td>Gerente</td><td><span class="tag good">roda</span></td></tr>
+          <tr><td>Comentários públicos</td><td>Chega todo dia · leitura semanal</td><td>Cliente escreve · dono nomeado responde</td><td><span class="tag good">roda</span></td></tr>
+          <tr><td>Cupom de pesquisa</td><td>Contínuo, com brinde</td><td>Cliente responde · equipe convida</td><td><span class="tag warn">em construção</span></td></tr>
+          <tr><td>Auditoria da marca</td><td>Mensal</td><td>Franqueadora</td><td><span class="tag good">roda</span></td></tr>
+          <tr><td>Cliente oculto</td><td>1×/mês por loja <em>(proposta)</em></td><td>Alguém de fora, sem aviso</td><td><span class="tag bad">não existe</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="font-size:.8125rem">
+      <em>(proposta)</em> = frequência sugerida, ainda não decidida — fecha com o Fred.
+      Clique num instrumento para ver o que é, quem faz e como faz.
+    </p>
+
+    <div class="grade-topicos">
+      <button class="topico-btn" type="button" data-topico="i1">
+        <span class="tnome">Checklist diário dos processos</span>
+        <span class="trow"><span class="tag neutro">todo dia</span><span class="tag good">roda hoje</span></span>
+      </button>
+      <button class="topico-btn" type="button" data-topico="i2">
+        <span class="tnome">Checklist de experiência do cliente</span>
+        <span class="trow"><span class="tag neutro">por amostra</span><span class="tag warn">em construção</span></span>
+      </button>
+      <button class="topico-btn" type="button" data-topico="i3">
+        <span class="tnome">Avaliação do gerente</span>
+        <span class="trow"><span class="tag neutro">semanal</span><span class="tag good">roda hoje</span></span>
+      </button>
+      <button class="topico-btn" type="button" data-topico="i4">
+        <span class="tnome">Comentários — iFood, 99Food e Google Maps</span>
+        <span class="trow"><span class="tag neutro">chega sozinho</span><span class="tag good">roda hoje</span></span>
+      </button>
+      <button class="topico-btn" type="button" data-topico="i5">
+        <span class="tnome">Cupom de pesquisa</span>
+        <span class="trow"><span class="tag neutro">contínuo</span><span class="tag warn">em construção</span></span>
+      </button>
+      <button class="topico-btn" type="button" data-topico="i6">
+        <span class="tnome">Auditoria da marca</span>
+        <span class="trow"><span class="tag neutro">mensal</span><span class="tag good">roda hoje</span></span>
+      </button>
+      <button class="topico-btn" type="button" data-topico="i7">
+        <span class="tnome">Cliente oculto</span>
+        <span class="trow"><span class="tag neutro">mensal · proposta</span><span class="tag bad">não existe</span></span>
+      </button>
+    </div>
+
+    <div id="visor">
+      <p class="visor-vazio">Escolha um instrumento acima para ver o que é, a frequência, quem faz e como faz.</p>
+
+      <!-- i1 · checklist diário -->
+      <div class="topico-conteudo" data-topico="i1" hidden>
+        <h3 class="ttitulo">Checklist diário dos processos <span class="tag good">roda hoje</span></h3>
+        <p class="prose">
+          A rotina de autoconferência que <strong>já roda no Sistema-HC</strong>: abertura, meio do dia
+          e fechamento. Mede se a <strong>tarefa foi feita</strong> — vitrine preenchida, salão limpo,
+          caixa fechado. É a camada mais frequente da blindagem e a única preenchida por quem executa:
+          ela garante o processo, não a percepção.
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v">Todo dia, em três momentos — abertura, meio do dia e fechamento — em cada loja.</span></div>
+          <div><span class="k">Quem faz</span><span class="v">A equipe do turno; o líder de loja cobra. O gerente confere se as respostas são verdadeiras (instrumento 3).</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="Pelo link aberto da loja no Sistema-HC ou direto pelo <strong>WhatsApp</strong> — o bot recebe texto, áudio e foto e preenche a execução sozinho.">Abrir o checklist do dia</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Cada item diz o que conferir e qual o critério. Item obrigatório não deixa fechar sem resposta.">Responder item a item</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Todo bloco de área fecha com uma <strong>foto de evidência</strong> — é ela que transforma o &laquo;feito&raquo; em prova.">Foto nos itens de evidência</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="A IA avalia cada foto (aprovado/reprovado + comentário) antes de qualquer pessoa olhar.">IA pré-avalia as fotos</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="As fotos passam por revisão humana, foto a foto — o veredito final não é da máquina.">Revisão humana</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag warn">limite</span><div>
+          Preenchido por <strong>quem é avaliado</strong> — mede execução, não experiência. Sozinho,
+          vira teatro. As outras seis camadas existem exatamente por isso.
+        </div></div>
+      </div>
+
+      <!-- i2 · checklist de experiência -->
+      <div class="topico-conteudo" data-topico="i2" hidden>
+        <h3 class="ttitulo">Checklist de experiência do cliente <span class="tag warn">em construção</span></h3>
+        <p class="prose">
+          O checklist que <strong>este projeto está criando</strong> — mede o que o cliente
+          <strong>recebeu</strong>, não se a tarefa foi feita: <em>&laquo;o cookie chegou morno?&raquo;</em>
+          em vez de <em>&laquo;retirou os cookies da vitrine?&raquo;</em>. É a régua do portão:
+          3 semanas seguidas sem item crítico aberto, e a campanha sobe.
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v">Por amostra, nunca em rotina fixa: dias e horários variados — noite e fim de semana entram de propósito. <em>Proposta:</em> 2 a 3 visitas avaliadas por semana, por loja.</span></div>
+          <div><span class="k">Quem faz</span><span class="v"><strong>Nunca quem é avaliado</strong> — regra inegociável. Candidatos: o gerente (na visita dele), o Fred e o cliente oculto quando existir.</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="A equipe não sabe quando será — se sabe, o instrumento mede preparo, não realidade.">Sortear dia e horário</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Pedir, esperar, sentar, comer, usar o banheiro. O roteiro é a <strong>jornada do cliente</strong>, não uma inspeção.">Viver a loja como cliente</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Template no Sistema-HC, respondido ao fim da visita — nota por item onde couber.">Responder o checklist</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Item crítico sem foto não conta — a foto é o que separa opinião de prova.">Foto nos itens críticos</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Item crítico reprovado abre no portão e <strong>zera o relógio das 3 semanas</strong>.">Crítico reprovado → portão</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag bad">trava</span><div>
+          Ainda depende das 4 respostas da seção 4 do Briefing — padrão da franquia, quem preenche,
+          o que o Fred viu em 14/08 e quais itens são críticos. O template no banco só entra
+          <strong>com aval do Fred, item a item</strong>.
+        </div></div>
+      </div>
+
+      <!-- i3 · avaliação do gerente -->
+      <div class="topico-conteudo" data-topico="i3" hidden>
+        <h3 class="ttitulo">Avaliação do gerente <span class="tag good">roda hoje</span></h3>
+        <p class="prose">
+          O olhar de gestão: o gerente entra na loja <strong>como um cliente entraria</strong> e
+          percorre um roteiro fixo pelos três pilares — e aproveita para conferir se os checklists
+          diários estão sendo respondidos de verdade (a foto bate com a loja na frente dele?).
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v"><em>Proposta:</em> 1 visita avaliada por semana, por loja — em dia e horário que a equipe não sabe antes.</span></div>
+          <div><span class="k">Quem faz</span><span class="v">O gerente — quem responde pelas lojas acima do líder de loja. Ele avalia a loja, nunca a própria execução.</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="Visita anunciada mede preparo. O dia e o horário variam de semana a semana.">Chegar sem aviso</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Produto, experiência, ambiente e os checklists do dia — o <strong>mesmo roteiro em toda visita</strong>, senão a nota de uma semana não se compara com a da outra.">Percorrer o roteiro</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="No mesmo molde do checklist de experiência, com foto nos itens críticos.">Registrar com foto</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="O líder de loja recebe o resultado <strong>no mesmo dia</strong> — avaliação engavetada não corrige nada.">Devolutiva no dia</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Item crítico reprovado entra no portão como o de qualquer outro instrumento.">Crítico → portão</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag warn">regra</span><div>
+          Sem roteiro fixo vira opinião — e opinião não fecha portão. O roteiro é o mesmo do
+          checklist de experiência, para os números conversarem entre instrumentos.
+        </div></div>
+      </div>
+
+      <!-- i4 · comentários públicos -->
+      <div class="topico-conteudo" data-topico="i4" hidden>
+        <h3 class="ttitulo">Comentários — iFood, 99Food e Google Maps <span class="tag good">roda hoje</span></h3>
+        <p class="prose">
+          A avaliação que acontece <strong>sem ninguém pedir</strong>: o cliente falando em público,
+          com nota, texto e data — e ficando registrado para sempre. É o termômetro passivo da
+          blindagem. A aba <strong>Pesquisa</strong> desta página já organiza os comentários do
+          Google, com peso maior para o recente.
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v">Chega todo dia, sozinho. A rotina: leitura e resposta <strong>1× por semana</strong>; consolidação dos temas <strong>1× por mês</strong>.</span></div>
+          <div><span class="k">Quem faz</span><span class="v">O cliente escreve. Do lado de cá, um <strong>dono nomeado</strong> — hoje o Fred, ou quem ele delegar. Comentário sem dono é comentário sem resposta.</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="iFood, 99Food e Google Maps, das três lojas — inclusive os elogios: neles está o que <strong>não pode regredir</strong>.">Ler tudo da semana</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Elogio agradecido, reclamação respondida com nome e sem modelo pronto — resposta pública também é vitrine.">Responder todos</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Cada comentário aponta para produto, experiência ou ambiente — é o que permite ver tendência, não caso isolado.">Classificar por pilar</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Reclamação que se repete vira candidato a item do checklist de experiência. Se apontou algo fora da lista, <strong>a lista é que estava errada</strong> — o checklist cresce.">Recorrente → checklist</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Uma leitura mensal do conjunto: o que subiu, o que desceu, o que apareceu de novo.">Consolidar no mês</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag acc">já existe</span><div>
+          O browser da aba Pesquisa já faz a consolidação para o Google Maps — barras por assunto,
+          peso por recência. Falta trazer iFood e 99Food para o mesmo funil.
+        </div></div>
+      </div>
+
+      <!-- i5 · cupom de pesquisa -->
+      <div class="topico-conteudo" data-topico="i5" hidden>
+        <h3 class="ttitulo">Cupom de pesquisa <span class="tag warn">em construção</span></h3>
+        <p class="prose">
+          A pesquisa que o cliente responde e <strong>ganha um brinde na hora</strong> — a pesquisa +
+          roda da trilha de fortalecimento da campanha de fidelização. Transforma opinião privada em
+          diagnóstico, sem expor a loja publicamente: o passo do Google fica
+          <strong>desligado até o portão passar</strong>.
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v">Contínuo — todo cliente é convidado, todos os dias. Consolidação semanal. Sobe na <strong>semana 0</strong>, junto com o projeto.</span></div>
+          <div><span class="k">Quem faz</span><span class="v">O cliente responde. A equipe convida — cupom ou QR entregue junto com o pedido. Um dono consolida as respostas por semana.</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="O cupom/QR vai na sacola, no balcão e na mesa — o convite é da equipe, a resposta é de quem quiser.">Convite com o pedido</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Curta de verdade: produto, experiência e ambiente em poucas perguntas — pesquisa longa mata a taxa de resposta.">QR → pesquisa curta</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="A roda paga o prêmio na hora. Na fase 1 a pesquisa entrega <strong>diagnóstico</strong>; a reputação (Google) entra depois do portão.">Brinde na hora</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="As respostas caem consolidadas, por loja e por semana.">Respostas no painel</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Nota baixa recorrente num pilar vira candidato a item do checklist de experiência.">Alimenta o checklist</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag warn">depende</span><div>
+          É a trilha de fortalecimento da <a href="../acoes-de-loja/campanha-fidelizacao/">campanha
+          de fidelização</a> — sobe sem o passo do Google (decisões 3 e 4 do Briefing).
+        </div></div>
+      </div>
+
+      <!-- i6 · auditoria da marca -->
+      <div class="topico-conteudo" data-topico="i6" hidden>
+        <h3 class="ttitulo">Auditoria da marca <span class="tag good">roda hoje</span></h3>
+        <p class="prose">
+          A franqueadora auditando a loja <strong>contra o padrão da marca</strong>. É o único olhar
+          da blindagem com a autoridade de quem define o padrão — responde <em>&laquo;esta loja
+          representa a Holy Cookie?&raquo;</em>, não <em>&laquo;esta loja está agradando?&raquo;</em>.
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v">Mensal, por loja.</span></div>
+          <div><span class="k">Quem faz</span><span class="v">O auditor/consultor da franqueadora — de fora da operação das três lojas.</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="Visita presencial na loja, no ritmo definido pela marca.">Visita da franqueadora</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="O roteiro é da franquia — a loja não escolhe o que é olhado.">Roteiro da marca</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="O resultado chega ao franqueado com os pontos fora do padrão.">Relatório</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Item reprovado na auditoria entra como candidato a <strong>item crítico do portão</strong> — não é um papel que se arquiva.">Reprovado → item crítico</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag acc">atalho</span><div>
+          Se a franquia tem roteiro escrito de auditoria, ele é a resposta da pergunta 1 da seção 4
+          do Briefing (<em>existe padrão da franquia?</em>) — pedir esse roteiro é o caminho mais
+          curto para fechar o checklist de experiência.
+        </div></div>
+      </div>
+
+      <!-- i7 · cliente oculto -->
+      <div class="topico-conteudo" data-topico="i7" hidden>
+        <h3 class="ttitulo">Cliente oculto <span class="tag bad">não existe</span></h3>
+        <p class="prose">
+          Alguém de fora visita como cliente comum, <strong>sem a loja saber</strong>, consome e
+          preenche o checklist de experiência. É o único instrumento que vê a loja exatamente como o
+          cliente vê — sem aviso, sem preparo, sem teatro. No Briefing, é a inclinação mais forte
+          para <em>quem preenche o checklist</em>.
+        </p>
+        <div class="ficha">
+          <div><span class="k">Frequência</span><span class="v"><em>Proposta:</em> 1 visita por loja por mês para começar — quinzenal se o portão travar. A frequência final é decisão do Fred.</span></div>
+          <div><span class="k">Quem faz</span><span class="v"><strong>Nunca alguém que a equipe reconheça.</strong> Candidatos: pessoa contratada, conhecido do Fred que a equipe não conhece, ou serviço especializado.</span></div>
+        </div>
+        <h3 class="sub">Como faz</h3>
+        <div class="fluxo">
+          <button class="passo-caixa" type="button" data-detalhe="O roteiro diz o que observar e o que pedir; a visita é reembolsada — ele consome de verdade.">Recebe roteiro + reembolso</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Pedir, esperar, sentar, comer, ir ao banheiro — a jornada completa, não uma espiada.">Consome como cliente</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Foto do que der sem se denunciar: o produto, a mesa, o banheiro. O sistema aceita foto como prova.">Foto discreta</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="Preenche o checklist de experiência em até 24 horas, com a memória fresca.">Checklist em 24h</button><span class="seta">→</span>
+          <button class="passo-caixa" type="button" data-detalhe="O resultado vai para o gerente e para o Fred — <strong>nunca direto para a equipe do turno</strong>, e a identidade não circula.">Resultado → gerente e Fred</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <div class="note-item"><span class="tag bad">falta fechar</span><div>
+          Quem é, quanto custa e a frequência (pergunta 2 da seção 4 do Briefing). E o acesso: o
+          link de checklist de hoje é aberto para a equipe — cliente oculto precisa de um caminho
+          separado no Sistema-HC.
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ══════ /blindagem ══════ -->
+
   <!-- ══════ avaliação ══════ -->
   <section>
-    <h2><span class="n">1</span> Candidatos a item — pilar Ambiente<span class="hint">matéria-prima, não a lista final</span></h2>
+    <h2><span class="n">2</span> Candidatos a item — pilar Ambiente<span class="hint">matéria-prima, não a lista final</span></h2>
     <p class="prose">
       Lista levantada cruzando a aba <strong>Pesquisa</strong> — o que os clientes escreveram sobre as
       lojas e sobre os concorrentes. <strong>Isto não substitui a seção 4.3 do Briefing</strong>:
@@ -949,6 +1263,34 @@
   });
   var inicial = location.hash.replace('#', '');
   if (inicial === 'pesquisa' || inicial === 'avaliacao') abrirAba(inicial);
+</script>
+
+<script>
+  // ── blindagem: card de instrumento → painel no visor ──
+  function abrirInstrumento(id) {
+    document.querySelectorAll('.topico-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.topico === id);
+    });
+    document.querySelectorAll('.topico-conteudo').forEach(function (c) {
+      c.hidden = c.dataset.topico !== id;
+    });
+    document.querySelector('.visor-vazio').hidden = true;
+    document.getElementById('visor').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  document.querySelectorAll('.topico-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirInstrumento(b.dataset.topico); });
+  });
+
+  // ── fluxo: clique na caixinha mostra o detalhe do passo ──
+  document.querySelectorAll('.passo-caixa').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var fluxo = b.closest('.fluxo');
+      var detalhe = fluxo.nextElementSibling;
+      fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      detalhe.innerHTML = b.dataset.detalhe;
+      detalhe.classList.add('aberto');
+    });
+  });
 </script>
 
 </body>
