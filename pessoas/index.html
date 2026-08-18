@@ -212,6 +212,9 @@
   table.tabela-encargos tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
   table.tabela-encargos tr.linha-total td { font-weight: 700; color: var(--ink); background: var(--surface-2); }
   table.tabela-encargos td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.tabela-encargos select { font-family: var(--sans); font-size: .8125rem; padding: .3rem .5rem;
+                             border: 1px solid var(--rule); border-radius: 4px;
+                             background: var(--surface); color: var(--ink); }
   .nome-atividade { color: var(--ink); font-weight: 500; }
   .desc-atividade { color: var(--ink-faint); font-size: .75rem; margin-top: .2rem; max-width: 26rem; }
   table.tabela-config .cel-sistema { text-align: center; }
@@ -1922,7 +1925,7 @@
               <li>
                 <div class="org-node">
                   <span class="titulo">Líder de Loja</span>
-                  <span class="sub">Luciana — acumula também Líder de Atendimento</span>
+                  <span class="sub"><span class="pessoa-role" data-role="lider-loja">Luciana</span> — acumula também Líder de Atendimento</span>
                   <span class="sal">líq. R$ 1.096,00</span>
                 </div>
                 <ul>
@@ -1939,27 +1942,27 @@
                           <li>
                             <div class="org-node duvida">
                               <span class="titulo">Líder de Pedidos Diurno</span>
-                              <span class="sub">era a Ana Beatriz (demitida) — agora, possivelmente, a Renata</span>
+                              <span class="sub"><span class="pessoa-role" data-role="lider-pedidos-diurno">não tem</span> — era a Ana Beatriz (demitida), possivelmente agora a Renata</span>
                               <span class="sal">histórico Ana Beatriz: R$ 2.421,60 · Renata: sem valor ainda</span>
                             </div>
                           </li>
                           <li>
                             <div class="org-node">
                               <span class="titulo">Líder de Pedidos Noturno</span>
-                              <span class="sub">Samara</span>
-                              <span class="sal">líq. R$ 2.042,80</span>
+                              <span class="sub"><span class="pessoa-role" data-role="lider-pedidos-noturno">Nicole</span> — entrou no lugar da Samara, que saiu da empresa</span>
+                              <span class="sal">histórico Samara: líq. R$ 2.042,80 · Nicole: sem valor confirmado ainda</span>
                             </div>
                             <ul>
                               <li>
-                                <div class="org-node duvida">
+                                <div class="org-node pendente">
                                   <span class="titulo">Folguista Líder de Pedido Noturno</span>
-                                  <span class="sub">talvez a Nicole Vilani (freelancer, R$ 110,00) — não confirmado</span>
+                                  <span class="sub"><span class="pessoa-role" data-role="folguista-lider-pedidos-noturno">não tem</span></span>
                                 </div>
                               </li>
                               <li>
                                 <div class="org-node pendente">
                                   <span class="titulo">Folguista de Auxiliar de Cozinha</span>
-                                  <span class="sub">não tem</span>
+                                  <span class="sub"><span class="pessoa-role" data-role="folguista-auxiliar-cozinha">não tem</span></span>
                                 </div>
                               </li>
                             </ul>
@@ -1967,13 +1970,13 @@
                           <li>
                             <div class="org-node pendente">
                               <span class="titulo">Estagiário de Cozinha</span>
-                              <span class="sub">vaga, sem gente</span>
+                              <span class="sub"><span class="pessoa-role" data-role="estagiario-cozinha">não tem</span></span>
                             </div>
                           </li>
                           <li>
                             <div class="org-node pendente">
                               <span class="titulo">Auxiliar de Cozinha</span>
-                              <span class="sub">vaga, sem gente</span>
+                              <span class="sub"><span class="pessoa-role" data-role="auxiliar-cozinha">não tem</span></span>
                             </div>
                           </li>
                         </ul>
@@ -1981,7 +1984,7 @@
                       <li>
                         <div class="org-node pendente">
                           <span class="titulo">Forneiro</span>
-                          <span class="sub">não existe hoje</span>
+                          <span class="sub"><span class="pessoa-role" data-role="forneiro">não tem</span></span>
                         </div>
                       </li>
                     </ul>
@@ -1994,13 +1997,13 @@
                       <li>
                         <div class="org-node">
                           <span class="titulo">Líder de Atendimento</span>
-                          <span class="sub">Luciana — mesma pessoa que a Líder de Loja, valor já contado lá</span>
+                          <span class="sub"><span class="pessoa-role" data-role="lider-atendimento">Luciana</span> — mesma pessoa que a Líder de Loja, valor já contado lá</span>
                         </div>
                         <ul>
                           <li>
                             <div class="org-node pendente">
                               <span class="titulo">Auxiliar de Atendimento</span>
-                              <span class="sub">não existe hoje</span>
+                              <span class="sub"><span class="pessoa-role" data-role="auxiliar-atendimento">não tem</span></span>
                             </div>
                           </li>
                         </ul>
@@ -2015,13 +2018,13 @@
                       <li>
                         <div class="org-node">
                           <span class="titulo">Processos Administrativos</span>
-                          <span class="sub">Luciana — mesma pessoa que a Líder de Loja, valor já contado lá</span>
+                          <span class="sub"><span class="pessoa-role" data-role="processos-administrativos-1">Luciana</span> — mesma pessoa que a Líder de Loja, valor já contado lá</span>
                         </div>
                       </li>
                       <li>
                         <div class="org-node pendente">
                           <span class="titulo">Processos Administrativos</span>
-                          <span class="sub">vaga — era a Samara, mas ela saiu</span>
+                          <span class="sub"><span class="pessoa-role" data-role="processos-administrativos-2">não tem</span> — era a Samara, que saiu da empresa</span>
                         </div>
                       </li>
                     </ul>
@@ -2037,26 +2040,26 @@
         sem Forneiro, sem Estagiário/Auxiliar de Cozinha, sem Auxiliar de Atendimento, sem Folguista
         de Auxiliar de Cozinha. A Luciana acumula Líder de Loja, Líder de Atendimento e Processos
         Administrativos — por isso não tem valor duplicado nesses nós, o salário dela já está
-        contado no topo da árvore. Ainda falta saber se a Nicole Vilani (R$ 110,00, freelancer) é
-        mesmo o Folguista do Líder de Pedido Noturno ou outra coisa.
+        contado no topo da árvore. A Samara saiu da empresa — a Nicole entrou no lugar dela como
+        Líder de Pedidos Noturno (só essa função, não Processos Administrativos), mas ainda sem
+        salário confirmado nessa função.
       </p>
 
-      <h2 style="margin-top:1.5rem">Remuneração total, Paulínia — funções confirmadas</h2>
+      <h2 style="margin-top:1.5rem">Remuneração total, Paulínia — todas as funções</h2>
       <p class="prose">
-        Só entram as 2 pessoas com cargo <strong>e</strong> valor de julho/2026 confirmados —
-        Ana Beatriz já saiu e Renata (se for ela) ainda não tem valor, então Líder de Pedidos
-        Diurno fica de fora daqui. A Luciana acumula 2 papéis (Líder de Loja + Líder de
-        Atendimento) e o documento não deixa claro se o pacote de VA/bônus soma os dois — por
-        isso não apliquei estimativa de bônus/VA pra ela, só o líquido pago mesmo.
+        Todas as funções do organograma acima, uma por linha. <strong>Pessoa é um seletor</strong> —
+        troque quem ocupa a função aqui e o organograma lá em cima atualiza junto. Bônus/VA/Cesta
+        são estimativa do documento de cargos, só quando bate o regime CLT com um cargo do
+        documento. Quando a pessoa mostrada não é a mesma de quem tem valor real de julho
+        confirmado, os valores ficam em branco — troquei o nome mas não invento o salário de quem
+        entrou.
       </p>
-      <div class="tablewrap"><table class="tabela-encargos">
-        <thead><tr><th>Cargo</th><th>Pessoa</th><th>Regime</th><th>Líquido pago (jul/26)</th><th>Bônus até (doc)</th><th>VA (doc)</th><th>Cesta (doc)</th><th>Total estimado</th></tr></thead>
-        <tbody>
-          <tr><td>Líder de Loja + Líder de Atendimento</td><td>Luciana</td><td>CLT</td><td class="num">R$ 1.096,00</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">R$ 1.096,00</td></tr>
-          <tr><td>Líder de Pedidos Noturno</td><td>Samara</td><td>CLT</td><td class="num">R$ 2.042,80</td><td class="num">R$ 300,00</td><td class="num">R$ 300,00</td><td class="num">R$ 101,00</td><td class="num">R$ 2.743,80</td></tr>
-          <tr class="linha-total"><td colspan="3">Total — 2 funções confirmadas</td><td class="num">R$ 3.138,80</td><td class="num">R$ 300,00</td><td class="num">R$ 300,00</td><td class="num">R$ 101,00</td><td class="num">R$ 3.839,80</td></tr>
-        </tbody>
-      </table></div>
+      <div class="tablewrap">
+        <table class="tabela-encargos">
+          <thead><tr><th>Cargo</th><th>Pessoa</th><th>Regime</th><th>Líquido pago (jul/26)</th><th>Bônus até (doc)</th><th>VA (doc)</th><th>Cesta (doc)</th><th>Total estimado</th></tr></thead>
+          <tbody id="corpoRemuneracaoPaulinia"></tbody>
+        </table>
+      </div>
 
       <h2 style="margin-top:1.5rem">Encargos — Paulínia, cargos CLT (Salário)</h2>
       <div class="tablewrap"><table class="tabela-encargos">
@@ -2997,12 +3000,137 @@
     }
   }
 
+  // ============================================================
+  // Paulínia — quem ocupa cada função é editável (seletor na tabela de
+  // Remuneração total), sincronizado com os nomes mostrados no organograma
+  // acima. Fica salvo no navegador; valores de salário só aparecem quando a
+  // pessoa escolhida é a mesma que tem valor real de julho/2026 confirmado.
+  // ============================================================
+  var CHAVE_ORG_PAULINIA = 'pessoas-holycookie-org-paulinia';
+  var NAO_TEM = 'não tem';
+
+  var PAPEIS_PAULINIA = [
+    { id: 'lider-loja', cargo: 'Líder de Loja + Líder de Atendimento', regime: 'CLT', padrao: 'Luciana', valores: { 'Luciana': { liq: 1096.00, bonus: 0, va: 0, cesta: 0 } } },
+    { id: 'lider-pedidos-diurno', cargo: 'Líder de Pedidos Diurno', regime: 'CLT', padrao: NAO_TEM, valores: {} },
+    { id: 'lider-pedidos-noturno', cargo: 'Líder de Pedidos Noturno', regime: 'CLT', padrao: 'Nicole', valores: { 'Samara': { liq: 2042.80, bonus: 300, va: 300, cesta: 101 } } },
+    { id: 'folguista-lider-pedidos-noturno', cargo: 'Folguista Líder de Pedido Noturno', regime: 'Freelancer', padrao: NAO_TEM, valores: {} },
+    { id: 'folguista-auxiliar-cozinha', cargo: 'Folguista de Auxiliar de Cozinha', regime: 'Freelancer', padrao: NAO_TEM, valores: {} },
+    { id: 'estagiario-cozinha', cargo: 'Estagiário de Cozinha', regime: 'Estágio', padrao: NAO_TEM, valores: {} },
+    { id: 'auxiliar-cozinha', cargo: 'Auxiliar de Cozinha', regime: 'Estágio', padrao: NAO_TEM, valores: {} },
+    { id: 'forneiro', cargo: 'Forneiro', regime: 'Freelancer', padrao: NAO_TEM, valores: {} },
+    { id: 'auxiliar-atendimento', cargo: 'Auxiliar de Atendimento', regime: 'CLT', padrao: NAO_TEM, valores: {} },
+    { id: 'processos-administrativos-1', cargo: 'Processos Administrativos', regime: '—', padrao: 'Luciana', valores: {}, jaContadoEm: 'Líder de Loja' },
+    { id: 'processos-administrativos-2', cargo: 'Processos Administrativos', regime: '—', padrao: NAO_TEM, valores: {} }
+  ];
+
+  var ROSTER_PAULINIA = [NAO_TEM, 'Luciana', 'Nicole', 'Renata', 'Samara', 'Ana Beatriz'];
+
+  function carregarPessoasPaulinia() {
+    try { return JSON.parse(localStorage.getItem(CHAVE_ORG_PAULINIA)) || {}; }
+    catch (e) { return {}; }
+  }
+
+  function obterPessoaPapel(papel) {
+    var salvas = carregarPessoasPaulinia();
+    return salvas[papel.id] || papel.padrao;
+  }
+
+  function salvarPessoaPapel(papelId, nome) {
+    var salvas = carregarPessoasPaulinia();
+    salvas[papelId] = nome;
+    localStorage.setItem(CHAVE_ORG_PAULINIA, JSON.stringify(salvas));
+    sincronizarArvorePaulinia();
+  }
+
+  function sincronizarArvorePaulinia() {
+    PAPEIS_PAULINIA.forEach(function (papel) {
+      var el = document.querySelector('.pessoa-role[data-role="' + papel.id + '"]');
+      if (el) el.textContent = obterPessoaPapel(papel);
+    });
+  }
+
+  function fmtReais(v) {
+    return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function montarTabelaRemuneracaoPaulinia() {
+    var corpo = document.getElementById('corpoRemuneracaoPaulinia');
+    if (!corpo) return;
+    corpo.innerHTML = '';
+
+    PAPEIS_PAULINIA.forEach(function (papel) {
+      var tr = document.createElement('tr');
+
+      var tdCargo = document.createElement('td');
+      tdCargo.textContent = papel.cargo;
+      tr.appendChild(tdCargo);
+
+      var tdPessoa = document.createElement('td');
+      var select = document.createElement('select');
+      ROSTER_PAULINIA.forEach(function (nome) {
+        var opt = document.createElement('option');
+        opt.value = nome;
+        opt.textContent = nome;
+        select.appendChild(opt);
+      });
+      select.value = obterPessoaPapel(papel);
+      select.addEventListener('change', function () {
+        salvarPessoaPapel(papel.id, select.value);
+        montarTabelaRemuneracaoPaulinia();
+      });
+      tdPessoa.appendChild(select);
+      tr.appendChild(tdPessoa);
+
+      var tdRegime = document.createElement('td');
+      tdRegime.textContent = papel.regime;
+      tr.appendChild(tdRegime);
+
+      var pessoaAtual = obterPessoaPapel(papel);
+      var valorConhecido = papel.valores[pessoaAtual];
+
+      if (papel.jaContadoEm) {
+        ['—', '—', '—', '—', 'já contado em ' + papel.jaContadoEm].forEach(function (txt) {
+          var td = document.createElement('td');
+          td.className = 'num';
+          td.textContent = txt;
+          tr.appendChild(td);
+        });
+      } else if (pessoaAtual === NAO_TEM) {
+        ['—', '—', '—', '—', '—'].forEach(function (txt) {
+          var td = document.createElement('td');
+          td.className = 'num';
+          td.textContent = txt;
+          tr.appendChild(td);
+        });
+      } else if (valorConhecido) {
+        var total = valorConhecido.liq + valorConhecido.bonus + valorConhecido.va + valorConhecido.cesta;
+        [valorConhecido.liq, valorConhecido.bonus, valorConhecido.va, valorConhecido.cesta, total].forEach(function (v) {
+          var td = document.createElement('td');
+          td.className = 'num';
+          td.textContent = v ? fmtReais(v) : '—';
+          tr.appendChild(td);
+        });
+      } else {
+        ['sem valor confirmado', '—', '—', '—', 'sem valor confirmado'].forEach(function (txt) {
+          var td = document.createElement('td');
+          td.className = 'num';
+          td.textContent = txt;
+          tr.appendChild(td);
+        });
+      }
+
+      corpo.appendChild(tr);
+    });
+  }
+
   var ATIVIDADES_GERENCIA = coletarAtividadesGerencia();
   ['lider-loja', 'lider-pedidos', 'forneiro', 'lider-atendimento', 'aux-atendimento', 'administrativo'].forEach(function (id) {
     montarCargoDinamico(id, ATIVIDADES_GERENCIA);
   });
   marcarPapeisGerencia(ATIVIDADES_GERENCIA);
   montarConfig(ATIVIDADES_GERENCIA);
+  sincronizarArvorePaulinia();
+  montarTabelaRemuneracaoPaulinia();
 
   (function atualizarResumoCargos() {
     var botoes = document.querySelectorAll('.grupo-btn');
