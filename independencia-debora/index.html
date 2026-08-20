@@ -271,6 +271,24 @@
   .ficha-sel:focus, .ficha-num:focus { outline: none; border-color: var(--accent); }
   .ficha-num.tem { border-color: var(--accent); font-weight: 700; }
   .ficha-tot td { font-weight: 700; border-top: 2px solid var(--ink) !important; font-family: var(--mono); }
+  .ficha-barra.cabe { position: static; gap: .9rem 1.4rem; }
+  .cabe-campo { display: flex; flex-direction: column; gap: .2rem; }
+  .cabe-campo label { font-size: .625rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+  .cabe-campo .ficha-num { max-width: 6rem; text-align: left; }
+  .cabe-saida { flex: 1 1 16rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.4; }
+  .cabe-saida b { font-family: var(--mono); }
+  .cabe-saida .ok { color: var(--good); } .cabe-saida .quase { color: var(--warn); } .cabe-saida .estoura { color: var(--bad); }
+  .ficha-filtro { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+  .ficha-filtro .flabel { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em;
+                          text-transform: uppercase; color: var(--ink-faint); margin-right: .2rem; }
+  .btn-mini.ativo { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+  table.ficha tr[hidden] { display: none; }
+  table.ficha tr.depois { opacity: .45; }
+  .tamanhos { display: flex; gap: .15rem; margin-top: .25rem; }
+  .tamanhos button { font: inherit; font-family: var(--mono); font-size: .5625rem; letter-spacing: .04em;
+                     cursor: pointer; color: var(--ink-faint); background: transparent;
+                     border: 1px solid var(--rule); border-radius: 3px; padding: .1rem .25rem; line-height: 1.4; }
+  .tamanhos button:hover { border-color: var(--accent); color: var(--accent); }
   td.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
   #fResumo td.num { color: var(--ink); font-weight: 600; }
   #fResumo th:first-child, #fResumo td:first-child { position: sticky; left: 0; background: var(--surface); }
@@ -2211,34 +2229,36 @@
     </section>
 
     <section>
-      <h2 class="sec">Como estimar as horas</h2>
-      <p class="prose">
-        Estimar &ldquo;o processo 3&rdquo; é impossível — processo não tem tamanho, atividade tem. Por isso
-        a ficha abaixo é <strong>por atividade</strong>, e as atividades são exatamente as que já estão
-        dentro dos cards da aba <a href="#processos">Os 7 processos</a>. Nada foi inventado aqui: a lista
-        se monta sozinha a partir de lá.
-      </p>
-
-      <h3 class="sub">A regra de ouro</h3>
+      <h2 class="sec">Você não precisa dimensionar tudo</h2>
       <blockquote class="tese">
-        <p><strong>Toda atividade começa com a hipótese de zero hora da Débora.</strong> Ela só ganha hora
-        quando a primeira pergunta falha — e a resposta tem que ser em minutos, não em horas.</p>
+        <p><strong>São 137 atividades. Estimar as 137 é o erro.</strong> A maior parte delas você não vai
+        fazer nos próximos 30 dias — e estimar trabalho que não vai acontecer é trabalho jogado fora,
+        além de ser exatamente o que trava a saída.</p>
+        <p>Só duas contas precisam existir agora: <strong>quantas horas da Débora o sprint consome</strong>
+        e <strong>o que cabe na sua semana</strong>. O resto pode ficar em branco sem prejuízo nenhum.</p>
       </blockquote>
 
-      <h3 class="sub">As três perguntas, nesta ordem</h3>
+      <h3 class="sub">As quatro passadas, nesta ordem</h3>
       <div class="fluxo">
-        <button class="passo-caixa fred" data-detalhe="<strong>Dá pra descobrir sem ela?</strong> Indo na loja, olhando o histórico, perguntando a quem executa, lendo o que já está escrito no cardápio de projetos.<br><br>Se <strong>sim</strong>: classifica como <em>Fred sozinho</em>, estima só a hora dele e acabou — <strong>zero hora da Débora</strong>. A maior parte das 80+ atividades cai aqui, e é isso que faz o sprint caber."><span class="quem">Pergunta 1</span>Dá pra descobrir sem ela?</button><span class="seta">→</span>
-        <button class="passo-caixa debora" data-detalhe="<strong>O que exatamente só ela sabe?</strong> Não é &ldquo;me explica compras&rdquo; — é &ldquo;qual o critério que você usa pra decidir a quantidade&rdquo;.<br><br>Recortar até sobrar só o julgamento dela: critério de decisão, erro crítico, exceção, o que é bom resultado. <strong>Isso cabe em blocos de 15–20 minutos.</strong> Se a estimativa dela passou de 1h numa atividade, a pergunta ainda está larga demais."><span class="quem">Pergunta 2</span>O que só ela sabe?</button><span class="seta">→</span>
-        <button class="passo-caixa fred" data-detalhe="<strong>Quanto custa virar processo depois?</strong> Pegar o material bruto e transformar em checklist, critério, indicador e alerta — mais o teste.<br><br>É a hora do Fred no ciclo 1, e normalmente é <strong>3× a hora dela</strong> na mesma atividade. É o 20–60–20 aparecendo na estimativa."><span class="quem">Pergunta 3</span>Quanto custa virar processo?</button>
+        <button class="passo-caixa fred" data-detalhe="<strong>Uma pergunta só, sim ou não: precisa dela?</strong><br><br>Não pense em horas. Percorra as 137 marcando apenas a classificação — <em>Fred sozinho · Precisa dela · Já existe · Não se aplica</em>. É decisão binária, sai rápido, e já responde a pergunta mais importante do projeto: <strong>quanto disso depende mesmo da Débora</strong>.<br><br>Use o filtro <em>não classificadas</em> para não reler o que já passou. As 10 áreas prontas da certificação já vêm marcadas."><span class="quem">Passada 1</span>Triar, sem estimar</button><span class="seta">→</span>
+        <button class="passo-caixa debora" data-detalhe="<strong>Só as marcadas &ldquo;Precisa dela&rdquo;.</strong> Filtre por elas e estime <em>só a coluna da Débora</em>, em minutos: 15, 30 ou 60.<br><br>Provavelmente são 20 a 30 linhas, não 137. <strong>Se alguma passar de 1h, a pergunta está larga demais</strong> — recorte até sobrar só o julgamento dela.<br><br>Esta é a única estimativa que o projeto realmente exige: é o recurso escasso."><span class="quem">Passada 2</span>Estimar só as horas dela</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>Escolha os processos do sprint antes de estimar as suas horas.</strong> Dois ou três, não sete. Tudo que ficar de fora vai para <em>Fica para depois</em> e some da conta.<br><br>Priorize pelo princípio: alta liberação da Débora + poucas horas dela + protege ou gera resultado. E lembre do prazo travado: <strong>Cookie de Graça é 11 e 12 de setembro.</strong>"><span class="quem">Passada 3</span>Cortar o que não é deste sprint</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>Agora sim, só no que sobrou.</strong> E não em número exato: use os botões de tamanho — <em>15m · 1h · 3h</em>. Errar entre 1h e 3h não muda decisão nenhuma; travar para escolher entre 1h e 1h30 trava o sprint inteiro.<br><br>Preencha suas horas por semana no topo da ficha e olhe o <strong>&ldquo;cabe em X semanas&rdquo;</strong>. Se passar de 4, você não precisa estimar melhor — precisa cortar mais."><span class="quem">Passada 4</span>Dimensionar por tamanho</button>
       </div>
       <div class="passo-detalhe"></div>
 
+      <h3 class="sub">Se travar numa atividade, use estas três perguntas</h3>
+      <ul class="pontos">
+        <li><strong>Dá pra descobrir sem ela?</strong> Indo na loja, olhando histórico, perguntando a quem executa, lendo o que já está no cardápio de projetos. Se sim, acabou: <em>Fred sozinho</em>, zero hora dela.</li>
+        <li><strong>O que exatamente só ela sabe?</strong> Não é &ldquo;me explica compras&rdquo; — é &ldquo;qual o critério pra decidir a quantidade&rdquo;. Recorte até caber em 15–20 minutos.</li>
+        <li><strong>Quanto custa virar processo depois?</strong> Sua hora no ciclo 1, tipicamente 3× a dela. É o 20–60–20 aparecendo na conta.</li>
+      </ul>
+
       <div class="note-item">
-        <span class="tag warn">o atalho que evita travar</span>
-        <div><strong>Classifique tudo antes de estimar qualquer coisa.</strong> Passar as 80+ atividades
-        marcando só &ldquo;Fred sozinho / Precisa dela / Já existe / Não se aplica&rdquo; é rápido e já
-        responde a pergunta que importa: <em>quanto do projeto depende dela de verdade</em>. Só depois
-        volte para digitar horas — e só nas que sobraram.</div>
+        <span class="tag warn">a regra de ouro</span>
+        <div><strong>Toda atividade começa com a hipótese de zero hora da Débora.</strong> Ela só ganha
+        hora quando a primeira pergunta falha. Deixar a coluna dela em branco é uma resposta válida — e é
+        a resposta certa na maioria das 137.</div>
       </div>
     </section>
 
@@ -2251,16 +2271,30 @@
       </p>
 
       <div class="ficha-barra">
-        <div class="ficha-stat"><b id="fStatClass">0/0</b><span>classificadas</span></div>
+        <div class="ficha-stat"><b id="fStatClass">0/0</b><span>triadas</span></div>
         <div class="progresso"><i id="fProg"></i></div>
-        <div class="ficha-stat fred"><b id="fStatFred">0h</b><span>Fred</span></div>
-        <div class="ficha-stat debora"><b id="fStatDeb">0h</b><span>Débora</span></div>
-        <div class="ficha-stat"><b id="fStatEq">0h</b><span>equipe/terceiro</span></div>
-        <div class="ficha-stat"><b id="fStatTot">0h</b><span>total</span></div>
+        <div class="ficha-stat fred"><b id="fStatFred">0h</b><span>Fred no sprint</span></div>
+        <div class="ficha-stat debora"><b id="fStatDeb">0h</b><span>Débora no sprint</span></div>
+        <div class="ficha-stat"><b id="fStatEq">0h</b><span>equipe</span></div>
+        <div class="ficha-stat"><b id="fStatFora">0h</b><span>fica p/ depois</span></div>
         <div class="ficha-acoes">
           <button class="btn-mini" type="button" id="fCopiar">copiar tudo</button>
           <button class="btn-mini perigo" type="button" id="fLimpar">limpar</button>
         </div>
+      </div>
+
+      <div class="ficha-barra cabe">
+        <div class="cabe-campo"><label for="capFred">suas horas / semana</label><input type="number" min="0" step="1" id="capFred" class="ficha-num" placeholder="0"></div>
+        <div class="cabe-campo"><label for="capDeb">horas dela / semana</label><input type="number" min="0" step="0.5" id="capDeb" class="ficha-num" placeholder="0"></div>
+        <div class="cabe-saida" id="fCabe">Preencha as duas capacidades para ver se o que você marcou cabe nos 30 dias.</div>
+      </div>
+
+      <div class="ficha-filtro">
+        <span class="flabel">mostrar</span>
+        <button class="btn-mini ativo" type="button" data-filtro="tudo">todas</button>
+        <button class="btn-mini" type="button" data-filtro="sem">não triadas</button>
+        <button class="btn-mini" type="button" data-filtro="debora">precisam dela</button>
+        <button class="btn-mini" type="button" data-filtro="sprint">no sprint</button>
       </div>
 
       <div class="fgrade" id="fGrade"></div>
@@ -2663,8 +2697,13 @@
       { v: 'fred',    rot: 'Fred sozinho' },
       { v: 'debora',  rot: 'Precisa dela' },
       { v: 'existe',  rot: 'Já existe pronto' },
-      { v: 'na',      rot: 'Não se aplica' }
+      { v: 'na',      rot: 'Não se aplica' },
+      { v: 'depois',  rot: 'Fica para depois' }
     ];
+    // tamanhos de um clique — escalas diferentes de propósito:
+    // a hora dela é bloco curto (15-60 min); a dele é meia hora a três horas.
+    var TAMANHOS = { f: [[0.25,'15m'],[1,'1h'],[3,'3h']], d: [[0.25,'15m'],[0.5,'30m'],[1,'1h']], e: [[1,'1h'],[3,'3h'],[8,'8h']] };
+    var FORA = { na: 1, depois: 1 };
     var dados = {};
     try { dados = JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) { dados = {}; }
     function salvar() { try { localStorage.setItem(CHAVE, JSON.stringify(dados)); } catch (e) {} }
@@ -2786,6 +2825,20 @@
             salvar(); recalcular();
           });
           td.appendChild(inp);
+          var tam = document.createElement('div');
+          tam.className = 'tamanhos';
+          TAMANHOS[campo].forEach(function (t) {
+            var b2 = document.createElement('button');
+            b2.type = 'button'; b2.textContent = t[1]; b2.title = t[0] + 'h';
+            b2.addEventListener('click', function () {
+              inp.value = t[0];
+              reg(a.id)[campo] = String(t[0]);
+              inp.classList.add('tem');
+              salvar(); recalcular();
+            });
+            tam.appendChild(b2);
+          });
+          td.appendChild(tam);
           tr.appendChild(td);
         });
 
@@ -2818,6 +2871,7 @@
       if (v === 'fred' || v === 'existe') tr.classList.add('so-fred');
       if (v === 'debora') tr.classList.add('precisa-dela');
       if (v === 'na') tr.classList.add('na');
+      if (v === 'depois') tr.classList.add('depois');
     }
 
     // ---- resumo por processo (4 auto + 4 manuais) ----
@@ -2855,13 +2909,14 @@
     });
 
     function recalcular() {
-      var gF = 0, gD = 0, gE = 0, classificadas = 0, total = 0;
+      var gF = 0, gD = 0, gE = 0, gFora = 0, classificadas = 0, total = 0;
       processos.forEach(function (proc) {
         var pF = 0, pD = 0, pE = 0, pClass = 0;
         proc.ativs.forEach(function (a) {
           var r = dados[a.id] || {};
           var f = num(r.f), d = num(r.d), e = num(r.e);
-          pF += f; pD += d; pE += e;
+          if (FORA[r.c]) { gFora += f + d + e; }
+          else { pF += f; pD += d; pE += e; }
           if (r.c) pClass++;
           var tr = document.querySelector('.fpainel[data-proc="' + proc.id + '"] tr[data-id="' + CSS.escape(a.id) + '"]');
           if (tr) {
@@ -2898,7 +2953,69 @@
       document.getElementById('fStatFred').textContent = fmt(gF);
       document.getElementById('fStatDeb').textContent = fmt(gD);
       document.getElementById('fStatEq').textContent = fmt(gE);
-      document.getElementById('fStatTot').textContent = fmt(gF + gD + gE);
+      document.getElementById('fStatFora').textContent = fmt(gFora);
+      calcularCabe(gF, gD);
+      aplicarFiltro();
+    }
+
+    // ---- cabe nos 30 dias? ----
+    var capF = document.getElementById('capFred'), capD = document.getElementById('capDeb');
+    [['capF', capF], ['capD', capD]].forEach(function (par) {
+      var v = dados['cap'] && dados['cap'][par[0]];
+      if (v) par[1].value = v;
+      par[1].addEventListener('input', function () { reg('cap')[par[0]] = par[1].value; salvar(); recalcular(); });
+    });
+
+    function calcularCabe(hF, hD) {
+      var saida = document.getElementById('fCabe');
+      var sF = num(capF.value), sD = num(capD.value);
+      if (!sF && !sD) {
+        saida.textContent = 'Preencha as duas capacidades para ver se o que você marcou cabe nos 30 dias.';
+        return;
+      }
+      function linha(rot, horas, porSemana) {
+        if (!porSemana) return rot + ': <b>' + fmt(horas) + '</b> (falta a capacidade)';
+        var sem = horas / porSemana;
+        var cls = sem <= 4 ? 'ok' : (sem <= 6 ? 'quase' : 'estoura');
+        var txt = sem <= 4 ? 'cabe no sprint' : (sem <= 6 ? 'passa do sprint' : 'não cabe — precisa cortar');
+        return rot + ': <b>' + fmt(horas) + '</b> = <span class="' + cls + '"><b>' +
+               (Math.round(sem * 10) / 10) + ' semanas</b> · ' + txt + '</span>';
+      }
+      saida.innerHTML = linha('Você', hF, sF) + '<br>' + linha('Débora', hD, sD) +
+        '<br><span style="color:var(--ink-faint)">O sprint tem 4 semanas. Se estourar, o caminho é ' +
+        'mandar processo para &ldquo;fica para depois&rdquo; — não estimar melhor.</span>';
+    }
+
+    // ---- filtro de linhas ----
+    var filtroAtual = 'tudo';
+    document.querySelectorAll('.ficha-filtro .btn-mini').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.ficha-filtro .btn-mini').forEach(function (x) { x.classList.remove('ativo'); });
+        b.classList.add('ativo');
+        filtroAtual = b.dataset.filtro;
+        aplicarFiltro();
+      });
+    });
+
+    function aplicarFiltro() {
+      processos.forEach(function (proc) {
+        var painel = document.querySelector('.fpainel[data-proc="' + proc.id + '"]');
+        if (!painel) return;
+        var visiveis = 0;
+        proc.ativs.forEach(function (a) {
+          var tr = painel.querySelector('tr[data-id="' + CSS.escape(a.id) + '"]');
+          if (!tr) return;
+          var c = (dados[a.id] || {}).c || '';
+          var ok = filtroAtual === 'tudo' ||
+                   (filtroAtual === 'sem' && !c) ||
+                   (filtroAtual === 'debora' && c === 'debora') ||
+                   (filtroAtual === 'sprint' && c && !FORA[c]);
+          tr.hidden = !ok;
+          if (ok) visiveis++;
+        });
+        var btn = grade.querySelector('.fgrupo-btn[data-proc="' + proc.id + '"]');
+        if (btn) btn.style.opacity = (filtroAtual !== 'tudo' && !visiveis) ? '.4' : '';
+      });
     }
 
     document.getElementById('fCopiar').addEventListener('click', function () {
@@ -2925,6 +3042,7 @@
       document.querySelectorAll('.ficha-num').forEach(function (i) { i.value = ''; i.classList.remove('tem'); });
       document.querySelectorAll('.ficha-sel').forEach(function (sl) { sl.value = ''; });
       document.querySelectorAll('.fpainel tbody tr').forEach(function (tr) { pintarLinha(tr, ''); });
+      capF.value = ''; capD.value = '';
       recalcular();
     });
 
