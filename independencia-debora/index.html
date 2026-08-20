@@ -394,7 +394,7 @@
         <span class="tag bad">falha do pilar 1</span>
         <div><strong>Mudar o gargalo de lugar.</strong> Transferir tudo da Débora para o Fred resolve o
         problema dela e cria o mesmo problema um degrau adiante. Por isso <em>o destino final de cada
-        competência é definido antes da transferência</em> — e em quatro dos sete processos esse destino
+        competência é definido antes da transferência</em> — e em cinco dos sete processos esse destino
         não é o Fred.</div>
       </div>
       <div class="note-item">
@@ -449,13 +449,13 @@
           <tr><td>4</td><td>Treinamento de equipe</td><td>Débora → Fred/Sistema → Liderança</td><td>Sistema + liderança</td></tr>
           <tr><td>5</td><td>Contratação de equipe</td><td>Débora → Fred/Sistema → Adm/RH</td><td>Administrativo/RH</td></tr>
           <tr><td>6</td><td>Marketing do iFood</td><td>Débora → Fred</td><td>Fred, com baixa demanda recorrente</td></tr>
-          <tr><td>7</td><td>DRE das lojas</td><td>Débora → Fred → ?</td><td class="vazio">a definir</td></tr>
+          <tr><td>7</td><td>DRE das lojas</td><td>Débora → Fred → Sistema</td><td>Sistema (sensores diários, Fred lê a cada 2–3 meses)</td></tr>
         </tbody>
       </table></div>
       <p class="prose" style="font-size:.875rem">
-        Em <strong>quatro dos sete</strong> o destino final não é o Fred — é exatamente isso que impede a
-        falha do pilar 1. Dois são do Fred mesmo, e o sétimo (DRE) está em aberto: decidir o destino dele
-        é parte do trabalho. Detalhe de cada um na aba <em>Os 7 processos</em>.
+        Em <strong>cinco dos sete</strong> o destino final não é o Fred — é exatamente isso que impede a
+        falha do pilar 1. Só faturamento da loja e marketing do iFood ficam com ele.
+        Detalhe de cada um na aba <em>Os 7 processos</em>.
       </p>
     </section>
 
@@ -573,8 +573,8 @@
       </button>
       <button class="grupo-btn" data-grupo="p7">
         <span class="gnome">7 · DRE das lojas</span>
-        <span class="gdesc">O resultado de cada loja fechado com número: de onde vem o dado, quem fecha, com que frequência e como se lê.</span>
-        <span class="gdestino">destino final: <b>a definir</b></span>
+        <span class="gdesc">O resultado de cada loja fechado com número — e um sistema de sensores lendo o dia a dia, com buffer, que só fala quando estoura.</span>
+        <span class="gdestino">destino final: <b>Sistema</b></span>
       </button>
     </div>
 
@@ -622,19 +622,18 @@
     </div>
 
     <div class="grupo-descricao" data-grupo="p7" hidden>
-      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred</span><span class="seta">→</span><span class="no destino">a definir</span></div>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred</span><span class="seta">→</span><span class="no destino">Sistema</span></div>
       <p class="prose" style="font-size:.875rem">
         O único processo do projeto que <strong>não é opcional para o pilar 2</strong>: sem DRE por loja
         não existe como provar margem mínima, nem medir a meta de crescimento, nem saber se uma campanha
         deu lucro ou só movimento. Ele é a régua que os outros seis usam.
       </p>
       <div class="note-item">
-        <span class="tag warn">decisão em aberto</span>
-        <div><strong>O destino final ainda não está definido</strong> — e definir antes de transferir é
-        regra do projeto. Dois candidatos: <em>Sistema + Administrativo</em> (o Adm fecha, o sistema
-        calcula e sinaliza, o Fred só lê) ou <em>Fred</em>, se a leitura do resultado for considerada
-        decisão de sócio e não rotina administrativa. A escolha muda quantas horas permanentes ele
-        recebe.</div>
+        <span class="tag acc">destino decidido</span>
+        <div><strong>O destino é o sistema — não uma pessoa.</strong> O sistema lê os sensores dia a dia,
+        com buffer configurado, e <em>só fala quando estoura</em>. O Fred não acompanha o dia a dia: ele
+        faz uma análise de fundo a cada dois ou três meses e reage aos estouros. A Débora sai por
+        completo — participa só da calibragem inicial dos limiares, que é uso legítimo do 20% dela.</div>
       </div>
     </div>
 
@@ -691,6 +690,8 @@
     <div class="grade-topicos" data-grupo="p7" hidden>
       <button class="topico-btn" data-topico="p7-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
       <button class="topico-btn" data-topico="p7-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p7-sensores"><span class="tnome">Os sensores e os buffers</span><span class="tag acc">o destino</span></button>
+      <button class="topico-btn" data-topico="p7-cadencia"><span class="tnome">As três cadências</span></button>
       <button class="topico-btn" data-topico="p7-pilar2"><span class="tnome">Por que ele sustenta o pilar 2</span><span class="tag good">crítico</span></button>
       <button class="topico-btn" data-topico="p7-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
     </div>
@@ -1472,10 +1473,79 @@
           <button class="passo-caixa fred" data-detalhe="<strong>Antes de extrair.</strong> O Fred rastreia sozinho a origem de cada linha do DRE — sistema, planilha, pessoa. É levantamento, não julgamento: <strong>não gastar hora da Débora com isso</strong>."><span class="quem">Fred · primeiro</span>Rastrear as fontes de dado</button><span class="seta">→</span>
           <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1, enxuto e cirúrgico.</strong> Só o que o rastreamento não respondeu: critério de rateio, como ela lê o DRE, contra o que compara e o que a faz agir."><span class="quem">Ciclo 1</span>Extrair só o tácito</button><span class="seta">→</span>
           <button class="passo-caixa fred" data-detalhe="Estrutura fixa de linhas, calendário de fechamento com data, responsável por cada fonte e <strong>faixas de margem por loja</strong> — que passam a alimentar os guardrails do pilar 2."><span class="quem">Fred</span>Fechar estrutura e calendário</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="<strong>Decisão em aberto:</strong> Sistema + Administrativo (o Adm fecha, o sistema calcula e sinaliza, o Fred lê) ou Fred, se a leitura for tratada como decisão de sócio. <strong>Definir antes de transferir</strong> — é regra do projeto."><span class="quem">Destino</span>Definir para onde vai</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="A Débora sai. Se o destino for Sistema + Administrativo, o Fred sai da execução e fica só com a leitura mensal."><span class="quem">Saída</span>Retirar a Débora</button>
+          <button class="passo-caixa outro" data-detalhe="<strong>O destino é o sistema.</strong> Cada linha crítica vira um sensor lendo dia a dia, com <strong>buffer</strong> — a faixa dispara antes do limite, com folga suficiente para dar tempo de reagir. Sensor sem buffer avisa quando já não dá mais para consertar."><span class="quem">Sistema</span>Ligar os sensores com buffer</button><span class="seta">→</span>
+          <button class="passo-caixa debora" data-detalhe="<strong>A calibragem pode ser feita junto com a Débora</strong> — ela é quem sabe qual variação é normal e qual é problema. É uso legítimo do 20% dela: uma vez, para configurar; não vira acompanhamento recorrente."><span class="quem">Calibragem</span>Ajustar os limiares com ela</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="A Débora sai por completo. O Fred não acompanha o dia a dia: <strong>o sistema só fala quando estoura</strong>, e ele faz uma análise de fundo a cada dois ou três meses."><span class="quem">Saída</span>Soltar o dia a dia</button>
         </div>
         <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p7-sensores" hidden>
+        <h2>7 · Os sensores e os buffers<span class="status andamento">o destino</span></h2>
+        <p class="prose">
+          O destino do DRE não é uma pessoa — é um <strong>sistema de sensores</strong>. Cada linha crítica
+          do resultado vira um sensor que lê os dados todo dia e compara com uma faixa. Enquanto está
+          dentro, ninguém é incomodado. <strong>O sistema só fala quando estoura.</strong>
+        </p>
+
+        <h3 class="sub">Por que todo sensor precisa de buffer</h3>
+        <blockquote class="tese">
+          <p><strong>Sensor sem buffer avisa quando já não dá mais para consertar.</strong> Se a faixa
+          dispara exatamente no limite que não pode ser rompido, o alerta chega no momento em que o dano
+          já aconteceu — o aviso vira relatório de acidente.</p>
+          <p>O buffer é a folga entre <em>onde o sensor dispara</em> e <em>onde o limite realmente é</em>.
+          Ele não se define por número redondo: define-se por <strong>quanto tempo leva para corrigir
+          aquilo</strong>. Se reverter um desvio de CMV leva três semanas, o sensor tem que disparar com
+          três semanas de folga.</p>
+        </blockquote>
+
+        <h3 class="sub">O que cada sensor precisa ter configurado</h3>
+        <ul class="check">
+          <li><strong>A linha que ele observa</strong> — qual número do DRE ou da operação diária.</li>
+          <li><strong>A fonte do dado</strong> e a garantia de que ele chega todo dia sem alguém empurrar.</li>
+          <li><strong>O limite real</strong> — o guardrail, o ponto que não pode ser rompido.</li>
+          <li><strong>O buffer</strong> — a folga, dimensionada pelo tempo de correção, não por arredondamento.</li>
+          <li><strong>Quem é avisado</strong> quando estoura, e em que canal.</li>
+          <li><strong>O protocolo</strong> — o que se faz. Escrito antes, e sem terminar na Débora.</li>
+        </ul>
+
+        <div class="note-item">
+          <span class="tag warn">o erro clássico</span>
+          <div><strong>Buffer apertado demais gera alarme falso; largo demais vira ruído que ninguém
+          lê.</strong> Os dois estragam o sistema do mesmo jeito — a equipe aprende a ignorar o alerta.
+          Por isso a calibragem inicial vale a hora da Débora: ela é quem sabe, hoje, qual variação é
+          normal e qual é sinal de problema.</div>
+        </div>
+        <div class="note-item">
+          <span class="tag acc">a regra vale para o projeto inteiro</span>
+          <div>Isso não é só do processo 7. <strong>Todo sensor de qualquer processo precisa de
+          buffer</strong> — CMV, estoque, perdas, faturamento por loja, iFood. Ver
+          <a href="#guardrails">Guardrails</a>, onde a mesma regra está aplicada ao sistema de sinais.</div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p7-cadencia" hidden>
+        <h2>7 · As três cadências</h2>
+        <p class="prose">
+          O DRE tem três ritmos diferentes, e confundi-los é o que faz o processo voltar para uma pessoa.
+          O sistema segura os dois primeiros; o Fred entra só no terceiro — <strong>ou quando estoura</strong>.
+        </p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Ritmo</th><th>Quem</th><th>O que acontece</th></tr></thead>
+          <tbody>
+            <tr><td>Diário</td><td>Sistema</td><td>Os sensores leem os dados que alimentam o resultado — faturamento, CMV, custo — e comparam com a faixa. Silêncio significa verde.</td></tr>
+            <tr><td>Mensal</td><td>Sistema + quem alimenta</td><td>O DRE fecha, na data do calendário. Estrutura de linhas fixa, rateio pelo critério escrito.</td></tr>
+            <tr><td>A cada 2–3 meses</td><td>Fred</td><td>Análise de fundo: tendência, comparação entre as três lojas, decisão do que muda. Não é acompanhamento — é leitura de resultado.</td></tr>
+            <tr><td>Fora de ritmo</td><td>Sistema → Fred</td><td><strong>Estourou.</strong> O sensor dispara e o protocolo daquele indicador roda. Só isso interrompe o Fred entre uma análise e outra.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note-item">
+          <span class="tag warn">a fechar</span>
+          <div>Falta cravar se a análise de fundo é <strong>bimestral ou trimestral</strong>. A diferença
+          não é pequena: bimestral dá seis leituras por ano e mais chance de corrigir rota; trimestral
+          custa menos hora permanente do Fred. Decidir junto com o limite de horas semanais dele, na
+          aba <a href="#capacidade">Capacidade</a>.</div>
+        </div>
       </div>
 
       <div class="topico-conteudo" data-topico="p7-pilar2" hidden>
@@ -1513,7 +1583,10 @@
           <li>Existe <strong>data de fechamento no calendário</strong>, e ela foi cumprida.</li>
           <li>O critério de rateio está escrito — e não muda de mês para mês.</li>
           <li>Existem <strong>faixas de margem por loja</strong> alimentando os guardrails.</li>
-          <li>O destino final foi decidido e formalizado.</li>
+          <li>Cada sensor tem <strong>limite, buffer, destinatário e protocolo</strong> configurados.</li>
+          <li>Os sensores rodaram <strong>um mês inteiro lendo sozinhos</strong>, e o silêncio deles significou verde de verdade — não sensor desligado.</li>
+          <li>Pelo menos <strong>um estouro real disparou</strong>, o protocolo rodou e não terminou na Débora.</li>
+          <li>A cadência da análise de fundo do Fred está cravada (bimestral ou trimestral) e agendada.</li>
         </ul>
       </div>
 
