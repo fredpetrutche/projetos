@@ -609,7 +609,7 @@
       </button>
       <button class="grupo-btn" data-grupo="p3">
         <span class="gnome">3 · Compras + estoque</span>
-        <span class="gdesc">Controle de estoque das 3 lojas, compras das lojas e compras da fábrica Holy Cook.</span>
+        <span class="gdesc">Três blocos: compras da fábrica (Campinas já roda), o inventário de estoque e as compras de insumos em geral.</span>
         <span class="gdestino">destino final: <b>Sistema + equipe</b></span>
       </button>
       <button class="grupo-btn" data-grupo="p4">
@@ -660,9 +660,17 @@
     </div>
     <div class="grupo-descricao" data-grupo="p3" hidden>
       <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Equipe</span></div>
-      <p class="prose" style="font-size:.875rem">O maior em volume de execução, e o único com três frentes de natureza diferente.
-      A vantagem: <strong>uma das lojas já tem um processo de compras que funciona</strong> — o trabalho é
-      consolidar esse e adaptar para as outras duas, não inventar do zero.</p>
+      <p class="prose" style="font-size:.875rem">O maior em volume de execução, e o único com três blocos
+      de natureza diferente: <em>3.1 compras da fábrica · 3.2 estoque (inventário) · 3.3 compras de
+      insumos em geral</em>.</p>
+      <div class="note-item">
+        <span class="tag good">a vantagem deste processo</span>
+        <div>É o único que <strong>já tem software e processo escritos</strong>. As compras da fábrica
+        <strong>já funcionam em Campinas</strong>, num sistema que importa planilha e calcula a
+        recomendação de compra sozinho — falta replicar para Piracicaba e Paulínia. E o inventário de
+        estoque já está desenhado por inteiro, etapa por etapa. Aqui quase nada é invenção: é
+        <em>replicação e implantação</em>.</div>
+      </div>
     </div>
     <div class="grupo-descricao" data-grupo="p4" hidden>
       <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Liderança</span></div>
@@ -729,9 +737,9 @@
     </div>
 
     <div class="grade-topicos" data-grupo="p3" hidden>
-      <button class="topico-btn" data-topico="p3-a" data-trabalho="1"><span class="tnome">3A · Controle de estoque</span></button>
-      <button class="topico-btn" data-topico="p3-b" data-trabalho="1"><span class="tnome">3B · Compras das lojas</span></button>
-      <button class="topico-btn" data-topico="p3-c" data-trabalho="1"><span class="tnome">3C · Compras da fábrica Holy Cook</span></button>
+      <button class="topico-btn" data-topico="p3-fabrica" data-trabalho="1"><span class="tnome">Compras da fábrica</span><span class="tag neutro">3.1 · Campinas já roda</span></button>
+      <button class="topico-btn" data-topico="p3-inventario" data-trabalho="1"><span class="tnome">Estoque — Inventário</span><span class="tag good">3.2 · processo já escrito</span></button>
+      <button class="topico-btn" data-topico="p3-insumos" data-trabalho="1"><span class="tnome">Compras de insumos em geral</span><span class="tag neutro">3.3</span></button>
       <button class="topico-btn" data-topico="p3-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p3-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
       <button class="topico-btn" data-topico="p3-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
@@ -1143,106 +1151,219 @@
       </div>
 
       <!-- ══════ PROCESSO 3 ══════ -->
-      <div class="topico-conteudo" data-topico="p3-a" hidden>
-        <h2>3A · Controle de estoque<span class="status definir">a extrair</span></h2>
-        <p class="prose">Três lojas, provavelmente três jeitos diferentes de controlar. O primeiro trabalho é descobrir <strong>o que já funciona</strong> antes de padronizar por cima.</p>
-        <div class="grade-itens">
-          <button class="item-btn" data-item="mapear">Mapear o processo atual</button>
-          <button class="item-btn" data-item="funciona">O que já funciona</button>
-          <button class="item-btn" data-item="diferencas">Diferenças entre as 3 lojas</button>
-          <button class="item-btn" data-item="minmax">Estoque mínimo e máximo</button>
-          <button class="item-btn" data-item="contagem">Frequência da contagem</button>
-          <button class="item-btn" data-item="quem">Responsável pela contagem</button>
-          <button class="item-btn" data-item="divergencia">Tratamento de divergências</button>
-          <button class="item-btn" data-item="perdas">Indicadores de perda e desperdício</button>
-          <button class="item-btn" data-item="alerta">Alertas</button>
-        </div>
-        <div class="item-visor">
-          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
-          <div class="item-conteudo" data-item="mapear" hidden>
-            <p>Como o controle de estoque acontece hoje, loja a loja: quem conta, o que conta, onde registra e o que faz com o número depois.</p>
-            <p><strong>Este item o Fred consegue mapear sem a Débora</strong> — indo na loja e perguntando pra quem executa. Não gastar hora dela com isso.</p>
-          </div>
-          <div class="item-conteudo" data-item="funciona" hidden>
-            <p>Antes de mudar qualquer coisa: <strong>o que já está bom</strong>. Padronizar por cima do que funciona é a forma mais rápida de piorar e criar resistência.</p>
-          </div>
-          <div class="item-conteudo" data-item="diferencas" hidden>
-            <p>Onde as três lojas divergem — e, para cada divergência, se ela é <strong>problema</strong> (falta de padrão) ou <strong>adaptação legítima</strong> (volume, espaço físico, equipe).</p>
-          </div>
-          <div class="item-conteudo" data-item="minmax" hidden>
-            <p>Estoque mínimo e máximo por item, onde fizer sentido. É o que permite o pedido virar regra em vez de julgamento — e o que cria o <strong>buffer</strong> que protege a operação de erro de quem está aprendendo.</p>
-          </div>
-          <div class="item-conteudo" data-item="contagem" hidden>
-            <p>De quanto em quanto tempo se conta, e se a frequência é a mesma para todo item ou se itens críticos contam mais vezes.</p>
-          </div>
-          <div class="item-conteudo" data-item="quem" hidden>
-            <p>Quem conta, em qual turno, e quem cobre quando essa pessoa falta. <strong>Responsabilidade sem substituto declarado volta pra cima</strong> — e &ldquo;pra cima&rdquo; hoje é a Débora.</p>
-          </div>
-          <div class="item-conteudo" data-item="divergencia" hidden>
-            <p>O que fazer quando o contado não bate com o esperado: a partir de que diferença vira ocorrência, quem investiga, quem decide e o que é registrado.</p>
-          </div>
-          <div class="item-conteudo" data-item="perdas" hidden>
-            <p>Perda e desperdício viram número — por loja, por período. Sem isso, deterioração de estoque só aparece no CMV, tarde demais.</p>
-          </div>
-          <div class="item-conteudo" data-item="alerta" hidden>
-            <p>O que avisa quando o estoque de um item crítico furou o mínimo, ou quando a perda passou do aceitável — e para quem avisa.</p>
-          </div>
-        </div>
-      </div>
+      <div class="topico-conteudo" data-topico="p3-fabrica" hidden>
+        <h2>3.1 · Compras da fábrica<span class="status andamento">Campinas já roda</span></h2>
+        <p class="prose">
+          <strong>Campinas já funciona</strong> — existe sistema que importa a planilha e calcula a
+          recomendação de compra sozinho. O trabalho é <strong>replicar para Piracicaba e Paulínia</strong>,
+          e não é replicar código: é fazer o cálculo do sistema bater com a planilha manual de cada loja
+          antes de deixar alguém confiar nele.
+        </p>
 
-      <div class="topico-conteudo" data-topico="p3-b" hidden>
-        <h2>3B · Compras das lojas<span class="status andamento">tem base pronta</span></h2>
-        <p class="prose">Aqui existe uma vantagem que nenhum outro processo tem: <strong>uma das lojas já tem um processo de compras que funciona.</strong> O caminho é consolidar esse e adaptar — não desenhar do zero.</p>
+        <h3 class="sub">As três fases — clique numa caixinha</h3>
         <div class="fluxo">
-          <button class="passo-caixa fred" data-detalhe="Escrever o processo da loja que já funciona: o que se compra, de quem, quando, em que quantidade e com base em quê. <strong>Grande parte disso o Fred levanta direto com quem executa hoje</strong>, sem gastar hora da Débora."><span class="quem">Passo 1</span>Consolidar o que já funciona</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="Adaptar para a loja 2 — respeitando as diferenças legítimas de volume, espaço e equipe mapeadas no 3A. Adaptar não é copiar."><span class="quem">Passo 2</span>Adaptar para a loja 2</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="Adaptar para a loja 3, com o aprendizado da loja 2 já incorporado. A terceira adaptação deve custar menos que a segunda — se não custar, o processo não está genérico o bastante."><span class="quem">Passo 3</span>Adaptar para a loja 3</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="<strong>O teste que vale.</strong> Um ciclo de pedido inteiro, nas três lojas, sem nenhuma participação da Débora — nem para aprovar, nem para lembrar, nem para corrigir. Se alguém precisou perguntar pra ela, não passou."><span class="quem">Passo 4</span>Testar sem a Débora</button>
+          <button class="passo-caixa fred" data-detalhe="<strong>Fase 1 — o sistema tem que bater com o real.</strong> Pegar a planilha manual da loja, rodar o mesmo período no sistema, listar as divergências, levar a lista pra Débora explicar, ajustar e pedir a validação final dela.<br><br><strong>Critério de saída:</strong> dois pedidos seguidos, em duas semanas, com o sistema batendo. Enquanto não bater, não passa pra fase 2 — sistema que erra e é entregue pra equipe queima a confiança de uma vez só."><span class="quem">Fase 1</span>Bater o sistema com o real</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="<strong>Fase 2 — tirar da planilha.</strong> Tela amigável pro funcionário, o mapa do que precisa ser importado à mão (o que o sistema não tem como saber sozinho) e a validação do número final antes do pedido sair.<br><br><strong>Critério de saída:</strong> o pedido sai pela tela, sem ninguém abrir a planilha."><span class="quem">Fase 2</span>Tirar da planilha</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Fase 3 — soltar em degraus.</strong> Grava o treinamento; a equipe faz uma vez com acompanhamento e o resultado tem que bater; depois faz sozinha e só se analisa o número final.<br><br><strong>Critério de saída:</strong> um ciclo de pedido inteiro feito pela equipe, sem Débora e sem Fred no meio."><span class="quem">Fase 3</span>Soltar em degraus</button>
         </div>
         <div class="passo-detalhe"></div>
-        <h3 class="sub">O que precisa ficar definido</h3>
-        <ul class="check">
-          <li><strong>Responsável pelos pedidos</strong> em cada loja — com substituto declarado.</li>
-          <li><strong>Frequência</strong> do pedido — dia fixo, não &ldquo;quando acabar&rdquo;.</li>
-          <li><strong>Critérios de quantidade</strong> — ancorados no mínimo/máximo definido no 3A.</li>
-          <li><strong>Aprovações e exceções</strong> — o que a pessoa decide sozinha, acima de que valor escala, e para quem escala (que não é a Débora).</li>
-        </ul>
+
+        <div class="note-item">
+          <span class="tag acc">por que nesta ordem</span>
+          <div><strong>A escada de autonomia é o que faz a transferência colar.</strong> Cada degrau só
+          abre quando o anterior provou que funciona — e o critério de prova é sempre o mesmo:
+          <em>o número bateu</em>. Pular a fase 1 e treinar a equipe num sistema que ainda erra é a forma
+          mais rápida de todo mundo voltar pra planilha.</div>
+        </div>
+
+        <h3 class="sub">Os passos, um a um</h3>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="f1-planilha">F1 · Pegar a planilha manual</button>
+          <button class="item-btn" data-item="f1-comparar">F1 · Comparar com o sistema</button>
+          <button class="item-btn" data-item="f1-divergencias">F1 · Levantar as divergências</button>
+          <button class="item-btn" data-item="f1-debora">F1 · Débora explica as divergências</button>
+          <button class="item-btn" data-item="f1-ajustar">F1 · Ajustar o sistema</button>
+          <button class="item-btn" data-item="f1-validar">F1 · Débora valida a versão final</button>
+          <button class="item-btn" data-item="f1-dois">F1 · Dois pedidos com o sistema batendo</button>
+          <button class="item-btn" data-item="f2-tela">F2 · Tela amigável para a equipe</button>
+          <button class="item-btn" data-item="f2-importar">F2 · O que precisa ser informado à mão</button>
+          <button class="item-btn" data-item="f2-numero">F2 · Cálculo e validação do número final</button>
+          <button class="item-btn" data-item="f3-treino">F3 · Gravar o treinamento</button>
+          <button class="item-btn" data-item="f3-acompanhado">F3 · Equipe faz uma vez, acompanhada</button>
+          <button class="item-btn" data-item="f3-sozinho">F3 · Equipe sozinha, só o resultado é olhado</button>
+          <button class="item-btn" data-item="piracicaba">Repetir para a outra loja</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num passo para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="f1-planilha" hidden>
+            <p>A planilha que hoje é feita <strong>manualmente</strong> para o pedido da fábrica. Levantar de onde ela sai, quem preenche e com que dados.</p>
+            <p><strong>Hora do Fred, não dela</strong> — é buscar arquivo e perguntar a quem preenche.</p>
+          </div>
+          <div class="item-conteudo" data-item="f1-comparar" hidden>
+            <p>Rodar o mesmo período no sistema e colocar os dois números lado a lado, item a item. <strong>Não é conferir o total</strong>: total pode bater por compensação de dois erros.</p>
+          </div>
+          <div class="item-conteudo" data-item="f1-divergencias" hidden>
+            <p>A lista do que não bateu, com o tamanho de cada diferença. <strong>Esta lista é o produto da fase 1</strong> — é ela, e não uma conversa aberta, que vai ser levada pra Débora.</p>
+          </div>
+          <div class="item-conteudo" data-item="f1-debora" hidden>
+            <p><strong>O único ponto da fase que exige hora dela.</strong> Ela olha a lista e explica cada divergência: onde a planilha considera algo que o sistema não sabe, onde o critério dela é diferente da regra programada, onde a planilha é que está errada.</p>
+            <p>Bloco curto, com a lista pronta na mão — é o formato mais econômico de usar o tempo dela em todo o projeto.</p>
+          </div>
+          <div class="item-conteudo" data-item="f1-ajustar" hidden>
+            <p>Fred corrige a regra do sistema com o que ela explicou. <strong>Cada ajuste vira regra escrita</strong>, não só código — senão o critério dela volta a existir só num lugar, que agora é o software.</p>
+          </div>
+          <div class="item-conteudo" data-item="f1-validar" hidden>
+            <p>Ela volta uma vez, no fim, para validar a versão final. <strong>É o segundo e último 20% dela nesta frente.</strong></p>
+          </div>
+          <div class="item-conteudo" data-item="f1-dois" hidden>
+            <p><strong>Duas semanas, dois pedidos, com o sistema batendo.</strong> É o portão: sem isso, não se avança para a fase 2.</p>
+            <p>Bater aqui significa que o pedido que o sistema recomendou é o que teria sido feito na mão — não que o pedido &ldquo;ficou parecido&rdquo;.</p>
+          </div>
+          <div class="item-conteudo" data-item="f2-tela" hidden>
+            <p>Tela pensada para quem executa, não para quem programou. O objetivo declarado é <strong>tirar o funcionário da planilha</strong> — se ele precisar abrir a planilha para conferir, a tela não está pronta.</p>
+          </div>
+          <div class="item-conteudo" data-item="f2-importar" hidden>
+            <p>O que o sistema <strong>não tem como saber sozinho</strong> e alguém precisa informar todo ciclo. Mapear esses campos é o que evita o cálculo sair errado com cara de certo.</p>
+            <p>Quanto menor essa lista, mais fácil soltar — cada campo manual é um lugar onde a equipe pode errar.</p>
+          </div>
+          <div class="item-conteudo" data-item="f2-numero" hidden>
+            <p>O sistema calcula e sai um número final — e <strong>esse número tem que ser validado antes do pedido sair</strong>. Definir quem valida, contra o quê, e a partir de que diferença o pedido trava e escala.</p>
+          </div>
+          <div class="item-conteudo" data-item="f3-treino" hidden>
+            <p>Treinamento <strong>gravado</strong>, não presencial — grava uma vez e serve para as duas lojas, para quem entrar depois e para a reciclagem. Encosta no <a href="#p4-sistema">processo 4</a>: mesmo formato, mesmo lugar.</p>
+          </div>
+          <div class="item-conteudo" data-item="f3-acompanhado" hidden>
+            <p>A equipe faz o pedido uma vez, com acompanhamento, e <strong>o resultado tem que bater</strong>. É o Ciclo 2 do método: aprender executando de verdade, não lendo manual.</p>
+          </div>
+          <div class="item-conteudo" data-item="f3-sozinho" hidden>
+            <p>A equipe passa a fazer sozinha e só se <strong>analisa o resultado final</strong>. Aqui a frente sai do Fred também — vira leitura de número, não execução.</p>
+            <p>Definir a partir de que desvio no número final alguém é chamado.</p>
+          </div>
+          <div class="item-conteudo" data-item="piracicaba" hidden>
+            <p>Todo o ciclo se repete para a segunda loja. <strong>A segunda tem que custar bem menos que a primeira</strong> — se custar igual, o que foi feito na primeira não virou processo, virou solução avulsa.</p>
+            <p>Piracicaba e Paulínia podem ter divergências diferentes: o mesmo sistema, calibrado por loja.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="topico-conteudo" data-topico="p3-c" hidden>
-        <h2>3C · Compras da fábrica Holy Cook<span class="status definir">a extrair</span></h2>
-        <p class="prose">A frente mais dependente dela das três — e a que menos tem processo escrito. Aqui o Ciclo 1 é obrigatório e não tem atalho.</p>
+      <div class="topico-conteudo" data-topico="p3-inventario" hidden>
+        <h2>3.2 · Estoque — o Inventário<span class="status andamento">processo já escrito</span></h2>
+        <div class="note-item">
+          <span class="tag good">achei</span>
+          <div>O projeto do inventário existe e está completo:
+          <strong><code>Vida Disciplinada/conhecimento/processo-inventario-loja.md</code></strong> —
+          não estava no Sistema-HC nem aqui na Squad. Tem a equação do estoque, 7 etapas de implantação
+          com critério de saída em cada uma, a rotina semanal do gerente e uma decisão sua ainda em
+          aberto. <strong>Não reescrever</strong>: as atividades abaixo são as etapas de lá.</div>
+        </div>
+        <blockquote class="tese">
+          <p><strong>Estoque Inicial + Entradas − Consumo por venda − Perdas lançadas = Estoque Teórico.</strong><br>
+          Estoque Teórico − Contagem Física = <em>divergência</em>.</p>
+          <p>Todo o processo existe para tornar cada variável dessa conta confiável. <strong>Uma etapa só
+          abre quando a anterior estiver verde</strong> — rodar o fechamento antes disso produz um número
+          sem significado, e o gerente vai caçar fantasma.</p>
+        </blockquote>
         <div class="grade-itens">
-          <button class="item-btn" data-item="comofaz">Como ela faz hoje</button>
+          <button class="item-btn" data-item="e0">Etapa 0 · Base de cadastro</button>
+          <button class="item-btn" data-item="e1">Etapa 1 · Contagem confiável</button>
+          <button class="item-btn" data-item="e2">Etapa 2 · Entradas</button>
+          <button class="item-btn" data-item="e3">Etapa 3 · Perdas e desperdícios</button>
+          <button class="item-btn" data-item="e4">Etapa 4 · Vendas item a item</button>
+          <button class="item-btn" data-item="e5">Etapa 5 · Fechamento do inventário</button>
+          <button class="item-btn" data-item="e6">Etapa 6 · Governança</button>
+          <button class="item-btn" data-item="rotina">A rotina semanal do gerente</button>
+          <button class="item-btn" data-item="doispc">Decisão pendente · os 2%</button>
+          <button class="item-btn" data-item="lojas">Replicar para as três lojas</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa etapa para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="e0" hidden>
+            <p><strong>Pré-requisito, não pula.</strong> Lista de itens fechada, unidade de contagem única por item, fator de conversão, ficha técnica e custo unitário atualizado.</p>
+            <p>Sem <strong>ficha técnica</strong> não existe baixa por venda, e a equação simplesmente não fecha. É o item mais subestimado da lista.</p>
+          </div>
+          <div class="item-conteudo" data-item="e1" hidden>
+            <p>Problema hoje: erro nas contagens de praticamente todos os produtos. A tela <code>/contagem</code> já existe, com aprovação e assinatura.</p>
+            <p>Regras a fechar: quem conta (sugestão de 2 pessoas, <strong>contagem cega</strong>), dia e hora fixos, e <strong>congelamento</strong> — nada entra nem sai durante a contagem.</p>
+            <p><strong>Saída:</strong> 2 semanas seguidas sem o gerente precisar corrigir nada relevante.</p>
+          </div>
+          <div class="item-conteudo" data-item="e2" hidden>
+            <p><strong>A etapa mais crítica hoje.</strong> Cinco frentes: recebimento físico conferido no ato, NF lançada em até 24h, entrada manual de compra sem nota, transferência entre lojas e produção própria.</p>
+            <p>Regra dura do documento: <strong>nada entra na loja sem registro.</strong></p>
+            <p><strong>Saída:</strong> 2 semanas com 100% das entradas lançadas em até 24h e zero nota represada.</p>
+          </div>
+          <div class="item-conteudo" data-item="e3" hidden>
+            <p><strong>Tela nova — não existe nada no sistema.</strong> É a que bloqueia todo o resto: sem lançamento de perda com motivo, a equação não tem como fechar.</p>
+            <p>Cinco categorias obrigatórias: validade · qualidade do fornecedor (gera cobrança) · erro de produção (aponta treinamento) · devolução de cliente · consumo interno e cortesia.</p>
+            <p><strong>Saída:</strong> 2 semanas de lançamento diário sem nenhum dia em branco.</p>
+          </div>
+          <div class="item-conteudo" data-item="e4" hidden>
+            <p><strong>Tela nova.</strong> Hoje existe faturamento total; falta o gerente conferir item a item por canal (balcão, iFood, 99Food, CardápioWeb).</p>
+            <p>É ela que alimenta a baixa teórica de insumo pela ficha técnica — fecha a perna do consumo.</p>
+          </div>
+          <div class="item-conteudo" data-item="e5" hidden>
+            <p><strong>Só abre quando as etapas 1 a 4 estiverem verdes.</strong> Sistema calcula o teórico, compara com o físico, divergências acima da tolerância viram lista de recontagem no mesmo dia, e o que persistir é baixado com motivo.</p>
+            <p>Tolerância por faixa de valor: item caro dispara em 0,5%, item barato em 5%.</p>
+          </div>
+          <div class="item-conteudo" data-item="e6" hidden>
+            <p>Reunião semanal de análise do inventário fechado, plano de ação por <strong>causa raiz</strong> e não por item, e indicadores acompanhados semana a semana.</p>
+            <p><strong>Atenção do projeto:</strong> o documento coloca &ldquo;gerente + você&rdquo; nessa reunião. Definir quem é &ldquo;você&rdquo; no destino final — se for o Fred para sempre, esta etapa é carga permanente dele.</p>
+          </div>
+          <div class="item-conteudo" data-item="rotina" hidden>
+            <p>O que o gerente faz para sempre: diário (lança NF em 24h, perdas por turno, confere vendas do dia anterior) e semanal em dia fixo, antes de abrir, na ordem descrita.</p>
+            <p><strong>A ordem importa</strong> — fechar antes de confirmar entradas e perdas transforma erro de lançamento em &ldquo;perda misteriosa&rdquo;.</p>
+          </div>
+          <div class="item-conteudo" data-item="doispc" hidden>
+            <p><strong>Decisão sua, ainda em aberto no documento.</strong> Você disse &ldquo;limitado a 2%&rdquo; e falta definir 2% de quê. A recomendação registrada lá: 2% sobre o custo do consumo do período (CMV), em R$ e não em unidade.</p>
+            <p>E quebrar em duas metas, porque são problemas diferentes: <strong>perda identificada ≤ 2% do CMV</strong> (eficiência operacional, tem dono) e <strong>perda não identificada ≤ 0,5%</strong> (furo de processo ou desvio, rigor maior). Juntar as duas esconde a segunda, que é a mais grave.</p>
+            <p>Estes dois números viram <a href="#guardrails">guardrail</a> e sensor — com buffer.</p>
+          </div>
+          <div class="item-conteudo" data-item="lojas" hidden>
+            <p>O documento descreve o processo de uma loja. Replicar para as três, respeitando o que for diferença legítima de volume, espaço e equipe — e não o que for só falta de padrão.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-insumos" hidden>
+        <h2>3.3 · Compras de insumos em geral<span class="status definir">a extrair</span></h2>
+        <p class="prose">
+          Tudo que a loja compra <strong>fora do pedido da fábrica</strong>: insumos de fornecedor,
+          embalagem, descartável, equipamento. É o bloco com menos sistema e mais critério na cabeça dela.
+        </p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="oque">O que se compra fora da fábrica</button>
           <button class="item-btn" data-item="fornecedores">Fornecedores</button>
-          <button class="item-btn" data-item="freq">Frequência</button>
-          <button class="item-btn" data-item="qtd">Critérios de quantidade</button>
-          <button class="item-btn" data-item="lead">Lead times</button>
-          <button class="item-btn" data-item="seguranca">Estoques de segurança</button>
-          <button class="item-btn" data-item="excecoes">Exceções</button>
+          <button class="item-btn" data-item="freq">Frequência e critério de quantidade</button>
+          <button class="item-btn" data-item="aprova">Aprovações e limite de valor</button>
+          <button class="item-btn" data-item="datas">Pedidos de datas especiais</button>
+          <button class="item-btn" data-item="equip">Equipamentos e utensílios</button>
+          <button class="item-btn" data-item="lojas">Diferenças entre as três lojas</button>
+          <button class="item-btn" data-item="quem">Quem passa a fazer</button>
         </div>
         <div class="item-visor">
           <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
-          <div class="item-conteudo" data-item="comofaz" hidden>
-            <p>A Débora registra como faz atualmente — do jeito que sair. Depois o Fred transforma em processo e ela valida. <strong>É o 20–60–20 puro.</strong></p>
+          <div class="item-conteudo" data-item="oque" hidden>
+            <p>A lista do que sai do pedido da fábrica: insumo de fornecedor externo, embalagem, descartável, produto de limpeza. <strong>Levantamento de campo</strong> — o Fred faz sem ela.</p>
           </div>
           <div class="item-conteudo" data-item="fornecedores" hidden>
-            <p>Quem são, o que cada um fornece, condição comercial, canal de contato e histórico de problema. Fornecedor que só ela sabe acionar é dependência escondida.</p>
+            <p>Quem são, o que fornece cada um, condição comercial, canal de contato e histórico de problema. <strong>Fornecedor que só ela sabe acionar é dependência escondida</strong> — e é o tipo de coisa que só aparece no dia em que falta.</p>
           </div>
           <div class="item-conteudo" data-item="freq" hidden>
-            <p>De quanto em quanto tempo se compra de cada fornecedor, e o que amarra essa frequência — pedido mínimo, validade, capacidade de armazenagem.</p>
+            <p>De quanto em quanto tempo se compra de cada um, e como se chega no número. Sempre que possível, ancorar no mínimo/máximo que sai do inventário (3.2) — <strong>regra em vez de julgamento</strong>.</p>
           </div>
-          <div class="item-conteudo" data-item="qtd" hidden>
-            <p>Como ela chega no número do pedido. Se for conta, escrever a conta. Se for experiência, extrair a regra por trás da experiência.</p>
+          <div class="item-conteudo" data-item="aprova" hidden>
+            <p>O que a pessoa decide sozinha, acima de que valor escala, e <strong>para quem escala — que não é a Débora</strong>. Sem esse limite escrito, toda compra fora do padrão volta pra ela.</p>
           </div>
-          <div class="item-conteudo" data-item="lead" hidden>
-            <p>Quanto tempo cada fornecedor leva entre pedido e entrega. <strong>Lead time é o que define quando pedir</strong> — sem isso, quem assumir vai pedir tarde.</p>
+          <div class="item-conteudo" data-item="datas" hidden>
+            <p>Páscoa e Natal têm pedido próprio, com antecedência e volume diferentes. <strong>Se não entrar em calendário, vira correria todo ano</strong> — e correria é quando ela é chamada.</p>
           </div>
-          <div class="item-conteudo" data-item="seguranca" hidden>
-            <p>Quanto de folga manter para não parar produção. É o <strong>buffer que protege a transição</strong>: quem está aprendendo erra, e o estoque de segurança absorve o erro sem virar crise.</p>
+          <div class="item-conteudo" data-item="equip" hidden>
+            <p>Compra de equipamento e utensílio: quem pede, quem aprova, e qual a diferença entre reposição (rotina) e investimento (decisão). São coisas diferentes e costumam andar juntas por engano.</p>
           </div>
-          <div class="item-conteudo" data-item="excecoes" hidden>
-            <p>Datas especiais, picos, ruptura de fornecedor, mudança de preço. As exceções são o que faz o processo escrito sobreviver ao contato com a realidade.</p>
+          <div class="item-conteudo" data-item="lojas" hidden>
+            <p>Onde as três divergem — e, para cada divergência, se é <strong>problema</strong> (falta de padrão) ou <strong>adaptação legítima</strong> (volume, espaço, fornecedor local).</p>
+          </div>
+          <div class="item-conteudo" data-item="quem" hidden>
+            <p>Responsável pelos pedidos em cada loja, <strong>com substituto declarado</strong>. Responsabilidade sem substituto volta pra cima na primeira falta — e &ldquo;pra cima&rdquo; hoje é a Débora.</p>
           </div>
         </div>
       </div>
@@ -1251,9 +1372,9 @@
         <h2>3 · Rota de transferência — Débora → Fred/Sistema → Equipe</h2>
         <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Equipe responsável</span></div>
         <div class="fluxo">
-          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1 só nas partes que dependem mesmo dela</strong> — na prática, quase tudo do 3C e os critérios de decisão do 3A. O resto o Fred levanta sozinho."><span class="quem">Ciclo 1 · parcial</span>Extrair só o que depende dela</button><span class="seta">→</span>
-          <button class="passo-caixa fred" data-detalhe="Mapear processo atual, consolidar o que já funciona na loja modelo, escrever o processo das três lojas. <strong>Nada disso precisa de hora da Débora</strong> — é levantamento de campo."><span class="quem">Fred</span>Construir sozinho o que der</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 com os responsáveis de cada loja.</strong> Eles executam contagem e pedido de verdade, dentro da autonomia definida, registrando dificuldade e exceção."><span class="quem">Ciclo 2</span>Transferir para a equipe</button><span class="seta">→</span>
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1 mínimo.</strong> Nas compras da fábrica, ela entra em dois pontos só: explicar as divergências entre planilha e sistema, e validar a versão final. No inventário, quase nada — o processo já está escrito. Nos insumos gerais, os critérios e os fornecedores."><span class="quem">Ciclo 1 · mínimo</span>Extrair só o que depende dela</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Replicar o sistema de compras de Campinas para as outras duas lojas até bater com a planilha, e construir as telas que faltam no inventário (perdas e conferência de vendas). <strong>Nada disso precisa de hora da Débora</strong> — é levantamento e construção."><span class="quem">Fred/Sistema</span>Construir sozinho o que der</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 em degraus.</strong> Treinamento gravado → equipe faz uma vez acompanhada, e o número tem que bater → equipe faz sozinha e só o resultado final é olhado. Vale para pedido e para contagem."><span class="quem">Ciclo 2</span>Soltar em degraus</button><span class="seta">→</span>
           <button class="passo-caixa fred" data-detalhe="Indicadores de perda, buffers de estoque e sinais de controle no ar. <strong>É o que permite soltar sem vigiar</strong> — o sinal avisa no lugar da pessoa."><span class="quem">Sistema</span>Ligar indicadores e buffers</button><span class="seta">→</span>
           <button class="passo-caixa outro" data-detalhe="A Débora sai, e o Fred sai da execução operacional — sobra pra ele auditoria pontual, não pedido nem contagem."><span class="quem">Saída</span>Retirar Débora e Fred</button>
         </div>
@@ -1262,28 +1383,39 @@
 
       <div class="topico-conteudo" data-topico="p3-existe" hidden>
         <h2>3 · O que já existe — não recomeçar do zero</h2>
-        <p class="prose">A página <a href="../pessoas/">Cargos Holy Cookie</a> já descreve, dentro da Gerência, atividades que são exatamente o escopo deste processo:</p>
+        <p class="prose"><strong>Este é o processo com mais coisa pronta do projeto inteiro.</strong> Dois ativos existem e não devem ser recomeçados:</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Ativo</th><th>O que é</th><th>Serve para</th></tr></thead>
+          <tbody>
+            <tr><td>Sistema de gestão de compras</td><td>App próprio (repo <code>HolyCampinas/gestao-compras</code>, base Supabase) com importação de planilha, <strong>cálculo automático da recomendação de compra</strong>, pedidos com aprovação, contagem, vendas, insumos e fornecedores</td><td><strong>3.1</strong> — já roda em Campinas; falta bater e replicar</td></tr>
+            <tr><td>Processo de Inventário Semanal</td><td><code>Vida Disciplinada/conhecimento/processo-inventario-loja.md</code> — a equação do estoque, 7 etapas de implantação com critério de saída, rotina diária e semanal do gerente</td><td><strong>3.2</strong> — o processo já está desenhado inteiro</td></tr>
+          </tbody>
+        </table></div>
+        <p class="prose">A página <a href="../pessoas/">Cargos Holy Cookie</a> também já descreve, dentro da Gerência, atividades que são exatamente o escopo deste processo:</p>
         <ul class="pontos">
           <li><strong>Compras</strong> — compras de insumos e produtos de venda, pedido semanal na fábrica, fornecedores, pedidos de datas especiais (Páscoa e Natal), compras de equipamentos e utensílios, redução de custos.</li>
           <li><strong>Estoque</strong> — contagem mensal de estoque, controle e organização do estoque, cálculo do CMV.</li>
         </ul>
         <p class="prose" style="font-size:.875rem">
-          Ou seja: <strong>a descrição da função já existe</strong>. O que não existe é o processo executável
-          por trás dela — como fazer, com que critério, com que número. É essa a lacuna que o Ciclo 1
-          preenche. Vale checar também o que a
-          <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já cobre de rotina de loja.
+          Ou seja: a descrição da função existe, o software existe e o processo de inventário existe.
+          <strong>A lacuna aqui não é de desenho, é de implantação</strong> — fazer o sistema bater,
+          construir as duas telas que faltam no inventário e passar por quem executa. Vale checar também
+          o que a <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já cobre de rotina de
+          loja, para o treinamento gravado da fase 3 morar no mesmo lugar.
         </p>
       </div>
 
       <div class="topico-conteudo" data-topico="p3-fim" hidden>
         <h2>3 · Como sei que acabou<span class="status definir">teste</span></h2>
         <ul class="check">
-          <li>Rodou <strong>um ciclo completo de pedido nas três lojas</strong> sem participação da Débora.</li>
-          <li>Rodou <strong>uma contagem de estoque completa</strong> com responsável nomeado em cada loja.</li>
-          <li>A compra da fábrica foi feita por outra pessoa, seguindo o processo escrito.</li>
-          <li>Existe mínimo/máximo definido nos itens críticos, com buffer de segurança.</li>
-          <li>Uma divergência de estoque foi tratada pelo protocolo, sem escalar para a Débora.</li>
-          <li>Existe indicador de perda por loja sendo medido por rotina.</li>
+          <li><strong>3.1</strong> — o sistema bateu com a planilha por dois pedidos seguidos em Piracicaba e em Paulínia.</li>
+          <li><strong>3.1</strong> — o pedido da fábrica sai pela tela, sem ninguém abrir planilha, feito pela equipe.</li>
+          <li><strong>3.2</strong> — as etapas 1 a 4 do inventário estão verdes e o fechamento roda de verdade.</li>
+          <li><strong>3.2</strong> — existe tela de perdas com motivo, lançada todo dia, sem dia em branco.</li>
+          <li><strong>3.2</strong> — os dois limites de perda (identificada e não identificada) estão definidos em número, com buffer.</li>
+          <li><strong>3.3</strong> — cada loja tem responsável pelos pedidos, com substituto declarado e limite de valor escrito.</li>
+          <li>Uma divergência de estoque foi tratada pelo protocolo, <strong>sem escalar para a Débora</strong>.</li>
+          <li>A reunião semanal de governança do inventário acontece — e quem senta nela não é a Débora.</li>
         </ul>
       </div>
 
