@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0C1416" media="(prefers-color-scheme: dark)">
 <title>Passagem de Bastão e de Responsabilidade da Débora</title>
-<meta name="description" content="Independência operacional: blindar a Débora dos problemas da loja para ela trabalhar só no que traz crescimento. Seis processos, duplo 20–60–20 e um sprint de 30 dias.">
+<meta name="description" content="Dois pilares: passar o bastão da Débora e, ao mesmo tempo, não perder o resultado — aumentar. Seis processos, duplo 20–60–20, guardrails e um sprint de 30 dias.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F7D74'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><path d='M58 26H32a4 4 0 0 0-4 4v40a4 4 0 0 0 4 4h26'/><path d='M52 50h24'/><path d='M66 40l10 10-10 10'/></g></svg>">
 <style>
   :root {
@@ -218,6 +218,22 @@
   .rota .no.meio { border-color: var(--accent); color: var(--accent); }
   .rota .no.destino { border-color: var(--good); background: var(--good-bg); color: var(--good); }
 
+  /* ---------- os dois pilares ---------- */
+  .pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: .7rem; }
+  .pilar { border: 1.5px solid var(--rule); border-top: 4px solid var(--accent); border-radius: 8px;
+           padding: 1.1rem 1.2rem; background: var(--surface);
+           display: flex; flex-direction: column; gap: .55rem; }
+  .pilar.dois { border-top-color: var(--good); }
+  .pilar .pnum { font-family: var(--mono); font-size: .625rem; letter-spacing: .14em;
+                 text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+  .pilar .pnome { font-family: var(--mono); font-size: .9375rem; font-weight: 700; letter-spacing: -.01em;
+                  line-height: 1.25; }
+  .pilar .pdesc { font-size: .875rem; color: var(--ink-soft); line-height: 1.5; }
+  .pilar .pdesc strong { color: var(--ink); font-weight: 600; }
+  .pilar .pfalha { font-size: .8125rem; color: var(--bad); border-top: 1px dashed var(--rule);
+                   padding-top: .6rem; margin-top: .1rem; }
+  .pilar .pfalha strong { font-weight: 700; }
+
   /* ---------- sinais verde/amarelo/vermelho ---------- */
   .sinais { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .6rem; }
   .sinal { border: 1.5px solid var(--rule); border-radius: 8px; padding: .9rem 1rem; background: var(--surface);
@@ -251,14 +267,14 @@
     <div class="eyebrow">Holy Cookie · Gestão · independência operacional</div>
     <h1>Passagem de Bastão e de Responsabilidade da Débora</h1>
     <p class="lede">
-      <strong>Blindar a Débora dos problemas da loja</strong> para ela trabalhar só naquilo que traz
-      crescimento — sem transformar o Fred no novo gargalo e sem deixar o negócio deteriorar no caminho.
-      Seis processos, duplo 20–60–20 por processo e um sprint de 30 dias.
+      Dois pilares: <strong>passar o bastão</strong> — blindar a Débora dos problemas da loja para ela
+      trabalhar só naquilo que traz crescimento — e <strong>não perder o resultado no caminho, mas
+      aumentar</strong>. Seis processos, duplo 20–60–20 por processo e um sprint de 30 dias.
     </p>
     <div class="resumo">
       <div><div class="num">6</div><div class="lbl">processos a transferir</div></div>
       <div class="ruim"><div class="num">0<span style="font-size:.9rem;color:var(--ink-faint)">/6</span></div><div class="lbl">independentes dela</div></div>
-      <div class="aviso"><div class="num">2</div><div class="lbl">ciclos por processo</div></div>
+      <div class="aviso"><div class="num">2</div><div class="lbl">pilares do projeto</div></div>
       <div><div class="num">30</div><div class="lbl">dias de sprint</div></div>
     </div>
   </header>
@@ -317,16 +333,70 @@
     </section>
 
     <section>
-      <h2 class="sec">As duas armadilhas do projeto</h2>
+      <h2 class="sec">Os dois pilares</h2>
+      <p class="prose">
+        O projeto tem duas metades, e as duas precisam acontecer. <strong>Entregar só a primeira não é
+        sucesso parcial — é fracasso com outro nome</strong>: uma operação independente da Débora que
+        fatura menos do que faturava não resolveu nada, só trocou um problema por outro.
+      </p>
+      <div class="pilares">
+        <div class="pilar">
+          <span class="pnum">Pilar 1</span>
+          <span class="pnome">Passar o bastão</span>
+          <span class="pdesc">Transferir a responsabilidade: cada competência sai da cabeça da Débora,
+          vira processo e chega num <strong>destino final definido</strong> — que nem sempre é o Fred.</span>
+          <span class="pfalha"><strong>Falha assim:</strong> o gargalo muda de lugar. A Débora sai, o Fred entope.</span>
+        </div>
+        <div class="pilar dois">
+          <span class="pnum">Pilar 2</span>
+          <span class="pnome">Não perder o resultado — e aumentar</span>
+          <span class="pdesc">A transição não pode custar faturamento, margem nem padrão. E o alvo não é
+          empatar: é <strong>terminar valendo mais do que começou</strong>.</span>
+          <span class="pfalha"><strong>Falha assim:</strong> ganha independência e perde o negócio — ou empata e chama de vitória.</span>
+        </div>
+      </div>
+
+      <h3 class="sub">O pilar 2 tem dois níveis</h3>
       <div class="note-item">
-        <span class="tag bad">armadilha 1</span>
+        <span class="tag warn">piso</span>
+        <div><strong>Não deteriorar.</strong> Faturamento, CMV, margem, qualidade de produto e padrão de
+        atendimento dentro dos limites declarados nos <a href="#guardrails">guardrails</a>. Piso é
+        obrigação, não meta — enquanto o número estiver abaixo dele, <em>o projeto para até voltar</em>.</div>
+      </div>
+      <div class="note-item">
+        <span class="tag good">teto</span>
+        <div><strong>Crescer.</strong> O projeto libera capacidade dos dois lados — e capacidade liberada
+        tem que virar resultado, não folga. Se ao fim dos 30 dias o faturamento estiver igual ao do
+        começo, o pilar 2 foi cumprido pela metade.</div>
+      </div>
+
+      <h3 class="sub">De onde o resultado deve crescer</h3>
+      <ul class="pontos">
+        <li><strong>A capacidade liberada da Débora</strong> — blindada da loja, vai para trabalho de crescimento. É a fonte que o próprio projeto cria: cada processo transferido devolve hora e, mais que hora, cabeça.</li>
+        <li><strong>Faturamento vira rotina, não lembrança</strong> — o processo 1 sai com calendário de ações e indicador. Campanha que nasce por calendário acontece mais vezes do que campanha que nasce por iniciativa.</li>
+        <li><strong>Processo escrito rende mais que processo tocado de cabeça</strong> — CMV com faixa de alerta, iFood com checklist e critério de quando não mexer, compras com mínimo/máximo. O ganho aqui é margem, não só ordem.</li>
+        <li><strong>O Fred fica com faturamento como responsabilidade nominal</strong> — hoje é dividido; depois do processo 1 tem dono único, com rotina de acompanhamento e calendário.</li>
+      </ul>
+      <div class="note-item">
+        <span class="tag warn">falta o número</span>
+        <div><strong>&ldquo;Aumentar&rdquo; sem meta vira sensação no fim do sprint.</strong> Definir junto
+        com os guardrails, na Semana 1: quanto o faturamento precisa subir para o pilar 2 contar como
+        cumprido — por loja e no consolidado. Referência de meta já existente em
+        <a href="../acoes-de-loja/">Estratégia da área Loja</a>.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">As duas armadilhas — uma por pilar</h2>
+      <div class="note-item">
+        <span class="tag bad">falha do pilar 1</span>
         <div><strong>Mudar o gargalo de lugar.</strong> Transferir tudo da Débora para o Fred resolve o
         problema dela e cria o mesmo problema um degrau adiante. Por isso <em>o destino final de cada
         competência é definido antes da transferência</em> — e em quatro dos seis processos esse destino
         não é o Fred.</div>
       </div>
       <div class="note-item">
-        <span class="tag bad">armadilha 2</span>
+        <span class="tag bad">falha do pilar 2</span>
         <div><strong>Ganhar independência e perder o negócio.</strong> Transição é o momento em que
         faturamento, CMV e padrão de loja escorregam sem ninguém perceber. Por isso existem
         <a href="#guardrails">guardrails</a>: limites declarados antes de começar, com sinal de
@@ -345,7 +415,8 @@
         <li>Existem <strong>indicadores e sinais</strong> que mostram quando algo sai do padrão.</li>
         <li>Problemas <strong>não voltam automaticamente</strong> para a Débora.</li>
         <li>O <strong>Fred permanece dentro da capacidade de tempo</strong> dele.</li>
-        <li><strong>Faturamento, CMV e os demais indicadores críticos</strong> seguem dentro dos guardrails.</li>
+        <li><strong>Faturamento, CMV e os demais indicadores críticos</strong> seguem dentro dos guardrails (piso do pilar 2).</li>
+        <li>O <strong>resultado subiu</strong> — bateu a meta de crescimento definida na Semana 1 (teto do pilar 2).</li>
         <li>Cada processo passou pela <a href="#sprint">regra de saída</a> — inclusive o teste de ter funcionado na prática sem ela.</li>
         <li>A resposta para a pergunta dos 30 dias é <strong>&ldquo;nada crítico&rdquo;</strong>.</li>
       </ul>
@@ -1380,6 +1451,32 @@
     </section>
 
     <section>
+      <h2 class="sec">O piso e o teto do pilar 2</h2>
+      <p class="prose">
+        A tabela acima é o <strong>piso</strong>: o ponto em que o custo da transição virou alto demais.
+        Ela protege metade do pilar 2 — a metade defensiva. A outra metade precisa de um número próprio,
+        porque <em>ficar dentro do guardrail não é o objetivo do projeto</em>, é a condição mínima para
+        ele continuar rodando.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Meta de crescimento</th><th>Base (início do sprint)</th><th>Alvo ao fim dos 30 dias</th></tr></thead>
+        <tbody>
+          <tr><td>Faturamento consolidado</td><td class="vazio">a medir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Faturamento — loja 1</td><td class="vazio">a medir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Faturamento — loja 2</td><td class="vazio">a medir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Faturamento — loja 3</td><td class="vazio">a medir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Margem</td><td class="vazio">a medir</td><td class="vazio">a definir</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note-item">
+        <span class="tag good">por que medir a base primeiro</span>
+        <div>Sem o número do início do sprint registrado, <strong>não existe como provar nem o piso nem o
+        teto no fim</strong> — a conversa da semana 4 vira memória contra memória. Medir a base é tarefa
+        da Semana 1, junto com fechar a capacidade.</div>
+      </div>
+    </section>
+
+    <section>
       <h2 class="sec">Sistema de sinais</h2>
       <div class="sinais">
         <div class="sinal verde">
@@ -1491,6 +1588,7 @@
           <tr><td>Horas adicionais absorvidas pelo Fred</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>Horas retiradas do Fred por delegação/sistema</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>Faturamento</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Faturamento vs. base (%) — pilar 2</td><td>0%</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>CMV</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>Principais indicadores operacionais</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>Carga percebida pela Débora (0–10)</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
@@ -1501,8 +1599,10 @@
         <div><strong>&ldquo;Horas adicionais absorvidas pelo Fred&rdquo; contra &ldquo;horas retiradas do
         Fred&rdquo;</strong> é o par que revela a armadilha 1: se a primeira sobe e a segunda não sobe
         junto, o gargalo só mudou de nome. E <strong>&ldquo;carga percebida pela Débora&rdquo;</strong> é a
-        única linha subjetiva do placar — e a que mais importa, porque o objetivo do projeto é carga
-        mental, não hora de relógio.</div>
+        única linha subjetiva do placar — e a que mais importa no pilar 1, porque o objetivo é carga
+        mental, não hora de relógio. Do lado do pilar 2, a linha que decide é
+        <strong>&ldquo;faturamento vs. base&rdquo;</strong>: enquanto ela estiver em 0%, o projeto está
+        entregando só metade.</div>
       </div>
     </section>
 
@@ -1534,8 +1634,8 @@
 
   <footer>
     Página de projeto — Passagem de Bastão e de Responsabilidade da Débora. Os campos marcados como
-    <em>a definir</em> são o trabalho da Semana 1: sem número de capacidade e sem limite de guardrail,
-    o resto do plano não tem base. Peça pra atualizar conforme os processos forem sendo transferidos.
+    <em>a definir</em> são o trabalho da Semana 1: sem número de capacidade, sem limite de guardrail e
+    sem meta de crescimento, o resto do plano não tem base. Peça pra atualizar conforme os processos forem sendo transferidos.
   </footer>
 
 </div>
