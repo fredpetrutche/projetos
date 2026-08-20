@@ -219,6 +219,62 @@
   .rota .no.meio { border-color: var(--accent); color: var(--accent); }
   .rota .no.destino { border-color: var(--good); background: var(--good-bg); color: var(--good); }
 
+  /* ---------- ficha editável de horas ---------- */
+  .ficha-barra { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem;
+                 background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+                 padding: .8rem 1rem; position: sticky; top: 0; z-index: 5; }
+  .ficha-stat { display: flex; flex-direction: column; line-height: 1.2; }
+  .ficha-stat b { font-family: var(--mono); font-size: 1.05rem; }
+  .ficha-stat span { font-size: .625rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+  .ficha-stat.debora b { color: var(--warn); }
+  .ficha-stat.fred b { color: var(--accent); }
+  .ficha-acoes { margin-left: auto; display: flex; gap: .4rem; flex-wrap: wrap; }
+  .btn-mini { font: inherit; font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em;
+              text-transform: uppercase; font-weight: 700; cursor: pointer; color: var(--ink-soft);
+              background: var(--surface-2); border: 1.5px solid var(--rule); border-radius: 5px;
+              padding: .4rem .7rem; transition: border-color .15s, color .15s; }
+  .btn-mini:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .btn-mini.perigo:hover { border-color: var(--bad); color: var(--bad); }
+  .progresso { flex: 1 1 8rem; min-width: 7rem; height: .4rem; background: var(--rule-soft);
+               border-radius: 999px; overflow: hidden; }
+  .progresso > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s; }
+
+  .fgrade { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .5rem; }
+  .fgrupo-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+                border: 1.5px solid var(--rule); border-radius: 8px; padding: .7rem .85rem;
+                display: flex; flex-direction: column; gap: .3rem; color: inherit;
+                transition: border-color .15s, background .15s; }
+  .fgrupo-btn:hover { border-color: var(--ink-faint); }
+  .fgrupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .fgrupo-btn .fnome { font-family: var(--mono); font-size: .75rem; font-weight: 700; letter-spacing: .04em; }
+  .fgrupo-btn .fmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); }
+  .fgrupo-btn .fmeta b { color: var(--accent); }
+
+  .fpainel { border: 1px dashed var(--rule); border-radius: 8px; background: var(--surface-2);
+             padding: .9rem; display: flex; flex-direction: column; gap: .7rem; }
+  .fpainel[hidden] { display: none; }
+  .fpainel h3 { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+                color: var(--accent); font-weight: 700; }
+  table.ficha { min-width: 42rem; }
+  table.ficha td { vertical-align: middle; }
+  table.ficha tbody td:first-child { font-weight: 500; color: var(--ink); font-size: .8125rem; }
+  table.ficha .frente { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em;
+                        text-transform: uppercase; color: var(--ink-faint); display: block; }
+  table.ficha tr.classificado td:first-child { color: var(--ink-soft); }
+  table.ficha tr.so-fred { background: color-mix(in srgb, var(--accent-bg) 45%, transparent); }
+  table.ficha tr.precisa-dela { background: color-mix(in srgb, var(--warn-bg) 45%, transparent); }
+  table.ficha tr.na { opacity: .5; }
+  .ficha-sel, .ficha-num { font: inherit; font-family: var(--mono); font-size: .75rem; color: var(--ink);
+                           background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px;
+                           padding: .3rem .4rem; width: 100%; }
+  .ficha-num { text-align: right; max-width: 5rem; }
+  .ficha-sel:focus, .ficha-num:focus { outline: none; border-color: var(--accent); }
+  .ficha-num.tem { border-color: var(--accent); font-weight: 700; }
+  .ficha-tot td { font-weight: 700; border-top: 2px solid var(--ink) !important; font-family: var(--mono); }
+  td.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
+  #fResumo td.num { color: var(--ink); font-weight: 600; }
+  #fResumo th:first-child, #fResumo td:first-child { position: sticky; left: 0; background: var(--surface); }
+
   /* ---------- os dois pilares ---------- */
   .pilares { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: .7rem; }
   .pilar { border: 1.5px solid var(--rule); border-top: 4px solid var(--accent); border-radius: 8px;
@@ -639,11 +695,11 @@
 
     <!-- ---------- grades de tópicos ---------- -->
     <div class="grade-topicos" data-grupo="p1" hidden>
-      <button class="topico-btn" data-topico="p1-anuncios"><span class="tnome">Anúncios</span><span class="tag neutro">frente</span></button>
-      <button class="topico-btn" data-topico="p1-conteudos"><span class="tnome">Conteúdos</span><span class="tag neutro">frente</span></button>
-      <button class="topico-btn" data-topico="p1-incentivo"><span class="tnome">Campanhas de incentivo</span><span class="tag neutro">frente</span></button>
-      <button class="topico-btn" data-topico="p1-verao"><span class="tnome">Cardápio de verão</span><span class="tag neutro">frente</span></button>
-      <button class="topico-btn" data-topico="p1-alocacao"><span class="tnome">Como ela decide entre as frentes</span><span class="tag acc">transversal</span></button>
+      <button class="topico-btn" data-topico="p1-anuncios" data-trabalho="1"><span class="tnome">Anúncios</span><span class="tag neutro">frente</span></button>
+      <button class="topico-btn" data-topico="p1-conteudos" data-trabalho="1"><span class="tnome">Conteúdos</span><span class="tag neutro">frente</span></button>
+      <button class="topico-btn" data-topico="p1-incentivo" data-trabalho="1"><span class="tnome">Campanhas de incentivo</span><span class="tag neutro">frente</span></button>
+      <button class="topico-btn" data-topico="p1-verao" data-trabalho="1"><span class="tnome">Cardápio de verão</span><span class="tag neutro">frente</span></button>
+      <button class="topico-btn" data-topico="p1-alocacao" data-trabalho="1"><span class="tnome">Como ela decide entre as frentes</span><span class="tag acc">transversal</span></button>
       <button class="topico-btn" data-topico="p1-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p1-rotina"><span class="tnome">O que fica rodando depois</span></button>
       <button class="topico-btn" data-topico="p1-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
@@ -651,46 +707,46 @@
     </div>
 
     <div class="grade-topicos" data-grupo="p2" hidden>
-      <button class="topico-btn" data-topico="p2-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p2-escopo" data-trabalho="1"><span class="tnome">Escopo — o que está dentro</span></button>
       <button class="topico-btn" data-topico="p2-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p2-sistema"><span class="tnome">O que significa &ldquo;virar sistema&rdquo;</span><span class="tag acc">destino</span></button>
       <button class="topico-btn" data-topico="p2-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
     </div>
 
     <div class="grade-topicos" data-grupo="p3" hidden>
-      <button class="topico-btn" data-topico="p3-a"><span class="tnome">3A · Controle de estoque</span></button>
-      <button class="topico-btn" data-topico="p3-b"><span class="tnome">3B · Compras das lojas</span></button>
-      <button class="topico-btn" data-topico="p3-c"><span class="tnome">3C · Compras da fábrica Holy Cook</span></button>
+      <button class="topico-btn" data-topico="p3-a" data-trabalho="1"><span class="tnome">3A · Controle de estoque</span></button>
+      <button class="topico-btn" data-topico="p3-b" data-trabalho="1"><span class="tnome">3B · Compras das lojas</span></button>
+      <button class="topico-btn" data-topico="p3-c" data-trabalho="1"><span class="tnome">3C · Compras da fábrica Holy Cook</span></button>
       <button class="topico-btn" data-topico="p3-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p3-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
       <button class="topico-btn" data-topico="p3-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
     </div>
 
     <div class="grade-topicos" data-grupo="p4" hidden>
-      <button class="topico-btn" data-topico="p4-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p4-escopo" data-trabalho="1"><span class="tnome">Escopo — o que está dentro</span></button>
       <button class="topico-btn" data-topico="p4-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p4-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
       <button class="topico-btn" data-topico="p4-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
     </div>
 
     <div class="grade-topicos" data-grupo="p5" hidden>
-      <button class="topico-btn" data-topico="p5-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p5-escopo" data-trabalho="1"><span class="tnome">Escopo — o que está dentro</span></button>
       <button class="topico-btn" data-topico="p5-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p5-loop"><span class="tnome">O loop que melhora o critério</span><span class="tag acc">mecanismo</span></button>
       <button class="topico-btn" data-topico="p5-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
     </div>
 
     <div class="grade-topicos" data-grupo="p6" hidden>
-      <button class="topico-btn" data-topico="p6-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p6-escopo" data-trabalho="1"><span class="tnome">Escopo — o que está dentro</span></button>
       <button class="topico-btn" data-topico="p6-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p6-quando"><span class="tnome">Quando mexer e quando não mexer</span><span class="tag warn">crítico</span></button>
       <button class="topico-btn" data-topico="p6-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
     </div>
 
     <div class="grade-topicos" data-grupo="p7" hidden>
-      <button class="topico-btn" data-topico="p7-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p7-escopo" data-trabalho="1"><span class="tnome">Escopo — o que está dentro</span></button>
       <button class="topico-btn" data-topico="p7-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
-      <button class="topico-btn" data-topico="p7-sensores"><span class="tnome">Os sensores e os buffers</span><span class="tag acc">o destino</span></button>
+      <button class="topico-btn" data-topico="p7-sensores" data-trabalho="1"><span class="tnome">Os sensores e os buffers</span><span class="tag acc">o destino</span></button>
       <button class="topico-btn" data-topico="p7-cadencia"><span class="tnome">As três cadências</span></button>
       <button class="topico-btn" data-topico="p7-pilar2"><span class="tnome">Por que ele sustenta o pilar 2</span><span class="tag good">crítico</span></button>
       <button class="topico-btn" data-topico="p7-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
@@ -1717,32 +1773,80 @@
     </section>
 
     <section>
-      <h2 class="sec">Ficha de capacidade por processo</h2>
+      <h2 class="sec">Como estimar as horas</h2>
       <p class="prose">
-        Preencher uma linha por processo, no bloco de abertura do sprint. <strong>É esta tabela que
-        alimenta a priorização</strong> — sem ela, a ordem de ataque é chute.
+        Estimar &ldquo;o processo 3&rdquo; é impossível — processo não tem tamanho, atividade tem. Por isso
+        a ficha abaixo é <strong>por atividade</strong>, e as atividades são exatamente as que já estão
+        dentro dos cards da aba <a href="#processos">Os 7 processos</a>. Nada foi inventado aqui: a lista
+        se monta sozinha a partir de lá.
       </p>
-      <div class="tablewrap"><table>
+
+      <h3 class="sub">A regra de ouro</h3>
+      <blockquote class="tese">
+        <p><strong>Toda atividade começa com a hipótese de zero hora da Débora.</strong> Ela só ganha hora
+        quando a primeira pergunta falha — e a resposta tem que ser em minutos, não em horas.</p>
+      </blockquote>
+
+      <h3 class="sub">As três perguntas, nesta ordem</h3>
+      <div class="fluxo">
+        <button class="passo-caixa fred" data-detalhe="<strong>Dá pra descobrir sem ela?</strong> Indo na loja, olhando o histórico, perguntando a quem executa, lendo o que já está escrito no cardápio de projetos.<br><br>Se <strong>sim</strong>: classifica como <em>Fred sozinho</em>, estima só a hora dele e acabou — <strong>zero hora da Débora</strong>. A maior parte das 80+ atividades cai aqui, e é isso que faz o sprint caber."><span class="quem">Pergunta 1</span>Dá pra descobrir sem ela?</button><span class="seta">→</span>
+        <button class="passo-caixa debora" data-detalhe="<strong>O que exatamente só ela sabe?</strong> Não é &ldquo;me explica compras&rdquo; — é &ldquo;qual o critério que você usa pra decidir a quantidade&rdquo;.<br><br>Recortar até sobrar só o julgamento dela: critério de decisão, erro crítico, exceção, o que é bom resultado. <strong>Isso cabe em blocos de 15–20 minutos.</strong> Se a estimativa dela passou de 1h numa atividade, a pergunta ainda está larga demais."><span class="quem">Pergunta 2</span>O que só ela sabe?</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>Quanto custa virar processo depois?</strong> Pegar o material bruto e transformar em checklist, critério, indicador e alerta — mais o teste.<br><br>É a hora do Fred no ciclo 1, e normalmente é <strong>3× a hora dela</strong> na mesma atividade. É o 20–60–20 aparecendo na estimativa."><span class="quem">Pergunta 3</span>Quanto custa virar processo?</button>
+      </div>
+      <div class="passo-detalhe"></div>
+
+      <div class="note-item">
+        <span class="tag warn">o atalho que evita travar</span>
+        <div><strong>Classifique tudo antes de estimar qualquer coisa.</strong> Passar as 80+ atividades
+        marcando só &ldquo;Fred sozinho / Precisa dela / Já existe / Não se aplica&rdquo; é rápido e já
+        responde a pergunta que importa: <em>quanto do projeto depende dela de verdade</em>. Só depois
+        volte para digitar horas — e só nas que sobraram.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Ficha de horas por atividade</h2>
+      <p class="prose">
+        Clique num processo para abrir as atividades dele. <strong>O que você digitar fica salvo neste
+        navegador</strong> — não some ao fechar a aba, mas também não viaja para outro aparelho. Use
+        &ldquo;copiar tudo&rdquo; para tirar um backup em planilha.
+      </p>
+
+      <div class="ficha-barra">
+        <div class="ficha-stat"><b id="fStatClass">0/0</b><span>classificadas</span></div>
+        <div class="progresso"><i id="fProg"></i></div>
+        <div class="ficha-stat fred"><b id="fStatFred">0h</b><span>Fred</span></div>
+        <div class="ficha-stat debora"><b id="fStatDeb">0h</b><span>Débora</span></div>
+        <div class="ficha-stat"><b id="fStatEq">0h</b><span>equipe/terceiro</span></div>
+        <div class="ficha-stat"><b id="fStatTot">0h</b><span>total</span></div>
+        <div class="ficha-acoes">
+          <button class="btn-mini" type="button" id="fCopiar">copiar tudo</button>
+          <button class="btn-mini perigo" type="button" id="fLimpar">limpar</button>
+        </div>
+      </div>
+
+      <div class="fgrade" id="fGrade"></div>
+      <div id="fPaineis"></div>
+    </section>
+
+    <section>
+      <h2 class="sec">Resumo por processo</h2>
+      <p class="prose">
+        As quatro primeiras colunas <strong>se calculam sozinhas</strong> a partir da ficha acima. As
+        quatro últimas são julgamento — preencher à mão. <strong>É esta tabela que alimenta a
+        <a href="#sprint">priorização</a></strong>.
+      </p>
+      <div class="tablewrap"><table id="fResumo">
         <thead><tr>
-          <th>Processo</th><th>Horas totais</th><th>Só Débora</th><th>Débora+Fred</th><th>Só Fred</th>
-          <th>Equipe</th><th>Terceirizável</th><th>Horas/sem. depois</th><th>Energia da Débora</th>
-          <th>Reduz carga dela</th><th>Impacto em resultado</th>
+          <th>Processo</th><th>Horas totais</th><th>Débora</th><th>Fred</th><th>Equipe</th>
+          <th>Horas/sem. depois</th><th>Energia da Débora</th><th>Reduz carga dela</th><th>Impacto em resultado</th>
         </tr></thead>
-        <tbody>
-          <tr><td>1 · Faturamento da loja</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>2 · Redução de CMV</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>3 · Compras + estoque</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>4 · Treinamento</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>5 · Contratação</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>6 · Marketing do iFood</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>7 · DRE das lojas</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-        </tbody>
+        <tbody></tbody>
       </table></div>
       <p class="prose" style="font-size:.8125rem">
-        Escalas: <strong>energia da Débora</strong> e <strong>reduz carga dela</strong> em baixa / média /
-        alta; <strong>impacto em resultado</strong> (faturamento ou lucro) em baixo / médio / alto.
         &ldquo;Horas/sem. depois&rdquo; é a carga permanente que o processo deixa <em>depois</em> de
-        implantado — o número que diz se o gargalo mudou de lugar.
+        implantado — o número que diz se o gargalo mudou de lugar. Some essa coluna e compare com o
+        limite de horas permanentes do Fred: se passar, algum destino final está errado.
       </p>
     </section>
 
@@ -1836,6 +1940,34 @@
           escrito antes de acontecer, não improvisado na hora. Protocolo sem escrita é sinônimo de
           &ldquo;chama quem sabe&rdquo;.</span>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Todo sensor precisa de buffer</h2>
+      <blockquote class="tese">
+        <p><strong>Sensor sem buffer avisa quando já não dá mais para consertar.</strong> Se o sinal
+        dispara exatamente no limite que não pode ser rompido, o alerta chega depois do dano — vira
+        relatório de acidente, não sistema de proteção.</p>
+        <p>O <strong>amarelo é o buffer</strong>. E a largura dele não se define por número redondo:
+        define-se por <em>quanto tempo leva para corrigir aquilo</em>. Se reverter um desvio de CMV leva
+        três semanas, o amarelo tem que acender com três semanas de folga.</p>
+      </blockquote>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Indicador</th><th>Limite (vermelho)</th><th>Buffer (amarelo acende em)</th><th>Tempo de correção</th></tr></thead>
+        <tbody>
+          <tr><td>Faturamento por loja</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>CMV</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Margem</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Perdas / estoque</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note-item">
+        <span class="tag warn">os dois erros</span>
+        <div><strong>Buffer apertado gera alarme falso; buffer largo vira ruído.</strong> Os dois estragam
+        o sistema do mesmo jeito — a equipe aprende a ignorar o alerta. A calibragem inicial vale a hora da
+        Débora: ela é quem sabe hoje qual variação é normal e qual é sinal de problema. Detalhe em
+        <a href="#p7-sensores">Os sensores e os buffers</a>.</div>
       </div>
     </section>
 
@@ -2081,6 +2213,274 @@
       detalhe.classList.add('aberto');
     });
   });
+
+  // ═══════════════ FICHA DE HORAS POR ATIVIDADE ═══════════════
+  // As atividades NÃO são digitadas aqui: são lidas dos cards da aba "Os 7 processos".
+  // Um tópico marcado com data-trabalho="1" vira linhas — uma por .item-btn dele, ou
+  // uma linha só quando o tópico não tem itens (bloco coeso).
+  (function fichaDeHoras() {
+    var CHAVE = 'debora-ficha-v1';
+    var CLASSES = [
+      { v: '',        rot: '— classificar —' },
+      { v: 'fred',    rot: 'Fred sozinho' },
+      { v: 'debora',  rot: 'Precisa dela' },
+      { v: 'existe',  rot: 'Já existe pronto' },
+      { v: 'na',      rot: 'Não se aplica' }
+    ];
+    var dados = {};
+    try { dados = JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) { dados = {}; }
+    function salvar() { try { localStorage.setItem(CHAVE, JSON.stringify(dados)); } catch (e) {} }
+    function reg(id) { if (!dados[id]) dados[id] = {}; return dados[id]; }
+    function num(v) { var n = parseFloat(v); return isNaN(n) ? 0 : n; }
+    function fmt(n) { return (Math.round(n * 100) / 100) + 'h'; }
+
+    // ---- coletar atividades do DOM ----
+    var painelProc = document.querySelector('.tab-panel[data-panel="processos"]');
+    var processos = [];
+    painelProc.querySelectorAll('.grupo-btn').forEach(function (gb) {
+      var gid = gb.dataset.grupo;
+      var proc = { id: gid, nome: gb.querySelector('.gnome').textContent.trim(), ativs: [] };
+      var grade = painelProc.querySelector('.grade-topicos[data-grupo="' + gid + '"]');
+      if (!grade) return;
+      grade.querySelectorAll('.topico-btn[data-trabalho="1"]').forEach(function (tb) {
+        var tid = tb.dataset.topico;
+        var tnome = tb.querySelector('.tnome').textContent.trim();
+        var cont = painelProc.querySelector('.topico-conteudo[data-topico="' + tid + '"]');
+        var itens = cont ? cont.querySelectorAll('.item-btn') : [];
+        if (itens.length) {
+          itens.forEach(function (ib) {
+            proc.ativs.push({ id: gid + '|' + tid + '|' + ib.dataset.item, frente: tnome, nome: ib.textContent.trim() });
+          });
+        } else {
+          proc.ativs.push({ id: gid + '|' + tid, frente: tnome, nome: tnome, bloco: true });
+        }
+      });
+      if (proc.ativs.length) processos.push(proc);
+    });
+
+    var grade = document.getElementById('fGrade');
+    var paineis = document.getElementById('fPaineis');
+    if (!grade || !paineis) return;
+
+    // ---- montar cards e tabelas ----
+    processos.forEach(function (proc) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'fgrupo-btn';
+      btn.dataset.proc = proc.id;
+      btn.innerHTML = '<span class="fnome"></span><span class="fmeta"></span>';
+      btn.querySelector('.fnome').textContent = proc.nome;
+      grade.appendChild(btn);
+
+      var painel = document.createElement('div');
+      painel.className = 'fpainel';
+      painel.dataset.proc = proc.id;
+      painel.hidden = true;
+      var h3 = document.createElement('h3');
+      h3.textContent = proc.nome + ' — ' + proc.ativs.length + ' atividades';
+      painel.appendChild(h3);
+
+      var wrap = document.createElement('div');
+      wrap.className = 'tablewrap';
+      var tab = document.createElement('table');
+      tab.className = 'ficha';
+      tab.innerHTML = '<thead><tr><th>Atividade</th><th>Classificação</th><th>Fred (h)</th>' +
+                      '<th>Débora (h)</th><th>Equipe (h)</th><th>Total</th></tr></thead><tbody></tbody>' +
+                      '<tfoot><tr class="ficha-tot"><td>Total do processo</td><td></td>' +
+                      '<td class="tf-fred">0</td><td class="tf-deb">0</td><td class="tf-eq">0</td><td class="tf-tot">0</td></tr></tfoot>';
+      var corpo = tab.querySelector('tbody');
+
+      var frenteAtual = null;
+      proc.ativs.forEach(function (a) {
+        var tr = document.createElement('tr');
+        tr.dataset.id = a.id;
+        var tdNome = document.createElement('td');
+        if (a.frente !== frenteAtual && !a.bloco) {
+          var sp = document.createElement('span');
+          sp.className = 'frente';
+          sp.textContent = a.frente;
+          tdNome.appendChild(sp);
+          frenteAtual = a.frente;
+        }
+        tdNome.appendChild(document.createTextNode(a.nome));
+        tr.appendChild(tdNome);
+
+        var tdSel = document.createElement('td');
+        var sel = document.createElement('select');
+        sel.className = 'ficha-sel';
+        CLASSES.forEach(function (c) {
+          var o = document.createElement('option');
+          o.value = c.v; o.textContent = c.rot;
+          sel.appendChild(o);
+        });
+        sel.value = (dados[a.id] && dados[a.id].c) || '';
+        sel.addEventListener('change', function () {
+          reg(a.id).c = sel.value;
+          if (sel.value === 'fred' && !reg(a.id).d) reg(a.id).d = 0;
+          salvar(); pintarLinha(tr, sel.value); recalcular();
+        });
+        tdSel.appendChild(sel);
+        tr.appendChild(tdSel);
+
+        ['f', 'd', 'e'].forEach(function (campo) {
+          var td = document.createElement('td');
+          var inp = document.createElement('input');
+          inp.type = 'number'; inp.min = '0'; inp.step = '0.25';
+          inp.className = 'ficha-num';
+          inp.placeholder = '0';
+          var v = dados[a.id] && dados[a.id][campo];
+          if (v !== undefined && v !== null && v !== '') inp.value = v;
+          if (num(inp.value) > 0) inp.classList.add('tem');
+          inp.addEventListener('input', function () {
+            reg(a.id)[campo] = inp.value;
+            inp.classList.toggle('tem', num(inp.value) > 0);
+            salvar(); recalcular();
+          });
+          td.appendChild(inp);
+          tr.appendChild(td);
+        });
+
+        var tdTot = document.createElement('td');
+        tdTot.className = 'lin-tot';
+        tdTot.style.fontFamily = 'var(--mono)';
+        tr.appendChild(tdTot);
+
+        pintarLinha(tr, sel.value);
+        corpo.appendChild(tr);
+      });
+
+      wrap.appendChild(tab);
+      painel.appendChild(wrap);
+      paineis.appendChild(painel);
+
+      btn.addEventListener('click', function () {
+        var abrindo = painel.hidden;
+        grade.querySelectorAll('.fgrupo-btn').forEach(function (b) { b.classList.remove('ativo'); });
+        paineis.querySelectorAll('.fpainel').forEach(function (pn) { pn.hidden = true; });
+        painel.hidden = !abrindo;
+        if (abrindo) { btn.classList.add('ativo'); painel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+      });
+    });
+
+    function pintarLinha(tr, v) {
+      tr.className = '';
+      if (!v) return;
+      tr.classList.add('classificado');
+      if (v === 'fred' || v === 'existe') tr.classList.add('so-fred');
+      if (v === 'debora') tr.classList.add('precisa-dela');
+      if (v === 'na') tr.classList.add('na');
+    }
+
+    // ---- resumo por processo (4 auto + 4 manuais) ----
+    var ESCALA = ['—', 'baixa', 'média', 'alta'];
+    var ESCALA_IMP = ['—', 'baixo', 'médio', 'alto'];
+    var corpoResumo = document.querySelector('#fResumo tbody');
+    processos.forEach(function (proc) {
+      var tr = document.createElement('tr');
+      tr.dataset.proc = proc.id;
+      tr.innerHTML = '<td></td><td class="r-tot num">0</td><td class="r-deb num">0</td>' +
+                     '<td class="r-fred num">0</td><td class="r-eq num">0</td><td></td><td></td><td></td><td></td>';
+      tr.querySelector('td').textContent = proc.nome;
+      var tds = tr.querySelectorAll('td');
+      // horas/semana depois — input livre
+      var inp = document.createElement('input');
+      inp.type = 'number'; inp.min = '0'; inp.step = '0.25'; inp.className = 'ficha-num'; inp.placeholder = '0';
+      var salvoH = dados['res|' + proc.id] && dados['res|' + proc.id].sem;
+      if (salvoH) inp.value = salvoH;
+      inp.addEventListener('input', function () { reg('res|' + proc.id).sem = inp.value; salvar(); });
+      tds[5].appendChild(inp);
+      // três selects de julgamento
+      [['energia', ESCALA, 6], ['carga', ESCALA, 7], ['impacto', ESCALA_IMP, 8]].forEach(function (cfg) {
+        var sel = document.createElement('select');
+        sel.className = 'ficha-sel';
+        cfg[1].forEach(function (op) {
+          var o = document.createElement('option');
+          o.value = (op === '—' ? '' : op); o.textContent = op;
+          sel.appendChild(o);
+        });
+        sel.value = (dados['res|' + proc.id] && dados['res|' + proc.id][cfg[0]]) || '';
+        sel.addEventListener('change', function () { reg('res|' + proc.id)[cfg[0]] = sel.value; salvar(); });
+        tds[cfg[2]].appendChild(sel);
+      });
+      corpoResumo.appendChild(tr);
+    });
+
+    function recalcular() {
+      var gF = 0, gD = 0, gE = 0, classificadas = 0, total = 0;
+      processos.forEach(function (proc) {
+        var pF = 0, pD = 0, pE = 0, pClass = 0;
+        proc.ativs.forEach(function (a) {
+          var r = dados[a.id] || {};
+          var f = num(r.f), d = num(r.d), e = num(r.e);
+          pF += f; pD += d; pE += e;
+          if (r.c) pClass++;
+          var tr = document.querySelector('.fpainel[data-proc="' + proc.id + '"] tr[data-id="' + CSS.escape(a.id) + '"]');
+          if (tr) {
+            var cel = tr.querySelector('.lin-tot');
+            var t = f + d + e;
+            cel.textContent = t ? fmt(t) : '';
+          }
+        });
+        total += proc.ativs.length; classificadas += pClass;
+        gF += pF; gD += pD; gE += pE;
+
+        var painel = document.querySelector('.fpainel[data-proc="' + proc.id + '"]');
+        if (painel) {
+          painel.querySelector('.tf-fred').textContent = fmt(pF);
+          painel.querySelector('.tf-deb').textContent = fmt(pD);
+          painel.querySelector('.tf-eq').textContent = fmt(pE);
+          painel.querySelector('.tf-tot').textContent = fmt(pF + pD + pE);
+        }
+        var btn = grade.querySelector('.fgrupo-btn[data-proc="' + proc.id + '"]');
+        if (btn) {
+          btn.querySelector('.fmeta').innerHTML = pClass + '/' + proc.ativs.length + ' · <b>' +
+            fmt(pF + pD + pE) + '</b>' + (pD ? ' · dela ' + fmt(pD) : '');
+        }
+        var lin = document.querySelector('#fResumo tr[data-proc="' + proc.id + '"]');
+        if (lin) {
+          lin.querySelector('.r-tot').textContent = fmt(pF + pD + pE);
+          lin.querySelector('.r-deb').textContent = fmt(pD);
+          lin.querySelector('.r-fred').textContent = fmt(pF);
+          lin.querySelector('.r-eq').textContent = fmt(pE);
+        }
+      });
+      document.getElementById('fStatClass').textContent = classificadas + '/' + total;
+      document.getElementById('fProg').style.width = total ? (classificadas / total * 100) + '%' : '0';
+      document.getElementById('fStatFred').textContent = fmt(gF);
+      document.getElementById('fStatDeb').textContent = fmt(gD);
+      document.getElementById('fStatEq').textContent = fmt(gE);
+      document.getElementById('fStatTot').textContent = fmt(gF + gD + gE);
+    }
+
+    document.getElementById('fCopiar').addEventListener('click', function () {
+      var l = ['Processo\tFrente\tAtividade\tClassificacao\tFred\tDebora\tEquipe'];
+      processos.forEach(function (proc) {
+        proc.ativs.forEach(function (a) {
+          var r = dados[a.id] || {};
+          var rot = '';
+          CLASSES.forEach(function (c) { if (c.v && c.v === r.c) rot = c.rot; });
+          l.push([proc.nome, a.frente, a.nome, rot, r.f || '', r.d || '', r.e || ''].join('\t'));
+        });
+      });
+      var txt = l.join('\n');
+      var btn = document.getElementById('fCopiar');
+      function ok() { btn.textContent = 'copiado ✓'; setTimeout(function () { btn.textContent = 'copiar tudo'; }, 1800); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(ok, function () { alert(txt); });
+      } else { alert(txt); }
+    });
+
+    document.getElementById('fLimpar').addEventListener('click', function () {
+      if (!confirm('Apagar tudo o que foi preenchido na ficha? Não dá pra desfazer.')) return;
+      dados = {}; salvar();
+      document.querySelectorAll('.ficha-num').forEach(function (i) { i.value = ''; i.classList.remove('tem'); });
+      document.querySelectorAll('.ficha-sel').forEach(function (sl) { sl.value = ''; });
+      document.querySelectorAll('.fpainel tbody tr').forEach(function (tr) { pintarLinha(tr, ''); });
+      recalcular();
+    });
+
+    recalcular();
+  })();
 
   // deep link: #aba, ou #topico (abre aba + grupo + tópico)
   var inicial = location.hash.replace('#', '');
