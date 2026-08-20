@@ -1,0 +1,1644 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C1416" media="(prefers-color-scheme: dark)">
+<title>Independência Operacional da Débora</title>
+<meta name="description" content="Retirar a Débora da responsabilidade operacional das empresas sem transformar o Fred no novo gargalo: seis processos, dois ciclos de 20–60–20 e um sprint de 30 dias.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F7D74'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><path d='M58 26H32a4 4 0 0 0-4 4v40a4 4 0 0 0 4 4h26'/><path d='M52 50h24'/><path d='M66 40l10 10-10 10'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F6F4ED; --ink:#191712;
+    --ink-soft:#655F55; --ink-faint:#928C7D; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#0F7D74; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E3EEE7; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#DCEEEB;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0C1416; --surface:#121D1F; --surface-2:#182528; --ink:#E6EFEE;
+      --ink-soft:#94A5A4; --ink-faint:#62716F; --rule:#26383A; --rule-soft:#1D2C2E;
+      --accent:#57C7B9; --accent-ink:#06110F; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#17291F; --bad-bg:#301F1B; --warn-bg:#2E2416; --accent-bg:#17322F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0C1416; --surface:#121D1F; --surface-2:#182528; --ink:#E6EFEE;
+    --ink-soft:#94A5A4; --ink-faint:#62716F; --rule:#26383A; --rule-soft:#1D2C2E;
+    --accent:#57C7B9; --accent-ink:#06110F; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#17291F; --bad-bg:#301F1B; --warn-bg:#2E2416; --accent-bg:#17322F;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 1.75rem; }
+  h1, h2, h3, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 64ch; }
+
+  .resumo { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .5rem; }
+  .resumo > div { flex: 1; min-width: 8.5rem; background: var(--surface); border: 1px solid var(--rule);
+                  border-radius: 4px; padding: .7rem 1rem; text-align: center; }
+  .resumo .num { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; }
+  .resumo .lbl { font-size: .6875rem; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); }
+  .resumo div.ruim .num { color: var(--bad); }
+  .resumo div.bom .num { color: var(--good); }
+  .resumo div.aviso .num { color: var(--warn); }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .875rem; letter-spacing: .01em;
+             font-weight: 700; color: var(--ink-soft); background: var(--surface);
+             border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer;
+             padding: .6rem 1.1rem; transition: border-color .15s, color .15s, background .15s, box-shadow .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent);
+                     box-shadow: 0 1px 0 rgba(0,0,0,.08); }
+  .tab-panel { display: flex; flex-direction: column; gap: 1.75rem; }
+  .tab-panel[hidden] { display: none; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2.sec { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink); }
+  h3.sub { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+           color: var(--accent); font-weight: 700; margin-top: .2rem; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose a, .item-conteudo a, .topico-conteudo a { color: var(--accent); text-decoration: none;
+           border-bottom: 1px solid currentColor; }
+
+  blockquote.tese { border-left: 3px solid var(--accent); background: var(--surface);
+                    border-radius: 0 4px 4px 0; padding: 1rem 1.25rem; color: var(--ink-soft);
+                    max-width: 70ch; display: flex; flex-direction: column; gap: .75rem; }
+  blockquote.tese strong { color: var(--ink); font-weight: 600; }
+  blockquote.tese .pergunta { font-family: var(--mono); font-size: .9375rem; color: var(--ink); font-weight: 600; }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface-2);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; font-family: var(--mono);
+         align-self: flex-start; }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.neutro { background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--rule); }
+
+  ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+              font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos li::marker { color: var(--accent); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+  ul.check { list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: .4rem;
+             font-size: .875rem; color: var(--ink-soft); }
+  ul.check li { display: grid; grid-template-columns: 1.15rem 1fr; gap: .55rem; align-items: start; }
+  ul.check li::before { content: "☐"; font-family: var(--mono); color: var(--ink-faint); line-height: 1.5; }
+  ul.check strong { color: var(--ink); font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 30rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+  td.vazio { color: var(--ink-faint); font-family: var(--mono); font-size: .75rem; white-space: nowrap; }
+
+  /* ---------- nível 1 — grade de grupos ---------- */
+  .grade-grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .6rem; }
+  .grupo-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+               border: 1.5px solid var(--rule); border-radius: 8px; padding: 1rem 1.1rem;
+               display: flex; flex-direction: column; gap: .55rem; color: inherit;
+               transition: border-color .15s, background .15s; }
+  .grupo-btn:hover { border-color: var(--ink-faint); }
+  .grupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .grupo-btn .gnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+                       letter-spacing: .05em; text-transform: uppercase; display: flex;
+                       align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+  .grupo-btn .gdesc { font-size: .8125rem; color: var(--ink-soft); line-height: 1.45; }
+  .grupo-btn .gdestino { font-family: var(--mono); font-size: .6875rem; color: var(--ink-faint);
+                          letter-spacing: .04em; }
+  .grupo-btn .gdestino b { color: var(--accent); font-weight: 700; }
+
+  /* ---------- nível 2 — grade de tópicos ---------- */
+  .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .5rem;
+                    margin-top: -.5rem; padding: .9rem; background: var(--surface-2);
+                    border: 1px dashed var(--rule); border-radius: 8px; }
+  .grade-topicos[hidden] { display: none; }
+  .grade-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .5rem; }
+  .topico-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+                border: 1.5px solid var(--rule); border-radius: 6px; padding: .65rem .85rem;
+                display: flex; flex-direction: column; gap: .4rem; color: inherit;
+                transition: border-color .15s, background .15s; }
+  .topico-btn:hover { border-color: var(--ink-faint); }
+  .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .topico-btn .tnome { font-size: .875rem; font-weight: 600; line-height: 1.3; }
+
+  /* ---------- visor de conteúdo ---------- */
+  .visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
+           padding: 1.5rem 1.5rem 1.75rem; scroll-margin-top: 1.5rem; }
+  .visor-vazio { color: var(--ink-faint); font-size: .9375rem; text-align: center; padding: 2rem 0; }
+  .topico-conteudo { display: flex; flex-direction: column; gap: 1.1rem; }
+  .topico-conteudo[hidden] { display: none; }
+  .topico-conteudo h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: -.01em;
+                        padding-bottom: .6rem; border-bottom: 2px solid var(--ink);
+                        display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+                        font-family: var(--sans); text-transform: none; }
+  .topico-conteudo h2 .status { margin-left: auto; font-family: var(--mono); font-size: .625rem;
+                        font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+                        padding: .15rem .55rem; border-radius: 999px; }
+  .status.definir { background: var(--warn-bg); color: var(--warn); }
+  .status.feito { background: var(--good-bg); color: var(--good); }
+  .status.andamento { background: var(--accent-bg); color: var(--accent); }
+
+  /* descrição fixa do grupo (texto de contexto, não é atividade — não vira card) */
+  .grupo-descricao { display: flex; flex-direction: column; gap: .75rem; margin-top: -.5rem; }
+  .grupo-descricao[hidden] { display: none; }
+
+  /* ---------- nível 3 — itens dentro de um tópico ---------- */
+  .grade-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: .45rem; }
+  .item-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+              border: 1.5px solid var(--rule); border-radius: 6px; padding: .55rem .75rem;
+              font-size: .8125rem; font-weight: 600; color: inherit; line-height: 1.3;
+              transition: border-color .15s, background .15s; }
+  .item-btn:hover { border-color: var(--ink-faint); }
+  .item-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .item-visor { border: 1px dashed var(--rule); border-radius: 6px; background: var(--surface-2);
+                padding: 1rem 1.1rem; }
+  .item-visor-vazio { color: var(--ink-faint); font-size: .8125rem; text-align: center; padding: .35rem 0; }
+  .item-conteudo { display: flex; flex-direction: column; gap: .65rem; font-size: .875rem; color: var(--ink-soft); }
+  .item-conteudo[hidden] { display: none; }
+  .item-conteudo strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- fluxo: caixinha → seta → caixinha ---------- */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: stretch; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 12rem; transition: border-color .15s, background .15s, color .15s;
+                 display: flex; flex-direction: column; gap: .2rem; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .passo-caixa .quem { font-size: .625rem; letter-spacing: .08em; text-transform: uppercase;
+                       color: var(--ink-faint); font-weight: 700; }
+  .passo-caixa.ativo .quem { color: var(--accent-ink); opacity: .8; }
+  .passo-caixa.debora { border-left: 4px solid var(--warn); }
+  .passo-caixa.fred { border-left: 4px solid var(--accent); }
+  .passo-caixa.outro { border-left: 4px solid var(--good); }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; align-self: center; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft);
+                   margin-top: .6rem; }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
+
+  /* ---------- rota de transferência (Débora → X → destino) ---------- */
+  .rota { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; font-family: var(--mono);
+          font-size: .8125rem; font-weight: 700; }
+  .rota .no { padding: .35rem .7rem; border-radius: 999px; border: 1.5px solid var(--rule);
+              background: var(--surface); }
+  .rota .no.saida { border-color: var(--warn); color: var(--warn); text-decoration: line-through; }
+  .rota .no.meio { border-color: var(--accent); color: var(--accent); }
+  .rota .no.destino { border-color: var(--good); background: var(--good-bg); color: var(--good); }
+
+  /* ---------- sinais verde/amarelo/vermelho ---------- */
+  .sinais { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .6rem; }
+  .sinal { border: 1.5px solid var(--rule); border-radius: 8px; padding: .9rem 1rem; background: var(--surface);
+           display: flex; flex-direction: column; gap: .45rem; }
+  .sinal .snome { font-family: var(--mono); font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+                  text-transform: uppercase; display: flex; align-items: center; gap: .45rem; }
+  .sinal .bolinha { width: .7rem; height: .7rem; border-radius: 50%; flex: 0 0 auto; }
+  .sinal .sdesc { font-size: .8125rem; color: var(--ink-soft); line-height: 1.45; }
+  .sinal.verde { border-color: var(--good); } .sinal.verde .bolinha { background: var(--good); }
+  .sinal.verde .snome { color: var(--good); }
+  .sinal.amarelo { border-color: var(--warn); } .sinal.amarelo .bolinha { background: var(--warn); }
+  .sinal.amarelo .snome { color: var(--warn); }
+  .sinal.vermelho { border-color: var(--bad); } .sinal.vermelho .bolinha { background: var(--bad); }
+  .sinal.vermelho .snome { color: var(--bad); }
+
+  .alerta { border: 1.5px solid var(--bad); background: var(--bad-bg); border-radius: 6px;
+            padding: .9rem 1.1rem; font-size: .875rem; color: var(--ink); max-width: 70ch; }
+  .alerta strong { font-weight: 700; }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · Gestão · transferência de responsabilidade</div>
+    <h1>Independência Operacional da Débora</h1>
+    <p class="lede">
+      Tirar a Débora da responsabilidade operacional das empresas <strong>sem transformar o Fred no novo
+      gargalo</strong> e sem deixar o negócio deteriorar no caminho. Seis processos, dois ciclos de
+      20–60–20 por processo e um sprint de 30 dias.
+    </p>
+    <div class="resumo">
+      <div><div class="num">6</div><div class="lbl">processos a transferir</div></div>
+      <div class="ruim"><div class="num">0<span style="font-size:.9rem;color:var(--ink-faint)">/6</span></div><div class="lbl">independentes dela</div></div>
+      <div class="aviso"><div class="num">2</div><div class="lbl">ciclos por processo</div></div>
+      <div><div class="num">30</div><div class="lbl">dias de sprint</div></div>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" type="button" data-tab="metodo" role="tab" aria-selected="false">Método 20–60–20</button>
+    <button class="tab-btn" type="button" data-tab="processos" role="tab" aria-selected="false">Os 6 processos</button>
+    <button class="tab-btn" type="button" data-tab="capacidade" role="tab" aria-selected="false">Capacidade</button>
+    <button class="tab-btn" type="button" data-tab="guardrails" role="tab" aria-selected="false">Guardrails</button>
+    <button class="tab-btn" type="button" data-tab="sprint" role="tab" aria-selected="false">Sprint de 30 dias</button>
+  </div>
+
+  <!-- ══════════════════════ BRIEFING ══════════════════════ -->
+  <div class="tab-panel" data-panel="briefing" role="tabpanel">
+
+    <section>
+      <h2 class="sec">Por que este projeto existe</h2>
+      <p class="prose">
+        Hoje uma parte grande da operação das empresas depende da Débora — não só das horas dela, mas da
+        <strong>iniciativa</strong> dela: coisas que só acontecem porque ela lembra, cobra, decide ou
+        acompanha. Enquanto for assim, ela não sai de verdade: mesmo sem executar, continua carregando a
+        operação na cabeça.
+      </p>
+      <p class="prose">
+        O projeto não é &ldquo;a Débora trabalhar menos&rdquo;. É <em>retirar a dependência</em>. Cada
+        competência que hoje mora na cabeça dela precisa sair de lá, virar processo e chegar num destino
+        final definido — que nem sempre é o Fred.
+      </p>
+      <blockquote class="tese">
+        <p class="pergunta">&ldquo;Se a Débora ficar 30 dias sem olhar absolutamente nada das empresas, o que quebra?&rdquo;</p>
+        <p>Essa é a única pergunta que fecha o projeto. <strong>Resposta desejada: nada crítico.</strong></p>
+        <p>Os problemas continuam existindo. Pessoas continuam errando, campanhas podem performar mal,
+        estoque pode desviar, contratação pode dar errado. A diferença é que <strong>o sistema detecta,
+        outra pessoa assume, corrige e aprende — sem devolver a responsabilidade para a Débora.</strong></p>
+      </blockquote>
+    </section>
+
+    <section>
+      <h2 class="sec">Objetivo</h2>
+      <ul class="pontos">
+        <li><strong>Retirar a Débora</strong> da responsabilidade operacional das empresas.</li>
+        <li><strong>Transferir o conhecimento crítico</strong> que hoje depende dela.</li>
+        <li>Garantir que <strong>cada competência tenha um destino final definido</strong> — pessoa, sistema ou função.</li>
+        <li><strong>Evitar que o Fred se torne o novo gargalo</strong> operacional.</li>
+        <li>Preservar <strong>faturamento, margem, qualidade e funcionamento das lojas</strong> durante a transição.</li>
+        <li>Reduzir progressivamente as horas e, principalmente, a <strong>carga mental</strong> da Débora.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="sec">As duas armadilhas do projeto</h2>
+      <div class="note-item">
+        <span class="tag bad">armadilha 1</span>
+        <div><strong>Mudar o gargalo de lugar.</strong> Transferir tudo da Débora para o Fred resolve o
+        problema dela e cria o mesmo problema um degrau adiante. Por isso <em>o destino final de cada
+        competência é definido antes da transferência</em> — e em quatro dos seis processos esse destino
+        não é o Fred.</div>
+      </div>
+      <div class="note-item">
+        <span class="tag bad">armadilha 2</span>
+        <div><strong>Ganhar independência e perder o negócio.</strong> Transição é o momento em que
+        faturamento, CMV e padrão de loja escorregam sem ninguém perceber. Por isso existem
+        <a href="#guardrails">guardrails</a>: limites declarados antes de começar, com sinal de
+        verde / amarelo / vermelho e responsável por cada cor.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">O que conta como &ldquo;projeto concluído&rdquo;</h2>
+      <p class="prose">Não é uma sensação. São dez condições objetivas — todas precisam estar verdadeiras:</p>
+      <ul class="check">
+        <li>A Débora não tem <strong>nenhum processo operacional recorrente</strong> sob responsabilidade dela.</li>
+        <li>Os processos críticos funcionam <strong>sem iniciativa nem acompanhamento</strong> dela.</li>
+        <li>As pessoas responsáveis <strong>sabem o que fazer</strong>.</li>
+        <li>Existe <strong>processo/documentação</strong> suficiente para sustentar a operação.</li>
+        <li>Existem <strong>indicadores e sinais</strong> que mostram quando algo sai do padrão.</li>
+        <li>Problemas <strong>não voltam automaticamente</strong> para a Débora.</li>
+        <li>O <strong>Fred permanece dentro da capacidade de tempo</strong> dele.</li>
+        <li><strong>Faturamento, CMV e os demais indicadores críticos</strong> seguem dentro dos guardrails.</li>
+        <li>Cada processo passou pela <a href="#sprint">regra de saída</a> — inclusive o teste de ter funcionado na prática sem ela.</li>
+        <li>A resposta para a pergunta dos 30 dias é <strong>&ldquo;nada crítico&rdquo;</strong>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="sec">O caminho do projeto — clique nas caixinhas</h2>
+      <div class="fluxo">
+        <button class="passo-caixa fred" data-detalhe="Antes de qualquer extração: quantas horas por semana a Débora aceita dar ao sprint, quantas o Fred tem livres, e o que o Fred já carrega que não pode largar. Sem esse número, todo o resto vira wishlist. <strong>Está na aba Capacidade — e é a primeira coisa a preencher.</strong>"><span class="quem">Passo 1</span>Fechar a capacidade</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="Mapa dos processos fechado (os 6 da aba ao lado), horas estimadas por processo e ordem de ataque definida pelos critérios de priorização. <strong>A ordem não é a numérica</strong> — é a que mais libera a Débora gastando menos hora dela."><span class="quem">Passo 2</span>Priorizar</button><span class="seta">→</span>
+        <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1, primeiros 20%.</strong> Blocos curtos de 15–20 min em que a Débora despeja conhecimento bruto: como executa, como pensa, critérios de decisão, erros críticos, exceções, o que é um bom resultado. Ela não formata, não escreve manual, não monta treinamento."><span class="quem">Passo 3 · Débora</span>Extrair o conhecimento</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>Ciclo 1, os 60% do meio.</strong> O Fred transforma conhecimento bruto em processo: checklist, critério de decisão, indicador, sinal de alerta, material de treinamento — e testa. Tudo que puder ser descoberto sem a Débora é descoberto sem a Débora."><span class="quem">Passo 4 · Fred</span>Virar processo</button><span class="seta">→</span>
+        <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1, últimos 20%.</strong> A Débora revisa o material pronto: corrige erro, aponta exceção não prevista, valida critério e aprova a versão 1.0. A partir daqui o conhecimento deixa de existir só na cabeça dela."><span class="quem">Passo 5 · Débora</span>Validar a v1.0</button><span class="seta">→</span>
+        <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 inteiro.</strong> A competência vai para o destino final: o Fred entrega processo, padrão e limite de autonomia (20%), o responsável executa de verdade (60%), o Fred audita e vai reduzindo o acompanhamento até soltar (20%)."><span class="quem">Passo 6 · Destino</span>Transferir e auditar</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="Todo fim de semana o scorecard mede o que importa: horas da Débora, interrupções que ela recebeu, processos ainda dependentes dela, horas que o Fred absorveu, faturamento e CMV. <strong>É o placar que diz se o projeto está andando ou só parecendo que anda.</strong>"><span class="quem">Passo 7 · Semanal</span>Medir o que sobrou</button>
+      </div>
+      <div class="passo-detalhe"></div>
+    </section>
+
+    <section>
+      <h2 class="sec">Os seis processos e para onde cada um vai</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>#</th><th>Processo</th><th>Rota</th><th>Destino final</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Faturamento da loja física</td><td>Débora → Fred</td><td>Fred</td></tr>
+          <tr><td>2</td><td>Redução de CMV + frete</td><td>Débora → Fred → Sistema</td><td>Sistema</td></tr>
+          <tr><td>3</td><td>Compras + controle de estoque</td><td>Débora → Fred/Sistema → Equipe</td><td>Sistema + equipe responsável</td></tr>
+          <tr><td>4</td><td>Treinamento de equipe</td><td>Débora → Fred/Sistema → Liderança</td><td>Sistema + liderança</td></tr>
+          <tr><td>5</td><td>Contratação de equipe</td><td>Débora → Fred/Sistema → Adm/RH</td><td>Administrativo/RH</td></tr>
+          <tr><td>6</td><td>Marketing do iFood</td><td>Débora → Fred</td><td>Fred, com baixa demanda recorrente</td></tr>
+        </tbody>
+      </table></div>
+      <p class="prose" style="font-size:.875rem">
+        Em <strong>quatro dos seis</strong> o destino final não é o Fred — é exatamente isso que impede a
+        armadilha 1. Detalhe de cada um na aba <em>Os 6 processos</em>.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════ MÉTODO 20–60–20 ══════════════════════ -->
+  <div class="tab-panel" data-panel="metodo" role="tabpanel" hidden>
+
+    <section>
+      <h2 class="sec">O método padrão: duplo 20–60–20</h2>
+      <p class="prose">
+        Todo processo passa por <strong>dois ciclos</strong>, sempre na mesma ordem. O primeiro tira o
+        conhecimento da cabeça da Débora. O segundo leva a competência até o destino final — que só é o
+        Fred quando o destino final <em>é</em> o Fred.
+      </p>
+      <p class="prose">
+        A proporção 20–60–20 é o ponto do método: <strong>quem tem o conhecimento gasta 20% do
+        esforço, não 100%</strong>. Os 60% do meio são trabalho de quem está recebendo. Os últimos 20%
+        são só revisão.
+      </p>
+      <div class="note-item">
+        <span class="tag acc">regra</span>
+        <div><strong>A Débora entrega conhecimento bruto.</strong> Ela não precisa construir treinamento,
+        manual ou processo perfeito. Formatar, estruturar, pesquisar e documentar é trabalho do Fred —
+        toda hora dela gasta em formatação é uma hora que não virou independência.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Ciclo 1 — extrair o conhecimento da Débora</h2>
+      <div class="fluxo">
+        <button class="passo-caixa debora" data-detalhe="<strong>20% · Débora.</strong> Em bloco curto, ela registra: como executa a atividade; como pensa sobre ela; os critérios importantes de decisão; os erros críticos (o que nunca pode acontecer); as exceções relevantes; e o que caracteriza um bom resultado.<br><br>Formato livre — áudio, conversa gravada, bullet solto. <strong>Conhecimento bruto, não material pronto.</strong>"><span class="quem">20% · Débora</span>Despejar o conhecimento</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>60% · Fred.</strong> Estuda o material, olha exemplos anteriores, preenche sozinho todas as lacunas que dá pra descobrir sem ela — e transforma em processo: checklist, critério de decisão, indicador, sinal de alerta e material de treinamento quando for o caso. Testa o processo. <strong>Concentra as dúvidas restantes numa lista só</strong>, em vez de interromper a Débora a cada dúvida."><span class="quem">60% · Fred</span>Transformar em processo</button><span class="seta">→</span>
+        <button class="passo-caixa debora" data-detalhe="<strong>20% · Débora.</strong> Revisa o material pronto: corrige erro, identifica exceção não prevista, valida critério e aprova a <strong>versão 1.0</strong>.<br><br>Resultado do ciclo: o conhecimento deixa de existir exclusivamente na cabeça dela."><span class="quem">20% · Débora</span>Revisar e aprovar a v1.0</button>
+      </div>
+      <div class="passo-detalhe"></div>
+      <p class="prose" style="font-size:.875rem"><strong>Saída do Ciclo 1:</strong> existe um documento
+      v1.0 aprovado. A Débora ainda pode estar executando — mas já não é a única fonte do conhecimento.</p>
+    </section>
+
+    <section>
+      <h2 class="sec">Ciclo 2 — transferir para o destino final</h2>
+      <div class="fluxo">
+        <button class="passo-caixa fred" data-detalhe="<strong>20% · Fred.</strong> Define o responsável; explica objetivo e processo; disponibiliza os materiais; define o padrão esperado; define os indicadores e o <strong>limite de autonomia</strong> — o que a pessoa decide sozinha e o que ela escala."><span class="quem">20% · Fred</span>Entregar o processo</button><span class="seta">→</span>
+        <button class="passo-caixa outro" data-detalhe="<strong>60% · Responsável.</strong> Executa na prática, toma decisões dentro da autonomia definida, registra dificuldades e exceções, e aprende pela execução real. <strong>Aprender executando é o ponto</strong> — não existe transferência por leitura de manual."><span class="quem">60% · Responsável</span>Executar de verdade</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>20% · Fred.</strong> Audita a execução, corrige desvios, melhora o processo, valida o domínio da competência e <strong>reduz o acompanhamento progressivamente</strong> até transferir a responsabilidade em definitivo.<br><br>Resultado: a competência deixa de depender também do Fred, quando o destino final dela não for o Fred."><span class="quem">20% · Fred</span>Auditar e soltar</button>
+      </div>
+      <div class="passo-detalhe"></div>
+      <p class="prose" style="font-size:.875rem"><strong>Saída do Ciclo 2:</strong> o processo rodou na
+      prática sem a Débora e sem o Fred executando. Só aí ele conta como transferido — a lista completa
+      de condições está na <a href="#sprint">regra de saída</a>.</p>
+    </section>
+
+    <section>
+      <h2 class="sec">Quem faz o quê, em uma tabela</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Etapa</th><th>Quem</th><th>Entrega</th><th>Custo pra Débora</th></tr></thead>
+        <tbody>
+          <tr><td>Ciclo 1 · 20%</td><td>Débora</td><td>Conhecimento bruto: execução, critérios, erros críticos, exceções, padrão de bom resultado</td><td>Alto por minuto, baixo em total</td></tr>
+          <tr><td>Ciclo 1 · 60%</td><td>Fred</td><td>Processo, checklist, critérios, indicadores, alertas, treinamento, teste</td><td>Zero</td></tr>
+          <tr><td>Ciclo 1 · 20%</td><td>Débora</td><td>Correção, exceções não previstas, aprovação da v1.0</td><td>Baixo</td></tr>
+          <tr><td>Ciclo 2 · 20%</td><td>Fred</td><td>Responsável definido, padrão, indicadores, limite de autonomia</td><td>Zero</td></tr>
+          <tr><td>Ciclo 2 · 60%</td><td>Responsável</td><td>Execução real, decisões, registro de exceções</td><td>Zero</td></tr>
+          <tr><td>Ciclo 2 · 20%</td><td>Fred</td><td>Auditoria, correção, validação de domínio, entrega definitiva</td><td>Zero</td></tr>
+        </tbody>
+      </table></div>
+      <p class="prose" style="font-size:.875rem">
+        Das seis etapas, <strong>a Débora aparece em duas</strong> — e as duas são do Ciclo 1. Se ela
+        estiver aparecendo em qualquer etapa do Ciclo 2, o método saiu do trilho.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════ OS 6 PROCESSOS ══════════════════════ -->
+  <div class="tab-panel" data-panel="processos" role="tabpanel" hidden>
+
+    <p class="prose">
+      Os seis processos que hoje dependem da Débora. Clique num processo pra abrir os tópicos dele —
+      escopo, rota de transferência, o que fica rodando depois e o teste que diz que acabou.
+      <strong>A ordem numérica não é a ordem de execução</strong>: quem define a ordem é a
+      <a href="#sprint">priorização</a>.
+    </p>
+
+    <div class="grade-grupos">
+      <button class="grupo-btn" data-grupo="p1">
+        <span class="gnome">1 · Faturamento da loja</span>
+        <span class="gdesc">Campanhas das lojas físicas — planejamento, execução, acompanhamento — e o cardápio de verão.</span>
+        <span class="gdestino">destino final: <b>Fred</b></span>
+      </button>
+      <button class="grupo-btn" data-grupo="p2">
+        <span class="gnome">2 · CMV + frete</span>
+        <span class="gdesc">Todas as ações de redução de custo em andamento e as ainda não implementadas, mais a gestão de frete.</span>
+        <span class="gdestino">destino final: <b>Sistema</b></span>
+      </button>
+      <button class="grupo-btn" data-grupo="p3">
+        <span class="gnome">3 · Compras + estoque</span>
+        <span class="gdesc">Controle de estoque das 3 lojas, compras das lojas e compras da fábrica Holy Cook.</span>
+        <span class="gdestino">destino final: <b>Sistema + equipe</b></span>
+      </button>
+      <button class="grupo-btn" data-grupo="p4">
+        <span class="gnome">4 · Treinamento</span>
+        <span class="gdesc">Trilha por função, materiais, avaliação prática, quem treina, quem valida e reciclagem.</span>
+        <span class="gdestino">destino final: <b>Sistema + liderança</b></span>
+      </button>
+      <button class="grupo-btn" data-grupo="p5">
+        <span class="gnome">5 · Contratação</span>
+        <span class="gdesc">Perfil por função, red flags, roteiro de entrevista, scorecard e decisão.</span>
+        <span class="gdestino">destino final: <b>Administrativo/RH</b></span>
+      </button>
+      <button class="grupo-btn" data-grupo="p6">
+        <span class="gnome">6 · Marketing do iFood</span>
+        <span class="gdesc">Campanhas, configurações, o que acompanhar, quando mexer e — principalmente — quando não mexer.</span>
+        <span class="gdestino">destino final: <b>Fred</b> (baixa demanda)</span>
+      </button>
+    </div>
+
+    <!-- ---------- descrições fixas de cada processo ---------- -->
+    <div class="grupo-descricao" data-grupo="p1" hidden>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no destino">Fred</span></div>
+      <p class="prose" style="font-size:.875rem">Único processo em que a rota é direta e curta: o destino
+      final é o Fred mesmo. É o processo mais ligado a resultado — por isso sai da Débora sem passar por
+      sistema nem por equipe nesta rodada.</p>
+    </div>
+    <div class="grupo-descricao" data-grupo="p2" hidden>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred</span><span class="seta">→</span><span class="no destino">Sistema</span></div>
+      <p class="prose" style="font-size:.875rem">O Fred é passagem, não destino. A meta é que o
+      acompanhamento vire sistema: dado alimentado por alguém definido, frequência fixa, faixa
+      verde/amarelo/vermelho e o máximo possível automatizado.</p>
+    </div>
+    <div class="grupo-descricao" data-grupo="p3" hidden>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Equipe</span></div>
+      <p class="prose" style="font-size:.875rem">O maior dos seis, e o único com três frentes separadas.
+      A vantagem: <strong>uma das lojas já tem um processo de compras que funciona</strong> — o trabalho é
+      consolidar esse e adaptar para as outras duas, não inventar do zero.</p>
+    </div>
+    <div class="grupo-descricao" data-grupo="p4" hidden>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Liderança</span></div>
+      <p class="prose" style="font-size:.875rem">Este processo não começa do zero: a
+      <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já é a trilha de treinamento por
+      função, com material próprio. O que falta é o que depende da Débora e o handoff pra liderança
+      treinar sem ela.</p>
+    </div>
+    <div class="grupo-descricao" data-grupo="p5" hidden>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Administrativo/RH</span></div>
+      <p class="prose" style="font-size:.875rem">O núcleo aqui é tácito: a Débora sabe reconhecer bom
+      candidato e sabe farejar red flag, mas isso não está escrito em lugar nenhum. Enquanto não virar
+      scorecard, toda contratação volta pra ela.</p>
+    </div>
+    <div class="grupo-descricao" data-grupo="p6" hidden>
+      <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no destino">Fred</span></div>
+      <p class="prose" style="font-size:.875rem">Ciclo 1 enxuto — é o processo de menor volume de
+      conhecimento e provavelmente o <strong>quick win mais barato</strong> do sprint: pouca hora da
+      Débora, retirada completa dela no fim.</p>
+    </div>
+
+    <!-- ---------- grades de tópicos ---------- -->
+    <div class="grade-topicos" data-grupo="p1" hidden>
+      <button class="topico-btn" data-topico="p1-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p1-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p1-rotina"><span class="tnome">O que fica rodando depois</span></button>
+      <button class="topico-btn" data-topico="p1-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
+      <button class="topico-btn" data-topico="p1-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="p2" hidden>
+      <button class="topico-btn" data-topico="p2-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p2-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p2-sistema"><span class="tnome">O que significa &ldquo;virar sistema&rdquo;</span><span class="tag acc">destino</span></button>
+      <button class="topico-btn" data-topico="p2-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="p3" hidden>
+      <button class="topico-btn" data-topico="p3-a"><span class="tnome">3A · Controle de estoque</span></button>
+      <button class="topico-btn" data-topico="p3-b"><span class="tnome">3B · Compras das lojas</span></button>
+      <button class="topico-btn" data-topico="p3-c"><span class="tnome">3C · Compras da fábrica Holy Cook</span></button>
+      <button class="topico-btn" data-topico="p3-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p3-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
+      <button class="topico-btn" data-topico="p3-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="p4" hidden>
+      <button class="topico-btn" data-topico="p4-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p4-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p4-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
+      <button class="topico-btn" data-topico="p4-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="p5" hidden>
+      <button class="topico-btn" data-topico="p5-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p5-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p5-loop"><span class="tnome">O loop que melhora o critério</span><span class="tag acc">mecanismo</span></button>
+      <button class="topico-btn" data-topico="p5-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
+    </div>
+
+    <div class="grade-topicos" data-grupo="p6" hidden>
+      <button class="topico-btn" data-topico="p6-escopo"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p6-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
+      <button class="topico-btn" data-topico="p6-quando"><span class="tnome">Quando mexer e quando não mexer</span><span class="tag warn">crítico</span></button>
+      <button class="topico-btn" data-topico="p6-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
+    </div>
+
+    <div class="visor">
+      <p class="visor-vazio">Clique num processo e depois num tópico pra ver o conteúdo.</p>
+
+      <!-- ══════ PROCESSO 1 ══════ -->
+      <div class="topico-conteudo" data-topico="p1-escopo" hidden>
+        <h2>1 · Faturamento da loja física — escopo<span class="status definir">a extrair</span></h2>
+        <p class="prose">O que precisa sair da cabeça da Débora neste processo. Clique num item pra ver o que exatamente extrair.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="campanhas">Campanhas das lojas físicas</button>
+          <button class="item-btn" data-item="planejamento">Planejamento das campanhas</button>
+          <button class="item-btn" data-item="execucao">Execução e acompanhamento</button>
+          <button class="item-btn" data-item="verao">Cardápio de verão</button>
+          <button class="item-btn" data-item="criterios">Critérios de decisão dela</button>
+          <button class="item-btn" data-item="indicadores">Indicadores de resultado</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="campanhas" hidden>
+            <p><strong>Quais campanhas existem hoje</strong>, quais estão no ar, quais estão pausadas e quais foram testadas e abandonadas — com o motivo do abandono.</p>
+            <p>Sem esse inventário, o Fred assume no escuro e repete campanha que já falhou.</p>
+          </div>
+          <div class="item-conteudo" data-item="planejamento" hidden>
+            <p><strong>Como uma campanha nasce</strong>: de onde vem a ideia, com quanto tempo de antecedência é montada, o que precisa estar pronto antes de subir (arte, produto, equipe avisada, estoque), e quem ela envolve.</p>
+          </div>
+          <div class="item-conteudo" data-item="execucao" hidden>
+            <p><strong>O que ela faz enquanto a campanha está rodando</strong>: o que olha, com que frequência, o que ajusta no meio do caminho e o que deixa correr até o fim.</p>
+            <p>Esta é a parte que mais consome carga mental — é acompanhamento contínuo, não tarefa pontual.</p>
+          </div>
+          <div class="item-conteudo" data-item="verao" hidden>
+            <p>O cardápio de verão entra no escopo como um caso concreto em andamento. Já existe página própria: <a href="https://holycampinas.github.io/cardapio-verao-holy-cookie/" target="_blank" rel="noopener">Cardápio de Verão</a> — coleta e votação de produtos.</p>
+            <p><strong>O que falta extrair:</strong> o critério de decisão dela sobre o que entra e o que sai do cardápio, e quem toca a implementação depois da votação.</p>
+          </div>
+          <div class="item-conteudo" data-item="criterios" hidden>
+            <p><strong>O item mais valioso do processo.</strong> Como ela decide entre duas ações possíveis: o que faz uma campanha parecer boa antes de existir resultado, o que a faz descartar uma ideia, quanto ela topa investir e o que nunca faria.</p>
+            <p>É isso que transforma &ldquo;fazer campanha&rdquo; em critério repetível em vez de intuição.</p>
+          </div>
+          <div class="item-conteudo" data-item="indicadores" hidden>
+            <p><strong>Como ela sabe se deu certo.</strong> Qual número olha, em quanto tempo, comparado com o quê, e a partir de que ponto ela considera fracasso.</p>
+            <p>Vira a base da rotina de acompanhamento do Fred — e das faixas verde/amarelo/vermelho.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p1-rota" hidden>
+        <h2>1 · Rota de transferência — Débora → Fred</h2>
+        <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no destino">Fred</span></div>
+        <div class="fluxo">
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1 completo</strong> nos seis itens do escopo. Blocos curtos, conhecimento bruto: campanhas existentes, como planeja, o que acompanha, critérios de decisão e indicadores."><span class="quem">Ciclo 1</span>Extrair da Débora</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="O Fred assume a responsabilidade pelo faturamento das lojas físicas. <strong>Não é dividir — é assumir.</strong> A partir daqui, campanha que não acontece é responsabilidade dele, não dela."><span class="quem">Fred</span>Assumir a responsabilidade</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Rotina de acompanhamento definida (o que olhar, quando), indicadores fechados e <strong>calendário de ações</strong> montado — para as campanhas nascerem por calendário, não por lembrança."><span class="quem">Fred</span>Montar rotina e calendário</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="A Débora sai do acompanhamento: não recebe relatório, não é consultada por rotina, não é copiada. <strong>Só entra se ela quiser entrar</strong> — nunca por necessidade do processo."><span class="quem">Saída</span>Retirar a Débora</button>
+        </div>
+        <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p1-rotina" hidden>
+        <h2>1 · O que fica rodando depois</h2>
+        <p class="prose">Depois da transferência, o processo não &ldquo;acaba&rdquo; — vira rotina do Fred. O que precisa existir:</p>
+        <ul class="check">
+          <li><strong>Calendário de ações</strong> — as campanhas do trimestre já marcadas, com data de montagem e data de subida.</li>
+          <li><strong>Rotina de acompanhamento</strong> — dia fixo da semana, com o que olhar definido de antemão.</li>
+          <li><strong>Indicadores</strong> — faturamento por loja e o resultado de cada campanha ativa.</li>
+          <li><strong>Faixas verde/amarelo/vermelho</strong> de faturamento por loja (definidas nos <a href="#guardrails">guardrails</a>).</li>
+        </ul>
+        <div class="note-item">
+          <span class="tag warn">atenção</span>
+          <div>Este é o processo com maior risco da <strong>armadilha 2</strong>: é justamente o que segura
+          faturamento. Se ele escorregar durante o sprint, o projeto inteiro para até voltar ao verde.</div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p1-existe" hidden>
+        <h2>1 · O que já existe — não recomeçar do zero</h2>
+        <ul class="pontos">
+          <li><a href="../acoes-de-loja/">Estratégia da área Loja</a> — a régua de julgar ação de loja: faturamento = pessoas × frequência × ticket. Toda campanha deve dizer qual dos três fatores move.</li>
+          <li><a href="https://holycampinas.github.io/cardapio-verao-holy-cookie/" target="_blank" rel="noopener">Cardápio de Verão</a> — página de coleta e votação de produtos, já no ar.</li>
+          <li><a href="../acoes-de-loja/campanha-fidelizacao/">Campanha de fidelização</a> — campanha em construção, com dossiê próprio.</li>
+          <li><a href="../prioridades/">Prioridades</a> — o recorte das duas crises simultâneas (faturamento e equipe) e a ordem sugerida entre elas.</li>
+        </ul>
+        <p class="prose" style="font-size:.875rem">Nenhum desses cobre o item mais caro do escopo — os
+        <strong>critérios de decisão da Débora</strong>. Esse só sai por extração.</p>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p1-fim" hidden>
+        <h2>1 · Como sei que acabou<span class="status definir">teste</span></h2>
+        <ul class="check">
+          <li>Rodou <strong>um ciclo completo de campanha</strong> — planejada, executada e avaliada — sem a Débora em nenhuma etapa.</li>
+          <li>Existe calendário de ações para o próximo trimestre, montado pelo Fred.</li>
+          <li>O faturamento por loja segue dentro da faixa definida nos guardrails.</li>
+          <li>A Débora não foi consultada nem avisada por rotina durante o ciclo.</li>
+          <li>Se uma campanha performar mal, existe critério escrito do que fazer — e ele não menciona a Débora.</li>
+        </ul>
+      </div>
+
+      <!-- ══════ PROCESSO 2 ══════ -->
+      <div class="topico-conteudo" data-topico="p2-escopo" hidden>
+        <h2>2 · Redução de CMV + frete — escopo<span class="status definir">a extrair</span></h2>
+        <p class="prose">CMV já foi tratado antes como crise resolvida — mas <strong>o que sustenta o resultado é o acompanhamento</strong>, e o acompanhamento hoje é ela.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="andamento">Ações em andamento</button>
+          <button class="item-btn" data-item="naoimplementadas">Ações ainda não implementadas</button>
+          <button class="item-btn" data-item="impacto">Impacto esperado de cada ação</button>
+          <button class="item-btn" data-item="responsaveis">Responsáveis pela implementação</button>
+          <button class="item-btn" data-item="frete">Gestão e otimização de frete</button>
+          <button class="item-btn" data-item="indcmv">Indicadores de CMV</button>
+          <button class="item-btn" data-item="indfrete">Indicadores de frete</button>
+          <button class="item-btn" data-item="rotina">Rotina de acompanhamento</button>
+          <button class="item-btn" data-item="alertas">Alertas de desvio</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="andamento" hidden>
+            <p><strong>Listar todas</strong> as ações de redução de CMV atualmente em andamento — em que pé cada uma está e quem toca.</p>
+            <p>Ação em andamento sem dono declarado é ação que morre quando a Débora sair.</p>
+          </div>
+          <div class="item-conteudo" data-item="naoimplementadas" hidden>
+            <p>Registrar as ações <strong>identificadas mas ainda não implementadas</strong>. É o estoque de oportunidade — e é o que se perde se ficar só na cabeça dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="impacto" hidden>
+            <p>Quanto cada ação vale, em real ou em ponto percentual de CMV. <strong>É o que permite priorizar</strong> em vez de tocar tudo ao mesmo tempo.</p>
+          </div>
+          <div class="item-conteudo" data-item="responsaveis" hidden>
+            <p>Quem implementa cada ação. Note que aqui já se decide: <strong>o Fred não é o responsável default</strong> — parte disso vai direto para equipe ou fornecedor.</p>
+          </div>
+          <div class="item-conteudo" data-item="frete" hidden>
+            <p>Estruturar a gestão de frete como frente própria: transportadoras, custo por rota/entrega, consolidação de pedido, e o critério que decide vale-a-pena pagar frete ou juntar pedido.</p>
+          </div>
+          <div class="item-conteudo" data-item="indcmv" hidden>
+            <p>Qual número, com que fórmula, medido em que frequência e por loja ou consolidado. <strong>Sem indicador fechado não existe faixa de alerta</strong> — e sem faixa, o sistema não substitui a Débora.</p>
+          </div>
+          <div class="item-conteudo" data-item="indfrete" hidden>
+            <p>O mesmo para frete: custo de frete como percentual da compra, por loja e por fornecedor.</p>
+          </div>
+          <div class="item-conteudo" data-item="rotina" hidden>
+            <p><strong>Quem alimenta o dado, com que frequência, e quem olha.</strong> É o coração da virada para sistema: enquanto o dado depender de alguém lembrar, não virou sistema.</p>
+          </div>
+          <div class="item-conteudo" data-item="alertas" hidden>
+            <p>O que dispara sozinho quando o CMV ou o frete sai da faixa — e para quem dispara. O alerta é o que substitui a vigilância mental da Débora.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p2-rota" hidden>
+        <h2>2 · Rota de transferência — Débora → Fred → Sistema</h2>
+        <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred</span><span class="seta">→</span><span class="no destino">Sistema</span></div>
+        <div class="fluxo">
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1.</strong> Ações em andamento, ações pendentes, impacto esperado de cada uma e como ela acompanha hoje."><span class="quem">Ciclo 1</span>Extrair da Débora</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="O Fred implementa e organiza as ações — inclusive definindo quem toca cada uma. <strong>Passagem, não destino.</strong>"><span class="quem">Fred</span>Implementar e organizar</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Transformar acompanhamento em sistema: quem alimenta o dado, frequência de análise, limites verde/amarelo/vermelho e <strong>automatizar o máximo possível</strong>."><span class="quem">Fred</span>Virar sistema</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="A Débora sai. E o Fred sai da execução recorrente sempre que possível — sobra pra ele só o que o sistema não faz e ninguém mais pode fazer."><span class="quem">Saída</span>Retirar Débora e Fred</button>
+        </div>
+        <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p2-sistema" hidden>
+        <h2>2 · O que significa &ldquo;virar sistema&rdquo;<span class="status andamento">destino</span></h2>
+        <p class="prose">&ldquo;Sistema&rdquo; aqui não é software necessariamente — é <strong>um arranjo que funciona sem iniciativa humana</strong>. Ele existe quando as cinco perguntas abaixo têm resposta escrita:</p>
+        <ul class="check">
+          <li><strong>Quem alimenta o dado</strong> — e o que acontece se essa pessoa faltar.</li>
+          <li><strong>Com que frequência</strong> o dado entra e com que frequência é analisado.</li>
+          <li><strong>Quais os limites</strong> de verde, amarelo e vermelho — em número, não em percepção.</li>
+          <li><strong>O que dispara sozinho</strong> quando sai da faixa, e para quem.</li>
+          <li><strong>Quem age</strong> em cada cor — e o protocolo do vermelho, definido antes de acontecer.</li>
+        </ul>
+        <div class="note-item">
+          <span class="tag acc">nota</span>
+          <div>Boa parte disso pode se apoiar em ferramenta que já existe na operação. <strong>Antes de
+          construir, checar o que já está no ar</strong> — reaproveitar base e login existentes em vez de
+          criar estrutura nova.</div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p2-fim" hidden>
+        <h2>2 · Como sei que acabou<span class="status definir">teste</span></h2>
+        <ul class="check">
+          <li>O CMV é calculado e revisado <strong>sem ninguém lembrar de fazer</strong> — o dado chega por rotina definida.</li>
+          <li>Existe faixa numérica de verde/amarelo/vermelho para CMV e para frete.</li>
+          <li>Cada ação de redução tem responsável nomeado — e nenhum deles é a Débora.</li>
+          <li>Um desvio de CMV foi detectado e tratado <strong>sem a Débora ser avisada</strong>.</li>
+          <li>O Fred não é quem executa a coleta nem o cálculo recorrente.</li>
+        </ul>
+      </div>
+
+      <!-- ══════ PROCESSO 3 ══════ -->
+      <div class="topico-conteudo" data-topico="p3-a" hidden>
+        <h2>3A · Controle de estoque<span class="status definir">a extrair</span></h2>
+        <p class="prose">Três lojas, provavelmente três jeitos diferentes de controlar. O primeiro trabalho é descobrir <strong>o que já funciona</strong> antes de padronizar por cima.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="mapear">Mapear o processo atual</button>
+          <button class="item-btn" data-item="funciona">O que já funciona</button>
+          <button class="item-btn" data-item="diferencas">Diferenças entre as 3 lojas</button>
+          <button class="item-btn" data-item="minmax">Estoque mínimo e máximo</button>
+          <button class="item-btn" data-item="contagem">Frequência da contagem</button>
+          <button class="item-btn" data-item="quem">Responsável pela contagem</button>
+          <button class="item-btn" data-item="divergencia">Tratamento de divergências</button>
+          <button class="item-btn" data-item="perdas">Indicadores de perda e desperdício</button>
+          <button class="item-btn" data-item="alerta">Alertas</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="mapear" hidden>
+            <p>Como o controle de estoque acontece hoje, loja a loja: quem conta, o que conta, onde registra e o que faz com o número depois.</p>
+            <p><strong>Este item o Fred consegue mapear sem a Débora</strong> — indo na loja e perguntando pra quem executa. Não gastar hora dela com isso.</p>
+          </div>
+          <div class="item-conteudo" data-item="funciona" hidden>
+            <p>Antes de mudar qualquer coisa: <strong>o que já está bom</strong>. Padronizar por cima do que funciona é a forma mais rápida de piorar e criar resistência.</p>
+          </div>
+          <div class="item-conteudo" data-item="diferencas" hidden>
+            <p>Onde as três lojas divergem — e, para cada divergência, se ela é <strong>problema</strong> (falta de padrão) ou <strong>adaptação legítima</strong> (volume, espaço físico, equipe).</p>
+          </div>
+          <div class="item-conteudo" data-item="minmax" hidden>
+            <p>Estoque mínimo e máximo por item, onde fizer sentido. É o que permite o pedido virar regra em vez de julgamento — e o que cria o <strong>buffer</strong> que protege a operação de erro de quem está aprendendo.</p>
+          </div>
+          <div class="item-conteudo" data-item="contagem" hidden>
+            <p>De quanto em quanto tempo se conta, e se a frequência é a mesma para todo item ou se itens críticos contam mais vezes.</p>
+          </div>
+          <div class="item-conteudo" data-item="quem" hidden>
+            <p>Quem conta, em qual turno, e quem cobre quando essa pessoa falta. <strong>Responsabilidade sem substituto declarado volta pra cima</strong> — e &ldquo;pra cima&rdquo; hoje é a Débora.</p>
+          </div>
+          <div class="item-conteudo" data-item="divergencia" hidden>
+            <p>O que fazer quando o contado não bate com o esperado: a partir de que diferença vira ocorrência, quem investiga, quem decide e o que é registrado.</p>
+          </div>
+          <div class="item-conteudo" data-item="perdas" hidden>
+            <p>Perda e desperdício viram número — por loja, por período. Sem isso, deterioração de estoque só aparece no CMV, tarde demais.</p>
+          </div>
+          <div class="item-conteudo" data-item="alerta" hidden>
+            <p>O que avisa quando o estoque de um item crítico furou o mínimo, ou quando a perda passou do aceitável — e para quem avisa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-b" hidden>
+        <h2>3B · Compras das lojas<span class="status andamento">tem base pronta</span></h2>
+        <p class="prose">Aqui existe uma vantagem que nenhum outro processo tem: <strong>uma das lojas já tem um processo de compras que funciona.</strong> O caminho é consolidar esse e adaptar — não desenhar do zero.</p>
+        <div class="fluxo">
+          <button class="passo-caixa fred" data-detalhe="Escrever o processo da loja que já funciona: o que se compra, de quem, quando, em que quantidade e com base em quê. <strong>Grande parte disso o Fred levanta direto com quem executa hoje</strong>, sem gastar hora da Débora."><span class="quem">Passo 1</span>Consolidar o que já funciona</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="Adaptar para a loja 2 — respeitando as diferenças legítimas de volume, espaço e equipe mapeadas no 3A. Adaptar não é copiar."><span class="quem">Passo 2</span>Adaptar para a loja 2</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="Adaptar para a loja 3, com o aprendizado da loja 2 já incorporado. A terceira adaptação deve custar menos que a segunda — se não custar, o processo não está genérico o bastante."><span class="quem">Passo 3</span>Adaptar para a loja 3</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>O teste que vale.</strong> Um ciclo de pedido inteiro, nas três lojas, sem nenhuma participação da Débora — nem para aprovar, nem para lembrar, nem para corrigir. Se alguém precisou perguntar pra ela, não passou."><span class="quem">Passo 4</span>Testar sem a Débora</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <h3 class="sub">O que precisa ficar definido</h3>
+        <ul class="check">
+          <li><strong>Responsável pelos pedidos</strong> em cada loja — com substituto declarado.</li>
+          <li><strong>Frequência</strong> do pedido — dia fixo, não &ldquo;quando acabar&rdquo;.</li>
+          <li><strong>Critérios de quantidade</strong> — ancorados no mínimo/máximo definido no 3A.</li>
+          <li><strong>Aprovações e exceções</strong> — o que a pessoa decide sozinha, acima de que valor escala, e para quem escala (que não é a Débora).</li>
+        </ul>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-c" hidden>
+        <h2>3C · Compras da fábrica Holy Cook<span class="status definir">a extrair</span></h2>
+        <p class="prose">A frente mais dependente dela das três — e a que menos tem processo escrito. Aqui o Ciclo 1 é obrigatório e não tem atalho.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="comofaz">Como ela faz hoje</button>
+          <button class="item-btn" data-item="fornecedores">Fornecedores</button>
+          <button class="item-btn" data-item="freq">Frequência</button>
+          <button class="item-btn" data-item="qtd">Critérios de quantidade</button>
+          <button class="item-btn" data-item="lead">Lead times</button>
+          <button class="item-btn" data-item="seguranca">Estoques de segurança</button>
+          <button class="item-btn" data-item="excecoes">Exceções</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="comofaz" hidden>
+            <p>A Débora registra como faz atualmente — do jeito que sair. Depois o Fred transforma em processo e ela valida. <strong>É o 20–60–20 puro.</strong></p>
+          </div>
+          <div class="item-conteudo" data-item="fornecedores" hidden>
+            <p>Quem são, o que cada um fornece, condição comercial, canal de contato e histórico de problema. Fornecedor que só ela sabe acionar é dependência escondida.</p>
+          </div>
+          <div class="item-conteudo" data-item="freq" hidden>
+            <p>De quanto em quanto tempo se compra de cada fornecedor, e o que amarra essa frequência — pedido mínimo, validade, capacidade de armazenagem.</p>
+          </div>
+          <div class="item-conteudo" data-item="qtd" hidden>
+            <p>Como ela chega no número do pedido. Se for conta, escrever a conta. Se for experiência, extrair a regra por trás da experiência.</p>
+          </div>
+          <div class="item-conteudo" data-item="lead" hidden>
+            <p>Quanto tempo cada fornecedor leva entre pedido e entrega. <strong>Lead time é o que define quando pedir</strong> — sem isso, quem assumir vai pedir tarde.</p>
+          </div>
+          <div class="item-conteudo" data-item="seguranca" hidden>
+            <p>Quanto de folga manter para não parar produção. É o <strong>buffer que protege a transição</strong>: quem está aprendendo erra, e o estoque de segurança absorve o erro sem virar crise.</p>
+          </div>
+          <div class="item-conteudo" data-item="excecoes" hidden>
+            <p>Datas especiais, picos, ruptura de fornecedor, mudança de preço. As exceções são o que faz o processo escrito sobreviver ao contato com a realidade.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-rota" hidden>
+        <h2>3 · Rota de transferência — Débora → Fred/Sistema → Equipe</h2>
+        <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Equipe responsável</span></div>
+        <div class="fluxo">
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1 só nas partes que dependem mesmo dela</strong> — na prática, quase tudo do 3C e os critérios de decisão do 3A. O resto o Fred levanta sozinho."><span class="quem">Ciclo 1 · parcial</span>Extrair só o que depende dela</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Mapear processo atual, consolidar o que já funciona na loja modelo, escrever o processo das três lojas. <strong>Nada disso precisa de hora da Débora</strong> — é levantamento de campo."><span class="quem">Fred</span>Construir sozinho o que der</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 com os responsáveis de cada loja.</strong> Eles executam contagem e pedido de verdade, dentro da autonomia definida, registrando dificuldade e exceção."><span class="quem">Ciclo 2</span>Transferir para a equipe</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Indicadores de perda, buffers de estoque e sinais de controle no ar. <strong>É o que permite soltar sem vigiar</strong> — o sinal avisa no lugar da pessoa."><span class="quem">Sistema</span>Ligar indicadores e buffers</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="A Débora sai, e o Fred sai da execução operacional — sobra pra ele auditoria pontual, não pedido nem contagem."><span class="quem">Saída</span>Retirar Débora e Fred</button>
+        </div>
+        <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-existe" hidden>
+        <h2>3 · O que já existe — não recomeçar do zero</h2>
+        <p class="prose">A página <a href="../pessoas/">Cargos Holy Cookie</a> já descreve, dentro da Gerência, atividades que são exatamente o escopo deste processo:</p>
+        <ul class="pontos">
+          <li><strong>Compras</strong> — compras de insumos e produtos de venda, pedido semanal na fábrica, fornecedores, pedidos de datas especiais (Páscoa e Natal), compras de equipamentos e utensílios, redução de custos.</li>
+          <li><strong>Estoque</strong> — contagem mensal de estoque, controle e organização do estoque, cálculo do CMV.</li>
+        </ul>
+        <p class="prose" style="font-size:.875rem">
+          Ou seja: <strong>a descrição da função já existe</strong>. O que não existe é o processo executável
+          por trás dela — como fazer, com que critério, com que número. É essa a lacuna que o Ciclo 1
+          preenche. Vale checar também o que a
+          <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já cobre de rotina de loja.
+        </p>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-fim" hidden>
+        <h2>3 · Como sei que acabou<span class="status definir">teste</span></h2>
+        <ul class="check">
+          <li>Rodou <strong>um ciclo completo de pedido nas três lojas</strong> sem participação da Débora.</li>
+          <li>Rodou <strong>uma contagem de estoque completa</strong> com responsável nomeado em cada loja.</li>
+          <li>A compra da fábrica foi feita por outra pessoa, seguindo o processo escrito.</li>
+          <li>Existe mínimo/máximo definido nos itens críticos, com buffer de segurança.</li>
+          <li>Uma divergência de estoque foi tratada pelo protocolo, sem escalar para a Débora.</li>
+          <li>Existe indicador de perda por loja sendo medido por rotina.</li>
+        </ul>
+      </div>
+
+      <!-- ══════ PROCESSO 4 ══════ -->
+      <div class="topico-conteudo" data-topico="p4-escopo" hidden>
+        <h2>4 · Treinamento de equipe — escopo<span class="status andamento">tem base pronta</span></h2>
+        <p class="prose">Este processo tem a melhor base de partida do projeto — a Certificação de Funções já é a espinha da trilha. O que falta é <strong>o que só a Débora sabe</strong> e o handoff pra liderança treinar sozinha.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="mapear">Treinamentos necessários por função</button>
+          <button class="item-btn" data-item="dela">Conhecimento que depende dela</button>
+          <button class="item-btn" data-item="padrao">Padrão mínimo por função</button>
+          <button class="item-btn" data-item="trilha">Trilha de treinamento</button>
+          <button class="item-btn" data-item="materiais">Materiais</button>
+          <button class="item-btn" data-item="checklists">Checklists</button>
+          <button class="item-btn" data-item="avaliacao">Avaliação prática</button>
+          <button class="item-btn" data-item="quemtreina">Quem treina o novo funcionário</button>
+          <button class="item-btn" data-item="quemvalida">Quem valida a conclusão</button>
+          <button class="item-btn" data-item="reciclagem">Reciclagem quando o desempenho cai</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="mapear" hidden>
+            <p>Que treinamento cada função precisa. <strong>Boa parte já está mapeada</strong> nas 26 áreas certificáveis da <a href="../certificacao-holy-cookie/">Certificação</a> — começar por lá, não do zero.</p>
+          </div>
+          <div class="item-conteudo" data-item="dela" hidden>
+            <p><strong>O item central deste processo.</strong> O que hoje só é ensinado porque a Débora ensina — o jeito de fazer, o padrão que ela cobra, o detalhe que ela corrige. Se isso não sair da cabeça dela, todo funcionário novo continua sendo um chamado pra ela.</p>
+          </div>
+          <div class="item-conteudo" data-item="padrao" hidden>
+            <p>O que caracteriza &ldquo;essa pessoa está pronta&rdquo; em cada função — em critério observável, não em impressão.</p>
+          </div>
+          <div class="item-conteudo" data-item="trilha" hidden>
+            <p>A ordem em que a pessoa aprende: o que vem no dia 1, na semana 1, no mês 1. Trilha é sequência — não é pilha de material.</p>
+          </div>
+          <div class="item-conteudo" data-item="materiais" hidden>
+            <p>O que a pessoa lê/assiste. Existe base em dois lugares: o <a href="../certificacao-holy-cookie/">Material de Certificação</a> e o <a href="https://manual-holycook.vercel.app/" target="_blank" rel="noopener">Manual da Franquia</a> (treinamentos operacionais e POPs).</p>
+          </div>
+          <div class="item-conteudo" data-item="checklists" hidden>
+            <p>O que o treinador confere. Também há base pronta nos <a href="../certificacao-holy-cookie/">checklists de loja</a> já existentes na operação.</p>
+          </div>
+          <div class="item-conteudo" data-item="avaliacao" hidden>
+            <p>Como se testa se a pessoa aprendeu — <strong>fazendo, não respondendo</strong>. Avaliação prática é o que evita o treinamento virar formalidade.</p>
+          </div>
+          <div class="item-conteudo" data-item="quemtreina" hidden>
+            <p>Quem executa o treinamento do novo funcionário. Destino final: <strong>liderança</strong> — hoje o Líder de Loja é o nó-pai da estrutura. Enquanto a resposta for &ldquo;depende&rdquo;, volta pra Débora.</p>
+          </div>
+          <div class="item-conteudo" data-item="quemvalida" hidden>
+            <p>Quem assina que o treinamento terminou. Precisa ser diferente de quem treinou sempre que possível — quem treina tende a aprovar.</p>
+          </div>
+          <div class="item-conteudo" data-item="reciclagem" hidden>
+            <p>O que acontece quando o desempenho de alguém já treinado cai: quem percebe, a partir de que sinal, e qual o retreino. <strong>É o que fecha o ciclo</strong> — sem isso, queda de padrão vira chamado pra Débora.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-rota" hidden>
+        <h2>4 · Rota de transferência — Débora → Fred/Sistema → Liderança</h2>
+        <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Liderança</span></div>
+        <div class="fluxo">
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1</strong> focado no que só ela sabe: o padrão que ela cobra, o que ela corrige, o erro crítico que ela nunca deixa passar. O resto já existe em material."><span class="quem">Ciclo 1</span>Extrair o padrão dela</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Transformar em trilha, material, checklist e avaliação prática — <strong>encaixando no que a Certificação já tem</strong> em vez de criar uma segunda estrutura paralela."><span class="quem">Fred</span>Virar treinamento</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 com a liderança.</strong> O líder treina um funcionário de verdade, com o material na mão, dentro da autonomia definida."><span class="quem">Ciclo 2</span>Liderança executa</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="O Fred audita <strong>os primeiros treinamentos</strong> e vai reduzindo. Auditar aqui é olhar o funcionário treinado, não o treinador — o resultado é a prova."><span class="quem">Fred</span>Auditar e reduzir</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="Indicador de qualidade do treinamento no ar. A Débora sai completamente; a participação do Fred cai para auditoria pontual."><span class="quem">Saída</span>Medir e soltar</button>
+        </div>
+        <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-existe" hidden>
+        <h2>4 · O que já existe — não recomeçar do zero</h2>
+        <ul class="pontos">
+          <li><a href="../certificacao-holy-cookie/">Certificação de Funções</a> — a trilha por função em si, com material próprio e controle de progresso por área certificável.</li>
+          <li><a href="https://manual-holycook.vercel.app/" target="_blank" rel="noopener">Manual da Franquia</a> — treinamentos operacionais, fichas técnicas e POPs sanitários.</li>
+          <li><a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a> — o padrão de produto, ambiente e atendimento que o treinamento tem que produzir.</li>
+          <li><a href="../marca-interna/">Marca Interna</a> — o outro lado da equação de equipe: reter quem já foi treinado.</li>
+        </ul>
+        <div class="note-item">
+          <span class="tag warn">cuidado</span>
+          <div><strong>Não criar uma segunda estrutura de treinamento.</strong> Se o material sair deste
+          projeto separado da Certificação, a operação passa a ter dois padrões — e dois padrões é o mesmo
+          que nenhum.</div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-fim" hidden>
+        <h2>4 · Como sei que acabou<span class="status definir">teste</span></h2>
+        <ul class="check">
+          <li>Um funcionário novo foi <strong>treinado inteiro pela liderança</strong>, com material, sem a Débora.</li>
+          <li>Esse funcionário passou na avaliação prática, validada por quem não o treinou.</li>
+          <li>Existe padrão mínimo escrito por função.</li>
+          <li>Existe indicador de qualidade do treinamento sendo medido.</li>
+          <li>Houve pelo menos um caso de queda de desempenho tratado por reciclagem, sem escalar para a Débora.</li>
+        </ul>
+      </div>
+
+      <!-- ══════ PROCESSO 5 ══════ -->
+      <div class="topico-conteudo" data-topico="p5-escopo" hidden>
+        <h2>5 · Contratação de equipe — escopo<span class="status definir">a extrair</span></h2>
+        <p class="prose">O processo mais <strong>tácito</strong> dos seis: o valor está no julgamento dela, não numa rotina. Extrair aqui é transformar faro em critério.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="perfil">Perfil ideal por função</button>
+          <button class="item-btn" data-item="elim">Critérios eliminatórios</button>
+          <button class="item-btn" data-item="selecao">Critérios de seleção</button>
+          <button class="item-btn" data-item="bons">Como ela identifica bons candidatos</button>
+          <button class="item-btn" data-item="red">Red flags</button>
+          <button class="item-btn" data-item="entrevista">Estrutura das entrevistas</button>
+          <button class="item-btn" data-item="decisao">Critérios de decisão</button>
+          <button class="item-btn" data-item="aprovacao">Processo de aprovação</button>
+          <button class="item-btn" data-item="experiencia">Relação com o período de experiência</button>
+          <button class="item-btn" data-item="feedback">Feedback de desempenho</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="perfil" hidden>
+            <p>Quem funciona em cada função — em característica observável, não em adjetivo. A base de funções já está descrita em <a href="../pessoas/">Cargos Holy Cookie</a>.</p>
+          </div>
+          <div class="item-conteudo" data-item="elim" hidden>
+            <p>O que reprova na hora, sem discussão. <strong>Critério eliminatório é o que mais economiza tempo</strong> de quem vai fazer a triagem depois dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="selecao" hidden>
+            <p>Entre candidatos que passaram do corte, o que faz um ser melhor que o outro — e o peso relativo de cada coisa.</p>
+          </div>
+          <div class="item-conteudo" data-item="bons" hidden>
+            <p><strong>O núcleo do processo.</strong> O que ela repara que outra pessoa não repararia. Pergunta de extração: &ldquo;pensa nas 3 melhores contratações que você fez — o que você viu nelas na entrevista?&rdquo;</p>
+          </div>
+          <div class="item-conteudo" data-item="red" hidden>
+            <p>O espelho do item acima: o que a faz desconfiar. Pergunta de extração: &ldquo;pensa nas 3 piores — dava pra ver antes? O que você deixou passar?&rdquo;</p>
+            <p>Red flag capturada é o que impede o RH de repetir o erro que ela já não comete.</p>
+          </div>
+          <div class="item-conteudo" data-item="entrevista" hidden>
+            <p>Como a conversa é conduzida: o que se pergunta, em que ordem, o que se observa além da resposta. Vira o <strong>roteiro</strong> que qualquer pessoa consegue seguir.</p>
+          </div>
+          <div class="item-conteudo" data-item="decisao" hidden>
+            <p>Como se fecha: quantos candidatos comparar, quem participa, e a partir de que ponto se contrata ou se recomeça a busca.</p>
+          </div>
+          <div class="item-conteudo" data-item="aprovacao" hidden>
+            <p>Quem aprova a contratação e qual o limite de autonomia do RH — o que ele fecha sozinho e o que escala. <strong>E para quem escala, já que não é a Débora.</strong></p>
+          </div>
+          <div class="item-conteudo" data-item="experiencia" hidden>
+            <p>O que se observa nos primeiros 30/60/90 dias, quem observa, e o que faz não efetivar. O período de experiência é a rede de segurança do processo seletivo — se ele não for usado, todo erro de contratação vira problema permanente.</p>
+          </div>
+          <div class="item-conteudo" data-item="feedback" hidden>
+            <p>O desempenho posterior volta para dentro do processo seletivo — ver o tópico <em>O loop que melhora o critério</em>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p5-rota" hidden>
+        <h2>5 · Rota de transferência — Débora → Fred/Sistema → Administrativo/RH</h2>
+        <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Administrativo/RH</span></div>
+        <div class="fluxo">
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1.</strong> Perfil por função, eliminatórios, o que ela vê num bom candidato, red flags e como decide. Melhor formato: ela comentando contratações reais que deram certo e que deram errado."><span class="quem">Ciclo 1</span>Extrair o julgamento dela</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Estruturar o processo seletivo de ponta a ponta e criar as ferramentas: <strong>roteiro de entrevista e scorecard de candidato</strong> — o instrumento que transforma julgamento em nota comparável."><span class="quem">Fred</span>Montar roteiro e scorecard</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 com o Administrativo/RH.</strong> O RH conduz processos seletivos reais, com o roteiro e o scorecard na mão."><span class="quem">Ciclo 2</span>RH conduz de verdade</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="O Fred audita <strong>as primeiras contratações</strong> — não para decidir por eles, mas para ver se o critério está sendo aplicado."><span class="quem">Fred</span>Auditar as primeiras</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="Comparar contratação × desempenho posterior, melhorar os critérios, e soltar. A Débora sai; o Fred reduz para auditoria pontual."><span class="quem">Saída</span>Calibrar e soltar</button>
+        </div>
+        <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p5-loop" hidden>
+        <h2>5 · O loop que melhora o critério<span class="status andamento">mecanismo</span></h2>
+        <p class="prose">Processo seletivo sem retorno de desempenho não melhora nunca — ele só repete o mesmo acerto e o mesmo erro. O loop fecha assim:</p>
+        <div class="fluxo">
+          <button class="passo-caixa outro" data-detalhe="O candidato recebe nota no scorecard durante o processo — e a nota fica registrada, não é descartada depois da decisão."><span class="quem">1</span>Scorecard na entrevista</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="Passados 30/60/90 dias, o desempenho real da pessoa é avaliado por quem convive com ela — normalmente a liderança da loja."><span class="quem">2</span>Desempenho medido depois</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Comparar as duas notas. <strong>Onde o scorecard acertou, o critério é bom. Onde errou, o critério está errado</strong> — e é exatamente esse critério que precisa mudar."><span class="quem">3</span>Comparar previsto × real</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Ajustar peso de critério, acrescentar red flag que passou batido, remover exigência que não previu nada. O scorecard v2 nasce do dado, não de opinião."><span class="quem">4</span>Ajustar o critério</button>
+        </div>
+        <div class="passo-detalhe"></div>
+        <p class="prose" style="font-size:.875rem">
+          <strong>Este loop é o que substitui a Débora de verdade.</strong> Enquanto o critério não se
+          corrigir sozinho, cada contratação ruim vira motivo pra alguém dizer &ldquo;melhor a Débora
+          entrevistar&rdquo;.
+        </p>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p5-fim" hidden>
+        <h2>5 · Como sei que acabou<span class="status definir">teste</span></h2>
+        <ul class="check">
+          <li>Uma contratação inteira foi conduzida pelo Administrativo/RH, <strong>da triagem à decisão</strong>, sem a Débora.</li>
+          <li>Existe roteiro de entrevista e scorecard sendo usados de verdade.</li>
+          <li>Os critérios eliminatórios e as red flags estão escritos.</li>
+          <li>O limite de autonomia do RH está definido — e quem ele aciona no escape não é a Débora.</li>
+          <li>Pelo menos um ciclo de <strong>previsto × real</strong> foi comparado e gerou ajuste no critério.</li>
+        </ul>
+      </div>
+
+      <!-- ══════ PROCESSO 6 ══════ -->
+      <div class="topico-conteudo" data-topico="p6-escopo" hidden>
+        <h2>6 · Marketing do iFood — escopo<span class="status andamento">quick win provável</span></h2>
+        <p class="prose">Menor volume de conhecimento dos seis, destino simples (Fred) e baixa demanda recorrente depois. <strong>Candidato natural a primeira transferência do sprint</strong> — libera a Débora de um acompanhamento contínuo gastando pouca hora dela.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="campanhas">Campanhas existentes</button>
+          <button class="item-btn" data-item="config">Configurações atuais</button>
+          <button class="item-btn" data-item="acompanha">O que ela acompanha</button>
+          <button class="item-btn" data-item="ind">Indicadores importantes</button>
+          <button class="item-btn" data-item="freq">Frequência de acompanhamento</button>
+          <button class="item-btn" data-item="sinais">Sinais que exigem otimização</button>
+          <button class="item-btn" data-item="mudancas">Que mudança fazer em cada cenário</button>
+          <button class="item-btn" data-item="hist">Histórico do que funcionou</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="campanhas" hidden>
+            <p>Quais campanhas estão ativas na plataforma hoje, em qual loja, com que oferta.</p>
+          </div>
+          <div class="item-conteudo" data-item="config" hidden>
+            <p>Como cada uma está configurada — desconto, abrangência, período, investimento. <strong>Print da tela resolve</strong>: é conhecimento que se extrai em minutos, não em reunião.</p>
+          </div>
+          <div class="item-conteudo" data-item="acompanha" hidden>
+            <p>O que ela abre e olha quando entra na plataforma. Esse é o embrião do checklist periódico do Fred.</p>
+          </div>
+          <div class="item-conteudo" data-item="ind" hidden>
+            <p>Quais números importam de verdade — e quais são ruído. Vira o dashboard/checklist.</p>
+          </div>
+          <div class="item-conteudo" data-item="freq" hidden>
+            <p>De quanto em quanto tempo faz sentido olhar. Definir isso é o que transforma vigilância contínua em <strong>tarefa agendada</strong> — e é aí que a carga mental cai.</p>
+          </div>
+          <div class="item-conteudo" data-item="sinais" hidden>
+            <p>O que indica que algo precisa ser mexido: queda de pedido, custo por pedido subindo, campanha perdendo tração.</p>
+          </div>
+          <div class="item-conteudo" data-item="mudancas" hidden>
+            <p>Para cada cenário, qual mudança fazer. <strong>Escrito antes</strong>, para a decisão não depender de julgamento no momento — é isso que permite outra pessoa operar.</p>
+          </div>
+          <div class="item-conteudo" data-item="hist" hidden>
+            <p>O que já foi testado e funcionou, e o que já foi testado e não funcionou. Evita o Fred repetir experimento que ela já pagou pra aprender.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p6-rota" hidden>
+        <h2>6 · Rota de transferência — Débora → Fred</h2>
+        <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no destino">Fred</span></div>
+        <div class="fluxo">
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1 enxuto.</strong> Um ou dois blocos curtos, muito apoiado em print de tela e histórico — não precisa de reunião longa."><span class="quem">Ciclo 1 · enxuto</span>Extrair o essencial</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="O Fred assume o acompanhamento das campanhas da plataforma."><span class="quem">Fred</span>Assumir o acompanhamento</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Dashboard ou checklist periódico montado, com <strong>faixas verde/amarelo/vermelho</strong> — para o acompanhamento ser leitura de sinal, não análise do zero toda vez."><span class="quem">Fred</span>Montar checklist e faixas</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="Depois de o acompanhamento estabilizar, a Débora sai <strong>completamente</strong> — sem consulta, sem revisão, sem aviso."><span class="quem">Saída</span>Retirar a Débora</button>
+        </div>
+        <div class="passo-detalhe"></div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p6-quando" hidden>
+        <h2>6 · Quando mexer e quando não mexer<span class="status definir">crítico</span></h2>
+        <p class="prose">
+          Este é o item que mais protege resultado neste processo — e o mais fácil de esquecer de extrair.
+          <strong>Quem assume uma conta de mídia tende a mexer demais</strong>: otimiza campanha que estava
+          performando, reage a variação normal, mata teste antes da hora.
+        </p>
+        <h3 class="sub">O que precisa estar escrito</h3>
+        <ul class="check">
+          <li><strong>Quando NÃO mexer</strong> — qual variação é normal e deve ser ignorada, e quanto tempo uma campanha nova precisa rodar antes de ser julgada.</li>
+          <li><strong>Que sinal exige otimização</strong> — em número, não em sensação.</li>
+          <li><strong>Que mudança fazer em cada cenário</strong> — decidido antes, não na hora.</li>
+          <li><strong>O que já foi testado</strong> e o resultado de cada teste.</li>
+        </ul>
+        <div class="note-item">
+          <span class="tag warn">nota</span>
+          <div>Sem esses quatro escritos, o Fred assume e o resultado cai — não por falta de capacidade,
+          por falta de baseline. <strong>Aí a operação conclui que &ldquo;só a Débora sabe&rdquo;</strong>,
+          e o processo volta pra ela.</div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p6-fim" hidden>
+        <h2>6 · Como sei que acabou<span class="status definir">teste</span></h2>
+        <ul class="check">
+          <li>O Fred acompanhou a plataforma por <strong>um ciclo completo</strong> sem consultar a Débora.</li>
+          <li>Existe checklist periódico com frequência definida e faixas verde/amarelo/vermelho.</li>
+          <li>Está escrito o que NÃO mexer e o que dispara otimização.</li>
+          <li>O histórico de testes está registrado em lugar consultável.</li>
+          <li>A demanda recorrente ficou baixa de verdade — cabe dentro da capacidade permanente do Fred.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════ CAPACIDADE ══════════════════════ -->
+  <div class="tab-panel" data-panel="capacidade" role="tabpanel" hidden>
+
+    <section>
+      <h2 class="sec">A restrição vem antes do plano</h2>
+      <p class="prose">
+        Este é o primeiro item do sprint e o mais fácil de pular. <strong>Sem número de horas, o plano é
+        wishlist</strong>: seis processos cabem em qualquer semana imaginária e em nenhuma semana real.
+      </p>
+      <p class="prose">
+        Duas restrições mandam no projeto — a capacidade da Débora e a capacidade do Fred — e existe uma
+        terceira alavanca que quase ninguém usa: <em>comprar capacidade</em>, em casa e na empresa.
+      </p>
+      <div class="grade-cards">
+        <button class="topico-btn" data-topico="cap-debora"><span class="tnome">Restrição 1 — Capacidade da Débora</span><span class="tag warn">a definir</span></button>
+        <button class="topico-btn" data-topico="cap-fred"><span class="tnome">Restrição 2 — Capacidade do Fred</span><span class="tag warn">a definir</span></button>
+        <button class="topico-btn" data-topico="cap-casa"><span class="tnome">Comprar capacidade — casa</span><span class="tag acc">alavanca</span></button>
+        <button class="topico-btn" data-topico="cap-empresa"><span class="tnome">Comprar capacidade — empresa</span><span class="tag acc">alavanca</span></button>
+      </div>
+
+      <div class="visor">
+        <p class="visor-vazio">Clique num card pra ver o conteúdo.</p>
+
+        <div class="topico-conteudo" data-topico="cap-debora" hidden>
+          <h2>Restrição 1 — Capacidade da Débora<span class="status definir">a definir</span></h2>
+          <h3 class="sub">O que precisa ser fechado antes do sprint começar</h3>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Parâmetro</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Horas por semana que ela aceita dar ao sprint</td><td class="vazio">a definir</td></tr>
+              <tr><td>Máximo de interações/reuniões por dia</td><td class="vazio">a definir</td></tr>
+              <tr><td>Duração padrão de cada bloco</td><td>15–20 min (preferencial)</td></tr>
+              <tr><td>Janela do dia em que ela prefere ser acionada</td><td class="vazio">a definir</td></tr>
+            </tbody>
+          </table></div>
+          <h3 class="sub">As regras de uso do tempo dela</h3>
+          <ul class="pontos">
+            <li><strong>Priorizar trabalho individual dela</strong> — não transformar tudo em reunião a dois.</li>
+            <li><strong>Blocos curtos</strong>, de 15–20 minutos, em vez de sessões longas.</li>
+            <li><strong>Não usar a Débora</strong> para pesquisa, documentação, formatação ou construção de material que o Fred possa fazer.</li>
+            <li><strong>Não fazer pergunta cuja resposta possa ser descoberta sem ela</strong> — ir na loja, olhar o histórico, perguntar a quem executa.</li>
+            <li><strong>Concentrar perguntas</strong> numa lista só, para evitar interrupção pingada.</li>
+            <li><strong>Cada hora dela tem que gerar independência futura</strong> — se a hora só resolve o problema de hoje, ela foi mal gasta.</li>
+          </ul>
+          <div class="note-item">
+            <span class="tag bad">o que realmente pesa</span>
+            <div>A restrição mais dura não é hora, é <strong>carga mental</strong>. Interrupção curta custa
+            pouco em minuto e muito em cabeça — por isso &ldquo;número de interrupções&rdquo; é um item
+            próprio do <a href="#sprint">scorecard semanal</a>, separado de horas.</div>
+          </div>
+        </div>
+
+        <div class="topico-conteudo" data-topico="cap-fred" hidden>
+          <h2>Restrição 2 — Capacidade do Fred<span class="status definir">a definir</span></h2>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Parâmetro</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Horas semanais disponíveis para o sprint</td><td class="vazio">a definir</td></tr>
+              <tr><td>Responsabilidades atuais que não podem ser abandonadas</td><td class="vazio">a mapear</td></tr>
+              <tr><td>Capacidade reservada para proteger/aumentar faturamento</td><td class="vazio">a definir</td></tr>
+              <tr><td>Capacidade máxima que ele pode receber <strong>em caráter permanente</strong></td><td class="vazio">a definir</td></tr>
+            </tbody>
+          </table></div>
+          <h3 class="sub">As duas regras que evitam a armadilha 1</h3>
+          <ul class="pontos">
+            <li><strong>Não transferir automaticamente toda responsabilidade da Débora para o Fred.</strong> Recebimento default é o erro que só aparece dois meses depois.</li>
+            <li><strong>Identificar o destino final de cada competência antes da transferência.</strong> Se o destino não for o Fred, ele é passagem — e passagem tem data para acabar.</li>
+          </ul>
+          <div class="note-item">
+            <span class="tag warn">separar as duas contas</span>
+            <div>Horas do <strong>sprint</strong> (temporárias, acabam em 30 dias) são uma conta. Horas
+            <strong>permanentes</strong> que ele passa a carregar depois são outra — e é a segunda que
+            define se o gargalo mudou de lugar. As duas precisam de número separado.</div>
+          </div>
+          <p class="prose" style="font-size:.875rem">
+            Referência do que já está no prato dele: <a href="../prioridades/">Prioridades</a> — as duas
+            crises simultâneas (faturamento e equipe) e a ordem sugerida entre elas.
+          </p>
+        </div>
+
+        <div class="topico-conteudo" data-topico="cap-casa" hidden>
+          <h2>Comprar capacidade — casa<span class="status definir">a avaliar</span></h2>
+          <p class="prose">
+            A capacidade da Débora não é limitada só pelas empresas. <strong>Comprar hora fora da empresa é
+            a alavanca mais barata do projeto</strong>: cada hora comprada em casa vira hora disponível
+            para extração — e o gasto é temporário, enquanto o ganho é permanente.
+          </p>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Investimento</th><th>Custo</th><th>Horas/semana que compra</th><th>Custo por hora liberada</th></tr></thead>
+            <tbody>
+              <tr><td>Babá</td><td class="vazio">a calcular</td><td class="vazio">a calcular</td><td class="vazio">—</td></tr>
+              <tr><td>Cozinheira / ajuda doméstica</td><td class="vazio">a calcular</td><td class="vazio">a calcular</td><td class="vazio">—</td></tr>
+            </tbody>
+          </table></div>
+          <h3 class="sub">Como decidir</h3>
+          <ul class="check">
+            <li>Calcular o <strong>custo por hora de Débora liberada</strong> em cada opção.</li>
+            <li>Avaliar <strong>versão parcial</strong> antes de estrutura completa — dois dias por semana costuma resolver o gargalo sem virar despesa fixa cheia.</li>
+            <li>Avaliar <strong>alternativa temporária só durante o sprint</strong>: 30 dias, não contratação permanente.</li>
+            <li>Decidir com uma pergunta só: <strong>o investimento se paga pela aceleração da transferência?</strong> Se o sprint termina uma semana antes, quanto vale essa semana?</li>
+          </ul>
+        </div>
+
+        <div class="topico-conteudo" data-topico="cap-empresa" hidden>
+          <h2>Comprar capacidade — empresa<span class="status definir">a avaliar</span></h2>
+          <p class="prose">Do lado da empresa a lógica é a mesma, aplicada às horas do Fred: <strong>comprar capacidade onde for economicamente racional</strong> em vez de espremer agenda.</p>
+          <ul class="check">
+            <li><strong>Trabalho transferível imediatamente para a equipe</strong> — o que já poderia sair hoje, sem processo novo, e não saiu só porque ninguém pediu.</li>
+            <li><strong>Necessidade de freelancer</strong> — trabalho pontual de execução que não exige contexto do negócio.</li>
+            <li><strong>Necessidade de especialista/consultor</strong> — onde comprar conhecimento sai mais barato que aprender.</li>
+            <li><strong>Comparar custo de terceirização × horas do Fred liberadas</strong> — a mesma conta da coluna &ldquo;custo por hora liberada&rdquo; do card ao lado.</li>
+          </ul>
+          <div class="note-item">
+            <span class="tag acc">critério</span>
+            <div>A conta não é &ldquo;quanto custa&rdquo;, é <strong>&ldquo;quanto custa comparado com a
+            hora que libera&rdquo;</strong>. Hora do Fred reservada para proteger faturamento vale mais que
+            hora dele executando tarefa que um freelancer faz.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Ficha de capacidade por processo</h2>
+      <p class="prose">
+        Preencher uma linha por processo, no bloco de abertura do sprint. <strong>É esta tabela que
+        alimenta a priorização</strong> — sem ela, a ordem de ataque é chute.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr>
+          <th>Processo</th><th>Horas totais</th><th>Só Débora</th><th>Débora+Fred</th><th>Só Fred</th>
+          <th>Equipe</th><th>Terceirizável</th><th>Horas/sem. depois</th><th>Energia da Débora</th>
+          <th>Reduz carga dela</th><th>Impacto em resultado</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1 · Faturamento da loja</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>2 · CMV + frete</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>3 · Compras + estoque</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>4 · Treinamento</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>5 · Contratação</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>6 · Marketing do iFood</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+        </tbody>
+      </table></div>
+      <p class="prose" style="font-size:.8125rem">
+        Escalas: <strong>energia da Débora</strong> e <strong>reduz carga dela</strong> em baixa / média /
+        alta; <strong>impacto em resultado</strong> (faturamento ou lucro) em baixo / médio / alto.
+        &ldquo;Horas/sem. depois&rdquo; é a carga permanente que o processo deixa <em>depois</em> de
+        implantado — o número que diz se o gargalo mudou de lugar.
+      </p>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════ GUARDRAILS ══════════════════════ -->
+  <div class="tab-panel" data-panel="guardrails" role="tabpanel" hidden>
+
+    <section>
+      <h2 class="sec">Para que servem os guardrails</h2>
+      <p class="prose">
+        Transição é exatamente o momento em que indicador escorrega sem ninguém perceber — todo mundo está
+        olhando para a transferência, não para o resultado. Os guardrails são os
+        <strong>limites declarados antes de começar</strong>: enquanto o número estiver dentro, o projeto
+        anda; quando sair, o projeto para até voltar.
+      </p>
+      <p class="prose">
+        Guardrail não é meta. É <em>o ponto em que o custo da transição passou a ser alto demais</em>.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="sec">Os limites que não podem ser rompidos</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Indicador</th><th>Limite</th><th>Quem observa</th><th>Frequência</th></tr></thead>
+        <tbody>
+          <tr><td>Faturamento mínimo por loja</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>CMV máximo</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Margem mínima</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Qualidade mínima de produto</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Padrão mínimo de atendimento</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Estoque / perdas máximas aceitáveis</td><td class="vazio">a definir</td><td class="vazio">a definir</td><td class="vazio">a definir</td></tr>
+          <tr><td>Limite de horas semanais do Fred</td><td class="vazio">a definir</td><td>Fred</td><td>semanal</td></tr>
+          <tr><td>Limite de horas / energia da Débora</td><td class="vazio">a definir</td><td>Fred</td><td>semanal</td></tr>
+        </tbody>
+      </table></div>
+      <p class="prose" style="font-size:.875rem">
+        Os dois últimos são guardrails <strong>do projeto</strong>, não do negócio — e são tão obrigatórios
+        quanto os outros. Estourar a hora do Fred é o sintoma da armadilha 1 aparecendo.
+        Para qualidade de produto e padrão de atendimento, a régua já existe em
+        <a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a> e nos checklists de loja.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="sec">Sistema de sinais</h2>
+      <div class="sinais">
+        <div class="sinal verde">
+          <span class="snome"><span class="bolinha"></span>Verde</span>
+          <span class="sdesc">Dentro do padrão. <strong>Nenhuma intervenção</strong> — e isso é uma
+          instrução, não uma permissão: mexer no que está verde é a forma mais comum de estragar um
+          processo recém-transferido.</span>
+        </div>
+        <div class="sinal amarelo">
+          <span class="snome"><span class="bolinha"></span>Amarelo</span>
+          <span class="sdesc">Aproximação do limite. <strong>O responsável pelo processo intervém</strong>
+          — e, se o processo ainda estiver em transferência, o Fred entra junto. Amarelo é o sinal que
+          existe justamente para o vermelho não acontecer.</span>
+        </div>
+        <div class="sinal vermelho">
+          <span class="snome"><span class="bolinha"></span>Vermelho</span>
+          <span class="sdesc">Risco relevante. <strong>Executa o protocolo previamente definido</strong> —
+          escrito antes de acontecer, não improvisado na hora. Protocolo sem escrita é sinônimo de
+          &ldquo;chama quem sabe&rdquo;.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">A escada de escalonamento — e quem não está nela</h2>
+      <div class="fluxo">
+        <button class="passo-caixa outro" data-detalhe="O sinal é gerado pelo indicador do processo, não pela percepção de alguém. <strong>Se depende de alguém perceber, não é sistema</strong> — e a pessoa que percebe hoje é a Débora."><span class="quem">1</span>Sinal detectado</button><span class="seta">→</span>
+        <button class="passo-caixa outro" data-detalhe="O responsável definido pelo processo age dentro da autonomia dele. Amarelo, na maioria dos casos, morre aqui."><span class="quem">2</span>Responsável do processo</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="Se passar da autonomia do responsável, escala para o Fred — que corrige, e <strong>corrige também o processo</strong>, para o mesmo escalonamento não se repetir."><span class="quem">3</span>Fred</button><span class="seta">→</span>
+        <button class="passo-caixa outro" data-detalhe="Vermelho tem protocolo escrito por processo: o que fazer, em que ordem, com que prazo. <strong>Escrito antes</strong> é o que impede o protocolo de virar &ldquo;pergunta pra Débora&rdquo;."><span class="quem">4</span>Protocolo do vermelho</button>
+      </div>
+      <div class="passo-detalhe"></div>
+      <div class="alerta">
+        <strong>Regra dura:</strong> &ldquo;vermelho&rdquo; não significa automaticamente chamar a Débora.
+        Se o protocolo do vermelho de qualquer processo terminar nela, esse processo <em>não</em> foi
+        transferido — só ganhou uma camada a mais antes de voltar pro mesmo lugar.
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════ SPRINT DE 30 DIAS ══════════════════════ -->
+  <div class="tab-panel" data-panel="sprint" role="tabpanel" hidden>
+
+    <section>
+      <h2 class="sec">Como priorizar</h2>
+      <p class="prose">Para cada processo, avaliar oito coisas:</p>
+      <ul class="pontos">
+        <li><strong>Quanto libera a Débora</strong> — o ganho real do projeto.</li>
+        <li><strong>Quantas horas dela exige</strong> — o custo no recurso mais escasso.</li>
+        <li><strong>Quantas horas do Fred exige</strong> — o custo no segundo recurso mais escasso.</li>
+        <li><strong>Impacto financeiro</strong> — protege ou gera resultado?</li>
+        <li><strong>Urgência</strong> — tem prazo externo (verão, contratação em aberto, campanha marcada)?</li>
+        <li><strong>Facilidade de transferência</strong> — tem responsável disponível e material pronto?</li>
+        <li><strong>Risco de deterioração</strong> — o que acontece se sair errado no meio.</li>
+        <li><strong>Quick win ou projeto longo</strong> — cabe no sprint ou atravessa?</li>
+      </ul>
+      <blockquote class="tese">
+        <p><strong>Princípio de priorização:</strong> alta liberação da Débora + poucas horas dela +
+        proteção ou geração de resultado.</p>
+        <p>Consequência prática: <strong>não executar os processos na ordem numérica.</strong> A numeração
+        é só identificação — quem manda na ordem é esta tabela.</p>
+      </blockquote>
+      <div class="tablewrap"><table>
+        <thead><tr>
+          <th>Processo</th><th>Libera Débora</th><th>Horas dela</th><th>Horas Fred</th>
+          <th>Impacto $</th><th>Urgência</th><th>Facilidade</th><th>Risco</th><th>Quick win?</th><th>Ordem</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1 · Faturamento da loja</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>2 · CMV + frete</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>3 · Compras + estoque</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>4 · Treinamento</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>5 · Contratação</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>6 · Marketing do iFood</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section>
+      <h2 class="sec">As quatro semanas — clique numa semana</h2>
+      <div class="fluxo">
+        <button class="passo-caixa fred" data-detalhe="<strong>Semana 1 — montar o terreno e provar que funciona.</strong><br>• Definir a capacidade disponível (Débora e Fred).<br>• Fechar o mapa de processos.<br>• Estimar as horas de cada um.<br>• Escolher os quick wins.<br>• Começar a primeira extração.<br>• <strong>Concluir pelo menos uma transferência simples</strong> — a semana 1 precisa terminar com uma vitória concreta, não só com planilha preenchida."><span class="quem">Semana 1</span>Capacidade, mapa e primeiro quick win</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>Semana 2 — ciclo 1 nos prioritários, ciclo 2 no que já está pronto.</strong><br>• Continuar o Ciclo 1 dos processos prioritários.<br>• Iniciar o Ciclo 2 dos processos já documentados.<br>• Transferir responsabilidade <strong>imediatamente após a estabilização</strong> — não esperar o sprint acabar pra soltar.<br>• Medir a redução de carga da Débora (primeira leitura real do scorecard)."><span class="quem">Semana 2</span>Extrair e começar a transferir</button><span class="seta">→</span>
+        <button class="passo-caixa outro" data-detalhe="<strong>Semana 3 — as partes difíceis e a primeira auditoria.</strong><br>• Atacar as dependências mais complexas (tipicamente 3C e o que é mais tácito no 5).<br>• Auditar as primeiras execuções da equipe.<br>• Corrigir os processos com o que a execução real mostrou.<br>• <strong>Retirar o Fred das atividades que já podem ser delegadas</strong> — a semana 3 é onde a armadilha 1 se manifesta, e onde ela precisa ser cortada."><span class="quem">Semana 3</span>Complexo, auditoria e correção</button><span class="seta">→</span>
+        <button class="passo-caixa fred" data-detalhe="<strong>Semana 4 — fechar, formalizar e olhar o que sobrou.</strong><br>• Finalizar as transferências prioritárias.<br>• Validar os processos contra a regra de saída.<br>• Formalizar os responsáveis definitivos.<br>• Medir as dependências restantes.<br>• <strong>Definir o plano para o que não coube no sprint</strong> — com data, não com &ldquo;depois&rdquo;."><span class="quem">Semana 4</span>Finalizar, formalizar e medir</button>
+      </div>
+      <div class="passo-detalhe"></div>
+      <div class="note-item">
+        <span class="tag acc">regra do sprint</span>
+        <div><strong>Transferir assim que estabilizar, não no fim.</strong> Processo pronto que fica
+        esperando o fim do sprint continua ocupando a cabeça da Débora — e transferência acumulada na
+        última semana é transferência que não vai ser auditada.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Scorecard semanal</h2>
+      <p class="prose">Medido toda semana, sem exceção. <strong>É o placar que diferencia projeto andando de projeto parecendo que anda.</strong></p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Métrica</th><th>Base</th><th>Sem. 1</th><th>Sem. 2</th><th>Sem. 3</th><th>Sem. 4</th></tr></thead>
+        <tbody>
+          <tr><td>Horas da Débora nas empresas</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Horas da Débora gastas em transferência</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Interrupções recebidas pela Débora</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Processos ainda dependentes dela</td><td>6</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Processos parcialmente transferidos</td><td>0</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Processos completamente independentes dela</td><td>0</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Horas adicionais absorvidas pelo Fred</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Horas retiradas do Fred por delegação/sistema</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Faturamento</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>CMV</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Principais indicadores operacionais</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>Carga percebida pela Débora (0–10)</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note-item">
+        <span class="tag warn">as duas linhas que denunciam</span>
+        <div><strong>&ldquo;Horas adicionais absorvidas pelo Fred&rdquo; contra &ldquo;horas retiradas do
+        Fred&rdquo;</strong> é o par que revela a armadilha 1: se a primeira sobe e a segunda não sobe
+        junto, o gargalo só mudou de nome. E <strong>&ldquo;carga percebida pela Débora&rdquo;</strong> é a
+        única linha subjetiva do placar — e a que mais importa, porque o objetivo do projeto é carga
+        mental, não hora de relógio.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">Regra de saída — quando um processo conta como transferido</h2>
+      <p class="prose">
+        Vale para <strong>todos</strong> os seis processos. Um processo só é considerado TRANSFERIDO quando
+        as dez condições abaixo forem verdadeiras — não nove.
+      </p>
+      <ul class="check">
+        <li>Existe <strong>responsável definido</strong>.</li>
+        <li>O responsável <strong>sabe executar</strong>.</li>
+        <li>O <strong>padrão esperado está claro</strong>.</li>
+        <li>As <strong>exceções principais estão documentadas</strong>.</li>
+        <li>Existe <strong>forma de perceber deterioração</strong>.</li>
+        <li>Existe <strong>responsável por corrigir</strong> a deterioração.</li>
+        <li>O <strong>Fred não precisa executar</strong>, quando não for o destino final.</li>
+        <li>A <strong>Débora não precisa acompanhar</strong>.</li>
+        <li><strong>Ninguém depende da iniciativa dela</strong> para o processo funcionar.</li>
+        <li>O <strong>processo funcionou na prática sem ela</strong> — pelo menos um ciclo completo, de verdade.</li>
+      </ul>
+      <div class="alerta">
+        <strong>A décima condição é a que não tem atalho.</strong> Processo documentado, com responsável
+        nomeado e treinado, mas que nunca rodou sem ela, não está transferido — está planejado.
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    Página de projeto — Independência Operacional da Débora. Os campos marcados como
+    <em>a definir</em> são o trabalho da Semana 1: sem número de capacidade e sem limite de guardrail,
+    o resto do plano não tem base. Peça pra atualizar conforme os processos forem sendo transferidos.
+  </footer>
+
+</div>
+
+<script>
+  var ABAS = ['briefing', 'metodo', 'processos', 'capacidade', 'guardrails', 'sprint'];
+
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome; else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); });
+  });
+
+  // links internos do tipo href="#guardrails" abrem a aba correspondente
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var alvo = a.getAttribute('href').slice(1);
+      if (ABAS.indexOf(alvo) === -1) return;
+      e.preventDefault();
+      abrirAba(alvo);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // nível 1 — grupo (escopado ao painel, pra não colidir entre abas)
+  function abrirGrupo(painel, id) {
+    painel.querySelectorAll('.grupo-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.grupo === id);
+    });
+    painel.querySelectorAll('.grade-topicos').forEach(function (g) {
+      g.hidden = g.dataset.grupo !== id;
+    });
+    painel.querySelectorAll('.grupo-descricao').forEach(function (d) {
+      d.hidden = d.dataset.grupo !== id;
+    });
+    // trocar de grupo limpa o visor do nível 2
+    painel.querySelectorAll('.topico-btn').forEach(function (b) { b.classList.remove('ativo'); });
+    painel.querySelectorAll('.topico-conteudo').forEach(function (c) { c.hidden = true; });
+    var vazio = painel.querySelector('.visor-vazio');
+    if (vazio) vazio.hidden = false;
+  }
+  document.querySelectorAll('.grupo-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirGrupo(b.closest('.tab-panel'), b.dataset.grupo); });
+  });
+
+  // nível 2 — tópico
+  function abrirTopico(btn) {
+    var painel = btn.closest('.tab-panel');
+    painel.querySelectorAll('.topico-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b === btn);
+    });
+    painel.querySelectorAll('.topico-conteudo').forEach(function (c) {
+      c.hidden = c.dataset.topico !== btn.dataset.topico;
+    });
+    var vazio = painel.querySelector('.visor-vazio');
+    if (vazio) vazio.hidden = true;
+    var visor = painel.querySelector('.visor');
+    if (visor) visor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('.topico-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirTopico(b); });
+  });
+
+  // nível 3 — itens dentro de um tópico (ids só precisam ser únicos dentro do próprio tópico)
+  document.querySelectorAll('.item-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var painel = b.closest('.topico-conteudo');
+      painel.querySelectorAll('.item-btn').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      painel.querySelectorAll('.item-conteudo').forEach(function (c) { c.hidden = c.dataset.item !== b.dataset.item; });
+      var vazio = painel.querySelector('.item-visor-vazio');
+      if (vazio) vazio.hidden = true;
+    });
+  });
+
+  // fluxo: caixinha → detalhe (o .passo-detalhe é sempre o irmão seguinte do .fluxo)
+  document.querySelectorAll('.passo-caixa').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var fluxo = b.closest('.fluxo');
+      var detalhe = fluxo.nextElementSibling;
+      if (!detalhe || !detalhe.classList.contains('passo-detalhe')) return;
+      fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      detalhe.innerHTML = b.dataset.detalhe;
+      detalhe.classList.add('aberto');
+    });
+  });
+
+  // deep link: #aba, ou #topico (abre aba + grupo + tópico)
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) !== -1) {
+    abrirAba(inicial);
+  } else if (inicial) {
+    var botaoInicial = document.querySelector('.topico-btn[data-topico="' + inicial + '"]');
+    if (botaoInicial) {
+      var painelInicial = botaoInicial.closest('.tab-panel');
+      abrirAba(painelInicial.dataset.panel);
+      var gradeInicial = botaoInicial.closest('.grade-topicos');
+      if (gradeInicial) abrirGrupo(painelInicial, gradeInicial.dataset.grupo);
+      abrirTopico(botaoInicial);
+    }
+  }
+</script>
+
+</body>
+</html>
