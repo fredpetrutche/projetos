@@ -738,7 +738,8 @@
 
     <div class="grade-topicos" data-grupo="p3" hidden>
       <button class="topico-btn" data-topico="p3-fabrica" data-trabalho="1"><span class="tnome">Compras da fábrica</span><span class="tag neutro">3.1 · Campinas já roda</span></button>
-      <button class="topico-btn" data-topico="p3-inventario" data-trabalho="1"><span class="tnome">Estoque — Inventário</span><span class="tag good">3.2 · processo já escrito</span></button>
+      <button class="topico-btn" data-topico="p3-inventario" data-trabalho="1"><span class="tnome">Estoque — o Inventário</span><span class="tag good">3.2 · construir</span></button>
+      <button class="topico-btn" data-topico="p3-implantacao" data-trabalho="1"><span class="tnome">Estoque — implantação com a equipe</span><span class="tag acc">3.2 · soltar</span></button>
       <button class="topico-btn" data-topico="p3-insumos" data-trabalho="1"><span class="tnome">Compras de insumos em geral</span><span class="tag neutro">3.3</span></button>
       <button class="topico-btn" data-topico="p3-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p3-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
@@ -1247,7 +1248,7 @@
       </div>
 
       <div class="topico-conteudo" data-topico="p3-inventario" hidden>
-        <h2>3.2 · Estoque — o Inventário<span class="status andamento">processo já escrito</span></h2>
+        <h2>3.2 · Estoque — o Inventário<span class="status andamento">construir</span></h2>
         <div class="note-item">
           <span class="tag good">achei</span>
           <div>O projeto do inventário existe e está completo:
@@ -1319,6 +1320,69 @@
           </div>
           <div class="item-conteudo" data-item="lojas" hidden>
             <p>O documento descreve o processo de uma loja. Replicar para as três, respeitando o que for diferença legítima de volume, espaço e equipe — e não o que for só falta de padrão.</p>
+          </div>
+        </div>
+        <div class="note-item">
+          <span class="tag acc">e depois de construir</span>
+          <div>Ter as etapas verdes <strong>não é ter o inventário rodando</strong>. Falta passar por
+          gente: treinar o gerente, treinar a equipe e provar em dois testes.
+          Está em <a href="#p3-implantacao">Estoque — implantação com a equipe</a>.</div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p3-implantacao" hidden>
+        <h2>3.2 · Estoque — implantação com a equipe<span class="status definir">soltar</span></h2>
+        <p class="prose">
+          O processo está escrito e as telas ficam prontas — <strong>e nada disso conta enquanto não
+          passar por gente</strong>. O inventário é o processo mais diário do projeto: depende de a
+          equipe lançar perda todo turno e de o gerente conferir todo dia. É o tipo de coisa que morre em
+          silêncio se for solta sem prova.
+        </p>
+
+        <div class="fluxo">
+          <button class="passo-caixa fred" data-detalhe="<strong>Treinar — o gerente primeiro, a equipe depois.</strong> O gerente é o dono do processo: se ele não domina a equação e a ordem do fechamento, não tem como sustentar a equipe nem corrigir o que ela errar. Treinar a equipe antes dele inverte a hierarquia da dúvida — e a dúvida sobe direto pra Débora."><span class="quem">Etapa A</span>Treinar</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Dois testes, não um.</strong> O primeiro descobre o que o processo escrito não previu; os ajustes corrigem. O segundo prova que os ajustes funcionaram — e é ele que autoriza soltar.<br><br>Soltar depois do primeiro acerto é a forma mais comum de um processo novo voltar pra planilha em três semanas."><span class="quem">Etapa B</span>Testar e ajustar, duas vezes</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Rodando.</strong> A equipe executa a rotina diária e semanal sozinha; o que chega pra cima é o número, não a execução. Os sensores de perda avisam quando estoura — <strong>e o protocolo não termina na Débora</strong>."><span class="quem">Etapa C</span>Rodando</button>
+        </div>
+        <div class="passo-detalhe"></div>
+
+        <h3 class="sub">Os passos, um a um</h3>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="treino-gerente">Treinamento do gerente</button>
+          <button class="item-btn" data-item="treino-equipe">Treinamento dos funcionários</button>
+          <button class="item-btn" data-item="teste1">Primeiro teste</button>
+          <button class="item-btn" data-item="ajuste1">Ajustes do primeiro teste</button>
+          <button class="item-btn" data-item="teste2">Segundo teste</button>
+          <button class="item-btn" data-item="ajuste2">Ajustes do segundo teste</button>
+          <button class="item-btn" data-item="rodando">Rodando — o que fica</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num passo para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="treino-gerente" hidden>
+            <p><strong>Vem primeiro, e é mais fundo que o da equipe.</strong> O gerente é o dono do processo no documento — ele precisa entender a <em>equação</em>, não só a tela: por que a ordem do fechamento importa, por que congelar o estoque na contagem, por que contagem cega, e o que fazer com uma divergência que não tem explicação.</p>
+            <p>Se ele souber só apertar botão, toda dúvida da equipe sobe — e sobe pra quem estamos tirando do circuito.</p>
+          </div>
+          <div class="item-conteudo" data-item="treino-equipe" hidden>
+            <p>Mais curto e mais prático: contar direito na unidade cadastrada, e <strong>lançar perda com o motivo certo, todo turno</strong>. São as duas coisas que a equipe faz de verdade.</p>
+            <p>A categoria de motivo é o que dá valor ao dado — perda lançada sem motivo vira número que não gera ação nenhuma. Vale gravar, como no <a href="#p3-fabrica">3.1</a>, para servir a três lojas e a quem entrar depois.</p>
+          </div>
+          <div class="item-conteudo" data-item="teste1" hidden>
+            <p>Um ciclo completo de verdade — contagem, entradas, perdas, conferência de vendas e fechamento — <strong>com acompanhamento</strong>.</p>
+            <p>O objetivo não é o número fechar. É <strong>descobrir o que o processo escrito não previu</strong>: item que ninguém sabe em que unidade conta, entrada que não tem onde ser lançada, motivo de perda que não existe na lista.</p>
+          </div>
+          <div class="item-conteudo" data-item="ajuste1" hidden>
+            <p>Corrigir o que o primeiro teste mostrou: cadastro, tela, regra, ou o próprio processo escrito. <strong>Ajuste que fica só na cabeça de quem acompanhou não é ajuste</strong> — cada um volta para o documento.</p>
+          </div>
+          <div class="item-conteudo" data-item="teste2" hidden>
+            <p><strong>O teste que autoriza soltar.</strong> Mesmo ciclo, já com os ajustes, e agora com a equipe conduzindo — o acompanhamento é de auditoria, não de apoio.</p>
+            <p>Critério: o fechamento roda inteiro sem intervenção e a divergência que sobrar tem explicação.</p>
+          </div>
+          <div class="item-conteudo" data-item="ajuste2" hidden>
+            <p>O que ainda escapou. <strong>Se o segundo teste gerar tanto ajuste quanto o primeiro</strong>, não é hora de soltar — é sinal de que uma etapa anterior do inventário ainda não estava verde, e vale voltar nela em vez de insistir.</p>
+          </div>
+          <div class="item-conteudo" data-item="rodando" hidden>
+            <p>A equipe executa a rotina diária e semanal sozinha. O que sobe é <strong>o número, não a execução</strong>: perda identificada, perda não identificada e as divergências sem explicação.</p>
+            <p>Fecha com os dois limites de perda definidos como sensor, com buffer — e com a reunião semanal de governança acontecendo <strong>sem a Débora na mesa</strong>.</p>
           </div>
         </div>
       </div>
@@ -1412,6 +1476,7 @@
           <li><strong>3.1</strong> — o pedido da fábrica sai pela tela, sem ninguém abrir planilha, feito pela equipe.</li>
           <li><strong>3.2</strong> — as etapas 1 a 4 do inventário estão verdes e o fechamento roda de verdade.</li>
           <li><strong>3.2</strong> — existe tela de perdas com motivo, lançada todo dia, sem dia em branco.</li>
+          <li><strong>3.2</strong> — gerente e equipe treinados, e <strong>os dois testes aconteceram</strong> — o segundo com a equipe conduzindo e o fechamento rodando sem intervenção.</li>
           <li><strong>3.2</strong> — os dois limites de perda (identificada e não identificada) estão definidos em número, com buffer.</li>
           <li><strong>3.3</strong> — cada loja tem responsável pelos pedidos, com substituto declarado e limite de valor escrito.</li>
           <li>Uma divergência de estoque foi tratada pelo protocolo, <strong>sem escalar para a Débora</strong>.</li>
