@@ -278,6 +278,15 @@
   .cabe-saida { flex: 1 1 16rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.4; }
   .cabe-saida b { font-family: var(--mono); }
   .cabe-saida .ok { color: var(--good); } .cabe-saida .quase { color: var(--warn); } .cabe-saida .estoura { color: var(--bad); }
+  .barra-esforco { display: flex; height: 2.1rem; border-radius: 6px; overflow: hidden;
+                   border: 1px solid var(--rule); }
+  .barra-esforco > span { display: flex; align-items: center; justify-content: center;
+                          font-family: var(--mono); font-size: .625rem; font-weight: 700;
+                          color: var(--accent-ink); overflow: hidden; white-space: nowrap; }
+  .legenda { display: flex; gap: .5rem 1.1rem; flex-wrap: wrap; font-size: .75rem; color: var(--ink-soft); }
+  .legenda span { display: inline-flex; align-items: center; gap: .35rem; }
+  .legenda i { width: .7rem; height: .7rem; border-radius: 2px; display: inline-block; }
+  .quem-tab td:first-child { white-space: nowrap; }
   .ficha-filtro { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
   .ficha-filtro .flabel { font-family: var(--mono); font-size: .625rem; letter-spacing: .1em;
                           text-transform: uppercase; color: var(--ink-faint); margin-right: .2rem; }
@@ -356,6 +365,7 @@
 
   <div class="tabs" role="tablist">
     <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" type="button" data-tab="foco" role="tab" aria-selected="false">Foco agora</button>
     <button class="tab-btn" type="button" data-tab="metodo" role="tab" aria-selected="false">Método 20–60–20</button>
     <button class="tab-btn" type="button" data-tab="processos" role="tab" aria-selected="false">Os 7 processos</button>
     <button class="tab-btn" type="button" data-tab="capacidade" role="tab" aria-selected="false">Capacidade</button>
@@ -531,6 +541,265 @@
         falha do pilar 1. Só faturamento da loja e marketing do iFood ficam com ele.
         Detalhe de cada um na aba <em>Os 7 processos</em>.
       </p>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════ FOCO AGORA ══════════════════════ -->
+  <div class="tab-panel" data-panel="foco" role="tabpanel" hidden>
+
+    <section>
+      <h2 class="sec">O que fazer agora</h2>
+      <p class="prose">
+        A <a href="#capacidade">ficha das 137 atividades</a> continua lá como mapa completo — mas ela
+        não é o plano. <strong>O plano é isto: quatro blocos, com etapas e com dono.</strong> A pergunta
+        que manda aqui não é &ldquo;quanto tempo leva&rdquo;, é <em>o que importa agora e de quem
+        depende</em>.
+      </p>
+      <div class="resumo">
+        <div><div class="num">6h</div><div class="lbl">cardápio de verão</div></div>
+        <div><div class="num">20h</div><div class="lbl">vídeos de anúncios</div></div>
+        <div><div class="num">4h</div><div class="lbl">CMV</div></div>
+        <div class="aviso"><div class="num">100h</div><div class="lbl">certificação</div></div>
+      </div>
+
+      <h3 class="sub">A proporção do esforço — 130 horas no total</h3>
+      <div class="barra-esforco">
+        <span style="width:4.6%;background:var(--good)" title="Cardápio de verão — 6h"></span>
+        <span style="width:15.4%;background:var(--accent)" title="Vídeos de anúncios — 20h">20h</span>
+        <span style="width:3.1%;background:var(--ink-faint)" title="CMV — 4h"></span>
+        <span style="width:76.9%;background:var(--warn)" title="Certificação — 100h">certificação · 100h</span>
+      </div>
+      <div class="legenda">
+        <span><i style="background:var(--good)"></i>Cardápio de verão · 6h</span>
+        <span><i style="background:var(--accent)"></i>Vídeos de anúncios · 20h</span>
+        <span><i style="background:var(--ink-faint)"></i>CMV · 4h</span>
+        <span><i style="background:var(--warn)"></i>Certificação · 100h</span>
+      </div>
+
+      <div class="alerta">
+        <strong>A certificação sozinha é 77% do esforço.</strong> Os outros três blocos somados dão 30
+        horas — cabem em duas ou três semanas. A certificação é <em>outro projeto</em>, não mais um item
+        desta lista: 100 horas não entram num sprint de 30 dias sem esmagar o resto.
+        <br><br>A decisão que isso força: <strong>ou o sprint são os três blocos de 30h e a certificação
+        vira um trilho paralelo com prazo próprio, ou o sprint é a certificação e os outros três esperam.</strong>
+        Tentar os quatro juntos é como os quatro não acontecerem.
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">De quem cada coisa depende</h2>
+      <p class="prose">Esta é a resposta para &ldquo;o que depende dela e o que não depende&rdquo;:</p>
+      <div class="tablewrap"><table class="quem-tab">
+        <thead><tr><th>Bloco</th><th>Depende de</th><th>Onde trava</th></tr></thead>
+        <tbody>
+          <tr><td>Cardápio de verão</td><td>Fred · <span class="tag warn">Débora, a confirmar</span></td><td>Duas datas ainda em branco e a degustação batendo com o Cookie de Graça</td></tr>
+          <tr><td>Vídeos de anúncios</td><td>Fred · <strong>editor</strong></td><td>Não se sabe se a Holy Cookie libera alguém pra editar — é a única incógnita real do bloco</td></tr>
+          <tr><td>CMV · embalagens</td><td><strong>Eduardo</strong> · outras lojas</td><td>Pedido grande só fecha com as outras lojas juntas</td></tr>
+          <tr><td>CMV · milkshake</td><td><strong>Yuri</strong> · equipe das lojas</td><td>Nada anda antes de o Yuri fechar o fornecedor</td></tr>
+          <tr><td>Certificação</td><td>Fred · liderança</td><td>Etapas ainda não abertas</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note-item">
+        <span class="tag good">a boa notícia</span>
+        <div><strong>Quase nada nesta lista depende da Débora.</strong> Os gargalos aqui são
+        <em>Eduardo</em> (cálculo e pedido de embalagem), <em>Yuri</em> (fechar o fornecedor do sorvete) e
+        <em>um editor</em> ainda não definido. Isso muda o que fazer primeiro: <strong>o que destrava
+        terceiro tem que ser pedido hoje</strong>, porque o tempo de espera deles corre em paralelo ao seu
+        e não consome hora sua.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="sec">As etapas de cada bloco</h2>
+      <div class="grade-grupos">
+        <button class="grupo-btn" data-grupo="fverao">
+          <span class="gnome">Cardápio de verão</span>
+          <span class="gdesc">Sete etapas com data, do fechamento das ideias até a venda começar nas lojas.</span>
+          <span class="gdestino">esforço: <b>6h</b> · começa 31/08</span>
+        </button>
+        <button class="grupo-btn" data-grupo="fanuncios">
+          <span class="gnome">Vídeos de anúncios</span>
+          <span class="gdesc">Selecionar, preparar, gravar num dia, editar 8 vídeos e publicar no Facebook.</span>
+          <span class="gdestino">esforço: <b>20h</b> · falta o editor</span>
+        </button>
+        <button class="grupo-btn" data-grupo="fcmv">
+          <span class="gnome">CMV</span>
+          <span class="gdesc">Duas frentes independentes: embalagem mais barata (Eduardo) e sorvete de milkshake mais barato (Yuri).</span>
+          <span class="gdestino">esforço: <b>4h</b> de coordenação</span>
+        </button>
+        <button class="grupo-btn" data-grupo="fcert">
+          <span class="gnome">Certificação</span>
+          <span class="gdesc">Certificação 80/20 para as lojas e sistema blindado de avaliação 360.</span>
+          <span class="gdestino">esforço: <b>100h</b> · etapas a abrir</span>
+        </button>
+      </div>
+
+      <div class="grupo-descricao" data-grupo="fcert" hidden>
+        <div class="note-item">
+          <span class="tag warn">a detalhar</span>
+          <div>As etapas da certificação ainda não foram abertas — fica para uma próxima conversa. O que
+          está definido: <strong>certificação 80/20 para as lojas</strong> e <strong>sistema blindado de
+          avaliação 360</strong>, com esforço estimado em <strong>100 horas</strong>.
+          <br><br>O material de base já existe: as
+          <a href="#p4-cozinha">26 áreas certificáveis</a> (10 prontas, 7 parciais, 9 faltando) e o
+          <a href="../certificacao-holy-cookie/">projeto de Certificação de Funções</a>. O 80/20
+          provavelmente é escolher, dentro dessas 26, as que cobrem a maior parte do risco de loja.</div>
+        </div>
+      </div>
+
+      <div class="grade-topicos" data-grupo="fverao" hidden>
+        <button class="topico-btn" data-topico="fv-etapas"><span class="tnome">As sete etapas</span><span class="tag acc">com data</span></button>
+        <button class="topico-btn" data-topico="fv-aberto"><span class="tnome">O que está em aberto</span><span class="tag warn">2 datas + 1 conflito</span></button>
+      </div>
+      <div class="grade-topicos" data-grupo="fanuncios" hidden>
+        <button class="topico-btn" data-topico="fa-etapas"><span class="tnome">As cinco etapas</span><span class="tag acc">com horas</span></button>
+        <button class="topico-btn" data-topico="fa-editor"><span class="tnome">A incógnita da edição</span><span class="tag warn">destrava o bloco</span></button>
+      </div>
+      <div class="grade-topicos" data-grupo="fcmv" hidden>
+        <button class="topico-btn" data-topico="fc-embalagem"><span class="tnome">Embalagens mais baratas</span><span class="tag neutro">Eduardo</span></button>
+        <button class="topico-btn" data-topico="fc-milkshake"><span class="tnome">Sorvete para milkshake</span><span class="tag neutro">Yuri</span></button>
+      </div>
+
+      <div class="visor">
+        <p class="visor-vazio">Clique num bloco e depois num tópico pra ver as etapas.</p>
+
+        <div class="topico-conteudo" data-topico="fv-etapas" hidden>
+          <h2>Cardápio de verão — as sete etapas<span class="status andamento">6h</span></h2>
+          <p class="prose">Clique numa caixinha para ver a data e o que ela destrava.</p>
+          <div class="fluxo">
+            <button class="passo-caixa fred" data-detalhe="<strong>31/08/2026</strong> — em 11 dias.<br><br>Fechar a lista final a partir do que a votação trouxe. <strong>A votação é insumo, não decisão</strong> — é aqui que entra o critério de produto: margem, complexidade de produção, insumo que já existe na casa, encaixe com a marca."><span class="quem">31/08</span>Fechar as ideias</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>11/09/2026</strong> — em 22 dias.<br><br><strong>⚠️ Bate com o Cookie de Graça</strong>, marcado para 11 e 12 de setembro em Paulínia e Piracicaba. Dois eventos no mesmo dia, com a mesma equipe e a mesma atenção. Vale mover um dos dois."><span class="quem">11/09</span>Degustação</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>Sem data — antes de 25/09.</strong><br><br>Apresentar o calendário às lojas: liberação de compra, divulgação no Instagram e início da venda. Vem antes de liberar os produtos na fábrica, porque é o que avisa a loja do que vem.<br><br><strong>Data ainda em branco</strong> — precisa ser cravada."><span class="quem">antes de 25/09</span>Apresentar às lojas</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>24/09/2026</strong> — em 35 dias.<br><br>Produzir o cardápio completo e o material impresso. É o item com prazo de terceiro embutido (gráfica) — checar o lead time antes de contar com a data."><span class="quem">24/09</span>Produzir o cardápio</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>25/09/2026</strong> — em 36 dias.<br><br>Abrir a solicitação e liberar os produtos na fábrica para compra. <strong>Encosta no processo 3.1</strong> — é pedido de fábrica, com o lead time dela no meio."><span class="quem">25/09</span>Liberar na fábrica</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>Sem data — antes de 01/10.</strong><br><br>Definir a data da divulgação no Instagram. <strong>Segunda data em branco</strong> — e essa amarra o conteúdo: sem ela, a gravação e a arte não entram em nenhum calendário."><span class="quem">antes de 01/10</span>Definir a divulgação</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>01/10/2026</strong> — em 42 dias.<br><br>Início da venda nas lojas, com divulgação de marketing. É o marco que fecha o bloco — e o único que o cliente vê."><span class="quem">01/10</span>Venda começa</button>
+          </div>
+          <div class="passo-detalhe"></div>
+          <div class="note-item">
+            <span class="tag acc">leitura do calendário</span>
+            <div>Entre <strong>31/08 e 11/09</strong> tem folga; entre <strong>24/09 e 01/10</strong> tem
+            quatro marcos em sete dias. <strong>O aperto está no fim</strong>, e é exatamente onde entram
+            os prazos que não são seus: gráfica e fábrica. Vale puxar o que der para antes.</div>
+          </div>
+        </div>
+
+        <div class="topico-conteudo" data-topico="fv-aberto" hidden>
+          <h2>Cardápio de verão — o que está em aberto<span class="status definir">decidir</span></h2>
+          <ul class="check">
+            <li><strong>A data de apresentar o calendário às lojas</strong> — só existe o limite &ldquo;antes de 25/09&rdquo;.</li>
+            <li><strong>A data da divulgação no Instagram</strong> — só existe o limite &ldquo;antes de 01/10&rdquo;. Esta amarra a produção de conteúdo: sem ela, gravação e arte não entram em calendário nenhum.</li>
+            <li><strong>O conflito de 11/09</strong> — degustação do cardápio no mesmo dia do Cookie de Graça em Paulínia e Piracicaba.</li>
+          </ul>
+          <div class="alerta">
+            <strong>O conflito de 11 de setembro é o item mais urgente desta aba.</strong> A degustação do
+            cardápio e o Cookie de Graça caem no mesmo dia, com a mesma equipe e a mesma atenção — e o
+            Cookie de Graça tem verba de R$ 5 mil e influenciador contratado, ou seja, é o menos móvel dos
+            dois. Decidir agora, não em setembro.
+          </div>
+          <div class="note-item">
+            <span class="tag warn">a confirmar</span>
+            <div>Não está definido <strong>quanto deste bloco depende da Débora</strong>. O critério de
+            escolha de produto é o item candidato — é o que hoje mora com ela. Se for, é um bloco curto de
+            15–20 min antes de 31/08, não uma reunião.</div>
+          </div>
+        </div>
+
+        <div class="topico-conteudo" data-topico="fa-etapas" hidden>
+          <h2>Vídeos de anúncios — as cinco etapas<span class="status andamento">20h</span></h2>
+          <div class="fluxo">
+            <button class="passo-caixa fred" data-detalhe="<strong>1 hora.</strong> Escolher quais vídeos vão ser gravados. Os roteiros já existem no card <em>Anúncios de tráfego</em>: onde fica a loja, tudo que tem de Nutella, os 3 recheados mais vendidos, o que dá pra comprar com menos de R$ 50, unboxing — e a regra de que todo anúncio leva o nome da cidade.<br><br>Ou seja: é <strong>selecionar</strong>, não criar."><span class="quem">1h · Fred</span>Selecionar os vídeos</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>2 horas.</strong> Preparação para gravar: produto, loja, figurino, roteiro na mão, ordem de gravação. É o que faz o dia inteiro de gravação render — <strong>preparação mal feita transforma 8 horas em 12</strong>."><span class="quem">2h · Fred</span>Preparação</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>8 horas — um dia inteiro.</strong> Grava tudo de uma vez. É o maior bloco contínuo do sprint: precisa de data no calendário, não de &ldquo;quando der&rdquo;.<br><br>Se o dia da gravação não estiver marcado, todo o resto do bloco fica sem âncora."><span class="quem">8h · Fred</span>Dia de gravação</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>6 a 8 horas, para cerca de 8 vídeos — e não é hora sua, se der certo.</strong> Depende de conseguir alguém da Holy Cookie para editar.<br><br><strong>É a única incógnita real do bloco</strong>: se não houver editor, essas horas viram suas ou viram custo de freelancer, e o bloco de 20h vira 28h."><span class="quem">6–8h · editor?</span>Editar 8 vídeos</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>Cerca de 1 hora.</strong> Subir os anúncios no Facebook. Aqui entram as duas coisas que ainda não estão definidas no <a href='#p1-anuncios'>subprocesso 1.1</a>: <strong>quanto de verba por loja</strong> e <strong>qual número diz que o anúncio está valendo</strong>."><span class="quem">~1h · Fred</span>Publicar no Facebook</button>
+          </div>
+          <div class="passo-detalhe"></div>
+          <div class="note-item">
+            <span class="tag acc">o que destrava primeiro</span>
+            <div>Duas coisas dão para resolver <strong>hoje</strong>, e as duas destravam o resto:
+            <strong>marcar a data da gravação</strong> (é o maior bloco e ancora tudo) e
+            <strong>perguntar sobre o editor</strong> (a resposta muda o tamanho do bloco em 40%).</div>
+          </div>
+        </div>
+
+        <div class="topico-conteudo" data-topico="fa-editor" hidden>
+          <h2>A incógnita da edição<span class="status definir">perguntar hoje</span></h2>
+          <p class="prose">
+            São cerca de <strong>8 vídeos</strong> e algo entre <strong>6 e 8 horas</strong> de edição.
+            Toda a estimativa de 20 horas do bloco assume que <strong>alguém da Holy Cookie edita</strong>
+            — se não editar, essas horas caem em cima de você ou viram custo.
+          </p>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Cenário</th><th>Custo para você</th><th>Bloco total</th></tr></thead>
+            <tbody>
+              <tr><td>Editor da Holy Cookie topa</td><td>0h (só revisão)</td><td><strong>~12h</strong></td></tr>
+              <tr><td>Freelancer</td><td>0h + custo em R$</td><td>~12h + despesa</td></tr>
+              <tr><td>Você edita</td><td>+6 a 8h</td><td><strong>~20h</strong></td></tr>
+            </tbody>
+          </table></div>
+          <div class="note-item">
+            <span class="tag warn">por que perguntar antes de gravar</span>
+            <div><strong>A resposta muda o que se grava.</strong> Editor disponível permite roteiro com
+            mais corte e mais take; sem editor, o certo é gravar plano mais simples, que edita mais rápido.
+            Perguntar depois de gravar é descobrir tarde demais.</div>
+          </div>
+        </div>
+
+        <div class="topico-conteudo" data-topico="fc-embalagem" hidden>
+          <h2>CMV — embalagens mais baratas<span class="status andamento">Eduardo</span></h2>
+          <p class="prose">
+            Seu papel aqui é <strong>coordenação</strong>, não execução: quem calcula e fecha é o Eduardo,
+            e o pedido só sai grande se as outras lojas entrarem junto.
+          </p>
+          <div class="fluxo">
+            <button class="passo-caixa outro" data-detalhe="<strong>Eduardo.</strong> Levantar e calcular os valores das embalagens — é ele quem faz."><span class="quem">Eduardo</span>Calcular os valores</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>Fred — coordenação.</strong> Alinhar com as outras lojas para fechar os valores. <strong>O pedido precisa ser grande</strong> para o preço valer; sozinho, a economia não acontece.<br><br>É o passo que depende de gente de fora e por isso deve ser aberto primeiro."><span class="quem">Fred</span>Juntar as outras lojas</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>Eduardo.</strong> Conferir o pedido consolidado antes de fechar."><span class="quem">Eduardo</span>Conferir o pedido</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>Calcular a quantidade que cada loja vai precisar.</strong> Encosta no <a href='#p3-inventario'>inventário</a>: quantidade por loja sai bem melhor com mínimo/máximo definido do que por estimativa."><span class="quem">Eduardo</span>Calcular a quantidade</button>
+          </div>
+          <div class="passo-detalhe"></div>
+          <div class="note-item">
+            <span class="tag warn">confirmar a ordem</span>
+            <div>Anotei nesta sequência a partir do que você descreveu, mas há uma inversão possível:
+            <strong>conferir o pedido antes ou depois de calcular a quantidade?</strong> Se a quantidade
+            entra no pedido, ela vem antes. Vale corrigir quando estiver na frente do Eduardo.</div>
+          </div>
+        </div>
+
+        <div class="topico-conteudo" data-topico="fc-milkshake" hidden>
+          <h2>CMV — sorvete para milkshake<span class="status definir">travado no Yuri</span></h2>
+          <div class="alerta">
+            <strong>Nada aqui anda antes de o Yuri fechar o fornecedor.</strong> Toda a lista abaixo está
+            represada nesse ponto — e por isso ele é a única coisa a cobrar hoje. O resto pode ser
+            preparado, mas não executado.
+          </div>
+          <h3 class="sub">Antes do fornecedor — dá para adiantar</h3>
+          <ul class="check">
+            <li><strong>Entender o CMV dos produtos</strong> que levam sorvete hoje — depende do <a href="#p7-escopo">processo 7 (DRE)</a> para virar número confiável.</li>
+            <li><strong>Entender a redução prevista</strong> com o sorvete novo: quanto o CMV cai, em ponto percentual e em R$.</li>
+            <li><strong>Yuri fecha o fornecedor</strong> — o portão.</li>
+          </ul>
+          <h3 class="sub">Depois que o fornecedor fechar</h3>
+          <div class="fluxo">
+            <button class="passo-caixa fred" data-detalhe="Comprar o sorvete novo e refazer as <strong>fichas técnicas</strong> dos produtos que levam sorvete. Ficha técnica errada é CMV errado — e também quebra a baixa de estoque do <a href='#p3-inventario'>inventário</a>."><span class="quem">1</span>Comprar e refazer as fichas</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="Imprimir as fichas técnicas e mandar para as lojas. Parece detalhe, mas é o que faz o padrão existir no balcão em vez de existir só no arquivo."><span class="quem">2</span>Imprimir e mandar pra loja</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>Treinar todos os funcionários</strong> no preparo novo. Vale gravar, como no 3.1 e no inventário — serve às três lojas e a quem entrar depois. Encosta direto na <a href='#p4-cozinha'>área Bebidas da certificação</a>, que hoje está marcada como <em>falta</em>."><span class="quem">3</span>Treinar os funcionários</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>Acompanhar por duas semanas</strong>, perguntando a cada dois ou três dias se estão fazendo do jeito novo. <strong>É o passo que quase todo mundo pula</strong> — e é o que decide se a mudança pegou ou se a loja voltou ao jeito antigo em silêncio."><span class="quem">4 · 2 semanas</span>Acompanhar de perto</button><span class="seta">→</span>
+            <button class="passo-caixa fred" data-detalhe="<strong>Experimentar o produto novo na loja.</strong> O cliente não sabe que o insumo mudou — o teste é se o produto continua bom. Se cair a qualidade, a economia de CMV não vale."><span class="quem">5</span>Provar o produto na loja</button><span class="seta">→</span>
+            <button class="passo-caixa outro" data-detalhe="<strong>Confirmar que o cálculo está certo com dado real</strong> de venda e de estoque. É aqui que a economia deixa de ser projeção e vira número — e é a prova de que valeu.<br><br>Depende do <a href='#p7-escopo'>DRE</a> e do <a href='#p3-inventario'>inventário</a> estarem medindo."><span class="quem">6</span>Confirmar com dado real</button>
+          </div>
+          <div class="passo-detalhe"></div>
+          <div class="note-item">
+            <span class="tag acc">o padrão que se repete</span>
+            <div>Repare que esta lista tem a mesma forma da implantação do inventário e da fase 3 das
+            compras: <strong>treinar → acompanhar de perto → confirmar com dado real</strong>. Não é
+            coincidência — é o que separa mudança que pega de mudança que volta atrás sozinha.</div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
   </div>
@@ -2228,6 +2497,14 @@
       </div>
     </section>
 
+    <div class="note-item">
+      <span class="tag acc">leia antes</span>
+      <div><strong>O plano operativo não está nesta aba — está em <a href="#foco">Foco agora</a>.</strong>
+      Quatro blocos, com etapas e com dono. Esta aba continua sendo o <em>mapa completo</em>: as 137
+      atividades de todos os sete processos, para quando a conversa for &ldquo;e o que mais falta&rdquo;.
+      Não precisa ser preenchida para o sprint começar.</div>
+    </div>
+
     <section>
       <h2 class="sec">Você não precisa dimensionar tudo</h2>
       <blockquote class="tese">
@@ -2585,7 +2862,7 @@
 </div>
 
 <script>
-  var ABAS = ['briefing', 'metodo', 'processos', 'capacidade', 'guardrails', 'sprint'];
+  var ABAS = ['briefing', 'foco', 'metodo', 'processos', 'capacidade', 'guardrails', 'sprint'];
 
   function abrirAba(nome) {
     document.querySelectorAll('.tab-btn').forEach(function (b) {
@@ -2603,8 +2880,9 @@
   });
 
   // links internos do tipo href="#guardrails" abrem a aba correspondente
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) {
       var alvo = a.getAttribute('href').slice(1);
       if (ABAS.indexOf(alvo) !== -1) {
         e.preventDefault();
@@ -2621,7 +2899,7 @@
       var grade = btn.closest('.grade-topicos');
       if (grade) abrirGrupo(painel, grade.dataset.grupo);
       abrirTopico(btn);
-    });
+    }
   });
 
   // nível 1 — grupo (escopado ao painel, pra não colidir entre abas)
