@@ -108,8 +108,9 @@
   ul.pontos strong { color: var(--ink); font-weight: 600; }
   ul.check { list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: .4rem;
              font-size: .875rem; color: var(--ink-soft); }
-  ul.check li { display: grid; grid-template-columns: 1.15rem 1fr; gap: .55rem; align-items: start; }
-  ul.check li::before { content: "☐"; font-family: var(--mono); color: var(--ink-faint); line-height: 1.5; }
+  ul.check li { position: relative; padding-left: 1.7rem; line-height: 1.5; }
+  ul.check li::before { content: "☐"; position: absolute; left: 0; top: 0;
+                        font-family: var(--mono); color: var(--ink-faint); line-height: 1.5; }
   ul.check strong { color: var(--ink); font-weight: 600; }
 
   .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
