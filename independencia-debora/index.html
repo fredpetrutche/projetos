@@ -502,7 +502,7 @@
           <tr><td>1</td><td>Faturamento da loja física</td><td>Débora → Fred</td><td>Fred</td></tr>
           <tr><td>2</td><td>Redução de CMV</td><td>Débora → Fred → Sistema</td><td>Sistema</td></tr>
           <tr><td>3</td><td>Compras + controle de estoque</td><td>Débora → Fred/Sistema → Equipe</td><td>Sistema + equipe responsável</td></tr>
-          <tr><td>4</td><td>Treinamento de equipe</td><td>Débora → Fred/Sistema → Liderança</td><td>Sistema + liderança</td></tr>
+          <tr><td>4</td><td>Treinamento e certificação</td><td>Débora → Fred/Sistema → Liderança</td><td>Sistema + liderança</td></tr>
           <tr><td>5</td><td>Contratação de equipe</td><td>Débora → Fred/Sistema → Adm/RH</td><td>Administrativo/RH</td></tr>
           <tr><td>6</td><td>Marketing do iFood</td><td>Débora → Fred</td><td>Fred, com baixa demanda recorrente</td></tr>
           <tr><td>7</td><td>DRE das lojas</td><td>Débora → Fred → Sistema</td><td>Sistema (sensores diários, Fred lê a cada 2–3 meses)</td></tr>
@@ -613,8 +613,8 @@
         <span class="gdestino">destino final: <b>Sistema + equipe</b></span>
       </button>
       <button class="grupo-btn" data-grupo="p4">
-        <span class="gnome">4 · Treinamento</span>
-        <span class="gdesc">Trilha por função, materiais, avaliação prática, quem treina, quem valida e reciclagem.</span>
+        <span class="gnome">4 · Treinamento e certificação</span>
+        <span class="gdesc">As 26 áreas certificáveis — 10 prontas, 7 parciais, 9 faltando — mais quem treina, quem valida e a reciclagem.</span>
         <span class="gdestino">destino final: <b>Sistema + liderança</b></span>
       </button>
       <button class="grupo-btn" data-grupo="p5">
@@ -666,10 +666,17 @@
     </div>
     <div class="grupo-descricao" data-grupo="p4" hidden>
       <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Liderança</span></div>
-      <p class="prose" style="font-size:.875rem">Este processo não começa do zero: a
-      <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já é a trilha de treinamento por
-      função, com material próprio. O que falta é o que depende da Débora e o handoff pra liderança
-      treinar sem ela.</p>
+      <p class="prose" style="font-size:.875rem">Este processo não começa do zero — e nem começa em
+      branco na estimativa. A <a href="../certificacao-holy-cookie/">Certificação de Funções</a> já tem
+      <strong>26 áreas certificáveis mapeadas, com status</strong>: 10 prontas, 7 parciais, 9 faltando.
+      <strong>As atividades deste processo são essas 26</strong>, lidas de lá, mais o sistema de
+      treinamento em volta delas (quem treina, quem valida, reciclagem).</p>
+      <div class="note-item">
+        <span class="tag good">a boa notícia da estimativa</span>
+        <div><strong>10 das 26 já custam zero hora.</strong> O trabalho real são as 16 que estão parciais
+        ou faltando — e mesmo nessas, boa parte é construção que o Fred faz sozinho. A hora da Débora
+        aqui é cirúrgica: o padrão que ela cobra e o erro que ela nunca deixa passar.</div>
+      </div>
     </div>
     <div class="grupo-descricao" data-grupo="p5" hidden>
       <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Administrativo/RH</span></div>
@@ -731,7 +738,11 @@
     </div>
 
     <div class="grade-topicos" data-grupo="p4" hidden>
-      <button class="topico-btn" data-topico="p4-escopo" data-trabalho="1"><span class="tnome">Escopo — o que está dentro</span></button>
+      <button class="topico-btn" data-topico="p4-cozinha" data-trabalho="1"><span class="tnome">Cozinha</span><span class="tag neutro">11 áreas</span></button>
+      <button class="topico-btn" data-topico="p4-atendimento" data-trabalho="1"><span class="tnome">Atendimento</span><span class="tag neutro">5 áreas</span></button>
+      <button class="topico-btn" data-topico="p4-transversal" data-trabalho="1"><span class="tnome">Transversal</span><span class="tag neutro">4 áreas</span></button>
+      <button class="topico-btn" data-topico="p4-onboard" data-trabalho="1"><span class="tnome">Treinamento e onboarding</span><span class="tag neutro">6 áreas</span></button>
+      <button class="topico-btn" data-topico="p4-sistema" data-trabalho="1"><span class="tnome">O sistema em volta</span><span class="tag acc">quem treina, quem valida</span></button>
       <button class="topico-btn" data-topico="p4-rota"><span class="tnome">Rota de transferência</span><span class="tag acc">como fazer</span></button>
       <button class="topico-btn" data-topico="p4-existe"><span class="tnome">O que já existe</span><span class="tag good">reaproveitar</span></button>
       <button class="topico-btn" data-topico="p4-fim"><span class="tnome">Como sei que acabou</span><span class="tag warn">teste</span></button>
@@ -1277,52 +1288,216 @@
       </div>
 
       <!-- ══════ PROCESSO 4 ══════ -->
-      <div class="topico-conteudo" data-topico="p4-escopo" hidden>
-        <h2>4 · Treinamento de equipe — escopo<span class="status andamento">tem base pronta</span></h2>
-        <p class="prose">Este processo tem a melhor base de partida do projeto — a Certificação de Funções já é a espinha da trilha. O que falta é <strong>o que só a Débora sabe</strong> e o handoff pra liderança treinar sozinha.</p>
+      <div class="topico-conteudo" data-topico="p4-cozinha" hidden>
+        <h2>4 · Cozinha<span class="status andamento">7 prontas · 1 parcial · 3 faltam</span></h2>
+        <p class="prose">Áreas certificáveis lidas da <a href="../certificacao-holy-cookie/material/">Certificação de Funções</a> — a lista e o status vêm de lá, não foram inventados aqui. Clique numa área para ver o que ela custa.</p>
         <div class="grade-itens">
-          <button class="item-btn" data-item="mapear">Treinamentos necessários por função</button>
-          <button class="item-btn" data-item="dela">Conhecimento que depende dela</button>
+          <button class="item-btn" data-item="t01" data-pre="existe">Cookies — Modelagem</button>
+          <button class="item-btn" data-item="t02" data-pre="existe">Cookies — Decoração</button>
+          <button class="item-btn" data-item="t03">Torta</button>
+          <button class="item-btn" data-item="t04" data-pre="existe">Brownie</button>
+          <button class="item-btn" data-item="t05" data-pre="existe">Croissant e Lanchinho</button>
+          <button class="item-btn" data-item="t06">Pães</button>
+          <button class="item-btn" data-item="t07">Bebidas</button>
+          <button class="item-btn" data-item="t08">Sorvetes</button>
+          <button class="item-btn" data-item="t09" data-pre="existe">Fluxo de Preparação dos Pedidos</button>
+          <button class="item-btn" data-item="t10" data-pre="existe">Organização, Estoque e Embalagem</button>
+          <button class="item-btn" data-item="t11" data-pre="existe">Limpeza e Organização</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa área para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="t01" hidden>
+            <p><strong>Cookies — Modelagem</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t02" hidden>
+            <p><strong>Cookies — Decoração</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t03" hidden>
+            <p><strong>Torta</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="t04" hidden>
+            <p><strong>Brownie</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t05" hidden>
+            <p><strong>Croissant e Lanchinho</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t06" hidden>
+            <p><strong>Pães</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t07" hidden>
+            <p><strong>Bebidas</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t08" hidden>
+            <p><strong>Sorvetes</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t09" hidden>
+            <p><strong>Fluxo de Preparação dos Pedidos</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t10" hidden>
+            <p><strong>Organização, Estoque e Embalagem</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t11" hidden>
+            <p><strong>Limpeza e Organização</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-atendimento" hidden>
+        <h2>4 · Atendimento<span class="status andamento">1 pronta · 2 parciais · 2 faltam</span></h2>
+        <p class="prose">Áreas certificáveis lidas da <a href="../certificacao-holy-cookie/material/">Certificação de Funções</a> — a lista e o status vêm de lá, não foram inventados aqui. Clique numa área para ver o que ela custa.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="t12" data-pre="existe">Atendimento na Loja</button>
+          <button class="item-btn" data-item="t13">Script de Vendas</button>
+          <button class="item-btn" data-item="t14">WhatsApp</button>
+          <button class="item-btn" data-item="t15">Plataformas — iFood / 99Food / Cardápio Web</button>
+          <button class="item-btn" data-item="t16">Resolvendo Problemas</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa área para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="t12" hidden>
+            <p><strong>Atendimento na Loja</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t13" hidden>
+            <p><strong>Script de Vendas</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t14" hidden>
+            <p><strong>WhatsApp</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t15" hidden>
+            <p><strong>Plataformas — iFood / 99Food / Cardápio Web</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="t16" hidden>
+            <p><strong>Resolvendo Problemas</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-transversal" hidden>
+        <h2>4 · Transversal<span class="status definir">0 prontas · 2 parciais · 2 faltam</span></h2>
+        <p class="prose">Áreas certificáveis lidas da <a href="../certificacao-holy-cookie/material/">Certificação de Funções</a> — a lista e o status vêm de lá, não foram inventados aqui. Clique numa área para ver o que ela custa.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="t17">Regulamento Interno</button>
+          <button class="item-btn" data-item="t18">Soft Skills</button>
+          <button class="item-btn" data-item="t19">RH e Retenção</button>
+          <button class="item-btn" data-item="t20">Módulo Geral de Onboarding</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa área para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="t17" hidden>
+            <p><strong>Regulamento Interno</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="t18" hidden>
+            <p><strong>Soft Skills</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t19" hidden>
+            <p><strong>RH e Retenção</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t20" hidden>
+            <p><strong>Módulo Geral de Onboarding</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-onboard" hidden>
+        <h2>4 · Treinamento e onboarding<span class="status andamento">2 prontas · 2 parciais · 2 faltam</span></h2>
+        <p class="prose">Áreas certificáveis lidas da <a href="../certificacao-holy-cookie/material/">Certificação de Funções</a> — a lista e o status vêm de lá, não foram inventados aqui. Clique numa área para ver o que ela custa.</p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="t21">O Papel do Treinador</button>
+          <button class="item-btn" data-item="t22" data-pre="existe">Onboarding 3 Dias — Cozinha</button>
+          <button class="item-btn" data-item="t23" data-pre="existe">Teste de Vaga — Forno/Cozinha</button>
+          <button class="item-btn" data-item="t24">Teste de Vaga — Atendimento</button>
+          <button class="item-btn" data-item="t25">Trilha do Freelancer</button>
+          <button class="item-btn" data-item="t26">Trilha — Líder de Loja / Gerente</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa área para ver o detalhe.</p>
+          <div class="item-conteudo" data-item="t21" hidden>
+            <p><strong>O Papel do Treinador</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="t22" hidden>
+            <p><strong>Onboarding 3 Dias — Cozinha</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t23" hidden>
+            <p><strong>Teste de Vaga — Forno/Cozinha</strong> <span class="tag good">pronto</span></p>
+            <p><strong>Material pronto</strong> na <a href="../certificacao-holy-cookie/material/">Certificação</a>. Custo estimado: <strong>zero hora</strong> — só conferir se o padrão descrito ainda é o que a Débora cobra hoje.</p>
+          </div>
+          <div class="item-conteudo" data-item="t24" hidden>
+            <p><strong>Teste de Vaga — Atendimento</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+          <div class="item-conteudo" data-item="t25" hidden>
+            <p><strong>Trilha do Freelancer</strong> <span class="tag warn">parcial</span></p>
+            <p><strong>Material parcial.</strong> Existe alguma coisa escrita, mas não fecha a certificação. O trabalho é completar — e completar é quase todo <strong>hora do Fred</strong>: ver o que já tem, achar o buraco, escrever. A Débora entra só se o buraco for critério de julgamento dela.</p>
+          </div>
+          <div class="item-conteudo" data-item="t26" hidden>
+            <p><strong>Trilha — Líder de Loja / Gerente</strong> <span class="tag bad">falta</span></p>
+            <p><strong>Não existe material.</strong> Precisa ser construído do zero. Antes de marcar hora da Débora, aplicar a pergunta 1: <em>dá pra escrever isso indo na loja e olhando quem já faz bem?</em> Na maioria dos casos aqui, dá.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topico-conteudo" data-topico="p4-sistema" hidden>
+        <h2>4 · O sistema em volta<span class="status definir">a extrair</span></h2>
+        <p class="prose">
+          As 26 áreas são o <em>conteúdo</em>. Isto aqui é o <em>sistema</em> — e é ele que decide se o
+          treinamento continua acontecendo quando a Débora sair. <strong>Material pronto sem sistema em
+          volta vira pasta que ninguém abre.</strong>
+        </p>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="so-ela">O que só a Débora sabe</button>
           <button class="item-btn" data-item="padrao">Padrão mínimo por função</button>
-          <button class="item-btn" data-item="trilha">Trilha de treinamento</button>
-          <button class="item-btn" data-item="materiais">Materiais</button>
-          <button class="item-btn" data-item="checklists">Checklists</button>
-          <button class="item-btn" data-item="avaliacao">Avaliação prática</button>
-          <button class="item-btn" data-item="quemtreina">Quem treina o novo funcionário</button>
-          <button class="item-btn" data-item="quemvalida">Quem valida a conclusão</button>
+          <button class="item-btn" data-item="quem-treina">Quem treina o novo funcionário</button>
+          <button class="item-btn" data-item="quem-valida">Quem valida a conclusão</button>
+          <button class="item-btn" data-item="avaliacao">A avaliação prática</button>
           <button class="item-btn" data-item="reciclagem">Reciclagem quando o desempenho cai</button>
+          <button class="item-btn" data-item="indicador">Indicador de qualidade do treinamento</button>
         </div>
         <div class="item-visor">
           <p class="item-visor-vazio">Clique num item para ver o detalhe.</p>
-          <div class="item-conteudo" data-item="mapear" hidden>
-            <p>Que treinamento cada função precisa. <strong>Boa parte já está mapeada</strong> nas 26 áreas certificáveis da <a href="../certificacao-holy-cookie/">Certificação</a> — começar por lá, não do zero.</p>
-          </div>
-          <div class="item-conteudo" data-item="dela" hidden>
-            <p><strong>O item central deste processo.</strong> O que hoje só é ensinado porque a Débora ensina — o jeito de fazer, o padrão que ela cobra, o detalhe que ela corrige. Se isso não sair da cabeça dela, todo funcionário novo continua sendo um chamado pra ela.</p>
+          <div class="item-conteudo" data-item="so-ela" hidden>
+            <p><strong>O item mais caro do processo, e o único que exige hora dela de verdade.</strong> O que hoje só é ensinado porque a Débora ensina: o jeito de fazer, o padrão que ela cobra, o detalhe que ela corrige, o erro que ela nunca deixa passar.</p>
+            <p>Enquanto isso não sair da cabeça dela, <strong>todo funcionário novo continua sendo um chamado pra ela</strong> — mesmo com as 26 áreas certificadas.</p>
           </div>
           <div class="item-conteudo" data-item="padrao" hidden>
-            <p>O que caracteriza &ldquo;essa pessoa está pronta&rdquo; em cada função — em critério observável, não em impressão.</p>
+            <p>O que caracteriza &ldquo;essa pessoa está pronta&rdquo; em cada função — em critério observável, não em impressão. É o que a certificação de cada área tem que entregar no fim.</p>
           </div>
-          <div class="item-conteudo" data-item="trilha" hidden>
-            <p>A ordem em que a pessoa aprende: o que vem no dia 1, na semana 1, no mês 1. Trilha é sequência — não é pilha de material.</p>
+          <div class="item-conteudo" data-item="quem-treina" hidden>
+            <p>Quem executa o treinamento do novo funcionário. Destino final: <strong>liderança</strong> — hoje o Líder de Loja é o nó-pai da estrutura em <a href="../pessoas/">Cargos Holy Cookie</a>. Enquanto a resposta for &ldquo;depende&rdquo;, volta pra Débora.</p>
+            <p>Note que a área <em>O Papel do Treinador</em> (parcial) é exatamente o material deste item — os dois andam juntos.</p>
           </div>
-          <div class="item-conteudo" data-item="materiais" hidden>
-            <p>O que a pessoa lê/assiste. Existe base em dois lugares: o <a href="../certificacao-holy-cookie/">Material de Certificação</a> e o <a href="https://manual-holycook.vercel.app/" target="_blank" rel="noopener">Manual da Franquia</a> (treinamentos operacionais e POPs).</p>
-          </div>
-          <div class="item-conteudo" data-item="checklists" hidden>
-            <p>O que o treinador confere. Também há base pronta nos <a href="../certificacao-holy-cookie/">checklists de loja</a> já existentes na operação.</p>
+          <div class="item-conteudo" data-item="quem-valida" hidden>
+            <p>Quem assina que a certificação terminou. <strong>Precisa ser diferente de quem treinou</strong> sempre que possível — quem treina tende a aprovar.</p>
           </div>
           <div class="item-conteudo" data-item="avaliacao" hidden>
-            <p>Como se testa se a pessoa aprendeu — <strong>fazendo, não respondendo</strong>. Avaliação prática é o que evita o treinamento virar formalidade.</p>
-          </div>
-          <div class="item-conteudo" data-item="quemtreina" hidden>
-            <p>Quem executa o treinamento do novo funcionário. Destino final: <strong>liderança</strong> — hoje o Líder de Loja é o nó-pai da estrutura. Enquanto a resposta for &ldquo;depende&rdquo;, volta pra Débora.</p>
-          </div>
-          <div class="item-conteudo" data-item="quemvalida" hidden>
-            <p>Quem assina que o treinamento terminou. Precisa ser diferente de quem treinou sempre que possível — quem treina tende a aprovar.</p>
+            <p>Como se testa se a pessoa aprendeu — <strong>fazendo, não respondendo</strong>. Já existem dois testes de vaga prontos (Forno/Cozinha) e um faltando (Atendimento); é a mesma linguagem.</p>
           </div>
           <div class="item-conteudo" data-item="reciclagem" hidden>
-            <p>O que acontece quando o desempenho de alguém já treinado cai: quem percebe, a partir de que sinal, e qual o retreino. <strong>É o que fecha o ciclo</strong> — sem isso, queda de padrão vira chamado pra Débora.</p>
+            <p>O que acontece quando o desempenho de alguém já certificado cai: quem percebe, a partir de que sinal, e qual o retreino. <strong>É o que fecha o ciclo</strong> — sem isso, queda de padrão vira chamado pra Débora, e a certificação vira um carimbo de uma vez só.</p>
+          </div>
+          <div class="item-conteudo" data-item="indicador" hidden>
+            <p>Como saber se o treinamento está bom, olhando o <strong>funcionário treinado</strong> e não o treinador. Candidatos: tempo até certificar, taxa de aprovação na avaliação prática, e quantos precisaram de reciclagem nos primeiros 90 dias.</p>
           </div>
         </div>
       </div>
@@ -1331,9 +1506,9 @@
         <h2>4 · Rota de transferência — Débora → Fred/Sistema → Liderança</h2>
         <div class="rota"><span class="no saida">Débora</span><span class="seta">→</span><span class="no meio">Fred / Sistema</span><span class="seta">→</span><span class="no destino">Liderança</span></div>
         <div class="fluxo">
-          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1</strong> focado no que só ela sabe: o padrão que ela cobra, o que ela corrige, o erro crítico que ela nunca deixa passar. O resto já existe em material."><span class="quem">Ciclo 1</span>Extrair o padrão dela</button><span class="seta">→</span>
-          <button class="passo-caixa fred" data-detalhe="Transformar em trilha, material, checklist e avaliação prática — <strong>encaixando no que a Certificação já tem</strong> em vez de criar uma segunda estrutura paralela."><span class="quem">Fred</span>Virar treinamento</button><span class="seta">→</span>
-          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 com a liderança.</strong> O líder treina um funcionário de verdade, com o material na mão, dentro da autonomia definida."><span class="quem">Ciclo 2</span>Liderança executa</button><span class="seta">→</span>
+          <button class="passo-caixa debora" data-detalhe="<strong>Ciclo 1 focado no que só ela sabe</strong> — o padrão que ela cobra, o que ela corrige, o erro crítico que ela nunca deixa passar. <strong>Não passar as 26 áreas com ela uma a uma</strong>: 10 já estão prontas e a maioria das outras o Fred escreve olhando quem já faz bem na loja."><span class="quem">Ciclo 1</span>Extrair o padrão dela</button><span class="seta">→</span>
+          <button class="passo-caixa fred" data-detalhe="Fechar as <strong>16 áreas que estão parciais ou faltando</strong>, dentro da Certificação — não numa estrutura paralela. Cada área fechada é material + checklist + avaliação prática."><span class="quem">Fred</span>Fechar as 16 áreas</button><span class="seta">→</span>
+          <button class="passo-caixa outro" data-detalhe="<strong>Ciclo 2 com a liderança.</strong> O líder treina e certifica um funcionário de verdade, com o material na mão, dentro da autonomia definida. A área <em>O Papel do Treinador</em> é o manual dele."><span class="quem">Ciclo 2</span>Liderança executa</button><span class="seta">→</span>
           <button class="passo-caixa fred" data-detalhe="O Fred audita <strong>os primeiros treinamentos</strong> e vai reduzindo. Auditar aqui é olhar o funcionário treinado, não o treinador — o resultado é a prova."><span class="quem">Fred</span>Auditar e reduzir</button><span class="seta">→</span>
           <button class="passo-caixa outro" data-detalhe="Indicador de qualidade do treinamento no ar. A Débora sai completamente; a participação do Fred cai para auditoria pontual."><span class="quem">Saída</span>Medir e soltar</button>
         </div>
@@ -1343,7 +1518,7 @@
       <div class="topico-conteudo" data-topico="p4-existe" hidden>
         <h2>4 · O que já existe — não recomeçar do zero</h2>
         <ul class="pontos">
-          <li><a href="../certificacao-holy-cookie/">Certificação de Funções</a> — a trilha por função em si, com material próprio e controle de progresso por área certificável.</li>
+          <li><a href="../certificacao-holy-cookie/">Certificação de Funções</a> — <strong>a espinha deste processo</strong>: as 26 áreas certificáveis, com material próprio e controle de progresso. As atividades da ficha de horas saem daqui.</li>
           <li><a href="https://manual-holycook.vercel.app/" target="_blank" rel="noopener">Manual da Franquia</a> — treinamentos operacionais, fichas técnicas e POPs sanitários.</li>
           <li><a href="../experiencia-holy-cookie/">Experiência Holy Cookie</a> — o padrão de produto, ambiente e atendimento que o treinamento tem que produzir.</li>
           <li><a href="../marca-interna/">Marca Interna</a> — o outro lado da equação de equipe: reter quem já foi treinado.</li>
@@ -1359,9 +1534,10 @@
       <div class="topico-conteudo" data-topico="p4-fim" hidden>
         <h2>4 · Como sei que acabou<span class="status definir">teste</span></h2>
         <ul class="check">
-          <li>Um funcionário novo foi <strong>treinado inteiro pela liderança</strong>, com material, sem a Débora.</li>
+          <li>Um funcionário novo foi <strong>treinado e certificado inteiro pela liderança</strong>, com material, sem a Débora.</li>
           <li>Esse funcionário passou na avaliação prática, validada por quem não o treinou.</li>
           <li>Existe padrão mínimo escrito por função.</li>
+          <li><strong>As 26 áreas saíram do parcial e do falta</strong> — ou, no mínimo, todas as das funções que estão sendo contratadas agora.</li>
           <li>Existe indicador de qualidade do treinamento sendo medido.</li>
           <li>Houve pelo menos um caso de queda de desempenho tratado por reciclagem, sem escalar para a Débora.</li>
         </ul>
@@ -2085,7 +2261,7 @@
           <tr><td>1 · Faturamento da loja</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>2 · Redução de CMV</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>3 · Compras + estoque</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
-          <tr><td>4 · Treinamento</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
+          <tr><td>4 · Treinamento e certificação</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>5 · Contratação</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>6 · Marketing do iFood</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
           <tr><td>7 · DRE das lojas</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td><td class="vazio">—</td></tr>
@@ -2314,7 +2490,8 @@
         var itens = cont ? cont.querySelectorAll('.item-btn') : [];
         if (itens.length) {
           itens.forEach(function (ib) {
-            proc.ativs.push({ id: gid + '|' + tid + '|' + ib.dataset.item, frente: tnome, nome: ib.textContent.trim() });
+            proc.ativs.push({ id: gid + '|' + tid + '|' + ib.dataset.item, frente: tnome,
+                              nome: ib.textContent.trim(), pre: ib.dataset.pre || '' });
           });
         } else {
           proc.ativs.push({ id: gid + '|' + tid, frente: tnome, nome: tnome, bloco: true });
@@ -2322,6 +2499,16 @@
       });
       if (proc.ativs.length) processos.push(proc);
     });
+
+    // pré-classificação vinda do próprio card (ex.: área de certificação já pronta).
+    // Só semeia quando ainda não existe escolha salva — a decisão do Fred sempre vence.
+    var semeou = false;
+    processos.forEach(function (proc) {
+      proc.ativs.forEach(function (a) {
+        if (a.pre && !(dados[a.id] && dados[a.id].c)) { reg(a.id).c = a.pre; semeou = true; }
+      });
+    });
+    if (semeou) salvar();
 
     var grade = document.getElementById('fGrade');
     var paineis = document.getElementById('fPaineis');
