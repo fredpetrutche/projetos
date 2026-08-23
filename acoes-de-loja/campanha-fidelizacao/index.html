@@ -742,7 +742,7 @@
     <summary>Premissas e origem dos números</summary>
     <ul>
       <li><strong>Vendas de loja</strong>: <code>vendas_consumer_itens_historico_pedido</code> e <code>vendas_consumer_pedidos_individual</code>, Paulínia, jun+jul/2026, canais <code>caixa</code> + <code>balcao</code> + <code>mesa</code> — 2.411 pedidos. Os 426 de delivery ficam de fora.</li>
-      <li><strong>CMV</strong>: <code>cmv_produtos</code>, atualizado na base em 30–31/07/2026. Cookie R$ 5,01 sem os premium (mín. R$ 3,83 Churros · máx. R$ 8,71 Pistache). Fatia da Torta Perfeita R$ 9,04 — confere com a inteira (R$ 72,32 ÷ 8). Milkshake R$ 13,20 (R$ 12,04 de ingrediente + R$ 1,16 de copo/tampa/canudo; só existe copo de 440 ml).</li>
+      <li><strong>CMV</strong>: <code>cmv_produtos</code>, atualizado na base em 30–31/07/2026. Cookie R$ 5,01 sem os premium (mín. R$ 3,83 Churros · máx. R$ 8,71 Pistache). Fatia da Torta Perfeita R$ 9,04 — confere com a inteira (R$ 72,32 ÷ 8). Milkshake R$ 13,20 (R$ 12,04 de ingrediente + R$ 1,16 de copo/tampa/canudo; só existe copo de 440 ml). Bola de sorvete R$ 2,00 — é o item <code>Add de sorvete</code> que já existe no cardápio, vendido a R$ 5,90.</li>
       <li><strong>Venda extra por visita</strong>: medida nos mesmos pedidos, descontando o que o brinde substitui. Compre-e-ganhe = pedido − 2 cookies = R$ 14,03; preço fixo = pedido − 1 item = R$ 24,24.</li>
       <li><strong>Taxas naturais</strong>: vêm do vídeo, não dos seus dados — o PDV registra pedido, não pessoa. <strong>É a premissa que decide a campanha inteira</strong>, e o cadastro do QR (nome + celular) é o que vai substituí-la por medição. A pesquisa de setor coloca a 1ª → 2ª visita entre <strong>23% e 47%</strong> (Bloom Intelligence: 28,8%, e 77% dos clientes de primeira vez nunca voltam; coorte da Nation's Restaurant News: 472 de 1.000), e confirma só a última taxa — acima de 70% de 4ª visita para quem chegou à 3ª. A "regra das três visitas" é conceito reconhecido do setor, <strong>sem estudo de origem</strong>. Os quatro números estão em slider na seção 7.</li>
       <li><strong>Simples 8,0%</strong> (DAS ÷ faturamento de competência) · <strong>Royalties 4,0%</strong> (contrato) · <strong>Cartão 2,0%</strong> (premissa — a Stone liquida líquido) · <strong>Quebra 1,0%</strong> (premissa — não há registro no sistema).</li>
@@ -986,6 +986,7 @@
     cookiePago: 15.19, cookieTab: 17.34, cookieCMV: 5.0100,        // sem os 2 premium
     cookieCMVmax: 8.7100, cookieCMVmin: 3.8336,
     tortaPreco: 22.90, tortaCMV: 9.0400,
+    sorvPreco: 5.90, sorvCMV: 2.0000,        // "Add de sorvete" da ficha
     milkPreco: 28.66, milkCMV: 13.2000,
     // as taxas naturais mudaram de constante para premissa ajustável (ver S.bR*)
   };
@@ -1028,6 +1029,9 @@
   //   exGanhe (R$ 14,03) → pedido menos 2 cookies (o pago + o de brinde)
   //   exPreco (R$ 24,24) → pedido menos 1 item (o cookie pago; o brinde não seria comprado)
   const BRINDES = {
+    g_ck_srv: { nome: "Compre 1 cookie, ganhe 1 bola de sorvete", fam: "G", exKey: "exPreco",
+                exige: () => B.cookiePago, preco: 0, cmv: () => B.sorvCMV, tab: () => B.sorvPreco,
+                nota: ["good", "<strong>O brinde mais eficiente da lista.</strong> Custa só R$ 2,00 de CMV, então a visita ainda rende quase o de uma visita normal. O prêmio percebido é o menor (R$ 5,90) — é presente pequeno, e por isso o lugar dele é a primeira visita."] },
     g_ck_ck:  { nome: "Compre 1 cookie, ganhe 1 cookie", fam: "G", exKey: "exGanhe",
                 exige: () => B.cookiePago, preco: 0, cmv: () => B.cookieCMV, tab: () => B.cookieTab,
                 nota: ["good", "O clássico do vídeo. O cookie pago cobre o brinde e sobra — e ninguém precisa entender regra nenhuma."] },
