@@ -243,8 +243,8 @@
   /* sub-abas: dentro de um painel, mais leves que as de cima */
   .abas.abas2 { border-bottom: 1px solid var(--rule); margin-bottom: -.75rem; gap: .3rem; }
   .abas.abas2 button { background: none; border: none; border-bottom: 2px solid transparent;
-                       border-radius: 0; margin-bottom: -1px; padding: .5rem .8rem;
-                       font-size: .75rem; color: var(--ink-faint); }
+                       border-radius: 0; margin-bottom: -1px; padding: .55rem .9rem;
+                       font-size: .8125rem; color: var(--ink-soft); }
   .abas.abas2 button:hover { color: var(--ink); }
   .abas.abas2 button[aria-selected="true"] { background: none; color: var(--accent);
                                              border-bottom-color: var(--accent); }
@@ -318,15 +318,15 @@
   <div class="painel" id="painel-iniciacao" role="tabpanel" aria-labelledby="aba-ini">
 
   <div class="abas abas2" role="tablist" aria-label="Partes da campanha de iniciação">
-    <button type="button" role="tab" id="sub-a" aria-controls="sub-combinado" aria-selected="true" data-hash="combinado">
-      Combinado de balcão<span class="sub2">as decisões de atendimento</span></button>
-    <button type="button" role="tab" id="sub-b" aria-controls="sub-campanha" aria-selected="false" data-hash="campanha">
-      A campanha<span class="sub2">a lógica, os brindes e a conta</span></button>
+    <button type="button" role="tab" id="sub-b" aria-controls="sub-campanha" aria-selected="true" data-hash="campanha">
+      Montar a campanha<span class="sub2">escolha os brindes · a lógica e a conta</span></button>
     <button type="button" role="tab" id="sub-c" aria-controls="sub-resultado" aria-selected="false" data-hash="resultado">
       O resultado<span class="sub2">funil, safra e projeção</span></button>
+    <button type="button" role="tab" id="sub-a" aria-controls="sub-combinado" aria-selected="false" data-hash="combinado">
+      Combinado de balcão<span class="sub2">as decisões de atendimento</span></button>
   </div>
 
-  <div class="painel" id="sub-combinado" role="tabpanel" aria-labelledby="sub-a">
+  <div class="painel" id="sub-combinado" role="tabpanel" aria-labelledby="sub-a" hidden>
 
 
   <!-- ══════ 0. O que falta decidir ══════ -->
@@ -573,7 +573,7 @@
 
   </div><!-- /sub-combinado -->
 
-  <div class="painel" id="sub-campanha" role="tabpanel" aria-labelledby="sub-b" hidden>
+  <div class="painel" id="sub-campanha" role="tabpanel" aria-labelledby="sub-b">
 
   <!-- ══════ 1. Como funciona ══════ -->
   <section id="logica">
