@@ -154,6 +154,7 @@
   table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 34rem; font-variant-numeric: tabular-nums; }
   th, td { padding: .5rem .8rem; text-align: right; white-space: nowrap; }
   th:first-child, td:first-child { text-align: left; white-space: normal; }
+  thead th[colspan] { text-align: center; border-bottom: 1px solid var(--rule); }
   thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
   tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
   tbody tr.total td { border-top: 2px solid var(--ink); font-weight: 700; }
@@ -1043,23 +1044,23 @@
       <thead><tr><th>Oferta</th><th>Cliente<br>compra</th><th>Custo do<br>brinde</th><th>Margem da<br>visita</th><th>Custo vs<br>normal</th><th>Prêmio<br>percebido</th></tr></thead>
       <tbody>
         <tr>
-          <td>1 · Compre 1 cookie, ganhe 1 cookie <span class="tag warn">pronta</span></td>
+          <td>Compre 1 cookie, ganhe 1 cookie <span class="tag warn">pronta</span></td>
           <td>R$ 15,19</td><td>R$ 5,26</td><td class="pos">R$ 8,83</td><td class="neg">−R$ 10,02</td><td>R$ 17,34</td>
         </tr>
         <tr class="mark">
-          <td>2 · Compre 1 cookie, ganhe 1 bola de sorvete</td>
+          <td>Compre 1 cookie, ganhe 1 bola de sorvete</td>
           <td>R$ 15,19</td><td>R$ 2,22</td><td class="pos"><strong>R$ 16,80</strong></td><td class="neg">−R$ 2,05</td><td>R$ 5,90</td>
         </tr>
         <tr>
-          <td>3 · Milkshake a R$ 15 no dia da semana</td>
-          <td>—</td><td>varia por sabor</td><td colspan="3">ver a tabela abaixo</td>
+          <td>Milkshake — as três versões</td>
+          <td colspan="4">depende de exigir o cookie ou não — <a href="#turbinar-milkshake">ver a seção do milkshake</a></td>
         </tr>
       </tbody>
     </table></div>
     <div class="notes">
-      <div class="note-item"><span class="tag good">a oferta 2 é cinco vezes mais barata que a 1</span><span>
-        <strong>R$ 2,05 contra R$ 10,02</strong> de margem por resgate. Com a mesma verba de brinde você
-        atende <em>cinco vezes mais gente</em> — e ainda entrega o que a estação pede. O contrapeso é o
+      <div class="note-item"><span class="tag good">a bola de sorvete é cinco vezes mais barata</span><span>
+        <strong>R$ 2,05 contra R$ 10,02</strong> de margem por resgate, contra o ganhe-1-cookie. Com a mesma
+        verba de brinde você atende <em>cinco vezes mais gente</em> — e ainda entrega o que a estação pede. O contrapeso é o
         tamanho do prêmio: R$ 5,90 contra R$ 17,34, então ela chama menos no anúncio.
         <em>É a diferença entre um anúncio que converte muito por real e um que chama mais atenção.</em>
       </span></div>
@@ -1068,77 +1069,86 @@
 
   <!-- ══════ O milkshake ══════ -->
   <section id="turbinar-milkshake">
-    <h2>As três campanhas de milkshake<span class="hint">são ofertas diferentes, com contas diferentes</span></h2>
+    <h2>As três campanhas de milkshake<span class="hint">o cliente vê quase a mesma coisa; a conta é outra</span></h2>
     <p class="prose">
-      É fácil confundir as três porque o cliente vê quase a mesma coisa. Do lado de dentro elas não têm
-      nada a ver uma com a outra — a diferença está em <strong>o que a oferta exige</strong> e
-      <strong>quanto o cliente paga pelo milkshake</strong>.
+      São três ofertas diferentes. O que separa uma da outra é <strong>se ela exige a compra de um
+      cookie</strong> e <strong>quanto o cliente paga pelo milkshake</strong>.
     </p>
 
     <div class="tablewrap"><table>
-      <thead><tr><th>&nbsp;</th><th>1 · Ganhe o milkshake</th><th>2 · Leve por R$ 15</th><th>3 · Milkshake da semana</th></tr></thead>
+      <thead><tr>
+        <th>Campanha</th><th>O cliente precisa comprar</th><th>Paga pelo milkshake</th><th>Você garante alguma venda?</th>
+      </tr></thead>
       <tbody>
-        <tr><td>O que o cliente faz</td><td>compra 1 cookie</td><td>compra 1 cookie</td><td><strong>nada</strong></td></tr>
-        <tr><td>Paga pelo milkshake</td><td>R$ 0</td><td>R$ 15</td><td>R$ 15</td></tr>
-        <tr class="mark"><td>Tem piso garantido?</td><td>sim — o cookie</td><td>sim — o cookie</td><td><strong>não</strong></td></tr>
+        <tr><td><strong>Cookie + milkshake grátis</strong></td><td>1 cookie</td><td>nada — vai de brinde</td><td class="pos">sim, o cookie</td></tr>
+        <tr class="mark"><td><strong>Cookie + milkshake por R$ 15</strong></td><td>1 cookie</td><td>R$ 15</td><td class="pos">sim, o cookie</td></tr>
+        <tr><td><strong>Milkshake avulso por R$ 15</strong><br><span style="font-weight:400;color:var(--ink-faint)">a promo do dia da semana</span></td><td><strong>nada</strong></td><td>R$ 15</td><td class="neg"><strong>não</strong></td></tr>
       </tbody>
     </table></div>
 
-    <h3 class="sub">A margem da visita, campanha por campanha</h3>
+    <h3 class="sub">Quanto sobra em cada uma, por sabor</h3>
+    <p class="prose">
+      A conta é a <strong>margem da visita inteira</strong> — o que fica no caixa depois de tudo. A régua
+      é a <strong>visita normal, de R$ 18,85</strong>, que é o que essa mesma pessoa deixaria sem promoção
+      nenhuma. O milkshake avulso aparece em duas colunas porque o resultado dele depende de a pessoa
+      levar mais alguma coisa junto ou não.
+    </p>
     <div class="tablewrap"><table>
-      <thead><tr><th>Sabor</th><th>1 · Ganhe</th><th>2 · Leve por R$ 15</th><th>3 · Só o milkshake</th><th>3 · Milkshake + cesta</th></tr></thead>
+      <thead><tr>
+        <th rowspan="2">Sabor</th>
+        <th colspan="2">Exigindo a compra de 1 cookie</th>
+        <th colspan="2">Milkshake avulso a R$ 15</th>
+      </tr><tr>
+        <th>milkshake grátis</th><th>milkshake a R$ 15</th>
+        <th>e leva só ele</th><th>e compra mais junto</th>
+      </tr></thead>
       <tbody>
         <tr><td>Cookie</td><td class="pos">R$ 9,37</td><td class="pos"><strong>R$ 22,27</strong></td><td class="pos">R$ 3,26</td><td class="pos">R$ 14,95</td></tr>
         <tr><td>Brownie</td><td class="pos">R$ 7,09</td><td class="pos"><strong>R$ 19,99</strong></td><td class="pos">R$ 0,98</td><td class="pos">R$ 12,67</td></tr>
         <tr><td>Ninho</td><td class="pos">R$ 6,36</td><td class="pos"><strong>R$ 19,26</strong></td><td class="pos">R$ 0,25</td><td class="pos">R$ 11,94</td></tr>
         <tr><td>Red <span style="font-weight:400;color:var(--ink-faint)">— fora da promo</span></td><td class="pos">R$ 5,49</td><td class="pos">R$ 18,39</td><td class="neg">−R$ 0,62</td><td class="pos">R$ 11,06</td></tr>
         <tr><td>Pistache <span style="font-weight:400;color:var(--ink-faint)">— fora da promo</span></td><td class="neg">−R$ 1,27</td><td class="pos">R$ 11,63</td><td class="neg">−R$ 7,38</td><td class="pos">R$ 4,31</td></tr>
-        <tr class="total"><td>Visita normal, sem promo nenhuma</td><td colspan="4" style="text-align:left">R$ 18,85</td></tr>
+        <tr class="total"><td>Visita normal, sem promoção</td><td colspan="4" style="text-align:left">R$ 18,85 — é este número que cada coluna tem que bater</td></tr>
       </tbody>
     </table></div>
 
     <div class="notes">
-      <div class="note-item"><span class="tag bad">1 · Ganhe o milkshake — a mais cara das três</span><span>
-        Custa entre <strong>R$ 9,48 e R$ 13,36</strong> de margem por resgate. Dar um milkshake é o
-        brinde mais caro que existe no cardápio, porque o CMV dele é o maior de todos os produtos.
-        <em>Faz sentido como brinde de fidelização, na última visita, onde chega pouca gente</em> — e é
-        exatamente onde ele está na outra aba. <strong>Como oferta de anúncio, para volume, é a pior das
-        três.</strong> No pistache ela chega a dar prejuízo direto.
+      <div class="note-item"><span class="tag bad">milkshake de graça é o brinde mais caro que você tem</span><span>
+        Custa entre <strong>R$ 9,48 e R$ 13,36</strong> de margem por resgate, porque o CMV do milkshake
+        é o maior de todos os produtos da loja. <em>Como brinde da última visita da fidelização faz
+        sentido</em> — lá chega pouca gente, e o prêmio grande é o que puxa. <strong>Como oferta de
+        anúncio, para volume, é a pior das três</strong>, e no pistache ela dá prejuízo direto.
       </span></div>
-      <div class="note-item"><span class="tag good">2 · Leve por R$ 15 — a melhor das três, com folga</span><span>
-        <strong>Três sabores rendem MAIS que uma visita normal.</strong> Ela junta as duas coisas que
-        fazem a conta fechar: exige a compra do cookie a preço cheio <em>e</em> ainda cobra R$ 15 pelo
-        milkshake. Para o cliente, a percepção é quase igual à campanha 3 — mesmo preço no milkshake.
-        Para você, é outro negócio.
+      <div class="note-item"><span class="tag good">cookie + milkshake a R$ 15 é a melhor, com folga</span><span>
+        <strong>Três sabores rendem mais que uma visita normal.</strong> Ela junta as duas coisas que
+        fazem a conta fechar: exige o cookie a preço cheio <em>e</em> ainda cobra pelo milkshake. Para o
+        cliente, a percepção é quase igual à da promo avulsa — o milkshake sai por R$ 15 nas duas.
       </span></div>
-      <div class="note-item"><span class="tag warn">3 · Milkshake da semana — a única sem piso</span><span>
-        É a única em que o cliente <strong>não precisa comprar nada</strong> para resgatar. Se ele vier
-        só pelo milkshake, você fica com <strong>R$ 0,25 no Ninho</strong> — praticamente trabalhando de
-        graça: fez o anúncio, fez o milkshake, guardou vinte e cinco centavos. Se ele comprar a cesta
-        normal junto, sobe para R$ 11,94. <em>O resultado desta campanha não é uma escolha sua, é uma
-        aposta no comportamento do cliente.</em>
+      <div class="note-item"><span class="tag warn">o milkshake avulso é o único sem piso</span><span>
+        É a única em que o cliente <strong>não precisa comprar nada</strong>. Se ele vier só pelo
+        milkshake, sobram <strong>R$ 0,25 no Ninho</strong> — anúncio feito, milkshake feito, vinte e
+        cinco centavos no caixa. Se levar a cesta normal junto, sobe para R$ 11,94.
+        <em>O resultado dessa campanha não é escolha sua: é aposta no comportamento do cliente.</em>
       </span></div>
-      <div class="note-item"><span class="tag acc">a conta que separa a 2 da 3</span><span>
-        As duas cobram os mesmos R$ 15 do cliente. A diferença é o que a oferta <em>exige</em>:
+      <div class="note-item"><span class="tag acc">a conta que separa as duas de R$ 15</span><span>
+        As duas cobram <strong>os mesmos R$ 15</strong> do cliente — para ele, é a mesma oferta.
+        A diferença é o que você exige em troca:
         <br><br>
-        <strong>Exigir o cookie vale R$ 7,32</strong> de margem garantida (os R$ 15,19 do cookie × 48,2%).
-        <strong>A cesta que a pessoa leva junto vale R$ 11,69</strong> — mas essa você não controla.
+        <strong>Exigir o cookie vale R$ 7,32</strong> de margem garantida.
+        <strong>A cesta que a pessoa leva junto vale R$ 11,69</strong> — só que essa você não controla.
         <br><br>
-        Na campanha 2 você <em>garante</em> os R$ 7,32 e ainda tem chance da cesta. Na 3 você não garante
-        nada. <strong>Mesma oferta aos olhos do cliente, R$ 19 de diferença por resgate no pior caso.</strong>
-      </span></div>
-      <div class="note-item"><span class="tag warn">quando a campanha 3 ainda faz sentido</span><span>
-        Se ela trouxer <strong>gente que não viria de jeito nenhum</strong>, R$ 0,25 é melhor que zero —
-        e o objetivo aqui é justamente reverter uma queda de 50%. Mas é a mesma pergunta de sempre:
-        <em>está criando visita ou descontando visita que já aconteceria?</em> Com uma diferença ruim —
-        nas outras duas, se a resposta for &ldquo;descontando&rdquo;, você pelo menos vendeu um cookie.
-        Nesta, não vendeu nada.
+        Exigindo o cookie você <em>garante</em> os R$ 7,32 e ainda pode ganhar a cesta. No avulso você
+        não garante nada. <strong>Mesma oferta aos olhos do cliente, até R$ 19 de diferença por
+        resgate.</strong>
+        <br><br>
+        E se a oferta acabar descontando alguém que viria de qualquer jeito: exigindo o cookie você
+        <em>pelo menos vendeu um cookie</em>; no avulso, não vendeu nada.
       </span></div>
     </div>
 
     <h3 class="sub">O texto da oferta recomendada</h3>
     <div class="oferta-box">
-      <span class="oferta-rot">campanha 2 — a que a conta aprova</span>
+      <span class="oferta-rot">cookie + milkshake por R$ 15 — a que a conta aprova</span>
       <span class="oferta-txt">Compre 1 cookie e leve o milkshake por <strong>R$ 15</strong><sup>*</sup></span>
       <span class="oferta-ast">* Milkshakes participantes: <strong>Cookie, Brownie e Ninho</strong>.
       Válido só na loja — não vale no delivery. Um por pessoa. Não acumula com outra promoção.</span>
@@ -1151,22 +1161,20 @@
         margem</em>, e é isso que a exclusão comprou: uma oferta que não precisa ser vigiada.
       </span></div>
       <div class="note-item"><span class="tag warn">o sabor mais atraente é o mais magro</span><span>
-        O <strong>Ninho</strong> é o que mais chama (R$ 9,90 de desconto, 40%) e o de menor sobra
-        (R$ 0,25 no item). O <strong>Cookie</strong> é o oposto: chama menos (28%) e rende treze vezes
-        mais. As pessoas vão para o maior desconto, então a média real puxa para baixo —
-        <em>se quiser mexer no mix, é o Cookie que merece o destaque na peça</em>, e ele ainda tem o
-        nome da casa.
+        O <strong>Ninho</strong> é o que mais chama (R$ 9,90 de desconto, 40%) e o de menor sobra.
+        O <strong>Cookie</strong> é o oposto: chama menos (28%) e rende treze vezes mais no item.
+        As pessoas vão para o maior desconto, então a média real puxa para baixo — <em>se quiser mexer
+        no mix, é o Cookie que merece o destaque na peça</em>, e ele ainda tem o nome da casa.
       </span></div>
       <div class="note-item"><span class="tag acc">e ela respeita a regra da casa</span><span>
         Milkshake solto a R$ 15 é <em>desconto</em> — a coisa que a campanha decidiu não fazer. Casado
         com o cookie vira <strong>compre-e-leve</strong>: exige compra a preço cheio e o benefício vem em
-        cima. <em>A campanha 3, sozinha, é a única das três que quebra a regra.</em>
+        cima. <em>O milkshake avulso é a única das três que quebra a regra.</em>
       </span></div>
       <div class="note-item"><span class="tag warn">a ressalva honesta</span><span>
-        Todas as margens de visita herdam a premissa de <strong>venda extra medida</strong> do resto da
-        página (R$ 24,24), medida em pedidos de jun+jul e <em>não em pedidos com milkshake
-        promocional</em>. O item do milkshake isolado (a coluna &ldquo;só o milkshake&rdquo;) não depende
-        dessa premissa — é conta fechada.
+        As margens de visita herdam a premissa de <strong>venda extra medida</strong> do resto da página
+        (R$ 24,24), medida em pedidos de jun+jul e <em>não em pedidos com milkshake promocional</em>.
+        A coluna &ldquo;e leva só ele&rdquo; não depende dessa premissa — é conta fechada.
       </span></div>
     </div>
   </section>
