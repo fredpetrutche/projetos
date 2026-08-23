@@ -250,6 +250,16 @@
                                              border-bottom-color: var(--accent); }
   .abas.abas2 .sub2 { font-size: .625rem; }
 
+  /* ─── caixa com o texto da oferta ─── */
+  .oferta-box { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 3px;
+                padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
+  .oferta-rot { font-family: var(--mono); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+                font-weight: 700; color: var(--accent); }
+  .oferta-txt { font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-weight: 600; color: var(--ink);
+                line-height: 1.3; letter-spacing: -.01em; }
+  .oferta-ast { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
+                border-top: 1px dashed var(--rule); padding-top: .5rem; }
+
   /* ─── regras do ticket ─── */
   .regras { margin: .55rem 0 .1rem; padding: 0; list-style: none; display: grid; gap: .45rem; }
   .regras li { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
@@ -1058,71 +1068,56 @@
 
   <!-- ══════ O milkshake ══════ -->
   <section id="turbinar-milkshake">
-    <h2>O milkshake<span class="hint">decidido em 23/08 — e a correção do pistache</span></h2>
-    <p class="prose">
-      <strong>R$ 15 não é o preço de custo</strong> — ele muda por sabor, e a conta precisa descontar
-      Simples, royalties e cartão antes de comparar. Segue a tabela com a decisão já aplicada.
-    </p>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Milkshake</th><th>CMV</th><th>Menu</th><th>Na promo</th><th>Sobra por unidade</th><th>Empata a partir de</th></tr></thead>
-      <tbody>
-        <tr><td>Cookie</td><td>R$ 9,35</td><td>R$ 20,90</td><td>R$ 15,00</td><td class="pos"><strong>+R$ 3,26</strong></td><td>R$ 11,21</td></tr>
-        <tr><td>Brownie</td><td>R$ 11,60</td><td>R$ 22,90</td><td>R$ 15,00</td><td class="pos">+R$ 0,98</td><td>R$ 13,86</td></tr>
-        <tr><td>Ninho</td><td>R$ 12,33</td><td>R$ 24,90</td><td>R$ 15,00</td><td class="pos">+R$ 0,25</td><td>R$ 14,71</td></tr>
-        <tr class="mark"><td>Red</td><td>R$ 13,19</td><td>R$ 24,90</td><td>R$ 15,00</td><td class="neg">−R$ 0,62</td><td>R$ 15,72</td></tr>
-        <tr class="mark"><td><strong>Pistache</strong></td><td>R$ 19,89</td><td>R$ 26,90</td><td><strong>R$ 20,00</strong></td><td class="neg"><strong>−R$ 3,08</strong></td><td><strong>R$ 23,59</strong></td></tr>
-      </tbody>
-    </table></div>
-    <div class="notes">
-      <div class="note-item"><span class="tag good">decidido</span><span>
-        <strong>O Red entra a R$ 15 e a perda de R$ 0,62 é assumida</strong> — decisão do Fred em
-        23/08/2026. É baixa e o sabor puxa gente; <em>vale mais ter a oferta redonda para o cliente do
-        que proteger sessenta centavos</em>. Cookie, Brownie e Ninho pagam essa conta com folga.
-      </span></div>
-      <div class="note-item"><span class="tag bad">mas o pistache a R$ 20 ainda perde</span><span>
-        O instinto de cobrar mais pelo premium está certo — <strong>o valor é que não alcança.</strong>
-        A R$ 20 o pistache deixa <strong>−R$ 3,08</strong> por unidade, cinco vezes a perda do Red.
-        Ele só empata em <strong>R$ 23,59</strong>, porque o CMV dele é R$ 19,89 — quase o preço que
-        você ia cobrar.
-        <br><br>
-        Três saídas: <strong>R$ 24</strong> (empata com folga mínima, +R$ 0,36) · <strong>deixar o
-        pistache fora da promo</strong>, no preço de menu de R$ 26,90 · ou <em>assumir a perda de
-        propósito</em>, como no Red — só que aqui ela é cinco vezes maior e o sabor vende sozinho.
-      </span></div>
+    <h2>A oferta do milkshake<span class="hint">fechada em 23/08/2026</span></h2>
+
+    <div class="oferta-box">
+      <span class="oferta-rot">o texto da oferta</span>
+      <span class="oferta-txt">Compre 1 cookie e leve o milkshake por <strong>R$ 15</strong><sup>*</sup></span>
+      <span class="oferta-ast">* Milkshakes participantes: <strong>Cookie, Brownie e Ninho</strong>.
+      Válido só na loja — não vale no delivery. Um por pessoa. Não acumula com outra promoção.</span>
     </div>
 
-    <h3 class="sub">Compre 1 cookie e leve o milkshake por R$ 15 — a versão que muda tudo</h3>
     <p class="prose">
-      Amarrar a oferta na compra de um cookie transforma a conta. Aqui é a
-      <strong>margem da visita inteira</strong>, pela mesma fórmula do resto da página, comparada com os
-      <strong>R$ 18,85</strong> de uma visita normal:
+      Três sabores participam. <strong>Red e Pistache ficam de fora</strong> — os dois davam prejuízo a
+      R$ 15, e o pistache não fechava nem a R$ 20, porque o CMV dele sozinho é R$ 19,89. Eles seguem no
+      preço de menu.
     </p>
+
     <div class="tablewrap"><table>
-      <thead><tr><th>Oferta</th><th>Milkshake de graça</th><th>Milkshake por R$ 15</th><th>vs visita normal</th></tr></thead>
+      <thead><tr><th>Sabor</th><th>CMV</th><th>Menu</th><th>Desconto que o cliente vê</th><th>Sobra no milkshake</th><th>Margem da visita</th></tr></thead>
       <tbody>
-        <tr><td>Cookie + milkshake Cookie</td><td>R$ 9,37</td><td class="pos"><strong>R$ 22,27</strong></td><td class="pos">+R$ 3,42</td></tr>
-        <tr><td>Cookie + milkshake Brownie</td><td>R$ 7,09</td><td class="pos"><strong>R$ 19,99</strong></td><td class="pos">+R$ 1,14</td></tr>
-        <tr><td>Cookie + milkshake Ninho</td><td>R$ 6,36</td><td class="pos">R$ 19,26</td><td class="pos">+R$ 0,41</td></tr>
-        <tr><td>Cookie + milkshake Red</td><td>R$ 5,49</td><td class="pos">R$ 18,39</td><td class="neg">−R$ 0,46</td></tr>
+        <tr><td>Cookie</td><td>R$ 9,35</td><td>R$ 20,90</td><td>R$ 5,90 · 28%</td><td class="pos">+R$ 3,26</td><td class="pos"><strong>R$ 22,27</strong></td></tr>
+        <tr><td>Brownie</td><td>R$ 11,60</td><td>R$ 22,90</td><td>R$ 7,90 · 34%</td><td class="pos">+R$ 0,98</td><td class="pos"><strong>R$ 19,99</strong></td></tr>
+        <tr><td>Ninho</td><td>R$ 12,33</td><td>R$ 24,90</td><td>R$ 9,90 · 40%</td><td class="pos">+R$ 0,25</td><td class="pos"><strong>R$ 19,26</strong></td></tr>
+        <tr class="total"><td>Média dos três</td><td>—</td><td>—</td><td>—</td><td class="pos">+R$ 1,50</td><td class="pos"><strong>R$ 20,51</strong></td></tr>
+        <tr><td>Visita normal, sem oferta</td><td>—</td><td>—</td><td>—</td><td>—</td><td>R$ 18,85</td></tr>
       </tbody>
     </table></div>
+
     <div class="notes">
-      <div class="note-item"><span class="tag good">cobrar os R$ 15 vale R$ 12,90 por resgate</span><span>
-        É a diferença exata entre dar o milkshake e vendê-lo a R$ 15, em qualquer sabor. E ela vira o
-        sinal da conta: <strong>três dos quatro sabores rendem MAIS que uma visita normal</strong>, e o
-        Red praticamente empata. <em>A oferta se paga sozinha</em> — não é promoção que custa margem, é
-        promoção que traz gente e ainda rende.
+      <div class="note-item"><span class="tag good">com três sabores, a oferta não custa nada</span><span>
+        <strong>Nenhum sabor participante rende menos que uma visita normal.</strong> A pior hipótese
+        possível — todo mundo pedindo Ninho — ainda dá <strong>R$ 19,26 contra R$ 18,85</strong>.
+        <em>Não existe cenário em que esta promoção custe margem</em>, e é isso que tirar o Red e o
+        Pistache comprou: uma oferta que não precisa ser vigiada.
       </span></div>
-      <div class="note-item"><span class="tag warn">a ressalva honesta</span><span>
-        Estes números herdam a mesma premissa de <strong>venda extra medida</strong> do resto da página
-        (R$ 24,24 por visita). Ela foi medida em pedidos de jun+jul, <em>não em pedidos com milkshake
-        promocional</em> — se quem vem pela oferta comprar menos junto, a margem cai. É a premissa a
-        conferir na primeira semana.
+      <div class="note-item"><span class="tag warn">o sabor mais atraente é o mais magro</span><span>
+        Repare na coluna do desconto: o <strong>Ninho é o que mais chama</strong> (R$ 9,90 de desconto,
+        40%) e é justamente o de menor sobra (R$ 0,25). O <strong>Cookie é o oposto</strong>: chama
+        menos (28%) e rende treze vezes mais. <em>A média real vai ficar mais perto do Ninho que dos
+        R$ 20,51</em> — as pessoas vão para o maior desconto. Não é problema, porque o piso é positivo;
+        mas se quiser puxar o mix, é o Cookie que merece o destaque no material.
       </span></div>
       <div class="note-item"><span class="tag acc">e ela respeita a regra da casa</span><span>
-        Milkshake solto a R$ 15 é <em>desconto</em> — a coisa que a campanha decidiu não fazer.
-        <strong>Casado com o cookie, vira compre-e-leve</strong>: exige compra a preço cheio, e o
-        benefício vem em cima. Mesma percepção de oferta, e a regra continua de pé.
+        Milkshake solto a R$ 15 seria <em>desconto</em> — a coisa que a campanha decidiu não fazer.
+        <strong>Casado com o cookie vira compre-e-leve</strong>: exige compra a preço cheio e o
+        benefício vem em cima. Mesma percepção de oferta para o cliente, regra da casa de pé.
+      </span></div>
+      <div class="note-item"><span class="tag warn">a ressalva honesta</span><span>
+        A margem da visita herda a premissa de <strong>venda extra medida</strong> do resto da página
+        (R$ 24,24), medida em pedidos de jun+jul e <em>não em pedidos com milkshake promocional</em>.
+        Se quem vem pela oferta comprar menos junto, os números caem. É a primeira coisa a conferir na
+        semana 1 — e o item do milkshake, isolado, continua positivo em qualquer cenário.
       </span></div>
     </div>
   </section>
@@ -1136,10 +1131,9 @@
       <li><b>Qual oferta leva a verba maior</b> — a pronta (cookie), a barata e sazonal (sorvete), ou o
       dia do milkshake. Elas não são excludentes, mas competem pelo mesmo dinheiro e pela mesma atenção
       do balcão.</li>
-      <li><b>Se o milkshake sai avulso ou casado com o cookie.</b> É a decisão que mais mexe na margem
-      desta aba.</li>
       <li><b>Qual dia da semana</b> leva o milkshake — de preferência o mais fraco, porque aí a oferta
-      enche buraco em vez de descontar movimento que já existiria.</li>
+      enche buraco em vez de descontar movimento que já existiria. <em>É a última peça que falta na
+      oferta do milkshake; o resto está fechado.</em></li>
       <li><b>Se estas ofertas conversam com a campanha de fidelização</b> ou correm por fora. Cliente que
       entra pelo anúncio é cliente novo — <em>é candidato natural à trilha de iniciação</em>, e seria
       desperdício ele entrar e sair sem cadastro.</li>
