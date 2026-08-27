@@ -147,6 +147,28 @@
                 color: var(--accent); font-weight: 700; margin-bottom: .3rem; }
   .copy .ctxt { font-size: .8125rem; white-space: pre-wrap; }
 
+  .subnav { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .sub-btn { font-family: var(--mono); font-size: .6875rem; letter-spacing: .09em; text-transform: uppercase;
+             font-weight: 600; cursor: pointer; background: var(--surface); border: 1px solid var(--rule);
+             border-radius: .4rem; padding: .4rem .75rem; color: var(--ink-soft); }
+  .sub-btn:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .sub-btn.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  #vistaHoje, #vistaProximos, #vistaArquivo { display: flex; flex-direction: column; gap: 1.25rem; }
+  #vistaHoje[hidden], #vistaProximos[hidden], #vistaArquivo[hidden] { display: none; }
+  .alerta-perdidos { background: var(--bad-bg); border-left: 3px solid var(--bad); border-radius: 0 .4rem .4rem 0;
+                     padding: .75rem .9rem; font-size: .875rem; }
+  .alerta-perdidos strong { color: var(--bad); }
+  .arq-dia { border: 1px solid var(--rule); border-radius: .6rem; overflow: hidden; }
+  .arq-cab { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; background: var(--surface-2);
+             padding: .55rem .8rem; font-family: var(--mono); font-size: .75rem; }
+  .arq-linha { display: flex; align-items: center; gap: .6rem; padding: .45rem .8rem;
+               border-top: 1px solid var(--rule-soft); font-size: .8125rem; }
+  .arq-linha img { width: 2rem; border-radius: .25rem; display: block; }
+  .arq-linha .qq { flex: 1; min-width: 0; color: var(--ink-soft); }
+  .selo { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase;
+          font-weight: 700; padding: .12rem .45rem; border-radius: .3rem; }
+  .selo.saiu { background: var(--good-bg); color: var(--good); border: 1px solid var(--good); }
+  .selo.nao { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad); }
   .sinc { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase;
           font-weight: 600; padding: .1rem .45rem; border-radius: .3rem; border: 1px solid transparent; }
   .sinc.ok { color: var(--good); border-color: var(--good); background: var(--good-bg); }
@@ -313,16 +335,17 @@
   <!-- ================= AGENDAMENTO ================= -->
   <div class="tab-panel" data-panel="agendamento" hidden>
     <section>
-      <h2>Grade<span class="sinc" id="sincEstado">sincronizado</span>
+      <h2>Agendamento<span class="sinc" id="sincEstado">sincronizado</span>
           <span class="cont">34 de 42 slots preenchidos</span></h2>
-      <p class="lede">Clique num dia para ver os três horários. Dentro do dia, clique no
-         horário de um post para movê-lo para outro dia ou horário.</p>
-      <div class="grade-dias" id="gradeDias"></div>
+      <div class="subnav">
+        <button class="sub-btn active" data-vista="hoje">Hoje</button>
+        <button class="sub-btn" data-vista="proximos">Próximos dias</button>
+        <button class="sub-btn" data-vista="arquivo">Arquivo</button>
+      </div>
     </section>
-    <div id="visor">
-      <div class="visor-vazio">Escolha um dia acima.</div>
-      <div id="paineis"></div>
-    </div>
+    <div id="vistaHoje"></div>
+    <div id="vistaProximos" hidden></div>
+    <div id="vistaArquivo" hidden></div>
   </div>
 
   <!-- ================= TBT ================= -->
@@ -560,32 +583,30 @@
     return linha;
   }
 
-  /* ---------- desenho ---------- */
-  function renderGrade() {
-    var alvo = document.getElementById('gradeDias');
-    alvo.innerHTML = datas().map(function (data) {
-      var linha = doDia(data), cheios = linha.filter(Boolean).length;
-      var ruins = linha.filter(function (p) { return p && /^360x/.test(p.res); }).length;
-      var c = climaDe(data);
-      var postados = 0, agendados = 0;
-      linha.forEach(function (p) {
-        if (!p) return;
-        var m = estado.marcas[p.sc] || {};
-        if (m.postado) postados++; else if (m.agendado) agendados++;
-      });
-      var resumo = postados ? postados + ' postado' + (postados > 1 ? 's' : '')
-                 : agendados ? agendados + ' agendado' + (agendados > 1 ? 's' : '') : '';
-      return '<button class="dia-btn" data-dia="' + data + '">'
-        + '<span class="dnum">' + brl(data) + '</span>'
-        + '<span class="dsem">' + diaSemana(data) + '</span>'
-        + '<span class="dtemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
-        + '<span class="dcheio' + (cheios < HOR.length ? ' falta' : '') + '">'
-        + cheios + '/' + HOR.length + ' slots</span>'
-        + (ruins ? '<span class="dcheio ruim">' + ruins + ' em 360p</span>' : '')
-        + '<span class="dmarca">' + resumo + '</span></button>';
-    }).join('');
+  /* ---------- desenho ----------
+     A tela principal é só o dia de hoje: é o que precisa sair. Os próximos dias
+     ficam numa vista à parte, e o que já passou vai pro arquivo. Passou sem sair
+     não some no arquivo caladinho - vira alerta em cima do dia de hoje. */
+  function hojeISO() {
+    try {
+      return new Date().toLocaleDateString('sv-SE', { timeZone: 'America/Sao_Paulo' });
+    } catch (e) { return new Date().toISOString().slice(0, 10); }
   }
+  function saiu(p) { return !!(estado.marcas[p.sc] || {}).postado; }
 
+  function cabecalhoDia(data) {
+    var linha = doDia(data), cheios = linha.filter(Boolean).length, c = climaDe(data);
+    var cls = c.meio == null ? '' : (c.meio <= LIMIAR ? 'frio' : 'calor');
+    var diz = cls === 'frio'
+      ? 'Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.'
+      : cls === 'calor'
+      ? 'Dia quente pede refrescante — milkshake, sorvete, bebida gelada.'
+      : 'Temperatura indisponível.';
+    return '<h2>' + brl(data) + ' · ' + diaLongo(data) + ' · '
+      + '<span class="htemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
+      + '<span class="cont">' + cheios + ' de ' + HOR.length + ' slots</span></h2>'
+      + '<div class="banda ' + cls + '"><span class="bdiz">' + diz + '</span></div>';
+  }
   function slotHTML(data, i, p) {
     var hora = HOR[i];
     if (!p) {
@@ -621,41 +642,131 @@
       + gancho + copys + marcas + '</div></div>';
   }
 
-  function renderPainel(data) {
-    var linha = doDia(data), cheios = linha.filter(Boolean).length, c = climaDe(data);
-    var cls = c.meio == null ? '' : (c.meio <= LIMIAR ? 'frio' : 'calor');
-    var diz = cls === 'frio'
-      ? 'Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.'
-      : cls === 'calor'
-      ? 'Dia quente pede refrescante — milkshake, sorvete, bebida gelada.'
-      : 'Temperatura indisponível.';
-    document.getElementById('paineis').innerHTML =
-      '<div class="dia-painel" data-dia="' + data + '">'
-      + '<h2>' + brl(data) + ' · ' + diaLongo(data) + ' · '
-      + '<span class="htemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
-      + '<span class="cont">' + cheios + ' de ' + HOR.length + ' slots</span></h2>'
-      + '<div class="banda ' + cls + '"><span class="bdiz">' + diz + '</span></div>'
-      + linha.map(function (p, i) { return slotHTML(data, i, p); }).join('')
-      + '</div>';
+  function painelDia(data) {
+    return '<div class="dia-painel" data-dia="' + data + '">' + cabecalhoDia(data)
+      + doDia(data).map(function (p, i) { return slotHTML(data, i, p); }).join('') + '</div>';
+  }
+
+  function perdidos() {
+    var hoje = hojeISO(), fora = [];
+    D.posts.forEach(function (p) {
+      var q = pos(p);
+      if (q.data < hoje && !saiu(p)) { fora.push({ post: p, data: q.data, slot: q.slot }); }
+    });
+    return fora.sort(function (a, b) { return a.data < b.data ? -1 : 1; });
+  }
+
+  function renderHoje() {
+    var hoje = hojeISO(), alvo = document.getElementById('vistaHoje');
+    var ds = datas(), html = '';
+    var fora = perdidos();
+    if (fora.length) {
+      html += '<div class="alerta-perdidos"><strong>' + fora.length + ' post'
+        + (fora.length > 1 ? 's passaram' : ' passou') + ' sem sair.</strong> '
+        + fora.map(function (f) { return brl(f.data) + ' · ' + esc(f.post.cat); }).join(' · ')
+        + ' — está no Arquivo, marcado como não postado.</div>';
+    }
+    if (ds.indexOf(hoje) === -1) {
+      var futuros = ds.filter(function (d) { return d > hoje; });
+      html += '<div class="visor-vazio">Hoje (' + brl(hoje) + ') não tem nada agendado.'
+        + (futuros.length ? ' O próximo dia com post é ' + brl(futuros[0]) + '.' : '')
+        + '</div>';
+    } else {
+      html += '<section>' + painelDia(hoje) + '</section>';
+    }
+    alvo.innerHTML = html;
+  }
+
+  function cartaoDia(data) {
+    var linha = doDia(data), cheios = linha.filter(Boolean).length;
+    var ruins = linha.filter(function (p) { return p && /^360x/.test(p.res); }).length;
+    var c = climaDe(data), postados = 0, agendados = 0;
+    linha.forEach(function (p) {
+      if (!p) return;
+      var m = estado.marcas[p.sc] || {};
+      if (m.postado) postados++; else if (m.agendado) agendados++;
+    });
+    var resumo = postados ? postados + ' postado' + (postados > 1 ? 's' : '')
+               : agendados ? agendados + ' agendado' + (agendados > 1 ? 's' : '') : '';
+    return '<button class="dia-btn" data-dia="' + data + '">'
+      + '<span class="dnum">' + brl(data) + '</span>'
+      + '<span class="dsem">' + diaSemana(data) + '</span>'
+      + '<span class="dtemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
+      + '<span class="dcheio' + (cheios < HOR.length ? ' falta' : '') + '">'
+      + cheios + '/' + HOR.length + ' slots</span>'
+      + (ruins ? '<span class="dcheio ruim">' + ruins + ' em 360p</span>' : '')
+      + '<span class="dmarca">' + resumo + '</span></button>';
   }
 
   var diaAberto = null;
-  function abrirDia(data) {
-    diaAberto = data;
-    document.querySelectorAll('.dia-btn').forEach(function (b) {
-      b.classList.toggle('ativo', b.dataset.dia === data);
-    });
-    document.querySelector('.visor-vazio').hidden = true;
-    renderPainel(data);
-  }
-  function redesenhar() {
-    renderGrade();
+  function renderProximos() {
+    var hoje = hojeISO(), alvo = document.getElementById('vistaProximos');
+    var ds = datas().filter(function (d) { return d > hoje; });
+    if (!ds.length) { alvo.innerHTML = '<div class="visor-vazio">Nada agendado daqui pra frente.</div>'; return; }
+    alvo.innerHTML = '<section><p class="lede">Clique num dia para abrir os três horários. '
+      + 'Dentro do dia, o horário de cada post é um botão para movê-lo.</p>'
+      + '<div class="grade-dias">' + ds.map(cartaoDia).join('') + '</div></section>'
+      + '<div id="visorProx">' + (diaAberto && ds.indexOf(diaAberto) !== -1
+          ? painelDia(diaAberto) : '<div class="visor-vazio">Escolha um dia acima.</div>') + '</div>';
     if (diaAberto) {
-      renderPainel(diaAberto);
-      document.querySelectorAll('.dia-btn').forEach(function (b) {
+      alvo.querySelectorAll('.dia-btn').forEach(function (b) {
         b.classList.toggle('ativo', b.dataset.dia === diaAberto);
       });
     }
+  }
+
+  function renderArquivo() {
+    var hoje = hojeISO(), alvo = document.getElementById('vistaArquivo');
+    var ds = datas().filter(function (d) { return d < hoje; }).reverse();
+    if (!ds.length) { alvo.innerHTML = '<div class="visor-vazio">Ainda não passou nenhum dia da grade.</div>'; return; }
+    alvo.innerHTML = '<section><p class="lede">Dias que já passaram. O selo diz se o post saiu '
+      + 'de fato — não postado é buraco na grade, não item concluído.</p>'
+      + ds.map(function (data) {
+          var linha = doDia(data).filter(Boolean);
+          var ok = linha.filter(saiu).length;
+          return '<div class="arq-dia"><div class="arq-cab"><strong>' + brl(data) + '</strong> · '
+            + diaLongo(data) + '<span style="margin-left:auto">' + ok + '/' + linha.length
+            + ' postados</span></div>'
+            + linha.map(function (p) {
+                var q = pos(p);
+                return '<div class="arq-linha">'
+                  + (p.capa ? '<img src="capas/' + esc(p.sc) + '.png" alt="" loading="lazy">' : '')
+                  + '<span class="tag">' + HOR[q.slot - 1] + '</span>'
+                  + '<span class="tag cat">' + esc(p.cat) + '</span>'
+                  + '<span class="qq">' + esc(p.legenda.slice(0, 70)) + '</span>'
+                  + '<span class="selo ' + (saiu(p) ? 'saiu">postado' : 'nao">não postado')
+                  + '</span></div>';
+              }).join('')
+            + '</div>';
+        }).join('') + '</section>';
+  }
+
+  var vista = 'hoje';
+  function abrirVista(nome) {
+    vista = nome;
+    document.querySelectorAll('.sub-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.vista === nome);
+    });
+    ['hoje', 'proximos', 'arquivo'].forEach(function (v) {
+      var el = document.getElementById('vista' + v.charAt(0).toUpperCase() + v.slice(1));
+      if (el) { el.hidden = v !== nome; }
+    });
+    redesenhar();
+  }
+  document.querySelectorAll('.sub-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirVista(b.dataset.vista); });
+  });
+
+  function abrirDia(data) {
+    diaAberto = data;
+    renderProximos();
+    var el = document.querySelector('#visorProx .dia-painel');
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+  function redesenhar() {
+    if (vista === 'hoje') { renderHoje(); }
+    else if (vista === 'proximos') { renderProximos(); }
+    else { renderArquivo(); }
   }
 
   /* ---------- mover um post ---------- */
@@ -775,7 +886,7 @@
   }
 
   lerLocal();
-  renderGrade();
+  abrirVista('hoje');
   situacao(pendencias() ? 'indo' : 'ok', pendencias() ? 'salvando…' : 'sincronizado');
   puxar().then(function () { empurrar(); });
   ligarSincronia();
