@@ -147,6 +147,11 @@
                 color: var(--accent); font-weight: 700; margin-bottom: .3rem; }
   .copy .ctxt { font-size: .8125rem; white-space: pre-wrap; }
 
+  .sinc { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase;
+          font-weight: 600; padding: .1rem .45rem; border-radius: .3rem; border: 1px solid transparent; }
+  .sinc.ok { color: var(--good); border-color: var(--good); background: var(--good-bg); }
+  .sinc.indo { color: var(--warn); border-color: var(--warn); background: var(--warn-bg); }
+  .sinc.erro { color: var(--bad); border-color: var(--bad); background: var(--bad-bg); }
   .hora-btn { font: inherit; font-family: var(--mono); font-size: .8125rem; font-weight: 700;
               cursor: pointer; background: var(--surface-2); color: inherit;
               border: 1px solid var(--rule); border-radius: .35rem; padding: .1rem .4rem; }
@@ -308,7 +313,8 @@
   <!-- ================= AGENDAMENTO ================= -->
   <div class="tab-panel" data-panel="agendamento" hidden>
     <section>
-      <h2>Grade<span class="cont">34 de 42 slots preenchidos</span></h2>
+      <h2>Grade<span class="sinc" id="sincEstado">sincronizado</span>
+          <span class="cont">34 de 42 slots preenchidos</span></h2>
       <p class="lede">Clique num dia para ver os três horários. Dentro do dia, clique no
          horário de um post para movê-lo para outro dia ou horário.</p>
       <div class="grade-dias" id="gradeDias"></div>
@@ -394,14 +400,18 @@
   var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYWp2eHlpeXF4b3RpeWRreWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NTgzNzcsImV4cCI6MjEwMjAzNDM3N30.vfHCb8BRcshufnp_7eAt9ch4aVEMpcbVA5u16IS0Kao';
   var ID = 'volume-postagem-marcacoes';
   var H = { apikey: ANON, Authorization: 'Bearer ' + ANON, 'Content-Type': 'application/json' };
+  var INTERVALO = 10000;   // relê o servidor a cada 10s enquanto a aba estiver à vista
+
   var estado = { marcas: {}, mudancas: {} };
+  /* Chaves alteradas aqui e ainda não confirmadas pelo servidor. Sem isso, uma
+     leitura que chega no meio do caminho desfaz o que acabou de ser clicado. */
+  var sujas = { marcas: {}, mudancas: {} };
 
   function normalizar(bruto) {
     if (!bruto || typeof bruto !== 'object') { return { marcas: {}, mudancas: {} }; }
     if (bruto.marcas || bruto.mudancas) {
       return { marcas: bruto.marcas || {}, mudancas: bruto.mudancas || {} };
     }
-    // formato antigo: chave "data|slot". Converte pro código do post e não perde nada.
     var marcas = {};
     Object.keys(bruto).forEach(function (k) {
       var pt = k.split('|');
@@ -413,25 +423,118 @@
     });
     return { marcas: marcas, mudancas: {} };
   }
+
   function lerLocal() {
-    try { return normalizar(JSON.parse(localStorage.getItem(LOCAL) || '{}')); }
-    catch (e) { return { marcas: {}, mudancas: {} }; }
+    try {
+      var g = JSON.parse(localStorage.getItem(LOCAL) || '{}');
+      estado = normalizar(g.estado || g);
+      sujas = (g.sujas && g.sujas.marcas) ? g.sujas : { marcas: {}, mudancas: {} };
+    } catch (e) { estado = { marcas: {}, mudancas: {} }; }
   }
   function gravarLocal() {
-    try { localStorage.setItem(LOCAL, JSON.stringify(estado)); } catch (e) {}
+    try {
+      localStorage.setItem(LOCAL, JSON.stringify({ estado: estado, sujas: sujas }));
+    } catch (e) {}
   }
-  var pendente = null;
-  function enviar() {
-    clearTimeout(pendente);
-    pendente = setTimeout(function () {
-      fetch(URL_BASE + '?on_conflict=id', {
-        method: 'POST',
-        headers: Object.assign({ Prefer: 'resolution=merge-duplicates' }, H),
-        body: JSON.stringify({ id: ID, layout: estado })
-      }).catch(function () {});
-    }, 600);
+
+  /* ---------- indicador ---------- */
+  var elSinc = null;
+  function situacao(cls, txt) {
+    if (!elSinc) { elSinc = document.getElementById('sincEstado'); }
+    if (elSinc) { elSinc.className = 'sinc ' + cls; elSinc.textContent = txt; }
   }
-  function salvar() { gravarLocal(); enviar(); }
+  function pendencias() {
+    return Object.keys(sujas.marcas).length + Object.keys(sujas.mudancas).length;
+  }
+
+  /* ---------- escrita, com repetição até o servidor confirmar ---------- */
+  var enviando = false, agendado = null, espera = 1000;
+  function empurrar() {
+    if (enviando) { return; }
+    if (!pendencias()) { situacao('ok', 'sincronizado'); return; }
+    enviando = true;
+    situacao('indo', 'salvando…');
+    var levadas = JSON.parse(JSON.stringify(sujas));
+    fetch(URL_BASE + '?on_conflict=id', {
+      method: 'POST',
+      headers: Object.assign({ Prefer: 'resolution=merge-duplicates' }, H),
+      body: JSON.stringify({ id: ID, layout: estado })
+    }).then(function (r) {
+      if (!r.ok) { throw new Error('HTTP ' + r.status); }
+      // só limpa o que foi de fato enviado: o que mudou no meio do caminho continua sujo
+      ['marcas', 'mudancas'].forEach(function (t) {
+        Object.keys(levadas[t]).forEach(function (k) { delete sujas[t][k]; });
+      });
+      gravarLocal();
+      espera = 1000;
+      enviando = false;
+      if (pendencias()) { empurrar(); } else { situacao('ok', 'sincronizado'); }
+    }).catch(function () {
+      enviando = false;
+      situacao('erro', 'sem conexão — vou tentar de novo');
+      clearTimeout(agendado);
+      agendado = setTimeout(empurrar, espera);
+      espera = Math.min(espera * 2, 30000);   // desiste de insistir rápido, não de insistir
+    });
+  }
+
+  var adiado = null;
+  function salvar(tipo, chave) {
+    if (tipo) { sujas[tipo][chave] = true; }
+    gravarLocal();
+    situacao('indo', 'salvando…');
+    clearTimeout(adiado);
+    adiado = setTimeout(empurrar, 500);
+  }
+
+  /* ---------- leitura contínua ---------- */
+  function puxar() {
+    if (document.hidden) { return Promise.resolve(); }
+    return fetch(URL_BASE + '?id=eq.' + ID + '&select=layout', { headers: H })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (linhas) {
+        if (!linhas) { throw new Error('sem resposta'); }
+        var remoto = normalizar(linhas[0] && linhas[0].layout);
+        var mudou = false;
+        ['marcas', 'mudancas'].forEach(function (t) {
+          Object.keys(remoto[t]).forEach(function (k) {
+            if (sujas[t][k]) { return; }          // alterado aqui e ainda não salvo: local manda
+            if (JSON.stringify(estado[t][k]) !== JSON.stringify(remoto[t][k])) {
+              estado[t][k] = remoto[t][k]; mudou = true;
+            }
+          });
+          Object.keys(estado[t]).forEach(function (k) {
+            if (!(k in remoto[t]) && !sujas[t][k]) { delete estado[t][k]; mudou = true; }
+          });
+        });
+        if (mudou) { gravarLocal(); redesenhar(); }
+        if (!pendencias()) { situacao('ok', 'sincronizado'); }
+        return true;
+      })
+      .catch(function () {
+        situacao('erro', 'sem conexão — vou tentar de novo');
+        return false;
+      });
+  }
+
+  function ligarSincronia() {
+    setInterval(puxar, INTERVALO);
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) { puxar(); empurrar(); }
+    });
+    window.addEventListener('online', function () { puxar(); empurrar(); });
+    window.addEventListener('offline', function () {
+      situacao('erro', 'sem conexão — vou tentar de novo');
+    });
+    // fecharam a aba com coisa pendente: última tentativa, sem travar o fechamento
+    window.addEventListener('pagehide', function () {
+      if (!pendencias() || !navigator.sendBeacon) { return; }
+      try {
+        navigator.sendBeacon(URL_BASE + '?on_conflict=id&apikey=' + ANON,
+          new Blob([JSON.stringify({ id: ID, layout: estado })], { type: 'application/json' }));
+      } catch (e) {}
+    });
+  }
 
   /* ---------- onde cada post está agora ---------- */
   function pos(p) {
@@ -588,9 +691,10 @@
       if (ocupante && ocupante.sc !== sc) {
         // destino ocupado: troca, que é como o Fred já pensa o remanejamento
         estado.mudancas[ocupante.sc] = { data: q.data, slot: q.slot };
+        salvar('mudancas', ocupante.sc);
       }
       estado.mudancas[sc] = { data: novaData, slot: novoSlot };
-      salvar();
+      salvar('mudancas', sc);
       diaAberto = novaData;
       redesenhar();
     });
@@ -606,7 +710,7 @@
       var sc = marca.closest('.marcas').dataset.sc;
       estado.marcas[sc] = estado.marcas[sc] || {};
       estado.marcas[sc][marca.dataset.marca] = !estado.marcas[sc][marca.dataset.marca];
-      salvar(); redesenhar(); return;
+      salvar('marcas', sc); redesenhar(); return;
     }
   });
 
@@ -670,25 +774,11 @@
       }).catch(function () {});
   }
 
-  async function sincronizar() {
-    try {
-      var r = await fetch(URL_BASE + '?id=eq.' + ID + '&select=layout', { headers: H });
-      if (!r.ok) return;
-      var linhas = await r.json();
-      var remoto = normalizar(linhas[0] && linhas[0].layout);
-      Object.keys(remoto.marcas).forEach(function (k) {
-        estado.marcas[k] = Object.assign({}, remoto.marcas[k], estado.marcas[k] || {});
-      });
-      Object.keys(remoto.mudancas).forEach(function (k) {
-        if (!estado.mudancas[k]) { estado.mudancas[k] = remoto.mudancas[k]; }
-      });
-      gravarLocal(); redesenhar(); enviar();
-    } catch (e) {}
-  }
-
-  estado = lerLocal();
+  lerLocal();
   renderGrade();
-  sincronizar();
+  situacao(pendencias() ? 'indo' : 'ok', pendencias() ? 'salvando…' : 'sincronizado');
+  puxar().then(function () { empurrar(); });
+  ligarSincronia();
   atualizarClima();
 
   var h = location.hash.replace('#', '');
