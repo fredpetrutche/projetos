@@ -147,6 +147,27 @@
                 color: var(--accent); font-weight: 700; margin-bottom: .3rem; }
   .copy .ctxt { font-size: .8125rem; white-space: pre-wrap; }
 
+  .hora-btn { font: inherit; font-family: var(--mono); font-size: .8125rem; font-weight: 700;
+              cursor: pointer; background: var(--surface-2); color: inherit;
+              border: 1px solid var(--rule); border-radius: .35rem; padding: .1rem .4rem; }
+  .hora-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .editor { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .6rem;
+            background: var(--surface-2); border: 1px solid var(--accent); border-radius: .5rem;
+            padding: .7rem .8rem; }
+  .editor .erow { display: flex; flex-direction: column; gap: .2rem; }
+  .editor label { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em;
+                  text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  .editor input, .editor select { font: inherit; font-size: .8125rem; padding: .3rem .4rem;
+                                  border: 1px solid var(--rule); border-radius: .35rem;
+                                  background: var(--surface); color: var(--ink); }
+  .editor .eacoes { display: flex; gap: .35rem; }
+  .ebtn { font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase;
+          font-weight: 700; cursor: pointer; border-radius: .35rem; padding: .4rem .7rem;
+          border: 1px solid var(--rule); background: var(--surface); color: var(--ink-soft); }
+  .ebtn.ok { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .ebtn:hover { border-color: var(--ink-faint); }
+  .editor .eaviso { flex-basis: 100%; font-size: .75rem; color: var(--ink-faint); margin: 0; }
+
   .marcas { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
   .marca { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase;
            font-weight: 600; cursor: pointer; background: var(--surface-2); border: 1px solid var(--rule);
@@ -288,148 +309,13 @@
   <div class="tab-panel" data-panel="agendamento" hidden>
     <section>
       <h2>Grade<span class="cont">34 de 42 slots preenchidos</span></h2>
-      <p class="lede">Clique num dia para ver os três horários.</p>
-      <div class="grade-dias"><button class="dia-btn" data-dia="2026-08-25"><span class="dnum">25/08</span><span class="dsem">ter</span><span class="dtemp" data-temp="2026-08-25"><span class="g frio">14°</span> · <span class="g calor">22°</span></span><span class="dcheio ">3/3 slots</span><span class="dmarca" data-resumo="2026-08-25"></span></button><button class="dia-btn" data-dia="2026-08-26"><span class="dnum">26/08</span><span class="dsem">qua</span><span class="dtemp" data-temp="2026-08-26"><span class="g frio">17°</span> · <span class="g calor">23°</span></span><span class="dcheio ">3/3 slots</span><span class="dcheio ruim">1 em 360p</span><span class="dmarca" data-resumo="2026-08-26"></span></button><button class="dia-btn" data-dia="2026-08-27"><span class="dnum">27/08</span><span class="dsem">qui</span><span class="dtemp" data-temp="2026-08-27"><span class="g frio">17°</span> · <span class="g calor">27°</span></span><span class="dcheio ">3/3 slots</span><span class="dcheio ruim">1 em 360p</span><span class="dmarca" data-resumo="2026-08-27"></span></button><button class="dia-btn" data-dia="2026-08-28"><span class="dnum">28/08</span><span class="dsem">sex</span><span class="dtemp" data-temp="2026-08-28"><span class="g frio">19°</span> · <span class="g calor">30°</span></span><span class="dcheio ">3/3 slots</span><span class="dmarca" data-resumo="2026-08-28"></span></button><button class="dia-btn" data-dia="2026-08-29"><span class="dnum">29/08</span><span class="dsem">sab</span><span class="dtemp" data-temp="2026-08-29"><span class="g calor">22°</span> · <span class="g calor">34°</span></span><span class="dcheio ">3/3 slots</span><span class="dcheio ruim">1 em 360p</span><span class="dmarca" data-resumo="2026-08-29"></span></button><button class="dia-btn" data-dia="2026-08-30"><span class="dnum">30/08</span><span class="dsem">dom</span><span class="dtemp" data-temp="2026-08-30"><span class="g calor">22°</span> · <span class="g calor">34°</span></span><span class="dcheio ">3/3 slots</span><span class="dmarca" data-resumo="2026-08-30"></span></button><button class="dia-btn" data-dia="2026-08-31"><span class="dnum">31/08</span><span class="dsem">seg</span><span class="dtemp" data-temp="2026-08-31"><span class="g calor">24°</span> · <span class="g calor">34°</span></span><span class="dcheio falta">2/3 slots</span><span class="dmarca" data-resumo="2026-08-31"></span></button><button class="dia-btn" data-dia="2026-09-01"><span class="dnum">01/09</span><span class="dsem">ter</span><span class="dtemp" data-temp="2026-09-01"><span class="g frio">18°</span> · <span class="g frio">21°</span></span><span class="dcheio falta">2/3 slots</span><span class="dmarca" data-resumo="2026-09-01"></span></button><button class="dia-btn" data-dia="2026-09-02"><span class="dnum">02/09</span><span class="dsem">qua</span><span class="dtemp" data-temp="2026-09-02"><span class="g frio">14°</span> · <span class="g frio">21°</span></span><span class="dcheio ">3/3 slots</span><span class="dmarca" data-resumo="2026-09-02"></span></button><button class="dia-btn" data-dia="2026-09-03"><span class="dnum">03/09</span><span class="dsem">qui</span><span class="dtemp" data-temp="2026-09-03"><span class="g frio">14°</span> · <span class="g calor">23°</span></span><span class="dcheio falta">2/3 slots</span><span class="dmarca" data-resumo="2026-09-03"></span></button><button class="dia-btn" data-dia="2026-09-04"><span class="dnum">04/09</span><span class="dsem">sex</span><span class="dtemp" data-temp="2026-09-04"><span class="g frio">12°</span> · <span class="g frio">19°</span></span><span class="dcheio falta">1/3 slots</span><span class="dmarca" data-resumo="2026-09-04"></span></button><button class="dia-btn" data-dia="2026-09-05"><span class="dnum">05/09</span><span class="dsem">sab</span><span class="dtemp" data-temp="2026-09-05"><span class="g frio">10°</span> · <span class="g frio">15°</span></span><span class="dcheio ">3/3 slots</span><span class="dcheio ruim">1 em 360p</span><span class="dmarca" data-resumo="2026-09-05"></span></button><button class="dia-btn" data-dia="2026-09-06"><span class="dnum">06/09</span><span class="dsem">dom</span><span class="dtemp" data-temp="2026-09-06"><span class="g frio">9°</span> · <span class="g frio">18°</span></span><span class="dcheio falta">2/3 slots</span><span class="dmarca" data-resumo="2026-09-06"></span></button><button class="dia-btn" data-dia="2026-09-07"><span class="dnum">07/09</span><span class="dsem">seg</span><span class="dtemp" data-temp="2026-09-07"><span class="g frio">12°</span> · <span class="g calor">22°</span></span><span class="dcheio falta">1/3 slots</span><span class="dmarca" data-resumo="2026-09-07"></span></button></div>
+      <p class="lede">Clique num dia para ver os três horários. Dentro do dia, clique no
+         horário de um post para movê-lo para outro dia ou horário.</p>
+      <div class="grade-dias" id="gradeDias"></div>
     </section>
     <div id="visor">
       <div class="visor-vazio">Escolha um dia acima.</div>
-      <div class="dia-painel" data-dia="2026-08-25" hidden><h2>25/08 · terça · <span class="htemp" data-htemp="2026-08-25"><span class="g frio">14°</span> · <span class="g calor">22°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DAQ4v8uOOcV.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">I CAN’T WAIT FOR: MARACUJÁ 🤤😮‍💨 Não precisa esperar mais, finalmente Holy Maracujá chegou! O sabor mais artesanal, vários processos mas o resultado não poderia ser diferente: UM SABOR IRRESISTÍVEL 😋 Corre pra HOLY garantir o seu! Disponível apenas até o dia 28.09 (ou enquanto durar o estoque 🗣️)</p><a class="link" href="https://www.instagram.com/p/DAQ4v8uOOcV/" target="_blank" rel="noopener">https://www.instagram.com/p/DAQ4v8uOOcV/</a><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Quebra ao meio e o recheio escorre. 🫠
-
-Não é creminho de maracujá: é a fruta reduzida no fogo até concentrar — aquele azedinho que faz fechar o olho — com pedaços de chocolate branco derretendo dentro.
-
-Massa amanteigada, borda macia, riscos finos de chocolate branco em cima e embaixo.
-
-Quente ele escorre. Frio ele fica cremoso. Não tem hora errada.
-
-Holy Maracujá 🧡</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">&quot;Eu não gosto muito de doce.&quot;
-
-Então esse aqui é o seu. 😌
-
-O Holy Maracujá é pra quem enjoa no segundo pedaço. A fruta é reduzida até ficar azedinha de verdade — ela corta o doce em vez de somar. O chocolate branco entra só pra equilibrar.
-
-É o cookie que a pessoa que &quot;não gosta de doce&quot; termina inteiro e já pede o segundo.
-
-Aceita o teste? 🧡</div></div></div><div class="marcas" data-chave="2026-08-25|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/C-VTweBOHx-.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Bebida gelada</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Que a gente AMA o cookie duo não é segredo pra ninguém, agoraaaaaa cookie duo na PROMO é MEDALHA DE OURO pro nosso coração! 🥹🍪 e vem de combinação nessa terça: Cookie duo + Holy iced caramel 🤎 ESPERAMOS VOCÊ! *promo válida nesta terça 06.08</p><a class="link" href="https://www.instagram.com/p/C-VTweBOHx-/" target="_blank" rel="noopener">https://www.instagram.com/p/C-VTweBOHx-/</a><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Repara que as camadas não se misturam. 👀
-
-O caramelo salgado vai no fundo. Depois o gelo, depois o leite — e o café curto entra por último, despejado bem devagar, só pra ficar boiando em cima.
-
-Você mexe com o canudo e o caramelo sobe.
-
-Do lado, o Duo: massa com pedaços de meio amargo e recheio de chocolate branco escorrendo no meio.
-
-Amargo e doce na mesma mesa 🤎🤍</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">Tem dia em que 15 minutos sentado salvam a tarde. 🤎
-
-Iced Caramel gelado na mão, Duo quebrado ao meio, celular virado pra baixo.
-
-Não é sobre o café. É sobre o intervalo.
-
-A mesa a gente separa. Os 15 minutos são com você.</div></div></div><div class="marcas" data-chave="2026-08-25|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/C_yFqbOv2il.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Milkshake</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Seu milkshake favorito te espera aqui na Holy 🤤❄️ Nós sabores: Pistache, RedVelvet, Brownie, Cookie e Ninho com Nutella 🤤 Na sua Holy favorita ⬇️ Americana: - Rua Dom Bosco, 229 - Vila Sta Catarina - Rua Bruno Cia, 301 - São Vito Sta. Bárbara D’Oeste: - Rua Duque de Caxias, 691 - Centro Campinas: - </p><a class="link" href="https://www.instagram.com/p/C_yFqbOv2il/" target="_blank" rel="noopener">https://www.instagram.com/p/C_yFqbOv2il/</a><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">A gente não bate o milkshake. A gente pulsa. 🥤
-
-Batido demais vira leite com gosto. Pulsado, o cookie continua sendo cookie — você acha pedaço no meio do caminho, no canudo, no fundo do copo.
-
-Cookie, Ninho com Nutella e Red Velvet levam cookie de verdade dentro. O Brownie leva 2/3 de um brownie inteiro. O Pistache é sorvete de pistache com pistache triturado.
-
-E o copo já vai riscado de chocolate por dentro, antes do shake entrar. 🤎
-
-Qual é o seu? 👇</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">A decisão mais difícil do seu dia — e a mais gostosa. 🥤
-
-Pistache, Red Velvet, Brownie, Cookie ou Ninho com Nutella.
-
-Tem gente que provou um e nunca mais mudou. Tem gente que vai testando um por semana até fechar a lista inteira.
-
-Você é do time fiel ou do time que testa? Responde aqui 👇</div></div></div><div class="marcas" data-chave="2026-08-25|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-08-26" hidden><h2>26/08 · quarta · <span class="htemp" data-htemp="2026-08-26"><span class="g frio">17°</span> · <span class="g calor">23°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/C_dT3P-Rlzi.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ruim">360x640 · pedir original</span></div><p class="legenda">Já conhece o nosso cookie M&amp;M’S? Recheado com chocolate ao leite e finalizado com M&amp;M’S 😮‍💨🤎 VEM PRA HOLY experimentar 🤤</p><a class="link" href="https://www.instagram.com/p/C_dT3P-Rlzi/" target="_blank" rel="noopener">https://www.instagram.com/p/C_dT3P-Rlzi/</a><div class="gancho"><div class="grot">Gancho — abertura do vídeo</div><div class="gtxt">os M&amp;M&#x27;s de fora são só o começo 👀
-
-o melhor desse cookie tá escondido dentro
-
-espera ele abrir</div></div><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Os M&amp;M&#x27;s não estão só em cima. 🍫
-
-Tem M&amp;M&#x27;s dentro do recheio também, misturados no chocolate ao leite: você morde e encontra o crocante no meio do cremoso.
-
-E os de cima vão pro forno junto com a massa — a casquinha colorida amolece e a cor escorre um pouquinho pra massa em volta.
-
-Crocante por fora, macio no meio, chocolate ao leite entre os dois.
-
-Vem provar 🤎</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">Tem um cookie que criança escolhe sem ler o nome. 🌈
-
-Ela vê as bolinhas coloridas em cima e aponta. Não precisa saber o que tem dentro.
-
-Aí você prova um pedaço &quot;só pra experimentar&quot; e lembra por que também era o seu: chocolate ao leite, M&amp;M&#x27;s por dentro e por fora, e a alegria boba de um pacotinho colorido.
-
-Marca aqui quem ia disputar esse com você 👇</div></div></div><div class="marcas" data-chave="2026-08-26|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/C7o0Ds3xoup.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Combo salgado</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Sabe o que vai te esquentar nesse friozinho? 🥶 CHOCOLATE CREMOSO + PÃO DE QUEIJO da Holy 🍫🫰🍪 Você já provou? Conta aqui pra gente 👀</p><a class="link" href="https://www.instagram.com/p/C7o0Ds3xoup/" target="_blank" rel="noopener">https://www.instagram.com/p/C7o0Ds3xoup/</a><div class="gancho"><div class="grot">Gancho — abertura do vídeo</div><div class="gtxt">salgado com doce dá certo? 👀
-
-ninguém te contou que dá pra molhar
-
-espera ver o quanto gruda</div></div><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Isso não é achocolatado. 🍫
-
-São 80g de chocolate meio amargo derretido pra 80g de leite — metade da xícara é chocolate de verdade, com leite Ninho e cacau em pó por cima disso.
-
-Fica tão denso que quase dá pra comer de colher. Amargo o bastante pra não enjoar, doce o bastante pra você querer o último gole.
-
-Do lado, o pão de queijo soltando vapor na hora que você abre no meio.
-
-Um gole, uma mordida, repete 🤎</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">Existe uma dupla que não erra nunca: chocolate quente e pão de queijo. 🤎
-
-É a merenda da casa da avó. É o que você pede quando o dia amanheceu cinza e a única coisa que você quer é sentar num lugar quente.
-
-Aqui o chocolate é meio amargo derretido de verdade, não pó. E o pão de queijo sai do forno pra sua mão.
-
-Vem tomar sentado. A tarde depois disso rende diferente.</div></div></div><div class="marcas" data-chave="2026-08-26|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/C7wlfnaxZWX.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Combo bebida gelada</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Nada como nosso cookie favorito + aquela bebida com café da Holy pra começar MUITO bem nossa semana 😎🤎 Te esperamos aqui, ou chama no delivery (link na bio 🔗) Rua Cônego Nery, 463 - Jardim Guanabara ⏰ Segunda a Sexta 11h às 18h30 Sábado 11h às 18h</p><a class="link" href="https://www.instagram.com/p/C7wlfnaxZWX/" target="_blank" rel="noopener">https://www.instagram.com/p/C7wlfnaxZWX/</a><div class="gancho"><div class="grot">Gancho — abertura do vídeo</div><div class="gtxt">precisa de motivo pra pedir os dois? 👀
-
-o doce de leite ainda tá morno
-
-5 da tarde pede os dois</div></div><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Café amargo e cookie doce foram feitos um pro outro. ☕️🍪
-
-O gole de café limpa o doce que ficou na boca — e a mordida seguinte do cookie chega com a mesma força da primeira.
-
-É por isso que não dá pra parar no meio: cada gole devolve a mordida, cada mordida pede o próximo gole.
-
-Você escolhe o sabor do cookie. A bebida a gente acerta 🤎</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">Segunda-feira não precisa começar às 8h em ponto. 😌
-
-Pode começar sentado, com um café na mão e o seu cookie favorito na frente, quinze minutos antes de abrir o computador.
-
-Não é fugir da semana. É entrar nela do jeito certo — a segunda inteira muda de cara quando começa por um lugar bom.
-
-Qual é o seu favorito? Conta aqui 👇</div></div></div><div class="marcas" data-chave="2026-08-26|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-08-27" hidden><h2>27/08 · quinta · <span class="htemp" data-htemp="2026-08-27"><span class="g frio">17°</span> · <span class="g calor">27°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DQMuCiEDQYb.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Torta com sorvete</span><span class="tag res-ruim">360x640 · pedir original</span></div><p class="legenda">Já conhecem nossa TORTA PFT de cookie? Super recheada de Kinder com Nutella🤤 Ela está disponível toda quinta e sexta🤌🏻 Entãooo hoje é o último dia da semana CORRE garantir seu pedaço antes que acabem os estoques😋🍪 📍Rua Cônego Nery 463- Jardim Guanabara</p><a class="link" href="https://www.instagram.com/p/DQMuCiEDQYb/" target="_blank" rel="noopener">https://www.instagram.com/p/DQMuCiEDQYb/</a><div class="marcas" data-chave="2026-08-27|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DA3lza7Pccd.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Cookie Nutella, Red Velvet ou os dois? 🍪 Seu Holyzinho favorito te espera 🤤 Americana: - Rua Dom Bosco, 229 - Vila Sta Catarina - Rua Bruno Cia, 301 - São Vito Sta. Bárbara D’Oeste: - Rua Duque de Caxias, 691 - Centro Campinas: - Rua Cônego Nery, 463 - Jardim Guanabara Alphaville: - Calçada das Azal</p><a class="link" href="https://www.instagram.com/p/DA3lza7Pccd/" target="_blank" rel="noopener">https://www.instagram.com/p/DA3lza7Pccd/</a><div class="marcas" data-chave="2026-08-27|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DTspPSZjfIQ.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Processo</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Ano passado uma das nossas maiores conquistas foi com certeza PRODUZIR NOSSO PRÓPRIO SORVETE, o Holy Ice Cream🤎🍦 - “Mas ué? Vcs não são especialistas em cookies?” Yess, mas desde o início fazemos tudo com muito carinho e ótimos ingredientes 🫶🏼 Usamos no topping dos cookies, brownies, tortas e claro,</p><a class="link" href="https://www.instagram.com/p/DTspPSZjfIQ/" target="_blank" rel="noopener">https://www.instagram.com/p/DTspPSZjfIQ/</a><div class="marcas" data-chave="2026-08-27|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-08-28" hidden><h2>28/08 · sexta · <span class="htemp" data-htemp="2026-08-28"><span class="g frio">19°</span> · <span class="g calor">30°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DQepERPDSY4.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Torta com sorvete</span><span class="tag res-ok">720x1280</span></div><p class="legenda">A @judemoura_ pediu essa combinação semana passada e a gnt ficou MTOOO CURIOSAS para provar 🤭🤎 TORTA DE COOKIE (Kinder com Nutella) + Sorvete de NUTELLA COM BROWNIE • jurooooo, equilibrou tudo e ficou uma PERFEIÇÃO 😭🤌🏻 Vc tbm é NUTELLOVER? O que achou dessa combinação?🍪 peça essa combinação na Holy </p><a class="link" href="https://www.instagram.com/p/DQepERPDSY4/" target="_blank" rel="noopener">https://www.instagram.com/p/DQepERPDSY4/</a><div class="marcas" data-chave="2026-08-28|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DKACSzMNTax.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Sextou com S de “Só preciso de um cookie da Holy hoje” 🤤 Nada vai melhorar mais meu dia do que um CHOC, cookie com muitooo chocolate ao leite + meio amargo 😮‍💨🤎 Vem provar o seu 🍪</p><a class="link" href="https://www.instagram.com/p/DKACSzMNTax/" target="_blank" rel="noopener">https://www.instagram.com/p/DKACSzMNTax/</a><div class="marcas" data-chave="2026-08-28|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DbdidqCCNvH.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Processo</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Aqui na Holy os nossos cookies, tortas, brownies… são produzidos artesanalmente na nossa FÁBRICA e distribuída para nossas 10 lojas 🥹🤎 São mais de 18 sabores de COOKIES no cardápio 🍪 (ee quasee todo mês tem novidade) Conta pra gente qual é o seu sabor favorito e VEM PRA HOLY VEM PRA HOLY 🍪 📍 America</p><a class="link" href="https://www.instagram.com/p/DbdidqCCNvH/" target="_blank" rel="noopener">https://www.instagram.com/p/DbdidqCCNvH/</a><div class="marcas" data-chave="2026-08-28|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-08-29" hidden><h2>29/08 · sábado · <span class="htemp" data-htemp="2026-08-29"><span class="g calor">22°</span> · <span class="g calor">34°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DBMNJHVPns2.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Brownie com sorvete</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Quarta e dia oficial de pedir seu Holy Brownie 😎😜 Receita exclusiva da Holy, com aquela casquinha por fora e extremamente macio por dentro 😮‍💨 Dica extra: adiciona sorvete pra experiência completa 🤤 VEM PRA HOLY 🤎</p><a class="link" href="https://www.instagram.com/p/DBMNJHVPns2/" target="_blank" rel="noopener">https://www.instagram.com/p/DBMNJHVPns2/</a><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">A colher afunda na casquinha e ela cede. 🍨
-
-Por dentro o brownie é denso e úmido, tão macio que desmancha antes de você mastigar. Por cima, a bola de sorvete vai derretendo devagar no calor dele, e o chocolate ao leite desce pela lateral até se encontrar com o creme no prato.
-
-Aí você pega tudo junto na mesma colherada: o quente do brownie, o gelado do sorvete, o doce do chocolate.
-
-E fica ali. Sem pressa nenhuma. 🤎</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">A gente sabe que tipo de quarta-feira você teve. 😮‍💨
-
-Aquela que começou correndo e não parou. Aquela que você olhou o relógio, já era 16h e a fome já tinha voltado.
-
-Então senta. Pede o brownie com a bola de sorvete derretendo em cima. Guarda o celular.
-
-Não é sobre o doce. É sobre a pausa — o intervalo em que a tarde inteira muda de humor e você volta pro resto do dia sendo outra pessoa.
-
-Tem dia que só isso resolve. Vem sentar com a gente. 🤎</div></div></div><div class="marcas" data-chave="2026-08-29|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/C-agSIaufI_.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Combo</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Toda a perfeição do cookie red velvet recheado com cheesecake de frutas vermelhas e nosso hot nutella, uma combinação que só pode ter vindo DO CÉU 🤤😮‍💨🤎 Passa na Holy e experiente 🫶🏻</p><a class="link" href="https://www.instagram.com/p/C-agSIaufI_/" target="_blank" rel="noopener">https://www.instagram.com/p/C-agSIaufI_/</a><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Quebra o Red Velvet e o cheesecake aparece no meio, com as frutas vermelhas inteiras dentro. 🍒
-
-A massa é red velvet de verdade, com pedaços de chocolate branco. O recheio é cheesecake — o azedinho do cream cheese é o que segura o doce no lugar.
-
-Do lado, o Hot Nutella: 50g de Nutella batidos com creme de leite e cacau, vaporizados até ficar aveludado. Não é achocolatado. É Nutella derretida em forma de bebida. 🤎
-
-Molhar o cookie no copo é permitido. A gente não conta pra ninguém 🤫</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">Ninguém toma Hot Nutella com pressa. ☕️
-
-Esse é o pedido de quem senta pra ficar: o Red Velvet recheado de cheesecake de um lado, o Hot Nutella do outro, e uma conversa que ia durar 20 minutos e durou uma hora.
-
-Tem gente que vem pelo cookie. E tem gente que vem pela mesa.
-
-Marca aqui quem você traria pra dividir 👇</div></div></div><div class="marcas" data-chave="2026-08-29|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DLVltRrpLgm.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Lanchinho</span><span class="tag res-ruim">360x640 · pedir original</span></div><p class="legenda">Holy Cook Campinas não é só cookies🍪🫶🏻 Além dos + de 18 sabores de cookies, temos: 🥤Milkshakes 🥛Frappuccinos ☕️ Cafés e 🥐 Lanchinhos Veja nosso cardápio completo nos destaques! 🍪Vem pra Holy ou peça Delivery (link na Bio) 📍R. Cônego Nery, 463, Jd.Guanabara-Campinas/SP</p><a class="link" href="https://www.instagram.com/p/DLVltRrpLgm/" target="_blank" rel="noopener">https://www.instagram.com/p/DLVltRrpLgm/</a><div class="copys"><div class="copy"><div class="crot">OPÇÃO A — food porn</div><div class="ctxt">Sim, a Holy tem salgado. E não, não é só um pãozinho. 🥐
-
-Pão na chapa com manteiga dos dois lados, prensado até dourar. Queijo quente com três fatias de queijo e cebolinha. Croissant com presunto defumado, mussarela, tomate e alface.
-
-E tem o Crookie: um croissant coberto de massa de cookie e chocolate meio amargo, com um mini cookie no topo, assado junto. Folhado por baixo, cookie por cima. 🤎
-
-Holy Cook não é só cookie. Vem descobrir o resto 👇</div></div><div class="copy"><div class="crot">OPÇÃO B — emocional / identificação</div><div class="ctxt">&quot;Ah, mas lá só tem doce.&quot;
-
-Não. 🙂
-
-Dá pra tomar café da manhã aqui: pão na chapa com manteiga dos dois lados, pão de queijo, café tirado na hora. Dá pra fazer um lanche de verdade às 16h com croissant de presunto e queijo.
-
-Os mais de 18 sabores de cookie continuam aí — só que eles não são a única razão pra entrar.
-
-Vem num dia que você não está a fim de doce. A gente te espera igual ☕️</div></div></div><div class="marcas" data-chave="2026-08-29|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-08-30" hidden><h2>30/08 · domingo · <span class="htemp" data-htemp="2026-08-30"><span class="g calor">22°</span> · <span class="g calor">34°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DBHI7c0RgPT.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">O Holyzinho 🍪 que conquistou nosso coração 🤏 Cookie Kinder Bueno White, massa tradicional com pedaços de chocolate ao leite e avelãs e super recheado com creme artesanal de avelã e chocolate branco crocante 😮‍💨 Já provou? VEM PRA HOLY</p><a class="link" href="https://www.instagram.com/p/DBHI7c0RgPT/" target="_blank" rel="noopener">https://www.instagram.com/p/DBHI7c0RgPT/</a><div class="marcas" data-chave="2026-08-30|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DTk5SsKDSDK.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Processo</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Essa quantidade de produção são em semanas “calmas” disseram elas 🤣🙌🏻🤧 Aqui na nossa fábrica produzimos todos os recheios, tortas, SORVETES, brownies, cookies and more ✨👩🏻‍🍳 Tudinho artesanal e fresquinhooo Conta pra gnt: QUAL COOKIE VC ACHA QUE AS MENINAS MAIS FABRICAM NA SEMANA? 👀🍪 Ah! E qual a pr</p><a class="link" href="https://www.instagram.com/p/DTk5SsKDSDK/" target="_blank" rel="noopener">https://www.instagram.com/p/DTk5SsKDSDK/</a><div class="marcas" data-chave="2026-08-30|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DGlUuoUOpoT.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Bebida gelada</span><span class="tag res-ok">720x1280</span></div><p class="legenda"></p><a class="link" href="https://www.instagram.com/p/DGlUuoUOpoT/" target="_blank" rel="noopener">https://www.instagram.com/p/DGlUuoUOpoT/</a><div class="marcas" data-chave="2026-08-30|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-08-31" hidden><h2>31/08 · segunda · <span class="htemp" data-htemp="2026-08-31"><span class="g calor">24°</span> · <span class="g calor">34°</span></span><span class="cont">2 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DWB-cnylcqX.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">MUITOOO RECHEIO! Nosso Kinder Bueno é feito 100% artesanal aqui na Holy 👉🏻 Ganache de chocolate ao leite, creme crocante de Bueno e farofinha irresistível de avelã com cacau - aprox 350g 🤌🏻 CORRE PEDIR O SEU FAVORITO, que está acabando o tempo 🚨🐰 📍 Americana: Rua Dom Bosco 229 - Vila Sta Catarina Ru</p><a class="link" href="https://www.instagram.com/p/DWB-cnylcqX/" target="_blank" rel="noopener">https://www.instagram.com/p/DWB-cnylcqX/</a><div class="marcas" data-chave="2026-08-31|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DWJs7Fpgvxt.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Milkshake</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">A Malu simplesmente acertou TODOS os sabores de milkshake 😮‍💨🥤 COOKIE: Sabor baunilha com pedaços de cookie BROWNIE: Chocolate meio amargo e pedaços do brownie RED VELVET: Frutas vermelhas e pedaços de cookie red velvet PISTACHE: Pasta pura de pistache com pedaços de pistache triturado e chocolate b</p><a class="link" href="https://www.instagram.com/p/DWJs7Fpgvxt/" target="_blank" rel="noopener">https://www.instagram.com/p/DWJs7Fpgvxt/</a><div class="marcas" data-chave="2026-08-31|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag">slot 3</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div></div><div class="dia-painel" data-dia="2026-09-01" hidden><h2>01/09 · terça · <span class="htemp" data-htemp="2026-09-01"><span class="g frio">18°</span> · <span class="g frio">21°</span></span><span class="cont">2 de 3 slots</span></h2><div class="banda frio" data-banda="frio"><span class="bdiz">Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.</span></div><div class="slot"><img src="capas/DXo-P-YiBUk.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Processo</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Fala sério? Quem não ama o cookie de Kinder com Nutella é pq ainda não provou 🫣🤎👀 Contaaa pra gnt, qual seu cookie favorito? #nutella #kinder #cookie #recheio #produção</p><a class="link" href="https://www.instagram.com/p/DXo-P-YiBUk/" target="_blank" rel="noopener">https://www.instagram.com/p/DXo-P-YiBUk/</a><div class="marcas" data-chave="2026-09-01|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DZu0PiviLuW.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Ele CHEGOU, o nosso cookie da FRANÇA 🍪🇫🇷 👉🏻 massa feita com manteiga noisette (manteiga tostada), pedaços de chocolate meio amargo, recheado com chocolate branco caramelizado, massa folheada e finalizado com flor de sal (dizem que ele é o melhor cookie até agora) Já tivemos por aqui: 🇧🇷 BRASIL com b</p><a class="link" href="https://www.instagram.com/p/DZu0PiviLuW/" target="_blank" rel="noopener">https://www.instagram.com/p/DZu0PiviLuW/</a><div class="marcas" data-chave="2026-09-01|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag">slot 3</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div></div><div class="dia-painel" data-dia="2026-09-02" hidden><h2>02/09 · quarta · <span class="htemp" data-htemp="2026-09-02"><span class="g frio">14°</span> · <span class="g frio">21°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda frio" data-banda="frio"><span class="bdiz">Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.</span></div><div class="slot"><img src="capas/C-25gq0xTCL.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Milkshake</span><span class="tag res-ok">720x1280</span></div><p class="legenda">A combinação perfeita pra começar a sua semana 😮‍💨🤏 VEM PRA HOLY 🏠🤎 ↴ Rua Cônego Nery, 463 - Jardim Guanabara ⏰ Segunda a Sexta 11h às 18h30 Sábado 11h às 18h</p><a class="link" href="https://www.instagram.com/p/C-25gq0xTCL/" target="_blank" rel="noopener">https://www.instagram.com/p/C-25gq0xTCL/</a><div class="marcas" data-chave="2026-09-02|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DXMpkAmlAVM.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Queijo quente</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Um queijo quente e não quero guerra com ninguém 😋🤎 Pão de azeite da @padocadaalma + queijo cremoso @prosacomidaria com cebolinha PSIU: o combinho perfeito é com frozen morango, fica a dica 👀 #queijoquente #cremoso #pão #cafédatarde #cookies #cheddar</p><a class="link" href="https://www.instagram.com/p/DXMpkAmlAVM/" target="_blank" rel="noopener">https://www.instagram.com/p/DXMpkAmlAVM/</a><div class="marcas" data-chave="2026-09-02|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DXhP5Y7F9_u.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Às vezes nossa sanidade mental depende 100% de um docinho pós almoço, né? 🍪🤎 O cookie do vídeo é o ouro branco, com recheio mto mtoooo cremoso (deu pra perceber? ahah) VEM PRO DELIVERY 🛵💨 #cookies #meme #delivery #recheio #chocolate</p><a class="link" href="https://www.instagram.com/p/DXhP5Y7F9_u/" target="_blank" rel="noopener">https://www.instagram.com/p/DXhP5Y7F9_u/</a><div class="marcas" data-chave="2026-09-02|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-09-03" hidden><h2>03/09 · quinta · <span class="htemp" data-htemp="2026-09-03"><span class="g frio">14°</span> · <span class="g calor">23°</span></span><span class="cont">2 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DVOepXzjJDz.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Torta</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Quinta e Sexta é um eventooo aqui na Holy porque ela aparece 🤎🤌🏻 Nossa torta PFTA de KINDER COM NUTELLA 🍪 👉🏻 peça seu pedaço ou uma inteirinhaaa só pra vc Vem pra Holy 🫶🏼 #cookie #torta #nutella #kinder #artesanal</p><a class="link" href="https://www.instagram.com/p/DVOepXzjJDz/" target="_blank" rel="noopener">https://www.instagram.com/p/DVOepXzjJDz/</a><div class="marcas" data-chave="2026-09-03|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DW6qxpzDagh.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Fala sério, quem não ama um limãozinho né? A produção do nosso cookie é feito 100% com limão siciliano 🍋🍪 Ele é um dos cookies que dá mais trabalhão de fazer por causa do recheio muito cremoso 🤣 massss a gnt ama VEM PROVAR O SEU 🤎 📍 Americana: Rua Dom Bosco 229 - Vila Sta Catarina Rua Bruno Cia 301 </p><a class="link" href="https://www.instagram.com/p/DW6qxpzDagh/" target="_blank" rel="noopener">https://www.instagram.com/p/DW6qxpzDagh/</a><div class="marcas" data-chave="2026-09-03|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag">slot 3</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div></div><div class="dia-painel" data-dia="2026-09-04" hidden><h2>04/09 · sexta · <span class="htemp" data-htemp="2026-09-04"><span class="g frio">12°</span> · <span class="g frio">19°</span></span><span class="cont">1 de 3 slots</span></h2><div class="banda frio" data-banda="frio"><span class="bdiz">Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.</span></div><div class="slot"><img src="capas/DUtDxIYj67l.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Não estar comendo chocolate não é motivo para não comer cookies 🫣🤎🍪 O DOCE DE LEITE ARTESANAL É O MELHOR! Não é? Qual o seu favorito? 🥹</p><a class="link" href="https://www.instagram.com/p/DUtDxIYj67l/" target="_blank" rel="noopener">https://www.instagram.com/p/DUtDxIYj67l/</a><div class="marcas" data-chave="2026-09-04|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag">slot 2</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag">slot 3</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div></div><div class="dia-painel" data-dia="2026-09-05" hidden><h2>05/09 · sábado · <span class="htemp" data-htemp="2026-09-05"><span class="g frio">10°</span> · <span class="g frio">15°</span></span><span class="cont">3 de 3 slots</span></h2><div class="banda frio" data-banda="frio"><span class="bdiz">Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.</span></div><div class="slot"><img src="capas/DQchv8NCbvJ.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Queijo quente</span><span class="tag res-ruim">360x640 · pedir original</span></div><p class="legenda">Fala sério nosso QUEIJO QUENTE de cafézinho da tarde é tudo o que vc estava precisando nessa quinta🤤🤌🏻 Peça já o seu pelo nosso delivery🛵💨</p><a class="link" href="https://www.instagram.com/p/DQchv8NCbvJ/" target="_blank" rel="noopener">https://www.instagram.com/p/DQchv8NCbvJ/</a><div class="marcas" data-chave="2026-09-05|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DUV1IDajDU4.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">720x1280</span></div><p class="legenda">Fala sério, quem não ama um brigadeiro de panela… pra desistir um filminho, num dia friozinho, quentinho kkkk tanto faaazz! Brigadeiro toda hr pfvo 🤎 Se vc é desse time precisa conhecer nosso cookie de brigadeiro de panela 🍪 100% artesanal da Holy #cookies #brigadeiro #producao #rotina #artesanal</p><a class="link" href="https://www.instagram.com/p/DUV1IDajDU4/" target="_blank" rel="noopener">https://www.instagram.com/p/DUV1IDajDU4/</a><div class="marcas" data-chave="2026-09-05|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/DXW8tQCD4p0.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag cat">Combo</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Qual seu combinho favorito? 🍪☕ PSIU: amanhã é feriado e estaremos ON loja das 13h às 18h30 | delivery até 23h45 Então já marca aquela pausinha pro café com seu @ favorito #campinas #cookies #feriado #café #dica #delivery</p><a class="link" href="https://www.instagram.com/p/DXW8tQCD4p0/" target="_blank" rel="noopener">https://www.instagram.com/p/DXW8tQCD4p0/</a><div class="marcas" data-chave="2026-09-05|3"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div></div><div class="dia-painel" data-dia="2026-09-06" hidden><h2>06/09 · domingo · <span class="htemp" data-htemp="2026-09-06"><span class="g frio">9°</span> · <span class="g frio">18°</span></span><span class="cont">2 de 3 slots</span></h2><div class="banda frio" data-banda="frio"><span class="bdiz">Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.</span></div><div class="slot"><img src="capas/DZz92lyEh5E.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">“Aline vamos ali gravar um vídeo rápido do seu react” Resultado: 1h30 de conteúdos com as 30 personalidades dela 🤣🥹 Se vc ainda não veio provar, corre que o COOKIE DA FRANÇA já está por aqui por TEMPO LIMITADO 🚨🗣️🇫🇷 🍪 massa feita com manteiga noisette (manteiga tostada), pedaços de chocolate meio am</p><a class="link" href="https://www.instagram.com/p/DZz92lyEh5E/" target="_blank" rel="noopener">https://www.instagram.com/p/DZz92lyEh5E/</a><div class="marcas" data-chave="2026-09-06|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot"><img src="capas/Dbs_Z6Ylcml.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag cat">Combo</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Quintoou e a Lu veio contar seu combinho favorito 🤎 🥐 Lanchinho de Croissant: Croissant da @mercimerci_patisserie com presunto alemão, mostarda, tomate e alface 🍓Frozen Morango: sorvete de morango artesanal da Holy finalizado com salty cream (chantilly levemente salgado) 🍪 Cookie de Kinder com muita</p><a class="link" href="https://www.instagram.com/p/Dbs_Z6Ylcml/" target="_blank" rel="noopener">https://www.instagram.com/p/Dbs_Z6Ylcml/</a><div class="marcas" data-chave="2026-09-06|2"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag">slot 3</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div></div><div class="dia-painel" data-dia="2026-09-07" hidden><h2>07/09 · segunda · <span class="htemp" data-htemp="2026-09-07"><span class="g frio">12°</span> · <span class="g calor">22°</span></span><span class="cont">1 de 3 slots</span></h2><div class="banda calor" data-banda="calor"><span class="bdiz">Dia quente pede refrescante — milkshake, sorvete, bebida gelada.</span></div><div class="slot"><img src="capas/DXE7NnnDCTC.png" alt="" loading="lazy"><div class="corpo"><div class="cab"><span class="hora">06:30</span><span class="tag cat">Cookie</span><span class="tag res-ok">1080x1920</span></div><p class="legenda">Segundou do jeito que a gente gosta: com muito chocolate 🤤🍪 Nosso Cookie Choc é aquele clássico que nunca decepciona 😮‍💨 Corre garantir o seu no nosso delivery🛵💨</p><a class="link" href="https://www.instagram.com/p/DXE7NnnDCTC/" target="_blank" rel="noopener">https://www.instagram.com/p/DXE7NnnDCTC/</a><div class="marcas" data-chave="2026-09-07|1"><button class="marca" data-marca="agendado"><span class="cx"></span>Agendado</button><button class="marca" data-marca="postado"><span class="cx"></span>Postado</button></div></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">12:30</span><span class="tag">slot 2</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div><div class="slot vazio"><div class="semcapa">livre</div><div class="corpo"><div class="cab"><span class="hora">17:30</span><span class="tag">slot 3</span></div><p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p></div></div></div>
+      <div id="paineis"></div>
     </div>
   </div>
 
@@ -475,8 +361,256 @@ Vem num dia que você não está a fim de doce. A gente te espera igual ☕️</
 
 </div>
 
+<script>window.DADOS = {"horarios": ["06:30", "12:30", "17:30"], "dias": [{"data": "2026-08-25", "clima": {"min": 14.4, "meio": 21.6}}, {"data": "2026-08-26", "clima": {"min": 17.0, "meio": 23.3}}, {"data": "2026-08-27", "clima": {"min": 17.3, "meio": 26.8}}, {"data": "2026-08-28", "clima": {"min": 18.7, "meio": 30.1}}, {"data": "2026-08-29", "clima": {"min": 22.1, "meio": 33.5}}, {"data": "2026-08-30", "clima": {"min": 22.3, "meio": 34.3}}, {"data": "2026-08-31", "clima": {"min": 24.1, "meio": 34.2}}, {"data": "2026-09-01", "clima": {"min": 17.5, "meio": 20.6}}, {"data": "2026-09-02", "clima": {"min": 14.5, "meio": 21.0}}, {"data": "2026-09-03", "clima": {"min": 13.7, "meio": 22.9}}, {"data": "2026-09-04", "clima": {"min": 11.7, "meio": 19.0}}, {"data": "2026-09-05", "clima": {"min": 9.8, "meio": 15.2}}, {"data": "2026-09-06", "clima": {"min": 9.2, "meio": 17.9}}, {"data": "2026-09-07", "clima": {"min": 11.9, "meio": 21.8}}], "posts": [{"sc": "DAQ4v8uOOcV", "cat": "Cookie", "data": "2026-08-25", "slot": 1, "url": "https://www.instagram.com/p/DAQ4v8uOOcV/", "capa": true, "legenda": "I CAN’T WAIT FOR: MARACUJÁ 🤤😮‍💨 Não precisa esperar mais, finalmente Holy Maracujá chegou! O sabor mais artesanal, vários processos mas o resultado não poderia ser diferente: UM SABOR IRRESISTÍVEL 😋 Corre pra HOLY garantir o seu! Disponível apenas até o dia 28.09 (ou enquanto durar o estoque 🗣️)", "gancho": "", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Quebra ao meio e o recheio escorre. 🫠\n\nNão é creminho de maracujá: é a fruta reduzida no fogo até concentrar — aquele azedinho que faz fechar o olho — com pedaços de chocolate branco derretendo dentro.\n\nMassa amanteigada, borda macia, riscos finos de chocolate branco em cima e embaixo.\n\nQuente ele escorre. Frio ele fica cremoso. Não tem hora errada.\n\nHoly Maracujá 🧡"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "\"Eu não gosto muito de doce.\"\n\nEntão esse aqui é o seu. 😌\n\nO Holy Maracujá é pra quem enjoa no segundo pedaço. A fruta é reduzida até ficar azedinha de verdade — ela corta o doce em vez de somar. O chocolate branco entra só pra equilibrar.\n\nÉ o cookie que a pessoa que \"não gosta de doce\" termina inteiro e já pede o segundo.\n\nAceita o teste? 🧡"}], "res": "720x1280"}, {"sc": "C-VTweBOHx-", "cat": "Bebida gelada", "data": "2026-08-25", "slot": 2, "url": "https://www.instagram.com/p/C-VTweBOHx-/", "capa": true, "legenda": "Que a gente AMA o cookie duo não é segredo pra ninguém, agoraaaaaa cookie duo na PROMO é MEDALHA DE OURO pro nosso coração! 🥹🍪 e vem de combinação nessa terça: Cookie duo + Holy iced caramel 🤎 ESPERAMOS VOCÊ! *promo válida nesta terça 06.08", "gancho": "", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Repara que as camadas não se misturam. 👀\n\nO caramelo salgado vai no fundo. Depois o gelo, depois o leite — e o café curto entra por último, despejado bem devagar, só pra ficar boiando em cima.\n\nVocê mexe com o canudo e o caramelo sobe.\n\nDo lado, o Duo: massa com pedaços de meio amargo e recheio de chocolate branco escorrendo no meio.\n\nAmargo e doce na mesma mesa 🤎🤍"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "Tem dia em que 15 minutos sentado salvam a tarde. 🤎\n\nIced Caramel gelado na mão, Duo quebrado ao meio, celular virado pra baixo.\n\nNão é sobre o café. É sobre o intervalo.\n\nA mesa a gente separa. Os 15 minutos são com você."}], "res": "720x1280"}, {"sc": "C_yFqbOv2il", "cat": "Milkshake", "data": "2026-08-25", "slot": 3, "url": "https://www.instagram.com/p/C_yFqbOv2il/", "capa": true, "legenda": "Seu milkshake favorito te espera aqui na Holy 🤤❄️ Nós sabores: Pistache, RedVelvet, Brownie, Cookie e Ninho com Nutella 🤤 Na sua Holy favorita ⬇️ Americana: - Rua Dom Bosco, 229 - Vila Sta Catarina - Rua Bruno Cia, 301 - São Vito Sta. Bárbara D’Oeste: - Rua Duque de Caxias, 691 - Centro Campinas: - ", "gancho": "", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "A gente não bate o milkshake. A gente pulsa. 🥤\n\nBatido demais vira leite com gosto. Pulsado, o cookie continua sendo cookie — você acha pedaço no meio do caminho, no canudo, no fundo do copo.\n\nCookie, Ninho com Nutella e Red Velvet levam cookie de verdade dentro. O Brownie leva 2/3 de um brownie inteiro. O Pistache é sorvete de pistache com pistache triturado.\n\nE o copo já vai riscado de chocolate por dentro, antes do shake entrar. 🤎\n\nQual é o seu? 👇"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "A decisão mais difícil do seu dia — e a mais gostosa. 🥤\n\nPistache, Red Velvet, Brownie, Cookie ou Ninho com Nutella.\n\nTem gente que provou um e nunca mais mudou. Tem gente que vai testando um por semana até fechar a lista inteira.\n\nVocê é do time fiel ou do time que testa? Responde aqui 👇"}], "res": "720x1280"}, {"sc": "C_dT3P-Rlzi", "cat": "Cookie", "data": "2026-08-26", "slot": 1, "url": "https://www.instagram.com/p/C_dT3P-Rlzi/", "capa": true, "legenda": "Já conhece o nosso cookie M&M’S? Recheado com chocolate ao leite e finalizado com M&M’S 😮‍💨🤎 VEM PRA HOLY experimentar 🤤", "gancho": "os M&M's de fora são só o começo 👀\n\no melhor desse cookie tá escondido dentro\n\nespera ele abrir", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Os M&M's não estão só em cima. 🍫\n\nTem M&M's dentro do recheio também, misturados no chocolate ao leite: você morde e encontra o crocante no meio do cremoso.\n\nE os de cima vão pro forno junto com a massa — a casquinha colorida amolece e a cor escorre um pouquinho pra massa em volta.\n\nCrocante por fora, macio no meio, chocolate ao leite entre os dois.\n\nVem provar 🤎"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "Tem um cookie que criança escolhe sem ler o nome. 🌈\n\nEla vê as bolinhas coloridas em cima e aponta. Não precisa saber o que tem dentro.\n\nAí você prova um pedaço \"só pra experimentar\" e lembra por que também era o seu: chocolate ao leite, M&M's por dentro e por fora, e a alegria boba de um pacotinho colorido.\n\nMarca aqui quem ia disputar esse com você 👇"}], "res": "360x640"}, {"sc": "C7o0Ds3xoup", "cat": "Combo salgado", "data": "2026-08-26", "slot": 2, "url": "https://www.instagram.com/p/C7o0Ds3xoup/", "capa": true, "legenda": "Sabe o que vai te esquentar nesse friozinho? 🥶 CHOCOLATE CREMOSO + PÃO DE QUEIJO da Holy 🍫🫰🍪 Você já provou? Conta aqui pra gente 👀", "gancho": "salgado com doce dá certo? 👀\n\nninguém te contou que dá pra molhar\n\nespera ver o quanto gruda", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Isso não é achocolatado. 🍫\n\nSão 80g de chocolate meio amargo derretido pra 80g de leite — metade da xícara é chocolate de verdade, com leite Ninho e cacau em pó por cima disso.\n\nFica tão denso que quase dá pra comer de colher. Amargo o bastante pra não enjoar, doce o bastante pra você querer o último gole.\n\nDo lado, o pão de queijo soltando vapor na hora que você abre no meio.\n\nUm gole, uma mordida, repete 🤎"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "Existe uma dupla que não erra nunca: chocolate quente e pão de queijo. 🤎\n\nÉ a merenda da casa da avó. É o que você pede quando o dia amanheceu cinza e a única coisa que você quer é sentar num lugar quente.\n\nAqui o chocolate é meio amargo derretido de verdade, não pó. E o pão de queijo sai do forno pra sua mão.\n\nVem tomar sentado. A tarde depois disso rende diferente."}], "res": "720x1280"}, {"sc": "C7wlfnaxZWX", "cat": "Combo bebida gelada", "data": "2026-08-26", "slot": 3, "url": "https://www.instagram.com/p/C7wlfnaxZWX/", "capa": true, "legenda": "Nada como nosso cookie favorito + aquela bebida com café da Holy pra começar MUITO bem nossa semana 😎🤎 Te esperamos aqui, ou chama no delivery (link na bio 🔗) Rua Cônego Nery, 463 - Jardim Guanabara ⏰ Segunda a Sexta 11h às 18h30 Sábado 11h às 18h", "gancho": "precisa de motivo pra pedir os dois? 👀\n\no doce de leite ainda tá morno\n\n5 da tarde pede os dois", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Café amargo e cookie doce foram feitos um pro outro. ☕️🍪\n\nO gole de café limpa o doce que ficou na boca — e a mordida seguinte do cookie chega com a mesma força da primeira.\n\nÉ por isso que não dá pra parar no meio: cada gole devolve a mordida, cada mordida pede o próximo gole.\n\nVocê escolhe o sabor do cookie. A bebida a gente acerta 🤎"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "Segunda-feira não precisa começar às 8h em ponto. 😌\n\nPode começar sentado, com um café na mão e o seu cookie favorito na frente, quinze minutos antes de abrir o computador.\n\nNão é fugir da semana. É entrar nela do jeito certo — a segunda inteira muda de cara quando começa por um lugar bom.\n\nQual é o seu favorito? Conta aqui 👇"}], "res": "720x1280"}, {"sc": "DQMuCiEDQYb", "cat": "Torta com sorvete", "data": "2026-08-27", "slot": 1, "url": "https://www.instagram.com/p/DQMuCiEDQYb/", "capa": true, "legenda": "Já conhecem nossa TORTA PFT de cookie? Super recheada de Kinder com Nutella🤤 Ela está disponível toda quinta e sexta🤌🏻 Entãooo hoje é o último dia da semana CORRE garantir seu pedaço antes que acabem os estoques😋🍪 📍Rua Cônego Nery 463- Jardim Guanabara", "gancho": "", "sugestoes": [], "res": "360x640"}, {"sc": "DA3lza7Pccd", "cat": "Cookie", "data": "2026-08-27", "slot": 2, "url": "https://www.instagram.com/p/DA3lza7Pccd/", "capa": true, "legenda": "Cookie Nutella, Red Velvet ou os dois? 🍪 Seu Holyzinho favorito te espera 🤤 Americana: - Rua Dom Bosco, 229 - Vila Sta Catarina - Rua Bruno Cia, 301 - São Vito Sta. Bárbara D’Oeste: - Rua Duque de Caxias, 691 - Centro Campinas: - Rua Cônego Nery, 463 - Jardim Guanabara Alphaville: - Calçada das Azal", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DTspPSZjfIQ", "cat": "Processo", "data": "2026-08-27", "slot": 3, "url": "https://www.instagram.com/p/DTspPSZjfIQ/", "capa": true, "legenda": "Ano passado uma das nossas maiores conquistas foi com certeza PRODUZIR NOSSO PRÓPRIO SORVETE, o Holy Ice Cream🤎🍦 - “Mas ué? Vcs não são especialistas em cookies?” Yess, mas desde o início fazemos tudo com muito carinho e ótimos ingredientes 🫶🏼 Usamos no topping dos cookies, brownies, tortas e claro,", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DQepERPDSY4", "cat": "Torta com sorvete", "data": "2026-08-28", "slot": 1, "url": "https://www.instagram.com/p/DQepERPDSY4/", "capa": true, "legenda": "A @judemoura_ pediu essa combinação semana passada e a gnt ficou MTOOO CURIOSAS para provar 🤭🤎 TORTA DE COOKIE (Kinder com Nutella) + Sorvete de NUTELLA COM BROWNIE • jurooooo, equilibrou tudo e ficou uma PERFEIÇÃO 😭🤌🏻 Vc tbm é NUTELLOVER? O que achou dessa combinação?🍪 peça essa combinação na Holy ", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DKACSzMNTax", "cat": "Cookie", "data": "2026-08-28", "slot": 2, "url": "https://www.instagram.com/p/DKACSzMNTax/", "capa": true, "legenda": "Sextou com S de “Só preciso de um cookie da Holy hoje” 🤤 Nada vai melhorar mais meu dia do que um CHOC, cookie com muitooo chocolate ao leite + meio amargo 😮‍💨🤎 Vem provar o seu 🍪", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DbdidqCCNvH", "cat": "Processo", "data": "2026-08-28", "slot": 3, "url": "https://www.instagram.com/p/DbdidqCCNvH/", "capa": true, "legenda": "Aqui na Holy os nossos cookies, tortas, brownies… são produzidos artesanalmente na nossa FÁBRICA e distribuída para nossas 10 lojas 🥹🤎 São mais de 18 sabores de COOKIES no cardápio 🍪 (ee quasee todo mês tem novidade) Conta pra gente qual é o seu sabor favorito e VEM PRA HOLY VEM PRA HOLY 🍪 📍 America", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DBMNJHVPns2", "cat": "Brownie com sorvete", "data": "2026-08-29", "slot": 1, "url": "https://www.instagram.com/p/DBMNJHVPns2/", "capa": true, "legenda": "Quarta e dia oficial de pedir seu Holy Brownie 😎😜 Receita exclusiva da Holy, com aquela casquinha por fora e extremamente macio por dentro 😮‍💨 Dica extra: adiciona sorvete pra experiência completa 🤤 VEM PRA HOLY 🤎", "gancho": "", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "A colher afunda na casquinha e ela cede. 🍨\n\nPor dentro o brownie é denso e úmido, tão macio que desmancha antes de você mastigar. Por cima, a bola de sorvete vai derretendo devagar no calor dele, e o chocolate ao leite desce pela lateral até se encontrar com o creme no prato.\n\nAí você pega tudo junto na mesma colherada: o quente do brownie, o gelado do sorvete, o doce do chocolate.\n\nE fica ali. Sem pressa nenhuma. 🤎"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "A gente sabe que tipo de quarta-feira você teve. 😮‍💨\n\nAquela que começou correndo e não parou. Aquela que você olhou o relógio, já era 16h e a fome já tinha voltado.\n\nEntão senta. Pede o brownie com a bola de sorvete derretendo em cima. Guarda o celular.\n\nNão é sobre o doce. É sobre a pausa — o intervalo em que a tarde inteira muda de humor e você volta pro resto do dia sendo outra pessoa.\n\nTem dia que só isso resolve. Vem sentar com a gente. 🤎"}], "res": "720x1280"}, {"sc": "C-agSIaufI_", "cat": "Combo", "data": "2026-08-29", "slot": 2, "url": "https://www.instagram.com/p/C-agSIaufI_/", "capa": true, "legenda": "Toda a perfeição do cookie red velvet recheado com cheesecake de frutas vermelhas e nosso hot nutella, uma combinação que só pode ter vindo DO CÉU 🤤😮‍💨🤎 Passa na Holy e experiente 🫶🏻", "gancho": "", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Quebra o Red Velvet e o cheesecake aparece no meio, com as frutas vermelhas inteiras dentro. 🍒\n\nA massa é red velvet de verdade, com pedaços de chocolate branco. O recheio é cheesecake — o azedinho do cream cheese é o que segura o doce no lugar.\n\nDo lado, o Hot Nutella: 50g de Nutella batidos com creme de leite e cacau, vaporizados até ficar aveludado. Não é achocolatado. É Nutella derretida em forma de bebida. 🤎\n\nMolhar o cookie no copo é permitido. A gente não conta pra ninguém 🤫"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "Ninguém toma Hot Nutella com pressa. ☕️\n\nEsse é o pedido de quem senta pra ficar: o Red Velvet recheado de cheesecake de um lado, o Hot Nutella do outro, e uma conversa que ia durar 20 minutos e durou uma hora.\n\nTem gente que vem pelo cookie. E tem gente que vem pela mesa.\n\nMarca aqui quem você traria pra dividir 👇"}], "res": "720x1280"}, {"sc": "DLVltRrpLgm", "cat": "Lanchinho", "data": "2026-08-29", "slot": 3, "url": "https://www.instagram.com/p/DLVltRrpLgm/", "capa": true, "legenda": "Holy Cook Campinas não é só cookies🍪🫶🏻 Além dos + de 18 sabores de cookies, temos: 🥤Milkshakes 🥛Frappuccinos ☕️ Cafés e 🥐 Lanchinhos Veja nosso cardápio completo nos destaques! 🍪Vem pra Holy ou peça Delivery (link na Bio) 📍R. Cônego Nery, 463, Jd.Guanabara-Campinas/SP", "gancho": "", "sugestoes": [{"rot": "OPÇÃO A — food porn", "txt": "Sim, a Holy tem salgado. E não, não é só um pãozinho. 🥐\n\nPão na chapa com manteiga dos dois lados, prensado até dourar. Queijo quente com três fatias de queijo e cebolinha. Croissant com presunto defumado, mussarela, tomate e alface.\n\nE tem o Crookie: um croissant coberto de massa de cookie e chocolate meio amargo, com um mini cookie no topo, assado junto. Folhado por baixo, cookie por cima. 🤎\n\nHoly Cook não é só cookie. Vem descobrir o resto 👇"}, {"rot": "OPÇÃO B — emocional / identificação", "txt": "\"Ah, mas lá só tem doce.\"\n\nNão. 🙂\n\nDá pra tomar café da manhã aqui: pão na chapa com manteiga dos dois lados, pão de queijo, café tirado na hora. Dá pra fazer um lanche de verdade às 16h com croissant de presunto e queijo.\n\nOs mais de 18 sabores de cookie continuam aí — só que eles não são a única razão pra entrar.\n\nVem num dia que você não está a fim de doce. A gente te espera igual ☕️"}], "res": "360x640"}, {"sc": "DBHI7c0RgPT", "cat": "Cookie", "data": "2026-08-30", "slot": 1, "url": "https://www.instagram.com/p/DBHI7c0RgPT/", "capa": true, "legenda": "O Holyzinho 🍪 que conquistou nosso coração 🤏 Cookie Kinder Bueno White, massa tradicional com pedaços de chocolate ao leite e avelãs e super recheado com creme artesanal de avelã e chocolate branco crocante 😮‍💨 Já provou? VEM PRA HOLY", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DTk5SsKDSDK", "cat": "Processo", "data": "2026-08-30", "slot": 2, "url": "https://www.instagram.com/p/DTk5SsKDSDK/", "capa": true, "legenda": "Essa quantidade de produção são em semanas “calmas” disseram elas 🤣🙌🏻🤧 Aqui na nossa fábrica produzimos todos os recheios, tortas, SORVETES, brownies, cookies and more ✨👩🏻‍🍳 Tudinho artesanal e fresquinhooo Conta pra gnt: QUAL COOKIE VC ACHA QUE AS MENINAS MAIS FABRICAM NA SEMANA? 👀🍪 Ah! E qual a pr", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DGlUuoUOpoT", "cat": "Bebida gelada", "data": "2026-08-30", "slot": 3, "url": "https://www.instagram.com/p/DGlUuoUOpoT/", "capa": true, "legenda": "", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DWB-cnylcqX", "cat": "Cookie", "data": "2026-08-31", "slot": 1, "url": "https://www.instagram.com/p/DWB-cnylcqX/", "capa": true, "legenda": "MUITOOO RECHEIO! Nosso Kinder Bueno é feito 100% artesanal aqui na Holy 👉🏻 Ganache de chocolate ao leite, creme crocante de Bueno e farofinha irresistível de avelã com cacau - aprox 350g 🤌🏻 CORRE PEDIR O SEU FAVORITO, que está acabando o tempo 🚨🐰 📍 Americana: Rua Dom Bosco 229 - Vila Sta Catarina Ru", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DWJs7Fpgvxt", "cat": "Milkshake", "data": "2026-08-31", "slot": 2, "url": "https://www.instagram.com/p/DWJs7Fpgvxt/", "capa": true, "legenda": "A Malu simplesmente acertou TODOS os sabores de milkshake 😮‍💨🥤 COOKIE: Sabor baunilha com pedaços de cookie BROWNIE: Chocolate meio amargo e pedaços do brownie RED VELVET: Frutas vermelhas e pedaços de cookie red velvet PISTACHE: Pasta pura de pistache com pedaços de pistache triturado e chocolate b", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DXo-P-YiBUk", "cat": "Processo", "data": "2026-09-01", "slot": 1, "url": "https://www.instagram.com/p/DXo-P-YiBUk/", "capa": true, "legenda": "Fala sério? Quem não ama o cookie de Kinder com Nutella é pq ainda não provou 🫣🤎👀 Contaaa pra gnt, qual seu cookie favorito? #nutella #kinder #cookie #recheio #produção", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DZu0PiviLuW", "cat": "Cookie", "data": "2026-09-01", "slot": 2, "url": "https://www.instagram.com/p/DZu0PiviLuW/", "capa": true, "legenda": "Ele CHEGOU, o nosso cookie da FRANÇA 🍪🇫🇷 👉🏻 massa feita com manteiga noisette (manteiga tostada), pedaços de chocolate meio amargo, recheado com chocolate branco caramelizado, massa folheada e finalizado com flor de sal (dizem que ele é o melhor cookie até agora) Já tivemos por aqui: 🇧🇷 BRASIL com b", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "C-25gq0xTCL", "cat": "Milkshake", "data": "2026-09-02", "slot": 1, "url": "https://www.instagram.com/p/C-25gq0xTCL/", "capa": true, "legenda": "A combinação perfeita pra começar a sua semana 😮‍💨🤏 VEM PRA HOLY 🏠🤎 ↴ Rua Cônego Nery, 463 - Jardim Guanabara ⏰ Segunda a Sexta 11h às 18h30 Sábado 11h às 18h", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DXMpkAmlAVM", "cat": "Queijo quente", "data": "2026-09-02", "slot": 2, "url": "https://www.instagram.com/p/DXMpkAmlAVM/", "capa": true, "legenda": "Um queijo quente e não quero guerra com ninguém 😋🤎 Pão de azeite da @padocadaalma + queijo cremoso @prosacomidaria com cebolinha PSIU: o combinho perfeito é com frozen morango, fica a dica 👀 #queijoquente #cremoso #pão #cafédatarde #cookies #cheddar", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DXhP5Y7F9_u", "cat": "Cookie", "data": "2026-09-02", "slot": 3, "url": "https://www.instagram.com/p/DXhP5Y7F9_u/", "capa": true, "legenda": "Às vezes nossa sanidade mental depende 100% de um docinho pós almoço, né? 🍪🤎 O cookie do vídeo é o ouro branco, com recheio mto mtoooo cremoso (deu pra perceber? ahah) VEM PRO DELIVERY 🛵💨 #cookies #meme #delivery #recheio #chocolate", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DVOepXzjJDz", "cat": "Torta", "data": "2026-09-03", "slot": 1, "url": "https://www.instagram.com/p/DVOepXzjJDz/", "capa": true, "legenda": "Quinta e Sexta é um eventooo aqui na Holy porque ela aparece 🤎🤌🏻 Nossa torta PFTA de KINDER COM NUTELLA 🍪 👉🏻 peça seu pedaço ou uma inteirinhaaa só pra vc Vem pra Holy 🫶🏼 #cookie #torta #nutella #kinder #artesanal", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DW6qxpzDagh", "cat": "Cookie", "data": "2026-09-03", "slot": 2, "url": "https://www.instagram.com/p/DW6qxpzDagh/", "capa": true, "legenda": "Fala sério, quem não ama um limãozinho né? A produção do nosso cookie é feito 100% com limão siciliano 🍋🍪 Ele é um dos cookies que dá mais trabalhão de fazer por causa do recheio muito cremoso 🤣 massss a gnt ama VEM PROVAR O SEU 🤎 📍 Americana: Rua Dom Bosco 229 - Vila Sta Catarina Rua Bruno Cia 301 ", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DUtDxIYj67l", "cat": "Cookie", "data": "2026-09-04", "slot": 1, "url": "https://www.instagram.com/p/DUtDxIYj67l/", "capa": true, "legenda": "Não estar comendo chocolate não é motivo para não comer cookies 🫣🤎🍪 O DOCE DE LEITE ARTESANAL É O MELHOR! Não é? Qual o seu favorito? 🥹", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DQchv8NCbvJ", "cat": "Queijo quente", "data": "2026-09-05", "slot": 1, "url": "https://www.instagram.com/p/DQchv8NCbvJ/", "capa": true, "legenda": "Fala sério nosso QUEIJO QUENTE de cafézinho da tarde é tudo o que vc estava precisando nessa quinta🤤🤌🏻 Peça já o seu pelo nosso delivery🛵💨", "gancho": "", "sugestoes": [], "res": "360x640"}, {"sc": "DUV1IDajDU4", "cat": "Cookie", "data": "2026-09-05", "slot": 2, "url": "https://www.instagram.com/p/DUV1IDajDU4/", "capa": true, "legenda": "Fala sério, quem não ama um brigadeiro de panela… pra desistir um filminho, num dia friozinho, quentinho kkkk tanto faaazz! Brigadeiro toda hr pfvo 🤎 Se vc é desse time precisa conhecer nosso cookie de brigadeiro de panela 🍪 100% artesanal da Holy #cookies #brigadeiro #producao #rotina #artesanal", "gancho": "", "sugestoes": [], "res": "720x1280"}, {"sc": "DXW8tQCD4p0", "cat": "Combo", "data": "2026-09-05", "slot": 3, "url": "https://www.instagram.com/p/DXW8tQCD4p0/", "capa": true, "legenda": "Qual seu combinho favorito? 🍪☕ PSIU: amanhã é feriado e estaremos ON loja das 13h às 18h30 | delivery até 23h45 Então já marca aquela pausinha pro café com seu @ favorito #campinas #cookies #feriado #café #dica #delivery", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DZz92lyEh5E", "cat": "Cookie", "data": "2026-09-06", "slot": 1, "url": "https://www.instagram.com/p/DZz92lyEh5E/", "capa": true, "legenda": "“Aline vamos ali gravar um vídeo rápido do seu react” Resultado: 1h30 de conteúdos com as 30 personalidades dela 🤣🥹 Se vc ainda não veio provar, corre que o COOKIE DA FRANÇA já está por aqui por TEMPO LIMITADO 🚨🗣️🇫🇷 🍪 massa feita com manteiga noisette (manteiga tostada), pedaços de chocolate meio am", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "Dbs_Z6Ylcml", "cat": "Combo", "data": "2026-09-06", "slot": 2, "url": "https://www.instagram.com/p/Dbs_Z6Ylcml/", "capa": true, "legenda": "Quintoou e a Lu veio contar seu combinho favorito 🤎 🥐 Lanchinho de Croissant: Croissant da @mercimerci_patisserie com presunto alemão, mostarda, tomate e alface 🍓Frozen Morango: sorvete de morango artesanal da Holy finalizado com salty cream (chantilly levemente salgado) 🍪 Cookie de Kinder com muita", "gancho": "", "sugestoes": [], "res": "1080x1920"}, {"sc": "DXE7NnnDCTC", "cat": "Cookie", "data": "2026-09-07", "slot": 1, "url": "https://www.instagram.com/p/DXE7NnnDCTC/", "capa": true, "legenda": "Segundou do jeito que a gente gosta: com muito chocolate 🤤🍪 Nosso Cookie Choc é aquele clássico que nunca decepciona 😮‍💨 Corre garantir o seu no nosso delivery🛵💨", "gancho": "", "sugestoes": [], "res": "1080x1920"}], "categorias": ["Cookie", "Milkshake", "Bebida gelada", "Combo", "Combo salgado", "Combo bebida gelada", "Brownie com sorvete", "Torta com sorvete", "Torta", "Queijo quente", "Lanchinho", "Processo", "Promo"], "limiar": 21.0};</script>
 <script>
 (function () {
+  "use strict";
+  var D = window.DADOS, HOR = D.horarios, LIMIAR = D.limiar;
+
+  function esc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function grau(t) {
+    if (t == null) { return '<span class="g">—</span>'; }
+    return '<span class="g ' + (t <= LIMIAR ? 'frio' : 'calor') + '">' + Math.round(t) + '°</span>';
+  }
+  function diaSemana(iso) {
+    var d = new Date(iso + 'T12:00:00');
+    return ['dom','seg','ter','qua','qui','sex','sab'][d.getDay()];
+  }
+  function diaLongo(iso) {
+    var d = new Date(iso + 'T12:00:00');
+    return ['domingo','segunda','terça','quarta','quinta','sexta','sábado'][d.getDay()];
+  }
+  function brl(iso) { return iso.slice(8, 10) + '/' + iso.slice(5, 7); }
+
+  /* ---------- estado que o usuário cria: marcações e remanejamentos ----------
+     Guardado no navegador e espelhado no Supabase que a página de projetos já usa.
+     A chave é o código do post, não o horário: assim mover um post não perde o ✔. */
+  var LOCAL = 'volume-postagem:estado';
+  var URL_BASE = 'https://mkajvxyiyqxotiydkylq.supabase.co/rest/v1/hc_cardapio_ordem';
+  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYWp2eHlpeXF4b3RpeWRreWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NTgzNzcsImV4cCI6MjEwMjAzNDM3N30.vfHCb8BRcshufnp_7eAt9ch4aVEMpcbVA5u16IS0Kao';
+  var ID = 'volume-postagem-marcacoes';
+  var H = { apikey: ANON, Authorization: 'Bearer ' + ANON, 'Content-Type': 'application/json' };
+  var estado = { marcas: {}, mudancas: {} };
+
+  function normalizar(bruto) {
+    if (!bruto || typeof bruto !== 'object') { return { marcas: {}, mudancas: {} }; }
+    if (bruto.marcas || bruto.mudancas) {
+      return { marcas: bruto.marcas || {}, mudancas: bruto.mudancas || {} };
+    }
+    // formato antigo: chave "data|slot". Converte pro código do post e não perde nada.
+    var marcas = {};
+    Object.keys(bruto).forEach(function (k) {
+      var pt = k.split('|');
+      for (var i = 0; i < D.posts.length; i++) {
+        if (D.posts[i].data === pt[0] && D.posts[i].slot === Number(pt[1])) {
+          marcas[D.posts[i].sc] = bruto[k]; break;
+        }
+      }
+    });
+    return { marcas: marcas, mudancas: {} };
+  }
+  function lerLocal() {
+    try { return normalizar(JSON.parse(localStorage.getItem(LOCAL) || '{}')); }
+    catch (e) { return { marcas: {}, mudancas: {} }; }
+  }
+  function gravarLocal() {
+    try { localStorage.setItem(LOCAL, JSON.stringify(estado)); } catch (e) {}
+  }
+  var pendente = null;
+  function enviar() {
+    clearTimeout(pendente);
+    pendente = setTimeout(function () {
+      fetch(URL_BASE + '?on_conflict=id', {
+        method: 'POST',
+        headers: Object.assign({ Prefer: 'resolution=merge-duplicates' }, H),
+        body: JSON.stringify({ id: ID, layout: estado })
+      }).catch(function () {});
+    }, 600);
+  }
+  function salvar() { gravarLocal(); enviar(); }
+
+  /* ---------- onde cada post está agora ---------- */
+  function pos(p) {
+    var m = estado.mudancas[p.sc];
+    return m ? { data: m.data, slot: m.slot } : { data: p.data, slot: p.slot };
+  }
+  function datas() {
+    var vistas = {};
+    D.dias.forEach(function (d) { vistas[d.data] = true; });
+    D.posts.forEach(function (p) { vistas[pos(p).data] = true; });
+    return Object.keys(vistas).sort();
+  }
+  function climaDe(data) {
+    for (var i = 0; i < D.dias.length; i++) { if (D.dias[i].data === data) return D.dias[i].clima || {}; }
+    return {};
+  }
+  function doDia(data) {
+    var linha = [null, null, null];
+    D.posts.forEach(function (p) {
+      var q = pos(p);
+      if (q.data === data && q.slot >= 1 && q.slot <= HOR.length) { linha[q.slot - 1] = p; }
+    });
+    return linha;
+  }
+
+  /* ---------- desenho ---------- */
+  function renderGrade() {
+    var alvo = document.getElementById('gradeDias');
+    alvo.innerHTML = datas().map(function (data) {
+      var linha = doDia(data), cheios = linha.filter(Boolean).length;
+      var ruins = linha.filter(function (p) { return p && /^360x/.test(p.res); }).length;
+      var c = climaDe(data);
+      var postados = 0, agendados = 0;
+      linha.forEach(function (p) {
+        if (!p) return;
+        var m = estado.marcas[p.sc] || {};
+        if (m.postado) postados++; else if (m.agendado) agendados++;
+      });
+      var resumo = postados ? postados + ' postado' + (postados > 1 ? 's' : '')
+                 : agendados ? agendados + ' agendado' + (agendados > 1 ? 's' : '') : '';
+      return '<button class="dia-btn" data-dia="' + data + '">'
+        + '<span class="dnum">' + brl(data) + '</span>'
+        + '<span class="dsem">' + diaSemana(data) + '</span>'
+        + '<span class="dtemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
+        + '<span class="dcheio' + (cheios < HOR.length ? ' falta' : '') + '">'
+        + cheios + '/' + HOR.length + ' slots</span>'
+        + (ruins ? '<span class="dcheio ruim">' + ruins + ' em 360p</span>' : '')
+        + '<span class="dmarca">' + resumo + '</span></button>';
+    }).join('');
+  }
+
+  function slotHTML(data, i, p) {
+    var hora = HOR[i];
+    if (!p) {
+      return '<div class="slot vazio" data-slot="' + (i + 1) + '"><div class="semcapa">livre</div>'
+        + '<div class="corpo"><div class="cab"><span class="hora">' + hora + '</span>'
+        + '<span class="tag">slot ' + (i + 1) + '</span></div>'
+        + '<p class="legenda">Sem post definido. O horário existe na grade para ser preenchido depois.</p>'
+        + '</div></div>';
+    }
+    var img = p.capa ? '<img src="capas/' + esc(p.sc) + '.png" alt="" loading="lazy">'
+                     : '<div class="semcapa">sem capa</div>';
+    var tagRes = !p.res ? '<span class="tag">sem arquivo</span>'
+      : /^360x/.test(p.res) ? '<span class="tag res-ruim">' + esc(p.res) + ' · pedir original</span>'
+      : '<span class="tag res-ok">' + esc(p.res) + '</span>';
+    var gancho = p.gancho ? '<div class="gancho"><div class="grot">Gancho — abertura do vídeo</div>'
+      + '<div class="gtxt">' + esc(p.gancho) + '</div></div>' : '';
+    var copys = p.sugestoes.length ? '<div class="copys">' + p.sugestoes.map(function (c) {
+      return '<div class="copy"><div class="crot">' + esc(c.rot) + '</div>'
+           + '<div class="ctxt">' + esc(c.txt) + '</div></div>';
+    }).join('') + '</div>' : '';
+    var m = estado.marcas[p.sc] || {};
+    var marcas = '<div class="marcas" data-sc="' + esc(p.sc) + '">'
+      + '<button class="marca' + (m.agendado ? ' on' : '') + '" data-marca="agendado">'
+      + '<span class="cx"></span>Agendado</button>'
+      + '<button class="marca' + (m.postado ? ' on' : '') + '" data-marca="postado">'
+      + '<span class="cx"></span>Postado</button></div>';
+    return '<div class="slot" data-slot="' + (i + 1) + '">' + img + '<div class="corpo">'
+      + '<div class="cab"><button class="hora hora-btn" data-mover="' + esc(p.sc) + '" '
+      + 'title="mover para outro dia ou horário">' + hora + ' ✎</button>'
+      + '<span class="tag cat">' + esc(p.cat) + '</span>' + tagRes + '</div>'
+      + '<p class="legenda">' + esc(p.legenda) + '</p>'
+      + '<a class="link" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.url) + '</a>'
+      + gancho + copys + marcas + '</div></div>';
+  }
+
+  function renderPainel(data) {
+    var linha = doDia(data), cheios = linha.filter(Boolean).length, c = climaDe(data);
+    var cls = c.meio == null ? '' : (c.meio <= LIMIAR ? 'frio' : 'calor');
+    var diz = cls === 'frio'
+      ? 'Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.'
+      : cls === 'calor'
+      ? 'Dia quente pede refrescante — milkshake, sorvete, bebida gelada.'
+      : 'Temperatura indisponível.';
+    document.getElementById('paineis').innerHTML =
+      '<div class="dia-painel" data-dia="' + data + '">'
+      + '<h2>' + brl(data) + ' · ' + diaLongo(data) + ' · '
+      + '<span class="htemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
+      + '<span class="cont">' + cheios + ' de ' + HOR.length + ' slots</span></h2>'
+      + '<div class="banda ' + cls + '"><span class="bdiz">' + diz + '</span></div>'
+      + linha.map(function (p, i) { return slotHTML(data, i, p); }).join('')
+      + '</div>';
+  }
+
+  var diaAberto = null;
+  function abrirDia(data) {
+    diaAberto = data;
+    document.querySelectorAll('.dia-btn').forEach(function (b) {
+      b.classList.toggle('ativo', b.dataset.dia === data);
+    });
+    document.querySelector('.visor-vazio').hidden = true;
+    renderPainel(data);
+  }
+  function redesenhar() {
+    renderGrade();
+    if (diaAberto) {
+      renderPainel(diaAberto);
+      document.querySelectorAll('.dia-btn').forEach(function (b) {
+        b.classList.toggle('ativo', b.dataset.dia === diaAberto);
+      });
+    }
+  }
+
+  /* ---------- mover um post ---------- */
+  function abrirEditor(sc, botao) {
+    document.querySelectorAll('.editor').forEach(function (e) { e.remove(); });
+    var p = D.posts.filter(function (x) { return x.sc === sc; })[0];
+    if (!p) return;
+    var q = pos(p);
+    var ds = datas();
+    var ed = document.createElement('div');
+    ed.className = 'editor';
+    ed.innerHTML = '<div class="erow"><label>Dia</label>'
+      + '<input type="date" class="edata" value="' + q.data + '" min="' + ds[0]
+      + '" max="' + ds[ds.length - 1] + '"></div>'
+      + '<div class="erow"><label>Horário</label><select class="eslot">'
+      + HOR.map(function (h, i) {
+          return '<option value="' + (i + 1) + '"' + (q.slot === i + 1 ? ' selected' : '') + '>'
+               + h + '</option>';
+        }).join('') + '</select></div>'
+      + '<div class="eacoes"><button class="ebtn ok">Mover</button>'
+      + '<button class="ebtn cancelar">Cancelar</button></div>'
+      + '<p class="eaviso">Se já houver post no destino, os dois trocam de lugar.</p>';
+    botao.closest('.cab').after(ed);
+    ed.querySelector('.edata').focus();
+
+    ed.querySelector('.cancelar').addEventListener('click', function () { ed.remove(); });
+    ed.querySelector('.ok').addEventListener('click', function () {
+      var novaData = ed.querySelector('.edata').value;
+      var novoSlot = Number(ed.querySelector('.eslot').value);
+      if (!novaData) { return; }
+      if (novaData === q.data && novoSlot === q.slot) { ed.remove(); return; }
+      var ocupante = doDia(novaData)[novoSlot - 1];
+      if (ocupante && ocupante.sc !== sc) {
+        // destino ocupado: troca, que é como o Fred já pensa o remanejamento
+        estado.mudancas[ocupante.sc] = { data: q.data, slot: q.slot };
+      }
+      estado.mudancas[sc] = { data: novaData, slot: novoSlot };
+      salvar();
+      diaAberto = novaData;
+      redesenhar();
+    });
+  }
+
+  document.addEventListener('click', function (ev) {
+    var dia = ev.target.closest('.dia-btn');
+    if (dia) { abrirDia(dia.dataset.dia); return; }
+    var mover = ev.target.closest('[data-mover]');
+    if (mover) { abrirEditor(mover.dataset.mover, mover); return; }
+    var marca = ev.target.closest('.marca');
+    if (marca) {
+      var sc = marca.closest('.marcas').dataset.sc;
+      estado.marcas[sc] = estado.marcas[sc] || {};
+      estado.marcas[sc][marca.dataset.marca] = !estado.marcas[sc][marca.dataset.marca];
+      salvar(); redesenhar(); return;
+    }
+  });
+
+  /* ---------- abas e filtros ---------- */
   function abrirAba(nome) {
     document.querySelectorAll('.tab-btn').forEach(function (b) {
       var ativo = b.dataset.tab === nome;
@@ -492,20 +626,6 @@ Vem num dia que você não está a fim de doce. A gente te espera igual ☕️</
   document.querySelectorAll('.tab-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirAba(b.dataset.tab); });
   });
-
-  function abrirDia(id) {
-    document.querySelectorAll('.dia-btn').forEach(function (b) {
-      b.classList.toggle('ativo', b.dataset.dia === id);
-    });
-    document.querySelectorAll('.dia-painel').forEach(function (p) {
-      p.hidden = p.dataset.dia !== id;
-    });
-    document.querySelector('.visor-vazio').hidden = true;
-  }
-  document.querySelectorAll('.dia-btn').forEach(function (b) {
-    b.addEventListener('click', function () { abrirDia(b.dataset.dia); });
-  });
-
   document.querySelectorAll('.filtro').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.filtro').forEach(function (o) {
@@ -513,50 +633,41 @@ Vem num dia que você não está a fim de doce. A gente te espera igual ☕️</
       });
       var f = b.dataset.filtro;
       document.querySelectorAll('table.acervo tbody tr').forEach(function (tr) {
-        var mostra = f === 'todos'
+        tr.hidden = !(f === 'todos'
           || (f === 'proprios' && tr.dataset.proprio === '1')
-          || (f === 'disponiveis' && tr.dataset.ja === '0');
-        tr.hidden = !mostra;
+          || (f === 'disponiveis' && tr.dataset.ja === '0'));
       });
     });
   });
 
-  /* ---- marcacoes de agendado/postado ----
-     Grava na hora no navegador (resposta instantanea, funciona sem rede) e
-     empurra pro Supabase que a pagina de projetos ja usa - a linha e so mais
-     um id na tabela chave->json, nenhuma tabela nova. Assim a marcacao feita
-     no celular aparece no computador. */
-  var LOCAL = 'volume-postagem:marcacoes';
-  var URL_BASE = 'https://mkajvxyiyqxotiydkylq.supabase.co/rest/v1/hc_cardapio_ordem';
-  var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYWp2eHlpeXF4b3RpeWRreWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NTgzNzcsImV4cCI6MjEwMjAzNDM3N30.vfHCb8BRcshufnp_7eAt9ch4aVEMpcbVA5u16IS0Kao';
-  var ID = 'volume-postagem-marcacoes';
-  var H = { apikey: ANON, Authorization: 'Bearer ' + ANON, 'Content-Type': 'application/json' };
-  var estado = {};
-
-  function lerLocal() {
-    try { return JSON.parse(localStorage.getItem(LOCAL) || '{}'); } catch (e) { return {}; }
-  }
-  function gravarLocal() {
-    try { localStorage.setItem(LOCAL, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
-  }
-
-  function pintar() {
-    document.querySelectorAll('.marcas').forEach(function (bloco) {
-      var st = estado[bloco.dataset.chave] || {};
-      bloco.querySelectorAll('.marca').forEach(function (b) {
-        b.classList.toggle('on', !!st[b.dataset.marca]);
-      });
-    });
-    document.querySelectorAll('.dmarca').forEach(function (el) {
-      var dia = el.dataset.resumo, postados = 0, agendados = 0;
-      Object.keys(estado).forEach(function (k) {
-        if (k.split('|')[0] !== dia) return;
-        if (estado[k].postado) postados++;
-        else if (estado[k].agendado) agendados++;
-      });
-      el.textContent = postados ? postados + ' postado' + (postados > 1 ? 's' : '')
-                     : agendados ? agendados + ' agendado' + (agendados > 1 ? 's' : '') : '';
-    });
+  /* ---------- previsão: os valores gravados envelhecem, o navegador rebusca ---------- */
+  function atualizarClima() {
+    var ds = datas();
+    if (!ds.length) return;
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=-22.9099&longitude=-47.0626'
+      + '&daily=temperature_2m_min&hourly=temperature_2m&timezone=America%2FSao_Paulo'
+      + '&start_date=' + ds[0] + '&end_date=' + ds[ds.length - 1])
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.daily) return;
+        var meio = {};
+        d.hourly.time.forEach(function (t, i) {
+          if (t.slice(11, 16) === '12:00') { meio[t.slice(0, 10)] = d.hourly.temperature_2m[i]; }
+        });
+        d.daily.time.forEach(function (dia, i) {
+          var achou = false;
+          for (var k = 0; k < D.dias.length; k++) {
+            if (D.dias[k].data === dia) {
+              D.dias[k].clima = { min: d.daily.temperature_2m_min[i], meio: meio[dia] };
+              achou = true; break;
+            }
+          }
+          if (!achou) {
+            D.dias.push({ data: dia, clima: { min: d.daily.temperature_2m_min[i], meio: meio[dia] } });
+          }
+        });
+        redesenhar();
+      }).catch(function () {});
   }
 
   async function sincronizar() {
@@ -564,85 +675,21 @@ Vem num dia que você não está a fim de doce. A gente te espera igual ☕️</
       var r = await fetch(URL_BASE + '?id=eq.' + ID + '&select=layout', { headers: H });
       if (!r.ok) return;
       var linhas = await r.json();
-      var remoto = (linhas[0] && linhas[0].layout) || {};
-      // o que ja esta marcado vence: marcar e sempre uma acao, desmarcar e raro
-      Object.keys(remoto).forEach(function (k) {
-        estado[k] = Object.assign({}, remoto[k], estado[k] || {});
+      var remoto = normalizar(linhas[0] && linhas[0].layout);
+      Object.keys(remoto.marcas).forEach(function (k) {
+        estado.marcas[k] = Object.assign({}, remoto.marcas[k], estado.marcas[k] || {});
       });
-      gravarLocal(); pintar(); enviar();
-    } catch (e) { /* sem rede: o navegador ja tem o estado */ }
-  }
-
-  var pendente = null;
-  function enviar() {
-    clearTimeout(pendente);
-    pendente = setTimeout(function () {
-      fetch(URL_BASE + '?on_conflict=id', {
-        method: 'POST',
-        headers: Object.assign({ Prefer: 'resolution=merge-duplicates' }, H),
-        body: JSON.stringify({ id: ID, layout: estado })
-      }).catch(function () { /* offline: fica so no navegador */ });
-    }, 600);
+      Object.keys(remoto.mudancas).forEach(function (k) {
+        if (!estado.mudancas[k]) { estado.mudancas[k] = remoto.mudancas[k]; }
+      });
+      gravarLocal(); redesenhar(); enviar();
+    } catch (e) {}
   }
 
   estado = lerLocal();
-  pintar();
+  renderGrade();
   sincronizar();
-
-  document.addEventListener('click', function (ev) {
-    var b = ev.target.closest('.marca');
-    if (!b) return;
-    var chave = b.closest('.marcas').dataset.chave;
-    estado[chave] = estado[chave] || {};
-    estado[chave][b.dataset.marca] = !estado[chave][b.dataset.marca];
-    gravarLocal(); pintar(); enviar();
-  });
-
-  /* ---- previsao: os valores gravados sao do dia em que a pagina foi gerada.
-     O navegador rebusca ao abrir, sem chave de API, pra previsao nao envelhecer. */
-  (function () {
-    var dias = [].map.call(document.querySelectorAll('[data-temp]'), function (el) {
-      return el.dataset.temp;
-    });
-    if (!dias.length) return;
-    dias.sort();
-    var url = 'https://api.open-meteo.com/v1/forecast?latitude=-22.9099&longitude=-47.0626'
-            + '&daily=temperature_2m_min&hourly=temperature_2m'
-            + '&timezone=America%2FSao_Paulo&start_date=' + dias[0] + '&end_date=' + dias[dias.length - 1];
-    fetch(url).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
-      if (!d || !d.daily) return;
-      var meio = {};
-      d.hourly.time.forEach(function (t, i) {
-        if (t.slice(11, 16) === '12:00') { meio[t.slice(0, 10)] = d.hourly.temperature_2m[i]; }
-      });
-      var LIMIAR = 21;   // mesmo corte do gerador: ate 21 azul, 22+ vermelho
-      function grau(t) {
-        if (t == null) { return '<span class="g">—</span>'; }
-        return '<span class="g ' + (t <= LIMIAR ? 'frio' : 'calor') + '">'
-             + Math.round(t) + '°</span>';
-      }
-      d.daily.time.forEach(function (dia, i) {
-        var mn = d.daily.temperature_2m_min[i], md = meio[dia];
-        if (mn == null || md == null) return;
-        var par = grau(mn) + ' · ' + grau(md);
-        var el = document.querySelector('[data-temp="' + dia + '"]');
-        if (el) { el.innerHTML = par; }
-        var hd = document.querySelector('[data-htemp="' + dia + '"]');
-        if (hd) { hd.innerHTML = par; }
-        var cls = md <= LIMIAR ? 'frio' : 'calor';
-        var painel = document.querySelector('.dia-painel[data-dia="' + dia + '"] .banda');
-        if (painel) {
-          painel.className = 'banda ' + cls;
-          var dz = painel.querySelector('.bdiz');
-          if (dz) {
-            dz.textContent = cls === 'frio'
-              ? 'Dia frio pede doce quente — cookie saindo do forno, queijo quente, bebida quente.'
-              : 'Dia quente pede refrescante — milkshake, sorvete, bebida gelada.';
-          }
-        }
-      });
-    }).catch(function () { /* sem rede: ficam os valores gravados */ });
-  })();
+  atualizarClima();
 
   var h = location.hash.replace('#', '');
   if (h && document.querySelector('.tab-panel[data-panel="' + h + '"]')) { abrirAba(h); }
