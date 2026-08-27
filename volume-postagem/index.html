@@ -140,6 +140,15 @@
   .gancho .grot { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em;
                   text-transform: uppercase; color: var(--good); font-weight: 700; margin-bottom: .25rem; }
   .gancho .gtxt { font-size: .875rem; white-space: pre-wrap; font-weight: 500; }
+  .gancho.vazio, .gancho.pedindo, .gancho.pronto, .gancho.falhou {
+    background: var(--surface-2); border-color: var(--rule); }
+  .gancho.vazio .grot, .gancho.pedindo .grot, .gancho.pronto .grot { color: var(--ink-faint); }
+  .gancho.pedindo { border-color: var(--warn); }
+  .gancho.pedindo .gtxt { color: var(--warn); font-weight: 400; }
+  .gancho.pronto { border-color: var(--good); }
+  .gancho.falhou { border-color: var(--bad); }
+  .gancho.falhou .grot { color: var(--bad); }
+  .banda .gerar-dia { margin-left: auto; }
   .copys { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: .5rem; }
   .copy { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: .5rem;
           padding: .6rem .7rem; }
@@ -432,6 +441,8 @@
   var URL_BASE = 'https://mkajvxyiyqxotiydkylq.supabase.co/rest/v1/hc_cardapio_ordem';
   var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYWp2eHlpeXF4b3RpeWRreWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NTgzNzcsImV4cCI6MjEwMjAzNDM3N30.vfHCb8BRcshufnp_7eAt9ch4aVEMpcbVA5u16IS0Kao';
   var ID = 'volume-postagem-marcacoes';
+  var ID_FILA = 'volume-postagem-pedidos';   // pedidos de gancho, à parte das marcações
+  var fila = {};
   var H = { apikey: ANON, Authorization: 'Bearer ' + ANON, 'Content-Type': 'application/json' };
   var INTERVALO = 10000;   // relê o servidor a cada 10s enquanto a aba estiver à vista
 
@@ -550,10 +561,35 @@
       });
   }
 
+  function lerFila() {
+    return fetch(URL_BASE + '?id=eq.' + ID_FILA + '&select=layout', { headers: H })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (linhas) {
+        if (!linhas) { return; }
+        var novo = (linhas[0] && linhas[0].layout) || {};
+        if (JSON.stringify(novo) !== JSON.stringify(fila)) { fila = novo; redesenhar(); }
+      }).catch(function () {});
+  }
+
+  function pedirGancho(scs) {
+    if (!scs.length) { return; }
+    scs.forEach(function (sc) { fila[sc] = { estado: 'pendente' }; });
+    redesenhar();
+    fetch(URL_BASE + '?on_conflict=id', {
+      method: 'POST',
+      headers: Object.assign({ Prefer: 'resolution=merge-duplicates' }, H),
+      body: JSON.stringify({ id: ID_FILA, layout: fila })
+    }).catch(function () {
+      scs.forEach(function (sc) { fila[sc] = { estado: 'erro', msg: 'não consegui enfileirar' }; });
+      redesenhar();
+    });
+  }
+
   function ligarSincronia() {
     setInterval(puxar, INTERVALO);
+    setInterval(lerFila, INTERVALO);
     document.addEventListener('visibilitychange', function () {
-      if (!document.hidden) { puxar(); empurrar(); }
+      if (!document.hidden) { puxar(); lerFila(); empurrar(); }
     });
     window.addEventListener('online', function () { puxar(); empurrar(); });
     window.addEventListener('offline', function () {
@@ -615,7 +651,14 @@
     return '<h2>' + brl(data) + ' · ' + diaLongo(data) + ' · '
       + '<span class="htemp">' + grau(c.min) + ' · ' + grau(c.meio) + '</span>'
       + '<span class="cont">' + cheios + ' de ' + HOR.length + ' slots</span></h2>'
-      + '<div class="banda ' + cls + '"><span class="bdiz">' + diz + '</span></div>';
+      + '<div class="banda ' + cls + '"><span class="bdiz">' + diz + '</span>'
+      + (function () {
+          var faltam = linha.filter(function (q) {
+            return q && !q.gancho && !(fila[q.sc] || {}).estado;
+          });
+          return faltam.length ? '<button class="ebtn ok gerar-dia" data-dia-gerar="' + data
+            + '">gerar ganchos do dia (' + faltam.length + ')</button>' : '';
+        })() + '</div>';
   }
   function slotHTML(data, i, p) {
     var hora = HOR[i];
@@ -631,8 +674,26 @@
     var tagRes = !p.res ? '<span class="tag">sem arquivo</span>'
       : /^360x/.test(p.res) ? '<span class="tag res-ruim">' + esc(p.res) + ' · pedir original</span>'
       : '<span class="tag res-ok">' + esc(p.res) + '</span>';
-    var gancho = p.gancho ? '<div class="gancho"><div class="grot">Gancho — abertura do vídeo</div>'
-      + '<div class="gtxt">' + esc(p.gancho) + '</div></div>' : '';
+    var f = fila[p.sc] || {};
+    var gancho;
+    if (p.gancho) {
+      gancho = '<div class="gancho"><div class="grot">Gancho — texto fixo na tela</div>'
+             + '<div class="gtxt">' + esc(p.gancho) + '</div></div>';
+    } else if (f.estado === 'pendente' || f.estado === 'processando') {
+      gancho = '<div class="gancho pedindo"><div class="grot">Gancho</div>'
+             + '<div class="gtxt">assistindo o vídeo e escrevendo… leva cerca de um minuto</div></div>';
+    } else if (f.estado === 'feito') {
+      gancho = '<div class="gancho pronto"><div class="grot">Gancho</div>'
+             + '<div class="gtxt">pronto — <button class="ebtn ok recarregar">recarregar a página</button>'
+             + '</div></div>';
+    } else if (f.estado === 'erro') {
+      gancho = '<div class="gancho falhou"><div class="grot">Gancho — falhou</div>'
+             + '<div class="gtxt">' + esc(f.msg || 'erro') + '</div>'
+             + '<button class="ebtn gerar" data-gerar="' + esc(p.sc) + '">tentar de novo</button></div>';
+    } else {
+      gancho = '<div class="gancho vazio"><div class="grot">Gancho</div>'
+             + '<button class="ebtn ok gerar" data-gerar="' + esc(p.sc) + '">gerar gancho</button></div>';
+    }
     var copys = p.sugestoes.length ? '<div class="copys">' + p.sugestoes.map(function (c) {
       return '<div class="copy"><div class="crot">' + esc(c.rot) + '</div>'
            + '<div class="ctxt">' + esc(c.txt) + '</div></div>';
@@ -839,6 +900,16 @@
   document.addEventListener('click', function (ev) {
     var dia = ev.target.closest('.dia-btn');
     if (dia) { abrirDia(dia.dataset.dia); return; }
+    if (ev.target.closest('.recarregar')) { location.reload(); return; }
+    var ger = ev.target.closest('[data-gerar]');
+    if (ger) { pedirGancho([ger.dataset.gerar]); return; }
+    var gerDia = ev.target.closest('[data-dia-gerar]');
+    if (gerDia) {
+      pedirGancho(doDia(gerDia.dataset.diaGerar).filter(function (q) {
+        return q && !q.gancho && !(fila[q.sc] || {}).estado;
+      }).map(function (q) { return q.sc; }));
+      return;
+    }
     var mover = ev.target.closest('[data-mover]');
     if (mover) { abrirEditor(mover.dataset.mover, mover); return; }
     var marca = ev.target.closest('.marca');
@@ -926,6 +997,7 @@
   abrirVista('hoje');
   situacao(pendencias() ? 'indo' : 'ok', pendencias() ? 'salvando…' : 'sincronizado');
   puxar().then(function () { empurrar(); });
+  lerFila();
   ligarSincronia();
   atualizarClima();
 
