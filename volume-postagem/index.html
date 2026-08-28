@@ -140,6 +140,13 @@
   .gancho .grot { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em;
                   text-transform: uppercase; color: var(--good); font-weight: 700; margin-bottom: .25rem; }
   .gancho .gtxt { font-size: .875rem; white-space: pre-wrap; font-weight: 500; }
+  .gtabela { display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem;
+             align-items: baseline; margin-top: .15rem; }
+  .gmolde { font-family: var(--mono); font-size: .625rem; letter-spacing: .04em;
+            color: var(--ink-faint); white-space: nowrap; text-align: right; }
+  .gtexto { font-size: .9375rem; font-weight: 600; line-height: 1.35; }
+  .gtexto.na { font-size: .75rem; font-weight: 400; color: var(--ink-faint); font-style: italic; }
+  .gnota { grid-column: 1 / -1; font-size: .75rem; color: var(--ink-faint); font-style: italic; }
   .gancho.vazio, .gancho.pedindo, .gancho.pronto, .gancho.falhou {
     background: var(--surface-2); border-color: var(--rule); }
   .gancho.vazio .grot, .gancho.pedindo .grot, .gancho.pronto .grot { color: var(--ink-faint); }
@@ -415,6 +422,27 @@
   "use strict";
   var D = window.DADOS, HOR = D.horarios, LIMIAR = D.limiar;
 
+  /* O gancho chega como "17 — convite: texto". Com nomes de molde de tamanhos
+     diferentes, os dois-pontos não alinham e não se enxerga onde acaba o rótulo
+     e começa a frase. Vira grade de duas colunas: molde discreto, texto em foco. */
+  function tabelaGancho(bruto) {
+    var linhas = String(bruto || '').split('\n').filter(function (l) { return l.trim(); });
+    var itens = linhas.map(function (l) {
+      var m = l.match(/^\s*(\d+)\s*[—–-]\s*([^:]+):\s*(.+)$/);
+      if (m) { return { molde: m[1], nome: m[2].trim(), txt: m[3].trim() }; }
+      var m2 = l.match(/^\s*(\d+)\s*·\s*(.+)$/);          // formato antigo
+      if (m2) { return { molde: m2[1], nome: '', txt: m2[2].trim() }; }
+      return { molde: '', nome: '', txt: l.trim(), solto: true };
+    });
+    if (!itens.some(function (i) { return i.molde; })) { return null; }
+    return '<div class="gtabela">' + itens.map(function (i) {
+      var na = /^não se aplica/i.test(i.txt);
+      if (i.solto) { return '<div class="gnota">' + esc(i.txt) + '</div>'; }
+      return '<div class="gmolde">' + esc(i.molde + (i.nome ? ' · ' + i.nome : '')) + '</div>'
+           + '<div class="gtexto' + (na ? ' na' : '') + '">' + esc(i.txt) + '</div>';
+    }).join('') + '</div>';
+  }
+
   function esc(t) {
     return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
@@ -677,8 +705,9 @@
     var f = fila[p.sc] || {};
     var gancho;
     if (p.gancho) {
+      var tab = tabelaGancho(p.gancho);
       gancho = '<div class="gancho"><div class="grot">Gancho — texto fixo na tela</div>'
-             + '<div class="gtxt">' + esc(p.gancho) + '</div></div>';
+             + (tab || '<div class="gtxt">' + esc(p.gancho) + '</div>') + '</div>';
     } else if (f.estado === 'pendente' || f.estado === 'processando') {
       gancho = '<div class="gancho pedindo"><div class="grot">Gancho</div>'
              + '<div class="gtxt">assistindo o vídeo e escrevendo… leva cerca de um minuto</div></div>';
