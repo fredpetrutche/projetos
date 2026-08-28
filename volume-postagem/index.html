@@ -738,6 +738,9 @@
     } else if (precisa && (f.estado === 'pendente' || f.estado === 'processando')) {
       acao = '<div class="gerabox pedindo">assistindo o vídeo e escrevendo… '
            + 'leva cerca de um minuto por texto</div>';
+    } else if (precisa && f.estado === 'gerado') {
+      // texto já escrito, mas a página no ar ainda é a antiga: não prometer recarregar
+      acao = '<div class="gerabox pedindo">texto escrito — publicando a página…</div>';
     } else if (f.estado === 'feito' && precisa) {
       acao = '<div class="gerabox pronto">pronto — '
            + '<button class="ebtn ok recarregar">recarregar a página</button></div>';
