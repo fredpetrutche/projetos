@@ -106,6 +106,11 @@
   .painel[hidden] { display: none !important; }
   .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink); }
   .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  /* bloco de texto pronto pra copiar — display:block de propósito: .painel é flex-column
+     e transformaria cada <a> interno numa linha separada */
+  .copiavel { display: block; background: var(--surface-2); border: 1px solid var(--rule);
+              border-radius: 5px; padding: 1.1rem 1.2rem; white-space: pre-wrap;
+              font-size: .8125rem; line-height: 1.65; overflow-wrap: anywhere; }
   .dica { font-size: .75rem; color: var(--ink-faint); font-family: var(--mono); }
 
   ul.pontos { margin: 0; padding-left: 1.15rem; display: flex; flex-direction: column; gap: .4rem; font-size: .875rem; color: var(--ink-soft); }
@@ -200,13 +205,15 @@
   <div><span class="v">Paulínia</span><span class="s">Av. José Paulino, 1615 · Centro — a campanha também roda em Piracicaba</span></div>
   <div><span class="v">R$ 5.000</span><span class="s">verba total da campanha</span></div>
   <div><span class="v">1 + 2</span><span class="s">uma página da cidade e dois influenciadores</span></div>
-  <div><span class="v">3 entregas</span><span class="s">cookie · voucher · sorteio</span></div>
+  <div><span class="v">3 entregas</span><span class="s">cookie · voucher · 2 combos por dia</span></div>
 </div>
 
 <div class="tabs" role="tablist">
   <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
   <button class="tab-btn" type="button" data-tab="video" role="tab" aria-selected="false">Vídeo modelo</button>
   <button class="tab-btn" type="button" data-tab="influenciadores" role="tab" aria-selected="false">Influenciadores</button>
+  <button class="tab-btn" type="button" data-tab="criador" role="tab" aria-selected="false">Briefing do criador</button>
+  <button class="tab-btn" type="button" data-tab="balcao" role="tab" aria-selected="false">Roteiro de balcão</button>
   <button class="tab-btn" type="button" data-tab="stories" role="tab" aria-selected="false">Melhor Stories</button>
   <button class="tab-btn" type="button" data-tab="voucher" role="tab" aria-selected="false">Voucher de volta</button>
 </div>
@@ -231,6 +238,10 @@
       A campanha roda em <strong>Paulínia e Piracicaba</strong>. O que é exclusivo desta página é a produção:
       <strong>o vídeo é da loja de Paulínia</strong> e os influenciadores levantados são de Paulínia. Piracicaba
       precisa do mesmo levantamento — a régua e o método da aba Influenciadores servem, os nomes não.</span></div>
+    <div class="note-item"><span class="tag acc">o que a equipe precisa saber de cor</span><span>
+      Horário, os dois combos, a regra de não ter delivery e a janela do voucher — tudo isso é falado no
+      balcão, uma pessoa de cada vez, numa fila. Está reunido na aba
+      <strong><a href="#balcao">Roteiro de balcão</a></strong>, em tópicos.</span></div>
     <div class="note-item"><span class="tag warn">o conflito de 11/09</span><span>
       A degustação do <strong>cardápio de verão</strong> está marcada pro mesmo 11 de setembro, com a mesma
       equipe e a mesma atenção. O Cookie de Graça tem verba comprometida e influenciador contratado — é o menos
@@ -296,16 +307,25 @@
           <li><strong>Teto de unidades por dia</strong> — e o que a equipe fala quando acabar.</li>
         </ul></div>
       <div class="painel" data-alvo="m6" hidden><span class="ptit">6 · Recebe o voucher de volta</span>
-        <span class="psub">novo nesta campanha · aba própria</span>
-        <p class="prose">Todo mundo que participar sai com um voucher pra voltar outro dia e ganhar um
-        benefício. É a única ponte entre os dois dias de fila e a segunda visita. O benefício ainda não foi
-        escolhido — <strong>a aba &ldquo;Voucher de volta&rdquo; tem as opções com o custo de cada uma</strong>.</p></div>
+        <span class="psub">janela fechada · benefício em aberto</span>
+        <p class="prose">Todo mundo que participar sai com um voucher pra voltar outro dia. É a única ponte
+        entre os dois dias de fila e a segunda visita.</p>
+        <ul class="pontos">
+          <li><strong>Vale de domingo 13/09 até sábado 19/09.</strong> Sete dias.</li>
+          <li><strong>Não vale no sábado 12</strong>, o segundo dia da própria campanha —
+          <strong>o voucher não é cumulativo com o Cookie de Graça</strong>. Quem pega na sexta e quer usar
+          no sábado não pode. É o ponto que mais vai gerar atrito no balcão, e por isso está escrito no
+          <a href="#balcao">roteiro de balcão</a>.</li>
+          <li>O benefício ainda não foi escolhido — a aba <strong>Voucher de volta</strong> tem as quatro
+          opções com o lucro de cada uma.</li>
+        </ul></div>
       <div class="painel" data-alvo="m7" hidden><span class="ptit">7 · Entra no sorteio do Melhor Stories</span>
         <span class="psub">novo nesta campanha · aba própria</span>
-        <p class="prose">O mesmo story do passo 3 já vale como inscrição. <strong>É um sorteio por dia</strong> —
-        um combo na sexta e outro no sábado — e o vencedor de cada dia é anunciado num vídeo no fim do
-        dia, chamando pra retirar. Precisa de um display de balcão com o combo à mostra, senão ninguém
-        fica sabendo. <strong>A aba &ldquo;Melhor Stories&rdquo; tem o fluxo inteiro.</strong></p></div>
+        <p class="prose">O mesmo story do passo 3 já vale como inscrição, e ele concorre a
+        <strong>dois combos por dia</strong>: um para o melhor stories e outro sorteado entre todos que
+        participaram. São <strong>quatro combos no total</strong>. Os ganhadores saem num vídeo no fim de
+        cada dia. Precisa de um display de balcão com o combo à mostra, senão ninguém fica sabendo.
+        <strong>A aba &ldquo;Melhor Stories&rdquo; tem o fluxo inteiro.</strong></p></div>
     </div>
   </div>
 </section>
@@ -1169,7 +1189,7 @@
   <p class="prose">O vídeo tem 37,8 s e não explica a promoção. Quem explica é a legenda — e é lá que estão
   as condições que o balcão vai ter que fazer valer. Esta é a legenda original do post de Campinas,
   na íntegra:</p>
-  <div class="painel" style="background:var(--surface-2);white-space:pre-wrap;font-size:.8125rem;line-height:1.65;">🍪 COOKIE RECHEADO NA FAIXA! 😍🔥só passar na loja e pegar!
+  <div class="copiavel">🍪 COOKIE RECHEADO NA FAIXA! 😍🔥só passar na loja e pegar!
 
 Galera, fomos conhecer o @holycook.campinas, que fica no taquaral em Campinas-SP, e olha… os cookies são simplesmente SURREAIS! 🫠 Bem recheados, feitos na hora, com fornadas fresquinhas o dia todo!
 
@@ -1261,12 +1281,22 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
 <section>
   <h2><span class="n">2</span> A recomendação<span class="hint">1 página + 2 criadores</span></h2>
   <div class="notes">
-    <div class="note-item"><span class="tag good">página</span><span>
-      <strong><a href="https://www.instagram.com/comendoporpaulinia/" target="_blank" rel="noopener">@comendoporpaulinia</a></strong> — é o análogo direto do <a href="https://www.instagram.com/comendoporcampinas/" target="_blank" rel="noopener">@comendoporcampinas</a> que fez o vídeo-modelo:
-      mesmo formato, mesma promessa, mesmo tipo de post. 1,8 view por seguidor e 7,2% de curtidas sobre
-      seguidor, o melhor engajamento entre as páginas. <em>O que ele não tem é tamanho</em>: 1.733 seguidores.
-      Se a prioridade for alcance bruto em vez de encaixe, a troca é <a href="https://www.instagram.com/livepaulinianilsao/" target="_blank" rel="noopener">@livepaulinianilsao</a> (69.873 seguidores,
-      mediana de 9.677) — mas aí é pauta de cidade, não recomendação de comida.</span></div>
+    <div class="note-item"><span class="tag acc">página · ESCOLHIDA</span><span>
+      <strong><a href="https://www.instagram.com/livepaulinianilsao/" target="_blank" rel="noopener">@livepaulinianilsao</a></strong> (Live Paulínia / Nilsão) — decidido em 03/09/2026. É o maior
+      alcance de Paulínia: <strong>69.873 seguidores e mediana de 9.677 views</strong>, postando 3,2 vezes
+      por semana. Página de notícia com rosto — o post entra como pauta da cidade, não como recomendação
+      de comida, e é isso que a escolha está comprando: <strong>alcance em vez de encaixe</strong>.
+      Como o formato é de notícia, vale combinar que a peça siga as seis exigências do roteiro
+      (<a href="#criador">Briefing do criador</a>) e não vire card de aviso.</span></div>
+    <div class="note-item"><span class="tag mudo">a alternativa que ficou de fora</span><span>
+      <strong><a href="https://www.instagram.com/comendoporpaulinia/" target="_blank" rel="noopener">@comendoporpaulinia</a></strong> — análogo direto do <a href="https://www.instagram.com/comendoporcampinas/" target="_blank" rel="noopener">@comendoporcampinas</a> que fez o vídeo-modelo:
+      mesmo formato, mesma promessa, e o melhor engajamento entre as páginas (1,8 view por seguidor,
+      7,2% de curtidas). O que faltou foi tamanho: 1.733 seguidores contra 69.873. Fica registrado como
+      opção de baixo custo pra uma segunda leva, ou pra Piracicaba.</span></div>
+    <div class="note-item"><span class="tag warn">criadores · AINDA NÃO ESCOLHIDOS</span><span>
+      A página está decidida; <strong>os dois criadores não</strong>. As sugestões abaixo continuam
+      valendo, ranqueadas por views por seguidor. O que cada um recebe e entrega está na aba
+      <a href="#criador">Briefing do criador</a>.</span></div>
     <div class="note-item"><span class="tag good">criador 1</span><span>
       <strong><a href="https://www.instagram.com/bellaraamalho/" target="_blank" rel="noopener">@bellaraamalho</a></strong> — o melhor número da lista inteira: 2,65 views por seguidor e 11% de
       curtidas sobre seguidor, com só 2.354 seguidores. Já postou sobre a loja em dezembro. É audiência que
@@ -1278,9 +1308,14 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
     <div class="note-item"><span class="tag warn">reserva</span><span>
       <strong><a href="https://www.instagram.com/sarahnogue/" target="_blank" rel="noopener">@sarahnogue</a></strong> — 1,46 view por seguidor e um reel que bateu 2,5 milhões. Se algum dos dois
       acima não fechar, é a substituta direta.</span></div>
+    <div class="note-item"><span class="tag good">o combinado com cada um</span><span>
+      Já definido: <strong>produtos para foto</strong> (não são pra consumo), <strong>3 cookies mais os
+      milkshakes e bebidas</strong> para abrir e consumir na hora, e um <strong>voucher de R$ 80</strong>
+      pra voltar outro dia. Detalhe de cada item na aba <a href="#criador">Briefing do criador</a>.</span></div>
     <div class="note-item"><span class="tag bad">o que ainda falta</span><span>
-      Cachê, quantos posts, se é reel ou story, <strong>a data em que o post vai ao ar</strong> e quem faz o
-      contato. Nada disso está definido — e a data importa: o vídeo-modelo foi ao ar na véspera.</span></div>
+      Os dois nomes, <strong>se há cachê em dinheiro</strong> além do produto e do voucher, quantos posts,
+      <strong>a data em que o post vai ao ar</strong> e quem faz o contato. A data importa: o vídeo-modelo
+      foi ao ar na véspera, o que colocaria o post em <strong>10 de setembro</strong>.</span></div>
   </div>
 </section>
 
@@ -1412,7 +1447,7 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
 <button class="card-btn" data-alvo="pg7"><span class="cnome">@conexaopaulinianews</span><span class="cmeta">941 seg · 2,78 v/seg</span><span class="cdesc">Conexão Paulínia News</span></button>
 </div><div class="visor">
 <div class="painel fechado" data-alvo="pg0" hidden>
-      <div class="perfilhead"><span class="h">@comendoporpaulinia</span><span class="nm">Comendo por Paulínia</span><span class="tag good">recomendada</span></div>
+      <div class="perfilhead"><span class="h">@comendoporpaulinia</span><span class="nm">Comendo por Paulínia</span><span class="tag acc">escolhida</span></div>
       <span class="dica">Onde comer e o que fazer em Paulínia e região</span>
       <div class="nums"><div><span class="v">1.733</span><span class="s">seguidores</span></div><div><span class="v">3.120</span><span class="s">mediana de views por reel</span></div><div><span class="v dest">1,80</span><span class="s">views por seguidor</span></div><div><span class="v">12.712</span><span class="s">maior view</span></div><div><span class="v">7,2%</span><span class="s">curtidas ÷ seguidores</span></div><div><span class="v">02/09</span><span class="s">último post</span></div><div><span class="v">3,0</span><span class="s">posts por semana</span></div></div>
       <p class="prose" style="font-size:.875rem;">É o análogo direto do @comendoporcampinas que fez o vídeo-modelo: mesmo formato, mesmo tipo de post, mesma promessa. 1,8 view por seguidor e 7,2% de likes — o melhor engajamento entre as páginas. O que ele não tem é tamanho: 1.733 seguidores contra 552 mil do de Campinas.</p>
@@ -1512,13 +1547,390 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
 </div>
 
 
+<div class="tab-panel" data-panel="criador" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> O que é esta aba<span class="hint">é o que se manda pro criador</span></h2>
+  <p class="prose">É o pacote que vai para o criador contratado: <strong>o que ele recebe, o que ele
+  entrega e o vídeo que serve de modelo</strong>. Feito pra ser mandado como link — dá pra abrir esta aba
+  direto em <code>#criador</code>.</p>
+  <div class="note-item"><span class="tag acc">a régua</span><span>
+    O roteiro tem <strong>seis exigências</strong> e mais nada. Fora delas o criador é livre — é ele que
+    conhece a audiência dele, e vídeo de influenciador engessado não performa. As seis existem porque
+    cada uma delas foi observada no vídeo que fez 107 mil views.</span></div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O que o criador recebe<span class="hint">clique num card</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="cr-foto"><span class="cnome">Produtos para foto</span><span class="cmeta">não são pra consumo</span></button>
+      <button class="card-btn" data-alvo="cr-consumo"><span class="cnome">Produtos para consumir</span><span class="cmeta">3 cookies + bebidas</span></button>
+      <button class="card-btn" data-alvo="cr-voucher"><span class="cnome">Voucher de R$ 80</span><span class="cmeta">pra voltar outro dia</span></button>
+      <button class="card-btn" data-alvo="cr-falta"><span class="cnome">O que falta combinar</span><span class="cmeta">4 pontos</span></button>
+    </div>
+    <div class="visor">
+      <div class="painel fechado" data-alvo="cr-foto" hidden><span class="ptit">Produtos para foto</span>
+        <p class="prose">A loja monta a mesa e o prato: são os produtos que aparecem no vídeo.
+        <strong>Não são para consumo</strong> — existem para serem filmados bonitos, inteiros e
+        montados.</p>
+        <ul class="pontos">
+          <li>É o que garante o ponto 2 do roteiro (volume de produto): um prato com 7 ou 8 cookies e
+          uma mesa com salgado, bebida gelada, bebida quente, cookie, torta e brownie.</li>
+          <li><strong>Em aberto:</strong> quantos itens exatamente, e se os de foto voltam pra venda
+          depois ou entram como perda. Muda o custo real da ação.</li>
+        </ul></div>
+      <div class="painel fechado" data-alvo="cr-consumo" hidden><span class="ptit">Produtos para consumir</span>
+        <p class="prose"><strong>Três cookies</strong> mais os <strong>milkshakes e bebidas</strong>
+        disponibilizados. Esses são para abrir, mexer, partir e tomar na hora — é o material do plano de
+        recheio escorrendo e do fio de recheio, que são os planos que mais seguram atenção no
+        vídeo-modelo.</p>
+        <ul class="pontos">
+          <li>Três cookies custam <strong>R$ 15,03</strong> de CMV (R$ 5,01 cada, média sem os premium).</li>
+          <li><strong>Em aberto:</strong> quantos milkshakes e quais bebidas. Cada milkshake é R$ 13,20 de
+          CMV e só existe copo de 440 ml.</li>
+        </ul></div>
+      <div class="painel fechado" data-alvo="cr-voucher" hidden><span class="ptit">Voucher de R$ 80</span>
+        <p class="prose">Além dos produtos do dia, o criador recebe um <strong>voucher de R$ 80,00</strong>
+        para voltar à loja em outro dia da semana e consumir.</p>
+        <ul class="pontos">
+          <li>R$ 80 a preço de tabela custam por volta de <strong>R$ 28</strong> de CMV (34,60% de CMV
+          mix) — estimativa, o número exato depende do que ela pedir.</li>
+          <li>É a parte do combinado que também traz o criador de volta à loja — a mesma lógica do
+          voucher do cliente.</li>
+        </ul></div>
+      <div class="painel aberto" data-alvo="cr-falta" hidden><span class="ptit">O que falta combinar</span>
+        <ul class="pontos">
+          <li><strong>Cachê em dinheiro.</strong> O combinado descrito até aqui é produto + voucher.
+          Se não houver pagamento em dinheiro, isso precisa estar claro na primeira conversa — é o tipo
+          de coisa que trava a negociação no fim, não no começo.</li>
+          <li><strong>Quantos posts e em que formato.</strong> Um reel? Reel + stories? Quantos stories?</li>
+          <li><strong>A data em que o post vai ao ar.</strong> O vídeo-modelo foi publicado na véspera e
+          o off diz &ldquo;é só amanhã e sábado&rdquo;. Se Paulínia copiar, a data é
+          <strong>10 de setembro</strong>.</li>
+          <li><strong>Quem faz o contato</strong> e até quando o criador tem que confirmar.</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> O roteiro — as seis exigências<span class="hint">clique numa caixinha</span></h2>
+  <p class="prose">Na ordem sugerida. Fora destes seis pontos, o criador faz do jeito dele.</p>
+  <div class="bloco">
+    <div class="fluxo">
+      <button class="passo-caixa" data-alvo="rc1"><span class="quem">1</span><span class="qtxt">A oferta nos 4 primeiros segundos</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rc2"><span class="quem">2</span><span class="qtxt">Volume de produto</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rc3"><span class="quem">3</span><span class="qtxt">A loja</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rc4"><span class="quem">4</span><span class="qtxt">A data</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rc5"><span class="quem">5</span><span class="qtxt">Cortes de 2 a 3 s</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rc6"><span class="quem">6</span><span class="qtxt">As regras na legenda</span></button>
+    </div>
+    <div class="visor">
+      <div class="painel" data-alvo="rc1" hidden><span class="ptit">1 · A oferta inteira nos 4 primeiros segundos</span>
+        <span class="psub">é a exigência que mais importa</span>
+        <div class="planorow"><img class="planoimg" src="planos/p01.jpg" alt="Exemplo do letreiro no primeiro frame" loading="lazy">
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+        <p class="prose" style="font-size:.875rem;">Assim, no <strong>frame 1</strong>, antes de qualquer
+        palavra: letreiro grande em caixa alta, branco com contorno preto, no alto da tela. No modelo é
+        <em>COOKIE DE GRAÇA</em> e, abaixo em corpo menor, <em>( SÓ PASSAR NA LOJA E PEGAR )</em>.</p>
+        <p class="prose" style="font-size:.875rem;">No modelo esse letreiro <strong>sai aos 4,17 s</strong>
+        e não volta. Quem parou de assistir no segundo 5 já recebeu a oferta inteira — é isso que o ponto
+        compra.</p>
+        </div></div></div>
+      <div class="painel" data-alvo="rc2" hidden><span class="ptit">2 · Volume de produto</span>
+        <div class="planorow"><img class="planoimg" src="planos/p06.jpg" alt="Exemplo de mesa cheia" loading="lazy">
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+        <p class="prose" style="font-size:.875rem;">Duas imagens que a loja monta:</p>
+        <ul class="pontos" style="font-size:.8125rem;">
+          <li><strong>Um prato com 7 ou 8 cookies</strong> juntos.</li>
+          <li><strong>Uma mesa cheia</strong> com salgado, bebida gelada, bebida quente, cookie, torta e
+          brownie — mostrando que a casa não é só de cookie.</li>
+        </ul>
+        <p class="prose" style="font-size:.875rem;">No modelo isso ocupa quatro planos diferentes
+        (6, 9, 10 e 17) e é sempre com a câmera em movimento lento, orbitando ou deslizando. Mesa parada
+        em plano fixo não passa a sensação de volume.</p>
+        </div></div></div>
+      <div class="painel" data-alvo="rc3" hidden><span class="ptit">3 · A loja</span>
+        <div class="planorow"><img class="planoimg" src="planos/p08.jpg" alt="Exemplo do plano de localização" loading="lazy">
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+        <p class="prose" style="font-size:.875rem;">A fachada e onde ela fica:
+        <strong>Av. José Paulino, 1615 — Centro, Paulínia</strong>.</p>
+        <p class="prose" style="font-size:.875rem;">No modelo a localização ganha o <strong>plano mais
+        longo do vídeo</strong> (3,6 s), num movimento único: o dedo aponta a loja e a câmera panoramiza
+        até a referência da rua. Endereço não se resolve em corte rápido — precisa de tempo pra
+        registrar.</p>
+        <p class="prose" style="font-size:.875rem;"><strong>Falta definir</strong> qual é a referência de
+        rua que todo mundo em Paulínia reconhece (em Campinas foi &ldquo;de frente com o Colégio
+        Liceu&rdquo;).</p>
+        </div></div></div>
+      <div class="painel" data-alvo="rc4" hidden><span class="ptit">4 · A data</span>
+        <div class="planorow"><img class="planoimg" src="planos/p18.jpg" alt="Exemplo da cartela de data" loading="lazy">
+        <div style="display:flex;flex-direction:column;gap:.6rem;">
+        <p class="prose" style="font-size:.875rem;"><strong>Sexta 11 e sábado 12 de setembro.</strong>
+        Falada no áudio <em>e</em> escrita em cartela grande.</p>
+        <p class="prose" style="font-size:.875rem;">No modelo a cartela aparece <strong>uma vez só</strong>,
+        ocupa um plano inteiro de 2,6 s e nada mais divide a tela com ela. Informação que precisa grudar
+        não concorre com outra informação.</p>
+        </div></div></div>
+      <div class="painel" data-alvo="rc5" hidden><span class="ptit">5 · Cortes de 2 a 3 segundos</span>
+        <p class="prose">No máximo 3 s por plano. É o que deixa dinâmico.</p>
+        <ul class="pontos">
+          <li>O modelo tem <strong>19 planos em 37,8 s</strong> — média de 2,0 s, nenhum abaixo de 1,0 s e
+          nenhum acima de 3,6 s.</li>
+          <li><strong>Todos os cortes são secos.</strong> Nenhuma transição, nenhum fade, nenhum efeito no
+          vídeo inteiro.</li>
+          <li>Duração total: <strong>entre 30 e 40 segundos</strong> é a faixa do modelo.</li>
+        </ul></div>
+      <div class="painel" data-alvo="rc6" hidden><span class="ptit">6 · As regras na legenda</span>
+        <p class="prose">O vídeo não explica a promoção — <strong>quem explica é a legenda</strong>. No
+        modelo, o vídeo só diz &ldquo;vai na loja e pega&rdquo;; seguir, postar, marcar e o limite por
+        pessoa moram todos na descrição do post.</p>
+        <p class="prose">A sugestão de legenda pronta está na seção 4 desta aba — é pra mandar junto, o
+        criador adapta pro jeito dele de escrever.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span> Sugestão de legenda<span class="hint">mandar junto · o criador adapta</span></h2>
+  <div class="copiavel">🍪 COOKIE RECHEADO NA FAIXA! 😍🔥 é só passar na loja e pegar!
+
+Fomos conhecer a <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a>, no Centro de Paulínia — e os cookies são absurdos: bem recheados, feitos na hora, com fornada fresquinha o dia todo. 🫠
+
+E tem muito mais do que cookie: opções salgadas, milkshakes, bebidas quentes, torta e brownie.
+
+📌 Alguns valores do que provamos:
+[PREENCHER — 4 ou 5 produtos com o preço do cardápio atual da Paulínia]
+
+🎁 COMO GARANTIR SEU COOKIE GRÁTIS
+✔️ Seguir <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a>
+📸 Postar um Story marcando <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a> [+ o perfil do criador?]
+📍 Retirar na loja — não vale delivery
+📅 Só nos dias 11 e 12 (sexta e sábado), enquanto durar o estoque
+⚠️ Limite: 1 cookie por pessoa
+
+🏆 E TEM SORTEIO
+Todo story postado concorre a DOIS combos por dia (torta + bola de sorvete + milkshake, para duas pessoas):
+🥇 um para o melhor stories do dia
+🎲 um sorteado entre todos que participaram
+Os ganhadores saem nos stories da <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a> no fim de cada dia.
+
+🎟️ E AINDA LEVA UM VOUCHER
+Todo mundo que participar sai com um voucher para voltar e ganhar um benefício, válido de domingo 13 a sábado 19/09.
+
+📍 Av. José Paulino, 1615 — Centro, Paulínia
+⏰ Loja: 11h às 20h · Delivery: até 22h · Sábado e domingo também
+
+Já marca quem vai com você! 🍪🔥</div>
+  <div class="notes">
+    <div class="note-item"><span class="tag warn">preencher antes de mandar</span><span>
+      <strong>Os preços.</strong> Não coloquei número inventado — os preços de venda vivem no
+      <code>/cmv</code> do Sistema-HC. Escolher 4 ou 5 produtos que o criador vai realmente provar.</span></div>
+    <div class="note-item"><span class="tag warn">decidir</span><span>
+      <strong>Se o story marca só a loja ou também o criador.</strong> No modelo de Campinas a exigência
+      era marcar os dois. Com dois criadores contratados, isso vira uma pergunta: qual deles o cliente
+      marca. Está em aberto no briefing.</span></div>
+    <div class="note-item"><span class="tag mudo">conferir</span><span>
+      O horário escrito aqui é <strong>11h às 20h na loja e até 22h no delivery, sábado e domingo
+      também</strong>. A bio do Instagram da loja hoje diz &ldquo;Seg a Sáb 11h às 20h&rdquo; e não
+      menciona domingo — <strong>vale corrigir a bio antes do dia 10</strong>, porque a campanha vai jogar
+      gente nesse perfil.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">5</span> O vídeo-modelo<span class="hint">mandar o link junto</span></h2>
+  <p class="prose">Mandar para o criador ver antes de gravar:
+  <a href="https://www.instagram.com/p/DIRNiD6xuI6/" target="_blank" rel="noopener">instagram.com/p/DIRNiD6xuI6</a>
+  — é o vídeo de <a href="https://www.instagram.com/comendoporcampinas/" target="_blank" rel="noopener">@comendoporcampinas</a> que fez 107 mil views com essa mesma promoção na loja de Campinas.</p>
+  <div class="videoblk">
+    <video src="modelo.mp4" controls preload="none" playsinline poster="planos/p01.jpg"></video>
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      <p class="prose">A aba <strong>Vídeo modelo</strong> tem ele destrinchado plano a plano, com a
+      transcrição e todos os frames — <em>essa parte é uso interno</em>, para quem for gravar e editar.
+      Para o criador basta o link e as seis exigências.</p>
+      <div class="note-item"><span class="tag mudo">calibrar expectativa</span><span>
+        Os 107 mil views são resultado normal para um canal de 552 mil seguidores. Nenhum perfil de
+        Paulínia tem esse tamanho — o que dá pra copiar é a construção, não o número.</span></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+<div class="tab-panel" data-panel="balcao" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> O que a equipe fala<span class="hint">tópicos, ainda não é o texto final</span></h2>
+  <p class="prose">O que o atendente diz para o cliente que vem retirar o Cookie de Graça, nos dias 11 e
+  12. <strong>Isto aqui são os tópicos</strong> — o que precisa ser dito e por quê. O texto final, com as
+  palavras exatas, ainda vai ser escrito em cima disto.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">por que isto existe</span><span>
+      São quatro informações para passar (horário, sorteio, sem delivery, janela do voucher) em uma fila,
+      uma pessoa de cada vez, num sábado cheio. <strong>Sem roteiro, cada atendente diz uma coisa
+      diferente</strong> — e a que mais gera atrito, a do voucher, é justamente a que mais gente vai
+      esquecer de falar.</span></div>
+    <div class="note-item"><span class="tag warn">o ponto mais delicado</span><span>
+      <strong>O voucher não vale no sábado 12.</strong> A pessoa que pega na sexta e volta no sábado
+      querendo usar vai reclamar no balcão. Isso precisa ser dito na entrega, não descoberto no
+      resgate.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> A ordem da conversa<span class="hint">clique numa caixinha</span></h2>
+  <div class="bloco">
+    <div class="fluxo">
+      <button class="passo-caixa" data-alvo="rb1"><span class="quem">1</span><span class="qtxt">Confere o story</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rb2"><span class="quem">2</span><span class="qtxt">Entrega o cookie</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rb3"><span class="quem">3</span><span class="qtxt">Explica o sorteio</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rb4"><span class="quem">4</span><span class="qtxt">Entrega o voucher</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="rb5"><span class="quem">5</span><span class="qtxt">Fecha com horário</span></button>
+    </div>
+    <div class="visor">
+      <div class="painel" data-alvo="rb1" hidden><span class="ptit">1 · Confere o story</span>
+        <ul class="pontos">
+          <li>Pede pra ver o story postado com a marcação da loja.</li>
+          <li>Confirma que seguiu o perfil.</li>
+          <li>As exceções da fila (sem Instagram, perfil fechado, quem quer dois) ainda não estão
+          resolvidas — estão listadas no passo 4 da mecânica, na aba <a href="#briefing">Briefing</a>, e
+          precisam de resposta antes do dia 11.</li>
+        </ul></div>
+      <div class="painel" data-alvo="rb2" hidden><span class="ptit">2 · Entrega o cookie</span>
+        <ul class="pontos">
+          <li>Entrega o cookie da promoção.</li>
+          <li><strong>Em aberto:</strong> sabor fixo ou à escolha, e o limite de 1 por pessoa — e como
+          controla.</li>
+          <li>Aproveita a entrega pra puxar o assunto do sorteio (passo 3). É o momento em que a pessoa
+          ainda está de frente, com o celular na mão.</li>
+        </ul></div>
+      <div class="painel" data-alvo="rb3" hidden><span class="ptit">3 · Explica o sorteio</span>
+        <span class="psub">tópicos do que dizer</span>
+        <ul class="pontos">
+          <li><strong>O story que ela acabou de postar já vale</strong> — não precisa fazer mais nada.</li>
+          <li><strong>São dois combos por dia</strong>, e o combo é <strong>torta + bola de sorvete +
+          milkshake, para duas pessoas</strong> (é o que está na foto do display).</li>
+          <li><strong>Um combo vai para o melhor stories do dia.</strong></li>
+          <li><strong>O outro é sorteado entre todos que participaram</strong> — ou seja, mesmo quem não
+          caprichou concorre. Vale dizer isso: aumenta a participação de quem acha que não ganharia.</li>
+          <li><strong>O resultado sai nos stories da loja</strong>, no fim do dia. Apontar o display.</li>
+        </ul></div>
+      <div class="painel" data-alvo="rb4" hidden><span class="ptit">4 · Entrega o voucher e explica a janela</span>
+        <span class="psub">o ponto que mais gera atrito</span>
+        <ul class="pontos">
+          <li>Entrega o voucher e diz que ele dá direito a um benefício na próxima visita.
+          <em>(Qual benefício ainda não foi escolhido — ver a aba Voucher de volta.)</em></li>
+          <li><strong>Vale por 7 dias: de domingo 13/09 a sábado 19/09.</strong></li>
+          <li><strong>Não vale no sábado 12</strong> — dizer isso na entrega, com a razão junto:
+          <strong>não é cumulativo com o Cookie de Graça</strong>. Enquanto a campanha do cookie grátis
+          estiver rodando (sexta e sábado), o voucher está parado; ele começa a valer no domingo, quando a
+          campanha acaba.</li>
+          <li>O caso concreto pra treinar a equipe: <em>a pessoa pega na sexta e volta no sábado querendo
+          usar.</em> Se ela só descobrir na hora do resgate, vira reclamação.</li>
+        </ul></div>
+      <div class="painel" data-alvo="rb5" hidden><span class="ptit">5 · Fecha com horário e canais</span>
+        <ul class="pontos">
+          <li><strong>Loja: 11h às 20h. Delivery: até 22h.</strong></li>
+          <li><strong>Abre sábado e domingo também</strong> — é o ponto que mais gente desconhece, e por
+          isso vale falar sempre.</li>
+          <li>Se a pessoa perguntar de delivery, cai no card <strong>&ldquo;Se pedir
+          delivery&rdquo;</strong> da seção 3.</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Os assuntos, um a um<span class="hint">clique num card</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="rbh"><span class="cnome">Horário e dias</span><span class="cmeta">o que a maioria não sabe</span></button>
+      <button class="card-btn" data-alvo="rbs"><span class="cnome">Os dois combos</span><span class="cmeta">mérito e sorte</span></button>
+      <button class="card-btn" data-alvo="rbd"><span class="cnome">Se pedir delivery</span><span class="cmeta">tem script próprio</span></button>
+      <button class="card-btn" data-alvo="rbv"><span class="cnome">A janela do voucher</span><span class="cmeta">13 a 19/09</span></button>
+    </div>
+    <div class="visor">
+      <div class="painel" data-alvo="rbh" hidden><span class="ptit">Horário e dias</span>
+        <ul class="pontos">
+          <li><strong>Abre 11h.</strong></li>
+          <li><strong>Loja até 20h. Delivery até 22h.</strong> São dois horários diferentes — a confusão
+          mais comum é a pessoa achar que a loja fica aberta até as 22h.</li>
+          <li><strong>Sábado e domingo também.</strong> É a informação que mais gente desconhece, e é
+          exatamente a que traz gente de volta no fim de semana.</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">conferir antes do dia 10</span><span>
+          A bio do Instagram da loja hoje diz <strong>&ldquo;Seg a Sáb 11h às 20h&rdquo;</strong> e não
+          menciona domingo nem o delivery até 22h. Se o horário certo é o desta página, a bio está errada
+          — e a campanha vai jogar muita gente nesse perfil.</span></div></div>
+      <div class="painel" data-alvo="rbs" hidden><span class="ptit">Os dois combos</span>
+        <ul class="pontos">
+          <li>O combo é <strong>torta + bola de sorvete + milkshake, para duas pessoas</strong>.</li>
+          <li><strong>São dois por dia:</strong> um para o melhor stories, um sorteado entre todos que
+          participaram. Quatro no total nos dois dias.</li>
+          <li>Dizer que <strong>todo mundo concorre ao segundo</strong> — é o que faz participar quem acha
+          que não tem chance de ganhar o de melhor stories.</li>
+          <li>Resultado nos stories da loja, no fim do dia.</li>
+          <li>Apontar o display do balcão, que tem a foto do combo.</li>
+        </ul></div>
+      <div class="painel aberto" data-alvo="rbd" hidden><span class="ptit">Se pedir delivery</span>
+        <span class="psub">a promoção é só consumo ou retirada na loja</span>
+        <p class="prose">A regra é <strong>consumo no local ou retirada</strong>. Mas o cliente insiste —
+        &ldquo;eu pago, você não pode cotar pra mim?&rdquo; — e é aí que o atendimento improvisa. Os
+        tópicos da resposta, na ordem:</p>
+        <ul class="pontos">
+          <li><strong>Explicar o canal:</strong> o delivery da loja é pelo iFood; existem parceiros de
+          entrega, e o valor cobrado por eles pode ser consultado e repassado na hora.</li>
+          <li><strong>Oferecer a consulta:</strong> &ldquo;posso cotar aqui e te falar o valor, ou você
+          passa na loja&rdquo;.</li>
+          <li><strong>Tirar print do valor e mandar pro cliente.</strong> Não falar o número de cabeça —
+          mostrar a tela.</li>
+          <li><strong>Antecipar que está caro,</strong> em vez de deixar o cliente descobrir:
+          &ldquo;estou vendo aqui que está um valor relativamente alto. Se você quiser eu mando mesmo
+          assim; senão você pode passar e retirar aqui na loja&rdquo;.</li>
+        </ul>
+        <div class="note-item"><span class="tag acc">por que este script existe</span><span>
+          A entrega é <strong>cobrança direta da plataforma</strong>, não da loja. Sem essa frase o cliente
+          sai achando que a Holy Cook cobrou aquilo — e a reclamação, que é do preço do parceiro, vira
+          reclamação da marca. O print é o que separa uma coisa da outra.</span></div>
+        <ul class="pontos">
+          <li><strong>Em aberto:</strong> se o cookie da promoção pode sair por esse caminho (cotado e
+          pago pelo cliente) ou se continua sendo <em>só</em> retirada. Os tópicos acima resolvem o
+          atendimento; a regra em si precisa ser decidida.</li>
+        </ul></div>
+      <div class="painel aberto" data-alvo="rbv" hidden><span class="ptit">A janela do voucher</span>
+        <ul class="pontos">
+          <li><strong>Vale de domingo 13/09 a sábado 19/09.</strong> Sete dias.</li>
+          <li><strong>Não vale nos dias da campanha</strong> — nem na sexta 11, nem no sábado 12.</li>
+          <li>A razão, que é o que faz o cliente aceitar: <strong>não é cumulativo com o Cookie de
+          Graça</strong>. Uma campanha por vez. O cookie grátis roda sexta e sábado; o voucher começa no
+          domingo.</li>
+          <li>Dizer isso <strong>na entrega</strong>, não deixar pro resgate.</li>
+          <li><strong>Em aberto:</strong> o benefício, e se o voucher é nominal ou ao portador (a foto
+          dele circula em minutos, se não for).</li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
 <div class="tab-panel" data-panel="stories" role="tabpanel" hidden>
 
 <section>
-  <h2><span class="n">1</span> O que é<span class="hint">um sorteio por dia</span></h2>
-  <p class="prose">Quem estiver na loja concorre a um <strong>combo da casa</strong> pelo melhor stories.
-  <strong>São dois sorteios: um na sexta 11 e um no sábado 12.</strong> No fim de cada dia sai um vídeo
-  anunciando o vencedor daquele dia — &ldquo;venha retirar o seu combo&rdquo;.</p>
+  <h2><span class="n">1</span> O que é<span class="hint">dois combos por dia · quatro no total</span></h2>
+  <p class="prose">Todo story postado nos dias 11 e 12 concorre a <strong>dois combos por dia</strong>.
+  O combo é <strong>uma torta com uma bola de sorvete e um milkshake, para duas pessoas</strong>.</p>
+  <div class="strip">
+    <div><span class="v">🥇 1 por dia</span><span class="s">para o <strong>melhor stories</strong> do dia — prêmio de mérito</span></div>
+    <div><span class="v">🎲 1 por dia</span><span class="s">sorteado <strong>entre todos que participaram</strong> — prêmio de sorte</span></div>
+    <div><span class="v">4 combos</span><span class="s">dois na sexta 11, dois no sábado 12</span></div>
+  </div>
+  <p class="prose">Os ganhadores dos dois são anunciados <strong>nos stories da loja no fim de cada
+  dia</strong> — &ldquo;venha retirar o seu combo&rdquo;.</p>
   <div class="notes">
     <div class="note-item"><span class="tag acc">por que existe</span><span>
       A campanha já obriga a pessoa a postar. Sem prêmio, ela posta o mínimo: uma foto do cookie com a
@@ -1530,10 +1942,11 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
       campanha, com o sábado inteiro pela frente. Ele deixa de ser aviso e vira
       <strong>chamada</strong>: prova que o prêmio é real, mostra o combo na mão de alguém e dá motivo
       pra quem não foi na sexta ir no sábado. Um sorteio único no fim não teria como fazer isso.</span></div>
-    <div class="note-item"><span class="tag warn">o que a loja precisa produzir</span><span>
-      Um <strong>display de balcão com o combo à mostra</strong>. É o que avisa a pessoa no momento em que
-      ela está com o celular na mão, na fila. Sem o display, o sorteio só existe pra quem o atendente
-      lembrar de avisar — e num sábado cheio ele não vai lembrar.</span></div>
+    <div class="note-item"><span class="tag warn">o caminho crítico</span><span>
+      <strong>Foto do combo → arte do A4 → impressão → loja no dia 10.</strong> A loja pode não ter foto
+      desse combo montado — se não tiver, ela precisa ser pedida <em>primeiro</em>, porque tudo depois
+      depende dela. É o único item da campanha em que o atraso não tem plano B: sem display, o sorteio só
+      existe pra quem o atendente lembrar de avisar, e num sábado cheio ele não vai lembrar.</span></div>
   </div>
 </section>
 
@@ -1615,20 +2028,29 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
           <li><strong>Em aberto:</strong> quem fica com o celular da loja nos dois dias. Não pode ser
           &ldquo;quem estiver livre&rdquo; — em pico de fila ninguém está livre.</li>
         </ul></div>
-      <div class="painel" data-alvo="ms4" hidden><span class="ptit">4 · Separa os melhores do dia</span>
-        <p class="prose">Ao longo do dia, quem está repostando marca <strong>3 ou 4 candidatos</strong>.
-        À noite a escolha é entre esses, não entre tudo que entrou.</p>
+      <div class="painel" data-alvo="ms4" hidden><span class="ptit">4 · Escolhe os dois do dia</span>
+        <p class="prose">São duas decisões diferentes, e só uma dá trabalho:</p>
+        <ul class="pontos">
+          <li><strong>O melhor stories.</strong> Ao longo do dia, quem está repostando marca 3 ou 4
+          candidatos. À noite a escolha é entre esses, não entre tudo que entrou.</li>
+          <li><strong>O sorteado entre todos.</strong> Aqui não tem julgamento — mas tem uma exigência:
+          precisa existir <strong>a lista de quem participou</strong>. O Destaque do dia é essa lista, e é
+          por isso que repostar todo mundo (passo 3) não é opcional: quem não foi repostado não está no
+          sorteio.</li>
+        </ul>
         <ul class="pontos">
           <li><strong>Em aberto — o critério de &ldquo;melhor&rdquo;.</strong> Precisa caber numa frase no
           display. Candidatos: mais criativo, que mostra melhor o produto, que fez rir. Prêmio subjetivo
           entregue sem critério escrito é o tipo de coisa que volta em comentário.</li>
-          <li><strong>Em aberto — quem julga.</strong> A loja, o Fred, ou os dois influenciadores
-          contratados — o que dá a eles um segundo conteúdo pra postar, de graça.</li>
+          <li><strong>Em aberto — quem julga</strong> e <strong>como o sorteio é feito</strong> (na frente
+          da câmera, no story, é o formato mais crível).</li>
+          <li><strong>Em aberto —</strong> se a mesma pessoa pode levar os dois prêmios do dia.</li>
         </ul></div>
-      <div class="painel" data-alvo="ms5" hidden><span class="ptit">5 · Vídeo do vencedor, no fim do dia</span>
+      <div class="painel" data-alvo="ms5" hidden><span class="ptit">5 · Vídeo dos vencedores, no fim do dia</span>
         <span class="psub">fechado · e é a peça mais valiosa dos dois dias</span>
-        <p class="prose">No fim de cada dia sai um vídeo anunciando o escolhido daquele dia, com o convite:
-        <strong>&ldquo;venha retirar o seu combo&rdquo;</strong>. Dois vídeos no total — um na sexta à
+        <p class="prose">No fim de cada dia sai um vídeo anunciando <strong>os dois ganhadores daquele
+        dia</strong> — o do melhor stories e o sorteado — com o convite:
+        <strong>&ldquo;venha retirar o seu combo&rdquo;</strong>. Dois vídeos no total: um na sexta à
         noite, um no sábado à noite.</p>
         <ul class="pontos">
           <li>O <strong>vídeo de sexta é o mais importante dos dois</strong>: ele vai ao ar com o sábado
@@ -1654,33 +2076,61 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
   <div class="bloco">
     <div class="grade">
       <button class="card-btn" data-alvo="ms-combo"><span class="cnome">Qual é o combo</span><span class="cmeta">trava tudo</span><span class="cdesc">Sem ele não tem foto, sem foto não tem display.</span></button>
-      <button class="card-btn" data-alvo="ms-display"><span class="cnome">O display de balcão</span><span class="cmeta">produção · prazo de gráfica</span><span class="cdesc">O que precisa estar escrito nele e quando tem que estar na loja.</span></button>
+      <button class="card-btn" data-alvo="ms-foto"><span class="cnome">A foto do combo</span><span class="cmeta">é o primeiro dominó</span><span class="cdesc">Sem ela não sai a arte, sem arte não sai o A4.</span></button>
+      <button class="card-btn" data-alvo="ms-display"><span class="cnome">O display A4</span><span class="cmeta">produção · prazo de gráfica</span><span class="cdesc">O que precisa estar escrito nele e quando tem que estar na loja.</span></button>
       <button class="card-btn" data-alvo="ms-regra"><span class="cnome">A regra do sorteio</span><span class="cmeta">critério e júri</span><span class="cdesc">Como se escolhe o melhor do dia, e quem escolhe.</span></button>
       <button class="card-btn" data-alvo="ms-quem"><span class="cnome">Quem opera</span><span class="cmeta">3 tarefas nomeadas</span><span class="cdesc">Repostar, separar candidatos e gravar o vídeo da noite.</span></button>
       <button class="card-btn" data-alvo="ms-custo"><span class="cnome">O custo</span><span class="cmeta">2 combos · sai dos R$ 5 mil</span><span class="cdesc">Quanto os dois combos tiram da verba.</span></button>
     </div>
     <div class="visor">
-      <div class="painel aberto" data-alvo="ms-combo" hidden><span class="ptit">Qual é o combo</span>
-        <p class="prose">É o item que trava a produção do display, que trava a gráfica, que trava a data.
-        Os custos de referência (base de 30–31/07/2026, da
-        <a href="../campanha-fidelizacao/">campanha de fidelização</a>):</p>
+      <div class="painel fechado" data-alvo="ms-combo" hidden><span class="ptit">Qual é o combo</span>
+        <span class="psub">definido</span>
+        <p class="prose"><strong>Uma torta com uma bola de sorvete e um milkshake, para duas pessoas.</strong>
+        Custos da base de 30–31/07/2026, a mesma da
+        <a href="../campanha-fidelizacao/">campanha de fidelização</a>:</p>
         <div class="tablewrap"><table><thead><tr><th>Item</th><th>CMV</th><th>Preço de tabela</th></tr></thead><tbody>
-          <tr><td>Cookie (médio)</td><td>R$ 5,01</td><td>~R$ 12,90</td></tr>
-          <tr><td>Bola de sorvete</td><td>R$ 2,00</td><td>R$ 5,90</td></tr>
           <tr><td>Fatia da Torta Perfeita</td><td>R$ 9,04</td><td>R$ 22,90</td></tr>
+          <tr><td>Bola de sorvete</td><td>R$ 2,00</td><td>R$ 5,90</td></tr>
           <tr><td>Milkshake (440 ml)</td><td>R$ 13,20</td><td>R$ 28,66</td></tr>
+          <tr class="mark"><td><strong>Combo</strong></td><td><strong>R$ 24,24</strong></td><td><strong>R$ 57,46</strong></td></tr>
         </tbody></table></div>
-        <p class="prose">Um combo tem que <strong>parecer grande na foto</strong> — é a única função dele.
-        Cookie + milkshake custa R$ 18,21 de CMV e aparenta R$ 41,56 de tabela: é a melhor relação entre o
-        que se vê e o que se paga. <strong>São dois combos</strong>, um por dia — R$ 36,42 de CMV no
-        total, o que é irrelevante perto dos R$ 5 mil.</p></div>
-      <div class="painel aberto" data-alvo="ms-display" hidden><span class="ptit">O display de balcão</span>
+        <p class="prose">Um combo tem que <strong>parecer grande na foto</strong> — é a única função dele —
+        e este aparenta R$ 57,46 custando R$ 24,24. <strong>São quatro combos</strong> (dois por dia):
+        <strong>R$ 96,96 de CMV no total</strong>, ou 1,9% da verba.</p>
+        <div class="note-item"><span class="tag warn">um detalhe pra fechar</span><span>
+          <strong>&ldquo;Para duas pessoas&rdquo; é uma unidade de cada, ou duas?</strong> Uma fatia e um
+          milkshake dividido por duas pessoas é uma coisa; duas fatias e dois milkshakes é outra — e dobra
+          o CMV, indo para R$ 48,48 por combo e R$ 193,92 no total. Continua irrelevante perto dos R$ 5
+          mil, mas <strong>muda a foto do display</strong>, que é o que trava a gráfica.</span></div></div>
+      <div class="painel aberto" data-alvo="ms-foto" hidden><span class="ptit">A foto do combo</span>
+        <span class="psub">o primeiro dominó — nada anda antes dela</span>
+        <p class="prose">O combo (torta + bola de sorvete + milkshake, para duas pessoas) é uma montagem
+        que provavelmente <strong>não existe fotografada</strong>. Se a loja ou a franqueadora não tiverem,
+        ela precisa ser pedida agora.</p>
+        <ul class="pontos">
+          <li><strong>Perguntar primeiro se já existe</strong> — no banco de imagens da marca ou no acervo
+          de vídeos. Combo montado costuma existir em foto de cardápio.</li>
+          <li>Se não existir: montar e fotografar na loja. Não precisa de estúdio — precisa de luz de dia
+          e fundo limpo. O mesmo material serve pra foto e pro story de aviso.</li>
+          <li>Fotografar <strong>a versão que vai ser entregue</strong>. Se a foto mostrar dois milkshakes
+          e o prêmio for um, isso volta em reclamação no balcão.</li>
+          <li><strong>Depende de fechar o detalhe do card &ldquo;Qual é o combo&rdquo;</strong>: uma
+          unidade de cada, ou duas.</li>
+        </ul>
+        <div class="note-item"><span class="tag bad">a corrente inteira</span><span>
+          foto → arte do A4 → gráfica → display na loja <strong>no dia 10</strong>. São quatro passos em
+          série, cada um esperando o anterior. É o item da campanha com menos folga de prazo.</span></div></div>
+      <div class="painel aberto" data-alvo="ms-display" hidden><span class="ptit">O display A4</span>
         <ul class="pontos">
           <li><strong>Foto do combo</strong> ocupando a maior parte da peça.</li>
           <li><strong>Uma linha</strong> dizendo o que fazer — não um regulamento. O regulamento vai no
           Instagram.</li>
           <li><strong>&ldquo;Um vencedor por dia&rdquo;</strong> e a hora em que o resultado sai. É o que
           faz a pessoa voltar no perfil à noite.</li>
+          <li><strong>Os dois prêmios</strong>, escritos separados: um pro melhor stories, um sorteado
+          entre todos que participaram. É o segundo que faz participar quem acha que não ganharia.</li>
+          <li><strong>Formato A4, impresso.</strong> Fica em pé no balcão — vale um suporte acrílico, senão
+          cai ou some.</li>
           <li>Precisa estar <strong>na loja no dia 10</strong>, não no dia 11. Prazo de gráfica conta pra
           trás a partir daí.</li>
           <li>A mesma arte serve de story de aviso e de post — pedir os três formatos de uma vez.</li>
@@ -1707,11 +2157,12 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
         conta como transferida — é o mesmo critério do passo &ldquo;quem toca no dia&rdquo; do
         briefing.</p></div>
       <div class="painel" data-alvo="ms-custo" hidden><span class="ptit">O custo</span>
-        <p class="prose">Os <strong>dois combos</strong> e o display saem dos R$ 5 mil da campanha, junto
-        com os cookies e o cachê dos influenciadores.</p>
-        <p class="prose">Em dinheiro os combos são irrelevantes — dois combos de cookie + milkshake dão
-        <strong>R$ 36,42 de CMV</strong>, 0,7% da verba. <strong>O display é que custa</strong>, e custa em
-        prazo, não em real: ele tem que estar na loja no dia 10.</p></div>
+        <p class="prose">Os <strong>quatro combos</strong> e o display saem dos R$ 5 mil da campanha, junto
+        com os cookies e o que for combinado com os criadores.</p>
+        <p class="prose">Em dinheiro os combos são irrelevantes: <strong>R$ 96,96 de CMV no total</strong>,
+        1,9% da verba (ou R$ 193,92 / 3,9% se &ldquo;para duas pessoas&rdquo; for dobrar cada item).
+        <strong>O que custa é o display</strong> — e custa em prazo, não em real. Ele tem que estar na loja
+        no dia 10.</p></div>
     </div>
   </div>
 </section>
@@ -1943,8 +2394,20 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
   document.querySelectorAll('.tab-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({top:0}); });
   });
+  var ABAS = ['briefing','video','influenciadores','criador','balcao','stories','voucher'];
   var inicial = location.hash.replace('#', '');
-  if (['video','influenciadores','stories','voucher'].indexOf(inicial) >= 0) abrirAba(inicial);
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos do tipo href="#balcao" trocam de aba, nao so o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
 
   // ── cards e caixinhas: escopo pelo .bloco mais próximo, para o padrão poder aninhar sem colidir
   document.addEventListener('click', function (e) {
