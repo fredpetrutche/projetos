@@ -1,0 +1,1687 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Programa de indicacao — Holy Cook</title>
+<meta name="description" content="Cliente indica amigo e ganha cookie. A conta da indicacao simples e a do ranking de pontos, na mesma base de custo da campanha de fidelizacao.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round'><circle cx='34' cy='36' r='12'/><path d='M18 74c0-11 7-18 16-18s16 7 16 18'/><circle cx='68' cy='44' r='9'/><path d='M55 74c0-9 6-15 13-15s13 6 13 15'/></g></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round'><circle cx='34' cy='36' r='12'/><path d='M18 74c0-11 7-18 16-18s16 7 16 18'/><circle cx='68' cy='44' r='9'/><path d='M55 74c0-9 6-15 13-15s13 6 13 15'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --step-1:#C6CBE2; --step-2:#98A2CB; --step-3:#6975AE; --step-4:#33417E;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+      --step-1:#2E3550; --step-2:#4A5580; --step-3:#6D7BB4; --step-4:#96A8E6;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --step-1:#C6CBE2; --step-2:#98A2CB; --step-3:#6975AE; --step-4:#33417E;
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+    --step-1:#2E3550; --step-2:#4A5580; --step-3:#6D7BB4; --step-4:#96A8E6;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag, .vnum { font-family: var(--mono); }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none; color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  .story { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .story > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
+  .story .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; align-self: flex-start; }
+  .story .job { font-family: var(--mono); font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .story .txt { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .story .txt em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .story .vid { font-size: .75rem; color: var(--ink-faint); border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+  .story.fluxo { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 68rem) { .story.fluxo { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 44rem) { .story.fluxo { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 30rem) { .story.fluxo { grid-template-columns: 1fr; } }
+
+  .ledger { display: flex; flex-direction: column; gap: .75rem; }
+  .offer { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; display: grid; grid-template-columns: 1fr auto; gap: .25rem 1.5rem; padding: 1rem 1.1rem; }
+  .offer.vazio { background: var(--surface-2); }
+  .offer.somatorio { border-color: var(--ink); border-width: 2px; }
+  .offer .head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .offer .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; }
+  .offer .name { font-weight: 600; font-size: .95rem; }
+  .offer .breakdown { grid-column: 1 / 2; font-family: var(--mono); font-size: .8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; margin-top: .3rem; }
+  .offer .result { grid-row: 1 / 3; grid-column: 2; align-self: center; text-align: right; display: flex; flex-direction: column; gap: .1rem; }
+  .offer .result .r { font-family: var(--mono); font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  .offer .risk { grid-column: 1 / -1; margin-top: .6rem; padding-top: .6rem; border-top: 1px dashed var(--rule); font-size: .8125rem; color: var(--ink-soft); display: flex; gap: .5rem; align-items: baseline; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+
+  .controls { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 1.15rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.15rem 1.75rem; }
+  .controls.destaque { border-color: var(--accent); background: var(--accent-bg); }
+  .ctl { display: flex; flex-direction: column; gap: .35rem; }
+  .ctl.off { opacity: .45; }
+  .ctl .top { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+  .ctl .top .val { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .ctl .note { font-size: .75rem; color: var(--ink-faint); line-height: 1.4; }
+  .ctl .note b { color: var(--ink-soft); font-weight: 600; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.1rem; background: transparent; cursor: pointer; margin: 0; }
+  input[type=range]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); margin-top: -6px; box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  select { font-family: var(--mono); font-size: .75rem; color: var(--ink); background: var(--surface-2); border: 1px solid var(--rule); border-radius: 3px; padding: .42rem .5rem; width: 100%; cursor: pointer; }
+  select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .toggle { display: flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .toggle button { flex: 1; font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; padding: .45rem .5rem; background: var(--surface-2); color: var(--ink-soft); border: none; cursor: pointer; }
+  .toggle button + button { border-left: 1px solid var(--rule); }
+  .toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .funnel { display: flex; flex-direction: column; }
+  .frow { display: grid; grid-template-columns: 16rem 1fr; align-items: center; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--rule-soft); }
+  .frow:last-child { border-bottom: none; }
+  .frow .fl { display: flex; flex-direction: column; }
+  .frow .fl .t { font-family: var(--mono); font-size: .8125rem; font-weight: 600; }
+  .frow .fl .d { font-size: .75rem; color: var(--ink-faint); }
+  .bartrack { position: relative; display: flex; align-items: center; gap: .6rem; min-width: 0; }
+  .bar { height: 22px; border-radius: 0 4px 4px 0; min-width: 2px; transition: width .22s ease; }
+  .bval { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .cell { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .25rem; }
+  .cell.hero { background: var(--surface-2); }
+  .cell .v { font-family: var(--mono); font-size: 1.55rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.025em; line-height: 1.1; }
+  .cell.hero .v { font-size: 2rem; }
+  .cell .s { font-size: .75rem; color: var(--ink-faint); line-height: 1.45; }
+  .cell .s em { color: var(--ink-soft); font-style: normal; font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 34rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: .5rem .8rem; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  thead th[colspan] { text-align: center; border-bottom: 1px solid var(--rule); }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.total td { border-top: 2px solid var(--ink); font-weight: 700; }
+  tbody tr.mark td { background: var(--surface-2); }
+  tbody td:first-child { color: var(--ink); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start; font-size: .875rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .note-item a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .note-item.alerta { border-color: var(--bad); background: var(--bad-bg); }
+  details { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .7rem 1rem; }
+  details summary { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); cursor: pointer; font-weight: 600; }
+  details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  details[open] summary { margin-bottom: .9rem; }
+  details ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .35rem; font-size: .8125rem; color: var(--ink-soft); }
+  details code { font-family: var(--mono); font-size: .95em; color: var(--ink); }
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 32rem) {
+    .frow { grid-template-columns: 1fr; gap: .35rem; }
+    .offer { grid-template-columns: 1fr; }
+    .offer .result { grid-row: auto; grid-column: 1; text-align: left; margin-top: .5rem; }
+  }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center; gap: .45rem;
+            align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  .pend { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px;
+          background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .pend > li { background: var(--surface); padding: .95rem 1.1rem;
+               display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem; align-items: start; }
+  .pend .num { grid-row: 1 / 3; font-family: var(--mono); font-size: .6875rem; font-weight: 700;
+               letter-spacing: .06em; color: var(--accent); background: var(--accent-bg);
+               padding: .18rem .4rem; border-radius: 2px; }
+  .pend .q { font-weight: 600; font-size: .9375rem; color: var(--ink); line-height: 1.4; }
+  .pend .porque { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .pend .porque em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .pend .porque a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .pend .q .ideia { display: block; font-weight: 400; font-size: .8125rem; color: var(--ink-faint);
+                    font-family: var(--mono); margin-top: .15rem; }
+  .pend .resp { grid-column: 2; margin-top: .6rem; padding: .55rem .7rem;
+                background: var(--surface-2); border: 1px dashed var(--rule); border-radius: 3px;
+                display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+  .pend .rl { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em; text-transform: uppercase;
+              font-weight: 700; color: var(--accent); flex: none; }
+  .pend .rv { font-size: .875rem; color: var(--ink); line-height: 1.5; flex: 1 1 14rem; min-width: 0; }
+  .pend .rv.vazia { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em;
+                    text-transform: uppercase; color: var(--ink-faint); }
+  .pend .rv em { font-style: normal; font-weight: 600; color: var(--ink); }
+  .pend .resp.ok { border-style: solid; background: var(--surface); }
+  .pend .resp.ok .rl { color: var(--good); }
+  @media (max-width: 32rem) {
+    .pend > li { grid-template-columns: 1fr; }
+    .pend .num { grid-row: auto; justify-self: start; }
+    .pend .resp { grid-column: 1; }
+  }
+
+  .regras { margin: .55rem 0 .1rem; padding: 0; list-style: none; display: grid; gap: .45rem; }
+  .regras li { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
+               padding-left: .85rem; position: relative; }
+  .regras li::before { content: ""; position: absolute; left: 0; top: .55rem;
+                       width: .3rem; height: .3rem; border-radius: 50%; background: var(--accent); }
+  .regras b { color: var(--ink); font-weight: 600; }
+  .regras.tarefas { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+                    padding: 1rem 1.1rem; gap: .6rem; }
+  .regras.tarefas li { padding-left: 1.5rem; }
+  .regras.tarefas li::before { top: .3rem; width: .7rem; height: .7rem; border-radius: 2px;
+                               background: none; border: 1.5px solid var(--accent); }
+
+  .abas { display: flex; gap: .35rem; flex-wrap: wrap; border-bottom: 2px solid var(--ink);
+          margin-bottom: -1rem; }
+  .abas button { font-family: var(--mono); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+                 text-align: left; background: var(--surface-2); color: var(--ink-soft);
+                 border: 1px solid var(--rule); border-bottom: none; border-radius: 4px 4px 0 0;
+                 padding: .6rem .95rem; cursor: pointer; margin-bottom: -2px; line-height: 1.25; }
+  .abas button:hover { color: var(--ink); }
+  .abas button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .abas button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .abas .sub2 { display: block; font-size: .6875rem; font-weight: 400; letter-spacing: .01em;
+                text-transform: none; opacity: .7; margin-top: .1rem; }
+  .painel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .painel[hidden] { display: none; }
+
+  .abas.abas2 { border-bottom: 1px solid var(--rule); margin-bottom: -.75rem; gap: .3rem; }
+  .abas.abas2 button { background: none; border: none; border-bottom: 2px solid transparent;
+                       border-radius: 0; margin-bottom: -1px; padding: .55rem .9rem;
+                       font-size: .8125rem; color: var(--ink-soft); }
+  .abas.abas2 button:hover { color: var(--ink); }
+  .abas.abas2 button[aria-selected="true"] { background: none; color: var(--accent);
+                                             border-bottom-color: var(--accent); }
+  .abas.abas2 .sub2 { font-size: .625rem; }
+
+  .oferta-box { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 3px;
+                padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
+  .oferta-rot { font-family: var(--mono); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+                font-weight: 700; color: var(--accent); }
+  .oferta-txt { font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-weight: 600; color: var(--ink);
+                line-height: 1.3; letter-spacing: -.01em; }
+  .oferta-ast { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
+                border-top: 1px dashed var(--rule); padding-top: .5rem; }
+
+  /* ─── barra de distribuição de quantas indicações cada pessoa converte ─── */
+  .dist { display: flex; flex-direction: column; gap: .3rem; }
+  .drow { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem; align-items: center; }
+  .drow .dl { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft); }
+  .drow .dt { display: flex; align-items: center; gap: .55rem; min-width: 0; }
+  .drow .db { height: 16px; border-radius: 0 3px 3px 0; min-width: 2px; background: var(--step-2); transition: width .22s ease; }
+  .drow .dv { font-family: var(--mono); font-size: .75rem; font-variant-numeric: tabular-nums; color: var(--ink-faint); white-space: nowrap; }
+  .drow.marco .db { background: var(--accent); }
+  .drow.marco .dl { color: var(--ink); font-weight: 700; }
+  @media (max-width: 32rem) { .drow { grid-template-columns: 1fr; gap: .2rem; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cook · Ações de loja</div>
+    <h1>Programa de indicação</h1>
+    <p class="lede">
+      Cliente indica um amigo, o amigo compra, o cliente ganha um cookie. Mesma base de custo da
+      <a href="../campanha-fidelizacao/" style="color:var(--accent)">campanha de fidelização por visitas</a>
+      — Paulínia, jun&nbsp;+&nbsp;jul&nbsp;/&nbsp;2026, CMV de 31/07. Duas contas separadas: a
+      indicação simples e o ranking de pontos.
+    </p>
+  </header>
+
+  <div class="strip">
+    <div><span class="label">Margem de 1 visita normal</span><span class="v" id="s-margNormal">—</span><span class="s">é com isso que toda visita da campanha compete</span></div>
+    <div><span class="label">Custo de 1 cookie</span><span class="v" id="s-custoCk">—</span><span class="s">CMV + quebra + divisória</span></div>
+    <div><span class="label">Prêmio percebido</span><span class="v">R$ 17,34</span><span class="s">o que o cliente acha que ganhou</span></div>
+    <div><span class="label">Margem de contribuição</span><span class="v" id="s-mc">—</span><span class="s" id="s-mcPed">—</span></div>
+    <div><span class="label">Resultado por indicação</span><span class="v" id="s-porInd">—</span><span class="s">com as premissas atuais da aba 1</span></div>
+  </div>
+
+  <div class="abas" role="tablist" aria-label="As duas contas do programa">
+    <button type="button" role="tab" id="aba-simples" aria-controls="painel-simples" aria-selected="true" data-hash="simples">
+      A indicação simples<span class="sub2">1 indicação = 1 cookie · a conta que já dá bom</span></button>
+    <button type="button" role="tab" id="aba-ranking" aria-controls="painel-ranking" aria-selected="false" data-hash="ranking">
+      O ranking de pontos<span class="sub2">1 · 3 · 5 · 10 indicações · a escada</span></button>
+    <button type="button" role="tab" id="aba-mecanica" aria-controls="painel-mecanica" aria-selected="false" data-hash="mecanica">
+      A mecânica<span class="sub2">o QR, o buraco do controle, o que falta decidir</span></button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 1 — A INDICAÇÃO SIMPLES
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-simples" role="tabpanel" aria-labelledby="aba-simples">
+
+  <section>
+    <h2><span class="n">1</span> A regra<span class="hint">o que está proposto</span></h2>
+    <div class="oferta-box">
+      <span class="oferta-rot">A oferta</span>
+      <span class="oferta-txt">Indique um amigo. Quando ele vier comprar, o cookie da sua próxima visita é por nossa conta.</span>
+      <span class="oferta-ast">
+        O cookie do prêmio vale <strong>até o valor do que o amigo comprou</strong> — o teto que você já
+        definiu. Sem isso, o resgate sempre sai no cookie mais caro do balcão (Pistache,
+        CMV R$&nbsp;8,71) em vez do médio (R$&nbsp;5,01): são <strong>R$&nbsp;3,70 a mais de custo por
+        resgate</strong>, e ninguém vai escolher o Churros de R$&nbsp;3,83 espontaneamente.
+      </span>
+    </div>
+    <div class="notes">
+      <div class="note-item"><span class="tag good">por que ela nasce lucrativa</span><span>
+        Uma indicação convertida <strong>gera duas visitas</strong>: a do amigo, que paga o ticket cheio,
+        e a de resgate, em que o indicador volta pra pegar o cookie e leva mais coisa junto. O prêmio
+        custa <span id="p1-custoCk">—</span> de estoque. É a conta mais favorável de toda a área — mas só
+        <em>enquanto</em> as duas visitas forem visitas que não aconteceriam.
+      </span></div>
+      <div class="note-item alerta"><span class="tag bad">a falha que decide tudo</span><span>
+        <strong>Não existe hoje nenhum jeito de saber se o indicado já era cliente.</strong> Não há
+        cadastro por telefone nem por CPF, então a regra &ldquo;indique alguém que ainda não conhece a loja&rdquo;
+        é <em>impossível de fiscalizar no mês 1</em>. Toda a conta desta página gira em torno de um número:
+        <strong>quantos por cento dos indicados viriam de qualquer jeito</strong>. É o slider mais importante
+        da seção 4 — e a <a href="#mecanica">aba da mecânica</a> mostra como a própria campanha resolve isso a partir do mês 2.
+      </span></div>
+      <div class="note-item"><span class="tag acc">o que já está protegido</span><span>
+        <strong>Quem indica é, por definição, cliente da loja</strong> — ele se cadastrou no balcão. Então o
+        lado do indicador nunca é canibalização de aquisição: é canibalização de <em>frequência</em>
+        (ele já viria esse mês?), que é um risco menor e tem slider próprio.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O desenho<span class="hint">quem ganha o quê, e como o prêmio é entregue</span></h2>
+    <div class="controls destaque" id="desenho"></div>
+    <div class="notes" id="desenhoNota"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> A conta de uma indicação<span class="hint">as duas visitas, linha a linha</span></h2>
+    <div class="ledger" id="ledger"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Premissas<span class="hint">valem para as duas abas</span></h2>
+    <h3 class="sub">O funil do mês</h3>
+    <div class="controls" id="ctlFunil"></div>
+    <h3 class="sub">Canibalização — a premissa que decide se ganha ou perde</h3>
+    <div class="controls" id="ctlCanib"></div>
+    <div class="note-item"><span class="tag bad">nenhum dos dois é medido</span><span>
+      Os dois números acima <strong>não vêm dos seus dados</strong> — o PDV registra pedido, não pessoa.
+      São premissas puras, e são as únicas capazes de virar o sinal do resultado. O que o cadastro do QR
+      (nome&nbsp;+&nbsp;WhatsApp) faz é <em>substituir os dois por medição</em>: a partir da segunda safra,
+      dá pra cruzar o WhatsApp do indicado contra a base e saber a taxa real.
+    </span></div>
+    <h3 class="sub">O que o indicador gasta ao resgatar</h3>
+    <div class="controls" id="ctlResgate"></div>
+    <div class="note-item"><span class="tag acc">medido</span><span>
+      Os <strong>R$&nbsp;14,03</strong> são a média medida nos 2.411 pedidos de loja de jun+jul,
+      descontando dois cookies do pedido (o pago e o de brinde) — 50% dos pedidos não levam nada além
+      dos dois cookies. É o mesmo número que a campanha de fidelização usa.
+      <strong>Arraste para R$&nbsp;0</strong> pra ver o piso: o cliente que entra, pega o brinde e vai embora.
+    </span></div>
+    <h3 class="sub">O prêmio de verdade — o cliente novo que fica</h3>
+    <div class="controls" id="ctlLTV"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> O resultado do mês</h2>
+    <div class="funnel" id="funnel"></div>
+    <div class="results" id="results"></div>
+    <div class="notes" id="resNota"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span> O ponto de virada<span class="hint">até onde a campanha aguenta</span></h2>
+    <div class="results" id="breakeven"></div>
+    <div class="notes" id="beNota"></div>
+  </section>
+
+  <details>
+    <summary>Premissas e origem dos números</summary>
+    <ul>
+      <li><strong>Toda a base de custo é a mesma da <a href="../campanha-fidelizacao/">campanha de fidelização</a></strong>: loja Paulínia, jun+jul/2026, canais caixa + balcão + mesa (delivery fora), 2.411 pedidos. Ticket R$ 39,09 · CMV do mix 34,60%.</li>
+      <li><strong>CMV</strong>: <code>cmv_produtos</code>, atualizado em 30–31/07/2026. Cookie R$ 5,01 sem os premium (mín. R$ 3,83 Churros · máx. R$ 8,71 Pistache). Fatia da Torta Perfeita R$ 9,04. Milkshake R$ 13,20. Bola de sorvete R$ 2,00 (<code>Add de sorvete</code>).</li>
+      <li><strong>Venda extra</strong>: R$ 14,03 = pedido − 2 cookies (quando o brinde é cookie) · R$ 24,24 = pedido − 1 item (quando o brinde é torta, milkshake ou sorvete, que 92% dos pedidos não levam de qualquer jeito).</li>
+      <li><strong>Simples 8,0%</strong> · <strong>Royalties 4,0%</strong> · <strong>Cartão 2,0%</strong> · <strong>Quebra 1,0%</strong> · embalagem R$ 0,85 por pedido + R$ 0,20 de divisória por item de promoção.</li>
+      <li><strong>Canibalização (as duas)</strong>: premissa, não medição. Não existe cadastro de cliente por telefone ou CPF hoje — é exatamente o que esta campanha começa a construir.</li>
+      <li><strong>Custo do disparo</strong>: premissa de R$ 0,12 por mensagem de template do WhatsApp Business. <em>A confirmar com o provedor.</em></li>
+      <li><strong>Distribuição de quantas indicações cada pessoa converte</strong>: binomial de <code>amigos indicados</code> tentativas com a taxa de conversão do disparo. Não é slider — sai direto das premissas do funil, e é o que faz a aba do ranking dar a resposta que dá.</li>
+    </ul>
+  </details>
+
+  </div><!-- /painel-simples -->
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 2 — O RANKING DE PONTOS
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-ranking" role="tabpanel" aria-labelledby="aba-ranking" hidden>
+
+  <section>
+    <h2><span class="n">1</span> A escada<span class="hint">quanto cada degrau custa por indicação</span></h2>
+    <p class="prose">
+      Os marcos são <strong>acumulativos</strong>: quem chega a 3 já resgatou o cookie do marco 1 no
+      caminho, e leva o combo por cima. Então o que importa não é o custo do degrau — é o
+      <strong>custo acumulado dividido pelas indicações que ele exigiu</strong>. Esse é o número que
+      compete com a margem que cada indicação gera.
+    </p>
+    <div class="controls destaque" id="marcos"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Marco</th><th>Indicações</th><th>Prêmio</th><th>Prêmio<br>percebido</th><th>Custo do<br>degrau</th><th>Custo<br>acumulado</th><th>Custo por<br>indicação</th><th>Sobra por<br>indicação</th></tr></thead>
+      <tbody id="tbEscada"></tbody>
+    </table></div>
+    <div class="notes" id="escadaNota"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Quem chega lá<span class="hint">a pergunta que decide o programa</span></h2>
+    <p class="prose">
+      Ninguém escolhe quantas indicações vai converter — ele escolhe quantos amigos <em>lista</em>. Quantas
+      viram compra é sorteio, com a taxa de conversão do disparo. Com
+      <strong id="r-amigos">—</strong> amigos por pessoa e <strong id="r-conv">—</strong> de conversão, é
+      esta a distribuição — e é ela que diz se a escada tem degrau de cima.
+    </p>
+    <div class="dist" id="dist"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Marco</th><th>Chance de chegar</th><th>Indicadores/mês<br>que chegam</th><th>Amigos que ele<br>precisaria listar*</th><th>Custo do degrau<br>no mês</th></tr></thead>
+      <tbody id="tbAlcance"></tbody>
+    </table></div>
+    <div class="notes" id="alcanceNota"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> O resultado do mês com a escada</h2>
+    <div class="results" id="rkResults"></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Linha</th><th>Volume</th><th>Valor unitário</th><th>Total</th></tr></thead>
+      <tbody id="tbRk"></tbody>
+    </table></div>
+    <div class="notes" id="rkNota"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Simples ou escada?</h2>
+    <div class="results" id="comparativo"></div>
+    <div class="notes" id="compNota"></div>
+  </section>
+
+  </div><!-- /painel-ranking -->
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 3 — A MECÂNICA
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-mecanica" role="tabpanel" aria-labelledby="aba-mecanica" hidden>
+
+  <section id="mecanica">
+    <h2>Como funciona na prática<span class="hint">do QR do balcão ao ponto que cai</span></h2>
+    <div class="story fluxo">
+      <div>
+        <span class="vnum">1</span>
+        <span class="job">O QR do balcão</span>
+        <span class="txt">Um QR fixo no balcão (e no rodapé do cupom fiscal). Quem lê cai numa página de
+        cadastro. <em>Ler o QR já é o filtro</em>: só quem está na loja indica, e por isso quem indica é
+        sempre cliente.</span>
+        <span class="vid">página nova, hospedada junto com o resto</span>
+      </div>
+      <div>
+        <span class="vnum">2</span>
+        <span class="job">O indicador se cadastra</span>
+        <span class="txt">Nome, WhatsApp e — <em>a decidir</em> — CPF. É o registro que cria a chave única
+        dele e a conta de pontos. <em>É também o primeiro tijolo da base de clientes</em>, que hoje não
+        existe.</span>
+        <span class="vid">o WhatsApp já é chave única · o CPF é a pergunta 06</span>
+      </div>
+      <div>
+        <span class="vnum">3</span>
+        <span class="job">Ele lista os amigos</span>
+        <span class="txt">Nome e WhatsApp de quantos quiser — 5, 10, 20. Cada linha vira um cupom com QR
+        próprio, amarrado ao indicador. <em>Quantos amigos ele lista é a alavanca de volume da campanha
+        inteira.</em></span>
+        <span class="vid">o número que a aba do ranking mais usa</span>
+      </div>
+      <div>
+        <span class="vnum">4</span>
+        <span class="job">O amigo recebe o disparo</span>
+        <span class="txt">Mensagem no WhatsApp: o amigo dele quis que ele conhecesse a loja, e o cupom
+        vem junto. <em>É aqui que mora a falha</em> — se o cupom não der nada a ele, o convite é só um
+        anúncio com nome de amigo em cima.</span>
+        <span class="vid">custo de template · validade do cupom a definir</span>
+      </div>
+      <div>
+        <span class="vnum">5</span>
+        <span class="job">O balcão escaneia</span>
+        <span class="txt">O amigo compra, o atendente lê o QR do cupom dele. <em>Só aí</em> o ponto cai
+        pro indicador, que recebe a mensagem dizendo que liberou o prêmio. <strong>Ponto sem compra não
+        existe</strong> — é o que impede fraude por lista inventada.</span>
+        <span class="vid">1 leitura no caixa · sem sistema novo no PDV</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O buraco do controle<span class="hint">e como a própria campanha o fecha</span></h2>
+    <div class="notes">
+      <div class="note-item alerta"><span class="tag bad">mês 1</span><span>
+        <strong>Cego.</strong> Não existe base de clientes. Se o indicado já comprava toda semana, ele
+        entra como &ldquo;novo&rdquo; e a loja paga um cookie por uma visita que já teria. A campanha
+        roda no escuro — e o único jeito de não perder dinheiro nesse mês é o prêmio ser barato o
+        bastante pra que a canibalização não vire prejuízo. É o teste da seção 6 da aba 1.
+      </span></div>
+      <div class="note-item"><span class="tag good">mês 2 em diante</span><span>
+        <strong>Medido.</strong> Todo indicado passou pelo cadastro com nome + WhatsApp, e todo indicador
+        também. A base nasce da própria campanha. A regra <em>&ldquo;o WhatsApp do indicado não pode já
+        estar na base&rdquo;</em> passa a ser verificável na hora do cadastro — a página recusa o número
+        antes de gerar o cupom, sem precisar de fiscal no balcão.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o que a base ainda não pega</span><span>
+        Quem já é cliente <strong>mas nunca se cadastrou</strong> continua invisível. A base só cobre quem
+        passou pelo QR. Por isso a taxa de canibalização cai devagar, não some — e por isso vale ligar o
+        cadastro do QR ao <a href="../campanha-fidelizacao/#combinado">cadastro da campanha de fidelização</a>:
+        <em>é a mesma base, construída duas vezes se forem dois sistemas</em>.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Regras de balcão<span class="hint">o que o atendente precisa saber de cor</span></h2>
+    <ul class="regras tarefas">
+      <li><b>Ponto só com compra.</b> O QR do amigo só é lido depois que o pedido dele fecha. Lista de nome não vale ponto.</li>
+      <li><b>Um cupom por pessoa, uma vez.</b> O QR queima na leitura. Se o mesmo amigo aparecer com dois cupons de dois indicadores, vale o primeiro.</li>
+      <li><b>Quem indica não pode ser indicado.</b> Ele já está na base — a página recusa o número dele na lista de amigos.</li>
+      <li><b>O prêmio do indicador vale até o valor do que o amigo comprou.</b> Amigo levou um Churros de R$ 14,90? O cookie do prêmio é até R$ 14,90.</li>
+      <li><b>O prêmio não sai na mesma visita do amigo</b> — a não ser que o desenho escolhido seja o &ldquo;venham juntos&rdquo; (seção 2 da aba 1).</li>
+      <li><b>Nada de foto de tela.</b> O QR é lido do celular ou não é lido. Print não vale — é o único ponto de fraude fácil.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>O que falta decidir<span class="hint">nada aqui está fechado</span></h2>
+    <ol class="pend">
+      <li>
+        <span class="num">01</span>
+        <span class="q">O indicado ganha alguma coisa?
+          <span class="ideia">é a falha central do desenho — hoje ele recebe um anúncio, não um presente</span></span>
+        <span class="porque">Do jeito que está, quem é indicado não ganha nada: recebe uma mensagem dizendo
+        que um amigo quer que ele conheça a loja. <em>O amigo virou mídia, não presente.</em> O simulador da
+        aba 1 tem o controle &ldquo;o que o indicado ganha&rdquo; justamente pra medir quanto custa consertar isso —
+        e a resposta é que <strong>o desenho aguenta dar brinde pros dois</strong>, desde que a canibalização
+        não estoure. Falta escolher qual.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="q">O resgate exige compra, ou o cookie é de graça mesmo?
+          <span class="ideia">compre-e-ganhe é a regra que você já fixou na outra campanha</span></span>
+        <span class="porque">Na campanha de fidelização a moeda é <em>compre e ganhe</em> — nunca desconto,
+        nunca brinde solto. Aqui o prêmio é recompensa, não isca, então dá pra defender o brinde puro. A
+        diferença na conta é grande: o toggle da seção 2 mostra quanto. <strong>Brinde puro só se sustenta
+        se o indicador comprar alguma coisa junto</strong>, e isso não está garantido.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="q">Separado ou &ldquo;venham juntos&rdquo;?
+          <span class="ideia">o cupom só vale com os dois na loja: o amigo paga, o indicador ganha</span></span>
+        <span class="porque">A versão &ldquo;juntos&rdquo; resolve o controle inteiro — o atendente vê as duas
+        pessoas, sabe quem é novo, e não existe resgate cego. <em>Mas troca duas visitas por uma</em>, e a
+        conta piora, a não ser que o pedido da dupla seja bem maior que um pedido solo. O simulador tem o
+        modo; falta decidir se o ganho de controle paga a margem que sai.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="q">Qual a validade do cupom do amigo?
+          <span class="ideia">sem prazo, o cupom nunca &ldquo;expira&rdquo; e a safra nunca fecha</span></span>
+        <span class="porque">Prazo curto (7 dias) força a visita e deixa medir a safra; prazo longo pega mais
+        gente mas mistura tudo. <em>Toda a conta de &ldquo;resultado do mês&rdquo; assume que a safra fecha
+        dentro do mês</em> — sem prazo, esse número perde o sentido.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="q">Quantos amigos cada pessoa pode listar de uma vez?
+          <span class="ideia">é a alavanca de volume — e o teto de custo de disparo</span></span>
+        <span class="porque">A aba do ranking mostra que <strong>este é o número que decide se a escada tem
+        degrau de cima</strong>. Sem teto, um cliente lista a agenda inteira e a loja paga o disparo de todos.
+        Com teto baixo, ninguém chega ao marco 3. <em>É a decisão mais barata de mudar depois</em> — mas
+        precisa nascer com um número.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">06</span>
+        <span class="q">Pedir CPF mesmo?
+          <span class="ideia">o WhatsApp já é chave única e é o canal do disparo</span></span>
+        <span class="porque">O CPF não é necessário pra identificar ninguém — o WhatsApp já faz isso e ainda
+        é por onde o cupom sai. O que o CPF acrescenta é <em>atrito no cadastro</em> (é o campo que mais faz
+        gente desistir) e <em>dado sensível de LGPD</em> pra guardar. Se o objetivo for cruzar com nota fiscal
+        depois, aí tem motivo — mas isso é decisão, não default.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">07</span>
+        <span class="q">Qual é o custo real do disparo de WhatsApp?
+          <span class="ideia">a página assume R$ 0,12 por template · não conferido</span></span>
+        <span class="porque">Com 240 disparos/mês, R$ 0,12 vira R$ 28,80 — irrelevante. Com 3.000 disparos,
+        vira R$ 360 e passa a competir com o custo dos prêmios. <em>É a única linha de custo da campanha que
+        cresce com a lista, não com a conversão</em>, e por isso precisa de número real antes de liberar
+        lista grande.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">08</span>
+        <span class="q">Salgado e cesta ainda não têm CMV na base
+          <span class="ideia">os marcos 3 e 4 usam itens já custeados como substituto de mesmo valor</span></span>
+        <span class="porque">Você desenhou o marco 5 como &ldquo;cookie + salgado + bebida&rdquo; e o marco 10
+        como cesta. <strong>Pão de queijo, croissant e a cesta não estão em <code>cmv_produtos</code></strong>,
+        então a página monta esses degraus com cookie, torta e milkshake — que têm CMV real — no mesmo patamar
+        de valor percebido. <em>Assim que o CMV desses itens entrar na base, os números trocam sozinhos</em>;
+        o formato do prêmio é decisão sua, o custo é dado.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">09</span>
+        <span class="q">A ideia do cupom que vale pros dois — ficou pela metade
+          <span class="ideia">&ldquo;você ganha um cupom de compra e ganha o outro… você leva quem te indicou&rdquo;</span></span>
+        <span class="porque">A última ideia da conversa não chegou ao fim. O que está modelado como
+        <em>&ldquo;venham juntos&rdquo;</em> (pergunta 03) é a leitura mais próxima: um cupom de compre-1-ganhe-1
+        que só vale com os dois presentes — o amigo paga, o indicador leva o de graça. <strong>Se a ideia era
+        outra, ela ainda não está na conta.</strong></span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+    </ol>
+  </section>
+
+  </div><!-- /painel-mecanica -->
+
+  <footer>
+    Base de custo idêntica à da <a href="../campanha-fidelizacao/" style="color:var(--accent)">campanha de fidelização por visitas</a>
+    — Paulínia, jun+jul/2026, CMV de 31/07/2026. As duas abas de conta compartilham as mesmas premissas:
+    mexer num slider da aba 1 muda a aba 2 também.
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  // ─── Base real — mesma da campanha de fidelização ──────────────────────────
+  const B = {
+    ticket: 39.09, pedidos: 1200,
+    cmvMix: 0.3460,
+    cookiePago: 15.19, cookieTab: 17.34, cookieCMV: 5.0100,
+    cookieCMVmin: 3.8336, cookieCMVmax: 8.7100,
+    tortaPreco: 22.90, tortaCMV: 9.0400,
+    sorvPreco: 5.90, sorvCMV: 2.0000,
+    milkPreco: 28.66, milkCMV: 13.2000,
+    exGanhe: 14.03, exPreco: 24.24,
+  };
+
+  const S = {
+    // funil (compartilhado pelas duas abas)
+    indicadores: 60, amigos: 4, conv: 12, txResgate: 75,
+    // desenho
+    premioInd: "ck", exigeCompra: true, premioIndicado: "nada",
+    modo: "separado", pedidoDupla: 62,
+    // canibalização
+    cI: 30, cR: 50,
+    // resgate
+    gastoResgate: 14.03, disparo: 0.12,
+    // LTV
+    viraFiel: 14, freqFiel: 1.2, mesesFiel: 12,
+    // estrutura de custo
+    simples: 8.0, royalty: 4.0, cartao: 2.0, quebra: 1.0,
+    embPedido: 0.85, embItem: 0.20,
+    // escada (aba 2)
+    m: [{ n: 1, p: "b_ck" }, { n: 3, p: "b_ck_mlk" }, { n: 5, p: "b_ck_tor_mlk" }, { n: 10, p: "b_cesta6" }],
+  };
+
+  const DED = (S.simples + S.royalty + S.cartao) / 100;
+  const QUEBRA = S.quebra / 100;
+  const MC = 1 - (B.cmvMix + QUEBRA + S.embPedido / B.ticket + DED);
+  const MARG_NORMAL = B.ticket * MC;
+  const custoItem = (cmv) => cmv * (1 + QUEBRA) + S.embItem;
+
+  const brl = (v, d = 2) => (v < 0 ? "−" : "") + "R$ " +
+    Math.abs(v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const brl0 = (v) => brl(v, 0);
+  const pc = (v, d = 1) => (100 * v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const n0 = (v) => Math.round(v).toLocaleString("pt-BR");
+  const n1 = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const sign = (v) => v >= 0 ? "pos" : "neg";
+
+  // ─── Itens com CMV real ────────────────────────────────────────────────────
+  const ITENS = {
+    ck:  { nome: "cookie",          pl: "cookies",           tab: B.cookieTab,  cmv: B.cookieCMV,  ex: "exGanhe" },
+    srv: { nome: "bola de sorvete", pl: "bolas de sorvete",  tab: B.sorvPreco,  cmv: B.sorvCMV,    ex: "exPreco" },
+    tor: { nome: "fatia de torta",  pl: "fatias de torta",   tab: B.tortaPreco, cmv: B.tortaCMV,   ex: "exPreco" },
+    mlk: { nome: "milkshake",       pl: "milkshakes",        tab: B.milkPreco,  cmv: B.milkCMV,    ex: "exPreco" },
+  };
+
+  // ─── Prêmio do indicador (aba 1) ───────────────────────────────────────────
+  const PREMIO_IND = {
+    ck:  { nome: "1 cookie", nota: ["good", "O prêmio da proposta. Custa " + brl(custoItem(B.cookieCMV)) + " e o cliente enxerga " + brl(B.cookieTab) + " — a melhor relação entre o que sai do estoque e o que a pessoa acha que ganhou."] },
+    srv: { nome: "1 bola de sorvete", nota: ["good", "O mais barato da lista (" + brl(custoItem(B.sorvCMV)) + "). Praticamente não pesa na conta — mas prêmio de " + brl(B.sorvPreco) + " dificilmente faz alguém digitar 5 telefones."] },
+    tor: { nome: "1 fatia de torta", nota: ["warn", "Prêmio de " + brl(B.tortaPreco) + " num item que 92% dos pedidos não levam — revela produto novo. Custa " + brl(custoItem(B.tortaCMV)) + ", quase o dobro do cookie."] },
+    mlk: { nome: "1 milkshake", nota: ["bad", "O maior prêmio percebido e o mais caro de entregar (" + brl(custoItem(B.milkCMV)) + "). Numa indicação simples ele come quase toda a margem da visita do amigo — guarde pra escada."] },
+  };
+
+  // ─── O que o indicado ganha (aba 1) ────────────────────────────────────────
+  const PREMIO_INDICADO = {
+    nada:   { nome: "Nada — só o convite do amigo", tipo: "nada",
+              nota: ["bad", "É o desenho de hoje, e é a falha que você apontou: <strong>o indicado não ganha nada</strong>. A visita dele rende o máximo (" + brl(MARG_NORMAL) + "), mas o convite compete com qualquer anúncio."] },
+    g_srv:  { nome: "Compre 1 cookie, ganhe 1 bola de sorvete", tipo: "ganhe", item: "srv",
+              nota: ["good", "O conserto mais barato da falha: custa " + brl(custoItem(B.sorvCMV)) + " e já transforma o convite em presente. É o brinde de entrada da campanha de fidelização, pelo mesmo motivo."] },
+    g_ck:   { nome: "Compre 1 cookie, ganhe 1 cookie", tipo: "ganhe", item: "ck",
+              nota: ["good", "Os dois lados ganham a mesma coisa — é o desenho mais fácil de explicar em uma frase. Tira " + brl(MARG_NORMAL - ((B.cookiePago + B.exGanhe) * MC - custoItem(B.cookieCMV))) + " da visita do amigo."] },
+    g_tor:  { nome: "Compre 1 cookie, ganhe 1 fatia de torta", tipo: "ganhe", item: "tor",
+              nota: ["warn", "Prêmio grande pra quem nunca entrou — e revela a torta, que 92% dos pedidos não levam. Mas é o desenho que mais depende da canibalização ficar baixa."] },
+    d_5:    { nome: "Cookie por R$ 5 · desconto", tipo: "desconto", preco: 5, item: "ck",
+              nota: ["bad", "Fora da regra que você fixou na outra campanha: é desconto, não brinde. Fica aqui só como comparação — ensina o cliente a esperar preço menor em vez de esperar presente."] },
+  };
+
+  // ─── Combos da escada (aba 2) ──────────────────────────────────────────────
+  const COMBOS = {
+    b_ck:         [["ck", 1]],
+    b_ck_srv:     [["ck", 1], ["srv", 1]],
+    b_ck_tor:     [["ck", 1], ["tor", 1]],
+    b_ck_mlk:     [["ck", 1], ["mlk", 1]],
+    b_tor_mlk:    [["tor", 1], ["mlk", 1]],
+    b_ck_tor_mlk: [["ck", 1], ["tor", 1], ["mlk", 1]],
+    b_ck2_mlk:    [["ck", 2], ["mlk", 1]],
+    b_cesta4:     [["ck", 4], ["mlk", 1]],
+    b_cesta6:     [["ck", 6], ["mlk", 1]],
+  };
+  const comboNome = (k) => COMBOS[k].map(([i, q]) => q + " " + (q > 1 ? ITENS[i].pl : ITENS[i].nome)).join(" + ");
+  const comboTab = (k) => COMBOS[k].reduce((a, [i, q]) => a + q * ITENS[i].tab, 0);
+  const comboCusto = (k) => COMBOS[k].reduce((a, [i, q]) => a + q * custoItem(ITENS[i].cmv), 0);
+
+  // ─── As duas visitas de uma indicação ──────────────────────────────────────
+
+  // margem da visita do AMIGO indicado, já descontada a canibalização
+  function margemVisitaIndicado() {
+    const o = PREMIO_INDICADO[S.premioIndicado];
+    if (o.tipo === "nada") return MARG_NORMAL;
+    const it = ITENS[o.item], extra = B[it.ex];
+    if (o.tipo === "ganhe") return (B.cookiePago + extra) * MC - custoItem(it.cmv);
+    return extra * MC + (o.preco * (1 - DED) - custoItem(it.cmv));  // desconto
+  }
+  const incrIndicado = () => margemVisitaIndicado() - (S.cI / 100) * MARG_NORMAL;
+
+  // margem da visita de RESGATE do indicador, já descontada a canibalização
+  function margemVisitaResgate(premioCusto, premioExKey) {
+    const receita = S.exigeCompra ? (B.cookiePago + B[premioExKey]) : S.gastoResgate;
+    return receita * MC - premioCusto - (S.cR / 100) * MARG_NORMAL;
+  }
+  const resgateSimples = () => margemVisitaResgate(custoItem(ITENS[S.premioInd].cmv), ITENS[S.premioInd].ex);
+
+  // modo "venham juntos": uma visita só cobre os dois lados
+  function margemJuntos() {
+    return S.pedidoDupla * MC - custoItem(ITENS[S.premioInd].cmv)
+           - ((S.cI + S.cR) / 100) * MARG_NORMAL;
+  }
+
+  // resultado de UMA indicação convertida
+  function porIndicacao() {
+    if (S.modo === "juntos") return margemJuntos();
+    return incrIndicado() + (S.txResgate / 100) * resgateSimples();
+  }
+
+  // ─── Binomial: quantas indicações cada indicador converte ──────────────────
+  function binom(n, p) {
+    const out = new Array(n + 1).fill(0);
+    let c = 1;
+    for (let k = 0; k <= n; k++) {
+      out[k] = c * Math.pow(p, k) * Math.pow(1 - p, n - k);
+      c = c * (n - k) / (k + 1);
+    }
+    return out;
+  }
+  const pmf = () => binom(S.amigos, S.conv / 100);
+  const pAoMenos = (dist, k) => dist.slice(Math.min(k, dist.length)).reduce((a, x) => a + x, 0);
+  // menor nº de amigos listados pra ter >= 50% de chance de converter >= k
+  function amigosPara(k) {
+    for (let a = k; a <= 400; a++) {
+      const d = binom(a, S.conv / 100);
+      if (pAoMenos(d, k) >= 0.5) return a;
+    }
+    return null;
+  }
+
+  // ─── Cálculo do mês — ABA 1 ────────────────────────────────────────────────
+  function calc1() {
+    const disparos = S.indicadores * S.amigos;
+    const conversoes = disparos * (S.conv / 100);
+    const resgates = conversoes * (S.txResgate / 100);
+    const custoDisparo = disparos * S.disparo;
+
+    let margAmigos, margResgate, custoPremios, visitas;
+    if (S.modo === "juntos") {
+      margAmigos = conversoes * margemJuntos();
+      margResgate = 0;
+      custoPremios = conversoes * custoItem(ITENS[S.premioInd].cmv);
+      visitas = conversoes;
+    } else {
+      margAmigos = conversoes * incrIndicado();
+      margResgate = resgates * resgateSimples();
+      custoPremios = resgates * custoItem(ITENS[S.premioInd].cmv)
+                   + (PREMIO_INDICADO[S.premioIndicado].tipo === "nada" ? 0
+                      : conversoes * custoItem(ITENS[PREMIO_INDICADO[S.premioIndicado].item].cmv));
+      visitas = conversoes + resgates;
+    }
+    const resultado = margAmigos + margResgate - custoDisparo;
+
+    const novos = conversoes * (1 - S.cI / 100);
+    const fieis = novos * (S.viraFiel / 100);
+    const margFielMes = S.freqFiel * B.ticket * MC;
+    const ltv = fieis * margFielMes * S.mesesFiel;
+
+    const oA = PREMIO_INDICADO[S.premioIndicado];
+    const receitaAmigo = oA.tipo === "nada" ? B.ticket
+      : (oA.tipo === "ganhe" ? B.cookiePago + B[ITENS[oA.item].ex]
+                             : oA.preco + B[ITENS[oA.item].ex]);
+    const fatExtra = S.modo === "juntos" ? conversoes * S.pedidoDupla
+                                         : conversoes * receitaAmigo
+                                           + resgates * (S.exigeCompra ? B.cookiePago + B[ITENS[S.premioInd].ex] : S.gastoResgate);
+
+    return { disparos, conversoes, resgates, custoDisparo, margAmigos, margResgate,
+             custoPremios, visitas, resultado, novos, fieis, margFielMes, ltv, fatExtra,
+             saldo: resultado + ltv };
+  }
+
+  // ─── Cálculo do mês — ABA 2 (escada) ───────────────────────────────────────
+  function calc2() {
+    const dist = pmf();
+    const disparos = S.indicadores * S.amigos;
+    const conversoes = disparos * (S.conv / 100);
+    const custoDisparo = disparos * S.disparo;
+
+    const marcos = S.m.map((m) => {
+      const p = pAoMenos(dist, m.n) * (S.txResgate / 100);
+      const custo = comboCusto(m.p);
+      return { n: m.n, p: m.p, chance: pAoMenos(dist, m.n), pResgatado: p,
+               qtd: S.indicadores * p, custo, tab: comboTab(m.p),
+               // a venda extra da visita de resgate: cookie se o combo tiver cookie, senão item de preço
+               exKey: COMBOS[m.p].some(([i]) => i === "ck") ? "exGanhe" : "exPreco" };
+    });
+
+    const custoPremios = marcos.reduce((a, m) => a + m.qtd * m.custo, 0);
+    const visitasResgate = marcos.reduce((a, m) => a + m.qtd, 0);
+    const margResgate = marcos.reduce((a, m) =>
+      a + m.qtd * ((S.exigeCompra ? B.cookiePago + B[m.exKey] : S.gastoResgate) * MC - (S.cR / 100) * MARG_NORMAL), 0);
+    const margAmigos = conversoes * incrIndicado();
+    const custoIndicadoPremio = PREMIO_INDICADO[S.premioIndicado].tipo === "nada" ? 0
+      : conversoes * custoItem(ITENS[PREMIO_INDICADO[S.premioIndicado].item].cmv);
+
+    const resultado = margAmigos + margResgate - custoPremios - custoDisparo;
+
+    const novos = conversoes * (1 - S.cI / 100);
+    const fieis = novos * (S.viraFiel / 100);
+    const ltv = fieis * S.freqFiel * B.ticket * MC * S.mesesFiel;
+
+    return { dist, disparos, conversoes, custoDisparo, marcos, custoPremios,
+             visitasResgate, margResgate, margAmigos, custoIndicadoPremio, resultado,
+             novos, fieis, ltv, saldo: resultado + ltv };
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // CONTROLES — construídos uma vez, sincronizados a cada mudança.
+  // (Se o innerHTML do container for reescrito a cada input, o arraste do
+  //  slider morre no primeiro movimento — foi assim que a página base fez.)
+  // ══════════════════════════════════════════════════════════════════════════
+  const CTLS = [
+    { k: "indicadores", g: "ctlFunil", lab: "Indicadores cadastrados por mês", min: 0, max: 400, step: 5, fmt: n0,
+      note: () => `Quantas pessoas leem o QR e preenchem a lista. A loja faz <b>${n0(B.pedidos)} pedidos/mês</b> — ${n0(S.indicadores)} cadastros são <b>${pc(S.indicadores / B.pedidos, 0)}</b> deles.` },
+    { k: "amigos", g: "ctlFunil", lab: "Amigos que cada um lista", min: 1, max: 30, step: 1, fmt: n0,
+      note: () => `<b>A alavanca de volume.</b> Multiplica disparos, conversões e — na aba do ranking — a chance de alguém chegar ao degrau de cima. Também multiplica o custo de disparo.` },
+    { k: "conv", g: "ctlFunil", lab: "Conversão do disparo", min: 1, max: 60, step: 1, fmt: (v) => v + "%",
+      note: () => `Dos ${n0(calc1().disparos)} amigos que recebem a mensagem, quantos aparecem e compram. <b>Não é medido</b> — nunca rodamos disparo assim. Convite com nome de amigo converte mais que anúncio, mas quanto é chute.` },
+    { k: "txResgate", g: "ctlFunil", lab: "Resgate do prêmio", min: 0, max: 100, step: 1, fmt: (v) => v + "%",
+      note: () => `Quantos indicadores realmente voltam pra pegar o prêmio. <b>Prêmio não resgatado é custo que não sai do estoque</b> — resgate baixo melhora a margem e piora a campanha.` },
+
+    { k: "cI", g: "ctlCanib", lab: "Indicados que viriam de qualquer jeito", min: 0, max: 100, step: 1, fmt: (v) => v + "%",
+      note: () => `<b>O número que decide a campanha.</b> Quanto dos amigos indicados já era cliente da loja. Hoje é impossível de medir — não existe cadastro. A ${pc(S.cI / 100, 0)} você está dizendo que <b>${n0(calc1().novos)}</b> dos ${n0(calc1().conversoes)} convertidos são gente nova de verdade.` },
+    { k: "cR", g: "ctlCanib", lab: "Resgates que substituem visita que já aconteceria", min: 0, max: 100, step: 1, fmt: (v) => v + "%",
+      note: () => `Quem indica é cliente da loja — então boa parte dos resgates é visita que ele faria de qualquer jeito, só que agora com um cookie de graça dentro. <b>É por isso que a visita de resgate vale menos do que parece.</b>` },
+
+    { k: "gastoResgate", g: "ctlResgate", lab: "Gasto espontâneo no resgate", min: 0, max: 40, step: 0.5, fmt: brl,
+      dep: () => !S.exigeCompra && S.modo === "separado",
+      note: () => (S.exigeCompra || S.modo === "juntos")
+        ? `Não se aplica neste desenho. No modo <b>compre e ganhe</b> a regra exige ${brl(B.cookiePago)} de cookie a preço cheio e a venda extra de <b>${brl(B[ITENS[S.premioInd].ex])}</b> é medida no histórico; no modo <b>venham juntos</b> não existe visita de resgate. Troque pra <b>brinde puro / separado</b> na seção 2 pra liberar este slider.`
+        : `Quanto o indicador gasta na visita em que pega o prêmio de graça. <b>R$ 14,03 é a média medida</b> (pedido menos dois cookies). <b>Arraste pra R$ 0</b> e veja o piso: quem entra, pega e vai embora custa ${brl(-custoItem(ITENS[S.premioInd].cmv) - (S.cR / 100) * MARG_NORMAL)}.` },
+    { k: "disparo", g: "ctlResgate", lab: "Custo do disparo de WhatsApp", min: 0, max: 0.60, step: 0.01, fmt: brl,
+      note: () => `Por mensagem de template. <b>Premissa — a confirmar com o provedor.</b> Com ${n0(calc1().disparos)} disparos/mês dá <b>${brl0(calc1().custoDisparo)}</b>. É a única linha que cresce com a lista, e não com a conversão.` },
+
+    { k: "viraFiel", g: "ctlLTV", lab: "Indicados novos que viram clientes fiéis", min: 0, max: 60, step: 1, fmt: (v) => v + "%",
+      note: () => `<b>14% é a taxa natural composta</b> da campanha de fidelização (42% × 47% × 72%): quem chega à 4ª visita volta sozinho. Rodar a campanha de fidelização em cima dos indicados é o que sobe este número.` },
+    { k: "freqFiel", g: "ctlLTV", lab: "Visitas por mês de um fiel", min: 0.5, max: 4, step: 0.1, fmt: n1,
+      note: () => `Cada fiel deixa <b>${brl(S.freqFiel * B.ticket * MC)}</b> de margem por mês. Mesmo número da outra campanha.` },
+    { k: "mesesFiel", g: "ctlLTV", lab: "Meses de vida de um fiel", min: 3, max: 36, step: 1, fmt: (v) => n0(v) + " meses",
+      note: () => `Por quanto tempo ele continua voltando. <b>É a premissa mais alavancada da página</b> — dobrar aqui dobra o LTV inteiro, e ninguém mediu.` },
+
+    { k: "pedidoDupla", g: "desenhoExtra", lab: "Pedido da dupla", min: 20, max: 120, step: 1, fmt: brl,
+      dep: () => S.modo === "juntos",
+      note: () => S.modo === "juntos"
+        ? `<b>Premissa, não medição.</b> Um pedido solo é ${brl(B.ticket)}. Dois juntos não custam o dobro — dividem, um paga pelos dois. Abaixo de <b>${brl(pontoDuplaEquilibrio())}</b> o modo &ldquo;juntos&rdquo; perde pro separado.`
+        : `Só vale no modo <b>venham juntos</b>. Troque o desenho de entrega aqui do lado pra liberar.` },
+  ];
+
+  function sliderHTML(c) {
+    const off = c.dep && !c.dep();
+    return `<div class="ctl${off ? " off" : ""}" id="ctl-${c.k}">
+      <div class="top"><span class="label" id="l-${c.k}">${c.lab}</span><span class="val" id="v-${c.k}">${c.fmt(S[c.k])}</span></div>
+      <input type="range" id="c-${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[c.k]}" aria-label="${c.lab}"${off ? " disabled" : ""}>
+      <span class="note" id="n-${c.k}">${c.note()}</span></div>`;
+  }
+
+  function buildControls() {
+    ["ctlFunil", "ctlCanib", "ctlResgate", "ctlLTV"].forEach((g) => {
+      document.getElementById(g).innerHTML = CTLS.filter((c) => c.g === g).map(sliderHTML).join("");
+    });
+    CTLS.forEach((c) => {
+      const el = document.getElementById("c-" + c.k);
+      if (el) el.addEventListener("input", () => { S[c.k] = parseFloat(el.value); update(); });
+    });
+  }
+
+  function syncControls() {
+    CTLS.forEach((c) => {
+      const v = document.getElementById("v-" + c.k), n = document.getElementById("n-" + c.k);
+      const i = document.getElementById("c-" + c.k), box = document.getElementById("ctl-" + c.k);
+      if (v) v.textContent = c.fmt(S[c.k]);
+      if (n) n.innerHTML = c.note();
+      if (i && i.value !== String(S[c.k])) i.value = S[c.k];
+      if (i && c.dep) { const off = !c.dep(); i.disabled = off; if (box) box.classList.toggle("off", off); }
+    });
+  }
+
+  // ─── Desenho: os dois selects e os dois toggles ────────────────────────────
+  function buildDesenho() {
+    const optI = Object.keys(PREMIO_IND).map((k) =>
+      `<option value="${k}">${PREMIO_IND[k].nome}</option>`).join("");
+    const optA = Object.keys(PREMIO_INDICADO).map((k) =>
+      `<option value="${k}">${PREMIO_INDICADO[k].nome}</option>`).join("");
+
+    document.getElementById("desenho").innerHTML = `
+      <div class="ctl" id="ctl-premioInd">
+        <div class="top"><span class="label">O indicador ganha</span><span class="val" id="v-premioInd"></span></div>
+        <select id="sel-premioInd" aria-label="Prêmio do indicador">${optI}</select>
+        <span class="note" id="n-premioInd"></span>
+      </div>
+
+      <div class="ctl" id="ctl-premioIndicado">
+        <div class="top"><span class="label">O indicado ganha</span><span class="val" id="v-premioIndicado"></span></div>
+        <select id="sel-premioIndicado" aria-label="Prêmio do indicado">${optA}</select>
+        <span class="note" id="n-premioIndicado"></span>
+      </div>
+
+      <div class="ctl" id="ctl-exige">
+        <div class="top"><span class="label">O resgate exige compra?</span></div>
+        <div class="toggle" role="group" aria-label="Resgate exige compra">
+          <button type="button" id="eg-on">Compre e ganhe</button>
+          <button type="button" id="eg-off">Brinde puro</button>
+        </div>
+        <span class="note" id="n-exige"></span>
+      </div>
+
+      <div class="ctl" id="ctl-modo">
+        <div class="top"><span class="label">Como o prêmio é entregue</span></div>
+        <div class="toggle" role="group" aria-label="Modo de entrega">
+          <button type="button" id="md-sep">Separado</button>
+          <button type="button" id="md-jun">Venham juntos</button>
+        </div>
+        <span class="note" id="n-modo"></span>
+      </div>
+
+      ${sliderHTML(CTLS.find((c) => c.k === "pedidoDupla"))}`;
+
+    document.getElementById("sel-premioInd").addEventListener("change", (e) => { S.premioInd = e.target.value; update(); });
+    document.getElementById("sel-premioIndicado").addEventListener("change", (e) => { S.premioIndicado = e.target.value; update(); });
+    const bind = (id, fn) => document.getElementById(id).addEventListener("click", () => { fn(); update(); });
+    bind("eg-on", () => S.exigeCompra = true);
+    bind("eg-off", () => S.exigeCompra = false);
+    bind("md-sep", () => S.modo = "separado");
+    bind("md-jun", () => S.modo = "juntos");
+  }
+
+  function syncDesenho() {
+    const juntos = S.modo === "juntos";
+    const oI = PREMIO_INDICADO[S.premioIndicado];
+
+    document.getElementById("sel-premioInd").value = S.premioInd;
+    document.getElementById("v-premioInd").textContent = brl(custoItem(ITENS[S.premioInd].cmv)) + " de custo";
+    document.getElementById("n-premioInd").innerHTML = PREMIO_IND[S.premioInd].nota[1];
+
+    const selA = document.getElementById("sel-premioIndicado");
+    selA.value = S.premioIndicado;
+    selA.disabled = juntos;
+    document.getElementById("ctl-premioIndicado").classList.toggle("off", juntos);
+    document.getElementById("v-premioIndicado").textContent = juntos ? "o cupom é dos dois"
+      : oI.tipo === "nada" ? "R$ 0,00" : brl(custoItem(ITENS[oI.item].cmv)) + " de custo";
+    document.getElementById("n-premioIndicado").innerHTML = juntos
+      ? "No modo <b>venham juntos</b> não existem dois prêmios: existe <b>um cupom compartilhado</b> — o amigo paga o cookie, o indicador leva o de graça, e os dois saem servidos da mesma visita. Volte pro <b>separado</b> pra liberar este controle."
+      : oI.nota[1];
+
+    document.getElementById("eg-on").setAttribute("aria-pressed", String(S.exigeCompra));
+    document.getElementById("eg-off").setAttribute("aria-pressed", String(!S.exigeCompra));
+    document.getElementById("ctl-exige").classList.toggle("off", juntos);
+    document.getElementById("n-exige").innerHTML = juntos
+      ? "Não se aplica: no modo <b>venham juntos</b> a compra do amigo já é a compra exigida, e não existe visita de resgate separada."
+      : S.exigeCompra
+        ? `<b>A regra da outra campanha.</b> Pra resgatar, o indicador leva um cookie de ${brl(B.cookiePago)} a preço cheio e o do prêmio vai junto. A visita de resgate rende <b>${brl(resgateSimples() + (S.cR / 100) * MARG_NORMAL)}</b> antes da canibalização.`
+        : `<b>O cookie sai de graça</b>, sem exigir compra. A visita passa a valer só o que ele resgatar de vontade própria — o slider de gasto na seção 4 é quem sustenta essa opção inteira.`;
+
+    document.getElementById("md-sep").setAttribute("aria-pressed", String(!juntos));
+    document.getElementById("md-jun").setAttribute("aria-pressed", String(juntos));
+    document.getElementById("n-modo").innerHTML = juntos
+      ? "<b>Uma visita só.</b> O cupom só vale com os dois no balcão: o amigo paga, o indicador leva o de graça. Resolve o controle inteiro, mas troca duas visitas por uma."
+      : "<b>Duas visitas.</b> O amigo vem comprar, e o indicador volta depois pra resgatar. É o desenho proposto — e o que mais gera visita.";
+  }
+
+  function renderDesenhoNota() {
+    const pi = porIndicacao();
+    document.getElementById("desenhoNota").innerHTML = `
+      <div class="note-item"><span class="tag ${sign(pi) === "pos" ? "good" : "bad"}">o número da campanha</span><span>
+        Com este desenho, <strong>cada indicação convertida vale
+        <span class="${sign(pi)}">${brl(pi)}</span></strong> de margem incremental —
+        contra os ${brl(MARG_NORMAL)} que uma visita normal deixa.
+        ${S.modo === "juntos"
+          ? `No modo <em>juntos</em> a comparação certa é com <strong>duas</strong> visitas normais (${brl(2 * MARG_NORMAL)}), porque é isso que a visita conjunta substitui quando os dois viriam de qualquer jeito.`
+          : `São duas visitas: a do amigo vale <span class="${sign(incrIndicado())}">${brl(incrIndicado())}</span> depois da canibalização, e a de resgate <span class="${sign(resgateSimples())}">${brl(resgateSimples())}</span>, que só acontece em ${pc(S.txResgate / 100, 0)} dos casos.`}
+      </span></div>
+      ${S.modo === "juntos" ? `
+      <div class="note-item"><span class="tag good">a falha some sozinha</span><span>
+        <strong>Este é o único desenho em que o indicado ganha alguma coisa sem custo extra.</strong> O cookie
+        de graça é do par, não do indicador — quem paga leva o amigo junto. É a resposta mais barata para a
+        pergunta 01, e a única que também resolve o controle. <em>O preço está na linha de cima</em>: uma
+        visita no lugar de duas.
+      </span></div>`
+      : PREMIO_INDICADO[S.premioIndicado].tipo === "nada" ? `
+      <div class="note-item"><span class="tag warn">a pergunta em aberto</span><span>
+        Do jeito que está, <strong>o indicado não ganha nada</strong>. Troque o segundo controle e veja o
+        custo: dar a bola de sorvete pro amigo derruba o resultado por indicação de
+        ${brl(pi)} para <strong>${brl(simulaComPremioIndicado("g_srv"))}</strong>, e dar o cookie
+        derruba para <strong>${brl(simulaComPremioIndicado("g_ck"))}</strong>.
+        <em>${simulaComPremioIndicado("g_ck") >= 0 ? "Nos dois casos continua positivo — a campanha aguenta pagar os dois lados." : "Dar cookie pros dois lados já vira negativo nestas premissas."}</em>
+      </span></div>` : `
+      <div class="note-item"><span class="tag good">os dois lados ganham</span><span>
+        Dar prêmio ao indicado custa <strong>${brl(simulaComPremioIndicado("nada") - pi)} por indicação</strong>
+        em relação a não dar nada. É o preço de o convite parar de ser anúncio e virar presente — e
+        ${pi >= 0 ? "<strong>ele cabe</strong>: o resultado continua positivo." : "<strong>ele não cabe nas premissas atuais</strong>: o resultado virou negativo."}
+      </span></div>`}`;
+  }
+
+  // simula o resultado por indicação trocando só o prêmio do indicado
+  function simulaComPremioIndicado(k) {
+    const antes = S.premioIndicado;
+    S.premioIndicado = k;
+    const v = porIndicacao();
+    S.premioIndicado = antes;
+    return v;
+  }
+  // pedido da dupla que empata o modo "juntos" com o modo "separado"
+  function pontoDuplaEquilibrio() {
+    const antes = S.modo;
+    S.modo = "separado";
+    const alvo = porIndicacao();
+    S.modo = antes;
+    return (alvo + custoItem(ITENS[S.premioInd].cmv) + ((S.cI + S.cR) / 100) * MARG_NORMAL) / MC;
+  }
+  // pior caso honesto: todo mundo já era cliente e ninguém gasta nada no resgate
+  function pisoResgate() {
+    const a = { cI: S.cI, cR: S.cR, gasto: S.gastoResgate, eg: S.exigeCompra, modo: S.modo };
+    S.cI = 100; S.cR = 100; S.exigeCompra = false; S.gastoResgate = 0; S.modo = "separado";
+    const v = porIndicacao();
+    Object.assign(S, { cI: a.cI, cR: a.cR, gastoResgate: a.gasto, exigeCompra: a.eg, modo: a.modo });
+    return v;
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // RENDER — faixa do topo
+  // ══════════════════════════════════════════════════════════════════════════
+  function renderStrip() {
+    document.getElementById("s-margNormal").textContent = brl(MARG_NORMAL);
+    document.getElementById("s-custoCk").textContent = brl(custoItem(B.cookieCMV));
+    document.getElementById("s-mc").textContent = pc(MC);
+    document.getElementById("s-mcPed").textContent = brl(MARG_NORMAL) + " por pedido de " + brl(B.ticket);
+    const v = porIndicacao();
+    const el = document.getElementById("s-porInd");
+    el.textContent = brl(v);
+    el.className = "v " + sign(v);
+    document.getElementById("p1-custoCk").textContent = brl(custoItem(B.cookieCMV));
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // ABA 1
+  // ══════════════════════════════════════════════════════════════════════════
+  function renderLedger() {
+    if (S.modo === "juntos") {
+      const mj = margemJuntos();
+      document.getElementById("ledger").innerHTML = `
+        <article class="offer">
+          <div class="head"><span class="vnum">ÚNICA</span><span class="name">Os dois vêm juntos — o amigo paga, o indicador ganha</span></div>
+          <div class="breakdown">
+            pedido da dupla ${brl(S.pedidoDupla)} · × ${pc(MC)} de margem = ${brl(S.pedidoDupla * MC)}<br>
+            − prêmio (${PREMIO_IND[S.premioInd].nome}): ${brl(custoItem(ITENS[S.premioInd].cmv))}<br>
+            − canibalização dos dois lados: ${pc(S.cI / 100, 0)} + ${pc(S.cR / 100, 0)} × ${brl(MARG_NORMAL)} = ${brl(((S.cI + S.cR) / 100) * MARG_NORMAL)}<br>
+            <span style="color:var(--ink-faint)">o par enxerga ${brl(ITENS[S.premioInd].tab)} de prêmio</span>
+          </div>
+          <div class="result"><span class="label">margem da indicação</span><span class="r ${sign(mj)}">${brl(mj)}</span></div>
+          <div class="risk"><span class="tag ${mj >= 0 ? "good" : "bad"}">${mj >= 0 ? "controle total" : "não fecha"}</span><span>
+            É o único desenho em que o atendente <strong>vê as duas pessoas</strong> — sabe quem é novo, e não
+            existe resgate cego. O preço disso é trocar duas visitas por uma:
+            <strong>abaixo de ${brl(pontoDuplaEquilibrio())} de pedido da dupla, o separado ganha</strong>.
+          </span></div>
+        </article>`;
+      return;
+    }
+
+    const oA = PREMIO_INDICADO[S.premioIndicado];
+    const mA = margemVisitaIndicado(), iA = incrIndicado();
+    const itP = ITENS[S.premioInd];
+    const mR = resgateSimples();
+    const receitaR = S.exigeCompra ? B.cookiePago + B[itP.ex] : S.gastoResgate;
+
+    document.getElementById("ledger").innerHTML = `
+      <article class="offer">
+        <div class="head"><span class="vnum">1</span><span class="name">A visita do amigo indicado</span></div>
+        <div class="breakdown">
+          ${oA.tipo === "nada"
+            ? `ticket cheio ${brl(B.ticket)} · × ${pc(MC)} de margem = <strong>${brl(MARG_NORMAL)}</strong><br>
+               <span style="color:var(--ink-faint)">nenhum produto sai de graça — ele só recebeu um convite</span>`
+            : `${oA.tipo === "ganhe" ? `compra exigida ${brl(B.cookiePago)} · ` : ""}venda extra medida ${brl(B[ITENS[oA.item].ex])} · × ${pc(MC)} = ${brl(((oA.tipo === "ganhe" ? B.cookiePago : 0) + B[ITENS[oA.item].ex]) * MC)}<br>
+               item do brinde: entra ${brl((oA.preco || 0) * (1 - DED))} − custo ${brl(custoItem(ITENS[oA.item].cmv))} = ${brl((oA.preco || 0) * (1 - DED) - custoItem(ITENS[oA.item].cmv))}<br>
+               <span style="color:var(--ink-faint)">o amigo enxerga ${brl(ITENS[oA.item].tab - (oA.preco || 0))} de prêmio</span>`}<br>
+          − canibalização ${pc(S.cI / 100, 0)} × ${brl(MARG_NORMAL)} = <span class="neg">${brl(-(S.cI / 100) * MARG_NORMAL)}</span>
+          <span style="color:var(--ink-faint)"> (os que viriam de qualquer jeito)</span>
+        </div>
+        <div class="result"><span class="label">margem incremental</span><span class="r ${sign(iA)}">${brl(iA)}</span>
+          <span class="label">${brl(mA)} antes da canibalização</span></div>
+        <div class="risk"><span class="tag ${oA.nota[0]}">${oA.nota[0] === "good" ? "ok" : oA.nota[0] === "warn" ? "atenção" : "risco"}</span><span>${oA.nota[1]}</span></div>
+      </article>
+
+      <article class="offer">
+        <div class="head"><span class="vnum">2</span><span class="name">A visita de resgate do indicador — ${PREMIO_IND[S.premioInd].nome}</span></div>
+        <div class="breakdown">
+          ${S.exigeCompra
+            ? `compra exigida ${brl(B.cookiePago)} + venda extra medida ${brl(B[itP.ex])} · × ${pc(MC)} = ${brl(receitaR * MC)}`
+            : `gasto espontâneo na visita ${brl(S.gastoResgate)} · × ${pc(MC)} = ${brl(receitaR * MC)} <span style="color:var(--ink-faint)">(premissa — arraste na seção 4)</span>`}<br>
+          − custo do prêmio: ${brl(custoItem(itP.cmv))}
+          <span style="color:var(--ink-faint)">(CMV ${brl(itP.cmv)} + quebra + divisória)</span><br>
+          − canibalização ${pc(S.cR / 100, 0)} × ${brl(MARG_NORMAL)} = <span class="neg">${brl(-(S.cR / 100) * MARG_NORMAL)}</span>
+          <span style="color:var(--ink-faint)"> (ele já viria esse mês?)</span><br>
+          <span style="color:var(--ink-faint)">só ${pc(S.txResgate / 100, 0)} dos pontos viram resgate — o resto é prêmio que nunca sai do estoque</span>
+        </div>
+        <div class="result"><span class="label">margem incremental</span><span class="r ${sign(mR)}">${brl(mR)}</span>
+          <span class="label">× ${pc(S.txResgate / 100, 0)} de resgate = ${brl((S.txResgate / 100) * mR)}</span></div>
+        <div class="risk"><span class="tag ${mR >= 0 ? "good" : "warn"}">${mR >= 0 ? "ok" : "a visita de resgate dá negativo"}</span><span>
+          ${mR >= 0
+            ? `O prêmio custa ${brl(custoItem(itP.cmv))} e a visita traz ${brl(receitaR * MC)} de margem — <strong>sobra mesmo depois de assumir que ${pc(S.cR / 100, 0)} desses resgates seriam visitas de qualquer jeito</strong>.`
+            : `Nesta configuração o resgate <strong>custa mais do que traz</strong>: ou porque o prêmio é caro demais, ou porque a canibalização de ${pc(S.cR / 100, 0)} diz que essa visita já aconteceria. A campanha só se salva pela visita do amigo.`}
+        </span></div>
+      </article>
+
+      <article class="offer somatorio">
+        <div class="head"><span class="vnum">=</span><span class="name">Uma indicação convertida</span></div>
+        <div class="breakdown">
+          visita do amigo ${brl(iA)} + resgate ${brl((S.txResgate / 100) * mR)}<br>
+          <span style="color:var(--ink-faint)">o custo do disparo entra só no total do mês — é por amigo listado, não por conversão</span>
+        </div>
+        <div class="result"><span class="label">margem por indicação</span><span class="r ${sign(porIndicacao())}">${brl(porIndicacao())}</span></div>
+        <div class="risk"><span class="tag acc">para comparar</span><span>
+          Uma visita normal deixa <strong>${brl(MARG_NORMAL)}</strong>. Uma indicação convertida deixa
+          <strong class="${sign(porIndicacao())}">${brl(porIndicacao())}</strong> —
+          ${porIndicacao() >= MARG_NORMAL
+            ? "<strong>mais do que uma visita normal</strong>, porque ela gera duas visitas em vez de uma."
+            : "<strong>menos que uma visita normal</strong>, mas a comparação certa não é essa: a visita normal aconteceria sozinha, e esta não."}
+        </span></div>
+      </article>`;
+  }
+
+  function renderFunnel() {
+    const R = calc1();
+    const steps = [
+      { t: "Indicadores cadastrados", d: "leram o QR e preencheram a lista", q: S.indicadores, c: "var(--step-1)" },
+      { t: "Amigos que recebem cupom", d: `${n0(S.amigos)} por indicador · ${brl0(R.custoDisparo)} de disparo`, q: R.disparos, c: "var(--step-1)" },
+      { t: "Amigos que compram", d: `${pc(S.conv / 100, 0)} de conversão — cada um vale ${brl(S.modo === "juntos" ? margemJuntos() : incrIndicado())}`, q: R.conversoes, c: "var(--step-2)" },
+      { t: "Clientes novos de verdade", d: `descontando ${pc(S.cI / 100, 0)} que viriam de qualquer jeito`, q: R.novos, c: "var(--step-3)" },
+      { t: "Viram clientes fiéis", d: `${pc(S.viraFiel / 100, 0)} deles · ${brl(R.margFielMes)}/mês cada`, q: R.fieis, c: "var(--step-4)" },
+    ];
+    const max = Math.max(...steps.map((s) => s.q), 1);
+    document.getElementById("funnel").innerHTML = steps.map((s) => `
+      <div class="frow">
+        <div class="fl"><span class="t">${s.t}</span><span class="d">${s.d}</span></div>
+        <div class="bartrack">
+          <div style="position:relative;flex:1;min-width:0;">
+            <div class="bar" style="width:${100 * s.q / max}%;background:${s.c}"></div>
+          </div>
+          <span class="bval">${n0(s.q)}</span>
+        </div>
+      </div>`).join("");
+  }
+
+  function renderResults() {
+    const R = calc1();
+    document.getElementById("results").innerHTML = `
+      <div class="cell hero">
+        <span class="label">Saldo de uma safra, seguida por ${n0(S.mesesFiel)} meses</span>
+        <span class="v ${sign(R.saldo)}">${brl0(R.saldo)}</span>
+        <span class="s">O que os cadastros de <em>um mês</em> deixam: resultado das visitas
+        (<span class="${sign(R.resultado)}">${brl0(R.resultado)}</span>) mais o que os
+        ${n1(R.fieis)} fiéis novos rendem em ${n0(S.mesesFiel)} meses
+        (<span class="pos">${brl0(R.ltv)}</span>).</span>
+      </div>
+      <div class="cell">
+        <span class="label">Resultado das visitas</span>
+        <span class="v ${sign(R.resultado)}">${brl0(R.resultado)}</span>
+        <span class="s">${n0(R.visitas)} visitas geradas no mês, já descontada a canibalização e
+        ${brl0(R.custoDisparo)} de disparo.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Custo dos prêmios</span>
+        <span class="v">${brl0(R.custoPremios)}</span>
+        <span class="s">${n0(R.resgates)} resgates${S.modo === "juntos" || PREMIO_INDICADO[S.premioIndicado].tipo === "nada" ? "" : " + " + n0(R.conversoes) + " brindes pro indicado"}.
+        <em>${pc(R.custoPremios / Math.max(R.fatExtra, 1), 1)} do faturamento que a campanha traz.</em></span>
+      </div>
+      <div class="cell">
+        <span class="label">Faturamento de loja que ela traz</span>
+        <span class="v">${brl0(R.fatExtra)}</span>
+        <span class="s">É <em>${pc(R.fatExtra / 46925, 1)}</em> do faturamento de loja do mês.
+        A meta da área precisa de +60%.</span>
+      </div>`;
+
+    const alvo = 5000;
+    const convPara = alvo / (S.modo === "juntos" ? S.pedidoDupla : B.ticket);
+    const indicadoresPara = convPara / Math.max(S.amigos * (S.conv / 100), 0.0001);
+
+    document.getElementById("resNota").innerHTML = `
+      <div class="note-item"><span class="tag ${R.resultado >= 0 ? "good" : "bad"}">a leitura</span><span>
+        A campanha ${R.resultado >= 0 ? "<strong>não perde dinheiro</strong>" : "<strong>está perdendo dinheiro</strong>"} nas premissas atuais —
+        mas repare no <strong>tamanho</strong>: ${brl0(R.resultado)} de resultado e ${brl0(R.fatExtra)} de faturamento,
+        contra R$ 46.925 que a loja já faz. <em>O gargalo não é o prêmio, é o volume de cadastros.</em>
+      </span></div>
+      <div class="note-item"><span class="tag acc">pra mover o ponteiro</span><span>
+        Pra ela trazer <strong>R$ 5.000 de faturamento de loja no mês</strong> seriam
+        <strong>${n0(convPara)} indicações convertidas</strong> — ou seja
+        <strong>${n0(indicadoresPara)} pessoas se cadastrando por mês</strong>, cada uma listando ${n0(S.amigos)} amigos.
+        São ${pc(indicadoresPara / B.pedidos, 0)} dos ${n0(B.pedidos)} pedidos de loja.
+        ${indicadoresPara / B.pedidos > 0.35
+          ? "<strong>Não fecha com esta taxa de conversão.</strong> O caminho é o disparo converter mais ou cada pessoa listar mais amigos — não prêmio maior."
+          : "É agressivo, mas cabe. <strong>Onde isso é ganho ou perdido é no balcão pedindo o cadastro</strong>, não no tamanho do prêmio."}
+      </span></div>`;
+  }
+
+  function renderBreakeven() {
+    const busca = (campo) => {
+      const antes = S[campo];
+      let achou = null;
+      for (let x = 0; x <= 100; x += 0.5) {
+        S[campo] = x;
+        if (porIndicacao() < 0) { achou = x; break; }
+      }
+      S[campo] = antes;
+      return achou;
+    };
+    const virCI = busca("cI");
+    const virCR = busca("cR");
+
+    let virConv = null;
+    { const antes = S.conv;
+      for (let x = 60; x >= 0.5; x -= 0.5) { S.conv = x; if (calc1().resultado < 0) { virConv = x; break; } }
+      S.conv = antes; }
+
+    document.getElementById("breakeven").innerHTML = `
+      <div class="cell ${virCI === null ? "hero" : ""}">
+        <span class="label">Aguenta canibalização de indicado até</span>
+        <span class="v ${virCI === null ? "pos" : ""}">${virCI === null ? "100%" : pc(Math.max(virCI - 0.5, 0) / 100, 0)}</span>
+        <span class="s">${virCI === null
+          ? "<em>Nem com 100% de canibalização a indicação fica negativa</em> — mesmo que todo indicado já fosse cliente, o resgate e a venda extra pagam o prêmio."
+          : `Acima de <em>${pc(Math.max(virCI - 0.5, 0) / 100, 0)}</em> dos indicados serem clientes antigos, cada indicação passa a dar prejuízo. Hoje a premissa é ${pc(S.cI / 100, 0)}.`}</span>
+      </div>
+      <div class="cell">
+        <span class="label">Aguenta canibalização de resgate até</span>
+        <span class="v ${virCR === null ? "pos" : ""}">${virCR === null ? "100%" : pc(Math.max(virCR - 0.5, 0) / 100, 0)}</span>
+        <span class="s">${virCR === null
+          ? "<em>Aguenta qualquer coisa</em> — a visita do amigo sozinha já paga o prêmio do indicador."
+          : `Acima de <em>${pc(Math.max(virCR - 0.5, 0) / 100, 0)}</em>, o resgate vira só custo em cima de visita que já aconteceria. Hoje a premissa é ${pc(S.cR / 100, 0)}.`}</span>
+      </div>
+      <div class="cell">
+        <span class="label">Conversão mínima do disparo</span>
+        <span class="v">${virConv === null ? "qualquer uma" : pc((virConv + 0.5) / 100, 1)}</span>
+        <span class="s">${virConv === null
+          ? "<em>Qualquer conversão fecha no positivo</em> — o custo de disparo é pequeno demais pra virar o sinal sozinho."
+          : `Abaixo de <em>${pc((virConv + 0.5) / 100, 1)}</em>, o custo de disparo come o resultado do mês. Hoje a premissa é ${pc(S.conv / 100, 0)}.`}</span>
+      </div>
+      <div class="cell">
+        <span class="label">Piso: ninguém gasta nada no resgate</span>
+        <span class="v ${sign(pisoResgate())}">${brl(pisoResgate())}</span>
+        <span class="s">Por indicação, no cenário em que o indicador entra, pega o prêmio e sai —
+        e o amigo indicado já era cliente. <em>É o pior caso honesto da campanha.</em></span>
+      </div>`;
+
+    document.getElementById("beNota").innerHTML = `
+      <div class="note-item"><span class="tag ${virCI === null ? "good" : "warn"}">por que ela é robusta</span><span>
+        A indicação simples ${virCI === null ? "<strong>não tem ponto de virada por canibalização</strong>" : "aguenta muita canibalização antes de virar"} por um motivo só:
+        <strong>o prêmio custa ${brl(custoItem(ITENS[S.premioInd].cmv))} e a visita que ele compra vale ${brl(MARG_NORMAL)}</strong>.
+        A razão é de <strong>${n1(MARG_NORMAL / custoItem(ITENS[S.premioInd].cmv))}&times;</strong>. É a mesma
+        matemática do compre-e-ganhe da outra campanha, só que aqui a visita comprada é de <em>outra pessoa</em>.
+      </span></div>
+      <div class="note-item"><span class="tag bad">onde ela quebra de verdade</span><span>
+        Não é na canibalização — é na <strong>conversão do disparo</strong> e no <strong>gasto no resgate</strong>.
+        Se o cupom por WhatsApp converter a 2% e o indicador só entrar pra pegar o cookie de graça, a campanha
+        vira uma máquina de distribuir cookie. <em>São exatamente os dois números que ninguém mediu</em>, e os
+        dois só se medem rodando.
+      </span></div>`;
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // ABA 2 — ESCADA
+  // ══════════════════════════════════════════════════════════════════════════
+  function buildMarcos() {
+    const opt = Object.keys(COMBOS).map((k) =>
+      `<option value="${k}">${comboNome(k)} · ${brl(comboTab(k))}</option>`).join("");
+    document.getElementById("marcos").innerHTML = S.m.map((m, i) => `
+      <div class="ctl">
+        <div class="top"><span class="label">Marco ${i + 1}</span><span class="val" id="v-marco-${i}"></span></div>
+        <input type="range" class="c-mn" id="c-marco-${i}" data-i="${i}" min="1" max="25" step="1" value="${m.n}" aria-label="Indicações do marco ${i + 1}">
+        <select class="c-mp" id="p-marco-${i}" data-i="${i}" aria-label="Prêmio do marco ${i + 1}">${opt}</select>
+        <span class="note" id="n-marco-${i}"></span>
+      </div>`).join("");
+
+    document.querySelectorAll(".c-mn").forEach((el) =>
+      el.addEventListener("input", () => {
+        const i = +el.dataset.i;
+        S.m[i].n = parseInt(el.value, 10);
+        // os marcos são uma escada: nenhum degrau pode ficar abaixo do anterior
+        for (let j = i + 1; j < S.m.length; j++) if (S.m[j].n <= S.m[j - 1].n) S.m[j].n = S.m[j - 1].n + 1;
+        for (let j = i - 1; j >= 0; j--) if (S.m[j].n >= S.m[j + 1].n) S.m[j].n = Math.max(1, S.m[j + 1].n - 1);
+        update();
+      }));
+    document.querySelectorAll(".c-mp").forEach((el) =>
+      el.addEventListener("change", () => { S.m[+el.dataset.i].p = el.value; update(); }));
+  }
+
+  function syncMarcos() {
+    S.m.forEach((m, i) => {
+      document.getElementById("v-marco-" + i).textContent = n0(m.n) + (m.n === 1 ? " indicação" : " indicações");
+      const r = document.getElementById("c-marco-" + i);
+      if (r.value !== String(m.n)) r.value = m.n;
+      document.getElementById("p-marco-" + i).value = m.p;
+      document.getElementById("n-marco-" + i).innerHTML =
+        `custo <b>${brl(comboCusto(m.p))}</b> · o cliente enxerga <b>${brl(comboTab(m.p))}</b>`;
+    });
+  }
+
+  function renderEscada() {
+    const margPorInd = incrIndicado();
+    let acum = 0;
+    const linhas = S.m.map((m, i) => {
+      const custo = comboCusto(m.p);
+      acum += custo;
+      const porInd = acum / m.n;
+      return { i, m, custo, acum, porInd, sobra: margPorInd - porInd, tab: comboTab(m.p) };
+    });
+    const pior = linhas.reduce((a, l) => l.porInd > a.porInd ? l : a, linhas[0]);
+
+    document.getElementById("tbEscada").innerHTML = linhas.map((l) => `
+      <tr class="${l === pior ? "mark" : ""}">
+        <td>Marco ${l.i + 1}${l === pior ? ' <span class="tag warn">o mais caro</span>' : ""}</td>
+        <td>${n0(l.m.n)}</td>
+        <td style="white-space:normal">${comboNome(l.m.p)}</td>
+        <td>${brl(l.tab)}</td>
+        <td>${brl(l.custo)}</td>
+        <td>${brl(l.acum)}</td>
+        <td><strong>${brl(l.porInd)}</strong></td>
+        <td class="${sign(l.sobra)}"><strong>${brl(l.sobra)}</strong></td>
+      </tr>`).join("") +
+      `<tr class="total"><td>Indicação simples — 1 cookie, sem escada</td><td>1</td>
+        <td style="white-space:normal">1 cookie</td><td>${brl(B.cookieTab)}</td>
+        <td>${brl(custoItem(B.cookieCMV))}</td><td>${brl(custoItem(B.cookieCMV))}</td>
+        <td>${brl(custoItem(B.cookieCMV))}</td>
+        <td class="${sign(margPorInd - custoItem(B.cookieCMV))}">${brl(margPorInd - custoItem(B.cookieCMV))}</td></tr>`;
+
+    const todosPositivos = linhas.every((l) => l.sobra >= 0);
+    document.getElementById("escadaNota").innerHTML = `
+      <div class="note-item"><span class="tag acc">como ler</span><span>
+        <strong>Custo por indicação</strong> é o custo acumulado de todos os prêmios até ali, dividido pelas
+        indicações que ele exigiu. <strong>Sobra por indicação</strong> compara isso com a
+        <strong>${brl(margPorInd)}</strong> que a visita de um amigo indicado gera (já descontada a
+        canibalização de ${pc(S.cI / 100, 0)}). Enquanto a última coluna for positiva, o degrau se paga.
+      </span></div>
+      <div class="note-item"><span class="tag ${todosPositivos ? "good" : "bad"}">${todosPositivos ? "a escada está calibrada" : "tem degrau que não se paga"}</span><span>
+        ${todosPositivos
+          ? `Todos os degraus sobram. <strong>O mais apertado é o marco ${pior.i + 1}</strong> (${brl(pior.porInd)} por indicação, sobrando ${brl(pior.sobra)}) — porque o salto de prêmio ali é maior que o salto de indicações exigidas. <em>A escada não é o problema deste programa.</em>`
+          : `<strong>O marco ${linhas.find((l) => l.sobra < 0).i + 1} custa mais por indicação do que a indicação gera.</strong> Aumente o número de indicações exigidas ou troque o prêmio por um mais barato.`}
+      </span></div>
+      <div class="note-item"><span class="tag warn">o que ainda é substituto</span><span>
+        <strong>Salgado e cesta não têm CMV em <code>cmv_produtos</code></strong> — pão de queijo, croissant e
+        o formato de cesta nunca foram custeados. Os marcos 3 e 4 usam cookie, torta e milkshake, que têm CMV real,
+        no mesmo patamar de valor percebido que você desenhou.
+        <em>O formato do prêmio é decisão sua; o custo é dado, e troca sozinho quando entrar na base.</em>
+      </span></div>`;
+  }
+
+  function renderAlcance() {
+    const R = calc2();
+    const dist = R.dist;
+    document.getElementById("r-amigos").textContent = n0(S.amigos);
+    document.getElementById("r-conv").textContent = pc(S.conv / 100, 0);
+
+    const marcosN = S.m.map((m) => m.n);
+    const corte = Math.min(dist.length - 1, Math.max(Math.max(...marcosN) + 1, 7));
+    const max = Math.max(...dist, 0.0001);
+    let linhas = dist.slice(0, corte + 1).map((p, k) => ({ k, p, rot: k + (k === 1 ? " indicação" : " indicações") }));
+    if (corte < dist.length - 1) {
+      const resto = dist.slice(corte + 1).reduce((a, x) => a + x, 0);
+      linhas.push({ k: -1, p: resto, rot: (corte + 1) + " ou mais" });
+    }
+    document.getElementById("dist").innerHTML = linhas.map((l) => `
+      <div class="drow ${marcosN.includes(l.k) ? "marco" : ""}">
+        <span class="dl">${l.rot}${marcosN.includes(l.k) ? " ← marco" : ""}</span>
+        <span class="dt">
+          <span class="db" style="width:${Math.max(100 * l.p / max, 0.4)}%"></span>
+          <span class="dv">${pc(l.p, 1)} · ${n1(S.indicadores * l.p)} pessoas</span>
+        </span>
+      </div>`).join("");
+
+    document.getElementById("tbAlcance").innerHTML = S.m.map((m, i) => {
+      const chance = pAoMenos(dist, m.n);
+      const qtd = S.indicadores * chance * (S.txResgate / 100);
+      const nec = amigosPara(m.n);
+      return `<tr class="${chance < 0.01 ? "mark" : ""}">
+        <td>Marco ${i + 1} · ${n0(m.n)} ${m.n === 1 ? "indicação" : "indicações"}</td>
+        <td>${chance < 0.001 ? "&lt; 0,1%" : pc(chance, 1)}</td>
+        <td>${qtd < 0.1 ? "—" : n1(qtd)}</td>
+        <td>${nec === null ? "mais de 400" : n0(nec)}</td>
+        <td>${brl(qtd * comboCusto(m.p))}</td>
+      </tr>`;
+    }).join("");
+
+    const fracos = S.m.map((m, i) => ({ m, i })).filter(({ m }) => pAoMenos(dist, m.n) < 0.01);
+    const media = S.amigos * (S.conv / 100);
+    const listaFracos = fracos.map(({ m }) => "o de " + n0(m.n)).join(fracos.length === 2 ? " e " : ", ");
+
+    document.getElementById("alcanceNota").innerHTML = `
+      <div class="note-item"><span class="tag acc">* como ler a última coluna</span><span>
+        É quantos amigos a pessoa precisaria listar pra ter <strong>metade de chance</strong> de chegar
+        naquele marco, na taxa de conversão atual. Não é meta — é o tamanho de lista que o marco
+        <em>implica</em>. Com ${pc(S.conv / 100, 0)} de conversão, cada amigo listado vale
+        <strong>${n1(S.conv / 100)} indicação</strong>.
+      </span></div>
+      ${fracos.length ? `
+      <div class="note-item alerta"><span class="tag bad">${fracos.length} de ${S.m.length} marcos ${fracos.length === 1 ? "é decoração" : "são decoração"}</span><span>
+        Com ${n0(S.amigos)} amigos por pessoa e ${pc(S.conv / 100, 0)} de conversão, o indicador médio
+        converte <strong>${n1(media)} ${media === 1 ? "indicação" : "indicações"}</strong>.
+        Dos marcos, ${listaFracos} ${fracos.length === 1 ? "tem" : "têm"}
+        <strong>menos de 1% de chance</strong> de ser alcançado. Prêmio que ninguém alcança não motiva:
+        <em>desmotiva</em>, porque a pessoa vê a escada, faz a conta e desiste no primeiro degrau.
+        <br><br>
+        <strong>Duas saídas, e só duas:</strong> baixar os marcos até caberem na distribuição real
+        (arraste os sliders da seção 1 e olhe esta tabela de novo), ou subir <strong>quantos amigos cada um
+        lista</strong> — que é o slider da aba 1, e a única alavanca que muda o formato da curva.
+      </span></div>` : `
+      <div class="note-item"><span class="tag good">a escada é alcançável</span><span>
+        Todos os marcos têm chance real de serem atingidos com ${n0(S.amigos)} amigos por pessoa. O indicador
+        médio converte <strong>${n1(media)}</strong> indicações.
+      </span></div>`}
+      <div class="note-item"><span class="tag warn">a tentação a evitar</span><span>
+        A saída fácil seria <strong>contar o ponto na indicação enviada</strong>, não na convertida — aí todo
+        mundo chega a 10 no primeiro dia. Mas aí o prêmio deixa de ser pago por venda: <em>a loja passa a pagar
+        cesta por lista de telefone digitada</em>. O ponto tem que continuar caindo só quando o balcão escaneia
+        o cupom do amigo.
+      </span></div>`;
+  }
+
+  function renderRk() {
+    const R = calc2(), R1 = calc1();
+    document.getElementById("rkResults").innerHTML = `
+      <div class="cell hero">
+        <span class="label">Saldo de uma safra, seguida por ${n0(S.mesesFiel)} meses</span>
+        <span class="v ${sign(R.saldo)}">${brl0(R.saldo)}</span>
+        <span class="s">Resultado das visitas (<span class="${sign(R.resultado)}">${brl0(R.resultado)}</span>)
+        mais o LTV dos ${n1(R.fieis)} fiéis novos (<span class="pos">${brl0(R.ltv)}</span>).</span>
+      </div>
+      <div class="cell">
+        <span class="label">Custo dos prêmios da escada</span>
+        <span class="v">${brl0(R.custoPremios)}</span>
+        <span class="s">${n1(R.visitasResgate)} resgates no mês, somando todos os degraus.
+        <em>${brl(R.conversoes ? R.custoPremios / R.conversoes : 0)} por indicação convertida.</em></span>
+      </div>
+      <div class="cell">
+        <span class="label">Custo por indicação</span>
+        <span class="v">${brl(R.conversoes ? (R.custoPremios + R.custoDisparo) / R.conversoes : 0)}</span>
+        <span class="s">Prêmios + disparo ÷ ${n0(R.conversoes)} conversões.
+        Cada uma gera <em>${brl(incrIndicado())}</em> de margem.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Diferença para a indicação simples</span>
+        <span class="v ${sign(R.resultado - R1.resultado)}">${brl0(R.resultado - R1.resultado)}</span>
+        <span class="s">No resultado das visitas do mês. <em>Mesmo funil, mesmas premissas — só muda o prêmio.</em></span>
+      </div>`;
+
+    const linhas = [
+      ["Visitas dos amigos indicados", n0(R.conversoes), brl(incrIndicado()), R.margAmigos],
+      ["Visitas de resgate dos marcos", n1(R.visitasResgate), brl(R.visitasResgate ? R.margResgate / R.visitasResgate : 0), R.margResgate],
+      ["Prêmios da escada", n1(R.visitasResgate), "−" + brl(R.visitasResgate ? R.custoPremios / R.visitasResgate : 0), -R.custoPremios],
+      ["Disparos de WhatsApp", n0(R.disparos), "−" + brl(S.disparo), -R.custoDisparo],
+    ];
+    document.getElementById("tbRk").innerHTML = linhas.map(([t, v, u, tot]) =>
+      `<tr><td>${t}</td><td>${v}</td><td>${u}</td><td class="${sign(tot)}">${brl(tot)}</td></tr>`).join("") +
+      `<tr class="total"><td>Resultado das visitas</td><td>—</td><td>—</td>
+        <td class="${sign(R.resultado)}">${brl(R.resultado)}</td></tr>`;
+
+    document.getElementById("rkNota").innerHTML = `
+      <div class="note-item"><span class="tag acc">o que está e o que não está aqui</span><span>
+        Esta conta usa <strong>as mesmas premissas da aba 1</strong> — indicadores, amigos por pessoa,
+        conversão, canibalização, tudo. A única diferença é o prêmio: em vez de um cookie por indicação,
+        a escada de ${S.m.map((m) => n0(m.n)).join(" · ")}.
+        ${PREMIO_INDICADO[S.premioIndicado].tipo !== "nada" && S.modo === "separado"
+          ? `O prêmio do indicado (${PREMIO_INDICADO[S.premioIndicado].nome}) já está embutido na margem de cada visita de amigo.`
+          : "O indicado continua sem ganhar nada — a pergunta 01 vale igual aqui."}
+      </span></div>
+      ${S.modo === "juntos" ? `
+      <div class="note-item"><span class="tag warn">o modo &ldquo;juntos&rdquo; não vale aqui</span><span>
+        A escada pressupõe <strong>visita de resgate separada</strong> — é o que faz sentido pra um marco de
+        5 ou 10 indicações. Esta aba calcula sempre no modo separado, mesmo com o toggle da aba 1 em
+        &ldquo;venham juntos&rdquo;.
+      </span></div>` : ""}`;
+  }
+
+  // quantos amigos por pessoa a escada precisaria induzir pra empatar
+  // com a indicação simples rodando na lista de hoje
+  function amigosParaEscadaEmpatar() {
+    const alvo = calc1().resultado;
+    const bak = S.amigos;
+    for (let a = S.amigos; a <= 60; a++) {
+      S.amigos = a;
+      if (calc2().resultado >= alvo) { S.amigos = bak; return a; }
+    }
+    S.amigos = bak;
+    return null;
+  }
+
+  function renderComparativo() {
+    const R2 = calc2(), R1 = calc1();
+    const dif = R2.resultado - R1.resultado;
+    const media = S.amigos * (S.conv / 100);
+    const alcancaveis = S.m.filter((m) => pAoMenos(R2.dist, m.n) >= 0.01).length;
+    const empate = amigosParaEscadaEmpatar();
+
+    document.getElementById("comparativo").innerHTML = `
+      <div class="cell ${dif <= 0 ? "hero" : ""}">
+        <span class="label">Indicação simples · resultado do mês</span>
+        <span class="v ${sign(R1.resultado)}">${brl0(R1.resultado)}</span>
+        <span class="s">1 cookie por indicação. Custo total de prêmio <em>${brl0(R1.custoPremios)}</em>.</span>
+      </div>
+      <div class="cell ${dif > 0 ? "hero" : ""}">
+        <span class="label">Ranking de pontos · resultado do mês</span>
+        <span class="v ${sign(R2.resultado)}">${brl0(R2.resultado)}</span>
+        <span class="s">Escada de ${S.m.map((m) => n0(m.n)).join("·")}. Custo total de prêmio <em>${brl0(R2.custoPremios)}</em>.</span>
+      </div>
+      <div class="cell">
+        <span class="label">Marcos que alguém alcança</span>
+        <span class="v">${alcancaveis} de ${S.m.length}</span>
+        <span class="s">Com chance acima de 1%. O indicador médio converte <em>${n1(media)}</em> indicações.</span>
+      </div>
+      <div class="cell hero">
+        <span class="label">A escada precisa fazer cada pessoa listar</span>
+        <span class="v">${empate === null ? "mais de 60" : n0(empate)}</span>
+        <span class="s">amigos, contra os ${n0(S.amigos)} de hoje —
+        <em>${empate === null ? "e nem assim empata" : empate <= S.amigos ? "ou seja, ela já empata sem mudar nada" : "+" + pc(empate / S.amigos - 1, 0) + " de lista"}</em>
+        — só pra empatar com a indicação simples. <strong>É essa a aposta do ranking.</strong></span>
+      </div>`;
+
+    document.getElementById("compNota").innerHTML = `
+      <div class="note-item"><span class="tag ${Math.abs(dif) < 100 ? "warn" : dif > 0 ? "good" : "bad"}">a resposta</span><span>
+        ${alcancaveis <= 1
+          ? `<strong>Nas premissas atuais a escada quase não muda nada</strong> — ${brl0(Math.abs(dif))} de diferença no mês,
+             porque <strong>só ${alcancaveis} marco é alcançável</strong>. Na prática, o ranking está rodando
+             como indicação simples com um nome mais bonito. <em>Isso não é argumento contra o ranking</em>:
+             é argumento pra calibrar os marcos na moeda que a distribuição real permite, ou pra subir
+             quantos amigos cada pessoa lista.`
+          : `A escada ${dif >= 0 ? "rende <strong>mais</strong>" : "rende <strong>menos</strong>"} que a indicação simples
+             <em>com o mesmo número de amigos listados</em>: ${brl0(Math.abs(dif))} de diferença no mês. ${dif >= 0
+               ? "Ela ganha porque paga prêmio só nos marcos, e não em toda indicação."
+               : "Ela perde porque os prêmios de cima são caros e o volume de gente que chega neles não compensa."}`}
+      </span></div>
+      <div class="note-item"><span class="tag acc">a única razão de existir do ranking</span><span>
+        <strong>A escada não é mais barata nem mais cara — é uma aposta comportamental.</strong> Esta página
+        mantém <em>o número de amigos listados igual nos dois cenários</em>, e nessa condição a escada
+        ${dif >= 0 ? "empata ou ganha por pouco" : "sempre perde"}: o prêmio de cima custa mais e alcança pouca gente.
+        O ranking só se paga se ele <em>mudar o comportamento</em> — se a promessa da cesta fizer a pessoa
+        listar <strong>${empate === null ? "mais de 60" : n0(empate)}</strong> amigos em vez de ${n0(S.amigos)}.
+        <strong>Isso é hipótese, não conta</strong>; nenhum número desta página prova ou refuta.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o que muda pro cliente</span><span>
+        Na indicação simples <strong>toda indicação paga</strong>. Na escada, <em>só os marcos pagam</em>:
+        quem converte ${S.m[0].n === 1 ? "2" : String(S.m[0].n + 1)} amigos com os marcos em
+        ${S.m.map((m) => n0(m.n)).join(" · ")} leva exatamente o mesmo prêmio de quem converteu ${n0(S.m[0].n)}.
+        É o que torna a escada mais barata por indicação — e também o que faz a pessoa parar de indicar
+        logo depois de bater um marco.
+      </span></div>
+      <div class="note-item"><span class="tag good">a decisão que isso sugere</span><span>
+        <strong>Comece pela indicação simples.</strong> Ela não depende de nenhuma premissa frágil pra dar
+        positivo, é uma frase pra explicar no balcão, e — o que mais importa — <em>é ela que mede a conversão
+        do disparo e a canibalização real</em>. Com dois meses de dado, a escada deixa de ser desenhada no
+        chute: os marcos saem da distribuição medida, não desta binomial.
+      </span></div>`;
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  function update() {
+    syncControls(); syncDesenho(); syncMarcos();
+    renderStrip(); renderDesenhoNota(); renderLedger();
+    renderFunnel(); renderResults(); renderBreakeven();
+    renderEscada(); renderAlcance(); renderRk(); renderComparativo();
+  }
+
+  // buildDesenho primeiro: ele é quem cria o slider "pedido da dupla", e o
+  // buildControls é quem liga os listeners de TODOS os sliders, esse incluído.
+  buildDesenho(); buildControls(); buildMarcos(); update();
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   ABAS — mesmo mecanismo da campanha de fidelização
+   ══════════════════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+  const grupos = Array.from(document.querySelectorAll(".abas")).map((barra) => {
+    const botoes = Array.from(barra.querySelectorAll(":scope > button"));
+    return { botoes, paineis: botoes.map((b) => document.getElementById(b.getAttribute("aria-controls"))) };
+  });
+  const dono = new Map();
+  grupos.forEach((g) => g.paineis.forEach((p, i) => { if (p) dono.set(p, { g, i }); }));
+
+  function ativa(g, i, comHash) {
+    g.botoes.forEach((b, j) => {
+      b.setAttribute("aria-selected", String(j === i));
+      if (g.paineis[j]) g.paineis[j].hidden = j !== i;
+    });
+    if (comHash) { try { history.replaceState(null, "", "#" + g.botoes[i].dataset.hash); } catch (e) {} }
+  }
+  function revelar(el) {
+    let p = el.closest(".painel");
+    while (p) {
+      const r = dono.get(p);
+      if (r) ativa(r.g, r.i, false);
+      p = p.parentElement ? p.parentElement.closest(".painel") : null;
+    }
+  }
+  grupos.forEach((g) => g.botoes.forEach((b, i) => {
+    b.addEventListener("click", () => ativa(g, i, true));
+    b.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      const j = (i + d + g.botoes.length) % g.botoes.length;
+      ativa(g, j, true); g.botoes[j].focus();
+    });
+  }));
+  function porHash() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    for (const g of grupos) {
+      const i = g.botoes.findIndex((b) => b.dataset.hash === h);
+      if (i >= 0) { revelar(g.paineis[i]); ativa(g, i, false); return; }
+    }
+    const alvo = document.getElementById(h);
+    if (alvo) { revelar(alvo); alvo.scrollIntoView(); }
+  }
+  addEventListener("hashchange", porHash);
+  porHash();
+})();
+</script>
+
+</body>
+</html>
