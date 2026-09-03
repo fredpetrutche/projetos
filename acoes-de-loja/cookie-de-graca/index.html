@@ -153,6 +153,8 @@
   thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
   tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
   tbody tr.mark td { background: var(--surface-2); }
+  .pos { color: var(--good); font-variant-numeric: tabular-nums; }
+  .neg { color: var(--bad); font-variant-numeric: tabular-nums; }
   td .leg { font-family: var(--mono); font-size: .75rem; color: var(--ink); }
   td .off { color: var(--ink-soft); }
 
@@ -300,9 +302,10 @@
         escolhido — <strong>a aba &ldquo;Voucher de volta&rdquo; tem as opções com o custo de cada uma</strong>.</p></div>
       <div class="painel" data-alvo="m7" hidden><span class="ptit">7 · Entra no sorteio do Melhor Stories</span>
         <span class="psub">novo nesta campanha · aba própria</span>
-        <p class="prose">Quem estiver na loja nos dois dias concorre a um combo da casa pelo melhor stories.
-        Precisa de um display de balcão com o combo à mostra, senão ninguém fica sabendo.
-        <strong>A aba &ldquo;Melhor Stories&rdquo; tem o que falta fechar.</strong></p></div>
+        <p class="prose">O mesmo story do passo 3 já vale como inscrição. <strong>É um sorteio por dia</strong> —
+        um combo na sexta e outro no sábado — e o vencedor de cada dia é anunciado num vídeo no fim do
+        dia, chamando pra retirar. Precisa de um display de balcão com o combo à mostra, senão ninguém
+        fica sabendo. <strong>A aba &ldquo;Melhor Stories&rdquo; tem o fluxo inteiro.</strong></p></div>
     </div>
   </div>
 </section>
@@ -1510,92 +1513,155 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
 <div class="tab-panel" data-panel="stories" role="tabpanel" hidden>
 
 <section>
-  <h2><span class="n">1</span> O que é<span class="hint">nos dois dias, na loja</span></h2>
-  <p class="prose">Quem estiver na loja na sexta 11 e no sábado 12 concorre a um <strong>combo da casa</strong>
-  pelo <strong>melhor stories</strong>. É a terceira camada da campanha: o cookie paga a visita de hoje, o
-  voucher paga a de amanhã, e o sorteio é o que faz o story sair melhor do que sairia.</p>
+  <h2><span class="n">1</span> O que é<span class="hint">um sorteio por dia</span></h2>
+  <p class="prose">Quem estiver na loja concorre a um <strong>combo da casa</strong> pelo melhor stories.
+  <strong>São dois sorteios: um na sexta 11 e um no sábado 12.</strong> No fim de cada dia sai um vídeo
+  anunciando o vencedor daquele dia — &ldquo;venha retirar o seu combo&rdquo;.</p>
   <div class="notes">
     <div class="note-item"><span class="tag acc">por que existe</span><span>
       A campanha já obriga a pessoa a postar. Sem prêmio, ela posta o mínimo: uma foto do cookie com a
       marcação. Com prêmio pelo melhor, <strong>ela capricha</strong> — e o alcance orgânico da campanha
-      inteira depende exatamente disso. É o único item da ação que melhora a qualidade do que é postado, não
-      só a quantidade.</span></div>
+      inteira depende exatamente disso. É o único item da ação que melhora a <em>qualidade</em> do que é
+      postado, não só a quantidade.</span></div>
+    <div class="note-item"><span class="tag good">por que um por dia é melhor que um só</span><span>
+      O vídeo do vencedor da sexta vai ao ar <strong>na noite de sexta</strong> — ou seja, no meio da
+      campanha, com o sábado inteiro pela frente. Ele deixa de ser aviso e vira
+      <strong>chamada</strong>: prova que o prêmio é real, mostra o combo na mão de alguém e dá motivo
+      pra quem não foi na sexta ir no sábado. Um sorteio único no fim não teria como fazer isso.</span></div>
     <div class="note-item"><span class="tag warn">o que a loja precisa produzir</span><span>
-      Um <strong>display de balcão com o combo à mostra</strong>. É o que avisa a pessoa no momento em que ela
-      está com o celular na mão, na fila. Sem o display, o sorteio só existe pra quem o atendente lembrar de
-      avisar — e num sábado cheio ele não vai lembrar.</span></div>
+      Um <strong>display de balcão com o combo à mostra</strong>. É o que avisa a pessoa no momento em que
+      ela está com o celular na mão, na fila. Sem o display, o sorteio só existe pra quem o atendente
+      lembrar de avisar — e num sábado cheio ele não vai lembrar.</span></div>
   </div>
 </section>
 
 <section>
-  <h2><span class="n">2</span> Como funciona no dia<span class="hint">clique numa caixinha</span></h2>
+  <h2><span class="n">2</span> Como se junta os stories<span class="hint">a parte que quase deu errado</span></h2>
+  <p class="prose">A pergunta óbvia é: <em>como eu vejo todo mundo que marcou a loja, sem clicar num
+  por um?</em> A resposta curta é que <strong>não existe esse botão</strong> — e a consequência disso
+  muda a rotina dos dois dias.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">não dá pra puxar depois</span><span>
+      A documentação da Meta é explícita: <code>Mentions on Stories are not supported</code>. O endpoint
+      oficial que lista quem marcou a conta cobre post e comentário, e <strong>exclui story</strong>. Cada
+      menção cai no Direct da loja, mas <strong>o story expira em 24 h</strong> — depois disso a mensagem
+      continua lá e não abre mais. <strong>Se ninguém capturar durante os dois dias, no domingo não há
+      o que julgar.</strong></span></div>
+    <div class="note-item"><span class="tag good">o que resolve, e custa um toque</span><span>
+      Cada menção no Direct tem o botão <strong>&ldquo;Adicionar ao seu story&rdquo;</strong>. Repostar
+      resolve duas coisas de uma vez: multiplica o alcance da campanha durante os dois dias
+      <em>e</em> arquiva a peça. Tudo vai para um <strong>Destaque chamado &ldquo;Cookie de
+      Graça&rdquo;</strong> — que fica público e permanente, vira prova social pra próxima campanha, e
+      transforma o julgamento em rolar um Destaque em vez de caçar no Direct.</span></div>
+    <div class="note-item"><span class="tag acc">o filtro contínuo é o que mata o trabalho</span><span>
+      Ninguém julga 200 stories bem — a pessoa cansa no quadragésimo e o resto passa batido. Quem está
+      com o celular <strong>separa os 3 ou 4 melhores ao longo do dia</strong>. No fim do dia a escolha é
+      entre 4, não entre 200. É por isso que o sorteio por dia também é mais fácil de operar: o lote de
+      julgamento é metade do tamanho.</span></div>
+    <div class="note-item"><span class="tag warn">conferir antes do dia 11</span><span>
+      Que o <strong>arquivamento automático de stories esteja ligado</strong> na conta da loja. Se estiver
+      desligado, o repost some em 24 h junto com o original e o Destaque não se monta.</span></div>
+  </div>
+  <details>
+    <summary>Por que não dá pra automatizar até 11/09</summary>
+    <ul>
+      <li><strong>API oficial da Meta:</strong> menção em story só chega pelo webhook de
+      <em>mensagens</em> — exige conta business ligada a uma Página, app na Meta, servidor com endpoint
+      público e revisão de permissão. É processo de semanas, não de dias.</li>
+      <li><strong>Raspagem com a sessão da loja:</strong> tecnicamente funciona e dá pra baixar as mídias
+      enquanto estão vivas, mas exige logar como <code>@holycook.paulinia</code> e roda com risco de
+      bloqueio — justamente no fim de semana em que a conta é o canal da campanha.</li>
+      <li>A sessão de Instagram disponível hoje é a de <code>@fredpetrutche</code>, não a da loja. Menção
+      em story só é visível de dentro da conta marcada.</li>
+    </ul>
+  </details>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Como funciona no dia<span class="hint">clique numa caixinha</span></h2>
   <div class="bloco">
     <div class="fluxo">
       <button class="passo-caixa" data-alvo="ms1"><span class="quem">1</span><span class="qtxt">Vê o display</span></button><span class="seta">→</span>
       <button class="passo-caixa" data-alvo="ms2"><span class="quem">2</span><span class="qtxt">Posta o story</span></button><span class="seta">→</span>
-      <button class="passo-caixa" data-alvo="ms3"><span class="quem">3</span><span class="qtxt">A loja salva</span></button><span class="seta">→</span>
-      <button class="passo-caixa" data-alvo="ms4"><span class="quem">4</span><span class="qtxt">Escolhe o melhor</span></button><span class="seta">→</span>
-      <button class="passo-caixa" data-alvo="ms5"><span class="quem">5</span><span class="qtxt">Anuncia e entrega</span></button>
+      <button class="passo-caixa" data-alvo="ms3"><span class="quem">3</span><span class="qtxt">A loja reposta na hora</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="ms4"><span class="quem">4</span><span class="qtxt">Separa os melhores do dia</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="ms5"><span class="quem">5</span><span class="qtxt">Vídeo do vencedor</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="ms6"><span class="quem">6</span><span class="qtxt">Retira o combo</span></button>
     </div>
     <div class="visor">
       <div class="painel" data-alvo="ms1" hidden><span class="ptit">1 · Vê o display no balcão</span>
         <p class="prose">O display precisa mostrar <strong>o combo</strong> — foto do que a pessoa leva se
-        ganhar — e a frase que explica em uma linha o que ela tem que fazer. Fica no balcão, na altura do olho
-        de quem está pagando, não na parede.</p>
-        <ul class="pontos"><li><strong>Em aberto:</strong> qual é o combo. Sem ele definido, não há o que
+        ganhar — e a frase que explica em uma linha o que ela tem que fazer. Fica no balcão, na altura do
+        olho de quem está pagando, não na parede. Tem que dizer que <strong>é um vencedor por dia</strong>
+        e que o resultado sai à noite, no perfil da loja.</p>
+        <ul class="pontos"><li><strong>Em aberto:</strong> qual é o combo. Sem ele definido não há o que
         fotografar, e sem foto não há display.</li></ul></div>
-      <div class="painel" data-alvo="ms2" hidden><span class="ptit">2 · Posta o story</span>
-        <p class="prose">É o mesmo story da mecânica principal — não é uma postagem a mais. A pessoa já ia
-        postar pra levar o cookie; o sorteio só muda o capricho.</p>
-        <ul class="pontos"><li><strong>Em aberto:</strong> o story do sorteio é o mesmo da promoção ou tem
-        exigência extra (aparecer no vídeo, mostrar a loja, usar alguma figurinha)? Quanto mais exigência,
-        menos gente participa — e a fila fica mais lenta.</li></ul></div>
-      <div class="painel" data-alvo="ms3" hidden><span class="ptit">3 · A loja salva os stories</span>
-        <p class="prose">Story some em 24 horas. Se ninguém salvar, não há o que julgar no dia seguinte.</p>
+      <div class="painel" data-alvo="ms2" hidden><span class="ptit">2 · Posta o story e marca</span>
+        <span class="psub">é o mesmo story da promoção</span>
+        <p class="prose">Não é uma postagem a mais: a pessoa já ia postar pra levar o cookie. O sorteio só
+        muda o capricho. <strong>Manter assim</strong> — qualquer exigência extra (aparecer no vídeo, usar
+        figurinha) reduz participação e trava a fila.</p></div>
+      <div class="painel" data-alvo="ms3" hidden><span class="ptit">3 · A loja reposta na hora</span>
+        <span class="psub">o repost é a inscrição</span>
+        <p class="prose">A menção chega no Direct da loja e alguém dá <strong>&ldquo;adicionar ao seu
+        story&rdquo;</strong>. Um toque. Isso publica (alcance) e arquiva (julgamento) de uma vez.</p>
+        <p class="prose"><strong>Só concorre quem foi repostado.</strong> Isso alinha o incentivo — quem
+        está no balcão reposta porque quer o alcance, e o arquivo se monta sozinho — e resolve o problema
+        de não existir jeito de recuperar story depois de 24 h.</p>
         <ul class="pontos">
-          <li><strong>Em aberto:</strong> quem salva, e em quê. O caminho mais simples é a loja repostar todos
-          nos próprios stories conforme chegam — resolve o arquivo e ainda multiplica o alcance da campanha
-          durante os dois dias.</li>
-          <li>Repostar todo mundo também é o que faz a promoção parecer cheia de gente, que é o que puxa mais
-          gente.</li>
+          <li>No fim do dia, tudo vai pro Destaque <strong>&ldquo;Cookie de Graça&rdquo;</strong>.</li>
+          <li><strong>Em aberto:</strong> quem fica com o celular da loja nos dois dias. Não pode ser
+          &ldquo;quem estiver livre&rdquo; — em pico de fila ninguém está livre.</li>
         </ul></div>
-      <div class="painel" data-alvo="ms4" hidden><span class="ptit">4 · Escolhe o melhor</span>
+      <div class="painel" data-alvo="ms4" hidden><span class="ptit">4 · Separa os melhores do dia</span>
+        <p class="prose">Ao longo do dia, quem está repostando marca <strong>3 ou 4 candidatos</strong>.
+        À noite a escolha é entre esses, não entre tudo que entrou.</p>
         <ul class="pontos">
-          <li><strong>Em aberto — o critério.</strong> &ldquo;Melhor&rdquo; sem critério escrito vira decisão
-          de gosto, e decisão de gosto em promoção pública vira reclamação. Candidatos: mais criativo, que
-          mostra melhor o produto, que fez rir, que teve mais visualização.</li>
-          <li><strong>Em aberto — quem julga.</strong> A loja, o Fred, ou os dois influenciadores contratados
-          (o que dá conteúdo pra eles postarem de novo, de graça).</li>
-          <li><strong>Em aberto — um sorteio ou dois.</strong> Um por dia dobra o motivo de participar no
-          sábado; um só concentra o prêmio.</li>
+          <li><strong>Em aberto — o critério de &ldquo;melhor&rdquo;.</strong> Precisa caber numa frase no
+          display. Candidatos: mais criativo, que mostra melhor o produto, que fez rir. Prêmio subjetivo
+          entregue sem critério escrito é o tipo de coisa que volta em comentário.</li>
+          <li><strong>Em aberto — quem julga.</strong> A loja, o Fred, ou os dois influenciadores
+          contratados — o que dá a eles um segundo conteúdo pra postar, de graça.</li>
         </ul></div>
-      <div class="painel" data-alvo="ms5" hidden><span class="ptit">5 · Anuncia e entrega</span>
+      <div class="painel" data-alvo="ms5" hidden><span class="ptit">5 · Vídeo do vencedor, no fim do dia</span>
+        <span class="psub">fechado · e é a peça mais valiosa dos dois dias</span>
+        <p class="prose">No fim de cada dia sai um vídeo anunciando o escolhido daquele dia, com o convite:
+        <strong>&ldquo;venha retirar o seu combo&rdquo;</strong>. Dois vídeos no total — um na sexta à
+        noite, um no sábado à noite.</p>
         <ul class="pontos">
-          <li><strong>Em aberto — quando anuncia.</strong> Se for no domingo, os dois dias de campanha já
-          passaram e o anúncio não puxa mais ninguém pra loja. Se for no sábado de manhã (o vencedor da
-          sexta), o anúncio vira motivo pra ir no sábado.</li>
-          <li><strong>Em aberto — como o vencedor retira.</strong> Prazo pra buscar o combo e o que acontece se
-          não buscar.</li>
-          <li>O anúncio é conteúdo: post no feed com o story vencedor rende mais que story de aviso.</li>
+          <li>O <strong>vídeo de sexta é o mais importante dos dois</strong>: ele vai ao ar com o sábado
+          inteiro pela frente e funciona como chamada, não como aviso.</li>
+          <li>Mostrar o story vencedor dentro do vídeo — é conteúdo pronto, feito por cliente, e faz a
+          próxima pessoa entender o que é &ldquo;caprichar&rdquo;.</li>
+          <li>Vai no feed, não só no story: o do sábado fica como registro da campanha.</li>
+          <li><strong>Em aberto:</strong> quem grava e posta esses dois vídeos, e a que horas. Fim de dia
+          numa sexta cheia é o pior momento pra descobrir que ninguém tinha essa tarefa.</li>
+        </ul></div>
+      <div class="painel" data-alvo="ms6" hidden><span class="ptit">6 · Retira o combo</span>
+        <ul class="pontos">
+          <li><strong>Em aberto — prazo pra buscar</strong> e o que acontece se não buscar.</li>
+          <li>A retirada é <strong>uma terceira visita</strong> daquela pessoa — vale combinar que ela é
+          filmada também, é o fechamento natural da campanha.</li>
         </ul></div>
     </div>
   </div>
 </section>
 
 <section>
-  <h2><span class="n">3</span> O que falta fechar<span class="hint">antes de mandar o display pra gráfica</span></h2>
+  <h2><span class="n">4</span> O que falta fechar<span class="hint">antes de mandar o display pra gráfica</span></h2>
   <div class="bloco">
     <div class="grade">
       <button class="card-btn" data-alvo="ms-combo"><span class="cnome">Qual é o combo</span><span class="cmeta">trava tudo</span><span class="cdesc">Sem ele não tem foto, sem foto não tem display.</span></button>
-      <button class="card-btn" data-alvo="ms-display"><span class="cnome">O display de balcão</span><span class="cmeta">produção</span><span class="cdesc">O que precisa estar escrito nele e quando ele tem que estar na loja.</span></button>
-      <button class="card-btn" data-alvo="ms-regra"><span class="cnome">A regra do sorteio</span><span class="cmeta">critério e júri</span><span class="cdesc">Como se escolhe o melhor, e quem escolhe.</span></button>
-      <button class="card-btn" data-alvo="ms-custo"><span class="cnome">O custo</span><span class="cmeta">sai dos R$ 5 mil</span><span class="cdesc">Quanto o combo tira da verba, e se é um ou dois.</span></button>
+      <button class="card-btn" data-alvo="ms-display"><span class="cnome">O display de balcão</span><span class="cmeta">produção · prazo de gráfica</span><span class="cdesc">O que precisa estar escrito nele e quando tem que estar na loja.</span></button>
+      <button class="card-btn" data-alvo="ms-regra"><span class="cnome">A regra do sorteio</span><span class="cmeta">critério e júri</span><span class="cdesc">Como se escolhe o melhor do dia, e quem escolhe.</span></button>
+      <button class="card-btn" data-alvo="ms-quem"><span class="cnome">Quem opera</span><span class="cmeta">3 tarefas nomeadas</span><span class="cdesc">Repostar, separar candidatos e gravar o vídeo da noite.</span></button>
+      <button class="card-btn" data-alvo="ms-custo"><span class="cnome">O custo</span><span class="cmeta">2 combos · sai dos R$ 5 mil</span><span class="cdesc">Quanto os dois combos tiram da verba.</span></button>
     </div>
     <div class="visor">
       <div class="painel aberto" data-alvo="ms-combo" hidden><span class="ptit">Qual é o combo</span>
-        <p class="prose">É o item que trava a produção do display, que trava a gráfica, que trava a data. Os
-        custos de referência (CMV de 30–31/07/2026, da
-        <a href="../campanha-fidelizacao/">campanha de fidelização</a>) para montar as contas:</p>
+        <p class="prose">É o item que trava a produção do display, que trava a gráfica, que trava a data.
+        Os custos de referência (base de 30–31/07/2026, da
+        <a href="../campanha-fidelizacao/">campanha de fidelização</a>):</p>
         <div class="tablewrap"><table><thead><tr><th>Item</th><th>CMV</th><th>Preço de tabela</th></tr></thead><tbody>
           <tr><td>Cookie (médio)</td><td>R$ 5,01</td><td>~R$ 12,90</td></tr>
           <tr><td>Bola de sorvete</td><td>R$ 2,00</td><td>R$ 5,90</td></tr>
@@ -1603,32 +1669,47 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
           <tr><td>Milkshake (440 ml)</td><td>R$ 13,20</td><td>R$ 28,66</td></tr>
         </tbody></table></div>
         <p class="prose">Um combo tem que <strong>parecer grande na foto</strong> — é a única função dele.
-        Cookie + milkshake custa R$ 18,21 de CMV e aparenta R$ 41,56 de tabela: é a melhor relação entre o que
-        se vê e o que se paga.</p></div>
+        Cookie + milkshake custa R$ 18,21 de CMV e aparenta R$ 41,56 de tabela: é a melhor relação entre o
+        que se vê e o que se paga. <strong>São dois combos</strong>, um por dia — R$ 36,42 de CMV no
+        total, o que é irrelevante perto dos R$ 5 mil.</p></div>
       <div class="painel aberto" data-alvo="ms-display" hidden><span class="ptit">O display de balcão</span>
         <ul class="pontos">
           <li><strong>Foto do combo</strong> ocupando a maior parte da peça.</li>
           <li><strong>Uma linha</strong> dizendo o que fazer — não um regulamento. O regulamento vai no
           Instagram.</li>
-          <li><strong>As duas datas</strong> (11 e 12/09) e a hora do anúncio do vencedor.</li>
-          <li>Precisa estar <strong>na loja no dia 10</strong>, não no dia 11. Prazo de gráfica conta pra trás
-          a partir daí.</li>
+          <li><strong>&ldquo;Um vencedor por dia&rdquo;</strong> e a hora em que o resultado sai. É o que
+          faz a pessoa voltar no perfil à noite.</li>
+          <li>Precisa estar <strong>na loja no dia 10</strong>, não no dia 11. Prazo de gráfica conta pra
+          trás a partir daí.</li>
           <li>A mesma arte serve de story de aviso e de post — pedir os três formatos de uma vez.</li>
         </ul></div>
       <div class="painel aberto" data-alvo="ms-regra" hidden><span class="ptit">A regra do sorteio</span>
-        <p class="prose">Três decisões, e as três precisam estar escritas <em>antes</em>, porque prêmio
-        subjetivo entregue sem critério é o tipo de coisa que volta em comentário:</p>
+        <p class="prose">O que já está fechado: <strong>um vencedor por dia</strong>, anunciado em vídeo no
+        fim do dia, e <strong>só concorre quem foi repostado</strong> pela loja. Falta:</p>
         <ul class="pontos">
-          <li><strong>O critério de &ldquo;melhor&rdquo;</strong> — e ele precisa caber numa frase no display.</li>
+          <li><strong>O critério de &ldquo;melhor&rdquo;</strong> — e ele precisa caber numa frase no
+          display.</li>
           <li><strong>Quem julga</strong> — loja, Fred, ou os influenciadores contratados.</li>
-          <li><strong>Um prêmio ou dois</strong> (um por dia).</li>
+          <li><strong>Desempate e recusa:</strong> o que acontece se o vencedor não responder, e se alguém
+          pode ganhar nos dois dias.</li>
         </ul></div>
-      <div class="painel aberto" data-alvo="ms-custo" hidden><span class="ptit">O custo</span>
-        <p class="prose">O combo e o display saem dos <strong>R$ 5 mil</strong> da campanha, junto com os
-        cookies e o cachê dos influenciadores. Como o rateio da verba ainda não foi feito, este item entra na
-        mesma conta que está em aberto no briefing.</p>
-        <p class="prose">Em dinheiro o combo é barato — um ou dois combos não movem a verba. <strong>O display
-        é que custa</strong>, e custa em prazo, não em real.</p></div>
+      <div class="painel aberto" data-alvo="ms-quem" hidden><span class="ptit">Quem opera</span>
+        <p class="prose">Três tarefas que só existem por causa do sorteio, e nenhuma delas tem dono ainda.
+        Numa sexta cheia, tarefa sem dono é tarefa que não acontece:</p>
+        <ul class="pontos">
+          <li><strong>Repostar as menções</strong> conforme chegam — quem fica com o celular da loja.</li>
+          <li><strong>Separar os 3–4 candidatos</strong> do dia.</li>
+          <li><strong>Gravar e postar o vídeo do vencedor</strong> no fim de cada dia.</li>
+        </ul>
+        <p class="prose">Se a resposta de qualquer uma delas for &ldquo;a Débora&rdquo;, a campanha não
+        conta como transferida — é o mesmo critério do passo &ldquo;quem toca no dia&rdquo; do
+        briefing.</p></div>
+      <div class="painel" data-alvo="ms-custo" hidden><span class="ptit">O custo</span>
+        <p class="prose">Os <strong>dois combos</strong> e o display saem dos R$ 5 mil da campanha, junto
+        com os cookies e o cachê dos influenciadores.</p>
+        <p class="prose">Em dinheiro os combos são irrelevantes — dois combos de cookie + milkshake dão
+        <strong>R$ 36,42 de CMV</strong>, 0,7% da verba. <strong>O display é que custa</strong>, e custa em
+        prazo, não em real: ele tem que estar na loja no dia 10.</p></div>
     </div>
   </div>
 </section>
@@ -1662,15 +1743,45 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
 </section>
 
 <section>
-  <h2><span class="n">2</span> As opções de benefício<span class="hint">clique numa · CMV de 30–31/07/2026</span></h2>
-  <p class="prose">As quatro opções que respeitam a regra do compre-e-ganhe, com o custo real de cada uma.
-  Todas exigem uma compra — é isso que separa presente de promoção.</p>
+  <h2><span class="n">2</span> As opções de benefício<span class="hint">clique numa · base de 30–31/07/2026</span></h2>
+  <p class="prose">As quatro opções que respeitam a regra do compre-e-ganhe, com o custo real e
+  <strong>quanto sobra por pessoa</strong>. Todas exigem uma compra — é isso que separa presente de
+  promoção. As quatro dão lucro na visita de volta; nenhuma dá tanto quanto uma visita normal
+  (R$ 18,85), e é essa diferença que a campanha está comprando.</p>
+  <div class="tablewrap"><table><thead><tr>
+    <th>Benefício</th><th>CMV</th><th>Percebido</th><th>Lucro na volta</th><th>vs. visita normal</th><th>Descontando o cookie grátis</th><th>Empata se voltarem</th>
+  </tr></thead><tbody>
+    <tr class="mark"><td>Bola de sorvete</td><td>R$ 2,00</td><td>R$ 5,90</td><td class="pos"><strong>R$ 16,80</strong></td><td>−R$ 2,06</td><td>R$ 11,54</td><td><strong>31%</strong></td></tr>
+    <tr><td>Fatia de torta</td><td>R$ 9,04</td><td>R$ 22,90</td><td class="pos"><strong>R$ 9,68</strong></td><td>−R$ 9,17</td><td>R$ 4,42</td><td>54%</td></tr>
+    <tr><td>Cookie</td><td>R$ 5,01</td><td>~R$ 12,90</td><td class="pos"><strong>R$ 8,83</strong></td><td>−R$ 10,02</td><td>R$ 3,57</td><td>60%</td></tr>
+    <tr><td>Milkshake</td><td>R$ 13,20</td><td>R$ 28,66</td><td class="pos"><strong>R$ 5,48</strong></td><td>−R$ 13,37</td><td>R$ 0,22</td><td class="neg"><strong>96%</strong></td></tr>
+  </tbody></table></div>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a coluna que decide</span><span>
+      <strong>&ldquo;Empata se voltarem&rdquo;</strong> é a taxa de resgate em que a campanha para de dar
+      prejuízo. O cookie dado nos dias 11 e 12 custa <strong>R$ 5,26</strong> por pessoa e é gasto com
+      todo mundo; o lucro só existe em quem volta. Com o sorvete a conta fecha com
+      <strong>31%</strong> de retorno; com o milkshake ela só fecha com <strong>96%</strong> —
+      taxa que não acontece em campanha nenhuma. <strong>Na prática o milkshake torna a campanha
+      estruturalmente negativa</strong>, por mais bonito que seja o prêmio.</span></div>
+    <div class="note-item"><span class="tag mudo">como o lucro é calculado</span><span>
+      Mesmo modelo do simulador da <a href="../campanha-fidelizacao/">campanha de fidelização</a>, pra os
+      dois números baterem: <code>(cookie pago + venda extra medida) × margem de contribuição − custo do
+      brinde</code>. Margem de contribuição de <strong>48,23%</strong> (1 − CMV mix 34,60% − quebra 1% −
+      embalagem por pedido − 14% de deduções: Simples 8% + royalty 4% + cartão 2%). Cookie pago R$ 15,19;
+      venda extra medida R$ 24,24 (pedido menos 1 item) ou R$ 14,03 quando o brinde também é cookie.
+      Custo do item = CMV × 1,01 + R$ 0,20 de embalagem. Base jun+jul/2026 da loja de Paulínia.</span></div>
+    <div class="note-item"><span class="tag warn">o que não está aqui</span><span>
+      Os R$ 5 mil de verba (cookies dos dois dias, cachê dos influenciadores, combos do sorteio, display)
+      são <strong>por fora</strong> desta conta — ela é por pessoa, no produto. E ela supõe que a pessoa
+      compra exatamente um cookie na volta; se ela levar mais, o lucro sobe.</span></div>
+  </div>
   <div class="bloco">
     <div class="grade">
-      <button class="card-btn" data-alvo="b1"><span class="cnome">Compre 1 cookie, ganhe 1 bola de sorvete</span><span class="cmeta">custa R$ 2,00 · vale R$ 5,90</span></button>
-      <button class="card-btn" data-alvo="b2"><span class="cnome">Compre 1 cookie, ganhe 1 fatia de torta</span><span class="cmeta">custa R$ 9,04 · vale R$ 22,90</span></button>
-      <button class="card-btn" data-alvo="b3"><span class="cnome">Compre 1 cookie, ganhe 1 milkshake</span><span class="cmeta">custa R$ 13,20 · vale R$ 28,66</span></button>
-      <button class="card-btn" data-alvo="b4"><span class="cnome">Compre 1 cookie, ganhe 1 cookie</span><span class="cmeta">custa R$ 5,01 · vale ~R$ 12,90</span></button>
+      <button class="card-btn" data-alvo="b1"><span class="cnome">Compre 1 cookie, ganhe 1 bola de sorvete</span><span class="cmeta">lucro R$ 16,80 · empata em 31%</span></button>
+      <button class="card-btn" data-alvo="b2"><span class="cnome">Compre 1 cookie, ganhe 1 fatia de torta</span><span class="cmeta">lucro R$ 9,68 · empata em 54%</span></button>
+      <button class="card-btn" data-alvo="b3"><span class="cnome">Compre 1 cookie, ganhe 1 milkshake</span><span class="cmeta">lucro R$ 5,48 · empata em 96%</span></button>
+      <button class="card-btn" data-alvo="b4"><span class="cnome">Compre 1 cookie, ganhe 1 cookie</span><span class="cmeta">lucro R$ 8,83 · empata em 60%</span></button>
     </div>
     <div class="visor">
       <div class="painel fechado" data-alvo="b1" hidden><span class="ptit">Compre 1 cookie, ganhe 1 bola de sorvete</span>
@@ -1678,42 +1789,59 @@ Então já marca quem vai garantir esse cookie delicioso com você! 🍪🔥</di
         <div class="nums">
           <div><span class="v">R$ 2,00</span><span class="s">CMV do brinde</span></div>
           <div><span class="v">R$ 5,90</span><span class="s">valor percebido</span></div>
-          <div><span class="v dest">2,95×</span><span class="s">percebido ÷ custo</span></div>
+          <div><span class="v dest">+R$ 16,80</span><span class="s">lucro por pessoa que volta</span></div>
+          <div><span class="v">−R$ 2,06</span><span class="s">contra uma visita normal</span></div>
+          <div><span class="v">+R$ 11,54</span><span class="s">descontando o cookie grátis</span></div>
+          <div><span class="v">31%</span><span class="s">retorno pra empatar</span></div>
         </div>
-        <p class="prose">O brinde mais barato da lista com folga. A visita que resgata este voucher ainda rende
-        quase o mesmo que uma visita normal. O prêmio percebido é o menor — <strong>é presente pequeno</strong>,
-        o que combina com quem chegou por um grátis e ainda não comprou nada.</p></div>
+        <p class="prose">O brinde mais barato da lista com folga: a visita de volta rende
+        <strong>R$ 16,80</strong>, só R$ 2,06 abaixo de uma visita normal. É o único dos quatro em que a
+        campanha fecha no positivo com uma taxa de retorno plausível. O prêmio percebido é o menor —
+        é presente pequeno, o que combina com quem chegou por um grátis e ainda não comprou nada.</p></div>
       <div class="painel fechado" data-alvo="b2" hidden><span class="ptit">Compre 1 cookie, ganhe 1 fatia de torta</span>
         <span class="psub">o que revela produto novo</span>
         <div class="nums">
           <div><span class="v">R$ 9,04</span><span class="s">CMV do brinde</span></div>
           <div><span class="v">R$ 22,90</span><span class="s">valor percebido</span></div>
-          <div><span class="v dest">2,53×</span><span class="s">percebido ÷ custo</span></div>
+          <div><span class="v dest">+R$ 9,68</span><span class="s">lucro por pessoa que volta</span></div>
+          <div><span class="v">−R$ 9,17</span><span class="s">contra uma visita normal</span></div>
+          <div><span class="v">+R$ 4,42</span><span class="s">descontando o cookie grátis</span></div>
+          <div><span class="v">54%</span><span class="s">retorno pra empatar</span></div>
         </div>
-        <p class="prose">Prêmio inteiro num item que <strong>92% dos pedidos da loja não levam</strong>. É o que
-        faz a pessoa descobrir que a casa tem torta — e resolve a armadilha de dar cookie pra quem acabou de
-        ganhar cookie.</p></div>
+        <p class="prose">Prêmio inteiro num item que <strong>92% dos pedidos da loja não levam</strong>. É o
+        que faz a pessoa descobrir que a casa tem torta — e resolve a armadilha de dar cookie pra quem
+        acabou de ganhar cookie. Custa metade do lucro da visita: <strong>R$ 9,68</strong> contra os
+        R$ 18,85 de uma visita normal. Vale se o objetivo for apresentar a torta, não proteger margem.</p></div>
       <div class="painel aberto" data-alvo="b3" hidden><span class="ptit">Compre 1 cookie, ganhe 1 milkshake</span>
-        <span class="psub">o maior prêmio, e o mais caro</span>
+        <span class="psub">o maior prêmio — e o que quebra a conta</span>
         <div class="nums">
           <div><span class="v">R$ 13,20</span><span class="s">CMV do brinde</span></div>
           <div><span class="v">R$ 28,66</span><span class="s">valor percebido</span></div>
-          <div><span class="v dest">2,17×</span><span class="s">percebido ÷ custo</span></div>
+          <div><span class="v dest">+R$ 5,48</span><span class="s">lucro por pessoa que volta</span></div>
+          <div><span class="v">−R$ 13,37</span><span class="s">contra uma visita normal</span></div>
+          <div><span class="v">+R$ 0,22</span><span class="s">descontando o cookie grátis</span></div>
+          <div><span class="v">96%</span><span class="s">retorno pra empatar</span></div>
         </div>
-        <p class="prose">O maior prêmio percebido e o mais caro de entregar — só existe copo de 440 ml, então
-        não dá pra fazer versão menor. Num voucher que vai pra <em>todo mundo</em> que passou nos dois dias,
-        R$ 13,20 por resgate é o cenário que mais pesa se a fila for grande.</p></div>
+        <p class="prose">O maior prêmio percebido e o mais caro de entregar — só existe copo de 440 ml,
+        então não dá pra fazer versão menor. A visita de volta ainda dá lucro (R$ 5,48), mas
+        <strong>quase exatamente o que o cookie grátis custou</strong> (R$ 5,26): sobram 22 centavos por
+        pessoa que volta. Traduzindo: <strong>a campanha só empata se 96% dos vouchers forem
+        resgatados</strong>. Não é uma opção cara — é uma opção que não fecha.</p></div>
       <div class="painel aberto" data-alvo="b4" hidden><span class="ptit">Compre 1 cookie, ganhe 1 cookie</span>
         <span class="psub">o clássico — mas aqui tem um problema</span>
         <div class="nums">
           <div><span class="v">R$ 5,01</span><span class="s">CMV do brinde</span></div>
           <div><span class="v">~R$ 12,90</span><span class="s">valor percebido</span></div>
-          <div><span class="v dest">2,57×</span><span class="s">percebido ÷ custo</span></div>
+          <div><span class="v dest">+R$ 8,83</span><span class="s">lucro por pessoa que volta</span></div>
+          <div><span class="v">−R$ 10,02</span><span class="s">contra uma visita normal</span></div>
+          <div><span class="v">+R$ 3,57</span><span class="s">descontando o cookie grátis</span></div>
+          <div><span class="v">60%</span><span class="s">retorno pra empatar</span></div>
         </div>
         <p class="prose">Em qualquer outra campanha é a melhor escolha: o cookie pago cobre o de brinde e
         sobra, e ninguém precisa entender regra nenhuma. <strong>Nesta campanha ele repete o prêmio que a
-        pessoa acabou de ganhar de graça</strong> — e é justamente o que ensina o cliente a esperar cookie de
-        graça.</p></div>
+        pessoa acabou de ganhar de graça</strong> — e é justamente o que ensina o cliente a esperar cookie
+        de graça. Repare também que ele rende menos que a torta (R$ 8,83 contra R$ 9,68), porque quando o
+        brinde é cookie a venda extra medida cai de R$ 24,24 pra R$ 14,03.</p></div>
     </div>
   </div>
 </section>
