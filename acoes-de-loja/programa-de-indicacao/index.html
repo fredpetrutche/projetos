@@ -308,6 +308,10 @@
                        color: var(--ink); line-height: 1.25; letter-spacing: -.01em; }
   .pagina-mock .pm-p { font-size: .875rem; color: var(--ink-soft); line-height: 1.55; }
   .pagina-mock .pm-p strong { color: var(--ink); font-weight: 600; }
+  .pagina-mock .pm-escassez { font-family: var(--mono); font-size: .75rem; color: var(--warn);
+                              background: var(--warn-bg); border-radius: 3px; padding: .4rem .6rem;
+                              justify-self: start; font-weight: 600; }
+  .pagina-mock .pm-escassez strong { font-weight: 700; }
   .pagina-mock .pm-botoes { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .35rem; }
   .pagina-mock .pm-btn { font-family: var(--mono); font-size: .6875rem; font-weight: 700; letter-spacing: .06em;
                          text-transform: uppercase; background: var(--accent); color: var(--accent-ink);
@@ -591,7 +595,7 @@
     <button type="button" role="tab" id="sub-balcao" aria-controls="sub-balcao-p" aria-selected="false" data-hash="balcao">
       Regras de balcão<span class="sub2">o que o atendente sabe de cor</span></button>
     <button type="button" role="tab" id="sub-decidir" aria-controls="sub-decidir-p" aria-selected="false" data-hash="decidir">
-      O que falta decidir<span class="sub2">13 perguntas em aberto</span></button>
+      O que falta decidir<span class="sub2">14 perguntas em aberto</span></button>
   </div>
 
   <div class="painel" id="sub-formas-p" role="tabpanel" aria-labelledby="sub-formas">
@@ -759,6 +763,7 @@
       <div class="pagina-mock">
         <span class="pm-h">Indique um amigo e ganhe um cookie.</span>
         <span class="pm-p">Compra um e o segundo é do seu amigo. Um pra cada.</span>
+        <span class="pm-escassez">Restam <strong>137</strong> dos 200 cookies desta rodada.</span>
         <span class="pm-p"><strong>Dois cookies significa que você tá levando alguém.</strong><br>
         A gente escreve a mensagem. Você escolhe quem paga.</span>
         <div class="pm-botoes">
@@ -1223,6 +1228,34 @@
         <em>o ranking de pontos deixa de existir</em> (não há o que contar) e <em>a mensagem passa a ser o
         único motor</em> — ela precisa ser boa o bastante pra ser enviada sem incentivo nenhum.</span>
         <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+      </li>
+      <li>
+        <span class="num">14</span>
+        <span class="q">Escassez: limitar o quê?
+          <span class="ideia">&ldquo;você pode indicar 2 amigos&rdquo; e &ldquo;só tem 200 cupons&rdquo; parecem a mesma ideia e não são</span></span>
+        <span class="porque">São três coisas diferentes, e só duas prestam aqui.
+        <br><br>
+        <strong>1. Teto de indicações por pessoa</strong> (&ldquo;você pode indicar 2&rdquo;) — <em>é a que
+        custa caro</em>. Com 60 cadastros, a lista aberta de 15 amigos gera 90 conversões; o teto de 2 gera
+        12. Para empatar, a conversão teria que ir de 10% para <strong>75%</strong>. Nem dobrando ou
+        triplicando chega perto. <em>O meio-termo é um teto de 5</em>: a 20% de conversão dá 60 conversões,
+        perde pouco e ainda deixa a escolha do amigo parecer deliberada.
+        <br><br>
+        <strong>2. Teto total da rodada</strong> (&ldquo;200 cookies nesta rodada&rdquo;) — <em>é a boa</em>.
+        Não limita ninguém individualmente, cria urgência real, e de quebra <strong>é o teto de exposição
+        que a pergunta 12 pedia</strong>: 200 cupons × R$ 5,26 = <strong>R$ 1.052 de custo máximo de
+        prêmio</strong>, um número que você decide antes em vez de descobrir depois.
+        <br><br>
+        <strong>3. O contador</strong> (&ldquo;X cupons resgatados&rdquo;) — <em>isso não é escassez, é prova
+        social</em>, princípio diferente e mecanismo oposto. E ele tem um problema de partida:
+        <strong>no dia 1 o número é 3, e 3 é prova social ao contrário.</strong> Por isso a página mostra
+        <em>&ldquo;restam 137 dos 200&rdquo;</em> e não &ldquo;63 resgatados&rdquo;: a mesma informação, mas
+        a versão que funciona desde o primeiro dia e vai ficando mais forte, em vez de mais fraca.
+        <br><br>
+        <strong>Uma condição, para as três:</strong> o número tem que ser verdadeiro. São três cidades
+        pequenas; escassez inventada é descoberta em uma semana e queima a próxima campanha junto.</span>
+        <span class="resp"><span class="rl">sugestão</span><span class="rv"><em>Teto total da rodada, não por pessoa. Contador em
+        &ldquo;restam X&rdquo;.</em> Falta você definir o tamanho da rodada.</span></span>
       </li>
     </ol>
   </section>
