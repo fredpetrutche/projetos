@@ -253,6 +253,51 @@
   .oferta-ast { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
                 border-top: 1px dashed var(--rule); padding-top: .5rem; }
 
+  /* ─── formas de indicar: grade de cards, um aberto por vez ─── */
+  .story.fluxo.comum { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 46rem) { .story.fluxo.comum { grid-template-columns: 1fr; } }
+  .story.fluxo.comum .vnum { background: var(--surface-2); color: var(--ink-faint); font-weight: 600; }
+
+  .grade-formas { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .55rem; }
+  .forma-btn { display: flex; flex-direction: column; gap: .3rem; text-align: left; cursor: pointer;
+               background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+               padding: .85rem .95rem; font-family: inherit; color: var(--ink);
+               border-left: 3px solid var(--rule); transition: border-color .15s ease, background .15s ease; }
+  .forma-btn:hover { border-color: var(--ink-faint); border-left-color: var(--accent); }
+  .forma-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .forma-btn .fn { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                   color: var(--ink-faint); }
+  .forma-btn .ft { font-family: var(--mono); font-size: .875rem; font-weight: 600; line-height: 1.25; }
+  .forma-btn .fd { font-size: .75rem; color: var(--ink-faint); line-height: 1.4; }
+  .forma-btn.rec { border-left-color: var(--good); }
+  .forma-btn.nova { border-left-color: var(--warn); }
+  .forma-btn[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); }
+  .forma-btn[aria-expanded="true"] .ft { color: var(--paper); }
+  .forma-btn[aria-expanded="true"] .fn,
+  .forma-btn[aria-expanded="true"] .fd { color: var(--paper); opacity: .75; }
+
+  .forma-visor { display: flex; flex-direction: column; gap: .9rem;
+                 background: var(--surface); border: 1px solid var(--ink); border-radius: 4px;
+                 padding: 1.1rem 1.25rem; }
+  /* obrigatório: a classe fixa display, então [hidden] do UA não vence sozinho */
+  .forma-visor[hidden] { display: none !important; }
+  .fv-cab { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
+            border-bottom: 1px solid var(--rule); padding-bottom: .6rem; }
+  .fv-cab .fv-t { font-family: var(--mono); font-size: 1rem; font-weight: 600; }
+  .fv-passos { margin: 0; padding-left: 1.2rem; display: grid; gap: .4rem;
+               font-size: .875rem; color: var(--ink-soft); line-height: 1.5; }
+  .fv-passos strong { color: var(--ink); font-weight: 600; }
+  .fv-passos li::marker { font-family: var(--mono); font-size: .75rem; color: var(--accent); font-weight: 700; }
+  .fv-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  @media (max-width: 44rem) { .fv-cols { grid-template-columns: 1fr; } }
+  .fv-cols ul { margin: .3rem 0 0; padding-left: 1.05rem; display: grid; gap: .32rem;
+                font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .fv-cols ul strong { color: var(--ink); font-weight: 600; }
+  .fv-cols li::marker { color: var(--ink-faint); }
+  .fv-med { font-size: .8125rem; color: var(--ink-soft); background: var(--surface-2);
+            border-left: 2px solid var(--accent); border-radius: 0 3px 3px 0; padding: .55rem .75rem; }
+  .fv-med strong { color: var(--ink); font-weight: 600; }
+
   /* ─── veredito: a resposta em linguagem de gente, antes de qualquer tabela ─── */
   .veredito { border: 2px solid var(--ink); border-radius: 4px; background: var(--surface);
               padding: 1.25rem 1.4rem; display: flex; flex-direction: column; gap: .65rem; }
@@ -513,260 +558,243 @@
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="painel" id="painel-mecanica" role="tabpanel" aria-labelledby="aba-mecanica" hidden>
 
+  <!-- ══════ Formas de indicar — cards, nenhuma decidida ══════ -->
   <section id="mecanica">
-    <h2>Desenho A: a loja dispara<span class="hint">do QR do balcão ao ponto que cai</span></h2>
+    <h2>Formas de indicar<span class="hint">cinco · a escolha é a pergunta 10</span></h2>
     <p class="prose">
-      É o desenho original. <strong>Nada aqui está decidido</strong> — logo abaixo tem mais três, e a
-      recomendação é outra. Vale ler este primeiro assim mesmo: as etapas 1, 2 e 5 são iguais nos quatro
-      desenhos. <em>O que muda é só quem manda a mensagem e o que o amigo recebe.</em>
+      <strong>O começo é igual em todas.</strong> Um QR fixo no balcão leva a uma página. É daí em diante
+      que elas se separam — no que a página faz, no que o amigo recebe, e no que sobra de rastro depois.
+      <em>Clique num card para abrir.</em>
     </p>
-    <div class="story fluxo">
+
+    <div class="story fluxo comum">
       <div>
-        <span class="vnum">1</span>
+        <span class="vnum">igual em todas · 1</span>
         <span class="job">O QR do balcão</span>
-        <span class="txt">Um QR fixo no balcão (e no rodapé do cupom fiscal). Quem lê cai numa página de
-        cadastro. <em>Ler o QR já é o filtro</em>: só quem está na loja indica, e por isso quem indica é
-        sempre cliente.</span>
-        <span class="vid">página nova, hospedada junto com o resto</span>
+        <span class="txt">Um QR fixo no balcão e no rodapé do cupom fiscal. Quem lê cai numa página.
+        <em>Ler o QR já é o filtro</em>: só quem está na loja indica — por isso quem indica é sempre cliente.</span>
       </div>
       <div>
-        <span class="vnum">2</span>
-        <span class="job">O indicador se cadastra</span>
-        <span class="txt">Nome, WhatsApp e — <em>a decidir</em> — CPF. É o registro que cria a chave única
-        dele e a conta de pontos. <em>É também o primeiro tijolo da base de clientes</em>, que hoje não
-        existe.</span>
-        <span class="vid">o WhatsApp já é chave única · o CPF é a pergunta 06</span>
+        <span class="vnum">igual em todas · 2</span>
+        <span class="job">A página</span>
+        <span class="txt">O que ela pede e o que ela devolve <em>é o que muda de uma forma para outra</em> —
+        de um cadastro completo com lista de amigos, até só um texto e um botão.</span>
       </div>
       <div>
-        <span class="vnum">3</span>
-        <span class="job">Ele lista os amigos</span>
-        <span class="txt">Nome e WhatsApp de quantos quiser — 5, 10, 20. Cada linha vira um cupom com QR
-        próprio, amarrado ao indicador. <em>Quantos amigos ele lista é a alavanca de volume da campanha
-        inteira.</em></span>
-        <span class="vid">o número que a aba do ranking mais usa</span>
-      </div>
-      <div>
-        <span class="vnum">4</span>
-        <span class="job">O amigo recebe o disparo</span>
-        <span class="txt">Mensagem no WhatsApp: o amigo dele quis que ele conhecesse a loja, e o cupom
-        vem junto. <em>É aqui que mora a falha</em> — se o cupom não der nada a ele, o convite é só um
-        anúncio com nome de amigo em cima.</span>
-        <span class="vid">custo de template · validade do cupom a definir</span>
-      </div>
-      <div>
-        <span class="vnum">5</span>
-        <span class="job">O balcão escaneia</span>
-        <span class="txt">O amigo compra, o atendente lê o QR do cupom dele. <em>Só aí</em> o ponto cai
-        pro indicador, que recebe a mensagem dizendo que liberou o prêmio. <strong>Ponto sem compra não
-        existe</strong> — é o que impede fraude por lista inventada.</span>
-        <span class="vid">1 leitura no caixa · sem sistema novo no PDV</span>
+        <span class="vnum">igual em todas · 3</span>
+        <span class="job">O amigo compra</span>
+        <span class="txt">O ponto só cai <em>na venda</em>, nunca no convite. <strong>Convite não vale
+        ponto</strong> — é o que impede lista inventada, em qualquer uma das cinco.</span>
       </div>
     </div>
-  </section>
 
-  <!-- ══════ As quatro mecânicas — sugestões, nenhuma decidida ══════ -->
-  <section id="mecanica-b">
-    <h2>As quatro mecânicas na mesa<span class="hint">sugestões · a escolha é a pergunta 10</span></h2>
-    <p class="prose">
-      O desenho acima é só o <strong>A</strong>. Existem mais três, e elas não diferem em custo — diferem em
-      <strong>quanto trabalho o cliente tem</strong>, <strong>quem consegue resgatar</strong> e
-      <strong>o que sobra de base de clientes no fim</strong>. Duas delas parecem iguais para quem está no
-      balcão e são negócios completamente diferentes.
-    </p>
+    <div class="grade-formas" id="gradeFormas">
+      <button type="button" class="forma-btn" data-forma="f1" aria-expanded="false" aria-controls="v-f1">
+        <span class="fn">1</span>
+        <span class="ft">A loja dispara</span>
+        <span class="fd">cliente lista os amigos · a loja manda o cupom com QR</span>
+      </button>
+      <button type="button" class="forma-btn" data-forma="f2" aria-expanded="false" aria-controls="v-f2">
+        <span class="fn">2</span>
+        <span class="ft">wa.me, um por amigo</span>
+        <span class="fd">um link por amigo · o cliente manda um a um</span>
+      </button>
+      <button type="button" class="forma-btn rec" data-forma="f3" aria-expanded="false" aria-controls="v-f3">
+        <span class="fn">3</span>
+        <span class="ft">Link único do indicador</span>
+        <span class="fd">copia uma vez, manda pra todos · o amigo se cadastra</span>
+      </button>
+      <button type="button" class="forma-btn" data-forma="f4" aria-expanded="false" aria-controls="v-f4">
+        <span class="fn">4</span>
+        <span class="ft">Código falado</span>
+        <span class="fd">FRED10 · print · sem cadastro de ninguém</span>
+      </button>
+      <button type="button" class="forma-btn nova" data-forma="f5" aria-expanded="false" aria-controls="v-f5">
+        <span class="fn">5</span>
+        <span class="ft">Mensagem pronta</span>
+        <span class="fd">só o texto e um botão · sem cadastro, sem link</span>
+      </button>
+    </div>
 
-    <div class="duo">
-      <div>
-        <div class="cab"><span class="tag acc">A</span><span class="t">A loja dispara</span></div>
-        <span class="d">Cliente lista os amigos com telefone. A loja manda a mensagem com o cupom e o QR
-        pronto. <strong>É o fluxo desenhado acima.</strong></span>
-        <span class="rot ok">ganha</span>
-        <ul>
-          <li>Visualmente é o melhor — o cupom chega pronto, com QR.</li>
-          <li>A loja <strong>sabe</strong> que a mensagem saiu.</li>
+    <!-- ─── 1 ─── -->
+    <div class="forma-visor" id="v-f1" hidden>
+      <div class="fv-cab"><span class="tag acc">forma 1</span><span class="fv-t">A loja dispara</span></div>
+      <ol class="fv-passos">
+        <li>Na página, o cliente digita <strong>nome e telefone de cada amigo</strong>.</li>
+        <li>A loja envia a mensagem, com o cupom e o <strong>QR</strong> já dentro.</li>
+        <li>O amigo chega, o balcão escaneia o QR dele, o ponto cai.</li>
+      </ol>
+      <div class="fv-cols">
+        <div><span class="rot ok">ganha</span><ul>
+          <li>Visualmente é a melhor — o cupom chega pronto, com QR.</li>
+          <li>A loja <strong>sabe</strong> que a mensagem saiu, e pra quem.</li>
           <li>Fica com o telefone de todo indicado, tenha ele vindo ou não.</li>
-        </ul>
-        <span class="rot nao">custa</span>
-        <ul>
-          <li><strong>Mensagem de número comercial pra quem nunca deu o número.</strong> É problema de LGPD e é o motivo clássico de template ser bloqueado — e, como você disse, <em>a pessoa pode nem abrir porque não é de amigo</em>.</li>
+        </ul></div>
+        <div><span class="rot nao">custa</span><ul>
+          <li><strong>Manda mensagem de número comercial pra quem nunca deu o número.</strong> LGPD, e template bloqueado. E a pessoa pode nem abrir, porque não é de amigo.</li>
           <li>Custo por disparo, que cresce com a lista.</li>
-          <li>O cliente digita o telefone de cada amigo, um por um.</li>
-        </ul>
+          <li>O cliente digita telefone por telefone.</li>
+        </ul></div>
       </div>
-      <div>
-        <div class="cab"><span class="tag acc">B</span><span class="t">wa.me, um por amigo</span></div>
-        <span class="d">A página gera um link <code>wa.me</code> por amigo. O cliente toca, abre o WhatsApp
-        <em>dele</em> com o texto pronto, e manda.</span>
-        <span class="rot ok">ganha</span>
-        <ul>
-          <li><strong>Consentimento resolvido</strong> — quem manda é o amigo. Nada de template, nada de provedor.</li>
-          <li>Converte mais: mensagem de amigo pesa mais que número comercial.</li>
-          <li>Custo de disparo zero.</li>
-        </ul>
-        <span class="rot nao">custa</span>
-        <ul>
-          <li><strong>O esforço vira o gargalo.</strong> Cada amigo é abrir, enviar e voltar. Dez amigos, dez idas e voltas — <em>e é por isso que ninguém lista dez</em>.</li>
+      <p class="fv-med"><strong>Dá pra medir:</strong> quantos foram convidados, quem são, quem ignorou. É a mais completa em rastro.</p>
+    </div>
+
+    <!-- ─── 2 ─── -->
+    <div class="forma-visor" id="v-f2" hidden>
+      <div class="fv-cab"><span class="tag acc">forma 2</span><span class="fv-t">wa.me, um por amigo</span></div>
+      <ol class="fv-passos">
+        <li>O cliente digita os amigos e a página gera <strong>um link <code>wa.me</code> para cada um</strong>.</li>
+        <li>Ele toca em cada link: abre o WhatsApp <em>dele</em>, com o texto pronto, e envia.</li>
+        <li>O amigo chega com o cupom, o balcão lê, o ponto cai.</li>
+      </ol>
+      <div class="fv-cols">
+        <div><span class="rot ok">ganha</span><ul>
+          <li><strong>Consentimento resolvido</strong> — quem manda é o amigo. Sem template, sem provedor, sem custo.</li>
+          <li>Deve converter mais que mensagem de número comercial.</li>
+          <li>A loja ainda fica com os telefones dos indicados.</li>
+        </ul></div>
+        <div><span class="rot nao">custa</span><ul>
+          <li><strong>O esforço vira o gargalo.</strong> Cada amigo é abrir, enviar e voltar. Dez amigos, dez idas e voltas — e é por isso que ninguém lista dez.</li>
           <li>Ainda exige digitar o telefone de cada um.</li>
           <li>A loja não sabe se a mensagem foi mesmo enviada.</li>
-        </ul>
+        </ul></div>
       </div>
-      <div>
-        <div class="cab"><span class="tag good">C</span><span class="t">Link único do indicador</span>
-          <span class="tag good">recomendado</span></div>
-        <span class="d">O cadastro gera <strong>um link só</strong>, dele. Ele copia uma mensagem e manda pra
-        quantos quiser. O amigo clica, <strong>se cadastra</strong>, e aí sim recebe um cupom próprio.</span>
-        <span class="rot ok">ganha</span>
-        <ul>
-          <li><strong>Trabalho uma vez só.</strong> Copia o texto, cola pra dez, pro grupo, pro status. É o que finalmente destrava o volume.</li>
-          <li>Custo zero, consentimento resolvido, <strong>e ninguém digita telefone de ninguém</strong>.</li>
-          <li><strong>O cadastro do amigo é o que mantém o 1-pra-1</strong>: cupom individual, ponto certo, e dá pra checar se ele já é cliente <em>antes</em> de ele ir à loja.</li>
-          <li>A base de clientes continua nascendo — dos amigos que se cadastram.</li>
-        </ul>
-        <span class="rot nao">custa</span>
-        <ul>
-          <li><strong>Uma tela a mais pro amigo.</strong> Clicar o link e preencher o cadastro derruba conversão — é o preço, e é o único.</li>
-          <li>Precisa de teto de resgates por indicador, senão um link que viraliza não tem fim.</li>
-        </ul>
-      </div>
-      <div>
-        <div class="cab"><span class="tag bad">D</span><span class="t">Código único falado</span>
-          <span class="tag bad">a armadilha</span></div>
-        <span class="d">Gera um código do indicador — <strong>FRED10</strong> — ele tira print e manda. O
-        amigo chega e fala o código no balcão. <em>Sem cadastro nenhum.</em></span>
-        <span class="rot ok">ganha</span>
-        <ul>
-          <li>É o mais simples de todos, de longe. Nada pra construir além do gerador de código.</li>
-          <li>Zero atrito pro amigo: ele só fala o código.</li>
-        </ul>
-        <span class="rot nao">custa</span>
-        <ul>
-          <li><strong>É um cupom ao portador.</strong> Quem tiver o print resgata — cliente antigo, vizinho, grupo do prédio inteiro.</li>
-          <li><strong>Sem teto.</strong> Um print num grupo de 300 pessoas é 300 resgates possíveis, e a loja não decide isso.</li>
-          <li><strong>A regra de &ldquo;cliente novo&rdquo; morre</strong>, e com ela a base de clientes e o ponto 1-pra-1.</li>
-        </ul>
-      </div>
+      <p class="fv-med"><strong>Dá pra medir:</strong> quantos links foram gerados — não quantos foram enviados.</p>
     </div>
 
-    <div class="notes">
-      <div class="note-item"><span class="tag acc">antes de comparar: a mecânica não muda o valor de uma indicação</span><span>
-        Nos quatro desenhos, um amigo que aparece e compra vale <strong>exatamente a mesma coisa</strong> —
-        R$ 12,75 nas premissas padrão. Nenhuma mecânica mexe nisso.
-        <strong>O que muda é só quantas indicações acontecem</strong>, e isso é o produto de duas coisas:
-        <em>quantas pessoas o indicador alcança</em> × <em>quantas delas compram</em>.
-        Toda a comparação abaixo é sobre esses dois números, e nada mais.
-      </span></div>
-      <div class="note-item alerta"><span class="tag bad">este modelo não sabe comparar mecânicas</span><span>
-        <strong>Tudo que separa um desenho do outro é entrada do modelo, não saída.</strong> Alcance por
-        indicador, conversão do convite e canibalização são os três números que decidem a comparação — e
-        os três são premissa digitada à mão, em todos os desenhos. Não existe dado nenhum sobre nenhum deles.
+    <!-- ─── 3 ─── -->
+    <div class="forma-visor" id="v-f3" hidden>
+      <div class="fv-cab"><span class="tag good">forma 3</span><span class="fv-t">Link único do indicador</span><span class="tag good">sugerida</span></div>
+      <ol class="fv-passos">
+        <li>O cliente se cadastra e a página devolve <strong>um link só, dele</strong>.</li>
+        <li>Ele copia uma mensagem e manda <strong>pra quantos quiser</strong> — dez, um grupo, o status.</li>
+        <li>O amigo clica, <strong>se cadastra</strong>, e só então recebe um cupom próprio.</li>
+        <li>O amigo chega com o cupom dele, o balcão lê, o ponto cai pro indicador certo.</li>
+      </ol>
+      <div class="fv-cols">
+        <div><span class="rot ok">ganha</span><ul>
+          <li><strong>Trabalho uma vez só.</strong> Copia o texto, cola pra dez. É o que destrava o volume.</li>
+          <li>Custo zero, consentimento resolvido, <strong>e ninguém digita telefone de ninguém</strong>.</li>
+          <li><strong>O cadastro do amigo mantém o 1-pra-1</strong>: cupom individual, ponto certo, e dá pra checar se ele já é cliente <em>antes</em> de ir à loja.</li>
+          <li>A base de clientes continua nascendo — dos amigos que se cadastram.</li>
+        </ul></div>
+        <div><span class="rot nao">custa</span><ul>
+          <li><strong>Uma tela a mais pro amigo.</strong> Clicar e preencher derruba conversão — é o preço, e é o único.</li>
+          <li>Precisa de teto de pontos por indicador, senão um link que viraliza desequilibra o ranking.</li>
+        </ul></div>
+      </div>
+      <p class="fv-med"><strong>Dá pra medir:</strong> quem clicou, quem se cadastrou e <strong>quem se cadastrou e não foi</strong> — a lista mais quente que a campanha produz.</p>
+    </div>
+
+    <!-- ─── 4 ─── -->
+    <div class="forma-visor" id="v-f4" hidden>
+      <div class="fv-cab"><span class="tag bad">forma 4</span><span class="fv-t">Código falado</span><span class="tag bad">a armadilha</span></div>
+      <ol class="fv-passos">
+        <li>A página gera um código do indicador — <strong>FRED10</strong>.</li>
+        <li>Ele tira um print e manda pra quem quiser.</li>
+        <li>O amigo chega e fala o código no balcão. <em>Sem cadastro nenhum.</em></li>
+      </ol>
+      <div class="fv-cols">
+        <div><span class="rot ok">ganha</span><ul>
+          <li>Simples de construir: só o gerador de código.</li>
+          <li>Zero atrito pro amigo — ele só fala o código.</li>
+        </ul></div>
+        <div><span class="rot nao">custa</span><ul>
+          <li><strong>É um cupom ao portador.</strong> Quem tiver o print resgata — cliente antigo, vizinho, grupo inteiro.</li>
+          <li><strong>A regra de &ldquo;cliente novo&rdquo; morre</strong>, e com ela a base e o ponto 1-pra-1.</li>
+          <li>Quem recebeu e não foi <strong>é invisível</strong>: não dá pra medir nem pra chamar de volta.</li>
+        </ul></div>
+      </div>
+      <p class="fv-med"><strong>Dá pra medir:</strong> nada além dos resgates no caixa.</p>
+    </div>
+
+    <!-- ─── 5 ─── -->
+    <div class="forma-visor" id="v-f5" hidden>
+      <div class="fv-cab"><span class="tag warn">forma 5</span><span class="fv-t">Mensagem pronta</span><span class="tag warn">a mais simples</span></div>
+      <ol class="fv-passos">
+        <li>A página mostra <strong>o texto da campanha</strong> e um botão embaixo.</li>
+        <li>Ele aperta <strong>&ldquo;mandar pra alguém no WhatsApp&rdquo;</strong>: abre o seletor de contatos com a mensagem pronta.</li>
+        <li>Escolhe o contato e envia. <em>Sem cadastro, sem código, sem link personalizado.</em></li>
+        <li>O amigo aparece na loja com a mensagem.</li>
+      </ol>
+      <div class="fv-cols">
+        <div><span class="rot ok">ganha</span><ul>
+          <li><strong>É a mais simples de todas, de longe.</strong> Nada pra construir além de uma página com texto e um botão.</li>
+          <li>Dois toques e a mensagem foi. Nenhum campo pra preencher, de nenhum dos dois lados.</li>
+          <li>Nenhum dado guardado — <strong>nenhuma exposição de LGPD</strong>.</li>
+        </ul></div>
+        <div><span class="rot nao">custa</span><ul>
+          <li><strong>Não existe atribuição.</strong> Sem link e sem código, ninguém sabe quem indicou quem.</li>
+          <li>Não constrói base de clientes.</li>
+          <li>A oferta fica <strong>pública na prática</strong>: a mensagem circula e qualquer um usa.</li>
+        </ul></div>
+      </div>
+      <p class="fv-med"><strong>Dá pra medir:</strong> só quantas vezes o botão foi apertado.</p>
+      <div class="note-item"><span class="tag acc">isto não é um programa de indicação — e tudo bem</span><span>
+        Sem atribuição, <strong>não tem como pagar o cookie do indicador</strong>: a loja não sabe quem
+        indicou. Então a forma 5 não é indicação premiada — é uma <strong>oferta compartilhável</strong>.
         <br><br>
-        Uma versão anterior desta página dizia que o C rendia <em>3,4&times; o A</em>. Aquele número vinha
-        inteiro de supor que a mesma pessoa alcança <strong>15 amigos no C e 4 no A</strong> — e nada
-        sustenta isso. O raciocínio era que no A ela digita telefone por telefone (custo por amigo) e no C
-        cola uma mensagem só (custo fixo), então o teto subiria. <em>É plausível e pode estar errado</em>:
-        se o que limita não é o trabalho e sim <strong>quantas pessoas ela se sente à vontade de
-        incomodar</strong>, ela convida 4 nos dois casos e a ferramenta não muda nada.
-        <br><br>
-        <strong>E havia mais duas suposições no mesmo sentido</strong>, que aquela versão não declarava:
-        que a conversão só cairia de 12% para 10% no C, e que a canibalização ficaria igual nos dois.
-        Se o alcance do C cresce por status ou grupo, some o endosso pessoal — que era justamente o que
-        fazia converter — e sobe a chance de cair em cliente antigo. <em>As três premissas puxavam para o
-        mesmo lado.</em>
+        <em>É exatamente o que a referência do Betelgeuse faz.</em> Ninguém é pago pra mandar a mensagem;
+        a própria oferta exige duas pessoas (&ldquo;dois cookies significa que você tá levando
+        alguém&rdquo;), e por isso ela se espalha sozinha. <strong>O prêmio do indicador deixa de existir
+        e a campanha continua de pé</strong> — inclusive fica mais barata, porque some metade do custo
+        de prêmio.
       </span></div>
-      <div class="note-item"><span class="tag acc">o que dá pra afirmar, e é pouco</span><span>
-        Da mecânica, o modelo só sabe duas coisas: <strong>uma indicação vale R$ 12,75 nos quatro
-        desenhos</strong>, e <strong>o disparo do A custa R$ 29 no mês</strong>. É toda a diferença
-        econômica que está medida. <em>A escolha entre os quatro não é uma decisão de conta.</em>
+      <div class="note-item"><span class="tag warn">o que fechar antes de escolher esta</span><span>
+        Se não há prêmio pro indicador, <strong>o motor da campanha passa a ser a oferta, não a
+        recompensa</strong>. Isso muda duas coisas: <em>o ranking de pontos deixa de fazer sentido</em>
+        (não há o que contar), e a mensagem precisa ser boa o bastante pra ser mandada sem incentivo
+        nenhum. <em>É a pergunta 13.</em>
       </span></div>
-      <div class="note-item"><span class="tag warn">a conta ao contrário — esta sim é legítima</span><span>
-        Em vez de chutar o alcance e ver o resultado, dá pra fixar o resultado e perguntar
-        <strong>quanto alcance o C precisaria ter</strong> pra empatar com o A. Isso é o modelo invertido,
-        não premissa nova. Assumindo que a tela de cadastro derruba a conversão de 12% para 10%:
-      </span></div>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Se o link único (C) alcançar</th><th>Resultado do mês</th><th>Contra o A (R$ 338)</th></tr></thead>
+    </div>
+
+    <div class="note-item"><span class="tag acc">o que o modelo sabe e o que não sabe sobre essa escolha</span><span>
+      <strong>Uma indicação vale os mesmos R$ 12,75 nas cinco formas</strong> — a mecânica não muda o valor
+      de uma indicação, só quantas acontecem. A única diferença medida entre elas são os R$ 29 de disparo
+      da forma 1. Alcance, conversão e canibalização são <em>premissa digitada à mão</em> em todas.
+      <strong>Ou seja: a escolha não é uma decisão de conta</strong> — é de consentimento, de controle e
+      de simplicidade. Os números só entram depois que uma delas estiver rodando.
+    </span></div>
+
+    <details>
+      <summary>3 ou 4? A diferença é uma tela só — e ela decide tudo</summary>
+      <ul>
+        <li>Para o cliente, <strong>3 e 4 são a mesma coisa</strong>: recebo algo do meu amigo, vou na loja, pego meu cookie.</li>
+        <li>A diferença é que na <strong>3</strong> o amigo passa por <strong>uma tela de cadastro que transforma o código compartilhado num cupom individual</strong>. Essa tela sozinha entrega quatro coisas: o cupom 1-pra-1, o teto de resgates, a checagem de &ldquo;já é cliente&rdquo; <em>antes</em> de ele ir à loja, e a base de clientes.</li>
+        <li><strong>Sem ela, a 4 não é um programa de indicação — é um cupom de desconto com o nome do indicador em cima.</strong></li>
+        <li><strong>Print obriga a 4; link permite a 3.</strong> Um print não pode ser clicado. O link dá o mesmo trabalho para quem envia (copia uma vez, cola pra dez) e é o que permite o cadastro. <em>Mesmo esforço, negócio diferente.</em> Se a imagem importa pra mensagem ficar bonita, manda imagem <strong>e</strong> link — mas o que resgata é o link.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>O código que substitui o QR (formas 3 e 4)</summary>
+      <ul>
+        <li><strong>Quatro caracteres</strong>, num alfabeto sem letra ambígua (fora O/0, I/1/L, S/5): cerca de 200 mil combinações, folga de anos. Exemplo: <code>M4K7</code>.</li>
+        <li><strong>Na forma 3 o código é do amigo</strong> — nasce quando ele se cadastra, vale uma vez, e amarra a venda ao indicador certo.</li>
+        <li><strong>Na forma 4 o código é do indicador</strong> — o mesmo pra todo mundo, reutilizável, impossível de limitar.</li>
+        <li>O atendente digita quatro caracteres uma vez por venda. É mais lento que scanner — <strong>é o único ponto em que a 3 piora a operação de balcão</strong>.</li>
+        <li><strong>Na forma 3 o QR volta, se você quiser</strong>: depois do cadastro, a página do amigo mostra um QR na tela e o balcão escaneia do celular dele. O código falado vira plano B pra quando a tela não abre.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>A conta ao contrário: quanto alcance a forma 3 precisa ter pra ganhar da 1</summary>
+      <ul>
+        <li>Em vez de chutar o alcance e ver o resultado, dá pra fixar o resultado e perguntar <strong>quanto alcance a 3 precisaria ter</strong> pra empatar com a 1. Isso é o modelo invertido, não premissa nova.</li>
+        <li>Assumindo que a tela de cadastro derruba a conversão de 12% para 10%:</li>
+      </ul>
+      <div class="tablewrap" style="margin-top:.7rem"><table>
+        <thead><tr><th>Se a forma 3 alcançar</th><th>Resultado do mês</th><th>Contra a forma 1 (R$ 338)</th></tr></thead>
         <tbody>
-          <tr class="mark"><td><strong>4 amigos</strong> — os mesmos do A</td><td>R$ 306</td><td><span class="tag bad">perde</span></td></tr>
+          <tr class="mark"><td><strong>4 amigos</strong> — os mesmos da forma 1</td><td>R$ 306</td><td><span class="tag bad">perde</span></td></tr>
           <tr class="mark"><td><strong>4,43 amigos</strong> — o empate</td><td>R$ 338</td><td><span class="tag warn">empata</span></td></tr>
           <tr><td>6 amigos</td><td>R$ 459</td><td><span class="tag good">ganha</span></td></tr>
           <tr><td>10 amigos</td><td>R$ 765</td><td><span class="tag good">ganha</span></td></tr>
           <tr><td>15 amigos</td><td>R$ 1.148</td><td><span class="tag good">ganha</span></td></tr>
         </tbody>
       </table></div>
-      <div class="note-item"><span class="tag good">então a decisão se resolve fora da planilha</span><span>
-        Sem inventar número, o que sobra são <strong>fatos estruturais</strong>, e eles bastam:
-        o <strong>A</strong> obriga a loja a mandar mensagem pra quem nunca deu o número (LGPD, template
-        bloqueado); o <strong>D</strong> é cupom ao portador, sem teto de resgate e sem como excluir cliente
-        antigo; <strong>B e C</strong> têm o amigo enviando, então resolvem o consentimento, e só o
-        <strong>C</strong> dispensa digitar telefone mantendo o cupom 1-pra-1.
-        <br><br>
-        <strong>É por isso que o C é a sugestão — por ser o único ao mesmo tempo consentido e controlado.
-        Não porque renda mais.</strong>
-        <br><br>
-        <em>E o alcance por indicador vira o primeiro número a instrumentar</em>: qualquer desenho que suba
-        entrega esse dado de graça na primeira safra, e é ele que diz se a ferramenta muda comportamento —
-        que é exatamente a pergunta que ninguém consegue responder antes de rodar. Também é ele, e não
-        prêmio maior, que decide se a escada do ranking sai do papel.
-      </span></div>
-      <div class="note-item alerta"><span class="tag bad">C e D diferem por UMA tela — e é ela que decide tudo</span><span>
-        Para o cliente, C e D são a mesma coisa: recebo algo do meu amigo, vou na loja, pego meu cookie.
-        A diferença é que no C o amigo passa por <strong>uma tela de cadastro que transforma o código
-        compartilhado num cupom individual</strong>. Essa tela sozinha entrega quatro coisas: o cupom
-        1-pra-1, o teto de resgates, a checagem de &ldquo;já é cliente&rdquo; <em>antes</em> de ele ir à
-        loja, e a base de clientes.
-        <br><br>
-        <strong>Sem ela, o D não é um programa de indicação — é um cupom de desconto com o nome do
-        indicador em cima.</strong>
-      </span></div>
-      <div class="note-item alerta"><span class="tag bad">o D é o único desenho que consegue dar prejuízo</span><span>
-        Como o código vaza, a canibalização deixa de ser premissa e vira consequência.
-        <em>Os números abaixo são ilustração de um mecanismo, não medição</em> — mas o mecanismo é
-        estrutural: cupom ao portador não tem como excluir cliente antigo, ponto. Rodando o D com
-        vazamento: a 50% ele ainda dá R$ 808 no mês, a 70% cai pra R$ 469, a 85% sobra R$ 214.
-        <br><br>
-        <strong>Mas junte o D com o prêmio pro indicado</strong> — que é a pergunta 01, a falha que você
-        mesmo apontou — e a 70% de vazamento o mês fecha em <strong class="neg">−R$ 433</strong>.
-        É o único cruzamento de decisões desta página inteira que fica negativo.
-        <em>O D é justamente a mecânica que não deixa você consertar a falha do indicado.</em>
-      </span></div>
-      <div class="note-item"><span class="tag warn">print não, link</span><span>
-        <strong>Um print não pode ser clicado</strong> — então ele obriga o D. O link faz o mesmo trabalho
-        para quem envia (copia uma vez, cola pra dez) e é o que permite o C. <em>Mesmo esforço, negócio
-        diferente.</em> Se a imagem for importante pra mensagem ficar bonita, dá pra mandar imagem
-        <strong>e</strong> link no mesmo texto — mas o que resgata é o link.
-      </span></div>
-    </div>
-
-    <h3 class="sub">O que substitui o QR em cada desenho</h3>
-    <div class="codigo">
-      <span class="cod">M4K7</span>
-      <span class="exp"><strong>No C, o código é do amigo</strong> — gerado no cadastro dele, não no do
-      indicador. Quatro caracteres num alfabeto sem letra ambígua (fora O/0, I/1/L, S/5): cerca de 200 mil
-      combinações, folga de anos. Queima na primeira leitura, tem validade, e o atendente digita quatro
-      caracteres uma vez por venda.</span>
-    </div>
-    <ul class="regras">
-      <li><b>Código do amigo (C)</b> — nasce quando ele se cadastra, vale uma vez, e amarra a venda ao indicador certo. É o que preserva tudo que o QR fazia.</li>
-      <li><b>Código do indicador (D)</b> — o mesmo pra todo mundo, reutilizável, impossível de limitar. Simples de gerar e impossível de controlar.</li>
-      <li><b>No C o QR volta, se você quiser</b>: depois do cadastro, a página do amigo pode mostrar um QR na tela em vez de um código. Aí o balcão nem digita — <b>escaneia do celular dele</b>. O código falado fica como plano B pra quando a tela não abre.</li>
-    </ul>
-
-    <h3 class="sub">O que o amigo preenche — e por que isso é a coisa mais cara da página</h3>
-    <div class="notes">
-      <div class="note-item"><span class="tag bad">cada campo aqui custa conversão</span><span>
-        No C, <strong>a tela de cadastro do amigo é o funil inteiro</strong>: é lá que a campanha ganha ou
-        perde volume. Você falou em nome, WhatsApp e talvez CPF — <em>para os dois lados</em>.
-        <br><br>
-        <strong>Do lado do indicador, tudo bem</strong>: ele já está na loja, já decidiu participar, e o
-        cadastro dele é o que cria a conta de pontos.
-        <strong>Do lado do amigo, o CPF é o campo mais caro que existe</strong> — é o que mais faz gente
-        desistir, e é dado sensível de LGPD pra guardar sem necessidade nenhuma: o WhatsApp já identifica,
-        já é chave única e já é por onde ele recebeu o convite.
-        <br><br>
-        <em>Recomendação: nome + WhatsApp para o amigo. CPF só se aparecer um motivo que hoje não existe.</em>
-      </span></div>
-    </div>
+    </details>
   </section>
-
   <!-- ══════ E se viralizar ══════ -->
   <section id="viral">
     <h2>E se o cupom viralizar?<span class="hint">o grupo da igreja, da academia, o story da influencer</span></h2>
@@ -889,7 +917,7 @@
   <section id="medicao">
     <h2>O que cada desenho deixa medir<span class="hint">o outro lado da escolha</span></h2>
     <p class="prose">
-      Você levantou o ponto certo: no desenho A dá pra saber quantas pessoas foram indicadas, mas isso não
+      Você levantou o ponto certo: na forma 1 dá pra saber quantas pessoas foram indicadas, mas isso não
       garante que elas venham; nos outros, sabe-se quantos <em>indicadores</em> existem e não quantos
       indicados. <strong>Vale separar o que é vaidade do que é acionável.</strong>
     </p>
@@ -905,7 +933,7 @@
     <div class="notes">
       <div class="note-item"><span class="tag warn">&ldquo;quantos foram indicados&rdquo; é o número menos útil dos quatro</span><span>
         Ele não decide nada: você não muda preço, prêmio nem operação por causa dele. <strong>O que decide
-        é quantos apareceram</strong>, e isso os quatro desenhos entregam igual, porque o ponto só cai na
+        é quantos apareceram</strong>, e isso as cinco formas entregam igual, porque o ponto só cai na
         venda.
         <br><br>
         O número que <em>realmente</em> muda o que você faz é o do meio da tabela: <strong>quem demonstrou
@@ -1029,7 +1057,7 @@
         <span class="porque">Com 240 disparos/mês, R$ 0,12 vira R$ 28,80 — irrelevante. Com 3.000 disparos,
         vira R$ 360 e passa a competir com o custo dos prêmios. <em>É a única linha de custo da campanha que
         cresce com a lista, não com a conversão</em>, e por isso precisa de número real antes de liberar
-        lista grande. <strong>Só existe no <a href="#mecanica">desenho A</a></strong> — no desenho B quem
+        lista grande. <strong>Só existe na <a href="#mecanica">forma 1</a></strong> — nas outras quem
         manda é o cliente, e o custo some.</span>
         <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
       </li>
@@ -1056,19 +1084,20 @@
       </li>
       <li>
         <span class="num">10</span>
-        <span class="q">Qual das quatro mecânicas?
-          <span class="ideia">A loja dispara · B wa.me um por amigo · C link único do indicador · D código falado</span></span>
+        <span class="q">Qual das cinco formas de indicar?
+          <span class="ideia">1 loja dispara · 2 wa.me um por amigo · 3 link único · 4 código falado · 5 mensagem pronta</span></span>
         <span class="porque">É a decisão mais pesada da página, comparada inteira em
-        <a href="#mecanica-b">As quatro mecânicas</a>. <strong>E não é decisão de conta</strong>: uma
-        indicação vale os mesmos R$ 12,75 nos quatro desenhos, e a única diferença medida entre eles são
-        R$ 29 de disparo. Tudo o mais que os separa — alcance, conversão, canibalização — é premissa
+        <a href="#mecanica">Formas de indicar</a>. <strong>E não é decisão de conta</strong>: uma
+        indicação vale os mesmos R$ 12,75 nas cinco formas, e a única diferença medida entre elas são
+        R$ 29 de disparo. Tudo o mais que as separa — alcance, conversão, canibalização — é premissa
         digitada à mão, não dado.
-        <strong>A sugestão do C se apoia em fato estrutural, não em rendimento</strong>: é o único desenho
-        ao mesmo tempo <em>consentido</em> (quem manda é o amigo, não a loja) e <em>controlado</em> (o
-        cadastro do amigo mantém o cupom 1-pra-1 e o teto de resgates). <em>O D é a armadilha</em> — parece
-        o mais simples e é cupom ao portador.</span>
-        <span class="resp"><span class="rl">sugestão</span><span class="rv"><em>C — link único do indicador, com cadastro do amigo.</em>
-        Falta o seu aval.</span></span>
+        <strong>A sugestão da 3 se apoia em fato estrutural, não em rendimento</strong>: é a única ao mesmo
+        tempo <em>consentida</em> (quem manda é o amigo, não a loja) e <em>controlada</em> (o cadastro do
+        amigo mantém o cupom 1-pra-1). <em>A 4 é a armadilha</em> — parece a mais simples e é cupom ao
+        portador. <em>A 5 é a mais simples de verdade</em>, mas troca de categoria: sem atribuição, deixa de
+        ser indicação premiada e vira oferta compartilhável (pergunta 13).</span>
+        <span class="resp"><span class="rl">sugestão</span><span class="rv"><em>3 — link único do indicador, com cadastro do amigo.</em>
+        Falta o seu aval — e a 5 é a alternativa se o objetivo for simplicidade acima de tudo.</span></span>
       </li>
       <li>
         <span class="num">11</span>
@@ -1097,6 +1126,22 @@
         cima, nenhum teto no resgate</em> — e o balcão avisado antes, em vez de surpreendido.</span>
         <span class="resp"><span class="rl">sugestão</span><span class="rv"><em>Teto no ranking, não no resgate.</em>
         O número sai da primeira safra; o campo precisa existir desde o dia 1.</span></span>
+      </li>
+      <li>
+        <span class="num">13</span>
+        <span class="q">Se for a forma 5, o indicador ainda ganha alguma coisa?
+          <span class="ideia">sem link e sem código, a loja não sabe quem indicou — não há como pagar o prêmio</span></span>
+        <span class="porque">Na <a href="#mecanica">forma 5</a> não existe atribuição: a mensagem sai genérica,
+        sem nada que amarre o amigo ao indicador. <strong>Então o cookie do indicador simplesmente não tem
+        como ser pago</strong>, e a campanha muda de categoria — deixa de ser indicação premiada e vira
+        <em>oferta compartilhável</em>.
+        <br><br>
+        <strong>Isso não é um defeito por si só</strong>: é exatamente o que a referência do Betelgeuse faz —
+        ninguém é pago pra mandar a mensagem, a própria oferta exige duas pessoas e por isso circula. Fica
+        até mais barata, porque some metade do custo de prêmio. Mas muda duas coisas de uma vez:
+        <em>o ranking de pontos deixa de existir</em> (não há o que contar) e <em>a mensagem passa a ser o
+        único motor</em> — ela precisa ser boa o bastante pra ser enviada sem incentivo nenhum.</span>
+        <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
       </li>
     </ol>
   </section>
@@ -2216,6 +2261,28 @@
 </script>
 
 <script>
+/* ══════════════════════════════════════════════════════════════════════════
+   FORMAS DE INDICAR — card clicado abre o detalhe embaixo, um por vez.
+   Nada aberto por padrão: a aba abre curta e a pessoa escolhe o que ler.
+   ══════════════════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+  const botoes = Array.from(document.querySelectorAll(".forma-btn"));
+  if (!botoes.length) return;
+  const visor = (b) => document.getElementById(b.getAttribute("aria-controls"));
+
+  function abrir(alvo) {
+    const jaAberto = alvo.getAttribute("aria-expanded") === "true";
+    botoes.forEach((b) => {
+      const v = visor(b);
+      const on = !jaAberto && b === alvo;
+      b.setAttribute("aria-expanded", String(on));
+      if (v) v.hidden = !on;
+    });
+  }
+  botoes.forEach((b) => b.addEventListener("click", () => abrir(b)));
+})();
+
 /* ══════════════════════════════════════════════════════════════════════════
    ABAS — mesmo mecanismo da campanha de fidelização
    ══════════════════════════════════════════════════════════════════════════ */
