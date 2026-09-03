@@ -1136,7 +1136,7 @@
     // canibalização
     cI: 30, cR: 50,
     // resgate
-    gastoResgate: 14.03, disparo: 0.12,
+    gastoResgate: 14.03, disparo: 0.12, extraAcompanhante: 0,
     // LTV
     viraFiel: 14, freqFiel: 1.2, mesesFiel: 12,
     // estrutura de custo
@@ -1208,15 +1208,29 @@
 
   // ─── As duas visitas de uma indicação ──────────────────────────────────────
 
-  // margem da visita do AMIGO indicado, já descontada a canibalização
+  // margem da visita do AMIGO indicado, já descontada a canibalização.
+  // O acompanhante só entra quando existe oferta pro indicado — é a oferta que
+  // cria a brincadeira do "a gente divide"; sem ela não há motivo pra vir em dois.
   function margemVisitaIndicado() {
     const o = PREMIO_INDICADO[S.premioIndicado];
     if (o.tipo === "nada") return MARG_NORMAL;
-    const it = ITENS[o.item], extra = B[it.ex];
+    const it = ITENS[o.item], extra = B[it.ex] + S.extraAcompanhante;
     if (o.tipo === "ganhe") return (B.cookiePago + extra) * MC - custoItem(it.cmv);
     return extra * MC + (o.preco * (1 - DED) - custoItem(it.cmv));  // desconto
   }
   const incrIndicado = () => margemVisitaIndicado() - (S.cI / 100) * MARG_NORMAL;
+
+  // quanto o acompanhante teria que gastar pra a oferta pro indicado sair de graça
+  // (a visita dele voltar a valer o mesmo que uma visita sem oferta nenhuma)
+  function beAcompanhante() {
+    const o = PREMIO_INDICADO[S.premioIndicado];
+    if (o.tipo === "nada") return 0;
+    const it = ITENS[o.item];
+    const pago = o.tipo === "ganhe" ? B.cookiePago : 0;
+    const entra = o.tipo === "ganhe" ? 0 : o.preco * (1 - DED);
+    // (pago + medido + X) * MC + entra - custo = MARG_NORMAL
+    return (MARG_NORMAL - entra + custoItem(it.cmv)) / MC - pago - B[it.ex];
+  }
 
   // margem da visita de RESGATE do indicador, já descontada a canibalização
   function margemVisitaResgate(premioCusto, premioExKey) {
@@ -1374,6 +1388,17 @@
       note: () => S.modo === "juntos"
         ? `<b>Premissa, não medição.</b> Um pedido solo é ${brl(B.ticket)}. Dois juntos não custam o dobro — dividem, um paga pelos dois. Abaixo de <b>${brl(pontoDuplaEquilibrio())}</b> o modo &ldquo;juntos&rdquo; perde pro separado.`
         : `Só vale no modo <b>venham juntos</b>. Troque o desenho de entrega aqui do lado pra liberar.` },
+
+    { k: "extraAcompanhante", g: "desenhoExtra", lab: "O acompanhante gasta a mais", min: 0, max: 60, step: 0.5, fmt: brl,
+      dep: () => PREMIO_INDICADO[S.premioIndicado].tipo !== "nada" && S.modo === "separado",
+      note: () => {
+        if (S.modo === "juntos") return `Não se aplica: no modo <b>venham juntos</b> o pedido da dupla já é o slider de cima.`;
+        if (PREMIO_INDICADO[S.premioIndicado].tipo === "nada") return `Só vale quando o indicado ganha alguma coisa — é a oferta que cria o motivo de vir em dois. Escolha um prêmio pro indicado aqui do lado.`;
+        const be = beAcompanhante();
+        return `<b>A brincadeira do &ldquo;a gente divide&rdquo;.</b> O indicado leva o amigo junto; quanto esse acompanhante pede a mais nessa visita.
+          A <b>${brl(be)}</b> a oferta se paga sozinha — a visita do indicado volta a valer os ${brl(MARG_NORMAL)} de uma visita sem oferta nenhuma.
+          <b>Cuidado:</b> se os dois <em>dividirem um cookie</em> e ninguém pedir nada além, este número é <b>zero</b> — a divisão é exatamente o que impede o pedido de subir.`;
+      } },
   ];
 
   function sliderHTML(c) {
@@ -1443,7 +1468,8 @@
         <span class="note" id="n-modo"></span>
       </div>
 
-      ${sliderHTML(CTLS.find((c) => c.k === "pedidoDupla"))}`;
+      ${sliderHTML(CTLS.find((c) => c.k === "pedidoDupla"))}
+      ${sliderHTML(CTLS.find((c) => c.k === "extraAcompanhante"))}`;
 
     document.getElementById("sel-premioInd").addEventListener("change", (e) => { S.premioInd = e.target.value; update(); });
     document.getElementById("sel-premioIndicado").addEventListener("change", (e) => { S.premioIndicado = e.target.value; update(); });
@@ -1518,6 +1544,20 @@
         Dar prêmio ao indicado custa <strong>${brl(simulaComPremioIndicado("nada") - pi)} por indicação</strong>
         em relação a não dar nada. É o preço de o convite parar de ser anúncio e virar presente — e
         ${pi >= 0 ? "<strong>ele cabe</strong>: o resultado continua positivo." : "<strong>ele não cabe nas premissas atuais</strong>: o resultado virou negativo."}
+      </span></div>
+      <div class="note-item"><span class="tag ${S.extraAcompanhante >= beAcompanhante() ? "good" : "warn"}">a brincadeira do &ldquo;a gente divide&rdquo;</span><span>
+        Se a oferta fizer o indicado <strong>trazer o amigo junto</strong>, o custo dela some — mas só se o
+        acompanhante <em>pedir alguma coisa</em>. O ponto de equilíbrio é
+        <strong>${brl(beAcompanhante())} a mais</strong> nessa visita, o que leva o pedido pago de
+        ${brl(B.ticket)} para ${brl(B.cookiePago + B[ITENS[PREMIO_INDICADO[S.premioIndicado].item].ex] + beAcompanhante())}.
+        ${S.extraAcompanhante >= beAcompanhante()
+          ? `Com os ${brl(S.extraAcompanhante)} que você marcou, <strong>a oferta pro indicado sai de graça</strong> — a visita dele vale o mesmo que uma visita cheia.`
+          : `Hoje o slider está em ${brl(S.extraAcompanhante)}, então a oferta ainda custa margem.`}
+        <br><br>
+        <strong>A armadilha está no nome da ideia.</strong> Se os dois <em>dividirem</em> um cookie e
+        ninguém pedir nada além, o acompanhante gasta <strong>R$ 0</strong> — entram duas pessoas e sai
+        o pedido de uma. <em>A oferta precisa empurrar um segundo item, não uma divisão</em>: dois cookies
+        e duas bebidas, não um cookie partido ao meio.
       </span></div>`}`;
   }
 
