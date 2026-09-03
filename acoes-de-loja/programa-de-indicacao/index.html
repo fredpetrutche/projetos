@@ -414,7 +414,7 @@
     <button type="button" role="tab" id="aba-ranking" aria-controls="painel-ranking" aria-selected="false" data-hash="ranking">
       O ranking de pontos<span class="sub2">1 · 3 · 5 · 10 indicações · a escada</span></button>
     <button type="button" role="tab" id="aba-mecanica" aria-controls="painel-mecanica" aria-selected="false" data-hash="mecanica">
-      A mecânica<span class="sub2">o QR, o buraco do controle, o que falta decidir</span></button>
+      Como indicar<span class="sub2">as 5 formas · controle · o que falta decidir</span></button>
   </div>
 
   <!-- ══════════════════════════════════════════════════════════════════════
@@ -581,9 +581,23 @@
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="painel" id="painel-mecanica" role="tabpanel" aria-labelledby="aba-mecanica" hidden>
 
+  <div class="abas abas2" role="tablist" aria-label="Partes de Como indicar">
+    <button type="button" role="tab" id="sub-formas" aria-controls="sub-formas-p" aria-selected="true" data-hash="formas">
+      As formas<span class="sub2">as cinco maneiras · uma por card</span></button>
+    <button type="button" role="tab" id="sub-controle" aria-controls="sub-controle-p" aria-selected="false" data-hash="controle">
+      Controle e medição<span class="sub2">o que dá pra saber, e o que não dá</span></button>
+    <button type="button" role="tab" id="sub-viral" aria-controls="sub-viral-p" aria-selected="false" data-hash="viralizar">
+      Se viralizar<span class="sub2">o grupo da igreja, o story da influencer</span></button>
+    <button type="button" role="tab" id="sub-balcao" aria-controls="sub-balcao-p" aria-selected="false" data-hash="balcao">
+      Regras de balcão<span class="sub2">o que o atendente sabe de cor</span></button>
+    <button type="button" role="tab" id="sub-decidir" aria-controls="sub-decidir-p" aria-selected="false" data-hash="decidir">
+      O que falta decidir<span class="sub2">13 perguntas em aberto</span></button>
+  </div>
+
+  <div class="painel" id="sub-formas-p" role="tabpanel" aria-labelledby="sub-formas">
   <!-- ══════ Formas de indicar — cards, nenhuma decidida ══════ -->
   <section id="mecanica">
-    <h2>Formas de indicar<span class="hint">cinco · a escolha é a pergunta 10</span></h2>
+    <h2>As cinco formas<span class="hint">clique num card · a escolha é a pergunta 10</span></h2>
     <p class="prose">
       <strong>O começo é igual em todas.</strong> Um QR fixo no balcão leva a uma página. É daí em diante
       que elas se separam — no que a página faz, no que o amigo recebe, e no que sobra de rastro depois.
@@ -855,7 +869,72 @@
       </table></div>
     </details>
   </section>
-  <!-- ══════ E se viralizar ══════ -->
+  </div><!-- /sub-formas-p -->
+
+  <div class="painel" id="sub-controle-p" role="tabpanel" aria-labelledby="sub-controle" hidden>
+  <section>
+    <h2>O buraco do controle<span class="hint">e como a própria campanha o fecha</span></h2>
+    <div class="notes">
+      <div class="note-item alerta"><span class="tag bad">mês 1</span><span>
+        <strong>Cego.</strong> Não existe base de clientes. Se o indicado já comprava toda semana, ele
+        entra como &ldquo;novo&rdquo; e a loja paga um cookie por uma visita que já teria. A campanha
+        roda no escuro — e o único jeito de não perder dinheiro nesse mês é o prêmio ser barato o
+        bastante pra que a canibalização não vire prejuízo. É o teste da seção 6 da aba 1.
+      </span></div>
+      <div class="note-item"><span class="tag good">mês 2 em diante</span><span>
+        <strong>Medido.</strong> Todo indicado passou pelo cadastro com nome + WhatsApp, e todo indicador
+        também. A base nasce da própria campanha. A regra <em>&ldquo;o WhatsApp do indicado não pode já
+        estar na base&rdquo;</em> passa a ser verificável na hora do cadastro — a página recusa o número
+        antes de gerar o cupom, sem precisar de fiscal no balcão.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o que a base ainda não pega</span><span>
+        Quem já é cliente <strong>mas nunca se cadastrou</strong> continua invisível. A base só cobre quem
+        passou pelo QR. Por isso a taxa de canibalização cai devagar, não some — e por isso vale ligar o
+        cadastro do QR ao <a href="../campanha-fidelizacao/#combinado">cadastro da campanha de fidelização</a>:
+        <em>é a mesma base, construída duas vezes se forem dois sistemas</em>.
+      </span></div>
+    </div>
+  </section>
+
+  <section id="medicao">
+    <h2>O que cada forma deixa medir<span class="hint">o outro lado da escolha</span></h2>
+    <p class="prose">
+      Você levantou o ponto certo: na forma 1 dá pra saber quantas pessoas foram indicadas, mas isso não
+      garante que elas venham; nos outros, sabe-se quantos <em>indicadores</em> existem e não quantos
+      indicados. <strong>Vale separar o que é vaidade do que é acionável.</strong>
+    </p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Forma</th><th>Quantos foram convidados</th><th>Quem são os indicados</th><th>Quem ficou pelo caminho</th><th>Dá pra chamar de volta?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong> loja dispara</td><td>Sabe — e sabe que <em>chegou</em></td><td>Sabe (nome + telefone)</td><td>Recebeu e ignorou</td><td>Sim, mas é lista fria</td></tr>
+        <tr><td><strong>2</strong> wa.me por amigo</td><td>Sabe quantos links gerou — <em>não se foram enviados</em></td><td>Sabe (o indicador digitou)</td><td>Não dá pra separar &ldquo;não mandou&rdquo; de &ldquo;não veio&rdquo;</td><td>Sim, mas sem saber se chegou</td></tr>
+        <tr class="mark"><td><strong>3</strong> link único + cadastro</td><td>Não sabe o alcance — só quantos clicaram</td><td>Sabe dos que se cadastram</td><td><strong>Clicou, se cadastrou e não foi à loja</strong></td><td><strong>Sim, e é o melhor segmento</strong></td></tr>
+        <tr><td><strong>4</strong> código falado</td><td>Não sabe</td><td>Não sabe</td><td>Invisível</td><td>Não</td></tr>
+      </tbody>
+    </table></div>
+    <div class="notes">
+      <div class="note-item"><span class="tag warn">&ldquo;quantos foram indicados&rdquo; é o número menos útil dos quatro</span><span>
+        Ele não decide nada: você não muda preço, prêmio nem operação por causa dele. <strong>O que decide
+        é quantos apareceram</strong>, e isso as cinco formas entregam igual, porque o ponto só cai na
+        venda.
+        <br><br>
+        O número que <em>realmente</em> muda o que você faz é o do meio da tabela: <strong>quem demonstrou
+        interesse e não veio</strong>. No A isso é &ldquo;recebeu uma mensagem e ignorou&rdquo; — sinal
+        fraquíssimo. No C é <strong>&ldquo;clicou no link do amigo, preencheu um cadastro e mesmo assim
+        não foi&rdquo;</strong> — gente que levantou a mão. É a lista mais quente que a campanha consegue
+        produzir, e é justamente ela que dá para reativar depois.
+      </span></div>
+      <div class="note-item alerta"><span class="tag bad">o D não deixa nada</span><span>
+        Sem cadastro do amigo, quem recebeu o print e não foi <strong>não existe para a loja</strong>.
+        Não dá pra medir, não dá pra chamar de volta, não dá pra saber se o convite não funcionou ou se
+        nem foi visto. <em>É a sua própria observação, e é o argumento mais forte contra o D</em> —
+        mais forte que qualquer conta de margem, porque a margem do D até se sustenta.
+      </span></div>
+    </div>
+  </section>
+  </div><!-- /sub-controle-p -->
+
+  <div class="painel" id="sub-viral-p" role="tabpanel" aria-labelledby="sub-viral" hidden>
   <section id="viral">
     <h2>E se o cupom viralizar?<span class="hint">o grupo da igreja, da academia, o story da influencer</span></h2>
     <p class="prose">
@@ -972,69 +1051,9 @@
       </span></div>
     </div>
   </section>
+  </div><!-- /sub-viral-p -->
 
-  <!-- ══════ O que cada desenho deixa medir ══════ -->
-  <section id="medicao">
-    <h2>O que cada desenho deixa medir<span class="hint">o outro lado da escolha</span></h2>
-    <p class="prose">
-      Você levantou o ponto certo: na forma 1 dá pra saber quantas pessoas foram indicadas, mas isso não
-      garante que elas venham; nos outros, sabe-se quantos <em>indicadores</em> existem e não quantos
-      indicados. <strong>Vale separar o que é vaidade do que é acionável.</strong>
-    </p>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Desenho</th><th>Quantos foram convidados</th><th>Quem são os indicados</th><th>Quem ficou pelo caminho</th><th>Dá pra chamar de volta?</th></tr></thead>
-      <tbody>
-        <tr><td><strong>A</strong> loja dispara</td><td>Sabe — e sabe que <em>chegou</em></td><td>Sabe (nome + telefone)</td><td>Recebeu e ignorou</td><td>Sim, mas é lista fria</td></tr>
-        <tr><td><strong>B</strong> wa.me por amigo</td><td>Sabe quantos links gerou — <em>não se foram enviados</em></td><td>Sabe (o indicador digitou)</td><td>Não dá pra separar &ldquo;não mandou&rdquo; de &ldquo;não veio&rdquo;</td><td>Sim, mas sem saber se chegou</td></tr>
-        <tr class="mark"><td><strong>C</strong> link único + cadastro</td><td>Não sabe o alcance — só quantos clicaram</td><td>Sabe dos que se cadastram</td><td><strong>Clicou, se cadastrou e não foi à loja</strong></td><td><strong>Sim, e é o melhor segmento</strong></td></tr>
-        <tr><td><strong>D</strong> código falado</td><td>Não sabe</td><td>Não sabe</td><td>Invisível</td><td>Não</td></tr>
-      </tbody>
-    </table></div>
-    <div class="notes">
-      <div class="note-item"><span class="tag warn">&ldquo;quantos foram indicados&rdquo; é o número menos útil dos quatro</span><span>
-        Ele não decide nada: você não muda preço, prêmio nem operação por causa dele. <strong>O que decide
-        é quantos apareceram</strong>, e isso as cinco formas entregam igual, porque o ponto só cai na
-        venda.
-        <br><br>
-        O número que <em>realmente</em> muda o que você faz é o do meio da tabela: <strong>quem demonstrou
-        interesse e não veio</strong>. No A isso é &ldquo;recebeu uma mensagem e ignorou&rdquo; — sinal
-        fraquíssimo. No C é <strong>&ldquo;clicou no link do amigo, preencheu um cadastro e mesmo assim
-        não foi&rdquo;</strong> — gente que levantou a mão. É a lista mais quente que a campanha consegue
-        produzir, e é justamente ela que dá para reativar depois.
-      </span></div>
-      <div class="note-item alerta"><span class="tag bad">o D não deixa nada</span><span>
-        Sem cadastro do amigo, quem recebeu o print e não foi <strong>não existe para a loja</strong>.
-        Não dá pra medir, não dá pra chamar de volta, não dá pra saber se o convite não funcionou ou se
-        nem foi visto. <em>É a sua própria observação, e é o argumento mais forte contra o D</em> —
-        mais forte que qualquer conta de margem, porque a margem do D até se sustenta.
-      </span></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>O buraco do controle<span class="hint">e como a própria campanha o fecha</span></h2>
-    <div class="notes">
-      <div class="note-item alerta"><span class="tag bad">mês 1</span><span>
-        <strong>Cego.</strong> Não existe base de clientes. Se o indicado já comprava toda semana, ele
-        entra como &ldquo;novo&rdquo; e a loja paga um cookie por uma visita que já teria. A campanha
-        roda no escuro — e o único jeito de não perder dinheiro nesse mês é o prêmio ser barato o
-        bastante pra que a canibalização não vire prejuízo. É o teste da seção 6 da aba 1.
-      </span></div>
-      <div class="note-item"><span class="tag good">mês 2 em diante</span><span>
-        <strong>Medido.</strong> Todo indicado passou pelo cadastro com nome + WhatsApp, e todo indicador
-        também. A base nasce da própria campanha. A regra <em>&ldquo;o WhatsApp do indicado não pode já
-        estar na base&rdquo;</em> passa a ser verificável na hora do cadastro — a página recusa o número
-        antes de gerar o cupom, sem precisar de fiscal no balcão.
-      </span></div>
-      <div class="note-item"><span class="tag warn">o que a base ainda não pega</span><span>
-        Quem já é cliente <strong>mas nunca se cadastrou</strong> continua invisível. A base só cobre quem
-        passou pelo QR. Por isso a taxa de canibalização cai devagar, não some — e por isso vale ligar o
-        cadastro do QR ao <a href="../campanha-fidelizacao/#combinado">cadastro da campanha de fidelização</a>:
-        <em>é a mesma base, construída duas vezes se forem dois sistemas</em>.
-      </span></div>
-    </div>
-  </section>
-
+  <div class="painel" id="sub-balcao-p" role="tabpanel" aria-labelledby="sub-balcao" hidden>
   <section>
     <h2>Regras de balcão<span class="hint">o que o atendente precisa saber de cor</span></h2>
     <ul class="regras tarefas">
@@ -1046,7 +1065,9 @@
       <li><b>Nada de foto de tela.</b> O QR é lido do celular ou não é lido. Print não vale — é o único ponto de fraude fácil.</li>
     </ul>
   </section>
+  </div><!-- /sub-balcao-p -->
 
+  <div class="painel" id="sub-decidir-p" role="tabpanel" aria-labelledby="sub-decidir" hidden>
   <section>
     <h2>O que falta decidir<span class="hint">nada aqui está fechado</span></h2>
     <ol class="pend">
@@ -1205,6 +1226,7 @@
       </li>
     </ol>
   </section>
+  </div><!-- /sub-decidir-p -->
 
   </div><!-- /painel-mecanica -->
 
