@@ -295,8 +295,31 @@
   .fv-cols ul strong { color: var(--ink); font-weight: 600; }
   .fv-cols li::marker { color: var(--ink-faint); }
   .fv-med { font-size: .8125rem; color: var(--ink-soft); background: var(--surface-2);
-            border-left: 2px solid var(--accent); border-radius: 0 3px 3px 0; padding: .55rem .75rem; }
+            border-left: 2px solid var(--accent); border-radius: 0 3px 3px 0; padding: .55rem .75rem;
+            line-height: 1.55; }
   .fv-med strong { color: var(--ink); font-weight: 600; }
+  .fv-med em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .fv-med code { font-family: var(--mono); font-size: .95em; color: var(--ink); }
+
+  /* a página atrás do QR, escrita como ela apareceria */
+  .pagina-mock { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 4px;
+                 padding: 1.1rem 1.2rem; display: grid; gap: .5rem; }
+  .pagina-mock .pm-h { font-family: var(--mono); font-size: clamp(1rem, 2.6vw, 1.25rem); font-weight: 700;
+                       color: var(--ink); line-height: 1.25; letter-spacing: -.01em; }
+  .pagina-mock .pm-p { font-size: .875rem; color: var(--ink-soft); line-height: 1.55; }
+  .pagina-mock .pm-p strong { color: var(--ink); font-weight: 600; }
+  .pagina-mock .pm-botoes { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .35rem; }
+  .pagina-mock .pm-btn { font-family: var(--mono); font-size: .6875rem; font-weight: 700; letter-spacing: .06em;
+                         text-transform: uppercase; background: var(--accent); color: var(--accent-ink);
+                         border-radius: 3px; padding: .6rem .95rem; }
+
+  /* as mensagens, como chegam no WhatsApp de quem recebe */
+  .msg { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--good);
+         border-radius: 0 4px 4px 0; padding: .75rem .9rem; font-size: .875rem; color: var(--ink);
+         line-height: 1.6; }
+  .msg .rot { display: block; font-family: var(--mono); font-size: .625rem; letter-spacing: .11em;
+              text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: .4rem; }
+  .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
 
   /* ─── veredito: a resposta em linguagem de gente, antes de qualquer tabela ─── */
   .veredito { border: 2px solid var(--ink); border-radius: 4px; background: var(--surface);
@@ -612,7 +635,7 @@
       <button type="button" class="forma-btn nova" data-forma="f5" aria-expanded="false" aria-controls="v-f5">
         <span class="fn">5</span>
         <span class="ft">Mensagem pronta</span>
-        <span class="fd">só o texto e um botão · sem cadastro, sem link</span>
+        <span class="fd">o texto e dois botões: eu pago ou você paga</span>
       </button>
     </div>
 
@@ -712,11 +735,48 @@
     <div class="forma-visor" id="v-f5" hidden>
       <div class="fv-cab"><span class="tag warn">forma 5</span><span class="fv-t">Mensagem pronta</span><span class="tag warn">a mais simples</span></div>
       <ol class="fv-passos">
-        <li>A página mostra <strong>o texto da campanha</strong> e um botão embaixo.</li>
-        <li>Ele aperta <strong>&ldquo;mandar pra alguém no WhatsApp&rdquo;</strong>: abre o seletor de contatos com a mensagem pronta.</li>
+        <li>A página mostra <strong>o texto da campanha</strong> e <strong>dois botões</strong> embaixo.</li>
+        <li>Ele escolhe um: <em>eu pago</em> ou <em>você paga</em>. Abre o WhatsApp com a mensagem daquele botão já escrita.</li>
         <li>Escolhe o contato e envia. <em>Sem cadastro, sem código, sem link personalizado.</em></li>
         <li>O amigo aparece na loja com a mensagem.</li>
       </ol>
+
+      <h3 class="sub">A página, escrita</h3>
+      <div class="pagina-mock">
+        <span class="pm-h">Indique um amigo e ganhe um cookie.</span>
+        <span class="pm-p">Compra um e o segundo é do seu amigo. Um pra cada.</span>
+        <span class="pm-p"><strong>Dois cookies significa que você tá levando alguém.</strong><br>
+        A gente escreve a mensagem. Você escolhe quem paga.</span>
+        <div class="pm-botoes">
+          <span class="pm-btn">É por minha conta</span>
+          <span class="pm-btn">Você paga, eu apresento</span>
+        </div>
+      </div>
+      <p class="fv-med"><strong>Os dois botões são a campanha inteira.</strong> Mesma oferta, carteira trocada —
+      é a piada do <em>&ldquo;quem deve pra quem&rdquo;</em> resolvida com dois botões em vez de uma frase.
+      Se o rótulo ficar comprido na tela, vira <code>EU PAGO</code> e <code>VOCÊ PAGA</code>: a graça já está no par.</p>
+
+      <h3 class="sub">As duas mensagens</h3>
+      <div class="msg">
+        <span class="rot">botão 1 · é por minha conta</span>
+        Vou te apresentar um cookie, e é por minha conta. Holy Cook: eu compro um e a gente leva dois.
+        <span class="lk">[link]</span><br>
+        Vale até domingo. Que dia e que horas?
+      </div>
+      <div class="msg">
+        <span class="rot">botão 2 · você paga</span>
+        Vou te apresentar um cookie e você vai me agradecer no final. Holy Cook: você compra um e a gente
+        leva dois. <span class="lk">[link]</span><br>
+        Vale até domingo. Que dia e que horas?
+      </div>
+      <p class="fv-med"><strong>Por que essas mensagens são assim.</strong> Abrem com a piada e não com a
+      oferta, porque quem envia é o amigo — se soar como loja, perde a graça toda. Os fatos vêm secos, sem
+      adjetivo no produto. E <em>terminam numa pergunta</em>: mensagem que pergunta é respondida, e
+      &ldquo;que dia e que horas?&rdquo; tira a pessoa do &ldquo;depois eu vejo&rdquo; e coloca ela marcando.
+      <br><br>
+      O <code>[link]</code> é a única coisa que denuncia que o texto não foi escrito pelo amigo — por isso
+      ele fica solto, sem nenhuma palavra de venda antes. <strong>Nesta forma ele nem precisa existir</strong>:
+      sem cupom pessoal, dá pra mandar só os fatos, como faz a referência do Betelgeuse.</p>
       <div class="fv-cols">
         <div><span class="rot ok">ganha</span><ul>
           <li><strong>É a mais simples de todas, de longe.</strong> Nada pra construir além de uma página com texto e um botão.</li>
