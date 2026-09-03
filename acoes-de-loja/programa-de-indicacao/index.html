@@ -776,32 +776,72 @@
       <strong>A resposta é o contrário do que parece:</strong> financeiramente o blast é bom. O que ele
       quebra é outra coisa.
     </p>
+    <p class="prose">
+      O saldo tem <strong>duas linhas só</strong>: o que os indicados deixam quando entram, e o que acontece
+      nas visitas em que o indicador volta para buscar os cookies dele. Tudo abaixo já assume
+      <strong>70% de canibalização</strong> — sete de cada dez que aparecem já eram clientes, o pessimismo
+      razoável para um grupo local.
+    </p>
     <div class="tablewrap"><table>
-      <thead><tr><th>Um indicador espalha o cupom</th><th>Receita que entra</th><th>Custo do prêmio</th><th>Saldo</th></tr></thead>
+      <thead><tr><th>200 pessoas aparecem com o cupom de alguém</th><th>Linha 1<br>margem dos 60 novos</th><th>Linha 2<br>visitas de resgate</th><th>Saldo</th></tr></thead>
       <tbody>
-        <tr><td><strong>40 pessoas</strong> · compre-e-ganhe · 1 cookie por indicação</td><td>R$ 1.564</td><td>R$ 210</td><td class="pos"><strong>R$ 288</strong></td></tr>
-        <tr><td><strong>200 pessoas</strong> · compre-e-ganhe · 1 cookie por indicação</td><td>R$ 7.818</td><td>R$ 1.052</td><td class="pos"><strong>R$ 1.438</strong></td></tr>
-        <tr class="mark"><td>40 pessoas · <strong>brinde puro</strong> (sem exigir compra)</td><td>R$ 1.564</td><td>R$ 210</td><td class="neg"><strong>−R$ 5</strong></td></tr>
-        <tr class="mark"><td>200 pessoas · <strong>brinde puro</strong>, 1 resgate por visita</td><td>R$ 7.818</td><td>R$ 1.052</td><td class="neg"><strong>−R$ 453</strong></td></tr>
-        <tr><td>40 pessoas · escada de marcos · compre-e-ganhe</td><td>R$ 1.564</td><td>R$ 97</td><td class="pos">R$ 148</td></tr>
-        <tr><td>200 pessoas · escada de marcos · compre-e-ganhe</td><td>R$ 7.818</td><td>R$ 97</td><td class="pos">R$ 1.052</td></tr>
+        <tr><td>compre-e-ganhe · ele resgata <strong>todos</strong> os 200 cookies</td><td>R$ 1.131</td><td class="pos">+R$ 307</td><td class="pos"><strong>R$ 1.438</strong></td></tr>
+        <tr><td>compre-e-ganhe · resgata 10% e o resto vence</td><td>R$ 1.131</td><td class="pos">+R$ 31</td><td class="pos"><strong>R$ 1.162</strong></td></tr>
+        <tr class="mark"><td>compre-e-ganhe · <strong>não resgata nada</strong> — o piso</td><td>R$ 1.131</td><td>R$ 0</td><td class="pos"><strong>R$ 1.131</strong></td></tr>
+        <tr><td>escada de marcos · compre-e-ganhe</td><td>R$ 1.131</td><td class="neg">−R$ 79</td><td class="pos">R$ 1.052</td></tr>
+        <tr class="mark"><td><strong>brinde puro</strong> · 1 resgate por visita</td><td>R$ 1.131</td><td class="neg">−R$ 1.584</td><td class="neg"><strong>−R$ 453</strong></td></tr>
       </tbody>
     </table></div>
-    <p class="prose" style="font-size:.8125rem">
-      Tudo acima já assume <strong>70% de canibalização</strong> — sete de cada dez que aparecem já eram
-      clientes da loja, que é o pessimismo razoável para um grupo local.
-    </p>
+
+    <details>
+      <summary>A conta das 200, linha por linha</summary>
+      <ul>
+        <li><strong>Constantes:</strong> ticket R$ 39,09 · margem de contribuição 48,23% · margem de uma
+        visita normal <code>39,09 × 48,23% = R$ 18,85</code> · cookie pago R$ 15,19 · custo de um cookie
+        <code>5,01 de CMV + 1% de quebra + 0,20 de divisória = R$ 5,26</code> · venda extra medida R$ 14,03.</li>
+        <li><strong>Linha 1 — as 200 visitas dos indicados.</strong>
+        <code>200 × 18,85 = R$ 3.770</code> de margem bruta. Mas 70% viriam de qualquer jeito, então
+        <code>140 × 18,85 = R$ 2.639</code> não é ganho novo. Sobra
+        <strong><code>60 × 18,85 = R$ 1.131</code></strong> — <em>e é daqui que sai 79% do resultado.</em></li>
+        <li><strong>Linha 2 — as visitas de resgate.</strong> Por visita, ele compra 5 cookies
+        (<code>5 × 15,19 = R$ 75,95</code>) e leva R$ 14,03 de outras coisas.
+        <code>89,98 × 48,23% = R$ 43,39</code> de margem, menos os 5 cookies de brinde
+        (<code>5 × 5,26 = R$ 26,30</code>), menos a visita que ele faria de qualquer jeito
+        (<code>50% × 18,85 = R$ 9,43</code>) = <strong>+R$ 7,67 por visita</strong>.
+        Resgatando os 200 em blocos de 5, são 40 visitas: <code>40 × 7,67 = R$ 307</code>.</li>
+        <li><strong>Total:</strong> <code>1.131 + 307 = R$ 1.438</code>.</li>
+        <li><strong>No brinde puro</strong> a linha 2 inverte: sem compra exigida, cada visita rende
+        <code>14,03 × 48,23% − 5,26 − 9,43 = −R$ 7,92</code>, e 200 resgates viram −R$ 1.584.</li>
+      </ul>
+    </details>
+
+    <div class="note-item"><span class="tag warn">a premissa frágil dessa conta, e por que ela não muda a conclusão</span><span>
+      A linha do R$ 1.438 assume que o indicador <strong>volta 40 vezes no mês</strong> e gasta
+      <strong>R$ 3.038 em cookies</strong> para resgatar os 200. <em>Isso não acontece.</em>
+      <br><br>
+      Mas repare na tabela: <strong>a linha 1 não se move</strong>. Resgatando tudo dá R$ 1.438; resgatando
+      nada dá R$ 1.131. <strong>O blast vale entre R$ 1.131 e R$ 1.438, e o piso é o cenário realista</strong>
+      — prêmio não resgatado é prêmio que nunca sai do estoque. A conclusão não depende do número absurdo:
+      ela depende só dos 60 clientes novos.
+    </span></div>
+    <div class="note-item"><span class="tag acc">e a receita bruta não é o número certo de olhar</span><span>
+      As 200 visitas somam <strong>R$ 7.818</strong> de venda, mas 140 delas aconteceriam sem cupom nenhum.
+      <strong>A receita que a campanha realmente traz é R$ 2.345</strong> — os 60 novos ×  R$ 39,09.
+      É contra essa que o custo do prêmio tem que ser comparado, e não contra a bruta.
+    </span></div>
 
     <div class="notes">
       <div class="note-item"><span class="tag good">a proteção contra viralização você já tinha, e não é a escada</span><span>
-        <strong>É o compre-e-ganhe.</strong> Para levar 40 cookies de graça, o indicador precisa
-        <em>comprar 40 cookies</em> — R$ 608 de receita antes de qualquer prêmio sair. Para levar 200, tem
-        que comprar R$ 3.038. <strong>O programa não tem como ser drenado</strong>: cada cookie dado exige
-        um cookie vendido.
+        <strong>É o compre-e-ganhe.</strong> Não porque o indicador vá gastar R$ 3.038 para resgatar 200
+        cookies — ele não vai. <strong>É porque ele não consegue tirar os 200 sem gastar.</strong>
+        Cada cookie que sai de graça exige um cookie vendido no mesmo balcão, então o programa não tem como
+        ser drenado: ou ele compra, ou o prêmio simplesmente não é retirado — e prêmio não retirado não
+        custa nada.
         <br><br>
-        Por isso a linha do compre-e-ganhe aguenta <strong>até 100% de canibalização</strong> num blast de
-        40 — mesmo que todos os 40 já fossem clientes, ele continua no zero. Já o
-        <strong>brinde puro vira negativo acima de 69,5%</strong>, e a 200 pessoas perde R$ 453.
+        É por isso que, no compre-e-ganhe, <strong>as três primeiras linhas da tabela são todas positivas
+        independentemente de quanto ele resgata</strong>. Já o <strong>brinde puro não tem esse freio</strong>:
+        o cookie sai sem nada entrar, e 200 resgates viram −R$ 1.584 na linha 2, derrubando o total para
+        −R$ 453.
         <em>A regra que você fixou na campanha de fidelização — &ldquo;a moeda é compre e ganhe, não
         desconto&rdquo; — é o que segura esse cenário. Ela já estava resolvida antes da pergunta existir.</em>
       </span></div>
@@ -809,13 +849,15 @@
         O prêmio da escada <strong>para de crescer em R$ 97</strong> — dá na mesma se forem 40 ou 200
         indicações, porque não existe marco acima de 10. É um teto de custo de verdade.
         <br><br>
-        <strong>Mas ele custa margem</strong>: com a escada o indicador volta 4 vezes para resgatar, e não
-        40. Como toda visita de resgate no compre-e-ganhe é <em>mais uma venda</em>, cortar visitas corta
-        receita — por isso a escada rende <strong>menos</strong> que o cookie-por-indicação no blast
-        (R$ 148 contra R$ 288; R$ 1.052 contra R$ 1.438).
+        <strong>Mas ele custa margem</strong>: com a escada o indicador volta <em>4 vezes</em> para
+        resgatar, e não 40. Como toda visita de resgate no compre-e-ganhe é <em>mais uma venda</em>, cortar
+        visitas corta receita — e a linha 2 da escada é <strong class="neg">−R$ 79</strong> contra
+        <strong class="pos">+R$ 307</strong> do cookie-por-indicação. Por isso ela fecha em R$ 1.052 e não
+        em R$ 1.438.
         <br><br>
-        <em>Resumo: sob compre-e-ganhe você não precisa do seguro. Sob brinde puro ele é a única coisa que
-        segura o cenário</em> — R$ 118 contra −R$ 91 no blast de 40.
+        <em>Resumo: sob compre-e-ganhe o seguro não é necessário — as três linhas já são positivas. Sob
+        brinde puro ele é a única coisa que segura o cenário</em>, porque limita o estrago a quatro prêmios
+        em vez de duzentos.
       </span></div>
       <div class="note-item"><span class="tag good">olhando pelo outro lado: o blast se paga sozinho</span><span>
         As 200 visitas deixam <strong>R$ 1.438 de saldo positivo</strong> — isso já <em>depois</em> de pagar
