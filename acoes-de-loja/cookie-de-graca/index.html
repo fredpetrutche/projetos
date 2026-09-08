@@ -61,6 +61,7 @@
   .tab-panel[hidden] { display: none !important; }
 
   section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
   h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink);
        padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
   h2 .n { color: var(--accent); font-weight: 700; }
@@ -182,6 +183,29 @@
   .aberto { border-left: 3px solid var(--warn); }
   .fechado { border-left: 3px solid var(--good); }
 
+  /* ── checklist ── */
+  .chk-lista { display: flex; flex-direction: column; gap: .1rem; }
+  .chk-item { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: start;
+              padding: .5rem .1rem; border-top: 1px solid var(--rule-soft); }
+  .chk-item:first-child { border-top: none; }
+  .chk-item input { margin-top: .28rem; width: .95rem; height: .95rem; accent-color: var(--accent);
+                    cursor: pointer; flex: none; }
+  .chk-item label { cursor: pointer; font-size: .875rem; color: var(--ink); line-height: 1.45; }
+  /* inline-block de propósito: decoração de texto do label não atravessa a borda de um
+     inline-block, então o risco do item marcado não pega a linha de explicação */
+  .chk-item label .por { display: inline-block; width: 100%; font-size: .75rem;
+                         color: var(--ink-faint); margin-top: .1rem; }
+  .chk-item input:checked + label { color: var(--ink-faint); text-decoration: line-through; }
+  .chk-item input:checked + label .por { text-decoration: none; }
+  .prazo { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase;
+           font-weight: 700; padding: .1rem .34rem; border-radius: 2px; margin-right: .35rem;
+           white-space: nowrap; }
+  .prazo.ja { background: var(--bad-bg); color: var(--bad); }
+  .prazo.d10 { background: var(--warn-bg); color: var(--warn); }
+  .prazo.dia { background: var(--accent); color: var(--accent-ink); }
+  .prazo.dep { background: var(--good-bg); color: var(--good); }
+  .contagem { font-family: var(--mono); font-size: .6875rem; font-weight: 700; color: var(--accent); }
+  .contagem.full { color: var(--good); }
   footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -210,6 +234,7 @@
 
 <div class="tabs" role="tablist">
   <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+  <button class="tab-btn" type="button" data-tab="checklist" role="tab" aria-selected="false">Checklist</button>
   <button class="tab-btn" type="button" data-tab="video" role="tab" aria-selected="false">Vídeo modelo</button>
   <button class="tab-btn" type="button" data-tab="influenciadores" role="tab" aria-selected="false">Influenciadores</button>
   <button class="tab-btn" type="button" data-tab="criador" role="tab" aria-selected="false">Briefing do criador</button>
@@ -405,6 +430,120 @@
 
 </div>
 
+
+<div class="tab-panel" data-panel="checklist" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> Onde a ação está<span class="hint">o que trava o quê</span></h2>
+  <div class="strip">
+    <div><span class="v">11 e 12/09</span><span class="s">sexta e sábado — os dois dias da campanha</span></div>
+    <div><span class="v">10/09</span><span class="s">tudo que é físico tem que estar na loja</span></div>
+    <div><span class="v" id="chk-total">0 / 44</span><span class="s">itens marcados nesta lista</span></div>
+  </div>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">o caminho crítico</span><span>
+      <strong>Foto do combo → arte do A4 → gráfica → display na loja.</strong> São quatro passos em série,
+      cada um esperando o anterior, e o último tem data fixa: <strong>10 de setembro</strong>. A foto
+      provavelmente não existe ainda. <em>Se a gráfica não couber no prazo, o plano B é imprimir o A4 na
+      própria loja</em> — feio é melhor do que ausente, porque sem display o sorteio só existe pra quem o
+      atendente lembrar de avisar.</span></div>
+    <div class="note-item"><span class="tag warn">o que trava mais coisa</span><span>
+      Três decisões seguram produção: <strong>qual cookie vai ser dado</strong> (trava o pedido de
+      estoque), <strong>se o story marca também o criador</strong> (trava a legenda e o PDF que vai pro
+      influenciador) e <strong>o benefício do voucher</strong> (trava a impressão). Enquanto elas não
+      saírem, os itens do grupo &ldquo;Produzir&rdquo; não andam.</span></div>
+    <div class="note-item"><span class="tag mudo">como usar</span><span>
+      As marcações ficam salvas <strong>neste navegador</strong> — não são compartilhadas com quem abrir
+      em outro aparelho. Serve pra você acompanhar; pra equipe, imprimir a lista.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O checklist<span class="hint">clique num grupo</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir agora</span><span class="cmeta contagem" data-conta="dec">0/11</span><span class="cdesc">Nada de produção anda enquanto estas não saírem.</span></button>
+      <button class="card-btn" data-alvo="ck-pro"><span class="cnome">Produzir até 10/09</span><span class="cmeta contagem" data-conta="pro">0/12</span><span class="cdesc">Tudo que é físico ou de conta precisa estar pronto na véspera.</span></button>
+      <button class="card-btn" data-alvo="ck-cri"><span class="cnome">Criadores</span><span class="cmeta contagem" data-conta="cri">0/8</span><span class="cdesc">Fechar, mandar o briefing, separar os produtos.</span></button>
+      <button class="card-btn" data-alvo="ck-dia"><span class="cnome">Nos dois dias</span><span class="cmeta contagem" data-conta="dia">0/7</span><span class="cdesc">A operação de 11 e 12, incluindo o sorteio.</span></button>
+      <button class="card-btn" data-alvo="ck-dep"><span class="cnome">Depois</span><span class="cmeta contagem" data-conta="dep">0/6</span><span class="cdesc">Entregar os combos e medir o que a campanha deu.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel aberto" data-alvo="ck-dec" hidden><span class="ptit">Decidir agora</span>
+        <span class="psub">11 decisões · cada uma segura alguma coisa</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-dec1" data-g="dec"><label for="ck-dec1"><span class="prazo ja">trava estoque</span><strong>Qual cookie vai ser dado</strong> — sabor fixo ou à escolha.<span class="por">Muda o custo em mais de 2x por unidade: Churros R$ 3,83 contra Bueno White R$ 8,30. Em mil cookies, é metade da verba.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec2" data-g="dec"><label for="ck-dec2"><span class="prazo ja">trava texto</span><strong>Limite por pessoa e como controlar</strong>.<span class="por">Campinas usou 1 por pessoa com CPF informado. É o único freio contra a mesma pessoa voltar cinco vezes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec3" data-g="dec"><label for="ck-dec3"><span class="prazo ja">trava texto</span><strong>Teto de unidades por dia</strong> — e o que a equipe fala quando acabar.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec4" data-g="dec"><label for="ck-dec4"><span class="prazo ja">trava o PDF</span><strong>Se o story marca só a loja ou também o criador.</strong><span class="por">Está entre colchetes na legenda do briefing-criador.pdf. Com dois criadores, vira a pergunta de qual deles o cliente marca.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec5" data-g="dec"><label for="ck-dec5"><span class="prazo ja">trava impressão</span><strong>O benefício do voucher.</strong><span class="por">Quatro opções com o lucro de cada uma na aba Voucher de volta. Sorvete e torta são as que não repetem o cookie que a pessoa acabou de ganhar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec6" data-g="dec"><label for="ck-dec6"><span class="prazo ja">trava impressão</span><strong>Como o voucher é resgatado</strong> — papel impresso ou QR.<span class="por">Papel é rápido e não deixa rastro. QR (o mesmo da fidelização) transforma os dois dias em base de clientes com nome e telefone.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec7" data-g="dec"><label for="ck-dec7"><span class="prazo ja">trava display</span><strong>Critério de &ldquo;melhor stories&rdquo; e quem julga.</strong><span class="por">Precisa caber numa frase no A4. Prêmio subjetivo sem critério escrito volta em comentário.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec8" data-g="dec"><label for="ck-dec8"><strong>Se a mesma pessoa pode ganhar os dois prêmios do dia.</strong></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec9" data-g="dec"><label for="ck-dec9"><strong>Rateio dos R$ 5 mil</strong> — quantos cookies, quanto pros criadores, quanto de reserva.<span class="por">O custo do voucher não entra aqui: ele cai no mês seguinte.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec10" data-g="dec"><label for="ck-dec10"><strong>Quem manda na loja nos dias 11 e 12.</strong><span class="por">Se a resposta for &ldquo;a Débora&rdquo;, a campanha não conta como transferida mesmo que dê certo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec11" data-g="dec"><label for="ck-dec11"><strong>Quem faz as três tarefas do sorteio</strong> — repostar, separar candidatos, gravar o vídeo da noite.<span class="por">Numa sexta cheia, tarefa sem dono é tarefa que não acontece.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-pro" hidden><span class="ptit">Produzir até 10/09</span>
+        <span class="psub">12 itens · a véspera é o prazo, não o dia 11</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-pro1" data-g="pro"><label for="ck-pro1"><span class="prazo ja">primeiro</span><strong>Foto do combo</strong> — torta + bola de sorvete + milkshake, para duas pessoas.<span class="por">Perguntar se já existe antes de montar. Fotografar exatamente o que vai ser entregue: se a foto tiver dois milkshakes e o prêmio for um, volta em reclamação.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro2" data-g="pro"><label for="ck-pro2"><span class="prazo d10">10/09</span><strong>Arte do display A4</strong> — foto do combo, a frase do que fazer, os dois prêmios, as datas e a hora do resultado.<span class="por">Pedir os três formatos de uma vez: A4, story e post.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro3" data-g="pro"><label for="ck-pro3"><span class="prazo d10">10/09</span><strong>Imprimir o A4</strong> e providenciar o suporte acrílico.<span class="por">Sem suporte ele cai ou some no balcão.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro4" data-g="pro"><label for="ck-pro4"><span class="prazo d10">10/09</span><strong>Display na loja</strong> — dia 10, não dia 11.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro5" data-g="pro"><label for="ck-pro5"><span class="prazo d10">10/09</span><strong>Vouchers prontos</strong> — impressos, ou o QR funcionando.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro6" data-g="pro"><label for="ck-pro6"><span class="prazo d10">10/09</span><strong>Sinalização da promoção</strong> na vitrine e no balcão.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro7" data-g="pro"><label for="ck-pro7"><span class="prazo ja">antecedência</span><strong>Estoque de cookie extra pedido.</strong><span class="por">Encosta no processo de compras e depende de prazo de fornecedor — não é decisão da semana.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro8" data-g="pro"><label for="ck-pro8"><span class="prazo d10">10/09</span><strong>Corrigir a bio do Instagram.</strong><span class="por">Hoje diz &ldquo;Seg a Sáb 11h às 20h&rdquo; — sem domingo e sem o delivery até 22h. A campanha vai jogar muita gente nesse perfil.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro9" data-g="pro"><label for="ck-pro9"><span class="prazo d10">10/09</span><strong>Ligar o arquivamento automático de stories</strong> na conta da loja.<span class="por">Se estiver desligado, o repost some em 24h e o Destaque não se monta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro10" data-g="pro"><label for="ck-pro10"><span class="prazo d10">10/09</span><strong>Criar o Destaque &ldquo;Cookie de Graça&rdquo;</strong>, vazio, pronto pra receber.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro11" data-g="pro"><label for="ck-pro11"><span class="prazo d10">10/09</span><strong>Escrever o roteiro de balcão final.</strong><span class="por">Hoje ele está em tópicos na aba Roteiro de balcão — falta a versão com as palavras.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pro12" data-g="pro"><label for="ck-pro12"><span class="prazo d10">10/09</span><strong>Treinar a equipe</strong> na mecânica e nas exceções.<span class="por">Sem Instagram, perfil fechado, quem quer dois, fila grande demais, story apagado na esquina. É onde a promoção quebra na prática.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-cri" hidden><span class="ptit">Criadores</span>
+        <span class="psub">8 itens · a página já está escolhida, os dois criadores não</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-cri1" data-g="cri"><label for="ck-cri1"><span class="prazo ja">trava tudo</span><strong>Fechar os dois criadores.</strong><span class="por">A página da cidade já é @livepaulinianilsao. As sugestões com o alcance real de cada um estão na aba Influenciadores.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri2" data-g="cri"><label for="ck-cri2"><strong>Definir se tem cachê em dinheiro</strong> além de produto + voucher.<span class="por">Se não tiver, precisa estar claro na primeira conversa — é o que trava negociação no fim.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri3" data-g="cri"><label for="ck-cri3"><strong>Mandar o <a href="briefing-criador.pdf" target="_blank" rel="noopener">briefing-criador.pdf</a>.</strong><span class="por">Resolver o &ldquo;[+ marcar o criador?]&rdquo; da legenda antes de enviar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri4" data-g="cri"><label for="ck-cri4"><span class="prazo d10">10/09</span><strong>Combinar a data do post.</strong><span class="por">O vídeo-modelo foi ao ar na véspera e o off diz &ldquo;é só amanhã e sábado&rdquo;. Copiando isso, a data é 10 de setembro.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri5" data-g="cri"><label for="ck-cri5"><strong>Separar os produtos de foto</strong> — prato com 7 ou 8 cookies e a mesa cheia.<span class="por">Não são para consumo. Decidir se voltam pra venda depois ou entram como perda.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri6" data-g="cri"><label for="ck-cri6"><strong>Separar os produtos de consumo</strong> — 3 cookies, 3 milkshakes de cores diferentes, 1 cappuccino e 1 soda italiana.<span class="por">R$ 68,28 de CMV. Os três milkshakes não são pra beber os três: é pra ter cor diferente em plano diferente.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri7" data-g="cri"><label for="ck-cri7"><strong>Emitir o voucher de R$ 80</strong> de cada criador.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri8" data-g="cri"><label for="ck-cri8"><span class="prazo d10">10/09</span><strong>Confirmar o post no ar</strong> na data combinada.</label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dia" hidden><span class="ptit">Nos dois dias</span>
+        <span class="psub">7 itens · repete na sexta e no sábado</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-dia1" data-g="dia"><label for="ck-dia1"><span class="prazo dia">11 e 12</span><strong>Conferir o story e entregar o cookie e o voucher.</strong><span class="por">Dizendo na entrega que o voucher só vale de domingo 13 a sábado 19 — é o ponto que mais gera atrito.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia2" data-g="dia"><label for="ck-dia2"><span class="prazo dia">11 e 12</span><strong>Repostar cada menção na hora.</strong><span class="por">O repost é a inscrição no sorteio, e é a única forma de ter a lista depois — story some em 24h e a API da Meta não expõe menção em story.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia3" data-g="dia"><label for="ck-dia3"><span class="prazo dia">11 e 12</span><strong>Separar 3 ou 4 candidatos</strong> ao melhor stories ao longo do dia.<span class="por">Ninguém julga 200 stories bem. À noite a escolha é entre 4.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia4" data-g="dia"><label for="ck-dia4"><span class="prazo dia">11 e 12</span><strong>Escolher os dois ganhadores do dia</strong> — o melhor stories e o sorteado entre todos.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia5" data-g="dia"><label for="ck-dia5"><span class="prazo dia">11 e 12</span><strong>Gravar e postar o vídeo dos ganhadores</strong> no fim do dia.<span class="por">O de sexta é o mais importante dos dois: vai ao ar com o sábado inteiro pela frente e vira chamada, não aviso.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia6" data-g="dia"><label for="ck-dia6"><span class="prazo dia">11 e 12</span><strong>Jogar todos os reposts no Destaque</strong> no fim do dia.</label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia7" data-g="dia"><label for="ck-dia7"><span class="prazo dia">11 e 12</span><strong>Anotar quantos cookies saíram</strong> e a que horas acabou.</label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dep" hidden><span class="ptit">Depois</span>
+        <span class="psub">6 itens · é aqui que se descobre se valeu</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-dep1" data-g="dep"><label for="ck-dep1"><span class="prazo dep">a partir de 13/09</span><strong>Entregar os quatro combos.</strong><span class="por">Vale filmar a retirada — é uma terceira visita da pessoa e o fechamento natural da campanha.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep2" data-g="dep"><label for="ck-dep2"><span class="prazo dep">13/09</span><strong>Contar os vouchers entregues.</strong><span class="por">É o denominador de tudo que vem depois.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep3" data-g="dep"><label for="ck-dep3"><span class="prazo dep">até 19/09</span><strong>Contar os vouchers resgatados.</strong><span class="por">É o número que julga a campanha. Movimento nos dias 11 e 12 é o número fácil e o que vai parecer sucesso; sem este, a ação vai ser julgada por fila.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep4" data-g="dep"><label for="ck-dep4"><span class="prazo dep">13/09</span><strong>Seguidores em 10/09 contra 13/09.</strong><span class="por">É o ativo que sobra depois que a campanha acaba. A base de 10/09 precisa ser anotada antes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep5" data-g="dep"><label for="ck-dep5"><span class="prazo dep">13/09</span><strong>Faturamento dos dois dias</strong> contra o mesmo par de dias das semanas anteriores.<span class="por">Mostra quem foi buscar o grátis e comprou outra coisa junto.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep6" data-g="dep"><label for="ck-dep6"><span class="prazo dep">13/09</span><strong>Quantos stories a campanha gerou.</strong><span class="por">É o alcance conquistado de graça, e é o insumo do sorteio.</span></label></div>
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
 
 <div class="tab-panel" data-panel="video" role="tabpanel" hidden>
 
@@ -2483,7 +2622,7 @@ Já marca quem garantir esse cookie delicioso com você! 🍪🔥</div>
   document.querySelectorAll('.tab-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({top:0}); });
   });
-  var ABAS = ['briefing','video','influenciadores','criador','balcao','stories','voucher'];
+  var ABAS = ['briefing','checklist','video','influenciadores','criador','balcao','stories','voucher'];
   var inicial = location.hash.replace('#', '');
   if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
 
@@ -2497,6 +2636,49 @@ Já marca quem garantir esse cookie delicioso com você! 🍪🔥</div>
     abrirAba(alvo);
     window.scrollTo({ top: 0 });
   });
+
+  // ── checklist: marcação persistida neste navegador (localStorage), com contador por grupo
+  (function () {
+    var caixas = document.querySelectorAll('.chk-item input[type="checkbox"]');
+    if (!caixas.length) return;
+    var CHAVE = 'hc-cookie-de-graca-checklist';
+
+    function ler() {
+      try { return JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) { return {}; }
+    }
+    function gravar(estado) {
+      try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+    }
+    function contar() {
+      var porGrupo = {}, feitosTotal = 0;
+      caixas.forEach(function (c) {
+        var g = c.dataset.g;
+        porGrupo[g] = porGrupo[g] || { feitos: 0, total: 0 };
+        porGrupo[g].total++;
+        if (c.checked) { porGrupo[g].feitos++; feitosTotal++; }
+      });
+      document.querySelectorAll('.contagem[data-conta]').forEach(function (el) {
+        var d = porGrupo[el.dataset.conta];
+        if (!d) return;
+        el.textContent = d.feitos + '/' + d.total;
+        el.classList.toggle('full', d.feitos === d.total);
+      });
+      var tot = document.getElementById('chk-total');
+      if (tot) tot.textContent = feitosTotal + ' / ' + caixas.length;
+    }
+
+    var estado = ler();
+    caixas.forEach(function (c) {
+      c.checked = !!estado[c.id];
+      c.addEventListener('change', function () {
+        var e = ler();
+        if (c.checked) e[c.id] = 1; else delete e[c.id];
+        gravar(e);
+        contar();
+      });
+    });
+    contar();
+  })();
 
   // ── cards e caixinhas: escopo pelo .bloco mais próximo, para o padrão poder aninhar sem colidir
   document.addEventListener('click', function (e) {
