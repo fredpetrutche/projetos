@@ -204,6 +204,16 @@
   .prazo.d10 { background: var(--warn-bg); color: var(--warn); }
   .prazo.dia { background: var(--accent); color: var(--accent-ink); }
   .prazo.dep { background: var(--good-bg); color: var(--good); }
+  .decidido { display: flex; flex-direction: column; gap: .1rem; margin-bottom: 1rem;
+              background: var(--good-bg); border-radius: 5px; padding: .3rem .9rem .6rem; }
+  .decidido .d-item { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: start;
+                      padding: .5rem 0; border-top: 1px solid rgba(47,107,74,.18); }
+  .decidido .d-item:first-child { border-top: none; }
+  .decidido .tick { color: var(--good); font-weight: 700; font-size: .9rem; line-height: 1.45; }
+  .decidido .txt { font-size: .875rem; color: var(--ink); line-height: 1.45; }
+  .decidido .txt .resp { display: block; color: var(--ink-soft); font-size: .8125rem; margin-top: .1rem; }
+  .decidido .dtit { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em;
+                    text-transform: uppercase; color: var(--good); font-weight: 700; padding-top: .5rem; }
   .contagem { font-family: var(--mono); font-size: .6875rem; font-weight: 700; color: var(--accent); }
   .contagem.full { color: var(--good); }
   footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
@@ -227,7 +237,7 @@
 <div class="strip">
   <div><span class="v">11 e 12/09</span><span class="s">sexta e sábado</span></div>
   <div><span class="v">Paulínia</span><span class="s">Av. José Paulino, 1615 · Centro — a campanha também roda em Piracicaba</span></div>
-  <div><span class="v">R$ 5.000</span><span class="s">verba total da campanha</span></div>
+  <div><span class="v">R$ 5.000</span><span class="s">orçamento de referência — sem rateio a fazer</span></div>
   <div><span class="v">1 + 2</span><span class="s">uma página da cidade e dois influenciadores</span></div>
   <div><span class="v">3 entregas</span><span class="s">cookie · voucher · 2 combos por dia</span></div>
 </div>
@@ -360,7 +370,7 @@
   <div class="bloco">
     <div class="grade">
       <button class="card-btn" data-alvo="d1"><span class="cnome">A mecânica</span><span class="cmeta">fechado · falta a exceção</span></button>
-      <button class="card-btn" data-alvo="d2"><span class="cnome">A verba de R$ 5 mil</span><span class="cmeta">valor fechado · rateio aberto</span></button>
+      <button class="card-btn" data-alvo="d2"><span class="cnome">A verba de R$ 5 mil</span><span class="cmeta">orçamento antigo · rateio descartado</span></button>
       <button class="card-btn" data-alvo="d3"><span class="cnome">Divulgação</span><span class="cmeta">formato fechado · nomes na aba 3</span></button>
       <button class="card-btn" data-alvo="d4"><span class="cnome">O que a loja precisa ter pronto</span><span class="cmeta">lista aberta</span></button>
       <button class="card-btn" data-alvo="d5"><span class="cnome">Quem toca no dia</span><span class="cmeta">não definido</span></button>
@@ -374,17 +384,15 @@
         <p class="prose">O que falta escrever é <strong>o que fazer quando a mecânica falha na fila</strong> —
         o passo 4 do fluxo acima. Enquanto não estiver escrito, a equipe decide na hora, e cada uma decide
         diferente.</p></div>
-      <div class="painel aberto" data-alvo="d2" hidden><span class="ptit">A verba de R$ 5 mil</span>
-        <p class="prose">O valor está definido. O que não está é <strong>como ele foi dimensionado</strong>:
-        quantos cookies dá, quanto vai pra influenciador, quanto sobra pra imprevisto, e qual o teto se a fila
-        passar do previsto.</p>
-        <ul class="pontos">
-          <li>Só de matéria-prima, R$ 5.000 ÷ R$ 5,01 de CMV médio ≈ <strong>998 cookies</strong> — mas isso é
-          se a verba inteira virar cookie, o que não vai acontecer.</li>
-          <li>Descontando o combo do sorteio, o cachê dos influenciadores, os vouchers impressos e o display,
-          sobra bem menos. <strong>Essa conta precisa existir antes de 11/09</strong>, não depois.</li>
-          <li>O custo do voucher que volta <em>não</em> está dentro dos R$ 5 mil — ele cai no mês seguinte.</li>
-        </ul></div>
+      <div class="painel fechado" data-alvo="d2" hidden><span class="ptit">A verba de R$ 5 mil</span>
+        <span class="psub">encerrado — não há rateio a fazer</span>
+        <p class="prose">Os R$ 5 mil eram um <strong>orçamento de referência</strong> levantado antes, não uma
+        verba a ser rateada agora. <strong>O rateio foi descartado pelo Fred em 08/09/2026</strong> — a
+        campanha não vai ser dimensionada por esse número.</p>
+        <p class="prose">O que continua valendo é a ordem de grandeza dos custos, que está nas outras abas:
+        o cookie dado custa <strong>R$ 4,71</strong> de CMV em média (Nutella R$ 5,35 e Brigadeiro R$ 4,07),
+        os quatro combos do sorteio somam <strong>R$ 96,96</strong>, e o pacote de cada criador fica em torno
+        de <strong>R$ 96</strong>. O custo do voucher que volta cai no mês seguinte, não neste.</p></div>
       <div class="painel aberto" data-alvo="d3" hidden><span class="ptit">Divulgação</span>
         <p class="prose">O formato está definido: <strong>uma página de indicação da cidade + dois
         influenciadores</strong>. Os nomes não estavam — <strong>a aba Influenciadores traz os candidatos de
@@ -438,7 +446,7 @@
   <div class="strip">
     <div><span class="v">11 e 12/09</span><span class="s">sexta e sábado — os dois dias da campanha</span></div>
     <div><span class="v">10/09</span><span class="s">tudo que é físico tem que estar na loja</span></div>
-    <div><span class="v" id="chk-total">0 / 44</span><span class="s">itens marcados nesta lista</span></div>
+    <div><span class="v" id="chk-total">0 / 38</span><span class="s">itens abertos nesta lista (5 decisões já saíram)</span></div>
   </div>
   <div class="notes">
     <div class="note-item"><span class="tag bad">o caminho crítico</span><span>
@@ -448,10 +456,10 @@
       própria loja</em> — feio é melhor do que ausente, porque sem display o sorteio só existe pra quem o
       atendente lembrar de avisar.</span></div>
     <div class="note-item"><span class="tag warn">o que trava mais coisa</span><span>
-      Três decisões seguram produção: <strong>qual cookie vai ser dado</strong> (trava o pedido de
-      estoque), <strong>se o story marca também o criador</strong> (trava a legenda e o PDF que vai pro
-      influenciador) e <strong>o benefício do voucher</strong> (trava a impressão). Enquanto elas não
-      saírem, os itens do grupo &ldquo;Produzir&rdquo; não andam.</span></div>
+      <strong>Cinco decisões saíram em 08/09</strong> — os sabores (Nutella e Brigadeiro), o story marcando
+      só a loja, sem limite por pessoa, sem teto por dia e um prêmio por pessoa. O que ainda segura produção
+      são duas: <strong>o benefício do voucher</strong> e <strong>como ele é resgatado</strong> travam a
+      impressão, e <strong>o critério do melhor stories</strong> trava o texto do display.</span></div>
     <div class="note-item"><span class="tag mudo">como usar</span><span>
       As marcações ficam salvas <strong>neste navegador</strong> — não são compartilhadas com quem abrir
       em outro aparelho. Serve pra você acompanhar; pra equipe, imprimir a lista.</span></div>
@@ -462,7 +470,7 @@
   <h2><span class="n">2</span> O checklist<span class="hint">clique num grupo</span></h2>
   <div class="bloco">
     <div class="grade">
-      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir agora</span><span class="cmeta contagem" data-conta="dec">0/11</span><span class="cdesc">Nada de produção anda enquanto estas não saírem.</span></button>
+      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir agora</span><span class="cmeta contagem" data-conta="dec">0/5</span><span class="cdesc">5 já fechadas. As 5 que sobraram ainda seguram produção.</span></button>
       <button class="card-btn" data-alvo="ck-pro"><span class="cnome">Produzir até 10/09</span><span class="cmeta contagem" data-conta="pro">0/12</span><span class="cdesc">Tudo que é físico ou de conta precisa estar pronto na véspera.</span></button>
       <button class="card-btn" data-alvo="ck-cri"><span class="cnome">Criadores</span><span class="cmeta contagem" data-conta="cri">0/8</span><span class="cdesc">Fechar, mandar o briefing, separar os produtos.</span></button>
       <button class="card-btn" data-alvo="ck-dia"><span class="cnome">Nos dois dias</span><span class="cmeta contagem" data-conta="dia">0/7</span><span class="cdesc">A operação de 11 e 12, incluindo o sorteio.</span></button>
@@ -471,19 +479,26 @@
     <div class="visor">
 
       <div class="painel aberto" data-alvo="ck-dec" hidden><span class="ptit">Decidir agora</span>
-        <span class="psub">11 decisões · cada uma segura alguma coisa</span>
+        <span class="psub">5 fechadas em 08/09 · 5 ainda abertas</span>
+        <div class="decidido">
+          <div class="dtit">Já decidido</div>
+          <div class="d-item"><span class="tick">✓</span><span class="txt"><strong>Qual cookie vai ser dado</strong>
+            <span class="resp"><strong>Nutella e Brigadeiro.</strong> Dois sabores, os dois de R$ 18,90 no cardápio. CMV de R$ 5,35 e R$ 4,07 — média de <strong>R$ 4,71</strong> por cookie dado, entregando R$ 18,90 de valor percebido.</span></span></div>
+          <div class="d-item"><span class="tick">✓</span><span class="txt"><strong>Limite por pessoa e como controlar</strong>
+            <span class="resp"><strong>Sem controle.</strong> A pessoa mostra o story e leva — não anota CPF nem cadastro. Diferente de Campinas, que pedia CPF.</span></span></div>
+          <div class="d-item"><span class="tick">✓</span><span class="txt"><strong>Teto de unidades por dia</strong>
+            <span class="resp"><strong>Não existe.</strong> Vai até acabar o estoque. Como é o único freio que sobra, a equipe precisa da frase pronta pra quando acabar — está no treinamento, em &ldquo;Produzir&rdquo;.</span></span></div>
+          <div class="d-item"><span class="tick">✓</span><span class="txt"><strong>O story marca quem</strong>
+            <span class="resp"><strong>Só a loja.</strong> @holycook.paulinia e mais nada. Isso destravou a legenda e o PDF do criador, que já estão sem o colchete.</span></span></div>
+          <div class="d-item"><span class="tick">✓</span><span class="txt"><strong>A mesma pessoa pode ganhar os dois prêmios do dia?</strong>
+            <span class="resp"><strong>Não.</strong> Um prêmio por pessoa por dia.</span></span></div>
+        </div>
         <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="ck-dec1" data-g="dec"><label for="ck-dec1"><span class="prazo ja">trava estoque</span><strong>Qual cookie vai ser dado</strong> — sabor fixo ou à escolha.<span class="por">Muda o custo em mais de 2x por unidade: Churros R$ 3,83 contra Bueno White R$ 8,30. Em mil cookies, é metade da verba.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec2" data-g="dec"><label for="ck-dec2"><span class="prazo ja">trava texto</span><strong>Limite por pessoa e como controlar</strong>.<span class="por">Campinas usou 1 por pessoa com CPF informado. É o único freio contra a mesma pessoa voltar cinco vezes.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec3" data-g="dec"><label for="ck-dec3"><span class="prazo ja">trava texto</span><strong>Teto de unidades por dia</strong> — e o que a equipe fala quando acabar.</label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec4" data-g="dec"><label for="ck-dec4"><span class="prazo ja">trava o PDF</span><strong>Se o story marca só a loja ou também o criador.</strong><span class="por">Está entre colchetes na legenda do briefing-criador.pdf. Com dois criadores, vira a pergunta de qual deles o cliente marca.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec5" data-g="dec"><label for="ck-dec5"><span class="prazo ja">trava impressão</span><strong>O benefício do voucher.</strong><span class="por">Quatro opções com o lucro de cada uma na aba Voucher de volta. Sorvete e torta são as que não repetem o cookie que a pessoa acabou de ganhar.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec6" data-g="dec"><label for="ck-dec6"><span class="prazo ja">trava impressão</span><strong>Como o voucher é resgatado</strong> — papel impresso ou QR.<span class="por">Papel é rápido e não deixa rastro. QR (o mesmo da fidelização) transforma os dois dias em base de clientes com nome e telefone.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec5" data-g="dec"><label for="ck-dec5"><span class="prazo ja">trava impressão</span><strong>O benefício do voucher.</strong><span class="por">Quatro opções com o lucro de cada uma na aba Voucher de volta. Sorvete e torta são as que não repetem o cookie que a pessoa acabou de ganhar — e agora isso pesa mais, porque o que ela ganha é Nutella ou Brigadeiro.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec6" data-g="dec"><label for="ck-dec6"><span class="prazo ja">trava impressão</span><strong>Como o voucher é resgatado</strong> — papel impresso ou QR.<span class="por">Papel é rápido e não deixa rastro. QR (o mesmo da fidelização) transforma os dois dias em base de clientes com nome e telefone — e é o único jeito de saber <em>quem</em> voltou, já que a entrega do cookie não vai registrar ninguém.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="ck-dec7" data-g="dec"><label for="ck-dec7"><span class="prazo ja">trava display</span><strong>Critério de &ldquo;melhor stories&rdquo; e quem julga.</strong><span class="por">Precisa caber numa frase no A4. Prêmio subjetivo sem critério escrito volta em comentário.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec8" data-g="dec"><label for="ck-dec8"><strong>Se a mesma pessoa pode ganhar os dois prêmios do dia.</strong></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec9" data-g="dec"><label for="ck-dec9"><strong>Rateio dos R$ 5 mil</strong> — quantos cookies, quanto pros criadores, quanto de reserva.<span class="por">O custo do voucher não entra aqui: ele cai no mês seguinte.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="ck-dec10" data-g="dec"><label for="ck-dec10"><strong>Quem manda na loja nos dias 11 e 12.</strong><span class="por">Se a resposta for &ldquo;a Débora&rdquo;, a campanha não conta como transferida mesmo que dê certo.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-dec11" data-g="dec"><label for="ck-dec11"><strong>Quem faz as três tarefas do sorteio</strong> — repostar, separar candidatos, gravar o vídeo da noite.<span class="por">Numa sexta cheia, tarefa sem dono é tarefa que não acontece.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec11" data-g="dec"><label for="ck-dec11"><strong>Dividir as três tarefas do sorteio</strong> — repostar, separar candidatos, gravar o vídeo da noite.<span class="por">São três pessoas possíveis: <strong>Débora, Fred ou Luciana</strong>. A divisão é feita no fim de cada dia — o item fica marcado quando os dois dias tiverem saído com as três tarefas atribuídas.</span></label></div>
         </div></div>
 
       <div class="painel" data-alvo="ck-pro" hidden><span class="ptit">Produzir até 10/09</span>
@@ -508,7 +523,7 @@
         <div class="chk-lista">
           <div class="chk-item"><input type="checkbox" id="ck-cri1" data-g="cri"><label for="ck-cri1"><span class="prazo ja">trava tudo</span><strong>Fechar os dois criadores.</strong><span class="por">A página da cidade já é @livepaulinianilsao. As sugestões com o alcance real de cada um estão na aba Influenciadores.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="ck-cri2" data-g="cri"><label for="ck-cri2"><strong>Definir se tem cachê em dinheiro</strong> além de produto + voucher.<span class="por">Se não tiver, precisa estar claro na primeira conversa — é o que trava negociação no fim.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="ck-cri3" data-g="cri"><label for="ck-cri3"><strong>Mandar o <a href="briefing-criador.pdf" target="_blank" rel="noopener">briefing-criador.pdf</a>.</strong><span class="por">Resolver o &ldquo;[+ marcar o criador?]&rdquo; da legenda antes de enviar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri3" data-g="cri"><label for="ck-cri3"><strong>Mandar o <a href="briefing-criador.pdf" target="_blank" rel="noopener">briefing-criador.pdf</a>.</strong><span class="por">A legenda já está fechada — o story marca só a loja.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="ck-cri4" data-g="cri"><label for="ck-cri4"><span class="prazo d10">10/09</span><strong>Combinar a data do post.</strong><span class="por">O vídeo-modelo foi ao ar na véspera e o off diz &ldquo;é só amanhã e sábado&rdquo;. Copiando isso, a data é 10 de setembro.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="ck-cri5" data-g="cri"><label for="ck-cri5"><strong>Separar os produtos de foto</strong> — prato com 7 ou 8 cookies e a mesa cheia.<span class="por">Não são para consumo. Decidir se voltam pra venda depois ou entram como perda.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="ck-cri6" data-g="cri"><label for="ck-cri6"><strong>Separar os produtos de consumo</strong> — 3 cookies, 3 milkshakes de cores diferentes, 1 cappuccino e 1 soda italiana.<span class="por">R$ 68,28 de CMV. Os três milkshakes não são pra beber os três: é pra ter cor diferente em plano diferente.</span></label></div>
@@ -1870,8 +1885,9 @@ E tem muito mais do que cookie: opções salgadas, milkshakes, bebidas quentes, 
 🥐 CROOKIE (croissant de cookie) – R$ 28,90
 
 🎁 COMO GARANTIR SEU COOKIE GRÁTIS
+O cookie da promoção é de <b>Nutella</b> ou <b>Brigadeiro</b>. Para levar o seu:
 ✔️ Seguir <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a>
-📸 Postar um Story marcando <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a> [+ o perfil do criador?]
+📸 Postar um Story marcando <a href="https://www.instagram.com/holycook.paulinia/" target="_blank" rel="noopener">@holycook.paulinia</a>
 📍 Retirar na loja física — não vale delivery
 📅 Só nos dias 11 e 12 (sexta e sábado), enquanto durar o estoque
 ⚠️ Limite: 1 cookie por pessoa (informar CPF).
@@ -2381,9 +2397,11 @@ Já marca quem garantir esse cookie delicioso com você! 🍪🔥</div>
           <li><strong>Separar os 3–4 candidatos</strong> do dia.</li>
           <li><strong>Gravar e postar o vídeo do vencedor</strong> no fim de cada dia.</li>
         </ul>
-        <p class="prose">Se a resposta de qualquer uma delas for &ldquo;a Débora&rdquo;, a campanha não
-        conta como transferida — é o mesmo critério do passo &ldquo;quem toca no dia&rdquo; do
-        briefing.</p></div>
+        <p class="prose"><strong>São três pessoas possíveis: a Débora, o Fred ou a Luciana</strong> — e a
+        divisão é feita no fim de cada dia, não agora. O que importa é que <em>alguém</em> saia de cada dia
+        com as três tarefas atribuídas.</p>
+        <p class="prose">Se as três acabarem sempre com a Débora, a campanha não conta como transferida —
+        é o mesmo critério do passo &ldquo;quem toca no dia&rdquo; do briefing.</p></div>
       <div class="painel" data-alvo="ms-custo" hidden><span class="ptit">O custo</span>
         <p class="prose">Os <strong>quatro combos</strong> e o display saem dos R$ 5 mil da campanha, junto
         com os cookies e o que for combinado com os criadores.</p>
