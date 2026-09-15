@@ -116,7 +116,7 @@
   .grupo-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
   .grupo-btn .gnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700;
                        letter-spacing: .06em; text-transform: uppercase; }
-  .gcontagem { display: flex; gap: .3rem; }
+  .gcontagem { display: flex; flex-wrap: wrap; gap: .3rem; }
 
   /* ---------- grade de tópicos (nível 2 — sub-cards do grupo escolhido) ---------- */
   .grade-topicos { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .5rem;
@@ -130,6 +130,23 @@
   .topico-btn:hover { border-color: var(--ink-faint); }
   .topico-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
   .topico-btn .tnome { font-size: .875rem; font-weight: 600; line-height: 1.3; }
+
+  /* ---------- grade de itens (nível 3 — sub-cards dentro de um tópico) ---------- */
+  .grade-itens { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: .45rem; }
+  .item-btn { font: inherit; text-align: left; cursor: pointer; background: var(--surface);
+              border: 1.5px solid var(--rule); border-radius: 6px; padding: .55rem .75rem;
+              font-size: .8125rem; font-weight: 600; color: inherit; line-height: 1.3;
+              transition: border-color .15s, background .15s; }
+  .item-btn:hover { border-color: var(--ink-faint); }
+  .item-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .item-visor { border: 1px dashed var(--rule); border-radius: 6px; background: var(--surface-2);
+                padding: 1rem 1.1rem; }
+  .item-visor-vazio { color: var(--ink-faint); font-size: .8125rem; text-align: center; padding: .35rem 0; }
+  .item-conteudo { display: flex; flex-direction: column; gap: .65rem; font-size: .875rem; color: var(--ink-soft); }
+  .item-conteudo[hidden] { display: none; }
+  .item-conteudo strong { color: var(--ink); font-weight: 600; }
+  .item-conteudo a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .item-conteudo h5 { font-size: .9375rem; font-weight: 600; color: var(--ink); font-family: var(--sans); }
 
   /* ---------- visor de conteúdo ---------- */
   #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
@@ -163,7 +180,7 @@
       <strong>duas crises simultâneas</strong> disputando o mesmo tempo do Fred e da Débora — faturamento e
       equipe — mais o <strong>CMV</strong>, que não é crise mas também não pode sair da lista: a visibilidade
       já existe, faltam os últimos detalhes pra fechar, e segue em cima da mesa. Esta página é só isso — os
-      cards de cada frente e a ordem sugerida de ataque.
+      cards de cada frente e a ordem sugerida de ações.
     </p>
   </header>
 
@@ -172,75 +189,177 @@
     <div class="grade-grupos">
       <button class="grupo-btn" data-grupo="faturamento">
         <span class="gnome">Crise de Faturamento</span>
-        <span class="gcontagem"><span class="tag warn">1 sazonal</span><span class="tag acc">1 bloqueio</span><span class="tag good">1 manutenção</span></span>
+        <span class="gcontagem"><span class="tag warn">1 lança 15/10</span><span class="tag acc">1 cronograma a definir</span><span class="tag acc">3 lojas — ambiente</span></span>
       </button>
       <button class="grupo-btn" data-grupo="equipe">
         <span class="gnome">Crise de Equipe</span>
-        <span class="gcontagem"><span class="tag bad">1 piora sozinho</span><span class="tag bad">1 trava as 3 lojas</span><span class="tag acc">1 bloqueio</span><span class="tag good">2 estável</span><span class="tag acc">1 processo novo</span></span>
+        <span class="gcontagem"><span class="tag acc">1 em teste</span><span class="tag bad">1 pendência</span><span class="tag acc">1 seletivo</span><span class="tag good">salário aplicado</span><span class="tag acc">2 de base</span></span>
       </button>
       <button class="grupo-btn" data-topico-direto="cmv">
         <span class="gnome">CMV</span>
-        <span class="gcontagem"><span class="tag warn">finalizando os últimos detalhes</span></span>
+        <span class="gcontagem"><span class="tag warn">2 pendências</span></span>
       </button>
     </div>
 
     <div class="grade-topicos" data-grupo="faturamento" hidden>
-      <button class="topico-btn" data-topico="cardapio-verao"><span class="tnome">Cardápio de Verão / Ação de Calor</span><span class="tag warn">sazonal — não espera</span></button>
-      <button class="topico-btn" data-topico="campanhas-manutencao"><span class="tnome">Campanhas em manutenção</span><span class="tag good">proteger piso mínimo</span></button>
-      <button class="topico-btn" data-topico="campinas-fachada"><span class="tnome">Campinas — fachada</span><span class="tag acc">bloqueador local</span></button>
+      <button class="topico-btn" data-topico="cardapio-verao"><span class="tnome">Cardápio de Verão / Ação de Calor</span><span class="tag warn">em andamento — lança ~15/10</span></button>
+      <button class="topico-btn" data-topico="campanhas-manutencao"><span class="tnome">Campanhas em manutenção</span><span class="tag acc">cronograma de 2 meses a definir</span></button>
+      <button class="topico-btn" data-topico="ambiente-lojas"><span class="tnome">Ambiente e experiência das 3 lojas</span><span class="tag acc">capex — roda em paralelo</span></button>
     </div>
 
     <div class="grade-topicos" data-grupo="equipe" hidden>
-      <button class="topico-btn" data-topico="piracicaba"><span class="tnome">Piracicaba</span><span class="tag bad">piora a cada dia</span></button>
-      <button class="topico-btn" data-topico="paulinia"><span class="tnome">Paulínia</span><span class="tag good">não piora sozinho</span></button>
-      <button class="topico-btn" data-topico="campinas-equipe"><span class="tnome">Campinas — atendimento</span><span class="tag good">sem crise ativa</span></button>
-      <button class="topico-btn" data-topico="salario"><span class="tnome">Bloqueador: salário</span><span class="tag acc">trava as duas lojas</span></button>
+      <button class="topico-btn" data-topico="piracicaba"><span class="tnome">Piracicaba</span><span class="tag acc">troca em teste esta semana</span></button>
+      <button class="topico-btn" data-topico="paulinia"><span class="tnome">Paulínia</span><span class="tag bad">resolver a Renata</span></button>
+      <button class="topico-btn" data-topico="campinas-equipe"><span class="tnome">Campinas — atendimento</span><span class="tag acc">seletivo em andamento</span></button>
+      <button class="topico-btn" data-topico="salario"><span class="tnome">Bloqueador: salário</span><span class="tag good">já aplicado em Piracicaba</span></button>
       <button class="topico-btn" data-topico="processo-visitas"><span class="tnome">Novo hábito: visita semanal + checklist de equipe</span><span class="tag acc">processo novo</span></button>
-      <button class="topico-btn" data-topico="dividir-cargos"><span class="tnome">Base: dividir atividades por cargo</span><span class="tag bad">hoje — trava as 3 lojas</span></button>
+      <button class="topico-btn" data-topico="dividir-cargos"><span class="tnome">Base: dividir atividades por cargo</span><span class="tag acc">líder de loja já definido</span></button>
     </div>
 
     <div id="visor">
       <p class="visor-vazio">Clique num grupo e depois num card pra ver a situação e a próxima ação.</p>
 
       <div class="topico-conteudo" data-topico="cardapio-verao" hidden>
-        <h3>Cardápio de Verão / Ação de Calor</h3>
+        <h3>Cardápio de Verão / Ação de Calor<span class="tag acc">lançamento ~15/10/2026</span></h3>
+        <div class="note-item"><span class="tag good">onde estamos</span><span>
+          O cardápio <strong>existe e está em andamento</strong> — os 10 produtos foram fechados em 21/08/2026,
+          a partir da coleta e votação da página
+          <a href="https://holycampinas.github.io/cardapio-verao-holy-cookie/">Cardápio de Verão</a>. Não é mais
+          escolher produto: é preparar o lançamento.
+        </span></div>
         <div class="note-item"><span class="tag warn">por que não espera</span><span>
-          Urgência de calendário, não de gente — cada dia de calor sem ação é venda de cookie perdida.
-          Diferente da crise de equipe, não exige Fred/Débora fisicamente numa loja.
+          Urgência de calendário, não de gente — venda de cookie é inversamente proporcional ao calor. Fura a
+          fila de marketing, na frente até da Máquina de Conteúdo.
         </span></div>
-        <div class="note-item"><span class="tag acc">próxima ação</span><span>
-          Definir o escopo mínimo — o que lança primeiro (sorvete? promo?) — e furar a fila de marketing,
-          na frente até da Máquina de Conteúdo.
-        </span></div>
-        <div class="note-item"><span class="tag good">projeto de base já existe</span><span>
-          A página <a href="https://holycampinas.github.io/cardapio-verao-holy-cookie/">Cardápio de Verão</a>
-          (coleta/votação de produto) já está no ar — a ação de calor usa essa base.
-        </span></div>
+
+        <h4 class="sub">Próximas etapas<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — clique numa caixinha</span></h4>
+        <div class="fluxo">
+          <button class="passo-caixa" data-detalhe="Produzir os vídeos de divulgação e montar as campanhas do lançamento. É a etapa mais longa de produção — começa agora, não na semana da data.">1. Material de marketing</button><span class="seta">→</span>
+          <button class="passo-caixa" data-detalhe="Se antecipar e deixar Campinas, Paulínia e Piracicaba organizadas antes do lançamento — insumo, equipamento e equipe treinada no produto novo. Organização feita no dia do lançamento é lançamento perdido.">2. Organizar as 3 lojas</button><span class="seta">→</span>
+          <button class="passo-caixa" data-detalhe="Rodar o teste dos produtos pra aprovar o que de fato entra no cardápio — é o aval final antes de tudo ir pro ar.">3. Teste e aprovação dos produtos</button><span class="seta">→</span>
+          <button class="passo-caixa" data-detalhe="Mira em torno de 15/10/2026. É essa data que ancora o cronograma de campanhas dos 2 meses seguintes — enquanto ela não estiver fechada, o resto da fila de marketing não tem em que se apoiar.">4. Data de lançamento — ~15/out</button>
+        </div>
+        <div class="passo-detalhe"></div>
       </div>
 
       <div class="topico-conteudo" data-topico="campanhas-manutencao" hidden>
-        <h3>Campanhas em manutenção</h3>
+        <h3>Campanhas em manutenção<span class="tag acc">cronograma a definir</span></h3>
+        <div class="note-item"><span class="tag warn">o que falta decidir</span><span>
+          Ação não falta — falta escolher <strong>qual delas faz o piso</strong>: a que sustenta a venda mínima
+          mesmo quando ninguém está empurrando. Sem essa escolha, o esforço se espalha entre todas e nenhuma
+          segura o piso.
+        </span></div>
+        <div class="note-item"><span class="tag acc">próxima ação</span><span>
+          Montar um <strong>cronograma de pelo menos 2 meses</strong> com as ações abaixo, separando o que é
+          <strong>piso</strong> (roda sempre, em cadência) do que é <strong>pico</strong> (data marcada).
+        </span></div>
         <div class="note-item"><span class="tag bad">o que já esfriou uma vez</span><span>
-          A <a href="https://fredpetrutche.github.io/maquina-de-conteudo/">Máquina de Conteúdo</a> ficou 4
-          dias seguidos sem nenhum toque em agosto/2026; a
-          <a href="../acoes-de-loja/campanha-fidelizacao/">campanha de fidelização por visitas</a> segue
-          travada na Etapa 2.
+          A <a href="https://fredpetrutche.github.io/maquina-de-conteudo/">Máquina de Conteúdo</a> ficou 4 dias
+          seguidos sem nenhum toque em agosto/2026; a <a href="../acoes-de-loja/campanha-fidelizacao/">campanha
+          de fidelização por visitas</a> segue travada na Etapa 2. Campanha parada perde força — retomar do zero
+          custa mais caro que manter cadência baixa e constante.
         </span></div>
-        <div class="note-item"><span class="tag acc">por que precisa de piso mínimo</span><span>
-          Campanha parada perde força — retomar do zero custa mais caro que manter uma cadência baixa e
-          constante.
-        </span></div>
+
+        <h4 class="sub">As ações que entram no cronograma<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — clique numa pra ver o detalhe</span></h4>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="camp-paginas-cidade">Páginas das cidades</button>
+          <button class="item-btn" data-item="camp-lanc-verao">Lançamento do Cardápio de Verão</button>
+          <button class="item-btn" data-item="camp-lanc-natal">Lançamento do Cardápio de Natal</button>
+          <button class="item-btn" data-item="camp-aluno-nota-10">Aluno Nota 10</button>
+          <button class="item-btn" data-item="camp-influenciadores">Influenciadores fixos</button>
+          <button class="item-btn" data-item="camp-maquina-conteudo">Máquina de Conteúdo</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa ação para ver o detalhe.</p>
+
+          <div class="item-conteudo" data-item="camp-paginas-cidade" hidden>
+            <h5>Páginas das cidades</h5>
+            <span class="tag good">ativo que já existe</span>
+            <p>Já estão no ar. Entram no cronograma como <strong>base que já trabalha</strong> — não é projeto
+            a construir, é ativo a alimentar.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="camp-lanc-verao" hidden>
+            <h5>Lançamento do Cardápio de Verão</h5>
+            <span class="tag warn">pico — data ~15/10/2026</span>
+            <p>A maior ação do período e a primeira data marcada do cronograma. As próximas etapas estão no card
+            <strong>Cardápio de Verão / Ação de Calor</strong>, neste mesmo grupo.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="camp-lanc-natal" hidden>
+            <h5>Lançamento do Cardápio de Natal</h5>
+            <span class="tag acc">pico — segunda data do calendário</span>
+            <p>Vem na sequência do verão. É a segunda data marcada a caber dentro dos 2 meses de cronograma.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="camp-aluno-nota-10" hidden>
+            <h5>Aluno Nota 10</h5>
+            <span class="tag acc">campanha na fila</span>
+            <p>Campanha que já está na lista e ainda precisa ser posicionada no cronograma — definir quando roda
+            e se entra como piso ou como pico.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="camp-influenciadores" hidden>
+            <h5>Influenciadores fixos</h5>
+            <span class="tag warn">teste de 4 semanas</span>
+            <p>Conteúdo viral com <strong>influenciadores fixos</strong>, em formato de teste: <strong>4
+            semanas</strong>, cada influenciador postando <strong>5 vídeos por semana</strong>. No fim do teste
+            dá pra decidir com dado se vira canal de piso ou não.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="camp-maquina-conteudo" hidden>
+            <h5>Máquina de Conteúdo</h5>
+            <span class="tag acc">candidata natural a piso</span>
+            <p>Postar de <strong>3 a 4 vídeos por dia</strong> no Instagram. É o canal mais perto de virar o
+            piso — o que falta é a cadência não morrer, como já aconteceu em agosto/2026. Método e fichas na
+            <a href="https://fredpetrutche.github.io/maquina-de-conteudo/">Máquina de Conteúdo</a>.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="topico-conteudo" data-topico="campinas-fachada" hidden>
-        <h3>Campinas — fachada</h3>
-        <div class="note-item"><span class="tag acc">o bloqueio</span><span>
-          A fachada da loja precisa ficar pronta antes de um bom marketing local ali — é capex, não gente,
-          então resolve em paralelo, sem tomar tempo de decisão contínuo.
+      <div class="topico-conteudo" data-topico="ambiente-lojas" hidden>
+        <h3>Ambiente e experiência das 3 lojas</h3>
+        <div class="note-item"><span class="tag acc">por que está em faturamento</span><span>
+          Loja feia, sem aconchego ou quente demais derruba venda antes de qualquer campanha começar. É
+          <strong>capex, não gente</strong> — resolve em paralelo, sem tomar tempo de decisão contínuo do Fred
+          e da Débora.
         </span></div>
-        <div class="note-item"><span class="tag warn">alternativa enquanto isso</span><span>
-          Dá pra fazer marketing das outras lojas nesse meio-tempo, mas com custo à parte.
+        <div class="note-item"><span class="tag warn">onde isso vive</span><span>
+          Dentro do teto de 8 semanas já definido pro <a href="../experiencia-holy-cookie/">Experiência Holy
+          Cookie</a> — o portão de estabilidade que precisa passar antes da campanha de fidelização subir.
         </span></div>
+
+        <h4 class="sub">Uma loja de cada vez<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — clique numa loja</span></h4>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="amb-campinas">Campinas</button>
+          <button class="item-btn" data-item="amb-paulinia">Paulínia</button>
+          <button class="item-btn" data-item="amb-piracicaba">Piracicaba</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa loja para ver o que falta nela.</p>
+
+          <div class="item-conteudo" data-item="amb-campinas" hidden>
+            <h5>Campinas — fachada e experiência interna</h5>
+            <span class="tag bad">fachada muito feia</span>
+            <p>Terminar de construir a <strong>fachada</strong> — hoje está muito feia e segura o marketing
+            local. Depois dela, <strong>melhorar a experiência do cliente dentro da loja</strong>. Enquanto a
+            fachada não fica pronta, dá pra fazer marketing das outras lojas, mas com custo à parte.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="amb-paulinia" hidden>
+            <h5>Paulínia — aconchego</h5>
+            <span class="tag warn">ambiente interno</span>
+            <p>O ponto fraco aqui não é a fachada, é o <strong>aconchego da loja</strong> — o cliente precisa
+            querer ficar.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="amb-piracicaba" hidden>
+            <h5>Piracicaba — calor</h5>
+            <span class="tag bad">loja muito quente</span>
+            <p>A loja é <strong>muito quente</strong>. Hoje tem só um ar-condicionado — provavelmente precisa de
+            <strong>dois</strong> — e de um <strong>toldo</strong> pra proteger do sol.</p>
+          </div>
+        </div>
       </div>
 
       <div class="topico-conteudo" data-topico="piracicaba" hidden>
@@ -250,6 +369,18 @@
           loja. Em vez de trocar os dois de uma vez, o plano virou faseado: resolve o atendimento primeiro,
           só depois decide o que fazer com o Henrique.
         </span></div>
+        <div class="note-item"><span class="tag acc">atualização 15/09/2026</span><span>
+          Duas candidatas — <strong>Rubia</strong> e <strong>Barbara</strong> — vão ser testadas
+          <strong>esta semana</strong> pra substituir os dois funcionários contaminados. O salário da loja já
+          foi aumentado e a busca por um <strong>sócio operador</strong> está aberta.
+        </span></div>
+
+        <h4 class="sub">Em curso agora</h4>
+        <ul class="checklist">
+          <li><label><input type="checkbox" data-id="pira-teste-candidatas">Testar Rubia e Barbara esta semana — são elas que entram no lugar dos dois funcionários atuais</label></li>
+          <li><label><input type="checkbox" data-id="pira-salario-aumentado" checked>Aumentar o salário da loja — feito; com salário baixo não vinha gente boa, não tinha como</label></li>
+          <li><label><input type="checkbox" data-id="pira-socio-operador">Buscar um sócio operador pra loja — mesma estrutura que já roda em Paulínia</label></li>
+        </ul>
 
         <h4 class="sub">Fase 0 — Pré-requisitos<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — antes de começar a seleção</span></h4>
         <div class="note-item"><span class="tag warn">por que</span><span>
@@ -315,6 +446,10 @@
           Não tem contaminação ativa — o time já saiu sozinho, não piora dia a dia. O risco é outro: falta de
           qualquer pessoa experiente pra ancorar o padrão da loja com tudo novo de uma vez.
         </span></div>
+        <div class="note-item"><span class="tag bad">atualização 15/09/2026</span><span>
+          A <strong>Renata</strong> tem faltado muito. Ou resolve a questão dos filhos dela — que é o que puxa
+          as faltas — ou troca. É a pendência aberta da loja hoje.
+        </span></div>
 
         <h4 class="sub">Fase 0 — Pré-requisitos<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — antes de começar a seleção</span></h4>
         <div class="note-item"><span class="tag warn">por que</span><span>
@@ -333,6 +468,7 @@
           <li><label><input type="checkbox" data-id="paulinia-contratar-equipe" checked>Contratar equipe nova — feito</label></li>
           <li><label><input type="checkbox" data-id="paulinia-certificar">Fazer a certificação dessa equipe, usando a <a href="../certificacao-holy-cookie/">Certificação 80/20</a> — já tem 10 dos 26 tópicos prontos, incluindo Atendimento, Forno e Líder de pedidos</label></li>
           <li><label><input type="checkbox" data-id="paulinia-confirmar-algo-a-perder">Confirmar que as pessoas que estão lá hoje têm &ldquo;algo a perder&rdquo; — mesma regra de Piracicaba, sem CLT</label></li>
+          <li><label><input type="checkbox" data-id="paulinia-renata">Resolver a Renata: tratar a questão dos filhos dela ou trocar — decidir, não deixar as faltas correrem</label></li>
           <li><label><input type="checkbox" data-id="paulinia-onboarding">Acompanhar o onboarding / período de experiência dos 3 colaboradores: Luciana (líder), auxiliar de cozinha, líder de pedido da noite</label></li>
         </ul>
       </div>
@@ -341,6 +477,10 @@
         <h3>Campinas — atendimento</h3>
         <div class="note-item"><span class="tag warn">a situação</span><span>
           Atendimento também não é excelente, mas sem crise ativa — ninguém pedindo pra sair.
+        </span></div>
+        <div class="note-item"><span class="tag acc">atualização 15/09/2026</span><span>
+          Já tem <strong>processo seletivo em andamento</strong> na loja — falta pegar o status antes de
+          decidir qualquer coisa aqui.
         </span></div>
 
         <h4 class="sub">Fase 0 — Pré-requisitos<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — antes de começar a seleção</span></h4>
@@ -356,6 +496,7 @@
 
         <h4 class="sub">Remanejamento e contratação</h4>
         <ul class="checklist">
+          <li><label><input type="checkbox" data-id="campinas-status-seletivo">Pegar o status do processo seletivo que já está em andamento</label></li>
           <li><label><input type="checkbox" data-id="campinas-custo">Resolver o custo extra de equipe antes de fechar a decisão</label></li>
           <li><label><input type="checkbox" data-id="campinas-manu">Decidir se a <strong>Manu</strong> migra pra processos e cozinha — ela é excelente, mas o perfil dela é mais de processos do que de pessoas/atendimento</label></li>
           <li><label><input type="checkbox" data-id="campinas-contratar">Contratar uma pessoa boa pro atendimento</label></li>
@@ -377,9 +518,14 @@
           Fred está calculando quanto dá pra aumentar sem onerar o custo da loja — projeto já rodando dentro
           do Sistema-HC (tela de mão-de-obra, no fluxo de caixa).
         </span></div>
-        <div class="note-item"><span class="tag good">por que priorizar</span><span>
-          Trava a contratação em Piracicaba <strong>e</strong> Paulínia ao mesmo tempo — fechar esse número
-          antes de qualquer vaga sair no ar, senão contrata no escuro duas vezes.
+        <div class="note-item"><span class="tag good">atualização 15/09/2026</span><span>
+          Em <strong>Piracicaba o aumento já foi aplicado</strong> — ficou claro que, com salário baixo, não
+          tinha como trazer gente boa. Falta fechar o número pras outras lojas, que é o que o cálculo do
+          Sistema-HC resolve.
+        </span></div>
+        <div class="note-item"><span class="tag acc">por que priorizar o resto</span><span>
+          Ainda trava a contratação nas outras lojas — fechar o número antes de qualquer vaga sair no ar,
+          senão contrata no escuro.
         </span></div>
       </div>
 
@@ -406,6 +552,22 @@
           <li><label><input type="checkbox" data-id="cargos-eduardo">Com isso, o Eduardo sabe o que procurar em cada contratação</label></li>
           <li><label><input type="checkbox" data-id="cargos-classificar">Com isso, dá pra classificar os funcionários atuais de Piracicaba, Paulínia e Campinas nas funções certas</label></li>
         </ul>
+        <div class="note-item"><span class="tag good">decisão tomada — 15/09/2026</span><span>
+          Mudança radical no cargo de <strong>líder de loja</strong>: ele passa a responder por
+          <strong>três coisas só</strong>.
+        </span></div>
+
+        <h4 class="sub">O novo escopo do líder de loja</h4>
+        <ul class="pontos">
+          <li><strong>Fica com ele:</strong> qualidade do produto, ambiente da loja e experiência do cliente.</li>
+          <li><strong>Sai dele:</strong> compras e sistema.</li>
+        </ul>
+        <div class="note-item"><span class="tag warn">por quê</span><span>
+          São <strong>habilidades contraditórias</strong>. Quem é bom de pessoas, de atendimento e de ambiente
+          não é bom da parte técnica — logística, lógica, sistema, imposto. Na prática: compra errado, deixa
+          faltar produto e toma decisões ruins de organização e de finanças. Água e óleo.
+        </span></div>
+
         <div class="note-item"><span class="tag acc">onde isso vive</span><span>
           É a continuação do trabalho já em andamento na página <a href="../pessoas/">Pessoas Holy Cookie</a>
           — descritivo de cargo + aba Config.
@@ -422,27 +584,35 @@
           Não é uma crise como Piracicaba ou Paulínia, mas também não é um item que se resolve e é esquecido —
           mesmo depois de fechado, CMV pede acompanhamento contínuo.
         </span></div>
+
+        <h4 class="sub">Pendências abertas — 15/09/2026</h4>
+        <ul class="checklist">
+          <li><label><input type="checkbox" data-id="cmv-embalagens">Comprar caixinhas e embalagens mais baratas</label></li>
+          <li><label><input type="checkbox" data-id="cmv-milkshake">Milkshake mais diluído, com preço menor</label></li>
+        </ul>
       </div>
 
     </div>
   </section>
 
   <section>
-    <h2 class="titulo">Ordem sugerida<span class="hint">clique nas caixinhas</span></h2>
+    <h2 class="titulo">Ordem sugerida de ações<span class="hint">clique nas caixinhas</span></h2>
     <div class="fluxo">
-      <button class="passo-caixa" data-detalhe="Bloqueador comum às duas lojas em crise — sem ele, contratação em Piracicaba e Paulínia fica no escuro. Já está em andamento na tela de mão-de-obra do fluxo de caixa do Sistema-HC; é terminar, não começar do zero. Pouco tempo seu pra travar o maior efeito destravador.">1. Fechar cálculo de salário</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Decidir a data de saída do Henrique e quantos dias o Eduardo tem pra cobrir Piracicaba interinamente — é essa cobertura que evita o líder contaminado passar a cultura ruim pra funcionária nova antes da troca dele.">2. Decidir saída do Henrique</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Calendário não espera — venda de cookie é inversamente proporcional ao calor. Entra na fila de marketing agora, na frente até da Máquina de Conteúdo.">3. Cardápio de Verão fura a fila</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Não precisa esperar Piracicaba fechar — só precisa do Eduardo livre se for apoio presencial. A Certificação 80/20, já com 10 dos 26 tópicos prontos, vira currículo de onboarding do time novo.">4. Paulínia recruta em paralelo</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Fachada (capex) e o resto da certificação seguem dentro do teto de 8 semanas já definido pro Experiência Holy Cookie — sem tomar tempo de decisão contínuo do Fred e da Débora.">5. Campinas e o resto no fundo</button>
+      <button class="passo-caixa" data-detalhe="É o que tem data marcada: Rubia e Barbara são testadas esta semana pra substituir os dois funcionários contaminados. O salário já foi aumentado, então o funil de candidatas existe — falta fechar o teste e trocar. Loja mais crítica, decisão mais próxima.">1. Fechar o teste de Piracicaba</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="A Renata tem faltado muito. Ou trata a questão dos filhos dela, que é o que puxa as faltas, ou troca — o que não dá é deixar correr numa loja com o time inteiro novo e sem ninguém experiente pra ancorar o padrão.">2. Decidir a Renata em Paulínia</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Calendário não espera — venda de cookie é inversamente proporcional ao calor. O cardápio já existe, com os 10 produtos fechados: agora é material de marketing, organizar as 3 lojas, aprovar os produtos no teste e cravar a data por volta de 15/10.">3. Cardápio de Verão até ~15/out</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Antes de espalhar esforço por seis frentes, escolher qual ação faz o piso e montar o cronograma de pelo menos 2 meses em volta das datas de verão e de Natal. Sem essa escolha, nenhuma campanha sustenta a venda mínima.">4. Cronograma de campanhas de 2 meses</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Fachada de Campinas, aconchego de Paulínia e o calor de Piracicaba: é capex, roda em paralelo, dentro do teto de 8 semanas já definido pro Experiência Holy Cookie — sem tomar tempo de decisão contínuo do Fred e da Débora.">5. Ambiente das 3 lojas no fundo</button>
     </div>
     <div class="passo-detalhe"></div>
   </section>
 
   <footer>
     Documento criado em 17/08/2026, a partir da conversa em que o Fred desenhou as duas crises simultâneas
-    (faturamento e equipe) e a ordem sugerida de ataque entre elas. Se algo aqui estiver desatualizado, esta
-    página é a fonte da verdade.
+    (faturamento e equipe) e a ordem sugerida de ações entre elas. Atualizado em 15/09/2026: cardápio de verão
+    em preparação de lançamento, cronograma de campanhas a definir, ambiente das 3 lojas, troca em teste em
+    Piracicaba, a Renata em Paulínia, o novo escopo do líder de loja e as 2 pendências de CMV. Se algo aqui
+    estiver desatualizado, esta página é a fonte da verdade.
   </footer>
 
 </div>
@@ -482,6 +652,16 @@
   }
   document.querySelectorAll('.topico-btn').forEach(function (b) {
     b.addEventListener('click', function () { abrirTopico(b.dataset.topico); });
+  });
+
+  document.querySelectorAll('.item-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var painel = b.closest('.topico-conteudo');
+      painel.querySelectorAll('.item-btn').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      painel.querySelectorAll('.item-conteudo').forEach(function (c) { c.hidden = c.dataset.item !== b.dataset.item; });
+      var vazio = painel.querySelector('.item-visor-vazio');
+      if (vazio) vazio.hidden = true;
+    });
   });
 
   document.querySelectorAll('.passo-caixa').forEach(function (b) {
