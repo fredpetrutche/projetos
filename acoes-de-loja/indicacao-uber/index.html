@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Indicacao Uber — Holy Cook</title>
+<meta name="description" content="Motorista de app revende cookie no carro e indica a loja. A conta dos dois lados: quanto ele leva por dia e quanto sobra para a loja.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><path d='M18 60h64'/><path d='M26 60l6-20h36l6 20'/><circle cx='34' cy='68' r='6'/><circle cx='66' cy='68' r='6'/></g></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'><path d='M18 60h64'/><path d='M26 60l6-20h36l6 20'/><circle cx='34' cy='68' r='6'/><circle cx='66' cy='68' r='6'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --step-1:#C6CBE2; --step-2:#98A2CB; --step-3:#6975AE; --step-4:#33417E;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+      --step-1:#2E3550; --step-2:#4A5580; --step-3:#6D7BB4; --step-4:#96A8E6;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --step-1:#C6CBE2; --step-2:#98A2CB; --step-3:#6975AE; --step-4:#33417E;
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+    --step-1:#2E3550; --step-2:#4A5580; --step-3:#6D7BB4; --step-4:#96A8E6;
+  }
+
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag, .vnum { font-family: var(--mono); }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none; color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  .story { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .story > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .45rem; }
+  .story .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; align-self: flex-start; }
+  .story .job { font-family: var(--mono); font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .story .txt { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .story .txt em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .story .vid { font-size: .75rem; color: var(--ink-faint); border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+  .story.fluxo { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 68rem) { .story.fluxo { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 44rem) { .story.fluxo { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 30rem) { .story.fluxo { grid-template-columns: 1fr; } }
+
+  .ledger { display: flex; flex-direction: column; gap: .75rem; }
+  .offer { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; display: grid; grid-template-columns: 1fr auto; gap: .25rem 1.5rem; padding: 1rem 1.1rem; }
+  .offer.vazio { background: var(--surface-2); }
+  .offer.somatorio { border-color: var(--ink); border-width: 2px; }
+  .offer .head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .offer .vnum { font-size: .6875rem; font-weight: 700; letter-spacing: .1em; background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem; border-radius: 2px; }
+  .offer .name { font-weight: 600; font-size: .95rem; }
+  .offer .breakdown { grid-column: 1 / 2; font-family: var(--mono); font-size: .8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; margin-top: .3rem; }
+  .offer .result { grid-row: 1 / 3; grid-column: 2; align-self: center; text-align: right; display: flex; flex-direction: column; gap: .1rem; }
+  .offer .result .r { font-family: var(--mono); font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  .offer .risk { grid-column: 1 / -1; margin-top: .6rem; padding-top: .6rem; border-top: 1px dashed var(--rule); font-size: .8125rem; color: var(--ink-soft); display: flex; gap: .5rem; align-items: baseline; }
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+
+  .controls { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 1.15rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.15rem 1.75rem; }
+  .controls.destaque { border-color: var(--accent); background: var(--accent-bg); }
+  .ctl { display: flex; flex-direction: column; gap: .35rem; }
+  .ctl.off { opacity: .45; }
+  .ctl .top { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+  .ctl .top .val { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .ctl .note { font-size: .75rem; color: var(--ink-faint); line-height: 1.4; }
+  .ctl .note b { color: var(--ink-soft); font-weight: 600; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 1.1rem; background: transparent; cursor: pointer; margin: 0; }
+  input[type=range]::-webkit-slider-runnable-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-moz-range-track { height: 3px; background: var(--rule); border-radius: 2px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); margin-top: -6px; box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+  input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  select { font-family: var(--mono); font-size: .75rem; color: var(--ink); background: var(--surface-2); border: 1px solid var(--rule); border-radius: 3px; padding: .42rem .5rem; width: 100%; cursor: pointer; }
+  select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .toggle { display: flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .toggle button { flex: 1; font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; padding: .45rem .5rem; background: var(--surface-2); color: var(--ink-soft); border: none; cursor: pointer; }
+  .toggle button + button { border-left: 1px solid var(--rule); }
+  .toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  .funnel { display: flex; flex-direction: column; }
+  .frow { display: grid; grid-template-columns: 16rem 1fr; align-items: center; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--rule-soft); }
+  .frow:last-child { border-bottom: none; }
+  .frow .fl { display: flex; flex-direction: column; }
+  .frow .fl .t { font-family: var(--mono); font-size: .8125rem; font-weight: 600; }
+  .frow .fl .d { font-size: .75rem; color: var(--ink-faint); }
+  .bartrack { position: relative; display: flex; align-items: center; gap: .6rem; min-width: 0; }
+  .bar { height: 22px; border-radius: 0 4px 4px 0; min-width: 2px; transition: width .22s ease; }
+  .bval { font-family: var(--mono); font-size: .875rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .cell { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .25rem; }
+  .cell.hero { background: var(--surface-2); }
+  .cell .v { font-family: var(--mono); font-size: 1.55rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.025em; line-height: 1.1; }
+  .cell.hero .v { font-size: 2rem; }
+  .cell .s { font-size: .75rem; color: var(--ink-faint); line-height: 1.45; }
+  .cell .s em { color: var(--ink-soft); font-style: normal; font-weight: 600; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 34rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: .5rem .8rem; text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; white-space: normal; }
+  thead th[colspan] { text-align: center; border-bottom: 1px solid var(--rule); }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.total td { border-top: 2px solid var(--ink); font-weight: 700; }
+  tbody tr.mark td { background: var(--surface-2); }
+  tbody td:first-child { color: var(--ink); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start; font-size: .875rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .note-item a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .note-item.alerta { border-color: var(--bad); background: var(--bad-bg); }
+  details { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .7rem 1rem; }
+  details summary { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); cursor: pointer; font-weight: 600; }
+  details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  details[open] summary { margin-bottom: .9rem; }
+  details ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .35rem; font-size: .8125rem; color: var(--ink-soft); }
+  details code { font-family: var(--mono); font-size: .95em; color: var(--ink); }
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 32rem) {
+    .frow { grid-template-columns: 1fr; gap: .35rem; }
+    .offer { grid-template-columns: 1fr; }
+    .offer .result { grid-row: auto; grid-column: 1; text-align: left; margin-top: .5rem; }
+  }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center; gap: .45rem;
+            align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  .pend { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px;
+          background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .pend > li { background: var(--surface); padding: .95rem 1.1rem;
+               display: grid; grid-template-columns: auto 1fr; gap: .3rem .8rem; align-items: start; }
+  .pend .num { grid-row: 1 / 3; font-family: var(--mono); font-size: .6875rem; font-weight: 700;
+               letter-spacing: .06em; color: var(--accent); background: var(--accent-bg);
+               padding: .18rem .4rem; border-radius: 2px; }
+  .pend .q { font-weight: 600; font-size: .9375rem; color: var(--ink); line-height: 1.4; }
+  .pend .porque { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .pend .porque em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .pend .porque a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .pend .q .ideia { display: block; font-weight: 400; font-size: .8125rem; color: var(--ink-faint);
+                    font-family: var(--mono); margin-top: .15rem; }
+  .pend .resp { grid-column: 2; margin-top: .6rem; padding: .55rem .7rem;
+                background: var(--surface-2); border: 1px dashed var(--rule); border-radius: 3px;
+                display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+  .pend .rl { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em; text-transform: uppercase;
+              font-weight: 700; color: var(--accent); flex: none; }
+  .pend .rv { font-size: .875rem; color: var(--ink); line-height: 1.5; flex: 1 1 14rem; min-width: 0; }
+  .pend .rv.vazia { font-family: var(--mono); font-size: .75rem; letter-spacing: .06em;
+                    text-transform: uppercase; color: var(--ink-faint); }
+  .pend .rv em { font-style: normal; font-weight: 600; color: var(--ink); }
+  .pend .resp.ok { border-style: solid; background: var(--surface); }
+  .pend .resp.ok .rl { color: var(--good); }
+  @media (max-width: 32rem) {
+    .pend > li { grid-template-columns: 1fr; }
+    .pend .num { grid-row: auto; justify-self: start; }
+    .pend .resp { grid-column: 1; }
+  }
+
+  .regras { margin: .55rem 0 .1rem; padding: 0; list-style: none; display: grid; gap: .45rem; }
+  .regras li { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
+               padding-left: .85rem; position: relative; }
+  .regras li::before { content: ""; position: absolute; left: 0; top: .55rem;
+                       width: .3rem; height: .3rem; border-radius: 50%; background: var(--accent); }
+  .regras b { color: var(--ink); font-weight: 600; }
+  .regras.tarefas { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+                    padding: 1rem 1.1rem; gap: .6rem; }
+  .regras.tarefas li { padding-left: 1.5rem; }
+  .regras.tarefas li::before { top: .3rem; width: .7rem; height: .7rem; border-radius: 2px;
+                               background: none; border: 1.5px solid var(--accent); }
+
+  .abas { display: flex; gap: .35rem; flex-wrap: wrap; border-bottom: 2px solid var(--ink);
+          margin-bottom: -1rem; }
+  .abas button { font-family: var(--mono); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+                 text-align: left; background: var(--surface-2); color: var(--ink-soft);
+                 border: 1px solid var(--rule); border-bottom: none; border-radius: 4px 4px 0 0;
+                 padding: .6rem .95rem; cursor: pointer; margin-bottom: -2px; line-height: 1.25; }
+  .abas button:hover { color: var(--ink); }
+  .abas button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .abas button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .abas .sub2 { display: block; font-size: .6875rem; font-weight: 400; letter-spacing: .01em;
+                text-transform: none; opacity: .7; margin-top: .1rem; }
+  .painel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .painel[hidden] { display: none; }
+
+  .abas.abas2 { border-bottom: 1px solid var(--rule); margin-bottom: -.75rem; gap: .3rem; }
+  .abas.abas2 button { background: none; border: none; border-bottom: 2px solid transparent;
+                       border-radius: 0; margin-bottom: -1px; padding: .55rem .9rem;
+                       font-size: .8125rem; color: var(--ink-soft); }
+  .abas.abas2 button:hover { color: var(--ink); }
+  .abas.abas2 button[aria-selected="true"] { background: none; color: var(--accent);
+                                             border-bottom-color: var(--accent); }
+  .abas.abas2 .sub2 { font-size: .625rem; }
+
+  .oferta-box { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 3px;
+                padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: .5rem; }
+  .oferta-rot { font-family: var(--mono); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
+                font-weight: 700; color: var(--accent); }
+  .oferta-txt { font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-weight: 600; color: var(--ink);
+                line-height: 1.3; letter-spacing: -.01em; }
+  .oferta-ast { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5;
+                border-top: 1px dashed var(--rule); padding-top: .5rem; }
+
+  /* ─── formas de indicar: grade de cards, um aberto por vez ─── */
+  .story.fluxo.comum { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 46rem) { .story.fluxo.comum { grid-template-columns: 1fr; } }
+  .story.fluxo.comum .vnum { background: var(--surface-2); color: var(--ink-faint); font-weight: 600; }
+
+  .grade-formas { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .55rem; }
+  .forma-btn { display: flex; flex-direction: column; gap: .3rem; text-align: left; cursor: pointer;
+               background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+               padding: .85rem .95rem; font-family: inherit; color: var(--ink);
+               border-left: 3px solid var(--rule); transition: border-color .15s ease, background .15s ease; }
+  .forma-btn:hover { border-color: var(--ink-faint); border-left-color: var(--accent); }
+  .forma-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .forma-btn .fn { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                   color: var(--ink-faint); }
+  .forma-btn .ft { font-family: var(--mono); font-size: .875rem; font-weight: 600; line-height: 1.25; }
+  .forma-btn .fd { font-size: .75rem; color: var(--ink-faint); line-height: 1.4; }
+  .forma-btn.rec { border-left-color: var(--good); }
+  .forma-btn.nova { border-left-color: var(--warn); }
+  .forma-btn[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); }
+  .forma-btn[aria-expanded="true"] .ft { color: var(--paper); }
+  .forma-btn[aria-expanded="true"] .fn,
+  .forma-btn[aria-expanded="true"] .fd { color: var(--paper); opacity: .75; }
+
+  .forma-visor { display: flex; flex-direction: column; gap: .9rem;
+                 background: var(--surface); border: 1px solid var(--ink); border-radius: 4px;
+                 padding: 1.1rem 1.25rem; }
+  /* obrigatório: a classe fixa display, então [hidden] do UA não vence sozinho */
+  .forma-visor[hidden] { display: none !important; }
+  .fv-cab { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
+            border-bottom: 1px solid var(--rule); padding-bottom: .6rem; }
+  .fv-cab .fv-t { font-family: var(--mono); font-size: 1rem; font-weight: 600; }
+  .fv-passos { margin: 0; padding-left: 1.2rem; display: grid; gap: .4rem;
+               font-size: .875rem; color: var(--ink-soft); line-height: 1.5; }
+  .fv-passos strong { color: var(--ink); font-weight: 600; }
+  .fv-passos li::marker { font-family: var(--mono); font-size: .75rem; color: var(--accent); font-weight: 700; }
+  .fv-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  @media (max-width: 44rem) { .fv-cols { grid-template-columns: 1fr; } }
+  .fv-cols ul { margin: .3rem 0 0; padding-left: 1.05rem; display: grid; gap: .32rem;
+                font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .fv-cols ul strong { color: var(--ink); font-weight: 600; }
+  .fv-cols li::marker { color: var(--ink-faint); }
+  .fv-med { font-size: .8125rem; color: var(--ink-soft); background: var(--surface-2);
+            border-left: 2px solid var(--accent); border-radius: 0 3px 3px 0; padding: .55rem .75rem;
+            line-height: 1.55; }
+  .fv-med strong { color: var(--ink); font-weight: 600; }
+  .fv-med em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .fv-med code { font-family: var(--mono); font-size: .95em; color: var(--ink); }
+
+  /* a página atrás do QR, escrita como ela apareceria */
+  .pagina-mock { background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 4px;
+                 padding: 1.1rem 1.2rem; display: grid; gap: .5rem; }
+  .pagina-mock .pm-h { font-family: var(--mono); font-size: clamp(1rem, 2.6vw, 1.25rem); font-weight: 700;
+                       color: var(--ink); line-height: 1.25; letter-spacing: -.01em; }
+  .pagina-mock .pm-p { font-size: .875rem; color: var(--ink-soft); line-height: 1.55; }
+  .pagina-mock .pm-p strong { color: var(--ink); font-weight: 600; }
+  .pagina-mock .pm-escassez { font-family: var(--mono); font-size: .75rem; color: var(--warn);
+                              background: var(--warn-bg); border-radius: 3px; padding: .4rem .6rem;
+                              justify-self: start; font-weight: 600; }
+  .pagina-mock .pm-escassez strong { font-weight: 700; }
+  .pagina-mock .pm-botoes { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .35rem; }
+  .pagina-mock .pm-btn { font-family: var(--mono); font-size: .6875rem; font-weight: 700; letter-spacing: .06em;
+                         text-transform: uppercase; background: var(--accent); color: var(--accent-ink);
+                         border-radius: 3px; padding: .6rem .95rem; }
+
+  /* as mensagens, como chegam no WhatsApp de quem recebe */
+  .msg { background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--good);
+         border-radius: 0 4px 4px 0; padding: .75rem .9rem; font-size: .875rem; color: var(--ink);
+         line-height: 1.6; }
+  .msg .rot { display: block; font-family: var(--mono); font-size: .625rem; letter-spacing: .11em;
+              text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: .4rem; }
+  .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
+
+  /* ─── veredito: a resposta em linguagem de gente, antes de qualquer tabela ─── */
+  .veredito { border: 2px solid var(--ink); border-radius: 4px; background: var(--surface);
+              padding: 1.25rem 1.4rem; display: flex; flex-direction: column; gap: .65rem; }
+  .veredito.pos { border-color: var(--good); }
+  .veredito.neg { border-color: var(--bad); }
+  .veredito .rot { font-family: var(--mono); font-size: .625rem; letter-spacing: .14em;
+                   text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+  .veredito .verd { font-family: var(--mono); font-size: clamp(1.4rem, 4.2vw, 2.1rem); font-weight: 700;
+                    letter-spacing: -.025em; line-height: 1.05; }
+  .veredito.pos .verd { color: var(--good); }
+  .veredito.neg .verd { color: var(--bad); }
+  .veredito p { font-size: .9375rem; color: var(--ink-soft); max-width: 66ch; line-height: 1.6; }
+  .veredito p strong { color: var(--ink); font-weight: 600; }
+  .veredito .se { border-top: 1px dashed var(--rule); padding-top: .75rem; margin-top: .15rem;
+                  display: grid; gap: .45rem; }
+  .veredito .se .t { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em;
+                     text-transform: uppercase; color: var(--warn); font-weight: 700; }
+  .veredito .se ul { margin: 0; padding-left: 1.05rem; display: grid; gap: .35rem;
+                     font-size: .875rem; color: var(--ink-soft); }
+  .veredito .se ul strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── dois desenhos lado a lado ─── */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule);
+         border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 46rem) { .duo { grid-template-columns: 1fr; } }
+  .duo > div { background: var(--surface); padding: 1.1rem 1.2rem; display: flex;
+               flex-direction: column; gap: .5rem; }
+  .duo .cab { display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+  .duo .cab .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .duo .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .duo .d strong { color: var(--ink); font-weight: 600; }
+  .duo ul { margin: 0; padding-left: 1.05rem; display: grid; gap: .32rem;
+            font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .duo ul strong { color: var(--ink); font-weight: 600; }
+  .duo li::marker { color: var(--ink-faint); }
+  .duo .rot { font-family: var(--mono); font-size: .625rem; letter-spacing: .11em; text-transform: uppercase;
+              font-weight: 700; margin-top: .25rem; }
+  .duo .rot.ok { color: var(--good); }
+  .duo .rot.nao { color: var(--bad); }
+
+  /* ─── o código falado no balcão ─── */
+  .codigo { display: flex; align-items: center; gap: .9rem; flex-wrap: wrap;
+            background: var(--surface-2); border: 1px dashed var(--rule); border-radius: 3px;
+            padding: .9rem 1.1rem; }
+  .codigo .cod { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; letter-spacing: .18em;
+                 color: var(--accent); background: var(--surface); border: 1px solid var(--accent);
+                 border-radius: 3px; padding: .25rem .7rem; }
+  .codigo .exp { font-size: .8125rem; color: var(--ink-soft); flex: 1 1 16rem; line-height: 1.5; }
+  .codigo .exp strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── barra de distribuição de quantas indicações cada pessoa converte ─── */
+  .dist { display: flex; flex-direction: column; gap: .3rem; }
+  .drow { display: grid; grid-template-columns: 9rem 1fr; gap: .8rem; align-items: center; }
+  .drow .dl { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft); }
+  .drow .dt { display: flex; align-items: center; gap: .55rem; min-width: 0; }
+  .drow .db { height: 16px; border-radius: 0 3px 3px 0; min-width: 2px; background: var(--step-2); transition: width .22s ease; }
+  .drow .dv { font-family: var(--mono); font-size: .75rem; font-variant-numeric: tabular-nums; color: var(--ink-faint); white-space: nowrap; }
+  .drow.marco .db { background: var(--accent); }
+  .drow.marco .dl { color: var(--ink); font-weight: 700; }
+  @media (max-width: 32rem) { .drow { grid-template-columns: 1fr; gap: .2rem; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cook · Paulínia</div>
+    <h1>Indicação Uber</h1>
+    <p class="lede">
+      Duas coisas diferentes com o mesmo público: o motorista <strong>revendendo cookie dentro do carro</strong>
+      — dinheiro no bolso dele, meta de R$ 30 a R$ 40 por dia — e o <strong>ranking de indicação na loja</strong>,
+      com premiação em dinheiro para o pódio. Mesma base de custo da campanha de fidelização.
+    </p>
+  </header>
+
+  <div class="strip">
+    <div><span class="label">Cookie · preço de tabela</span><span class="v">R$ 17,34</span><span class="s">o que a loja cobra hoje</span></div>
+    <div><span class="label">Custo de um cookie</span><span class="v">R$ 5,91</span><span class="s">CMV R$ 5,01 + quebra + embalagem</span></div>
+    <div><span class="label">Sobra por cookie</span><span class="v" id="sobraDireto">—</span><span class="s">se a loja vendesse direto</span></div>
+    <div><span class="label">O motorista leva</span><span class="v" id="stripMot">—</span><span class="s" id="stripMotDia">—</span></div>
+    <div><span class="label">A loja leva</span><span class="v" id="stripLoja">—</span><span class="s">por mês, no cenário montado</span></div>
+  </div>
+
+  <div class="abas" role="tablist" aria-label="As duas frentes">
+    <button type="button" role="tab" id="aba-revenda" aria-controls="painel-revenda" aria-selected="true" data-hash="revenda">
+      Revenda no carro<span class="sub2">o principal · margem no bolso do motorista</span></button>
+    <button type="button" role="tab" id="aba-ranking" aria-controls="painel-ranking" aria-selected="false" data-hash="ranking">
+      Ranking de indicação<span class="sub2">pódio em dinheiro · R$ 250 / 200 / 100</span></button>
+    <button type="button" role="tab" id="aba-decidir" aria-controls="painel-decidir" aria-selected="false" data-hash="decidir">
+      O que falta decidir<span class="sub2">nada aqui está fechado</span></button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 1 — REVENDA NO CARRO
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-revenda" role="tabpanel" aria-labelledby="aba-revenda">
+
+    <div class="veredito" id="veredito"></div>
+
+    <section>
+      <h2><span class="n">1</span> A conta de um cookie<span class="hint">quem fica com o quê</span></h2>
+      <p class="prose">
+        A loja vende o cookie ao motorista por um preço de atacado. Ele revende no carro pelo preço que
+        vocês combinarem. <strong>A diferença é o salário dele</strong> — e é ela que decide se o programa
+        existe ou não, porque motorista de app calcula por hora.
+      </p>
+      <div class="ledger" id="ledger"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">2</span> Montar o programa<span class="hint">os dois preços decidem tudo</span></h2>
+      <div class="controls destaque" id="ctlPrecos"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">3</span> Quanto o motorista leva<span class="hint">a meta é R$ 30 a R$ 40 por dia</span></h2>
+      <div class="results" id="resMotorista"></div>
+      <div class="notes" id="notaMotorista"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">4</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
+      <div class="controls" id="ctlEscala"></div>
+      <div class="results" id="resLoja"></div>
+      <div class="notes" id="notaLoja"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">5</span> A tabela de atacado<span class="hint">cada preço, os dois lados</span></h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Atacado</th><th>Motorista<br>por cookie</th><th>Cookies/dia<br>p/ R$ 30</th><th>Cookies/dia<br>p/ R$ 40</th><th>Loja<br>por cookie</th><th>Loja/mês<br>no cenário</th></tr></thead>
+        <tbody id="tabAtacado"></tbody>
+      </table></div>
+      <div class="notes" id="notaTabela"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">6</span> Premissas</h2>
+      <div class="controls" id="ctlPremissas"></div>
+    </section>
+
+  </div><!-- /painel-revenda -->
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 2 — RANKING
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-ranking" role="tabpanel" aria-labelledby="aba-ranking" hidden>
+
+    <div class="veredito" id="veredito2"></div>
+
+    <section>
+      <h2><span class="n">1</span> O pódio<span class="hint">quanto custa por mês</span></h2>
+      <p class="prose">
+        Aqui o motorista não revende: ele <strong>manda gente para a loja</strong> e ganha pontos. No fim
+        do mês, o pódio leva dinheiro. <strong>A diferença para tudo que a gente calculou até agora é que
+        este custo é fixo</strong> — dá na mesma se vierem 40 ou 400 pessoas.
+      </p>
+      <div class="controls destaque" id="ctlPodio"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">2</span> O ponto de equilíbrio</h2>
+      <div class="results" id="resRanking"></div>
+      <div class="notes" id="notaRanking"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">3</span> Conforme o volume<span class="hint">o prêmio não cresce junto</span></h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Indicações convertidas no mês</th><th>Margem que entra</th><th>Prêmio do pódio</th><th>Sobra</th><th>Por indicação</th></tr></thead>
+        <tbody id="tabRanking"></tbody>
+      </table></div>
+      <div class="notes" id="notaVolume"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">4</span> Premissas</h2>
+      <div class="controls" id="ctlRankPrem"></div>
+    </section>
+
+  </div><!-- /painel-ranking -->
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 3 — O QUE FALTA DECIDIR
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-decidir" role="tabpanel" aria-labelledby="aba-decidir" hidden>
+
+    <section>
+      <h2>O que falta decidir<span class="hint">as perguntas que a conta não responde</span></h2>
+      <p class="prose">
+        A conta diz que o programa cabe. <strong>O que decide se ele existe é operacional</strong>, e quase
+        nada disso está fechado. As três primeiras são bloqueantes — sem elas não dá para começar.
+      </p>
+      <ol class="pend">
+        <li>
+          <span class="num">01</span>
+          <span class="q">Quanto tempo o cookie aguenta dentro do carro?
+            <span class="ideia">bloqueante · decide quantos ele leva por dia e se precisa de embalagem térmica</span></span>
+          <span class="porque">É a pergunta operacional número um e <strong>ninguém mediu</strong>. Carro parado
+          no sol em Paulínia passa de 50°C. Se o cookie aguenta o turno inteiro, ele leva 8 e vende 5. Se
+          aguenta 3 horas, ele leva 3 — e aí a meta de R$ 30 a R$ 40 por dia <em>não fecha no preço que a
+          conta está usando</em>. <strong>Um teste de um dia responde isso.</strong></span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <span class="q">Ele compra, ou é consignado?
+            <span class="ideia">bloqueante · decide de quem é o risco do cookie que não vende</span></span>
+          <span class="porque"><strong>Se ele compra</strong>, o risco é dele: a loja recebe na hora e não
+          perde nada. Mas é dinheiro do bolso de alguém que muitas vezes não tem, e isso derruba a adesão.
+          <strong>Se é consignado</strong>, a adesão dispara e o risco vira da loja — todo cookie que voltar
+          velho é <em>R$ 5,91 jogado fora</em>, e a conta desta página não desconta isso.
+          <em>Meio-termo: primeira remessa consignada, depois só compra.</em></span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <span class="q">Vender comida dentro de um carro particular é permitido?
+            <span class="ideia">bloqueante · vigilância sanitária e regra do app</span></span>
+          <span class="porque">Duas coisas diferentes: a <strong>vigilância sanitária</strong> (transporte e
+          venda de alimento exigem condição própria) e a <strong>regra da Uber</strong>, que pode proibir
+          comércio dentro da corrida. <strong>Nenhuma das duas foi checada</strong>, e as duas podem matar o
+          programa depois de ele já estar rodando — que é o pior momento possível.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <span class="q">Quais sabores o motorista pode levar?
+            <span class="ideia">o CMV do cookie varia de R$ 3,83 a R$ 8,71</span></span>
+          <span class="porque">A conta usa <strong>R$ 5,01</strong>, que é a média sem os premium. Mas
+          Churros custa R$ 3,83 e <strong>Pistache custa R$ 8,71</strong>. Se o motorista puder escolher, ele
+          leva o que vende melhor — e se for o caro, <em>a margem da loja cai quase pela metade</em>.
+          <strong>O jeito simples é fechar a lista</strong>: dois ou três sabores de CMV baixo, que também
+          são os que aguentam melhor o carro.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">05</span>
+          <span class="q">Por quanto ele vende no carro?
+            <span class="ideia">a tabela da loja é R$ 17,34 — no carro, preço quebrado é ruim</span></span>
+          <span class="porque">No carro não tem maquininha nem troco fácil: <strong>preço redondo importa
+          mais que na loja</strong>. R$ 18 ou R$ 20 funcionam melhor que R$ 17,34. E tem uma pergunta de
+          fundo: <em>pode ser mais caro que na loja?</em> É conveniência — o passageiro não ia até a loja.
+          Cobrar mais no carro aumenta a margem dos dois lados, mas cria a chance de um cliente descobrir
+          que pagou mais caro.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">06</span>
+          <span class="q">Como ele paga a loja?
+            <span class="ideia">a conta assume PIX ou dinheiro, sem taxa de cartão</span></span>
+          <span class="porque">A página desconta <strong>12% de Simples + royalties</strong> e
+          <strong>nenhuma taxa de cartão</strong>, porque assume PIX na retirada. Se virar fiado ou cartão,
+          some mais 2% e aparece risco de calote. <em>PIX na hora da retirada é o desenho mais simples</em>,
+          e resolve junto a pergunta 02.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">07</span>
+          <span class="q">Quantos motoristas, e como achar os primeiros?
+            <span class="ideia">a conta escala linear, a realidade não</span></span>
+          <span class="porque">A tabela multiplica motoristas por cookies e dá um número bonito. <strong>Mas
+          recrutar 20 motoristas não é 4 vezes recrutar 5</strong> — e a página não tem nenhuma premissa
+          sobre quantos aderem, quantos desistem no segundo mês, ou quanto custa achar cada um.
+          <em>O primeiro mês com 3 motoristas é que vai dizer</em>.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">08</span>
+          <span class="q">No ranking, o que conta como indicação?
+            <span class="ideia">o motorista não tem como provar que mandou alguém</span></span>
+          <span class="porque">É o mesmo buraco do <a href="../programa-de-indicacao/#mecanica">programa de
+          indicação</a>: sem código ou link, não dá para saber quem mandou quem. <strong>Com dinheiro em
+          jogo no pódio, isso deixa de ser detalhe</strong> — vira a diferença entre um ranking e uma
+          discussão. <em>O código por motorista resolve</em>, e é mais fácil aqui do que com cliente: são
+          poucos, são cadastrados, e cada um pode ter o seu.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+        <li>
+          <span class="num">09</span>
+          <span class="q">As duas frentes convivem ou competem?
+            <span class="ideia">o mesmo motorista pode revender e indicar ao mesmo tempo</span></span>
+          <span class="porque">Revender rende <strong>R$ 8 por cookie, na hora</strong>. Indicar rende
+          <em>talvez</em> um prêmio de pódio no fim do mês. <strong>Um motorista racional só revende</strong>
+          — e o ranking vira decoração, igual à escada de pontos do outro programa.
+          <em>Ou o ranking premia quem revende mais</em> (aí é o mesmo programa, com um incentivo em cima),
+          <em>ou ele precisa de um público diferente</em> — motoristas que não querem carregar estoque.</span>
+          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+        </li>
+      </ol>
+    </section>
+  </div><!-- /painel-decidir -->
+
+  <footer>
+    Cookie R$ 17,34 de tabela e CMV R$ 5,01 (média sem os premium; mín. R$ 3,83 Churros, máx. R$ 8,71 Pistache),
+    da mesma base de custo da <a href="../campanha-fidelizacao/" style="color:var(--accent)">campanha de fidelização por visitas</a> —
+    loja Paulínia, jun+jul/2026. Quebra 1%, embalagem R$ 0,85, Simples 8% + royalties 4%.
+    <strong>Nenhum número desta página foi medido com motorista de verdade</strong>: quantos cookies ele vende
+    por dia, quantos motoristas aderem e quanto o cookie aguenta no carro são todos premissa em slider.
+  </footer>
+
+</div>
+<script>
+(() => {
+  "use strict";
+
+  // ─── Base real — cookie da loja Paulínia, mesma base da campanha de fidelização ───
+  const B = {
+    cookieTab: 17.34, cookieCMV: 5.01, cmvMin: 3.8336, cmvMax: 8.7100,
+    ticket: 39.09, cmvMix: 0.3460,
+  };
+
+  const S = {
+    precoCarro: 18, atacado: 10,            // os dois preços que decidem tudo
+    motoristas: 20, porDia: 5, dias: 26,    // escala
+    simples: 8.0, royalty: 4.0, quebra: 1.0, embItem: 0.85, cartao: 0,
+    // ranking
+    p1: 250, p2: 200, p3: 100, conversoes: 60, canib: 30,
+  };
+
+  let DED, QUEBRA, custoCookie, MC, MARG_VISITA;
+  function recalc() {
+    DED = (S.simples + S.royalty + S.cartao) / 100;
+    QUEBRA = S.quebra / 100;
+    custoCookie = B.cookieCMV * (1 + QUEBRA) + S.embItem;
+    // margem de contribuição de uma visita normal à loja — usada só no ranking
+    MC = 1 - (B.cmvMix + QUEBRA + S.embItem / B.ticket + (S.simples + S.royalty + 2) / 100);
+    MARG_VISITA = B.ticket * MC;
+  }
+  recalc();
+
+  const brl = (v, d = 2) => (v < 0 ? "−" : "") + "R$ " +
+    Math.abs(v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const brl0 = (v) => brl(v, 0);
+  const n0 = (v) => Math.round(v).toLocaleString("pt-BR");
+  const n1 = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const pc = (v, d = 0) => (100 * v).toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+  const sign = (v) => v >= 0 ? "pos" : "neg";
+
+  // ─── As duas contas ────────────────────────────────────────────────────────
+  const porCookieMotorista = () => S.precoCarro - S.atacado;
+  const porCookieLoja = (atac = S.atacado) => atac * (1 - DED) - custoCookie;
+  const margemLojaDireto = () => B.cookieTab * (1 - DED) - custoCookie;
+
+  function calc() {
+    const mot = porCookieMotorista();
+    const loja = porCookieLoja();
+    const unMes = S.motoristas * S.porDia * S.dias;
+    return {
+      mot, loja, unMes,
+      motDia: mot * S.porDia,
+      motMes: mot * S.porDia * S.dias,
+      lojaMes: loja * unMes,
+      faturaMes: S.atacado * unMes,
+      unPara30: mot > 0 ? 30 / mot : Infinity,
+      unPara40: mot > 0 ? 40 / mot : Infinity,
+    };
+  }
+
+  function calcRank() {
+    const premio = S.p1 + S.p2 + S.p3;
+    const porInd = MARG_VISITA * (1 - S.canib / 100);
+    const margem = S.conversoes * porInd;
+    return { premio, porInd, margem, saldo: margem - premio,
+             empate: porInd > 0 ? premio / porInd : Infinity,
+             custoPorInd: S.conversoes > 0 ? premio / S.conversoes : Infinity };
+  }
+
+  // ─── Controles ─────────────────────────────────────────────────────────────
+  const CTLS = [
+    { k: "precoCarro", g: "precos", lab: "Preço no carro", min: 10, max: 30, step: 0.5, fmt: brl,
+      note: () => `Por quanto o passageiro compra. A tabela da loja é <b>${brl(B.cookieTab)}</b> — no carro,
+        preço redondo funciona melhor (pergunta 05).` },
+    { k: "atacado", g: "precos", lab: "Preço de atacado", min: 5, max: 16, step: 0.5, fmt: brl,
+      note: () => {
+        const l = porCookieLoja();
+        return `Por quanto a loja vende ao motorista. Abaixo de <b>${brl(custoCookie / (1 - DED))}</b> a loja
+        perde dinheiro em cada cookie. Hoje sobram <b class="${sign(l)}">${brl(l)}</b> por cookie
+        — contra ${brl(margemLojaDireto())} se a loja vendesse direto na vitrine.`; } },
+
+    { k: "motoristas", g: "escala", lab: "Motoristas ativos", min: 0, max: 100, step: 1, fmt: n0,
+      note: () => `Quantos estão vendendo de fato no mês. <b>Recrutar 20 não é 4 vezes recrutar 5</b> — a conta
+        escala linear, a realidade não (pergunta 07).` },
+    { k: "porDia", g: "escala", lab: "Cookies por motorista/dia", min: 0, max: 20, step: 0.5, fmt: n1,
+      note: () => {
+        const R = calc();
+        return `<b>É a premissa mais frágil da página</b> e ninguém mediu. Para bater a meta de R$ 30 a R$ 40
+        por dia ele precisa vender <b>${n1(R.unPara30)} a ${n1(R.unPara40)}</b> cookies — e quantos ele
+        consegue carregar depende da pergunta 01.`; } },
+    { k: "dias", g: "escala", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0,
+      note: () => `Motorista de app não roda todo dia. 26 é a premissa de quem trabalha 6 dias por semana.` },
+
+    { k: "simples", g: "prem", lab: "Simples", min: 0, max: 20, step: 0.1, fmt: (v) => pc(v / 100, 1),
+      note: () => `DAS ÷ faturamento de competência.` },
+    { k: "royalty", g: "prem", lab: "Royalties", min: 0, max: 10, step: 0.1, fmt: (v) => pc(v / 100, 1),
+      note: () => `Contrato de franquia — incide sobre a venda ao motorista também.` },
+    { k: "cartao", g: "prem", lab: "Taxa de cartão", min: 0, max: 5, step: 0.1, fmt: (v) => pc(v / 100, 1),
+      note: () => S.cartao === 0
+        ? `Zero porque a conta assume <b>PIX ou dinheiro na retirada</b> (pergunta 06). Se virar cartão, suba aqui.`
+        : `A loja está pagando ${pc(S.cartao / 100, 1)} de taxa na venda ao motorista.` },
+    { k: "quebra", g: "prem", lab: "Quebra", min: 0, max: 10, step: 0.1, fmt: (v) => pc(v / 100, 1),
+      note: () => `Premissa — não há registro no sistema. <b>Não inclui cookie que volta velho do carro</b>:
+        isso só existe se o modelo for consignado (pergunta 02).` },
+    { k: "embItem", g: "prem", lab: "Embalagem por cookie", min: 0, max: 3, step: 0.05, fmt: brl,
+      note: () => `A caixinha. Se o carro exigir embalagem térmica, este número sobe.` },
+
+    { k: "p1", g: "podio", lab: "1º lugar", min: 0, max: 1000, step: 10, fmt: brl0,
+      note: () => `O prêmio de quem mais indicar no mês.` },
+    { k: "p2", g: "podio", lab: "2º lugar", min: 0, max: 1000, step: 10, fmt: brl0,
+      note: () => `` },
+    { k: "p3", g: "podio", lab: "3º lugar", min: 0, max: 1000, step: 10, fmt: brl0,
+      note: () => {
+        const R = calcRank();
+        return `Total do pódio: <b>${brl0(R.premio)} por mês</b>, e esse número <b>não cresce com o volume</b>.`; } },
+    { k: "conversoes", g: "rankprem", lab: "Indicações convertidas/mês", min: 0, max: 500, step: 5, fmt: n0,
+      note: () => {
+        const R = calcRank();
+        return `Gente que o motorista mandou e que <b>comprou</b> — indicação que não vira venda não conta.
+        O empate é em <b>${n0(Math.ceil(R.empate))}</b>.`; } },
+    { k: "canib", g: "rankprem", lab: "Já eram clientes", min: 0, max: 100, step: 1, fmt: (v) => pc(v / 100),
+      note: () => `Quantos dos indicados viriam à loja de qualquer jeito. <b>Ninguém consegue medir isso antes
+        de rodar</b> — mesma premissa frágil do programa de indicação.` },
+  ];
+
+  function sliderHTML(c) {
+    return `<div class="ctl">
+      <div class="top"><span class="label">${c.lab}</span><span class="val">${c.fmt(S[c.k])}</span></div>
+      <input type="range" id="c-${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[c.k]}" aria-label="${c.lab}">
+      ${c.note() ? `<span class="note">${c.note()}</span>` : ""}
+    </div>`;
+  }
+  const grupo = (g) => CTLS.filter((c) => c.g === g).map(sliderHTML).join("");
+
+  function buildControls() {
+    document.getElementById("ctlPrecos").innerHTML = grupo("precos");
+    document.getElementById("ctlEscala").innerHTML = grupo("escala");
+    document.getElementById("ctlPremissas").innerHTML = grupo("prem");
+    document.getElementById("ctlPodio").innerHTML = grupo("podio");
+    document.getElementById("ctlRankPrem").innerHTML = grupo("rankprem");
+    CTLS.forEach((c) => {
+      const el = document.getElementById("c-" + c.k);
+      if (el) el.addEventListener("input", (e) => { S[c.k] = parseFloat(e.target.value); recalc(); update(); });
+    });
+  }
+  function syncControls() {
+    CTLS.forEach((c) => {
+      const el = document.getElementById("c-" + c.k);
+      if (el && parseFloat(el.value) !== S[c.k]) el.value = S[c.k];
+    });
+  }
+
+  // ─── Render ────────────────────────────────────────────────────────────────
+  function renderVeredito(R) {
+    const ok = R.loja > 0 && R.mot > 0;
+    const bate = R.motDia >= 30;
+    document.getElementById("veredito").className = "veredito " + (ok ? (bate ? "pos" : "") : "neg");
+    document.getElementById("veredito").innerHTML = `
+      <span class="rot">A resposta, sem tabela</span>
+      <span class="verd">${!ok ? "Não fecha."
+        : bate ? "Fecha, e sobra dos dois lados."
+        : "Fecha pra loja, não pro motorista."}</span>
+      <p>
+        A ${brl(S.atacado)} de atacado e ${brl(S.precoCarro)} no carro, o motorista ganha
+        <strong>${brl(R.mot)} por cookie</strong> e a loja fica com <strong>${brl(R.loja)}</strong>.
+        Vendendo ${n1(S.porDia)} por dia, ele leva <strong>${brl(R.motDia)} por dia</strong>
+        — ${bate ? "<em>acima</em> da meta de R$ 30" : "<em>abaixo</em> da meta de R$ 30"} — e
+        <strong>${brl0(R.motMes)} no mês</strong>.
+      </p>
+      <p>
+        Com ${n0(S.motoristas)} motoristas nesse ritmo, são <strong>${n0(R.unMes)} cookies por mês</strong>
+        que a loja não venderia, e <strong>${brl0(R.lojaMes)}</strong> de margem.
+        ${R.lojaMes > 0 ? `<em>Para comparação, o programa de indicação de cliente rende R$ 338 por mês.</em>` : ""}
+      </p>
+      <div class="se">
+        <span class="t">Antes de acreditar nisso</span>
+        <ul>
+          <li><strong>Nenhum número aqui foi medido com motorista de verdade.</strong> Quantos cookies ele vende por dia, quantos motoristas aderem e quanto o cookie aguenta no carro são todos chute em slider.</li>
+          <li>A conta <strong>não desconta cookie que volta velho</strong>. Se for consignado, cada um que sobrar é ${brl(custoCookie)} perdido (pergunta 02).</li>
+          <li>Vender comida no carro pode <strong>não ser permitido</strong> — sanitária e regra do app não foram checadas (pergunta 03).</li>
+        </ul>
+      </div>`;
+  }
+
+  function renderLedger(R) {
+    const linha = (nome, quem, valor, detalhe, tag) => `
+      <div class="offer">
+        <div class="head"><span class="vnum">${quem}</span><span class="name">${nome}</span></div>
+        <div class="breakdown">${detalhe}</div>
+        <div class="result"><span class="r ${sign(valor)}">${brl(valor)}</span><span class="s" style="font-size:.75rem;color:var(--ink-faint)">por cookie</span></div>
+      </div>`;
+    document.getElementById("ledger").innerHTML =
+      linha("O passageiro paga", "carro", S.precoCarro, `O preço que o motorista cobra dentro do carro.`) +
+      linha("O motorista fica com", "dele", R.mot,
+        `${brl(S.precoCarro)} que ele cobra − ${brl(S.atacado)} que ele pagou à loja`) +
+      linha("A loja fica com", "loja", R.loja,
+        `${brl(S.atacado)} de atacado − ${pc(DED, 0)} de impostos e royalties (${brl(S.atacado * DED)}) − ${brl(custoCookie)} de custo do cookie`) +
+      `<div class="note-item"><span class="tag ${R.loja >= margemLojaDireto() ? "good" : "warn"}">o que a loja abre mão</span><span>
+        Vendendo na vitrine, um cookie deixa <strong>${brl(margemLojaDireto())}</strong>. Pelo motorista, deixa
+        <strong>${brl(R.loja)}</strong> — <strong>${brl(margemLojaDireto() - R.loja)} a menos por cookie</strong>.
+        <em>E tudo bem</em>: é venda que não existiria, para um passageiro que não ia à loja.
+        ${R.loja > 0 ? `Só deixa de valer se o motorista estiver vendendo para quem <em>iria</em> à loja de qualquer jeito.`
+                     : `<strong>Mas nesse preço de atacado a loja está pagando para vender.</strong>`}
+      </span></div>`;
+  }
+
+  function renderMotorista(R) {
+    document.getElementById("resMotorista").innerHTML = `
+      <div class="cell hero"><span class="label">Por dia</span><span class="v ${R.motDia >= 30 ? "pos" : "neg"}">${brl(R.motDia)}</span>
+        <span class="s">a meta é R$ 30 a R$ 40 · ${n1(S.porDia)} cookies × ${brl(R.mot)}</span></div>
+      <div class="cell"><span class="label">Por mês</span><span class="v">${brl0(R.motMes)}</span>
+        <span class="s">${n0(S.dias)} dias rodando</span></div>
+      <div class="cell"><span class="label">Por cookie</span><span class="v">${brl(R.mot)}</span>
+        <span class="s">${pc(R.mot / S.precoCarro)} do preço que ele cobra</span></div>
+      <div class="cell"><span class="label">Pra bater R$ 30/dia</span><span class="v">${n1(R.unPara30)}</span>
+        <span class="s">cookies por dia · ${n1(R.unPara40)} para R$ 40</span></div>`;
+
+    document.getElementById("notaMotorista").innerHTML = `
+      <div class="note-item"><span class="tag ${R.motDia >= 30 ? "good" : "bad"}">a meta que você definiu</span><span>
+        R$ 30 a R$ 40 por dia. Nesse desenho ele faz <strong>${brl(R.motDia)}</strong> vendendo
+        ${n1(S.porDia)} cookies — <strong>${R.motDia >= 30 ? "bate" : "não bate"}</strong>.
+        ${R.motDia >= 30
+          ? `E são <strong>${n1(R.unPara30)} cookies</strong> para o mínimo: <em>menos de um a cada duas horas
+             de turno</em>. É pouco o bastante para ser crível.`
+          : `Para bater, ele precisaria vender <strong>${n1(R.unPara30)} por dia</strong> — ou o atacado
+             precisa cair, ou o preço no carro precisa subir.`}
+      </span></div>
+      <div class="note-item"><span class="tag warn">o que faz esse número ser crível ou não</span><span>
+        <strong>${brl0(R.motMes)} por mês não é troco para motorista de app</strong> — é o tipo de número que
+        faz alguém aderir. Mas ele só existe se o cookie <em>aguentar o carro</em> e se o passageiro
+        <em>comprar</em>. As duas coisas são pergunta em aberto, não premissa medida.
+      </span></div>`;
+  }
+
+  function renderLoja(R) {
+    document.getElementById("resLoja").innerHTML = `
+      <div class="cell hero"><span class="label">Margem da loja/mês</span><span class="v ${sign(R.lojaMes)}">${brl0(R.lojaMes)}</span>
+        <span class="s">${n0(R.unMes)} cookies × ${brl(R.loja)}</span></div>
+      <div class="cell"><span class="label">Faturamento/mês</span><span class="v">${brl0(R.faturaMes)}</span>
+        <span class="s">o que os motoristas pagam à loja</span></div>
+      <div class="cell"><span class="label">Cookies/mês</span><span class="v">${n0(R.unMes)}</span>
+        <span class="s">${n0(S.motoristas)} motoristas × ${n1(S.porDia)}/dia × ${n0(S.dias)} dias</span></div>
+      <div class="cell"><span class="label">Sai no bolso dos motoristas</span><span class="v">${brl0(R.motMes * S.motoristas)}</span>
+        <span class="s">somando os ${n0(S.motoristas)}</span></div>`;
+
+    document.getElementById("notaLoja").innerHTML = `
+      <div class="note-item"><span class="tag acc">o tamanho disso comparado com o resto</span><span>
+        <strong>${brl0(R.lojaMes)} por mês.</strong> O programa de indicação de cliente, na outra página,
+        rende R$ 338. <em>Esta frente é de outra ordem de grandeza</em> — e é por isso que ela vem primeiro.
+        ${R.faturaMes > 0 ? `São ${brl0(R.faturaMes)} de faturamento novo, ${pc(R.faturaMes / 46925, 1)} do que a loja
+        já faz hoje.` : ""}
+      </span></div>
+      <div class="note-item"><span class="tag bad">onde essa conta mente</span><span>
+        Ela multiplica motoristas × cookies × dias e dá um número bonito. <strong>Na prática, nada escala
+        assim.</strong> Motorista some, cookie volta velho, tem dia de chuva e tem passageiro que não quer
+        conversa. <em>O número que vale é o do primeiro mês com 3 motoristas</em> — e é ele que deveria
+        substituir os sliders desta seção.
+      </span></div>`;
+  }
+
+  function renderTabela(R) {
+    const linhas = [];
+    for (let a = Math.max(5, Math.round(custoCookie)); a <= S.precoCarro - 1; a += 1) {
+      const mot = S.precoCarro - a, loja = porCookieLoja(a);
+      const atual = Math.abs(a - S.atacado) < 0.5;
+      linhas.push(`<tr class="${atual ? "mark" : ""}">
+        <td>${atual ? `<span class="vnum" style="background:var(--accent);color:var(--accent-ink);padding:.1rem .35rem;border-radius:2px;font-size:.625rem;margin-right:.4rem">atual</span>` : ""}${brl(a)}</td>
+        <td>${brl(mot)}</td>
+        <td>${n1(30 / mot)}</td>
+        <td>${n1(40 / mot)}</td>
+        <td class="${sign(loja)}"><strong>${brl(loja)}</strong></td>
+        <td class="${sign(loja)}">${brl0(loja * R.unMes)}</td></tr>`);
+    }
+    document.getElementById("tabAtacado").innerHTML = linhas.join("") ||
+      `<tr><td colspan="6">Preço no carro baixo demais para haver tabela.</td></tr>`;
+
+    document.getElementById("notaTabela").innerHTML = `
+      <div class="note-item"><span class="tag acc">como ler</span><span>
+        Descendo a tabela, o motorista ganha menos e a loja ganha mais. <strong>O ponto certo é o mais alto
+        em que ele ainda bate R$ 30 por dia sem esforço absurdo</strong> — porque acima disso ele não adere,
+        e abaixo disso a loja está dando margem de graça.
+        <br><br>
+        Abaixo de <strong>${brl(custoCookie / (1 - DED))}</strong> de atacado a loja perde dinheiro em cada
+        cookie, por mais que o motorista adore o programa.
+      </span></div>`;
+  }
+
+  // ─── Ranking ───────────────────────────────────────────────────────────────
+  function renderRanking() {
+    const R = calcRank();
+    const ok = R.saldo >= 0;
+    document.getElementById("veredito2").className = "veredito " + (ok ? "pos" : "neg");
+    document.getElementById("veredito2").innerHTML = `
+      <span class="rot">A resposta, sem tabela</span>
+      <span class="verd">${ok ? "Cabe." : "Ainda não cabe."}</span>
+      <p>
+        O pódio custa <strong>${brl0(R.premio)} por mês</strong>, fixo. Cada indicação que vira venda deixa
+        <strong>${brl(R.porInd)}</strong> — já descontando os ${pc(S.canib / 100)} que viriam de qualquer jeito.
+        <strong>O empate é em ${n0(Math.ceil(R.empate))} indicações no mês.</strong>
+      </p>
+      <p>
+        Com ${n0(S.conversoes)} indicações, entram ${brl0(R.margem)} e sobram
+        <strong class="${sign(R.saldo)}">${brl0(R.saldo)}</strong> —
+        <strong>${brl(R.custoPorInd)} de prêmio por indicação</strong>.
+      </p>
+      <div class="se">
+        <span class="t">O que torna isso diferente de tudo na outra página</span>
+        <ul>
+          <li><strong>O prêmio é custo fixo.</strong> Vindo 40 ou 400 pessoas, o pódio custa ${brl0(R.premio)}. Cada indicação acima do empate é <em>margem inteira</em>, sem prêmio nenhum em cima.</li>
+          <li>Isso é o oposto do cookie por indicação, que <em>cresce junto com o volume</em>. Aqui, quanto mais der certo, melhor fica a conta — e não pior.</li>
+          <li><strong>Mas só o pódio ganha.</strong> O 4º lugar trabalhou e levou zero, e no segundo mês ele não joga mais.</li>
+        </ul>
+      </div>`;
+
+    document.getElementById("resRanking").innerHTML = `
+      <div class="cell hero"><span class="label">Sobra no mês</span><span class="v ${sign(R.saldo)}">${brl0(R.saldo)}</span>
+        <span class="s">${brl0(R.margem)} de margem − ${brl0(R.premio)} de pódio</span></div>
+      <div class="cell"><span class="label">Empate</span><span class="v">${n0(Math.ceil(R.empate))}</span>
+        <span class="s">indicações convertidas para pagar o pódio</span></div>
+      <div class="cell"><span class="label">Custo por indicação</span><span class="v">${brl(R.custoPorInd)}</span>
+        <span class="s">cai conforme o volume sobe</span></div>
+      <div class="cell"><span class="label">Cada indicação vale</span><span class="v">${brl(R.porInd)}</span>
+        <span class="s">margem de uma visita, menos canibalização</span></div>`;
+
+    const porMot = (n) => Math.ceil(R.empate) / n;
+    document.getElementById("notaRanking").innerHTML = `
+      <div class="note-item"><span class="tag acc">quanto isso pede de cada motorista</span><span>
+        Para pagar o pódio são <strong>${n0(Math.ceil(R.empate))} indicações no mês</strong>. Divididas entre:
+        <strong>5 motoristas</strong> = ${n1(porMot(5))} cada · <strong>10</strong> = ${n1(porMot(10))} cada ·
+        <strong>20</strong> = ${n1(porMot(20))} cada · <strong>30</strong> = ${n1(porMot(30))} cada.
+        <em>Com 20 motoristas ativos, são ${n1(porMot(20))} indicações por motorista no mês</em> — pouco,
+        mas ainda é chute: ninguém sabe quantos motoristas aderem.
+      </span></div>
+      <div class="note-item"><span class="tag bad">o furo que o dinheiro escancara</span><span>
+        Sem código por motorista, <strong>não dá para saber quem mandou quem</strong> — e aqui tem R$ ${n0(R.premio)}
+        em jogo. É a diferença entre um ranking e uma discussão no fim do mês.
+        <em>Com motorista é mais fácil resolver do que com cliente</em>: são poucos, são cadastrados, e cada um
+        pode ter um código fixo (pergunta 08).
+      </span></div>`;
+
+    const linhas = [0.5, 1, 1.5, 2, 3, 5].map((m) => {
+      const c = Math.round(Math.ceil(R.empate) * m);
+      const marg = c * R.porInd, saldo = marg - R.premio;
+      const atual = Math.abs(c - S.conversoes) <= 2;
+      return `<tr class="${atual ? "mark" : ""}">
+        <td>${n0(c)}${Math.abs(m - 1) < 0.01 ? " <span style=\"color:var(--ink-faint)\">· o empate</span>" : ""}</td>
+        <td>${brl0(marg)}</td><td>${brl0(R.premio)}</td>
+        <td class="${sign(saldo)}"><strong>${brl0(saldo)}</strong></td>
+        <td>${c > 0 ? brl(R.premio / c) : "—"}</td></tr>`;
+    }).join("");
+    document.getElementById("tabRanking").innerHTML = linhas;
+
+    document.getElementById("notaVolume").innerHTML = `
+      <div class="note-item"><span class="tag good">é isso que custo fixo faz</span><span>
+        Repare na última coluna: o prêmio por indicação <strong>despenca conforme o volume sobe</strong>,
+        porque o pódio não muda. <em>No cookie por indicação essa coluna seria uma linha reta</em> —
+        cada indicação custaria sempre o mesmo cookie.
+        <strong>Um programa de ranking fica mais barato quanto mais funciona.</strong>
+      </span></div>`;
+  }
+
+  // ─── Update ────────────────────────────────────────────────────────────────
+  function update() {
+    const R = calc();
+    syncControls();
+    document.getElementById("sobraDireto").textContent = brl(margemLojaDireto());
+    document.getElementById("stripMot").textContent = brl0(R.motMes);
+    document.getElementById("stripMotDia").textContent = brl(R.motDia) + " por dia";
+    document.getElementById("stripLoja").textContent = brl0(R.lojaMes);
+    renderVeredito(R); renderLedger(R); renderMotorista(R); renderLoja(R); renderTabela(R);
+    renderRanking();
+    CTLS.forEach((c) => {
+      const el = document.getElementById("c-" + c.k);
+      if (el) { const top = el.previousElementSibling; if (top) { const v = top.querySelector(".val"); if (v) v.textContent = c.fmt(S[c.k]); } }
+    });
+  }
+
+  buildControls(); update();
+})();
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   ABAS — mesmo mecanismo das outras páginas
+   ══════════════════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+  const grupos = Array.from(document.querySelectorAll(".abas")).map((barra) => {
+    const botoes = Array.from(barra.querySelectorAll(":scope > button"));
+    return { botoes, paineis: botoes.map((b) => document.getElementById(b.getAttribute("aria-controls"))) };
+  });
+  const dono = new Map();
+  grupos.forEach((g) => g.paineis.forEach((p, i) => { if (p) dono.set(p, { g, i }); }));
+
+  function ativa(g, i, comHash) {
+    g.botoes.forEach((b, j) => {
+      b.setAttribute("aria-selected", String(j === i));
+      if (g.paineis[j]) g.paineis[j].hidden = j !== i;
+    });
+    if (comHash) { try { history.replaceState(null, "", "#" + g.botoes[i].dataset.hash); } catch (e) {} }
+  }
+  function revelar(el) {
+    let p = el.closest(".painel");
+    while (p) {
+      const r = dono.get(p);
+      if (r) ativa(r.g, r.i, false);
+      p = p.parentElement ? p.parentElement.closest(".painel") : null;
+    }
+  }
+  grupos.forEach((g) => g.botoes.forEach((b, i) => {
+    b.addEventListener("click", () => ativa(g, i, true));
+    b.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      const j = (i + d + g.botoes.length) % g.botoes.length;
+      ativa(g, j, true); g.botoes[j].focus();
+    });
+  }));
+  function porHash() {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    for (const g of grupos) {
+      const i = g.botoes.findIndex((b) => b.dataset.hash === h);
+      if (i >= 0) { revelar(g.paineis[i]); ativa(g, i, false); return; }
+    }
+    const alvo = document.getElementById(h);
+    if (alvo) { revelar(alvo); alvo.scrollIntoView(); }
+  }
+  addEventListener("hashchange", porHash);
+  porHash();
+})();
+</script>
+
+</body>
+</html>
