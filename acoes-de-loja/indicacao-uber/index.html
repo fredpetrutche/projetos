@@ -326,10 +326,12 @@
   .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
 
   /* ─── tabelinha do dia a dia: rótulo, − valor + ─── */
-  .campos { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem;
+  /* duas colunas: rótulos alinhados à esquerda, controles todos na mesma coluna */
+  .campos { display: grid; grid-template-columns: auto auto; justify-content: start;
+            align-items: center; gap: .45rem .9rem;
             background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
             padding: .75rem .9rem; }
-  .campo { display: flex; flex-direction: row; align-items: center; gap: .5rem; flex: none; }
+  .campo { display: contents; }
   .campo .cl { font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase;
                color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
   .campo .cg { display: inline-flex; align-items: center; gap: .15rem; }
