@@ -432,19 +432,10 @@
     <div class="eyebrow">Holy Cook · Paulínia</div>
     <h1>Indicação Uber</h1>
     <p class="lede">
-      Duas coisas diferentes com o mesmo público: o motorista <strong>revendendo cookie dentro do carro</strong>
-      — dinheiro no bolso dele, meta de R$ 25 a R$ 40 por dia — e o <strong>ranking de indicação na loja</strong>,
-      com premiação em dinheiro para o pódio. Mesma base de custo da campanha de fidelização.
+      Programa em que o motorista de Uber <strong>revende os cookies dentro do carro</strong> e
+      <strong>indica a loja</strong>, acumulando pontos para trocar em dinheiro e prêmios.
     </p>
   </header>
-
-  <div class="strip">
-    <div><span class="label">Cookie · preço de tabela</span><span class="v">R$ 17,34</span><span class="s">o que a loja cobra hoje</span></div>
-    <div><span class="label">Custo de um cookie</span><span class="v">R$ 5,91</span><span class="s">CMV R$ 5,01 + quebra + embalagem</span></div>
-    <div><span class="label">Sobra por cookie</span><span class="v" id="sobraDireto">—</span><span class="s">se a loja vendesse direto</span></div>
-    <div><span class="label">O motorista leva</span><span class="v" id="stripMot">—</span><span class="s" id="stripMotDia">—</span></div>
-    <div><span class="label">A loja leva</span><span class="v" id="stripLoja">—</span><span class="s">por mês, no cenário montado</span></div>
-  </div>
 
   <div class="abas" role="tablist" aria-label="As frentes do programa">
     <button type="button" role="tab" id="aba-motorista" aria-controls="painel-motorista" aria-selected="true" data-hash="motorista">
@@ -809,12 +800,6 @@
   // para a escala é a MÉDIA da lista escolhida — não um preço único de atacado.
   const porCookieMotorista = () => mediaGanhoMotorista();
   const porCookieLoja = () => mediaGanhoLoja();
-  const margemLojaDireto = () => {
-    const sel = escolhidos();
-    if (!sel.length) return 0;
-    return sel.reduce((a, s) => a + (s.preco * (1 - DED) - s.cmv * (1 + QUEBRA) - S.embItem), 0) / sel.length;
-  };
-
   function calc() {
     const mot = porCookieMotorista();
     const loja = porCookieLoja();
@@ -843,16 +828,6 @@
 
   // ─── Controles ─────────────────────────────────────────────────────────────
   const CTLS = [
-    { k: "precoCarro", g: "precos", lab: "Preço no carro", min: 10, max: 30, step: 0.5, fmt: brl,
-      note: () => `Por quanto o passageiro compra. A tabela da loja é <b>${brl(B.cookieTab)}</b> — no carro,
-        preço redondo funciona melhor (pergunta 05).` },
-    { k: "atacado", g: "precos", lab: "Preço de atacado", min: 5, max: 16, step: 0.5, fmt: brl,
-      note: () => {
-        const l = porCookieLoja();
-        return `Por quanto a loja vende ao motorista. Abaixo de <b>${brl(custoCookie / (1 - DED))}</b> a loja
-        perde dinheiro em cada cookie. Hoje sobram <b class="${sign(l)}">${brl(l)}</b> por cookie
-        — contra ${brl(margemLojaDireto())} se a loja vendesse direto na vitrine.`; } },
-
     { k: "motoristas", g: "escala", lab: "Motoristas ativos", min: 0, max: 100, step: 1, fmt: n0,
       note: () => `Quantos estão vendendo de fato no mês. <b>Recrutar 20 não é 4 vezes recrutar 5</b> — a conta
         escala linear, a realidade não (pergunta 07).` },
@@ -1228,11 +1203,7 @@
   function update() {
     const R = calc();
     syncControls();
-    document.getElementById("sobraDireto").textContent = brl(margemLojaDireto());
     document.getElementById("mediaInline").textContent = brl(mediaGanhoMotorista());
-    document.getElementById("stripMot").textContent = brl0(R.motMes);
-    document.getElementById("stripMotDia").textContent = brl(R.motDia) + " por dia";
-    document.getElementById("stripLoja").textContent = brl0(R.lojaMes);
     buildCardapio(); renderCardapio(); renderLojaCookie(); renderSabores(R); renderMotorista(R); renderLoja(R);
     renderRanking();
     CTLS.forEach((c) => {
