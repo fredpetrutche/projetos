@@ -326,11 +326,12 @@
   .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
 
   /* ─── tabelinha do dia a dia: rótulo, − valor + ─── */
-  .campos { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .campo { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
-           padding: .5rem .6rem; display: flex; flex-direction: column; gap: .3rem; flex: none; }
-  .campo .cl { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase;
-               color: var(--ink-faint); font-weight: 600; text-align: center; }
+  .campos { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.1rem;
+            background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+            padding: .6rem .9rem; }
+  .campo { display: flex; flex-direction: row; align-items: center; gap: .5rem; flex: none; }
+  .campo .cl { font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase;
+               color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
   .campo .cg { display: inline-flex; align-items: center; gap: .15rem; }
   .campo .cv { font-family: var(--mono); font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums;
                min-width: 2.4rem; text-align: center; }
@@ -849,7 +850,7 @@
 
     // Os três do dia a dia viraram tabelinha (ver campoHTML), sem slider e sem nota.
     { k: "corridas", g: "dia", lab: "Corridas por dia", min: 0, max: 99, step: 1, fmt: n0, note: () => "" },
-    { k: "vendasDia", g: "dia", lab: "Vendas por dia", min: 0, max: 99, step: 0.5, fmt: n1, note: () => "" },
+    { k: "vendasDia", g: "dia", lab: "Unidades vendidas por dia", min: 0, max: 99, step: 1, fmt: n0, note: () => "" },
     { k: "dias", g: "dia", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0, note: () => "" },
 
     { k: "simples", g: "prem", lab: "Simples", min: 0, max: 20, step: 0.1, fmt: (v) => pc(v / 100, 1),
@@ -960,7 +961,7 @@
     // a embalagem do carro é custo da loja — mora na aba da loja, não aqui
     document.getElementById("ctlLoja").innerHTML = sliderHTML(CTLS.find((c) => c.k === "embCarro"));
     // tabelinha do dia a dia: rótulo, − valor +. Sem slider, sem nota.
-    const CURTO = { corridas: "Corridas/dia", vendasDia: "Vendas/dia", dias: "Dias/mês" };
+    const CURTO = { corridas: "Corridas/dia", vendasDia: "Unidades vendidas/dia", dias: "Dias/mês" };
     const campo = (k) => {
       const c = CTLS.find((x) => x.k === k);
       return `<div class="campo">
@@ -1091,11 +1092,11 @@
       <div class="cell"><span class="label">Por cookie</span><span class="v">${brl(R.mot)}</span>
         <span class="s">${pc(R.mot / (precoMedio() || 1))} do preço que ele cobra</span></div>
       <div class="cell hero"><span class="label">Por dia</span><span class="v ${R.motDia >= 25 ? "pos" : "neg"}">${brl(R.motDia)}</span>
-        <span class="s">piso R$ 25 · alvo R$ 30 · ${n1(R.porDia)} cookies × ${brl(R.mot)}</span></div>
+        <span class="s">piso R$ 25 · alvo R$ 30 · ${n0(R.porDia)} cookies × ${brl(R.mot)}</span></div>
       <div class="cell"><span class="label">Por mês</span><span class="v">${brl0(R.motMes)}</span>
         <span class="s">${n0(S.dias)} dias rodando</span></div>
       <div class="cell"><span class="label">Conversão por corrida</span><span class="v">${S.corridas > 0 ? pc(R.porDia / S.corridas) : "—"}</span>
-        <span class="s">${n1(R.porDia)} vendas em ${n0(S.corridas)} corridas</span></div>`;
+        <span class="s">${n0(R.porDia)} vendas em ${n0(S.corridas)} corridas</span></div>`;
 
   }
 
@@ -1106,7 +1107,7 @@
       <div class="cell"><span class="label">Faturamento/mês</span><span class="v">${brl0(R.faturaMes)}</span>
         <span class="s">o que os motoristas pagam à loja</span></div>
       <div class="cell"><span class="label">Cookies/mês</span><span class="v">${n0(R.unMes)}</span>
-        <span class="s">${n0(S.motoristas)} motoristas × ${n1(R.porDia)}/dia × ${n0(S.dias)} dias</span></div>
+        <span class="s">${n0(S.motoristas)} motoristas × ${n0(R.porDia)}/dia × ${n0(S.dias)} dias</span></div>
       <div class="cell"><span class="label">Sai no bolso dos motoristas</span><span class="v">${brl0(R.motMes * S.motoristas)}</span>
         <span class="s">somando os ${n0(S.motoristas)}</span></div>`;
 
