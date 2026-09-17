@@ -326,16 +326,16 @@
   .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
 
   /* ─── tabelinha do dia a dia: rótulo, − valor + ─── */
-  .campos { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
-  .campo { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-           padding: .7rem 1rem; }
-  .campo + .campo { border-top: 1px solid var(--rule-soft); }
-  .campo .cl { font-size: .875rem; color: var(--ink); }
-  .campo .cg { display: inline-flex; align-items: center; gap: .2rem; flex: none; }
-  .campo .cv { font-family: var(--mono); font-size: 1rem; font-weight: 600; font-variant-numeric: tabular-nums;
-               min-width: 3.2rem; text-align: center; }
-  .campo .cb { font-family: var(--mono); font-size: 1.05rem; line-height: 1; font-weight: 600;
-               width: 2rem; height: 2rem; cursor: pointer; color: var(--ink);
+  .campos { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .campo { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+           padding: .5rem .6rem; display: flex; flex-direction: column; gap: .3rem; flex: none; }
+  .campo .cl { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em; text-transform: uppercase;
+               color: var(--ink-faint); font-weight: 600; text-align: center; }
+  .campo .cg { display: inline-flex; align-items: center; gap: .15rem; }
+  .campo .cv { font-family: var(--mono); font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums;
+               min-width: 2.4rem; text-align: center; }
+  .campo .cb { font-family: var(--mono); font-size: 1rem; line-height: 1; font-weight: 600;
+               width: 1.7rem; height: 1.7rem; cursor: pointer; color: var(--ink); padding: 0;
                background: var(--surface-2); border: 1px solid var(--rule); border-radius: 3px; }
   .campo .cb:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .campo .cb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -460,7 +460,7 @@
         loja</strong> — o passageiro não paga mais caro por estar ali. <strong>A diferença é o dinheiro
         dele</strong>, e com a lista atual dá <span id="mediaInline">—</span> por cookie.
       </p>
-      <div class="controls" id="ctlDia"></div>
+      <div id="ctlDia"></div>
       <div class="results" id="resMotorista"></div>
     </section>
 
@@ -960,10 +960,11 @@
     // a embalagem do carro é custo da loja — mora na aba da loja, não aqui
     document.getElementById("ctlLoja").innerHTML = sliderHTML(CTLS.find((c) => c.k === "embCarro"));
     // tabelinha do dia a dia: rótulo, − valor +. Sem slider, sem nota.
+    const CURTO = { corridas: "Corridas/dia", vendasDia: "Vendas/dia", dias: "Dias/mês" };
     const campo = (k) => {
       const c = CTLS.find((x) => x.k === k);
       return `<div class="campo">
-        <span class="cl">${c.lab}</span>
+        <span class="cl">${CURTO[k] || c.lab}</span>
         <span class="cg">
           <button type="button" class="cb" data-k="${k}" data-d="-1" aria-label="Diminuir ${c.lab}">−</button>
           <span class="cv" id="cv-${k}">${c.fmt(S[k])}</span>
