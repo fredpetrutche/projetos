@@ -335,6 +335,7 @@
   .campo .cl { font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; text-transform: uppercase;
                color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
   .campo .cg { display: inline-flex; align-items: center; gap: .15rem; }
+  .campo .cv.lido { font-weight: 600; color: var(--ink); min-width: 0; }
   .campo .cv { font-family: var(--mono); font-size: 1rem; font-weight: 700; font-variant-numeric: tabular-nums;
                min-width: 2.4rem; text-align: center; }
   .campo .cb { font-family: var(--mono); font-size: 1rem; line-height: 1; font-weight: 600;
@@ -503,7 +504,7 @@
         pra ter volume que hoje não tem</strong> — e o tamanho disso depende de quantos motoristas
         realmente vendem.
       </p>
-      <div class="controls" id="ctlEscala"></div>
+      <div id="ctlEscala"></div>
       <div class="results" id="resLoja"></div>
       <div class="notes" id="notaLoja"></div>
     </section>
@@ -754,6 +755,7 @@
     const sel = escolhidos();
     return sel.length ? sel.reduce((a, s) => a + ganhoMotoristaDe(s), 0) / sel.length : 0;
   };
+  const mediaCMV = () => { const s = escolhidos(); return s.length ? s.reduce((a, x) => a + x.cmv, 0) / s.length : 0; };
   const mediaGanhoLoja = () => {
     const sel = escolhidos();
     return sel.length ? sel.reduce((a, s) => a + ganhoLojaDe(s), 0) / sel.length : 0;
@@ -899,7 +901,7 @@
   const grupo = (g) => CTLS.filter((c) => c.g === g).map(sliderHTML).join("");
 
   function buildControls() {
-    document.getElementById("ctlEscala").innerHTML = grupo("escala");
+
     document.getElementById("ctlPremissas").innerHTML = grupo("prem");
     document.getElementById("ctlPodio").innerHTML = grupo("podio");
     document.getElementById("ctlRankPrem").innerHTML = grupo("rankprem");
@@ -1103,28 +1105,60 @@
   }
 
   function renderLoja(R) {
+    // motoristas com + e −, e o ganho mensal de cada um vindo da aba 1
+    const c = CTLS.find((x) => x.k === "motoristas");
+    document.getElementById("ctlEscala").innerHTML = `
+      <div class="campos">
+        <div class="campo">
+          <span class="cl">Motoristas ativos</span>
+          <span class="cg">
+            <button type="button" class="cb" data-k="motoristas" data-d="-1" aria-label="Menos motoristas">−</button>
+            <span class="cv">${n0(S.motoristas)}</span>
+            <button type="button" class="cb" data-k="motoristas" data-d="1" aria-label="Mais motoristas">+</button>
+          </span>
+        </div>
+        <div class="campo">
+          <span class="cl">Ganho mensal por motorista</span>
+          <span class="cg"><span class="cv lido">${brl0(R.motMes)}</span></span>
+        </div>
+      </div>`;
+    document.querySelectorAll("#ctlEscala .cb").forEach((b) => {
+      b.addEventListener("click", () => {
+        const novo = S.motoristas + Number(b.dataset.d) * c.step;
+        S.motoristas = Math.min(c.max, Math.max(c.min, novo));
+        recalc(); update();
+      });
+    });
+
+    const custoCMV = R.unMes * mediaCMV() * (1 + QUEBRA);
+    const custoImp = R.faturaMes * DED;
+    const custoEmb = R.unMes * S.embCarro;
     document.getElementById("resLoja").innerHTML = `
-      <div class="cell hero"><span class="label">Margem da loja/mês</span><span class="v ${sign(R.lojaMes)}">${brl0(R.lojaMes)}</span>
-        <span class="s">${n0(R.unMes)} cookies × ${brl(R.loja)}</span></div>
-      <div class="cell"><span class="label">Faturamento/mês</span><span class="v">${brl0(R.faturaMes)}</span>
-        <span class="s">o que os motoristas pagam à loja</span></div>
-      <div class="cell"><span class="label">Cookies/mês</span><span class="v">${n0(R.unMes)}</span>
+      <div class="cell"><span class="label">Cookies no mês</span><span class="v">${n0(R.unMes)}</span>
         <span class="s">${n0(S.motoristas)} motoristas × ${n0(R.porDia)}/dia × ${n0(S.dias)} dias</span></div>
-      <div class="cell"><span class="label">Sai no bolso dos motoristas</span><span class="v">${brl0(R.motMes * S.motoristas)}</span>
-        <span class="s">somando os ${n0(S.motoristas)}</span></div>`;
+      <div class="cell"><span class="label">Faturamento do mês</span><span class="v">${brl0(R.faturaMes)}</span>
+        <span class="s">o que os motoristas pagam à loja</span></div>
+      <div class="cell hero"><span class="label">Margem da loja</span><span class="v ${sign(R.lojaMes)}">${brl0(R.lojaMes)}</span>
+        <span class="s">o que sobra depois de todos os custos</span></div>`;
 
     document.getElementById("notaLoja").innerHTML = `
-      <div class="note-item"><span class="tag acc">o tamanho disso comparado com o resto</span><span>
-        <strong>${brl0(R.lojaMes)} por mês.</strong> O programa de indicação de cliente, na outra página,
-        rende R$ 338. <em>Esta frente é de outra ordem de grandeza</em> — e é por isso que ela vem primeiro.
-        ${R.faturaMes > 0 ? `São ${brl0(R.faturaMes)} de faturamento novo, ${pc(R.faturaMes / 46925, 1)} do que a loja
-        já faz hoje.` : ""}
+      <div class="note-item"><span class="tag acc">de onde sai a margem</span><span>
+        <strong>Margem não é o faturamento.</strong> Entra ${brl0(R.faturaMes)} e sai o que o cookie custa
+        para existir:
+        <br><br>
+        <code>${brl0(R.faturaMes)}</code> que os motoristas pagam<br>
+        <code>−${brl0(custoCMV)}</code> de ingrediente e quebra<br>
+        <code>−${brl0(custoImp)}</code> de Simples e royalties (${pc(DED)})<br>
+        <code>−${brl0(custoEmb)}</code> de saquinho e adesivo<br>
+        <strong><code>= ${brl0(R.lojaMes)}</code> de margem</strong>
+        <br><br>
+        <em>É esse último número que vira lucro da loja</em> — o faturamento é só quanto dinheiro passou
+        pelo caixa.
       </span></div>
       <div class="note-item"><span class="tag bad">onde essa conta mente</span><span>
         Ela multiplica motoristas × cookies × dias e dá um número bonito. <strong>Na prática, nada escala
         assim.</strong> Motorista some, cookie volta velho, tem dia de chuva e tem passageiro que não quer
-        conversa. <em>O número que vale é o do primeiro mês com 3 motoristas</em> — e é ele que deveria
-        substituir os sliders desta seção.
+        conversa. <em>O número que vale é o do primeiro mês com 3 motoristas.</em>
       </span></div>`;
   }
 
