@@ -418,7 +418,7 @@
     <h1>Indicação Uber</h1>
     <p class="lede">
       Duas coisas diferentes com o mesmo público: o motorista <strong>revendendo cookie dentro do carro</strong>
-      — dinheiro no bolso dele, meta de R$ 30 a R$ 40 por dia — e o <strong>ranking de indicação na loja</strong>,
+      — dinheiro no bolso dele, meta de R$ 25 a R$ 40 por dia — e o <strong>ranking de indicação na loja</strong>,
       com premiação em dinheiro para o pódio. Mesma base de custo da campanha de fidelização.
     </p>
   </header>
@@ -448,7 +448,7 @@
     <div class="veredito" id="veredito"></div>
 
     <section id="sabores">
-      <h2><span class="n">1</span> Quais sabores o motorista leva<span class="hint">venda real de Paulínia · jun+jul+ago</span></h2>
+      <h2><span class="n">1</span> Quais sabores o motorista leva<span class="hint">Paulínia · últimos 90 dias · só loja</span></h2>
       <p class="prose">
         <strong>Essa escolha não é cosmética: ela decide se o programa fecha.</strong> O CMV do cookie vai de
         R$ 3,83 a R$ 8,71, e é ele que define quanta margem sobra pra dividir com o motorista. Clique para
@@ -474,7 +474,7 @@
     </section>
 
     <section>
-      <h2><span class="n">4</span> Quanto o motorista leva<span class="hint">a meta é R$ 30 a R$ 40 por dia</span></h2>
+      <h2><span class="n">4</span> Quanto o motorista leva<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
       <div class="results" id="resMotorista"></div>
       <div class="notes" id="notaMotorista"></div>
     </section>
@@ -559,7 +559,7 @@
             <span class="ideia">bloqueante · decide quantos ele leva por dia e se precisa de embalagem térmica</span></span>
           <span class="porque">É a pergunta operacional número um e <strong>ninguém mediu</strong>. Carro parado
           no sol em Paulínia passa de 50°C. Se o cookie aguenta o turno inteiro, ele leva 8 e vende 5. Se
-          aguenta 3 horas, ele leva 3 — e aí a meta de R$ 30 a R$ 40 por dia <em>não fecha no preço que a
+          aguenta 3 horas, ele leva 3 — e aí a meta de R$ 25 a R$ 40 por dia <em>não fecha no preço que a
           conta está usando</em>. <strong>Um teste de um dia responde isso.</strong></span>
           <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
         </li>
@@ -671,31 +671,34 @@
     ticket: 39.09, cmvMix: 0.3460,
   };
 
-  // ─── Sabores: venda REAL de Paulínia, jun+jul+ago/2026, canais de loja ────────
-  // un = unidades vendidas no trimestre · preco = preço médio praticado (com promo)
-  // 8.621 cookies no total. CMV de cmv_produtos.
+  // ─── Sabores: venda REAL de Paulínia, ÚLTIMOS 90 DIAS (19/06 a 17/09/2026) ────
+  // Só canais de loja (caixa + balcão + mesa). Fora: tortas, sorvetes, bebidas,
+  // milkshakes, brownies, salgados e adicionais. 7.333 cookies, R$ 119.758.
+  // un = unidades · fat = faturamento · preco = preço médio praticado (com promo)
+  // CMV de cmv_produtos.
   const SABORES = [
-    { id: "nut",  nome: "Nutella",                  un: 2027, preco: 13.48, cmv: 5.35, on: true },
-    { id: "kin",  nome: "Kinder com Nutella",       un: 899,  preco: 18.90, cmv: 5.58, on: true },
-    { id: "nin",  nome: "Ninho com Nutella",        un: 749,  preco: 15.29, cmv: 5.01, on: true },
-    { id: "bri",  nome: "Brigadeiro de panela",     un: 741,  preco: 17.77, cmv: 4.17, on: true },
-    { id: "bue",  nome: "Bueno white",              un: 513,  preco: 20.90, cmv: 8.30, on: false },
-    { id: "our",  nome: "Ouro Branco 2.0",          un: 378,  preco: 14.89, cmv: 4.99, on: false },
-    { id: "duo",  nome: "Duo",                      un: 373,  preco: 17.56, cmv: 5.84, on: false },
-    { id: "tra",  nome: "Tradicional",              un: 365,  preco: 12.86, cmv: 3.98, on: true },
-    { id: "mm",   nome: "M&M's",                    un: 330,  preco: 14.90, cmv: 4.72, on: false },
-    { id: "cho",  nome: "Choc",                     un: 330,  preco: 16.91, cmv: 5.35, on: false },
-    { id: "nfv",  nome: "Ninho c/ Frutas Verm.",    un: 299,  preco: 16.90, cmv: 4.15, on: false },
-    { id: "red",  nome: "Red Velvet",               un: 277,  preco: 18.90, cmv: 4.23, on: false },
-    { id: "chu",  nome: "Churros",                  un: 266,  preco: 14.90, cmv: 3.83, on: false },
-    { id: "coc",  nome: "Cocada cremosa",           un: 211,  preco: 14.76, cmv: 4.28, on: false },
-    { id: "pis",  nome: "Pistache",                 un: 204,  preco: 22.90, cmv: 8.71, on: false },
-    { id: "lim",  nome: "Limão siciliano",          un: 193,  preco: 16.89, cmv: 4.25, on: false },
-    { id: "noz",  nome: "Doce de leite c/ Nozes",   un: 185,  preco: 16.90, cmv: 4.19, on: false },
-    { id: "mar",  nome: "Maracujá",                 un: 162,  preco: 16.90, cmv: 6.22, on: false },
-    { id: "fra",  nome: "França",                   un: 51,   preco: 16.90, cmv: 5.79, on: false },
+    { id: "nut",  nome: "Nutella",                un: 1869, fat: 25490.11, preco: 13.64, cmv: 5.35, on: true },
+    { id: "kin",  nome: "Kinder com Nutella",     un: 786,  fat: 14846.40, preco: 18.89, cmv: 5.58, on: true },
+    { id: "bri",  nome: "Brigadeiro de panela",   un: 645,  fat: 11364.94, preco: 17.62, cmv: 4.17, on: true },
+    { id: "nin",  nome: "Ninho com Nutella",      un: 508,  fat: 8463.20,  preco: 16.66, cmv: 5.01, on: true },
+    { id: "bue",  nome: "Bueno white",            un: 452,  fat: 9446.80,  preco: 20.90, cmv: 8.30, on: false },
+    { id: "duo",  nome: "Duo",                    un: 331,  fat: 5548.90,  preco: 16.76, cmv: 5.84, on: false },
+    { id: "our",  nome: "Ouro Branco 2.0",        un: 323,  fat: 4812.70,  preco: 14.90, cmv: 4.99, on: false },
+    { id: "tra",  nome: "Tradicional",            un: 317,  fat: 4076.40,  preco: 12.86, cmv: 3.98, on: true },
+    { id: "mm",   nome: "M&M's",                  un: 273,  fat: 4067.70,  preco: 14.90, cmv: 4.72, on: false },
+    { id: "nfv",  nome: "Ninho c/ Frutas Verm.",  un: 254,  fat: 4292.60,  preco: 16.90, cmv: 4.15, on: false },
+    { id: "chu",  nome: "Churros",                un: 233,  fat: 3471.70,  preco: 14.90, cmv: 3.83, on: false },
+    { id: "red",  nome: "Red Velvet",             un: 227,  fat: 4290.30,  preco: 18.90, cmv: 4.23, on: false },
+    { id: "cho",  nome: "Choc",                   un: 221,  fat: 3736.10,  preco: 16.91, cmv: 5.35, on: false },
+    { id: "coc",  nome: "Cocada cremosa",         un: 180,  fat: 2656.80,  preco: 14.76, cmv: 4.28, on: false },
+    { id: "lim",  nome: "Limão siciliano",        un: 163,  fat: 2753.00,  preco: 16.89, cmv: 4.25, on: false },
+    { id: "pis",  nome: "Pistache",               un: 155,  fat: 3549.50,  preco: 22.90, cmv: 8.71, on: false },
+    { id: "noz",  nome: "Doce de leite c/ Nozes", un: 138,  fat: 2332.20,  preco: 16.90, cmv: 4.19, on: false },
+    { id: "mar",  nome: "Maracujá",               un: 133,  fat: 2247.70,  preco: 16.90, cmv: 6.22, on: false },
+    { id: "fra",  nome: "França",                 un: 75,   fat: 1267.50,  preco: 16.90, cmv: 5.79, on: false },
   ];
-  const TOTAL_COOKIES = 8621;
+  const TOTAL_COOKIES = 7333;
+  const TOTAL_FAT = 119758.09;
 
   const escolhidos = () => SABORES.filter((s) => s.on);
   // CMV da lista = média ponderada pelo que o público já compra
@@ -707,8 +710,10 @@
   }
 
   const S = {
-    precoCarro: 18, atacado: 10,            // os dois preços que decidem tudo
-    motoristas: 20, porDia: 5, dias: 26,    // escala
+    precoCarro: 18, atacado: 12,            // os dois preços que decidem tudo
+    // cookies/dia não é slider: é corridas × conversão por corrida — as duas
+    // coisas que o motorista consegue observar e reportar depois do teste.
+    motoristas: 20, corridas: 20, convCorrida: 25, dias: 26,
     simples: 8.0, royalty: 4.0, quebra: 1.0, embItem: 0.85, cartao: 0,
     // ranking
     p1: 250, p2: 200, p3: 100, conversoes: 60, canib: 30,
@@ -741,13 +746,15 @@
   function calc() {
     const mot = porCookieMotorista();
     const loja = porCookieLoja();
-    const unMes = S.motoristas * S.porDia * S.dias;
+    const porDia = S.corridas * (S.convCorrida / 100);
+    const unMes = S.motoristas * porDia * S.dias;
     return {
-      mot, loja, unMes,
-      motDia: mot * S.porDia,
-      motMes: mot * S.porDia * S.dias,
+      mot, loja, unMes, porDia,
+      motDia: mot * porDia,
+      motMes: mot * porDia * S.dias,
       lojaMes: loja * unMes,
       faturaMes: S.atacado * unMes,
+      unPara25: mot > 0 ? 25 / mot : Infinity,
       unPara30: mot > 0 ? 30 / mot : Infinity,
       unPara40: mot > 0 ? 40 / mot : Infinity,
     };
@@ -777,12 +784,17 @@
     { k: "motoristas", g: "escala", lab: "Motoristas ativos", min: 0, max: 100, step: 1, fmt: n0,
       note: () => `Quantos estão vendendo de fato no mês. <b>Recrutar 20 não é 4 vezes recrutar 5</b> — a conta
         escala linear, a realidade não (pergunta 07).` },
-    { k: "porDia", g: "escala", lab: "Cookies por motorista/dia", min: 0, max: 20, step: 0.5, fmt: n1,
+    { k: "corridas", g: "escala", lab: "Corridas por dia", min: 0, max: 60, step: 1, fmt: n0,
+      note: () => `Quantos passageiros diferentes ele leva no dia. <b>20 é o número do teste</b> — e é o único
+        dos três que já tem chão: motorista de app sabe quantas corridas faz.` },
+    { k: "convCorrida", g: "escala", lab: "Conversão por corrida", min: 0, max: 100, step: 1, fmt: (v) => pc(v / 100),
       note: () => {
         const R = calc();
-        return `<b>É a premissa mais frágil da página</b> e ninguém mediu. Para bater a meta de R$ 30 a R$ 40
-        por dia ele precisa vender <b>${n1(R.unPara30)} a ${n1(R.unPara40)}</b> cookies — e quantos ele
-        consegue carregar depende da pergunta 01.`; } },
+        return `De cada 100 passageiros, quantos compram. A ${pc(S.convCorrida / 100)} ele vende
+        <b>${n1(R.porDia)} cookies por dia</b>.
+        <b>É a premissa mais frágil da página inteira</b>: ninguém nunca ofereceu cookie dentro de um carro,
+        e 1 em cada 4 comprando é otimista. <em>É exatamente isso que o teste vai medir</em> — e é o número
+        que deve substituir este slider depois.`; } },
     { k: "dias", g: "escala", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0,
       note: () => `Motorista de app não roda todo dia. 26 é a premissa de quem trabalha 6 dias por semana.` },
 
@@ -848,7 +860,7 @@
   // ─── Render ────────────────────────────────────────────────────────────────
   function renderVeredito(R) {
     const ok = R.loja > 0 && R.mot > 0;
-    const bate = R.motDia >= 30;
+    const bate = R.motDia >= 25;   // R$ 25 é o piso do "razoável"; R$ 30 é o alvo
     document.getElementById("veredito").className = "veredito " + (ok ? (bate ? "pos" : "") : "neg");
     document.getElementById("veredito").innerHTML = `
       <span class="rot">A resposta, sem tabela</span>
@@ -858,7 +870,7 @@
       <p>
         A ${brl(S.atacado)} de atacado e ${brl(S.precoCarro)} no carro, o motorista ganha
         <strong>${brl(R.mot)} por cookie</strong> e a loja fica com <strong>${brl(R.loja)}</strong>.
-        Vendendo ${n1(S.porDia)} por dia, ele leva <strong>${brl(R.motDia)} por dia</strong>
+        Vendendo ${n1(R.porDia)} por dia, ele leva <strong>${brl(R.motDia)} por dia</strong>
         — ${bate ? "<em>acima</em> da meta de R$ 30" : "<em>abaixo</em> da meta de R$ 30"} — e
         <strong>${brl0(R.motMes)} no mês</strong>.
       </p>
@@ -883,11 +895,12 @@
   const lojaCom = (cmv) => S.atacado * (1 - DED) - custoDe(cmv);
 
   function buildSabores() {
-    document.getElementById("grSabores").innerHTML = SABORES.map((s) => `
+    document.getElementById("grSabores").innerHTML = SABORES.map((s, i) => `
       <button type="button" class="sab ${s.on ? "on" : ""}" id="sab-${s.id}" aria-pressed="${s.on}">
-        <span class="sn">${s.nome}</span>
-        <span class="sd"><b>${n0(s.un)}</b> un · ${pc(s.un / TOTAL_COOKIES, 1)} da loja</span>
-        <span class="sc">CMV ${brl(s.cmv)}</span>
+        <span class="sn">${i + 1}. ${s.nome}</span>
+        <span class="sd"><b>${n0(s.un)}</b> un · ${pc(s.un / TOTAL_COOKIES, 1)} · ${brl0(s.fat)}</span>
+        <span class="sd">venda ${brl(s.preco)}</span>
+        <span class="sc">CMV ${brl(s.cmv)} · ${pc(s.cmv / s.preco)}</span>
       </button>`).join("");
     SABORES.forEach((s) => {
       const el = document.getElementById("sab-" + s.id);
@@ -913,7 +926,8 @@
     document.getElementById("notaSabores").innerHTML = `
       <div class="note-item"><span class="tag ${sel.length ? "good" : "bad"}">a lista que você montou</span><span>
         ${sel.length
-          ? `<strong>${n0(sel.length)} sabores</strong>, que somam <strong>${n0(un)} unidades</strong> no trimestre —
+          ? `<strong>${n0(sel.length)} sabores</strong>, que somam <strong>${n0(un)} unidades</strong> e
+             <strong>${brl0(sel.reduce((a, s) => a + s.fat, 0))}</strong> em 90 dias —
              <strong>${pc(un / TOTAL_COOKIES)} de tudo que a loja vende de cookie</strong>.
              CMV médio ponderado: <strong>${brl(cmvLista())}</strong>, custo total por unidade ${brl(custoCookie)}.
              ${melhor && pior && melhor !== pior
@@ -931,6 +945,10 @@
         <strong>França vendeu 51 unidades no trimestre em Paulínia</strong>, 0,6% do volume — em Campinas
         vende cinco vezes mais. <em>Pode ser bom e o público de Paulínia simplesmente não compra.</em>
         O Crookie não entra aqui porque não é cookie, e em Paulínia fez 91 unidades em quatro meses.
+        <br><br>
+        Ficaram fora do seletor <strong>50 unidades (0,7%)</strong> de três sabores residuais — Japão,
+        Biscoff e EUA Reeses — porque <em>o CMV deles está zerado ou ausente no sistema</em>. Não muda nada
+        na conta, mas é por isso que as porcentagens não fecham em 100%.
         <br><br>
         E o dado <strong>não diz nada sobre o que aguenta o carro</strong> — que é a pergunta 01 e continua
         sem resposta. <em>Vender bem na vitrine e aguentar 6 horas a 50°C são coisas diferentes.</em>
@@ -961,24 +979,35 @@
 
   function renderMotorista(R) {
     document.getElementById("resMotorista").innerHTML = `
-      <div class="cell hero"><span class="label">Por dia</span><span class="v ${R.motDia >= 30 ? "pos" : "neg"}">${brl(R.motDia)}</span>
-        <span class="s">a meta é R$ 30 a R$ 40 · ${n1(S.porDia)} cookies × ${brl(R.mot)}</span></div>
+      <div class="cell hero"><span class="label">Por dia</span><span class="v ${R.motDia >= 25 ? "pos" : "neg"}">${brl(R.motDia)}</span>
+        <span class="s">piso R$ 25 · alvo R$ 30 · ${n1(R.porDia)} cookies × ${brl(R.mot)}</span></div>
       <div class="cell"><span class="label">Por mês</span><span class="v">${brl0(R.motMes)}</span>
         <span class="s">${n0(S.dias)} dias rodando</span></div>
       <div class="cell"><span class="label">Por cookie</span><span class="v">${brl(R.mot)}</span>
         <span class="s">${pc(R.mot / S.precoCarro)} do preço que ele cobra</span></div>
-      <div class="cell"><span class="label">Pra bater R$ 30/dia</span><span class="v">${n1(R.unPara30)}</span>
-        <span class="s">cookies por dia · ${n1(R.unPara40)} para R$ 40</span></div>`;
+      <div class="cell"><span class="label">Conversão por corrida</span><span class="v">${pc(S.convCorrida / 100)}</span>
+        <span class="s">${n1(R.porDia)} vendas em ${n0(S.corridas)} corridas</span></div>`;
 
+    const convPara = (alvo) => R.mot > 0 && S.corridas > 0 ? 100 * (alvo / R.mot) / S.corridas : Infinity;
     document.getElementById("notaMotorista").innerHTML = `
-      <div class="note-item"><span class="tag ${R.motDia >= 30 ? "good" : "bad"}">a meta que você definiu</span><span>
-        R$ 30 a R$ 40 por dia. Nesse desenho ele faz <strong>${brl(R.motDia)}</strong> vendendo
-        ${n1(S.porDia)} cookies — <strong>${R.motDia >= 30 ? "bate" : "não bate"}</strong>.
-        ${R.motDia >= 30
-          ? `E são <strong>${n1(R.unPara30)} cookies</strong> para o mínimo: <em>menos de um a cada duas horas
-             de turno</em>. É pouco o bastante para ser crível.`
-          : `Para bater, ele precisaria vender <strong>${n1(R.unPara30)} por dia</strong> — ou o atacado
-             precisa cair, ou o preço no carro precisa subir.`}
+      <div class="note-item"><span class="tag ${R.motDia >= 25 ? "good" : "bad"}">a meta que você definiu</span><span>
+        R$ 25 a R$ 30 por dia é o razoável; R$ 40 é o teto. Nesse desenho ele faz
+        <strong>${brl(R.motDia)}</strong> vendendo ${n1(R.porDia)} cookies em ${n0(S.corridas)} corridas —
+        <strong>${R.motDia >= 25 ? "bate" : "não bate"}</strong>.
+        ${R.motDia >= 25
+          ? `São <strong>${n1(R.unPara25)} cookies</strong> para o piso de R$ 25 e ${n1(R.unPara40)} para R$ 40.
+             <em>Em 20 corridas, isso é oferecer para todo mundo e um punhado dizer sim.</em>`
+          : `Para bater o piso, ele precisaria vender <strong>${n1(R.unPara25)} por dia</strong> — ou o atacado
+             cai, ou o preço no carro sobe, ou a conversão precisa ser maior.`}
+      </span></div>
+      <div class="note-item"><span class="tag warn">a conta de trás pra frente</span><span>
+        Com ${n0(S.corridas)} corridas e ${brl(R.mot)} por cookie, a conversão por corrida precisa ser:
+        <strong>${pc(convPara(25) / 100, 1)}</strong> para R$ 25 no dia ·
+        <strong>${pc(convPara(30) / 100, 1)}</strong> para R$ 30 ·
+        <strong>${pc(convPara(40) / 100, 1)}</strong> para R$ 40.
+        <br><br>
+        <em>É o número que o teste tem que trazer.</em> Depois dele, este slider some e vira dado — e é a
+        única coisa que transforma esta página de estimativa em projeção.
       </span></div>
       <div class="note-item"><span class="tag warn">o que faz esse número ser crível ou não</span><span>
         <strong>${brl0(R.motMes)} por mês não é troco para motorista de app</strong> — é o tipo de número que
@@ -994,7 +1023,7 @@
       <div class="cell"><span class="label">Faturamento/mês</span><span class="v">${brl0(R.faturaMes)}</span>
         <span class="s">o que os motoristas pagam à loja</span></div>
       <div class="cell"><span class="label">Cookies/mês</span><span class="v">${n0(R.unMes)}</span>
-        <span class="s">${n0(S.motoristas)} motoristas × ${n1(S.porDia)}/dia × ${n0(S.dias)} dias</span></div>
+        <span class="s">${n0(S.motoristas)} motoristas × ${n1(R.porDia)}/dia × ${n0(S.dias)} dias</span></div>
       <div class="cell"><span class="label">Sai no bolso dos motoristas</span><span class="v">${brl0(R.motMes * S.motoristas)}</span>
         <span class="s">somando os ${n0(S.motoristas)}</span></div>`;
 
