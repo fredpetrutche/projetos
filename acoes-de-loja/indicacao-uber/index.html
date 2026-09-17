@@ -431,33 +431,35 @@
     <div><span class="label">A loja leva</span><span class="v" id="stripLoja">—</span><span class="s">por mês, no cenário montado</span></div>
   </div>
 
-  <div class="abas" role="tablist" aria-label="As duas frentes">
-    <button type="button" role="tab" id="aba-revenda" aria-controls="painel-revenda" aria-selected="true" data-hash="revenda">
-      Revenda no carro<span class="sub2">o principal · margem no bolso do motorista</span></button>
-    <button type="button" role="tab" id="aba-ranking" aria-controls="painel-ranking" aria-selected="false" data-hash="ranking">
-      Ranking de indicação<span class="sub2">pódio em dinheiro · R$ 250 / 200 / 100</span></button>
+  <div class="abas" role="tablist" aria-label="As frentes do programa">
+    <button type="button" role="tab" id="aba-motorista" aria-controls="painel-motorista" aria-selected="true" data-hash="motorista">
+      Ganho do motorista<span class="sub2">o que ele leva pra casa — é o que decide se tem programa</span></button>
+    <button type="button" role="tab" id="aba-loja" aria-controls="painel-loja" aria-selected="false" data-hash="loja">
+      Ganho da loja<span class="sub2">o que sobra do outro lado do balcão</span></button>
+    <button type="button" role="tab" id="aba-premio" aria-controls="painel-premio" aria-selected="false" data-hash="premio">
+      Prêmio de indicação<span class="sub2">pódio em dinheiro · R$ 250 / 200 / 100</span></button>
     <button type="button" role="tab" id="aba-decidir" aria-controls="painel-decidir" aria-selected="false" data-hash="decidir">
       O que falta decidir<span class="sub2">nada aqui está fechado</span></button>
   </div>
 
   <!-- ══════════════════════════════════════════════════════════════════════
-       ABA 1 — REVENDA NO CARRO
+       ABA 1 — GANHO DO MOTORISTA
        ══════════════════════════════════════════════════════════════════════ -->
-  <div class="painel" id="painel-revenda" role="tabpanel" aria-labelledby="aba-revenda">
+  <div class="painel" id="painel-motorista" role="tabpanel" aria-labelledby="aba-motorista">
 
     <div class="veredito" id="veredito"></div>
 
     <section id="sabores">
-      <h2><span class="n">1</span> O cardápio do motorista<span class="hint">o que ele leva no carro</span></h2>
+      <h2><span class="n">1</span> O cardápio<span class="hint">o que ele leva no carro, e o que sobra pra ele</span></h2>
       <p class="prose">
-        Cinco produtos. O preço de revenda é <strong>o mesmo da loja</strong> — o passageiro não paga mais
-        caro por estar no carro. O preço de atacado sai do <strong>CMV alvo</strong>: a R$ 50%, a loja vende
-        pro motorista pelo dobro do custo.
+        O preço de revenda é <strong>o mesmo da loja</strong> — o passageiro não paga mais caro por estar no
+        carro. O que ele paga à loja sai do <strong>CMV alvo</strong>: a 50%, o atacado é o dobro do custo.
+        <em>A diferença entre os dois é o dinheiro dele.</em>
       </p>
       <div class="controls destaque" id="ctlCardapio"></div>
       <div class="tablewrap"><table>
-        <thead><tr><th>Produto</th><th>Revenda<br>(preço de loja)</th><th>CMV</th><th>Atacado<br>o motorista paga</th><th>Ganho da loja</th><th>Ganho do<br>motorista</th></tr></thead>
-        <tbody id="tabCardapio"></tbody>
+        <thead><tr><th>Produto</th><th>Ele vende por</th><th>Ele paga</th><th>Fica com ele</th><th>% da venda</th></tr></thead>
+        <tbody id="tabMotorista"></tbody>
       </table></div>
       <div class="notes" id="notaCardapio"></div>
 
@@ -470,32 +472,55 @@
       <div class="notes" id="notaSabores"></div>
     </section>
 
-
     <section>
-      <h2><span class="n">2</span> Quanto o motorista leva<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
+      <h2><span class="n">2</span> Quanto ele leva por dia<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
+      <div class="controls" id="ctlDia"></div>
       <div class="results" id="resMotorista"></div>
       <div class="notes" id="notaMotorista"></div>
     </section>
 
+  </div><!-- /painel-motorista -->
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       ABA 2 — GANHO DA LOJA
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="painel" id="painel-loja" role="tabpanel" aria-labelledby="aba-loja" hidden>
+
+    <div class="veredito" id="veredito3"></div>
+
     <section>
-      <h2><span class="n">3</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
+      <h2><span class="n">1</span> O que sobra por cookie<span class="hint">mesma lista, o outro lado</span></h2>
+      <p class="prose">
+        A loja recebe o atacado, paga imposto e royalties sobre ele, e arca com o custo do cookie, a quebra
+        e a embalagem do carro. <strong>O que sobra é isto</strong> — e é sempre menos do que vender na
+        vitrine, porque parte da margem foi pro motorista.
+      </p>
+      <div class="controls" id="ctlLoja"></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Produto</th><th>Atacado<br>entra</th><th>CMV<br>+ quebra</th><th>Imposto<br>+ royalty</th><th>Embalagem<br>do carro</th><th>Sobra</th><th>Na vitrine<br>sobraria</th></tr></thead>
+        <tbody id="tabLoja"></tbody>
+      </table></div>
+      <div class="notes" id="notaLojaCookie"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">2</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
       <div class="controls" id="ctlEscala"></div>
       <div class="results" id="resLoja"></div>
       <div class="notes" id="notaLoja"></div>
     </section>
 
-
     <section>
-      <h2><span class="n">4</span> Premissas</h2>
+      <h2><span class="n">3</span> Premissas de custo</h2>
       <div class="controls" id="ctlPremissas"></div>
     </section>
 
-  </div><!-- /painel-revenda -->
+  </div><!-- /painel-loja -->
 
   <!-- ══════════════════════════════════════════════════════════════════════
-       ABA 2 — RANKING
+       ABA 3 — PRÊMIO DE INDICAÇÃO
        ══════════════════════════════════════════════════════════════════════ -->
-  <div class="painel" id="painel-ranking" role="tabpanel" aria-labelledby="aba-ranking" hidden>
+  <div class="painel" id="painel-premio" role="tabpanel" aria-labelledby="aba-premio" hidden>
 
     <div class="veredito" id="veredito2"></div>
 
@@ -529,7 +554,7 @@
       <div class="controls" id="ctlRankPrem"></div>
     </section>
 
-  </div><!-- /painel-ranking -->
+  </div><!-- /painel-premio -->
 
   <!-- ══════════════════════════════════════════════════════════════════════
        ABA 3 — O QUE FALTA DECIDIR
@@ -828,10 +853,10 @@
       note: () => `Embalagem extra do carro, por unidade. <b>Premissa, não cotação.</b> Sai do lado da loja —
         não muda o ganho do motorista.` },
 
-    { k: "corridas", g: "escala", lab: "Corridas por dia", min: 0, max: 60, step: 1, fmt: n0,
+    { k: "corridas", g: "dia", lab: "Corridas por dia", min: 0, max: 60, step: 1, fmt: n0,
       note: () => `Quantos passageiros diferentes ele leva no dia. <b>20 é o número do teste</b> — e é o único
         dos três que já tem chão: motorista de app sabe quantas corridas faz.` },
-    { k: "convCorrida", g: "escala", lab: "Conversão por corrida", min: 0, max: 100, step: 1, fmt: (v) => pc(v / 100),
+    { k: "convCorrida", g: "dia", lab: "Conversão por corrida", min: 0, max: 100, step: 1, fmt: (v) => pc(v / 100),
       note: () => {
         const R = calc();
         return `De cada 100 passageiros, quantos compram. A ${pc(S.convCorrida / 100)} ele vende
@@ -839,7 +864,7 @@
         <b>É a premissa mais frágil da página inteira</b>: ninguém nunca ofereceu cookie dentro de um carro,
         e 1 em cada 4 comprando é otimista. <em>É exatamente isso que o teste vai medir</em> — e é o número
         que deve substituir este slider depois.`; } },
-    { k: "dias", g: "escala", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0,
+    { k: "dias", g: "dia", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0,
       note: () => `Motorista de app não roda todo dia. 26 é a premissa de quem trabalha 6 dias por semana.` },
 
     { k: "simples", g: "prem", lab: "Simples", min: 0, max: 20, step: 0.1, fmt: (v) => pc(v / 100, 1),
@@ -903,6 +928,35 @@
   }
 
   // ─── Render ────────────────────────────────────────────────────────────────
+  // veredito da ABA 2 — só o lado da loja
+  function renderVeredito3(R) {
+    const ok = R.loja > 0;
+    const sel = escolhidos();
+    const vit = sel.length ? sel.reduce((a, s) => a + (s.preco * (1 - DED) - s.cmv * (1 + QUEBRA) - S.embItem), 0) / sel.length : 0;
+    document.getElementById("veredito3").className = "veredito " + (ok ? "pos" : "neg");
+    document.getElementById("veredito3").innerHTML = `
+      <span class="rot">A resposta, sem tabela</span>
+      <span class="verd">${ok ? "Sobra." : "Não sobra."}</span>
+      <p>
+        Cada cookie vendido pelo motorista deixa <strong>${brl(R.loja)}</strong> na loja — contra
+        ${brl(vit)} se fosse vendido na vitrine. <em>A loja troca ${brl(vit - R.loja)} de margem por uma
+        venda que não existiria.</em>
+      </p>
+      <p>
+        Com ${n0(S.motoristas)} motoristas vendendo ${n1(R.porDia)} por dia, são
+        <strong>${n0(R.unMes)} cookies</strong> e <strong>${brl0(R.lojaMes)} por mês</strong>.
+        ${R.faturaMes > 0 ? `São ${brl0(R.faturaMes)} de faturamento novo, ${pc(R.faturaMes / 46925)} do que a loja faz hoje.` : ""}
+      </p>
+      <div class="se">
+        <span class="t">O que derruba isso</span>
+        <ul>
+          <li><strong>O motorista vender pra quem já ia à loja.</strong> Aí não é venda nova — é a mesma venda com ${brl(vit - R.loja)} a menos.</li>
+          <li><strong>Cookie que volta do carro</strong>, se o modelo for consignado. Cada um que sobrar é ${brl(escolhidos().length ? escolhidos().reduce((a, s) => a + s.cmv, 0) / escolhidos().length : 0)} perdido, e esta conta não desconta isso.</li>
+          <li>A conta multiplica motoristas × cookies × dias. <strong>Na prática nada escala assim</strong> — o número que vale é o do primeiro mês com 3 motoristas.</li>
+        </ul>
+      </div>`;
+  }
+
   function renderVeredito(R) {
     const ok = R.loja > 0 && R.mot > 0;
     const bate = R.motDia >= 25;   // R$ 25 é o piso do "razoável"; R$ 30 é o alvo
@@ -974,56 +1028,95 @@
           : "Você fixa o <b>ganho em reais</b>, igual pra todos, e o CMV alvo vira consequência — diferente em cada produto."}</span>
       </div>
       ${sliderHTML(CTLS.find((c) => c.k === "cmvAlvo"))}
-      ${sliderHTML(CTLS.find((c) => c.k === "ganhoAlvo"))}
-      ${sliderHTML(CTLS.find((c) => c.k === "embCarro"))}`;
+      ${sliderHTML(CTLS.find((c) => c.k === "ganhoAlvo"))}`;
+    // a embalagem do carro é custo da loja — mora na aba da loja, não aqui
+    document.getElementById("ctlLoja").innerHTML = sliderHTML(CTLS.find((c) => c.k === "embCarro"));
+    document.getElementById("ctlDia").innerHTML =
+      ["corridas", "convCorrida", "dias"].map((k) => sliderHTML(CTLS.find((c) => c.k === k))).join("");
     const b1 = document.getElementById("mp-cmv"), b2 = document.getElementById("mp-ganho");
     if (b1) b1.addEventListener("click", () => { S.modoPreco = "cmv"; recalc(); update(); });
     if (b2) b2.addEventListener("click", () => { S.modoPreco = "ganho"; recalc(); update(); });
-    ["cmvAlvo", "ganhoAlvo", "embCarro"].forEach((k) => {
+    ["cmvAlvo", "ganhoAlvo", "embCarro", "corridas", "convCorrida", "dias"].forEach((k) => {
       const el = document.getElementById("c-" + k);
-      const c = CTLS.find((x) => x.k === k);
       if (el) el.addEventListener("input", (e) => { S[k] = parseFloat(e.target.value); recalc(); update(); });
     });
   }
 
+  // ─── ABA 1: só o lado do motorista ─────────────────────────────────────────
   function renderCardapio() {
     const sel = escolhidos();
-    document.getElementById("tabCardapio").innerHTML = sel.length
+    document.getElementById("tabMotorista").innerHTML = sel.length
       ? sel.map((s) => {
-          const at = atacadoDe(s), gl = ganhoLojaDe(s), gm = ganhoMotoristaDe(s);
+          const at = atacadoDe(s), gm = ganhoMotoristaDe(s);
           return `<tr>
             <td>${s.nome}</td>
             <td>${brl(s.preco)}</td>
-            <td>${brl(s.cmv)}<br><span style="color:var(--ink-faint);font-size:.75rem">${pc(cmvRealDe(s))} do atacado</span></td>
-            <td><strong>${brl(at)}</strong></td>
-            <td class="${sign(gl)}">${brl(gl)}</td>
-            <td class="${sign(gm)}"><strong>${brl(gm)}</strong><br><span style="color:var(--ink-faint);font-size:.75rem">${pc(gm / s.preco)} da venda</span></td>
+            <td>${brl(at)}</td>
+            <td class="${sign(gm)}"><strong>${brl(gm)}</strong></td>
+            <td>${pc(gm / s.preco)}</td>
           </tr>`;
         }).join("") +
-        `<tr class="total"><td>Média dos ${n0(sel.length)}</td><td>—</td><td>—</td><td>—</td>
-          <td class="${sign(mediaGanhoLoja())}">${brl(mediaGanhoLoja())}</td>
-          <td class="${sign(mediaGanhoMotorista())}"><strong>${brl(mediaGanhoMotorista())}</strong></td></tr>`
-      : `<tr><td colspan="6">Nenhum produto selecionado.</td></tr>`;
+        `<tr class="total"><td>Média dos ${n0(sel.length)}</td><td>—</td><td>—</td>
+          <td class="${sign(mediaGanhoMotorista())}"><strong>${brl(mediaGanhoMotorista())}</strong></td>
+          <td>—</td></tr>`
+      : `<tr><td colspan="5">Nenhum produto selecionado.</td></tr>`;
 
-    const gm = mediaGanhoMotorista(), gl = mediaGanhoLoja();
-    const vendas = S.corridas * (S.convCorrida / 100);
+    const gm = mediaGanhoMotorista();
+    const sel2 = escolhidos();
+    const melhor = sel2.length ? sel2.reduce((a, s) => ganhoMotoristaDe(s) > ganhoMotoristaDe(a) ? s : a) : null;
+    const pior = sel2.length ? sel2.reduce((a, s) => ganhoMotoristaDe(s) < ganhoMotoristaDe(a) ? s : a) : null;
     document.getElementById("notaCardapio").innerHTML = `
-      <div class="note-item"><span class="tag ${gm * vendas >= 25 ? "good" : "warn"}">a conta do motorista, com essa lista</span><span>
-        Ganho médio de <strong>${brl(gm)} por cookie</strong>. Vendendo <strong>${n1(vendas)} por dia</strong>
-        (${n0(S.corridas)} corridas × ${pc(S.convCorrida / 100)}), ele faz <strong>${brl(gm * vendas)} por dia</strong>
-        e <strong>${brl0(gm * vendas * S.dias)} no mês</strong> em ${n0(S.dias)} dias rodando.
+      <div class="note-item"><span class="tag acc">a média é o que importa</span><span>
+        Ele não vende um sabor só, então o número que vale é a média: <strong>${brl(gm)} por cookie</strong>.
+        ${melhor && pior && melhor !== pior
+          ? `O que mais rende pra ele é <strong>${melhor.nome}</strong> (${brl(ganhoMotoristaDe(melhor))}), o que menos é
+             <strong>${pior.nome}</strong> (${brl(ganhoMotoristaDe(pior))}) — uma diferença de
+             <strong>${brl(ganhoMotoristaDe(melhor) - ganhoMotoristaDe(pior))}</strong> por unidade.
+             <em>Ele vai perceber isso e empurrar o que rende mais.</em>` : ""}
       </span></div>
-      <div class="note-item"><span class="tag acc">a conta da loja</span><span>
-        <strong>${brl(gl)} por cookie</strong>, já descontando imposto e royalties (${pc(DED)}), a quebra
-        e os <strong>${brl(S.embCarro)} de saquinho e adesivo</strong>.
-        Com ${n0(S.motoristas)} motoristas nesse ritmo são <strong>${n0(vendas * S.motoristas * S.dias)} cookies</strong>
-        e <strong>${brl0(gl * vendas * S.motoristas * S.dias)}</strong> no mês.
+      ${S.modoPreco === "ganho" ? `<div class="note-item alerta"><span class="tag bad">o preço fixo não cabe em todo produto</span><span>
+        Fixando <strong>${brl(S.ganhoAlvo)}</strong> pra todos, os produtos mais baratos não têm espaço:
+        ${sel2.filter((s) => cmvRealDe(s) > 0.6).map((s) => `<strong>${s.nome}</strong> ficaria com ${pc(cmvRealDe(s))} de CMV`).join(", ") || "nenhum estourou por enquanto"}.
+        <em>Ou o produto sai da lista, ou o ganho dele é menor que o dos outros.</em>
+      </span></div>` : ""}`;
+  }
+
+  // ─── ABA 2: só o lado da loja ──────────────────────────────────────────────
+  function renderLojaCookie() {
+    const sel = escolhidos();
+    const naVitrine = (s) => s.preco * (1 - DED) - s.cmv * (1 + QUEBRA) - S.embItem;
+    document.getElementById("tabLoja").innerHTML = sel.length
+      ? sel.map((s) => {
+          const at = atacadoDe(s), gl = ganhoLojaDe(s);
+          return `<tr>
+            <td>${s.nome}</td>
+            <td>${brl(at)}</td>
+            <td>−${brl(s.cmv * (1 + QUEBRA))}</td>
+            <td>−${brl(at * DED)}</td>
+            <td>−${brl(S.embCarro)}</td>
+            <td class="${sign(gl)}"><strong>${brl(gl)}</strong></td>
+            <td style="color:var(--ink-faint)">${brl(naVitrine(s))}</td>
+          </tr>`;
+        }).join("") +
+        `<tr class="total"><td>Média dos ${n0(sel.length)}</td><td>—</td><td>—</td><td>—</td><td>—</td>
+          <td class="${sign(mediaGanhoLoja())}"><strong>${brl(mediaGanhoLoja())}</strong></td>
+          <td>${brl(sel.reduce((a, s) => a + naVitrine(s), 0) / sel.length)}</td></tr>`
+      : `<tr><td colspan="7">Nenhum produto selecionado.</td></tr>`;
+
+    const gl = mediaGanhoLoja();
+    const vit = sel.length ? sel.reduce((a, s) => a + naVitrine(s), 0) / sel.length : 0;
+    document.getElementById("notaLojaCookie").innerHTML = `
+      <div class="note-item"><span class="tag ${gl > 0 ? "good" : "bad"}">quanto a loja abre mão</span><span>
+        Na vitrine um cookie deixa <strong>${brl(vit)}</strong> na média. Pelo motorista deixa
+        <strong>${brl(gl)}</strong> — <strong>${brl(vit - gl)} a menos por unidade</strong>.
+        <em>E tudo bem</em>: é venda que não existiria, pra um passageiro que não ia à loja.
+        <strong>Só deixa de valer se o motorista estiver vendendo pra quem iria à loja de qualquer jeito.</strong>
       </span></div>
       <div class="note-item"><span class="tag warn">a embalagem do carro não estava em lugar nenhum</span><span>
         Saquinho plástico e adesivo são <em>custo novo</em>: o CMV cadastrado cobre a embalagem da loja,
-        não a do carro. Estão aqui como <strong>${brl(S.embCarro)} por unidade</strong> — e isso é
-        <strong>premissa, não cotação</strong>. Saem do lado da loja, não do motorista: por isso o ganho
-        dele não muda quando você mexe nesse número.
+        não a do carro. Estão aqui como <strong>${brl(S.embCarro)} por unidade</strong>, e isso é
+        <strong>premissa, não cotação</strong>. Saem só deste lado — <em>o ganho do motorista não muda
+        quando você mexe nesse número</em>.
       </span></div>`;
   }
 
@@ -1216,7 +1309,7 @@
     document.getElementById("stripMot").textContent = brl0(R.motMes);
     document.getElementById("stripMotDia").textContent = brl(R.motDia) + " por dia";
     document.getElementById("stripLoja").textContent = brl0(R.lojaMes);
-    buildCardapio(); renderCardapio(); renderSabores(R); renderVeredito(R); renderMotorista(R); renderLoja(R);
+    buildCardapio(); renderCardapio(); renderLojaCookie(); renderSabores(R); renderVeredito(R); renderVeredito3(R); renderMotorista(R); renderLoja(R);
     renderRanking();
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
