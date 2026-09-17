@@ -466,7 +466,7 @@
       </p>
       <div class="controls destaque" id="ctlCardapio"></div>
       <div class="tablewrap"><table>
-        <thead><tr><th>Produto</th><th>Ele vende por</th><th>Ele paga</th><th>Fica com ele</th><th>% da venda</th></tr></thead>
+        <thead><tr><th>Produto</th><th>Ele paga</th><th>Ele vende por</th><th>Fica com ele</th><th>% da venda</th></tr></thead>
         <tbody id="tabMotorista"></tbody>
       </table></div>
       <div class="notes" id="notaCardapio"></div>
@@ -997,8 +997,8 @@
           const at = atacadoDe(s), gm = ganhoMotoristaDe(s);
           return `<tr>
             <td>${s.nome}</td>
-            <td>${brl(s.preco)}</td>
             <td>${brl(at)}</td>
+            <td>${brl(s.preco)}</td>
             <td class="${sign(gm)}"><strong>${brl(gm)}</strong></td>
             <td>${pc(gm / s.preco)}</td>
           </tr>`;
