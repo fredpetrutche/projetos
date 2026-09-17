@@ -325,6 +325,26 @@
               text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: .4rem; }
   .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
 
+  /* ─── seletor de sabores: venda real de cada um, clicável ─── */
+  .sabores-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: .45rem; }
+  .sab { display: flex; flex-direction: column; gap: .18rem; text-align: left; cursor: pointer;
+         background: var(--surface-2); color: var(--ink-faint); border: 1px solid var(--rule);
+         border-radius: 4px; padding: .6rem .7rem; font-family: inherit;
+         border-left: 3px solid var(--rule); transition: border-color .15s ease, background .15s ease; }
+  .sab:hover { border-color: var(--ink-faint); }
+  .sab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .sab .sn { font-family: var(--mono); font-size: .8125rem; font-weight: 600; line-height: 1.2; }
+  .sab .sd { font-size: .6875rem; line-height: 1.35; }
+  .sab .sd b { font-weight: 700; }
+  .sab .sc { font-family: var(--mono); font-size: .6875rem; font-weight: 600; margin-top: .1rem; }
+  .sab.on { background: var(--surface); color: var(--ink); border-color: var(--rule);
+            border-left-color: var(--good); }
+  .sab.on .sd { color: var(--ink-soft); }
+  .sab.on .sc { color: var(--good); }
+  .sab.perde { border-left-color: var(--bad); }
+  .sab.perde .sc { color: var(--bad); }
+  .sab.on.perde { background: var(--bad-bg); }
+
   /* ─── veredito: a resposta em linguagem de gente, antes de qualquer tabela ─── */
   .veredito { border: 2px solid var(--ink); border-radius: 4px; background: var(--surface);
               padding: 1.25rem 1.4rem; display: flex; flex-direction: column; gap: .65rem; }
@@ -427,8 +447,19 @@
 
     <div class="veredito" id="veredito"></div>
 
+    <section id="sabores">
+      <h2><span class="n">1</span> Quais sabores o motorista leva<span class="hint">venda real de Paulínia · jun+jul+ago</span></h2>
+      <p class="prose">
+        <strong>Essa escolha não é cosmética: ela decide se o programa fecha.</strong> O CMV do cookie vai de
+        R$ 3,83 a R$ 8,71, e é ele que define quanta margem sobra pra dividir com o motorista. Clique para
+        montar a lista — <em>o CMV de toda a página passa a ser a média ponderada do que você escolher</em>.
+      </p>
+      <div class="sabores-grade" id="grSabores"></div>
+      <div class="notes" id="notaSabores"></div>
+    </section>
+
     <section>
-      <h2><span class="n">1</span> A conta de um cookie<span class="hint">quem fica com o quê</span></h2>
+      <h2><span class="n">2</span> A conta de um cookie<span class="hint">quem fica com o quê</span></h2>
       <p class="prose">
         A loja vende o cookie ao motorista por um preço de atacado. Ele revende no carro pelo preço que
         vocês combinarem. <strong>A diferença é o salário dele</strong> — e é ela que decide se o programa
@@ -438,25 +469,25 @@
     </section>
 
     <section>
-      <h2><span class="n">2</span> Montar o programa<span class="hint">os dois preços decidem tudo</span></h2>
+      <h2><span class="n">3</span> Montar o programa<span class="hint">os dois preços decidem tudo</span></h2>
       <div class="controls destaque" id="ctlPrecos"></div>
     </section>
 
     <section>
-      <h2><span class="n">3</span> Quanto o motorista leva<span class="hint">a meta é R$ 30 a R$ 40 por dia</span></h2>
+      <h2><span class="n">4</span> Quanto o motorista leva<span class="hint">a meta é R$ 30 a R$ 40 por dia</span></h2>
       <div class="results" id="resMotorista"></div>
       <div class="notes" id="notaMotorista"></div>
     </section>
 
     <section>
-      <h2><span class="n">4</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
+      <h2><span class="n">5</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
       <div class="controls" id="ctlEscala"></div>
       <div class="results" id="resLoja"></div>
       <div class="notes" id="notaLoja"></div>
     </section>
 
     <section>
-      <h2><span class="n">5</span> A tabela de atacado<span class="hint">cada preço, os dois lados</span></h2>
+      <h2><span class="n">6</span> A tabela de atacado<span class="hint">cada preço, os dois lados</span></h2>
       <div class="tablewrap"><table>
         <thead><tr><th>Atacado</th><th>Motorista<br>por cookie</th><th>Cookies/dia<br>p/ R$ 30</th><th>Cookies/dia<br>p/ R$ 40</th><th>Loja<br>por cookie</th><th>Loja/mês<br>no cenário</th></tr></thead>
         <tbody id="tabAtacado"></tbody>
@@ -465,7 +496,7 @@
     </section>
 
     <section>
-      <h2><span class="n">6</span> Premissas</h2>
+      <h2><span class="n">7</span> Premissas</h2>
       <div class="controls" id="ctlPremissas"></div>
     </section>
 
@@ -640,6 +671,41 @@
     ticket: 39.09, cmvMix: 0.3460,
   };
 
+  // ─── Sabores: venda REAL de Paulínia, jun+jul+ago/2026, canais de loja ────────
+  // un = unidades vendidas no trimestre · preco = preço médio praticado (com promo)
+  // 8.621 cookies no total. CMV de cmv_produtos.
+  const SABORES = [
+    { id: "nut",  nome: "Nutella",                  un: 2027, preco: 13.48, cmv: 5.35, on: true },
+    { id: "kin",  nome: "Kinder com Nutella",       un: 899,  preco: 18.90, cmv: 5.58, on: true },
+    { id: "nin",  nome: "Ninho com Nutella",        un: 749,  preco: 15.29, cmv: 5.01, on: true },
+    { id: "bri",  nome: "Brigadeiro de panela",     un: 741,  preco: 17.77, cmv: 4.17, on: true },
+    { id: "bue",  nome: "Bueno white",              un: 513,  preco: 20.90, cmv: 8.30, on: false },
+    { id: "our",  nome: "Ouro Branco 2.0",          un: 378,  preco: 14.89, cmv: 4.99, on: false },
+    { id: "duo",  nome: "Duo",                      un: 373,  preco: 17.56, cmv: 5.84, on: false },
+    { id: "tra",  nome: "Tradicional",              un: 365,  preco: 12.86, cmv: 3.98, on: true },
+    { id: "mm",   nome: "M&M's",                    un: 330,  preco: 14.90, cmv: 4.72, on: false },
+    { id: "cho",  nome: "Choc",                     un: 330,  preco: 16.91, cmv: 5.35, on: false },
+    { id: "nfv",  nome: "Ninho c/ Frutas Verm.",    un: 299,  preco: 16.90, cmv: 4.15, on: false },
+    { id: "red",  nome: "Red Velvet",               un: 277,  preco: 18.90, cmv: 4.23, on: false },
+    { id: "chu",  nome: "Churros",                  un: 266,  preco: 14.90, cmv: 3.83, on: false },
+    { id: "coc",  nome: "Cocada cremosa",           un: 211,  preco: 14.76, cmv: 4.28, on: false },
+    { id: "pis",  nome: "Pistache",                 un: 204,  preco: 22.90, cmv: 8.71, on: false },
+    { id: "lim",  nome: "Limão siciliano",          un: 193,  preco: 16.89, cmv: 4.25, on: false },
+    { id: "noz",  nome: "Doce de leite c/ Nozes",   un: 185,  preco: 16.90, cmv: 4.19, on: false },
+    { id: "mar",  nome: "Maracujá",                 un: 162,  preco: 16.90, cmv: 6.22, on: false },
+    { id: "fra",  nome: "França",                   un: 51,   preco: 16.90, cmv: 5.79, on: false },
+  ];
+  const TOTAL_COOKIES = 8621;
+
+  const escolhidos = () => SABORES.filter((s) => s.on);
+  // CMV da lista = média ponderada pelo que o público já compra
+  function cmvLista() {
+    const sel = escolhidos();
+    if (!sel.length) return B.cookieCMV;
+    const un = sel.reduce((a, s) => a + s.un, 0);
+    return sel.reduce((a, s) => a + s.cmv * s.un, 0) / un;
+  }
+
   const S = {
     precoCarro: 18, atacado: 10,            // os dois preços que decidem tudo
     motoristas: 20, porDia: 5, dias: 26,    // escala
@@ -652,7 +718,7 @@
   function recalc() {
     DED = (S.simples + S.royalty + S.cartao) / 100;
     QUEBRA = S.quebra / 100;
-    custoCookie = B.cookieCMV * (1 + QUEBRA) + S.embItem;
+    custoCookie = cmvLista() * (1 + QUEBRA) + S.embItem;
     // margem de contribuição de uma visita normal à loja — usada só no ranking
     MC = 1 - (B.cmvMix + QUEBRA + S.embItem / B.ticket + (S.simples + S.royalty + 2) / 100);
     MARG_VISITA = B.ticket * MC;
@@ -809,6 +875,66 @@
           <li>Vender comida no carro pode <strong>não ser permitido</strong> — sanitária e regra do app não foram checadas (pergunta 03).</li>
         </ul>
       </div>`;
+  }
+
+  // ─── Sabores ───────────────────────────────────────────────────────────────
+  // Um sabor "não paga" quando, no atacado atual, o custo dele supera o que entra.
+  const custoDe = (cmv) => cmv * (1 + QUEBRA) + S.embItem;
+  const lojaCom = (cmv) => S.atacado * (1 - DED) - custoDe(cmv);
+
+  function buildSabores() {
+    document.getElementById("grSabores").innerHTML = SABORES.map((s) => `
+      <button type="button" class="sab ${s.on ? "on" : ""}" id="sab-${s.id}" aria-pressed="${s.on}">
+        <span class="sn">${s.nome}</span>
+        <span class="sd"><b>${n0(s.un)}</b> un · ${pc(s.un / TOTAL_COOKIES, 1)} da loja</span>
+        <span class="sc">CMV ${brl(s.cmv)}</span>
+      </button>`).join("");
+    SABORES.forEach((s) => {
+      const el = document.getElementById("sab-" + s.id);
+      if (el) el.addEventListener("click", () => { s.on = !s.on; recalc(); update(); });
+    });
+  }
+  function syncSabores() {
+    SABORES.forEach((s) => {
+      const el = document.getElementById("sab-" + s.id);
+      if (!el) return;
+      el.className = "sab " + (s.on ? "on " : "") + (lojaCom(s.cmv) < 0 ? "perde" : "");
+      el.setAttribute("aria-pressed", String(s.on));
+    });
+  }
+  function renderSabores(R) {
+    syncSabores();
+    const sel = escolhidos();
+    const un = sel.reduce((a, s) => a + s.un, 0);
+    const ruins = sel.filter((s) => lojaCom(s.cmv) < 0);
+    const pior = sel.length ? sel.reduce((a, s) => s.cmv > a.cmv ? s : a) : null;
+    const melhor = sel.length ? sel.reduce((a, s) => s.cmv < a.cmv ? s : a) : null;
+
+    document.getElementById("notaSabores").innerHTML = `
+      <div class="note-item"><span class="tag ${sel.length ? "good" : "bad"}">a lista que você montou</span><span>
+        ${sel.length
+          ? `<strong>${n0(sel.length)} sabores</strong>, que somam <strong>${n0(un)} unidades</strong> no trimestre —
+             <strong>${pc(un / TOTAL_COOKIES)} de tudo que a loja vende de cookie</strong>.
+             CMV médio ponderado: <strong>${brl(cmvLista())}</strong>, custo total por unidade ${brl(custoCookie)}.
+             ${melhor && pior && melhor !== pior
+               ? `O mais barato da lista é ${melhor.nome} (${brl(melhor.cmv)}), o mais caro é ${pior.nome} (${brl(pior.cmv)}).`
+               : ""}`
+          : `<strong>Nenhum sabor selecionado.</strong> A página voltou a usar o CMV médio de ${brl(B.cookieCMV)}.`}
+      </span></div>
+      ${ruins.length ? `<div class="note-item alerta"><span class="tag bad">${ruins.length === 1 ? "um sabor da lista dá prejuízo" : ruins.length + " sabores da lista dão prejuízo"}</span><span>
+        A ${brl(S.atacado)} de atacado, ${ruins.map((s) => `<strong>${s.nome}</strong> (CMV ${brl(s.cmv)}) deixa ${brl(lojaCom(s.cmv))}`).join(", ")}.
+        <strong>A loja paga pra vender.</strong> Ou sobe o atacado, ou tira da lista.
+      </span></div>` : ""}
+      <div class="note-item"><span class="tag warn">o que os dados dizem, e o que eles não dizem</span><span>
+        <strong>Blueberry não aparece porque nunca foi vendido</strong> — em loja nenhuma, em mês nenhum.
+        É produto novo, sem histórico: escolher ele é aposta, não leitura de dado.
+        <strong>França vendeu 51 unidades no trimestre em Paulínia</strong>, 0,6% do volume — em Campinas
+        vende cinco vezes mais. <em>Pode ser bom e o público de Paulínia simplesmente não compra.</em>
+        O Crookie não entra aqui porque não é cookie, e em Paulínia fez 91 unidades em quatro meses.
+        <br><br>
+        E o dado <strong>não diz nada sobre o que aguenta o carro</strong> — que é a pergunta 01 e continua
+        sem resposta. <em>Vender bem na vitrine e aguentar 6 horas a 50°C são coisas diferentes.</em>
+      </span></div>`;
   }
 
   function renderLedger(R) {
@@ -996,7 +1122,7 @@
     document.getElementById("stripMot").textContent = brl0(R.motMes);
     document.getElementById("stripMotDia").textContent = brl(R.motDia) + " por dia";
     document.getElementById("stripLoja").textContent = brl0(R.lojaMes);
-    renderVeredito(R); renderLedger(R); renderMotorista(R); renderLoja(R); renderTabela(R);
+    renderSabores(R); renderVeredito(R); renderLedger(R); renderMotorista(R); renderLoja(R); renderTabela(R);
     renderRanking();
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
@@ -1004,7 +1130,7 @@
     });
   }
 
-  buildControls(); update();
+  buildControls(); buildSabores(); update();
 })();
 </script>
 
