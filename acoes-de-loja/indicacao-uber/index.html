@@ -456,7 +456,6 @@
       </p>
       <div class="controls" id="ctlDia"></div>
       <div class="results" id="resMotorista"></div>
-      <div class="notes" id="notaMotorista"></div>
     </section>
 
     <section id="sabores">
@@ -1111,41 +1110,15 @@
 
   function renderMotorista(R) {
     document.getElementById("resMotorista").innerHTML = `
+      <div class="cell"><span class="label">Por cookie</span><span class="v">${brl(R.mot)}</span>
+        <span class="s">${pc(R.mot / (precoMedio() || 1))} do preço que ele cobra</span></div>
       <div class="cell hero"><span class="label">Por dia</span><span class="v ${R.motDia >= 25 ? "pos" : "neg"}">${brl(R.motDia)}</span>
         <span class="s">piso R$ 25 · alvo R$ 30 · ${n1(R.porDia)} cookies × ${brl(R.mot)}</span></div>
       <div class="cell"><span class="label">Por mês</span><span class="v">${brl0(R.motMes)}</span>
         <span class="s">${n0(S.dias)} dias rodando</span></div>
-      <div class="cell"><span class="label">Por cookie</span><span class="v">${brl(R.mot)}</span>
-        <span class="s">${pc(R.mot / (precoMedio() || 1))} do preço que ele cobra</span></div>
       <div class="cell"><span class="label">Conversão por corrida</span><span class="v">${pc(S.convCorrida / 100)}</span>
         <span class="s">${n1(R.porDia)} vendas em ${n0(S.corridas)} corridas</span></div>`;
 
-    const convPara = (alvo) => R.mot > 0 && S.corridas > 0 ? 100 * (alvo / R.mot) / S.corridas : Infinity;
-    document.getElementById("notaMotorista").innerHTML = `
-      <div class="note-item"><span class="tag ${R.motDia >= 25 ? "good" : "bad"}">a meta que você definiu</span><span>
-        R$ 25 a R$ 30 por dia é o razoável; R$ 40 é o teto. Nesse desenho ele faz
-        <strong>${brl(R.motDia)}</strong> vendendo ${n1(R.porDia)} cookies em ${n0(S.corridas)} corridas —
-        <strong>${R.motDia >= 25 ? "bate" : "não bate"}</strong>.
-        ${R.motDia >= 25
-          ? `São <strong>${n1(R.unPara25)} cookies</strong> para o piso de R$ 25 e ${n1(R.unPara40)} para R$ 40.
-             <em>Em 20 corridas, isso é oferecer para todo mundo e um punhado dizer sim.</em>`
-          : `Para bater o piso, ele precisaria vender <strong>${n1(R.unPara25)} por dia</strong> — ou o atacado
-             cai, ou o preço no carro sobe, ou a conversão precisa ser maior.`}
-      </span></div>
-      <div class="note-item"><span class="tag warn">a conta de trás pra frente</span><span>
-        Com ${n0(S.corridas)} corridas e ${brl(R.mot)} por cookie, a conversão por corrida precisa ser:
-        <strong>${pc(convPara(25) / 100, 1)}</strong> para R$ 25 no dia ·
-        <strong>${pc(convPara(30) / 100, 1)}</strong> para R$ 30 ·
-        <strong>${pc(convPara(40) / 100, 1)}</strong> para R$ 40.
-        <br><br>
-        <em>É o número que o teste tem que trazer.</em> Depois dele, este slider some e vira dado — e é a
-        única coisa que transforma esta página de estimativa em projeção.
-      </span></div>
-      <div class="note-item"><span class="tag warn">o que faz esse número ser crível ou não</span><span>
-        <strong>${brl0(R.motMes)} por mês não é troco para motorista de app</strong> — é o tipo de número que
-        faz alguém aderir. Mas ele só existe se o cookie <em>aguentar o carro</em> e se o passageiro
-        <em>comprar</em>. As duas coisas são pergunta em aberto, não premissa medida.
-      </span></div>`;
   }
 
   function renderLoja(R) {
