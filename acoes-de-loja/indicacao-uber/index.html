@@ -447,14 +447,23 @@
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="painel" id="painel-motorista" role="tabpanel" aria-labelledby="aba-motorista">
 
-    <div class="veredito" id="veredito"></div>
+    <section>
+      <h2><span class="n">1</span> Quanto ele leva por dia<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
+      <p class="prose">
+        Ele compra da loja por um preço de atacado e revende dentro do carro <strong>pelo mesmo preço da
+        loja</strong> — o passageiro não paga mais caro por estar ali. <strong>A diferença é o dinheiro
+        dele</strong>, e com a lista atual dá <span id="mediaInline">—</span> por cookie.
+      </p>
+      <div class="controls" id="ctlDia"></div>
+      <div class="results" id="resMotorista"></div>
+      <div class="notes" id="notaMotorista"></div>
+    </section>
 
     <section id="sabores">
-      <h2><span class="n">1</span> O cardápio<span class="hint">o que ele leva no carro, e o que sobra pra ele</span></h2>
+      <h2><span class="n">2</span> O cardápio<span class="hint">produto a produto, o que sobra pra ele</span></h2>
       <p class="prose">
-        O preço de revenda é <strong>o mesmo da loja</strong> — o passageiro não paga mais caro por estar no
-        carro. O que ele paga à loja sai do <strong>CMV alvo</strong>: a 50%, o atacado é o dobro do custo.
-        <em>A diferença entre os dois é o dinheiro dele.</em>
+        O que ele paga à loja sai do <strong>CMV alvo</strong>: a 50%, o atacado é o dobro do custo do
+        produto. Como cada cookie tem um CMV diferente, <em>o ganho dele muda de item pra item</em>.
       </p>
       <div class="controls destaque" id="ctlCardapio"></div>
       <div class="tablewrap"><table>
@@ -472,13 +481,6 @@
       <div class="notes" id="notaSabores"></div>
     </section>
 
-    <section>
-      <h2><span class="n">2</span> Quanto ele leva por dia<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
-      <div class="controls" id="ctlDia"></div>
-      <div class="results" id="resMotorista"></div>
-      <div class="notes" id="notaMotorista"></div>
-    </section>
-
   </div><!-- /painel-motorista -->
 
   <!-- ══════════════════════════════════════════════════════════════════════
@@ -486,33 +488,36 @@
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="painel" id="painel-loja" role="tabpanel" aria-labelledby="aba-loja" hidden>
 
-    <div class="veredito" id="veredito3"></div>
-
     <section>
-      <h2><span class="n">1</span> O que sobra por cookie<span class="hint">mesma lista, o outro lado</span></h2>
+      <h2><span class="n">1</span> A escala<span class="hint">quantos motoristas, quantos cookies, quanto entra</span></h2>
       <p class="prose">
-        A loja recebe o atacado, paga imposto e royalties sobre ele, e arca com o custo do cookie, a quebra
-        e a embalagem do carro. <strong>O que sobra é isto</strong> — e é sempre menos do que vender na
-        vitrine, porque parte da margem foi pro motorista.
+        É venda que não existiria: o passageiro não ia à loja. <strong>A loja abre mão de parte da margem
+        pra ter volume que hoje não tem</strong> — e o tamanho disso depende de quantos motoristas
+        realmente vendem.
       </p>
-      <div class="controls" id="ctlLoja"></div>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Produto</th><th>Atacado<br>entra</th><th>CMV<br>+ quebra</th><th>Imposto<br>+ royalty</th><th>Embalagem<br>do carro</th><th>Sobra</th><th>Na vitrine<br>sobraria</th></tr></thead>
-        <tbody id="tabLoja"></tbody>
-      </table></div>
-      <div class="notes" id="notaLojaCookie"></div>
-    </section>
-
-    <section>
-      <h2><span class="n">2</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
       <div class="controls" id="ctlEscala"></div>
       <div class="results" id="resLoja"></div>
       <div class="notes" id="notaLoja"></div>
     </section>
 
     <section>
-      <h2><span class="n">3</span> Premissas de custo</h2>
+      <h2><span class="n">2</span> Premissas de custo</h2>
+      <div class="controls" id="ctlLoja"></div>
       <div class="controls" id="ctlPremissas"></div>
+    </section>
+
+    <section>
+      <h2><span class="n">3</span> O que sobra por cookie<span class="hint">o detalhe, produto a produto</span></h2>
+      <p class="prose">
+        A loja recebe o atacado, paga imposto e royalties sobre ele, e arca com o custo do cookie, a quebra
+        e a embalagem do carro. <strong>O que sobra é isto</strong> — e é sempre menos do que vender na
+        vitrine, porque parte da margem foi pro motorista.
+      </p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Produto</th><th>Atacado<br>entra</th><th>CMV<br>+ quebra</th><th>Imposto<br>+ royalty</th><th>Embalagem<br>do carro</th><th>Sobra</th><th>Na vitrine<br>sobraria</th></tr></thead>
+        <tbody id="tabLoja"></tbody>
+      </table></div>
+      <div class="notes" id="notaLojaCookie"></div>
     </section>
 
   </div><!-- /painel-loja -->
@@ -754,7 +759,7 @@
   }
 
   const S = {
-    precoCarro: 18, atacado: 12,            // os dois preços que decidem tudo
+
     // cookies/dia não é slider: é corridas × conversão por corrida — as duas
     // coisas que o motorista consegue observar e reportar depois do teste.
     motoristas: 20, corridas: 20, convCorrida: 25, dias: 26,
@@ -806,7 +811,7 @@
       motDia: mot * porDia,
       motMes: mot * porDia * S.dias,
       lojaMes: loja * unMes,
-      faturaMes: S.atacado * unMes,
+      faturaMes: atacadoMedio() * unMes,
       unPara25: mot > 0 ? 25 / mot : Infinity,
       unPara30: mot > 0 ? 30 / mot : Infinity,
       unPara40: mot > 0 ? 40 / mot : Infinity,
@@ -928,70 +933,13 @@
   }
 
   // ─── Render ────────────────────────────────────────────────────────────────
-  // veredito da ABA 2 — só o lado da loja
-  function renderVeredito3(R) {
-    const ok = R.loja > 0;
-    const sel = escolhidos();
-    const vit = sel.length ? sel.reduce((a, s) => a + (s.preco * (1 - DED) - s.cmv * (1 + QUEBRA) - S.embItem), 0) / sel.length : 0;
-    document.getElementById("veredito3").className = "veredito " + (ok ? "pos" : "neg");
-    document.getElementById("veredito3").innerHTML = `
-      <span class="rot">A resposta, sem tabela</span>
-      <span class="verd">${ok ? "Sobra." : "Não sobra."}</span>
-      <p>
-        Cada cookie vendido pelo motorista deixa <strong>${brl(R.loja)}</strong> na loja — contra
-        ${brl(vit)} se fosse vendido na vitrine. <em>A loja troca ${brl(vit - R.loja)} de margem por uma
-        venda que não existiria.</em>
-      </p>
-      <p>
-        Com ${n0(S.motoristas)} motoristas vendendo ${n1(R.porDia)} por dia, são
-        <strong>${n0(R.unMes)} cookies</strong> e <strong>${brl0(R.lojaMes)} por mês</strong>.
-        ${R.faturaMes > 0 ? `São ${brl0(R.faturaMes)} de faturamento novo, ${pc(R.faturaMes / 46925)} do que a loja faz hoje.` : ""}
-      </p>
-      <div class="se">
-        <span class="t">O que derruba isso</span>
-        <ul>
-          <li><strong>O motorista vender pra quem já ia à loja.</strong> Aí não é venda nova — é a mesma venda com ${brl(vit - R.loja)} a menos.</li>
-          <li><strong>Cookie que volta do carro</strong>, se o modelo for consignado. Cada um que sobrar é ${brl(escolhidos().length ? escolhidos().reduce((a, s) => a + s.cmv, 0) / escolhidos().length : 0)} perdido, e esta conta não desconta isso.</li>
-          <li>A conta multiplica motoristas × cookies × dias. <strong>Na prática nada escala assim</strong> — o número que vale é o do primeiro mês com 3 motoristas.</li>
-        </ul>
-      </div>`;
-  }
-
-  function renderVeredito(R) {
-    const ok = R.loja > 0 && R.mot > 0;
-    const bate = R.motDia >= 25;   // R$ 25 é o piso do "razoável"; R$ 30 é o alvo
-    document.getElementById("veredito").className = "veredito " + (ok ? (bate ? "pos" : "") : "neg");
-    document.getElementById("veredito").innerHTML = `
-      <span class="rot">A resposta, sem tabela</span>
-      <span class="verd">${!ok ? "Não fecha."
-        : bate ? "Fecha, e sobra dos dois lados."
-        : "Fecha pra loja, não pro motorista."}</span>
-      <p>
-        A ${brl(S.atacado)} de atacado e ${brl(S.precoCarro)} no carro, o motorista ganha
-        <strong>${brl(R.mot)} por cookie</strong> e a loja fica com <strong>${brl(R.loja)}</strong>.
-        Vendendo ${n1(R.porDia)} por dia, ele leva <strong>${brl(R.motDia)} por dia</strong>
-        — ${bate ? "<em>acima</em> da meta de R$ 30" : "<em>abaixo</em> da meta de R$ 30"} — e
-        <strong>${brl0(R.motMes)} no mês</strong>.
-      </p>
-      <p>
-        Com ${n0(S.motoristas)} motoristas nesse ritmo, são <strong>${n0(R.unMes)} cookies por mês</strong>
-        que a loja não venderia, e <strong>${brl0(R.lojaMes)}</strong> de margem.
-        ${R.lojaMes > 0 ? `<em>Para comparação, o programa de indicação de cliente rende R$ 338 por mês.</em>` : ""}
-      </p>
-      <div class="se">
-        <span class="t">Antes de acreditar nisso</span>
-        <ul>
-          <li><strong>Nenhum número aqui foi medido com motorista de verdade.</strong> Quantos cookies ele vende por dia, quantos motoristas aderem e quanto o cookie aguenta no carro são todos chute em slider.</li>
-          <li>A conta <strong>não desconta cookie que volta velho</strong>. Se for consignado, cada um que sobrar é ${brl(custoCookie)} perdido (pergunta 02).</li>
-          <li>Vender comida no carro pode <strong>não ser permitido</strong> — sanitária e regra do app não foram checadas (pergunta 03).</li>
-        </ul>
-      </div>`;
-  }
 
   // ─── Sabores ───────────────────────────────────────────────────────────────
   // Um sabor "não paga" quando, no atacado atual, o custo dele supera o que entra.
   const custoDe = (cmv) => cmv * (1 + QUEBRA) + S.embItem;
-  const lojaCom = (cmv) => S.atacado * (1 - DED) - custoDe(cmv);
+  const precoMedio = () => { const s = escolhidos(); return s.length ? s.reduce((a, x) => a + x.preco, 0) / s.length : 0; };
+  const atacadoMedio = () => { const s = escolhidos(); return s.length ? s.reduce((a, x) => a + atacadoDe(x), 0) / s.length : 0; };
+
 
   function buildSabores() {
     document.getElementById("grSabores").innerHTML = SABORES.map((s, i) => `
@@ -1010,7 +958,7 @@
     SABORES.forEach((s) => {
       const el = document.getElementById("sab-" + s.id);
       if (!el) return;
-      el.className = "sab " + (s.on ? "on " : "") + (lojaCom(s.cmv) < 0 ? "perde" : "");
+      el.className = "sab " + (s.on ? "on " : "") + (ganhoLojaDe(s) < 0 ? "perde" : "");
       el.setAttribute("aria-pressed", String(s.on));
     });
   }
@@ -1124,7 +1072,7 @@
     syncSabores();
     const sel = escolhidos();
     const un = sel.reduce((a, s) => a + s.un, 0);
-    const ruins = sel.filter((s) => lojaCom(s.cmv) < 0);
+    const ruins = sel.filter((s) => ganhoLojaDe(s) < 0);
     const pior = sel.length ? sel.reduce((a, s) => s.cmv > a.cmv ? s : a) : null;
     const melhor = sel.length ? sel.reduce((a, s) => s.cmv < a.cmv ? s : a) : null;
 
@@ -1141,7 +1089,7 @@
           : `<strong>Nenhum sabor selecionado.</strong> A página voltou a usar o CMV médio de ${brl(B.cookieCMV)}.`}
       </span></div>
       ${ruins.length ? `<div class="note-item alerta"><span class="tag bad">${ruins.length === 1 ? "um sabor da lista dá prejuízo" : ruins.length + " sabores da lista dão prejuízo"}</span><span>
-        A ${brl(S.atacado)} de atacado, ${ruins.map((s) => `<strong>${s.nome}</strong> (CMV ${brl(s.cmv)}) deixa ${brl(lojaCom(s.cmv))}`).join(", ")}.
+        No CMV alvo atual, ${ruins.map((s) => `<strong>${s.nome}</strong> deixa ${brl(ganhoLojaDe(s))}`).join(", ")}.
         <strong>A loja paga pra vender.</strong> Ou sobe o atacado, ou tira da lista.
       </span></div>` : ""}
       <div class="note-item"><span class="tag warn">o que os dados dizem, e o que eles não dizem</span><span>
@@ -1168,7 +1116,7 @@
       <div class="cell"><span class="label">Por mês</span><span class="v">${brl0(R.motMes)}</span>
         <span class="s">${n0(S.dias)} dias rodando</span></div>
       <div class="cell"><span class="label">Por cookie</span><span class="v">${brl(R.mot)}</span>
-        <span class="s">${pc(R.mot / S.precoCarro)} do preço que ele cobra</span></div>
+        <span class="s">${pc(R.mot / (precoMedio() || 1))} do preço que ele cobra</span></div>
       <div class="cell"><span class="label">Conversão por corrida</span><span class="v">${pc(S.convCorrida / 100)}</span>
         <span class="s">${n1(R.porDia)} vendas em ${n0(S.corridas)} corridas</span></div>`;
 
@@ -1306,10 +1254,11 @@
     const R = calc();
     syncControls();
     document.getElementById("sobraDireto").textContent = brl(margemLojaDireto());
+    document.getElementById("mediaInline").textContent = brl(mediaGanhoMotorista());
     document.getElementById("stripMot").textContent = brl0(R.motMes);
     document.getElementById("stripMotDia").textContent = brl(R.motDia) + " por dia";
     document.getElementById("stripLoja").textContent = brl0(R.lojaMes);
-    buildCardapio(); renderCardapio(); renderLojaCookie(); renderSabores(R); renderVeredito(R); renderVeredito3(R); renderMotorista(R); renderLoja(R);
+    buildCardapio(); renderCardapio(); renderLojaCookie(); renderSabores(R); renderMotorista(R); renderLoja(R);
     renderRanking();
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
