@@ -325,6 +325,21 @@
               text-transform: uppercase; color: var(--ink-faint); font-weight: 700; margin-bottom: .4rem; }
   .msg .lk { color: var(--accent); font-family: var(--mono); font-size: .9em; }
 
+  /* ─── tabelinha do dia a dia: rótulo, − valor + ─── */
+  .campos { background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .campo { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+           padding: .7rem 1rem; }
+  .campo + .campo { border-top: 1px solid var(--rule-soft); }
+  .campo .cl { font-size: .875rem; color: var(--ink); }
+  .campo .cg { display: inline-flex; align-items: center; gap: .2rem; flex: none; }
+  .campo .cv { font-family: var(--mono); font-size: 1rem; font-weight: 600; font-variant-numeric: tabular-nums;
+               min-width: 3.2rem; text-align: center; }
+  .campo .cb { font-family: var(--mono); font-size: 1.05rem; line-height: 1; font-weight: 600;
+               width: 2rem; height: 2rem; cursor: pointer; color: var(--ink);
+               background: var(--surface-2); border: 1px solid var(--rule); border-radius: 3px; }
+  .campo .cb:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .campo .cb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   /* ─── seletor de sabores: venda real de cada um, clicável ─── */
   .sabores-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: .45rem; }
   .sab { display: flex; flex-direction: column; gap: .18rem; text-align: left; cursor: pointer;
@@ -761,7 +776,7 @@
 
     // cookies/dia não é slider: é corridas × conversão por corrida — as duas
     // coisas que o motorista consegue observar e reportar depois do teste.
-    motoristas: 20, corridas: 20, convCorrida: 25, dias: 26,
+    motoristas: 20, corridas: 20, vendasDia: 5, dias: 26,
     // preço de atacado: CMV alvo (padrão 50% = atacado é o dobro do custo)
     cmvAlvo: 50, ganhoAlvo: 7, modoPreco: "cmv",
     embCarro: 0.50,   // saquinho plástico + adesivo, por unidade — premissa
@@ -803,7 +818,7 @@
   function calc() {
     const mot = porCookieMotorista();
     const loja = porCookieLoja();
-    const porDia = S.corridas * (S.convCorrida / 100);
+    const porDia = S.vendasDia;
     const unMes = S.motoristas * porDia * S.dias;
     return {
       mot, loja, unMes, porDia,
@@ -857,19 +872,10 @@
       note: () => `Embalagem extra do carro, por unidade. <b>Premissa, não cotação.</b> Sai do lado da loja —
         não muda o ganho do motorista.` },
 
-    { k: "corridas", g: "dia", lab: "Corridas por dia", min: 0, max: 60, step: 1, fmt: n0,
-      note: () => `Quantos passageiros diferentes ele leva no dia. <b>20 é o número do teste</b> — e é o único
-        dos três que já tem chão: motorista de app sabe quantas corridas faz.` },
-    { k: "convCorrida", g: "dia", lab: "Conversão por corrida", min: 0, max: 100, step: 1, fmt: (v) => pc(v / 100),
-      note: () => {
-        const R = calc();
-        return `De cada 100 passageiros, quantos compram. A ${pc(S.convCorrida / 100)} ele vende
-        <b>${n1(R.porDia)} cookies por dia</b>.
-        <b>É a premissa mais frágil da página inteira</b>: ninguém nunca ofereceu cookie dentro de um carro,
-        e 1 em cada 4 comprando é otimista. <em>É exatamente isso que o teste vai medir</em> — e é o número
-        que deve substituir este slider depois.`; } },
-    { k: "dias", g: "dia", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0,
-      note: () => `Motorista de app não roda todo dia. 26 é a premissa de quem trabalha 6 dias por semana.` },
+    // Os três do dia a dia viraram tabelinha (ver campoHTML), sem slider e sem nota.
+    { k: "corridas", g: "dia", lab: "Corridas por dia", min: 0, max: 99, step: 1, fmt: n0, note: () => "" },
+    { k: "vendasDia", g: "dia", lab: "Vendas por dia", min: 0, max: 99, step: 0.5, fmt: n1, note: () => "" },
+    { k: "dias", g: "dia", lab: "Dias rodando no mês", min: 1, max: 31, step: 1, fmt: n0, note: () => "" },
 
     { k: "simples", g: "prem", lab: "Simples", min: 0, max: 20, step: 0.1, fmt: (v) => pc(v / 100, 1),
       note: () => `DAS ÷ faturamento de competência.` },
@@ -978,12 +984,32 @@
       ${sliderHTML(CTLS.find((c) => c.k === "ganhoAlvo"))}`;
     // a embalagem do carro é custo da loja — mora na aba da loja, não aqui
     document.getElementById("ctlLoja").innerHTML = sliderHTML(CTLS.find((c) => c.k === "embCarro"));
+    // tabelinha do dia a dia: rótulo, − valor +. Sem slider, sem nota.
+    const campo = (k) => {
+      const c = CTLS.find((x) => x.k === k);
+      return `<div class="campo">
+        <span class="cl">${c.lab}</span>
+        <span class="cg">
+          <button type="button" class="cb" data-k="${k}" data-d="-1" aria-label="Diminuir ${c.lab}">−</button>
+          <span class="cv" id="cv-${k}">${c.fmt(S[k])}</span>
+          <button type="button" class="cb" data-k="${k}" data-d="1" aria-label="Aumentar ${c.lab}">+</button>
+        </span>
+      </div>`;
+    };
     document.getElementById("ctlDia").innerHTML =
-      ["corridas", "convCorrida", "dias"].map((k) => sliderHTML(CTLS.find((c) => c.k === k))).join("");
+      `<div class="campos">${["corridas", "vendasDia", "dias"].map(campo).join("")}</div>`;
+    document.querySelectorAll("#ctlDia .cb").forEach((b) => {
+      b.addEventListener("click", () => {
+        const k = b.dataset.k, c = CTLS.find((x) => x.k === k);
+        const novo = +(S[k] + Number(b.dataset.d) * c.step).toFixed(2);
+        S[k] = Math.min(c.max, Math.max(c.min, novo));
+        recalc(); update();
+      });
+    });
     const b1 = document.getElementById("mp-cmv"), b2 = document.getElementById("mp-ganho");
     if (b1) b1.addEventListener("click", () => { S.modoPreco = "cmv"; recalc(); update(); });
     if (b2) b2.addEventListener("click", () => { S.modoPreco = "ganho"; recalc(); update(); });
-    ["cmvAlvo", "ganhoAlvo", "embCarro", "corridas", "convCorrida", "dias"].forEach((k) => {
+    ["cmvAlvo", "ganhoAlvo", "embCarro"].forEach((k) => {
       const el = document.getElementById("c-" + k);
       if (el) el.addEventListener("input", (e) => { S[k] = parseFloat(e.target.value); recalc(); update(); });
     });
@@ -1008,19 +1034,8 @@
           <td>—</td></tr>`
       : `<tr><td colspan="5">Nenhum produto selecionado.</td></tr>`;
 
-    const gm = mediaGanhoMotorista();
     const sel2 = escolhidos();
-    const melhor = sel2.length ? sel2.reduce((a, s) => ganhoMotoristaDe(s) > ganhoMotoristaDe(a) ? s : a) : null;
-    const pior = sel2.length ? sel2.reduce((a, s) => ganhoMotoristaDe(s) < ganhoMotoristaDe(a) ? s : a) : null;
     document.getElementById("notaCardapio").innerHTML = `
-      <div class="note-item"><span class="tag acc">a média é o que importa</span><span>
-        Ele não vende um sabor só, então o número que vale é a média: <strong>${brl(gm)} por cookie</strong>.
-        ${melhor && pior && melhor !== pior
-          ? `O que mais rende pra ele é <strong>${melhor.nome}</strong> (${brl(ganhoMotoristaDe(melhor))}), o que menos é
-             <strong>${pior.nome}</strong> (${brl(ganhoMotoristaDe(pior))}) — uma diferença de
-             <strong>${brl(ganhoMotoristaDe(melhor) - ganhoMotoristaDe(pior))}</strong> por unidade.
-             <em>Ele vai perceber isso e empurrar o que rende mais.</em>` : ""}
-      </span></div>
       ${S.modoPreco === "ganho" ? `<div class="note-item alerta"><span class="tag bad">o preço fixo não cabe em todo produto</span><span>
         Fixando <strong>${brl(S.ganhoAlvo)}</strong> pra todos, os produtos mais baratos não têm espaço:
         ${sel2.filter((s) => cmvRealDe(s) > 0.6).map((s) => `<strong>${s.nome}</strong> ficaria com ${pc(cmvRealDe(s))} de CMV`).join(", ") || "nenhum estourou por enquanto"}.
@@ -1091,20 +1106,7 @@
         No CMV alvo atual, ${ruins.map((s) => `<strong>${s.nome}</strong> deixa ${brl(ganhoLojaDe(s))}`).join(", ")}.
         <strong>A loja paga pra vender.</strong> Ou sobe o atacado, ou tira da lista.
       </span></div>` : ""}
-      <div class="note-item"><span class="tag warn">o que os dados dizem, e o que eles não dizem</span><span>
-        <strong>Blueberry não aparece porque nunca foi vendido</strong> — em loja nenhuma, em mês nenhum.
-        É produto novo, sem histórico: escolher ele é aposta, não leitura de dado.
-        <strong>França vendeu 51 unidades no trimestre em Paulínia</strong>, 0,6% do volume — em Campinas
-        vende cinco vezes mais. <em>Pode ser bom e o público de Paulínia simplesmente não compra.</em>
-        O Crookie não entra aqui porque não é cookie, e em Paulínia fez 91 unidades em quatro meses.
-        <br><br>
-        Ficaram fora do seletor <strong>50 unidades (0,7%)</strong> de três sabores residuais — Japão,
-        Biscoff e EUA Reeses — porque <em>o CMV deles está zerado ou ausente no sistema</em>. Não muda nada
-        na conta, mas é por isso que as porcentagens não fecham em 100%.
-        <br><br>
-        E o dado <strong>não diz nada sobre o que aguenta o carro</strong> — que é a pergunta 01 e continua
-        sem resposta. <em>Vender bem na vitrine e aguentar 6 horas a 50°C são coisas diferentes.</em>
-      </span></div>`;
+      `;
   }
 
 
@@ -1116,7 +1118,7 @@
         <span class="s">piso R$ 25 · alvo R$ 30 · ${n1(R.porDia)} cookies × ${brl(R.mot)}</span></div>
       <div class="cell"><span class="label">Por mês</span><span class="v">${brl0(R.motMes)}</span>
         <span class="s">${n0(S.dias)} dias rodando</span></div>
-      <div class="cell"><span class="label">Conversão por corrida</span><span class="v">${pc(S.convCorrida / 100)}</span>
+      <div class="cell"><span class="label">Conversão por corrida</span><span class="v">${S.corridas > 0 ? pc(R.porDia / S.corridas) : "—"}</span>
         <span class="s">${n1(R.porDia)} vendas em ${n0(S.corridas)} corridas</span></div>`;
 
   }
