@@ -448,55 +448,45 @@
     <div class="veredito" id="veredito"></div>
 
     <section id="sabores">
-      <h2><span class="n">1</span> Quais sabores o motorista leva<span class="hint">Paulínia · últimos 90 dias · só loja</span></h2>
+      <h2><span class="n">1</span> O cardápio do motorista<span class="hint">o que ele leva no carro</span></h2>
       <p class="prose">
-        <strong>Essa escolha não é cosmética: ela decide se o programa fecha.</strong> O CMV do cookie vai de
-        R$ 3,83 a R$ 8,71, e é ele que define quanta margem sobra pra dividir com o motorista. Clique para
-        montar a lista — <em>o CMV de toda a página passa a ser a média ponderada do que você escolher</em>.
+        Cinco produtos. O preço de revenda é <strong>o mesmo da loja</strong> — o passageiro não paga mais
+        caro por estar no carro. O preço de atacado sai do <strong>CMV alvo</strong>: a R$ 50%, a loja vende
+        pro motorista pelo dobro do custo.
+      </p>
+      <div class="controls destaque" id="ctlCardapio"></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Produto</th><th>Revenda<br>(preço de loja)</th><th>CMV</th><th>Atacado<br>o motorista paga</th><th>Ganho da loja</th><th>Ganho do<br>motorista</th></tr></thead>
+        <tbody id="tabCardapio"></tbody>
+      </table></div>
+      <div class="notes" id="notaCardapio"></div>
+
+      <h3 class="sub">Trocar um item</h3>
+      <p class="prose" style="font-size:.8125rem">
+        Clique para montar outra lista. Os números vêm da venda real de Paulínia nos últimos 90 dias,
+        só canais de loja.
       </p>
       <div class="sabores-grade" id="grSabores"></div>
       <div class="notes" id="notaSabores"></div>
     </section>
 
-    <section>
-      <h2><span class="n">2</span> A conta de um cookie<span class="hint">quem fica com o quê</span></h2>
-      <p class="prose">
-        A loja vende o cookie ao motorista por um preço de atacado. Ele revende no carro pelo preço que
-        vocês combinarem. <strong>A diferença é o salário dele</strong> — e é ela que decide se o programa
-        existe ou não, porque motorista de app calcula por hora.
-      </p>
-      <div class="ledger" id="ledger"></div>
-    </section>
 
     <section>
-      <h2><span class="n">3</span> Montar o programa<span class="hint">os dois preços decidem tudo</span></h2>
-      <div class="controls destaque" id="ctlPrecos"></div>
-    </section>
-
-    <section>
-      <h2><span class="n">4</span> Quanto o motorista leva<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
+      <h2><span class="n">2</span> Quanto o motorista leva<span class="hint">a meta: R$ 25 é razoável, R$ 30 é o alvo</span></h2>
       <div class="results" id="resMotorista"></div>
       <div class="notes" id="notaMotorista"></div>
     </section>
 
     <section>
-      <h2><span class="n">5</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
+      <h2><span class="n">3</span> A escala<span class="hint">quantos motoristas, quantos cookies</span></h2>
       <div class="controls" id="ctlEscala"></div>
       <div class="results" id="resLoja"></div>
       <div class="notes" id="notaLoja"></div>
     </section>
 
-    <section>
-      <h2><span class="n">6</span> A tabela de atacado<span class="hint">cada preço, os dois lados</span></h2>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Atacado</th><th>Motorista<br>por cookie</th><th>Cookies/dia<br>p/ R$ 30</th><th>Cookies/dia<br>p/ R$ 40</th><th>Loja<br>por cookie</th><th>Loja/mês<br>no cenário</th></tr></thead>
-        <tbody id="tabAtacado"></tbody>
-      </table></div>
-      <div class="notes" id="notaTabela"></div>
-    </section>
 
     <section>
-      <h2><span class="n">7</span> Premissas</h2>
+      <h2><span class="n">4</span> Premissas</h2>
       <div class="controls" id="ctlPremissas"></div>
     </section>
 
@@ -674,24 +664,30 @@
   // ─── Sabores: venda REAL de Paulínia, ÚLTIMOS 90 DIAS (19/06 a 17/09/2026) ────
   // Só canais de loja (caixa + balcão + mesa). Fora: tortas, sorvetes, bebidas,
   // milkshakes, brownies, salgados e adicionais. 7.333 cookies, R$ 119.758.
-  // un = unidades · fat = faturamento · preco = preço médio praticado (com promo)
+  // un = unidades · fat = faturamento no período · preco = preço de TABELA (cheio)
   // CMV de cmv_produtos.
   const SABORES = [
-    { id: "nut",  nome: "Nutella",                un: 1869, fat: 25490.11, preco: 13.64, cmv: 5.35, on: true },
-    { id: "kin",  nome: "Kinder com Nutella",     un: 786,  fat: 14846.40, preco: 18.89, cmv: 5.58, on: true },
-    { id: "bri",  nome: "Brigadeiro de panela",   un: 645,  fat: 11364.94, preco: 17.62, cmv: 4.17, on: true },
-    { id: "nin",  nome: "Ninho com Nutella",      un: 508,  fat: 8463.20,  preco: 16.66, cmv: 5.01, on: true },
+    { id: "nut",  nome: "Nutella",                un: 1869, fat: 25490.11, preco: 18.90, cmv: 5.35, on: true },
+    { id: "kin",  nome: "Kinder com Nutella",     un: 786,  fat: 14846.40, preco: 18.90, cmv: 5.58, on: true },
+    // Brigadeiro reposicionado para R$ 16,90 (decisão do Fred, 17/09)
+    { id: "bri",  nome: "Brigadeiro de panela",   un: 645,  fat: 11364.94, preco: 16.90, cmv: 4.17, on: true },
+    // Brookie: categoria Brownie, não Cookie. CMV já com o corte de 20 fatias
+    // em vez de 16 (115 g crus no lugar de 143,75 g) — decisão do Fred, 17/09.
+    { id: "brk",  nome: "Brookie",                un: 54,   fat: 912.60,   preco: 16.90, cmv: 5.17, on: true,
+      nota: "categoria brownie · CMV já com o corte novo de 20 fatias" },
+    { id: "nin",  nome: "Ninho com Nutella",      un: 508,  fat: 8463.20,  preco: 18.90, cmv: 5.01, on: false },
     { id: "bue",  nome: "Bueno white",            un: 452,  fat: 9446.80,  preco: 20.90, cmv: 8.30, on: false },
-    { id: "duo",  nome: "Duo",                    un: 331,  fat: 5548.90,  preco: 16.76, cmv: 5.84, on: false },
+    { id: "duo",  nome: "Duo",                    un: 331,  fat: 5548.90,  preco: 18.90, cmv: 5.84, on: false },
     { id: "our",  nome: "Ouro Branco 2.0",        un: 323,  fat: 4812.70,  preco: 14.90, cmv: 4.99, on: false },
-    { id: "tra",  nome: "Tradicional",            un: 317,  fat: 4076.40,  preco: 12.86, cmv: 3.98, on: true },
+    { id: "tra",  nome: "Tradicional",            un: 317,  fat: 4076.40,  preco: 12.90, cmv: 3.98, on: true },
     { id: "mm",   nome: "M&M's",                  un: 273,  fat: 4067.70,  preco: 14.90, cmv: 4.72, on: false },
     { id: "nfv",  nome: "Ninho c/ Frutas Verm.",  un: 254,  fat: 4292.60,  preco: 16.90, cmv: 4.15, on: false },
-    { id: "chu",  nome: "Churros",                un: 233,  fat: 3471.70,  preco: 14.90, cmv: 3.83, on: false },
+    { id: "chu",  nome: "Churros",                un: 233,  fat: 3471.70,  preco: 14.90, cmv: 3.83, on: false,
+      nota: "doce de leite — a opção pra quem não é fã de chocolate" },
     { id: "red",  nome: "Red Velvet",             un: 227,  fat: 4290.30,  preco: 18.90, cmv: 4.23, on: false },
-    { id: "cho",  nome: "Choc",                   un: 221,  fat: 3736.10,  preco: 16.91, cmv: 5.35, on: false },
-    { id: "coc",  nome: "Cocada cremosa",         un: 180,  fat: 2656.80,  preco: 14.76, cmv: 4.28, on: false },
-    { id: "lim",  nome: "Limão siciliano",        un: 163,  fat: 2753.00,  preco: 16.89, cmv: 4.25, on: false },
+    { id: "cho",  nome: "Choc",                   un: 221,  fat: 3736.10,  preco: 18.90, cmv: 5.35, on: false },
+    { id: "coc",  nome: "Cocada cremosa",         un: 180,  fat: 2656.80,  preco: 14.90, cmv: 4.28, on: false },
+    { id: "lim",  nome: "Limão siciliano",        un: 163,  fat: 2753.00,  preco: 16.90, cmv: 4.25, on: false },
     { id: "pis",  nome: "Pistache",               un: 155,  fat: 3549.50,  preco: 22.90, cmv: 8.71, on: false },
     { id: "noz",  nome: "Doce de leite c/ Nozes", un: 138,  fat: 2332.20,  preco: 16.90, cmv: 4.19, on: false },
     { id: "mar",  nome: "Maracujá",               un: 133,  fat: 2247.70,  preco: 16.90, cmv: 6.22, on: false },
@@ -701,6 +697,29 @@
   const TOTAL_FAT = 119758.09;
 
   const escolhidos = () => SABORES.filter((s) => s.on);
+
+  // ─── Preço de atacado: sai do CMV alvo, produto a produto ──────────────────
+  // Dois modos, porque são o mesmo botão visto de lados opostos:
+  //   "cmv"   → fixo o CMV alvo, o ganho do motorista é consequência
+  //   "ganho" → fixo o ganho do motorista em R$, o CMV alvo é consequência
+  function atacadoDe(s) {
+    if (S.modoPreco === "ganho") return Math.max(s.cmv, s.preco - S.ganhoAlvo);
+    return s.cmv / (S.cmvAlvo / 100);
+  }
+  const ganhoMotoristaDe = (s) => s.preco - atacadoDe(s);
+  // A loja recebe o atacado, paga imposto+royalty sobre ele, e arca com o CMV,
+  // a quebra e a embalagem extra do carro (saquinho + adesivo).
+  const ganhoLojaDe = (s) => atacadoDe(s) * (1 - DED) - s.cmv * (1 + QUEBRA) - S.embCarro;
+  const cmvRealDe = (s) => s.cmv / atacadoDe(s);
+
+  const mediaGanhoMotorista = () => {
+    const sel = escolhidos();
+    return sel.length ? sel.reduce((a, s) => a + ganhoMotoristaDe(s), 0) / sel.length : 0;
+  };
+  const mediaGanhoLoja = () => {
+    const sel = escolhidos();
+    return sel.length ? sel.reduce((a, s) => a + ganhoLojaDe(s), 0) / sel.length : 0;
+  };
   // CMV da lista = média ponderada pelo que o público já compra
   function cmvLista() {
     const sel = escolhidos();
@@ -714,6 +733,9 @@
     // cookies/dia não é slider: é corridas × conversão por corrida — as duas
     // coisas que o motorista consegue observar e reportar depois do teste.
     motoristas: 20, corridas: 20, convCorrida: 25, dias: 26,
+    // preço de atacado: CMV alvo (padrão 50% = atacado é o dobro do custo)
+    cmvAlvo: 50, ganhoAlvo: 7, modoPreco: "cmv",
+    embCarro: 0.50,   // saquinho plástico + adesivo, por unidade — premissa
     simples: 8.0, royalty: 4.0, quebra: 1.0, embItem: 0.85, cartao: 0,
     // ranking
     p1: 250, p2: 200, p3: 100, conversoes: 60, canib: 30,
@@ -739,9 +761,15 @@
   const sign = (v) => v >= 0 ? "pos" : "neg";
 
   // ─── As duas contas ────────────────────────────────────────────────────────
-  const porCookieMotorista = () => S.precoCarro - S.atacado;
-  const porCookieLoja = (atac = S.atacado) => atac * (1 - DED) - custoCookie;
-  const margemLojaDireto = () => B.cookieTab * (1 - DED) - custoCookie;
+  // Desde que o preço passou a sair do CMV alvo produto a produto, o que vale
+  // para a escala é a MÉDIA da lista escolhida — não um preço único de atacado.
+  const porCookieMotorista = () => mediaGanhoMotorista();
+  const porCookieLoja = () => mediaGanhoLoja();
+  const margemLojaDireto = () => {
+    const sel = escolhidos();
+    if (!sel.length) return 0;
+    return sel.reduce((a, s) => a + (s.preco * (1 - DED) - s.cmv * (1 + QUEBRA) - S.embItem), 0) / sel.length;
+  };
 
   function calc() {
     const mot = porCookieMotorista();
@@ -784,6 +812,22 @@
     { k: "motoristas", g: "escala", lab: "Motoristas ativos", min: 0, max: 100, step: 1, fmt: n0,
       note: () => `Quantos estão vendendo de fato no mês. <b>Recrutar 20 não é 4 vezes recrutar 5</b> — a conta
         escala linear, a realidade não (pergunta 07).` },
+    { k: "cmvAlvo", g: "cardapio", lab: "CMV alvo", min: 20, max: 80, step: 1, fmt: (v) => pc(v / 100),
+      dep: () => S.modoPreco === "cmv",
+      note: () => S.modoPreco !== "cmv"
+        ? `Desligado: você está fixando o ganho do motorista, então o CMV alvo vira consequência.`
+        : `Quanto o CMV deve representar do preço que a loja cobra do motorista. A <b>50%</b> o atacado é
+           <b>o dobro do custo</b>. Baixar aqui <em>sobe</em> o atacado — a loja ganha mais e o motorista menos.` },
+    { k: "ganhoAlvo", g: "cardapio", lab: "Ganho do motorista", min: 1, max: 15, step: 0.5, fmt: brl,
+      dep: () => S.modoPreco === "ganho",
+      note: () => S.modoPreco !== "ganho"
+        ? `Desligado: você está fixando o CMV alvo, então o ganho sai diferente em cada produto.`
+        : `Em reais, igual pra todos os produtos. O atacado passa a ser <b>preço de revenda menos este valor</b>,
+           e o CMV alvo vira consequência — diferente em cada produto.` },
+    { k: "embCarro", g: "cardapio", lab: "Saquinho + adesivo", min: 0, max: 3, step: 0.05, fmt: brl,
+      note: () => `Embalagem extra do carro, por unidade. <b>Premissa, não cotação.</b> Sai do lado da loja —
+        não muda o ganho do motorista.` },
+
     { k: "corridas", g: "escala", lab: "Corridas por dia", min: 0, max: 60, step: 1, fmt: n0,
       note: () => `Quantos passageiros diferentes ele leva no dia. <b>20 é o número do teste</b> — e é o único
         dos três que já tem chão: motorista de app sabe quantas corridas faz.` },
@@ -831,16 +875,17 @@
   ];
 
   function sliderHTML(c) {
-    return `<div class="ctl">
+    const ligado = c.dep ? c.dep() : true;
+    return `<div class="ctl${ligado ? "" : " off"}">
       <div class="top"><span class="label">${c.lab}</span><span class="val">${c.fmt(S[c.k])}</span></div>
-      <input type="range" id="c-${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[c.k]}" aria-label="${c.lab}">
+      <input type="range" id="c-${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${S[c.k]}"
+             aria-label="${c.lab}"${ligado ? "" : " disabled"}>
       ${c.note() ? `<span class="note">${c.note()}</span>` : ""}
     </div>`;
   }
   const grupo = (g) => CTLS.filter((c) => c.g === g).map(sliderHTML).join("");
 
   function buildControls() {
-    document.getElementById("ctlPrecos").innerHTML = grupo("precos");
     document.getElementById("ctlEscala").innerHTML = grupo("escala");
     document.getElementById("ctlPremissas").innerHTML = grupo("prem");
     document.getElementById("ctlPodio").innerHTML = grupo("podio");
@@ -915,6 +960,73 @@
       el.setAttribute("aria-pressed", String(s.on));
     });
   }
+  // ─── O cardápio: uma linha por produto, atacado calculado do CMV alvo ──────
+  function buildCardapio() {
+    document.getElementById("ctlCardapio").innerHTML = `
+      <div class="ctl">
+        <div class="top"><span class="label">O que eu fixo</span></div>
+        <div class="toggle" role="group" aria-label="O que fixar">
+          <button type="button" id="mp-cmv" aria-pressed="${S.modoPreco === "cmv"}">CMV alvo</button>
+          <button type="button" id="mp-ganho" aria-pressed="${S.modoPreco === "ganho"}">Ganho do motorista</button>
+        </div>
+        <span class="note">${S.modoPreco === "cmv"
+          ? "Você fixa o <b>CMV alvo</b> e o ganho do motorista sai como consequência — diferente em cada produto, porque cada um tem um CMV."
+          : "Você fixa o <b>ganho em reais</b>, igual pra todos, e o CMV alvo vira consequência — diferente em cada produto."}</span>
+      </div>
+      ${sliderHTML(CTLS.find((c) => c.k === "cmvAlvo"))}
+      ${sliderHTML(CTLS.find((c) => c.k === "ganhoAlvo"))}
+      ${sliderHTML(CTLS.find((c) => c.k === "embCarro"))}`;
+    const b1 = document.getElementById("mp-cmv"), b2 = document.getElementById("mp-ganho");
+    if (b1) b1.addEventListener("click", () => { S.modoPreco = "cmv"; recalc(); update(); });
+    if (b2) b2.addEventListener("click", () => { S.modoPreco = "ganho"; recalc(); update(); });
+    ["cmvAlvo", "ganhoAlvo", "embCarro"].forEach((k) => {
+      const el = document.getElementById("c-" + k);
+      const c = CTLS.find((x) => x.k === k);
+      if (el) el.addEventListener("input", (e) => { S[k] = parseFloat(e.target.value); recalc(); update(); });
+    });
+  }
+
+  function renderCardapio() {
+    const sel = escolhidos();
+    document.getElementById("tabCardapio").innerHTML = sel.length
+      ? sel.map((s) => {
+          const at = atacadoDe(s), gl = ganhoLojaDe(s), gm = ganhoMotoristaDe(s);
+          return `<tr>
+            <td>${s.nome}</td>
+            <td>${brl(s.preco)}</td>
+            <td>${brl(s.cmv)}<br><span style="color:var(--ink-faint);font-size:.75rem">${pc(cmvRealDe(s))} do atacado</span></td>
+            <td><strong>${brl(at)}</strong></td>
+            <td class="${sign(gl)}">${brl(gl)}</td>
+            <td class="${sign(gm)}"><strong>${brl(gm)}</strong><br><span style="color:var(--ink-faint);font-size:.75rem">${pc(gm / s.preco)} da venda</span></td>
+          </tr>`;
+        }).join("") +
+        `<tr class="total"><td>Média dos ${n0(sel.length)}</td><td>—</td><td>—</td><td>—</td>
+          <td class="${sign(mediaGanhoLoja())}">${brl(mediaGanhoLoja())}</td>
+          <td class="${sign(mediaGanhoMotorista())}"><strong>${brl(mediaGanhoMotorista())}</strong></td></tr>`
+      : `<tr><td colspan="6">Nenhum produto selecionado.</td></tr>`;
+
+    const gm = mediaGanhoMotorista(), gl = mediaGanhoLoja();
+    const vendas = S.corridas * (S.convCorrida / 100);
+    document.getElementById("notaCardapio").innerHTML = `
+      <div class="note-item"><span class="tag ${gm * vendas >= 25 ? "good" : "warn"}">a conta do motorista, com essa lista</span><span>
+        Ganho médio de <strong>${brl(gm)} por cookie</strong>. Vendendo <strong>${n1(vendas)} por dia</strong>
+        (${n0(S.corridas)} corridas × ${pc(S.convCorrida / 100)}), ele faz <strong>${brl(gm * vendas)} por dia</strong>
+        e <strong>${brl0(gm * vendas * S.dias)} no mês</strong> em ${n0(S.dias)} dias rodando.
+      </span></div>
+      <div class="note-item"><span class="tag acc">a conta da loja</span><span>
+        <strong>${brl(gl)} por cookie</strong>, já descontando imposto e royalties (${pc(DED)}), a quebra
+        e os <strong>${brl(S.embCarro)} de saquinho e adesivo</strong>.
+        Com ${n0(S.motoristas)} motoristas nesse ritmo são <strong>${n0(vendas * S.motoristas * S.dias)} cookies</strong>
+        e <strong>${brl0(gl * vendas * S.motoristas * S.dias)}</strong> no mês.
+      </span></div>
+      <div class="note-item"><span class="tag warn">a embalagem do carro não estava em lugar nenhum</span><span>
+        Saquinho plástico e adesivo são <em>custo novo</em>: o CMV cadastrado cobre a embalagem da loja,
+        não a do carro. Estão aqui como <strong>${brl(S.embCarro)} por unidade</strong> — e isso é
+        <strong>premissa, não cotação</strong>. Saem do lado da loja, não do motorista: por isso o ganho
+        dele não muda quando você mexe nesse número.
+      </span></div>`;
+  }
+
   function renderSabores(R) {
     syncSabores();
     const sel = escolhidos();
@@ -955,27 +1067,6 @@
       </span></div>`;
   }
 
-  function renderLedger(R) {
-    const linha = (nome, quem, valor, detalhe, tag) => `
-      <div class="offer">
-        <div class="head"><span class="vnum">${quem}</span><span class="name">${nome}</span></div>
-        <div class="breakdown">${detalhe}</div>
-        <div class="result"><span class="r ${sign(valor)}">${brl(valor)}</span><span class="s" style="font-size:.75rem;color:var(--ink-faint)">por cookie</span></div>
-      </div>`;
-    document.getElementById("ledger").innerHTML =
-      linha("O passageiro paga", "carro", S.precoCarro, `O preço que o motorista cobra dentro do carro.`) +
-      linha("O motorista fica com", "dele", R.mot,
-        `${brl(S.precoCarro)} que ele cobra − ${brl(S.atacado)} que ele pagou à loja`) +
-      linha("A loja fica com", "loja", R.loja,
-        `${brl(S.atacado)} de atacado − ${pc(DED, 0)} de impostos e royalties (${brl(S.atacado * DED)}) − ${brl(custoCookie)} de custo do cookie`) +
-      `<div class="note-item"><span class="tag ${R.loja >= margemLojaDireto() ? "good" : "warn"}">o que a loja abre mão</span><span>
-        Vendendo na vitrine, um cookie deixa <strong>${brl(margemLojaDireto())}</strong>. Pelo motorista, deixa
-        <strong>${brl(R.loja)}</strong> — <strong>${brl(margemLojaDireto() - R.loja)} a menos por cookie</strong>.
-        <em>E tudo bem</em>: é venda que não existiria, para um passageiro que não ia à loja.
-        ${R.loja > 0 ? `Só deixa de valer se o motorista estiver vendendo para quem <em>iria</em> à loja de qualquer jeito.`
-                     : `<strong>Mas nesse preço de atacado a loja está pagando para vender.</strong>`}
-      </span></div>`;
-  }
 
   function renderMotorista(R) {
     document.getElementById("resMotorista").innerHTML = `
@@ -1042,32 +1133,6 @@
       </span></div>`;
   }
 
-  function renderTabela(R) {
-    const linhas = [];
-    for (let a = Math.max(5, Math.round(custoCookie)); a <= S.precoCarro - 1; a += 1) {
-      const mot = S.precoCarro - a, loja = porCookieLoja(a);
-      const atual = Math.abs(a - S.atacado) < 0.5;
-      linhas.push(`<tr class="${atual ? "mark" : ""}">
-        <td>${atual ? `<span class="vnum" style="background:var(--accent);color:var(--accent-ink);padding:.1rem .35rem;border-radius:2px;font-size:.625rem;margin-right:.4rem">atual</span>` : ""}${brl(a)}</td>
-        <td>${brl(mot)}</td>
-        <td>${n1(30 / mot)}</td>
-        <td>${n1(40 / mot)}</td>
-        <td class="${sign(loja)}"><strong>${brl(loja)}</strong></td>
-        <td class="${sign(loja)}">${brl0(loja * R.unMes)}</td></tr>`);
-    }
-    document.getElementById("tabAtacado").innerHTML = linhas.join("") ||
-      `<tr><td colspan="6">Preço no carro baixo demais para haver tabela.</td></tr>`;
-
-    document.getElementById("notaTabela").innerHTML = `
-      <div class="note-item"><span class="tag acc">como ler</span><span>
-        Descendo a tabela, o motorista ganha menos e a loja ganha mais. <strong>O ponto certo é o mais alto
-        em que ele ainda bate R$ 30 por dia sem esforço absurdo</strong> — porque acima disso ele não adere,
-        e abaixo disso a loja está dando margem de graça.
-        <br><br>
-        Abaixo de <strong>${brl(custoCookie / (1 - DED))}</strong> de atacado a loja perde dinheiro em cada
-        cookie, por mais que o motorista adore o programa.
-      </span></div>`;
-  }
 
   // ─── Ranking ───────────────────────────────────────────────────────────────
   function renderRanking() {
@@ -1151,7 +1216,7 @@
     document.getElementById("stripMot").textContent = brl0(R.motMes);
     document.getElementById("stripMotDia").textContent = brl(R.motDia) + " por dia";
     document.getElementById("stripLoja").textContent = brl0(R.lojaMes);
-    renderSabores(R); renderVeredito(R); renderLedger(R); renderMotorista(R); renderLoja(R); renderTabela(R);
+    buildCardapio(); renderCardapio(); renderSabores(R); renderVeredito(R); renderMotorista(R); renderLoja(R);
     renderRanking();
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
@@ -1159,7 +1224,7 @@
     });
   }
 
-  buildControls(); buildSabores(); update();
+  buildControls(); buildCardapio(); buildSabores(); update();
 })();
 </script>
 
