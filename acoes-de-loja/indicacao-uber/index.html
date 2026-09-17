@@ -568,6 +568,18 @@
       <div class="controls" id="ctlRankPrem"></div>
     </section>
 
+    <section id="podio-vendas">
+      <h2><span class="n">5</span> O segundo pódio<span class="hint">quem mais vende no carro</span></h2>
+      <p class="prose">
+        São dois rankings diferentes, porque são dois comportamentos diferentes. <strong>Indicar manda gente
+        pra loja; vender é o carro.</strong> Um motorista bom faz as duas coisas — e é por isso que ele
+        precisa das duas, já que o passageiro que comprou no carro <em>não volta ao carro dele</em>.
+      </p>
+      <div class="controls destaque" id="ctlPodioV"></div>
+      <div class="results" id="resPodioV"></div>
+      <div class="notes" id="notaPodioV"></div>
+    </section>
+
   </div><!-- /painel-premio -->
 
   <!-- ══════════════════════════════════════════════════════════════════════
@@ -576,106 +588,110 @@
   <div class="painel" id="painel-decidir" role="tabpanel" aria-labelledby="aba-decidir" hidden>
 
     <section>
-      <h2>O que falta decidir<span class="hint">as perguntas que a conta não responde</span></h2>
+      <h2>O que falta decidir<span class="hint">8 de 9 respondidas</span></h2>
       <p class="prose">
-        A conta diz que o programa cabe. <strong>O que decide se ele existe é operacional</strong>, e quase
-        nada disso está fechado. As três primeiras são bloqueantes — sem elas não dá para começar.
+        A conta diz que o programa cabe; o que decide se ele existe é operacional. <strong>Oito das nove
+        perguntas já têm resposta</strong> — sobrou a <a href="#pend03">03</a>, se vender comida dentro do
+        carro é permitido, e ela é a única que ainda pode parar tudo.
       </p>
       <ol class="pend">
         <li>
           <span class="num">01</span>
-          <span class="q">Quanto tempo o cookie aguenta dentro do carro?
-            <span class="ideia">bloqueante · decide quantos ele leva por dia e se precisa de embalagem térmica</span></span>
-          <span class="porque">É a pergunta operacional número um e <strong>ninguém mediu</strong>. Carro parado
-          no sol em Paulínia passa de 50°C. Se o cookie aguenta o turno inteiro, ele leva 8 e vende 5. Se
-          aguenta 3 horas, ele leva 3 — e aí a meta de R$ 25 a R$ 40 por dia <em>não fecha no preço que a
-          conta está usando</em>. <strong>Um teste de um dia responde isso.</strong></span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">Quanto tempo o cookie aguenta dentro do carro?</span>
+          <span class="porque">Decide quantos ele carrega por vez e se precisa de embalagem térmica. Carro
+          parado no sol em Paulínia passa de 50°C.</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Dois dias no máximo</strong> — mas a premissa da loja é cookie fresco, então
+            <em>ele passa na loja todo dia</em> e pega de 5 a 10, conforme o que acha que vende.
+            <strong>Teto de 10 por vez.</strong>
+          </span></span>
         </li>
         <li>
           <span class="num">02</span>
-          <span class="q">Ele compra, ou é consignado?
-            <span class="ideia">bloqueante · decide de quem é o risco do cookie que não vende</span></span>
-          <span class="porque"><strong>Se ele compra</strong>, o risco é dele: a loja recebe na hora e não
-          perde nada. Mas é dinheiro do bolso de alguém que muitas vezes não tem, e isso derruba a adesão.
-          <strong>Se é consignado</strong>, a adesão dispara e o risco vira da loja — todo cookie que voltar
-          velho é <em>R$ 5,91 jogado fora</em>, e a conta desta página não desconta isso.
-          <em>Meio-termo: primeira remessa consignada, depois só compra.</em></span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">Ele compra, ou é consignado?</span>
+          <span class="porque">Decide de quem é o risco do cookie que não vende.</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Compra sempre. Nunca consignado.</strong> A loja não tem como saber o que ele faz com o
+            produto depois. Na primeira vez ele tira 5 cookies — cerca de <strong>R$ 50</strong> — e
+            <em>daí em diante ele já vem com o dinheiro da venda anterior no bolso</em>, então o capital de
+            giro é dele e se paga sozinho a partir do segundo dia.
+          </span></span>
         </li>
         <li>
-          <span class="num">03</span>
+          <span class="num" id="pend03">03</span>
           <span class="q">Vender comida dentro de um carro particular é permitido?
-            <span class="ideia">bloqueante · vigilância sanitária e regra do app</span></span>
-          <span class="porque">Duas coisas diferentes: a <strong>vigilância sanitária</strong> (transporte e
-          venda de alimento exigem condição própria) e a <strong>regra da Uber</strong>, que pode proibir
-          comércio dentro da corrida. <strong>Nenhuma das duas foi checada</strong>, e as duas podem matar o
-          programa depois de ele já estar rodando — que é o pior momento possível.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+            <span class="ideia">vigilância sanitária e regra do app</span></span>
+          <span class="porque">São duas coisas diferentes: a <strong>vigilância sanitária</strong> (transporte
+          e venda de alimento) e a <strong>regra da Uber</strong>, que pode proibir comércio na corrida.
+          Nenhuma das duas foi checada.</span>
+          <span class="resp"><span class="rl">em aberto · risco a analisar</span><span class="rv">
+            Avaliação do Fred: <em>pouco provável virar problema</em>, mas ainda não foi verificado.
+            <strong>É a única pergunta bloqueante que sobrou.</strong>
+          </span></span>
         </li>
         <li>
           <span class="num">04</span>
-          <span class="q">Quais sabores o motorista pode levar?
-            <span class="ideia">o CMV do cookie varia de R$ 3,83 a R$ 8,71</span></span>
-          <span class="porque">A conta usa <strong>R$ 5,01</strong>, que é a média sem os premium. Mas
-          Churros custa R$ 3,83 e <strong>Pistache custa R$ 8,71</strong>. Se o motorista puder escolher, ele
-          leva o que vende melhor — e se for o caro, <em>a margem da loja cai quase pela metade</em>.
-          <strong>O jeito simples é fechar a lista</strong>: dois ou três sabores de CMV baixo, que também
-          são os que aguentam melhor o carro.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">Quais sabores o motorista pode levar?</span>
+          <span class="porque">O CMV do cookie vai de R$ 3,83 a R$ 8,71 — se ele escolhe livre e pega o caro,
+          a margem da loja cai quase pela metade.</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Lista fechada em cinco</strong>: Nutella, Kinder com Nutella, Brigadeiro de panela,
+            Brookie e Tradicional. <em>Churros fica como alternativa</em> — é a opção de doce de leite pra
+            quem não gosta de chocolate.
+          </span></span>
         </li>
         <li>
           <span class="num">05</span>
-          <span class="q">Por quanto ele vende no carro?
-            <span class="ideia">a tabela da loja é R$ 17,34 — no carro, preço quebrado é ruim</span></span>
-          <span class="porque">No carro não tem maquininha nem troco fácil: <strong>preço redondo importa
-          mais que na loja</strong>. R$ 18 ou R$ 20 funcionam melhor que R$ 17,34. E tem uma pergunta de
-          fundo: <em>pode ser mais caro que na loja?</em> É conveniência — o passageiro não ia até a loja.
-          Cobrar mais no carro aumenta a margem dos dois lados, mas cria a chance de um cliente descobrir
-          que pagou mais caro.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">Por quanto ele vende no carro?</span>
+          <span class="porque">No carro não tem maquininha nem troco fácil, e tem a pergunta de fundo: pode
+          ser mais caro que na loja?</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Mesmo preço da loja.</strong> O passageiro não paga a mais por estar no carro.
+          </span></span>
         </li>
         <li>
           <span class="num">06</span>
-          <span class="q">Como ele paga a loja?
-            <span class="ideia">a conta assume PIX ou dinheiro, sem taxa de cartão</span></span>
-          <span class="porque">A página desconta <strong>12% de Simples + royalties</strong> e
-          <strong>nenhuma taxa de cartão</strong>, porque assume PIX na retirada. Se virar fiado ou cartão,
-          some mais 2% e aparece risco de calote. <em>PIX na hora da retirada é o desenho mais simples</em>,
-          e resolve junto a pergunta 02.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">Como ele paga a loja?</span>
+          <span class="porque">A conta assume 12% de Simples e royalties e nenhuma taxa de cartão.</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Sempre PIX ou dinheiro</strong>, na retirada. Sem cartão e sem fiado — o que confirma os
+            12% da conta e elimina risco de calote.
+          </span></span>
         </li>
         <li>
           <span class="num">07</span>
-          <span class="q">Quantos motoristas, e como achar os primeiros?
-            <span class="ideia">a conta escala linear, a realidade não</span></span>
-          <span class="porque">A tabela multiplica motoristas por cookies e dá um número bonito. <strong>Mas
-          recrutar 20 motoristas não é 4 vezes recrutar 5</strong> — e a página não tem nenhuma premissa
-          sobre quantos aderem, quantos desistem no segundo mês, ou quanto custa achar cada um.
-          <em>O primeiro mês com 3 motoristas é que vai dizer</em>.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">Quantos motoristas, e como achar os primeiros?</span>
+          <span class="porque">A tabela multiplica motoristas × cookies × dias e dá um número bonito.
+          Recrutar 20 não é 4 vezes recrutar 5.</span>
+          <span class="resp ok"><span class="rl">respondido pelo Fred</span><span class="rv">
+            Definido. <em>Falta só registrar aqui o número e o caminho de recrutamento</em> — a página segue
+            simulando com 20 até isso entrar.
+          </span></span>
         </li>
         <li>
           <span class="num">08</span>
-          <span class="q">No ranking, o que conta como indicação?
-            <span class="ideia">o motorista não tem como provar que mandou alguém</span></span>
-          <span class="porque">É o mesmo buraco do <a href="../programa-de-indicacao/#mecanica">programa de
-          indicação</a>: sem código ou link, não dá para saber quem mandou quem. <strong>Com dinheiro em
-          jogo no pódio, isso deixa de ser detalhe</strong> — vira a diferença entre um ranking e uma
-          discussão. <em>O código por motorista resolve</em>, e é mais fácil aqui do que com cliente: são
-          poucos, são cadastrados, e cada um pode ter o seu.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">No ranking, o que conta como indicação?</span>
+          <span class="porque">Sem código, não dá pra saber quem mandou quem — e tem prêmio em dinheiro em
+          jogo.</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Cada motorista tem cadastro e um código próprio</strong>, como código de revendedor
+            parceiro. <em>No carro fica uma placa com o código dele</em>; o passageiro fotografa.
+            Na loja, pra entrar na promoção de <strong>compre 1 e ganhe 1</strong>, o cliente precisa
+            apresentar o código ou dizer o nome do motorista. <strong>Sem código, sem promoção</strong> —
+            é isso que amarra a venda ao indicador certo.
+          </span></span>
         </li>
         <li>
           <span class="num">09</span>
-          <span class="q">As duas frentes convivem ou competem?
-            <span class="ideia">o mesmo motorista pode revender e indicar ao mesmo tempo</span></span>
-          <span class="porque">Revender rende <strong>R$ 8 por cookie, na hora</strong>. Indicar rende
-          <em>talvez</em> um prêmio de pódio no fim do mês. <strong>Um motorista racional só revende</strong>
-          — e o ranking vira decoração, igual à escada de pontos do outro programa.
-          <em>Ou o ranking premia quem revende mais</em> (aí é o mesmo programa, com um incentivo em cima),
-          <em>ou ele precisa de um público diferente</em> — motoristas que não querem carregar estoque.</span>
-          <span class="resp"><span class="rl">resposta</span><span class="rv vazia">em aberto</span></span>
+          <span class="q">As duas frentes convivem ou competem?</span>
+          <span class="porque">Revender rende na hora; indicar rende talvez um prêmio no fim do mês. Um
+          motorista racional só revenderia.</span>
+          <span class="resp ok"><span class="rl">respondido</span><span class="rv">
+            <strong>Convivem, e uma precisa da outra.</strong> Ele vende pro passageiro uma vez e
+            <em>aquele passageiro não volta ao carro dele</em> — pra continuar ganhando, ele tem que mandar
+            a pessoa pra loja. <strong>Vai ter os dois rankings</strong>: um de quem mais indica e outro de
+            quem mais vende, cada um com seu pódio.
+          </span></span>
         </li>
       </ol>
     </section>
@@ -779,6 +795,7 @@
     simples: 8.0, royalty: 4.0, quebra: 1.0, embItem: 0.85, cartao: 0,
     // ranking
     p1: 250, p2: 200, p3: 100, conversoes: 60, canib: 30,
+    v1: 300, v2: 200, v3: 100,   // pódio de quem mais vende no carro
   };
 
   let DED, QUEBRA, custoCookie, MC, MARG_VISITA;
@@ -879,6 +896,12 @@
       note: () => {
         const R = calcRank();
         return `Total do pódio: <b>${brl0(R.premio)} por mês</b>, e esse número <b>não cresce com o volume</b>.`; } },
+
+    { k: "v1", g: "podiov", lab: "1º lugar", min: 0, max: 1000, step: 10, fmt: brl0,
+      note: () => `Prêmio de quem mais <b>vendeu no carro</b> no mês.` },
+    { k: "v2", g: "podiov", lab: "2º lugar", min: 0, max: 1000, step: 10, fmt: brl0, note: () => `` },
+    { k: "v3", g: "podiov", lab: "3º lugar", min: 0, max: 1000, step: 10, fmt: brl0,
+      note: () => `Total: <b>${brl0(S.v1 + S.v2 + S.v3)} por mês</b>, também fixo.` },
     { k: "conversoes", g: "rankprem", lab: "Indicações convertidas/mês", min: 0, max: 500, step: 5, fmt: n0,
       note: () => {
         const R = calcRank();
@@ -904,6 +927,7 @@
 
     document.getElementById("ctlPremissas").innerHTML = grupo("prem");
     document.getElementById("ctlPodio").innerHTML = grupo("podio");
+    document.getElementById("ctlPodioV").innerHTML = grupo("podiov");
     document.getElementById("ctlRankPrem").innerHTML = grupo("rankprem");
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
@@ -1135,7 +1159,9 @@
     const custoEmb = R.unMes * S.embCarro;
     document.getElementById("resLoja").innerHTML = `
       <div class="cell"><span class="label">Cookies no mês</span><span class="v">${n0(R.unMes)}</span>
-        <span class="s">${n0(S.motoristas)} motoristas × ${n0(R.porDia)}/dia × ${n0(S.dias)} dias</span></div>
+        <span class="s"><strong>${n0(S.motoristas * R.porDia)}</strong> por dia ·
+        <strong>${n0(R.unMes * 12 / 52)}</strong> por semana<br>
+        ${n0(S.motoristas)} motoristas × ${n0(R.porDia)}/dia × ${n0(S.dias)} dias</span></div>
       <div class="cell"><span class="label">Faturamento do mês</span><span class="v">${brl0(R.faturaMes)}</span>
         <span class="s">o que os motoristas pagam à loja</span></div>
       <div class="cell hero"><span class="label">Margem da loja</span><span class="v ${sign(R.lojaMes)}">${brl0(R.lojaMes)}</span>
@@ -1162,6 +1188,42 @@
       </span></div>`;
   }
 
+
+  // ─── Pódio de vendas: custo fixo contra a margem que a revenda já gera ─────
+  function renderPodioV() {
+    const R = calc();
+    const premio = S.v1 + S.v2 + S.v3;
+    const margem = R.lojaMes;
+    const sobra = margem - premio;
+    const porMot = S.motoristas > 0 ? premio / S.motoristas : 0;
+    document.getElementById("resPodioV").innerHTML = `
+      <div class="cell"><span class="label">Custo do pódio</span><span class="v">${brl0(premio)}</span>
+        <span class="s">${brl0(S.v1)} + ${brl0(S.v2)} + ${brl0(S.v3)} · fixo no mês</span></div>
+      <div class="cell"><span class="label">Margem da revenda</span><span class="v">${brl0(margem)}</span>
+        <span class="s">o que a aba da loja apura</span></div>
+      <div class="cell hero"><span class="label">Sobra depois do pódio</span><span class="v ${sign(sobra)}">${brl0(sobra)}</span>
+        <span class="s">${margem > 0 ? pc(premio / margem) + " da margem vai pro prêmio" : "sem margem para comparar"}</span></div>`;
+
+    document.getElementById("notaPodioV").innerHTML = `
+      <div class="note-item"><span class="tag ${sobra >= 0 ? "good" : "bad"}">o pódio de vendas se paga com muita folga</span><span>
+        ${brl0(premio)} contra <strong>${brl0(margem)} de margem</strong> que a revenda já gera —
+        <strong>${margem > 0 ? pc(premio / margem) : "—"} do total</strong>.
+        Diferente do prêmio de indicação, aqui <em>não existe ponto de equilíbrio a atingir</em>: a margem
+        já está lá, o pódio só divide um pedaço dela.
+        ${S.motoristas > 0 ? `Dá <strong>${brl(porMot)} por motorista ativo</strong> se você diluir pelos ${n0(S.motoristas)}.` : ""}
+      </span></div>
+      <div class="note-item"><span class="tag acc">os dois pódios juntos</span><span>
+        Indicação <strong>${brl0(S.p1 + S.p2 + S.p3)}</strong> + vendas <strong>${brl0(premio)}</strong> =
+        <strong>${brl0(S.p1 + S.p2 + S.p3 + premio)} por mês</strong> de prêmio, fixo.
+        <em>É o teto de exposição do programa inteiro</em> — um número que você decide antes, não descobre
+        depois.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o mesmo motorista pode ganhar os dois</span><span>
+        Quem vende muito costuma indicar muito. <strong>Se nada impedir, o primeiro lugar leva
+        ${brl0(S.p1 + S.v1)}</strong> — e os outros param de jogar no segundo mês.
+        <em>Vale decidir se um motorista pode subir nos dois pódios.</em>
+      </span></div>`;
+  }
 
   // ─── Ranking ───────────────────────────────────────────────────────────────
   function renderRanking() {
@@ -1243,7 +1305,7 @@
     syncControls();
     document.getElementById("mediaInline").textContent = brl(mediaGanhoMotorista());
     buildCardapio(); renderCardapio(); renderLojaCookie(); renderSabores(R); renderMotorista(R); renderLoja(R);
-    renderRanking();
+    renderRanking(); renderPodioV();
     CTLS.forEach((c) => {
       const el = document.getElementById("c-" + c.k);
       if (el) { const top = el.previousElementSibling; if (top) { const v = top.querySelector(".val"); if (v) v.textContent = c.fmt(S[c.k]); } }
