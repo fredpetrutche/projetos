@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<title>Cardápio de Verão</title>
+<meta name="description" content="Todos os links do lançamento do cardápio de verão: a página do projeto com as etapas, os briefings e a votação.">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2334C759'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round'><circle cx='50' cy='50' r='26'/><path d='M40 44h.01M60 40h.01M56 60h.01M41 62h.01'/></g></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2334C759'/><g fill='none' stroke='white' stroke-width='7' stroke-linecap='round'><circle cx='50' cy='50' r='26'/><path d='M40 44h.01M60 40h.01M56 60h.01M41 62h.01'/></g></svg>">
+<style>
+/* ============================================================
+   CARDÁPIO DE VERÃO — índice de links do lançamento
+   Mesma direção visual do cardápio de projetos: iOS 26 / Liquid Glass.
+   Esta página não guarda conteúdo: ela só diz onde cada parte mora.
+   ============================================================ */
+
+:root{
+  --fundo:#F2F2F7;
+  --ilha:#FFFFFF;
+
+  --rotulo:#000000;
+  --rotulo-2:rgba(60,60,67,.60);
+  --rotulo-3:rgba(60,60,67,.30);
+
+  --sep:rgba(60,60,67,.16);
+  --preench:rgba(120,120,128,.12);
+
+  --tinta:#007AFF;
+  --tinta-fraca:rgba(0,122,255,.10);
+  --verde:#34C759;
+  --laranja:#FF9500;
+  --roxo:#AF52DE;
+  --cinza:#8E8E93;
+
+  --sombra:0 1px 1px rgba(0,0,0,.04),0 8px 24px -10px rgba(0,0,0,.12);
+  --sombra-alta:0 2px 4px rgba(0,0,0,.05),0 16px 36px -12px rgba(0,0,0,.20);
+
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI Variable Text","Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,"Cascadia Mono",Menlo,Consolas,monospace;
+
+  --r-cartao:18px;
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --fundo:#000000;
+    --ilha:#1C1C1E;
+
+    --rotulo:#FFFFFF;
+    --rotulo-2:rgba(235,235,245,.60);
+    --rotulo-3:rgba(235,235,245,.30);
+
+    --sep:rgba(84,84,88,.55);
+    --preench:rgba(120,120,128,.24);
+
+    --tinta:#0A84FF;
+    --tinta-fraca:rgba(10,132,255,.16);
+    --verde:#30D158;
+    --laranja:#FF9F0A;
+    --roxo:#BF5AF2;
+
+    --sombra:0 1px 1px rgba(0,0,0,.3),0 8px 24px -10px rgba(0,0,0,.6);
+    --sombra-alta:0 2px 4px rgba(0,0,0,.4),0 16px 36px -12px rgba(0,0,0,.75);
+  }
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:var(--sans);
+  background:var(--fundo);
+  color:var(--rotulo);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding:0 max(1.25rem,env(safe-area-inset-left)) 5rem;
+}
+
+.larg{max-width:60rem;margin:0 auto}
+
+/* ---------- voltar ---------- */
+.voltar{
+  font-family:var(--mono);
+  font-size:.6875rem;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--rotulo-3);
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:.45rem;
+  margin-top:2.25rem;
+}
+.voltar:hover{color:var(--tinta)}
+.voltar svg{width:.7rem;height:.7rem;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- cabeçalho ---------- */
+header{padding:1.5rem 0 2.5rem}
+h1{
+  font-size:clamp(2.25rem,7vw,3rem);
+  font-weight:700;
+  letter-spacing:-.025em;
+  line-height:1.08;
+}
+header p{
+  margin-top:.6rem;
+  color:var(--rotulo-2);
+  font-size:1.0625rem;
+  max-width:38rem;
+}
+
+/* ---------- seção ---------- */
+section{margin-top:2.75rem}
+h2{
+  font-size:.8125rem;
+  font-weight:600;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  color:var(--rotulo-2);
+  margin:0 0 .875rem .125rem;
+  display:flex;align-items:baseline;gap:.625rem;flex-wrap:wrap;
+}
+h2 .dica{
+  font-size:.75rem;
+  font-weight:400;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--rotulo-3);
+}
+
+/* ---------- grade de cartões ---------- */
+.grade{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(17.5rem,1fr));
+  gap:.875rem;
+}
+
+.cartao{
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+  background:var(--ilha);
+  border-radius:var(--r-cartao);
+  padding:1.25rem 1.25rem 1.125rem;
+  text-decoration:none;
+  color:inherit;
+  box-shadow:var(--sombra);
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .22s ease;
+}
+/* faixa de cor da família do link */
+.cartao::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:var(--cor,var(--tinta));
+  z-index:-1;
+}
+.cartao:hover,.cartao:focus-visible{
+  transform:translateY(-3px);
+  box-shadow:var(--sombra-alta);
+}
+.cartao:focus-visible{outline:2.5px solid var(--tinta);outline-offset:3px}
+.cartao:active{transform:translateY(-1px)}
+
+/* o cartão principal ocupa a linha inteira: é a página do projeto */
+.cartao.largo{grid-column:1/-1}
+
+.topo{display:flex;align-items:center;gap:.625rem}
+.ic{
+  width:2rem;height:2rem;
+  flex:0 0 auto;
+  border-radius:9px;
+  display:grid;place-items:center;
+  background:color-mix(in srgb,var(--cor,var(--tinta)) 14%,transparent);
+  color:var(--cor,var(--tinta));
+}
+.ic svg{width:1.0625rem;height:1.0625rem;stroke-width:2.1;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+
+.nome{
+  font-size:1.0625rem;
+  font-weight:600;
+  letter-spacing:-.012em;
+  line-height:1.25;
+}
+
+.desc{
+  color:var(--rotulo-2);
+  font-size:.9375rem;
+  line-height:1.45;
+  flex:1;
+}
+
+.pe{
+  display:flex;align-items:center;gap:.375rem;
+  margin-top:.375rem;
+  font-family:var(--mono);
+  font-size:.6875rem;
+  color:var(--rotulo-3);
+  letter-spacing:-.01em;
+}
+.pe svg{width:.75rem;height:.75rem;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cartao:hover .pe{color:var(--cor,var(--tinta))}
+
+/* selo de estado, quando o link é histórico e não trabalho em andamento */
+.selo{
+  margin-left:auto;
+  font-size:.625rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--cor,var(--tinta));
+  background:color-mix(in srgb,var(--cor,var(--tinta)) 13%,transparent);
+  padding:.125rem .375rem;
+  border-radius:5px;
+}
+
+/* ---------- atalhos de aba, dentro do cartão principal ---------- */
+.abas{
+  display:flex;flex-wrap:wrap;gap:.4375rem;
+  margin-top:.5rem;
+}
+.aba{
+  font-size:.8125rem;
+  font-weight:600;
+  letter-spacing:-.01em;
+  text-decoration:none;
+  color:var(--verde);
+  background:color-mix(in srgb,var(--verde) 12%,transparent);
+  padding:.3125rem .6875rem;
+  border-radius:980px;
+  transition:background .18s ease;
+}
+.aba:hover{background:color-mix(in srgb,var(--verde) 22%,transparent)}
+.aba:focus-visible{outline:2.5px solid var(--verde);outline-offset:2px}
+
+footer{
+  margin-top:3.5rem;
+  padding-top:1.25rem;
+  border-top:1px solid var(--sep);
+  font-family:var(--mono);
+  font-size:.6875rem;
+  color:var(--rotulo-3);
+  letter-spacing:-.01em;
+}
+</style>
+</head>
+<body>
+<div class="larg">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+  <header>
+    <h1>Cardápio de Verão</h1>
+    <p>O lançamento dos produtos de verão. O projeto está espalhado por várias páginas — esta aqui só diz onde cada uma delas mora.</p>
+  </header>
+
+  <!-- ============ O PROJETO ============ -->
+  <section>
+    <h2>O projeto<span class="dica">onde as etapas e o que fazer em cada uma estão escritos</span></h2>
+    <div class="grade">
+
+      <a class="cartao largo" style="--cor:var(--verde)" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 10.5h.01M15 9.5h.01M13 15h.01M9.5 15.5h.01"/></svg></span>
+          <span class="nome">A página do projeto</span>
+        </div>
+        <p class="desc">O lançamento inteiro, em seis abas: o briefing, os produtos um por um, as ações com prazo e responsável, o cronograma até a degustação, as atas das reuniões e o que ficou em aberto. É aqui que se marca ação como feita — a marcação sincroniza pra todo mundo.</p>
+        <div class="abas">
+          <a class="aba" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/#briefing" target="_blank" rel="noopener">Briefing</a>
+          <a class="aba" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/#produtos" target="_blank" rel="noopener">Os produtos</a>
+          <a class="aba" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/#acoes" target="_blank" rel="noopener">Ações</a>
+          <a class="aba" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/#cronograma" target="_blank" rel="noopener">Cronograma</a>
+          <a class="aba" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/#atas" target="_blank" rel="noopener">Atas</a>
+          <a class="aba" href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/#abertos" target="_blank" rel="noopener">Em aberto</a>
+        </div>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holy-cook-reunioes/cardapio-verao</span>
+      </a>
+
+      <a class="cartao" style="--cor:var(--tinta)" href="https://fredpetrutche.github.io/holy-cook-reunioes/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/></svg></span>
+          <span class="nome">Reuniões Holy Cook</span>
+        </div>
+        <p class="desc">A casa de onde o cardápio de verão saiu: todos os projetos da Holy Cook em card, as atas das reuniões e as ações de cada um. O cardápio é um dos cards dessa home.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holy-cook-reunioes</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============ OS BRIEFINGS ============ -->
+  <section>
+    <h2>Os briefings<span class="dica">o raciocínio por trás da escolha dos produtos</span></h2>
+    <div class="grade">
+
+      <a class="cartao" style="--cor:var(--laranja)" href="https://fredpetrutche.github.io/holy-cook-reunioes/briefing-final/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.5 10.9V17h7v-3.1A6 6 0 0 0 12 3z"/><line x1="10" y1="20.5" x2="14" y2="20.5"/></svg></span>
+          <span class="nome">O jogo da atenção</span>
+        </div>
+        <p class="desc">O briefing final, apresentado em 31/08. Por que o produto novo precisa ganhar o olho antes de ganhar o paladar, e como isso virou os critérios do cardápio.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holy-cook-reunioes/briefing-final</span>
+      </a>
+
+      <a class="cartao" style="--cor:var(--laranja)" href="https://fredpetrutche.github.io/holy-cook-reunioes/produtos-desejaveis/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 20.5l8.8-7.8a5 5 0 0 0 0-7.1z"/></svg></span>
+          <span class="nome">Produtos desejáveis</span>
+        </div>
+        <p class="desc">Os dois filtros que todo produto do verão tem que passar: desejo pelos olhos — vende na imagem — e simples de executar na loja, montagem e não receita, porque o atendente não é chef.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holy-cook-reunioes/produtos-desejaveis</span>
+      </a>
+
+      <a class="cartao" style="--cor:var(--laranja)" href="https://fredpetrutche.github.io/holy-cook-reunioes/referencias-performaticas/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><polygon points="10 8 16 12 10 16 10 8"/><rect x="3" y="4" width="18" height="16" rx="2.5"/></svg></span>
+          <span class="nome">Referências performáticas</span>
+        </div>
+        <p class="desc">Os produtos de mercado que servem de referência de execução — o que a loja consegue copiar do jeito de montar e de mostrar, item por item.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holy-cook-reunioes/referencias-performaticas</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============ DE ONDE VEIO ============ -->
+  <section>
+    <h2>De onde veio<span class="dica">a etapa de coleta, já encerrada</span></h2>
+    <div class="grade">
+
+      <a class="cartao" style="--cor:var(--roxo)" href="https://holycampinas.github.io/cardapio-verao-holy-cookie/" target="_blank" rel="noopener">
+        <div class="topo">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M14 9V5.5a2.5 2.5 0 0 0-5 0V9"/><path d="M4.5 9h15l-1.2 10a2 2 0 0 1-2 1.8H7.7a2 2 0 0 1-2-1.8z"/></svg></span>
+          <span class="nome">Votação de sugestões</span>
+          <span class="selo">histórico</span>
+        </div>
+        <p class="desc">A página onde o time colou os links de reel e votou: a capa era puxada sozinha do Instagram e os mais votados viraram o cardápio. Fechou em 21/08 — fica como registro de onde cada produto apareceu.</p>
+        <span class="pe"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>holycampinas.github.io/cardapio-verao-holy-cookie</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>Índice de links · as etapas e as ações vivem na página do projeto, não aqui</footer>
+
+</div>
+</body>
+</html>
