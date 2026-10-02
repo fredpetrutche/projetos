@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
+<title>Sorteio dos Condomínios — Holy Cook</title>
+<meta name="description" content="A ação do evento de condomínios: cadastro por QR code, sorteio da torta e das 5 caixas misteriosas, e o voucher de cookie grátis disparado depois.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
+<style>
+  :root {
+    --paper:#F4EFE4; --surface:#FFFDF8; --surface-2:#EFE8DA; --ink:#241A10;
+    --ink-soft:#6E6253; --ink-faint:#998D7B; --rule:#D6CBB4; --rule-soft:#E4DCCB;
+    --marca:#9C2B1B; --marca-ink:#FFFDF8; --bad:#A32B1F; --good:#2F6B4A; --warn:#8A5C13;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#17130D; --surface:#211B13; --surface-2:#2A231A; --ink:#F3EDE2;
+      --ink-soft:#A99E8D; --ink-faint:#7A7162; --rule:#3A3123; --rule-soft:#2E271C;
+      --marca:#E8755A; --marca-ink:#17130D; --bad:#E4907F; --good:#74BC92; --warn:#DBAE60;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 2rem 1.1rem 5rem; display: flex; flex-direction: column; gap: 1.75rem; }
+
+  .voltar { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); text-decoration: none; }
+  .voltar:hover { color: var(--marca); }
+
+  header { display: flex; flex-direction: column; gap: .4rem; }
+  .marca { font-family: var(--mono); font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--marca); font-weight: 700; }
+  h1 { font-size: clamp(1.6rem, 4.5vw, 2.3rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.12; }
+  .lede { color: var(--ink-soft); max-width: 60ch; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .8rem 1rem; display: flex; flex-direction: column; gap: .1rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.05rem; font-weight: 700; }
+  .strip .s { font-size: .74rem; color: var(--ink-faint); }
+
+  /* ── Abas ─────────────────────────────────────────────────────── */
+  .abas { display: flex; gap: .3rem; border-bottom: 2px solid var(--rule); overflow-x: auto; }
+  .abas button { font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; padding: .6rem .9rem; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--ink-faint); cursor: pointer; white-space: nowrap; font-weight: 600; }
+  .abas button[aria-selected="true"] { color: var(--marca); border-bottom-color: var(--marca); }
+  .painel { display: flex; flex-direction: column; gap: 1.5rem; }
+  .painel[hidden] { display: none; }
+
+  h2 { font-family: var(--mono); font-size: .76rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 700; padding-bottom: .5rem; border-bottom: 2px solid var(--ink); }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose + .prose { margin-top: .7rem; }
+
+  /* ── Cards de tela ────────────────────────────────────────────── */
+  .grade-telas { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: .9rem; }
+  a.tela { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--cor, var(--marca)); border-radius: 5px; padding: 1.1rem 1.2rem; display: flex; flex-direction: column; gap: .4rem; text-decoration: none; color: inherit; }
+  a.tela:hover { border-color: var(--marca); border-left-color: var(--marca); }
+  a.tela .quando { font-family: var(--mono); font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cor, var(--marca)); }
+  a.tela .nome { font-size: 1.08rem; font-weight: 700; }
+  a.tela .desc { font-size: .86rem; color: var(--ink-soft); }
+  a.tela .pe { font-family: var(--mono); font-size: .68rem; color: var(--ink-faint); margin-top: .3rem; }
+
+  /* ── Fluxo ────────────────────────────────────────────────────── */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+  .passo { font-family: var(--sans); font-size: .82rem; font-weight: 600; padding: .55rem .8rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; color: var(--ink); cursor: pointer; display: flex; align-items: center; gap: .45rem; }
+  .passo:hover { border-color: var(--marca); }
+  .passo[aria-pressed="true"] { background: var(--marca); color: var(--marca-ink); border-color: var(--marca); }
+  .passo .n { font-family: var(--mono); font-size: .68rem; opacity: .65; }
+  .seta { color: var(--ink-faint); font-size: .9rem; }
+  .detalhe { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1rem 1.15rem; display: flex; flex-direction: column; gap: .4rem; }
+  .detalhe[hidden] { display: none; }
+  .detalhe .tit { font-weight: 700; font-size: 1rem; }
+
+  /* ── Cards de tópico (mensagens, operação) ────────────────────── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .7rem; }
+  .grade[hidden] { display: none; }
+  .topico { font-family: var(--sans); text-align: left; background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: .85rem 1rem; cursor: pointer; display: flex; flex-direction: column; gap: .2rem; color: inherit; }
+  .topico:hover { border-color: var(--marca); }
+  .topico[aria-pressed="true"] { border-color: var(--marca); background: var(--surface-2); }
+  .topico .t { font-size: .95rem; font-weight: 700; }
+  .topico .q { font-size: .76rem; color: var(--ink-faint); }
+  .visor { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.15rem 1.25rem; display: flex; flex-direction: column; gap: .7rem; }
+  .visor[hidden] { display: none; }
+  .visor .tit { font-size: 1.05rem; font-weight: 700; }
+  .visor .quando { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--marca); font-weight: 700; }
+  .balao { background: var(--surface-2); border: 1px solid var(--rule); border-radius: 10px 10px 10px 2px; padding: .8rem .9rem; font-size: .9rem; white-space: pre-wrap; line-height: 1.5; }
+  .anexo { font-size: .78rem; color: var(--ink-faint); }
+
+  .pontos { display: flex; flex-direction: column; gap: .45rem; padding-left: 1.1rem; color: var(--ink-soft); font-size: .9rem; }
+  .pontos strong { color: var(--ink); font-weight: 600; }
+
+  .nota { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--warn); border-radius: 5px; padding: .9rem 1.1rem; font-size: .9rem; color: var(--ink-soft); }
+  .nota b { color: var(--ink); }
+
+  .qr { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.15rem; }
+  .qr img { width: 11rem; height: 11rem; background: #fff; padding: .5rem; border-radius: 5px; }
+  .qr .txt { flex: 1 1 15rem; display: flex; flex-direction: column; gap: .4rem; }
+  .qr .url { font-family: var(--mono); font-size: .74rem; color: var(--marca); word-break: break-all; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="voltar" href="../../">&larr; Projetos</a>
+
+  <header>
+    <div class="marca">Holy Cook &middot; Piracicaba</div>
+    <h1>Sorteio dos Condomínios</h1>
+    <p class="lede">Captação de leads no evento de condomínios: a pessoa se cadastra pelo QR code,
+    recebe o número do sorteio no WhatsApp, e dias depois recebe um voucher de cookie grátis para
+    aparecer na loja.</p>
+  </header>
+
+  <div class="strip">
+    <div><span class="v">1 torta</span><span class="s">Kinder Completa</span></div>
+    <div><span class="v">5 caixas</span><span class="s">misteriosas, 4 cookies cada</span></div>
+    <div><span class="v">1 voucher</span><span class="s">cookie grátis, para todos</span></div>
+    <div><span class="v">18/10/2026</span><span class="s">validade do voucher</span></div>
+  </div>
+
+  <div class="abas" role="tablist">
+    <button role="tab" aria-selected="true" data-aba="briefing">Briefing</button>
+    <button role="tab" aria-selected="false" data-aba="telas">Telas</button>
+    <button role="tab" aria-selected="false" data-aba="mensagens">Mensagens</button>
+    <button role="tab" aria-selected="false" data-aba="operacao">Operação</button>
+  </div>
+
+  <!-- ══ BRIEFING ══════════════════════════════════════════════════ -->
+  <div class="painel" data-painel="briefing">
+    <section>
+      <h2>O que é</h2>
+      <p class="prose">O evento junta síndicos, zeladores e conselheiros de condomínio num lugar só —
+      exatamente quem decide a compra coletiva de um prédio inteiro. A isca é o sorteio; o que a loja
+      leva do evento é <strong>o WhatsApp dessa gente, com o condomínio e o cargo de cada um</strong>.</p>
+      <p class="prose">O sorteio acontece ao vivo, no evento. O voucher é o segundo tempo: alguns dias
+      depois, todo mundo que participou recebe um cookie grátis para ir à loja — é ele que transforma
+      um cadastro numa visita.</p>
+    </section>
+
+    <section>
+      <h2>O caminho da pessoa</h2>
+      <div class="fluxo" id="fluxo">
+        <button class="passo" data-passo="p1"><span class="n">1</span>Lê o QR code</button><span class="seta">&rarr;</span>
+        <button class="passo" data-passo="p2"><span class="n">2</span>Preenche o cadastro</button><span class="seta">&rarr;</span>
+        <button class="passo" data-passo="p3"><span class="n">3</span>Recebe a senha</button><span class="seta">&rarr;</span>
+        <button class="passo" data-passo="p4"><span class="n">4</span>Responde "sim"</button><span class="seta">&rarr;</span>
+        <button class="passo" data-passo="p5"><span class="n">5</span>Sorteio ao vivo</button><span class="seta">&rarr;</span>
+        <button class="passo" data-passo="p6"><span class="n">6</span>Ganhador é avisado</button><span class="seta">&rarr;</span>
+        <button class="passo" data-passo="p7"><span class="n">7</span>Voucher, dias depois</button>
+      </div>
+      <div class="detalhe" id="detalheFluxo" hidden></div>
+    </section>
+
+    <section>
+      <h2>As duas decisões que mudam o jogo</h2>
+      <ul class="pontos">
+        <li><strong>Quem concorre é quem preencheu o cadastro</strong> — tenha respondido "sim" ou não.
+        A confirmação serve para saber que o número é vivo e que a mensagem chegou, não para habilitar
+        a participação.</li>
+        <li><strong>Quem ganha a torta sai do bolo das caixas.</strong> Por isso a torta é sorteada
+        primeiro: ninguém ganha duas vezes.</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- ══ TELAS ═════════════════════════════════════════════════════ -->
+  <div class="painel" data-painel="telas" hidden>
+    <section>
+      <h2>As quatro telas</h2>
+      <div class="grade-telas">
+        <a class="tela" href="cadastro/" style="--cor:#2F6B4A">
+          <span class="quando">no evento &middot; aberta ao público</span>
+          <span class="nome">Cadastro</span>
+          <span class="desc">A página que a pessoa abre no celular. Prêmios, formulário e o número dela na tela ao terminar.</span>
+          <span class="pe">cadastro/</span>
+        </a>
+        <a class="tela" href="sorteio/" style="--cor:#9C2B1B">
+          <span class="quando">no evento &middot; projetada</span>
+          <span class="nome">Rodar o sorteio</span>
+          <span class="desc">Conta quem está participando, roda a torta e as 5 caixas, e avisa cada ganhador no WhatsApp.</span>
+          <span class="pe">sorteio/</span>
+        </a>
+        <a class="tela" href="participantes/" style="--cor:#8A5C13">
+          <span class="quando">durante e depois</span>
+          <span class="nome">Cadastro de participantes</span>
+          <span class="desc">Todo mundo numa tabela. Edita qualquer campo, marca o voucher como utilizado e exporta para o Excel.</span>
+          <span class="pe">participantes/</span>
+        </a>
+        <a class="tela" href="bonus/" style="--cor:#146A7C">
+          <span class="quando">dias depois</span>
+          <span class="nome">Bônus surpresa</span>
+          <span class="desc">Dispara o voucher de cookie grátis para todo mundo, devagar, sem queimar o número da loja.</span>
+          <span class="pe">bonus/</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2>O QR code do balcão</h2>
+      <div class="qr">
+        <img src="img/qr-cadastro.png" alt="QR code do cadastro" onerror="this.remove()">
+        <div class="txt">
+          <p class="prose">É este QR que vai no display do balcão e nos materiais do evento. Ele abre
+          direto a página de cadastro — sem login, sem app.</p>
+          <span class="url">fredpetrutche.github.io/projetos/acoes-de-loja/sorteio-condominios/cadastro/</span>
+          <p class="prose">Quem não quiser apontar a câmera consegue digitar o endereço, mas o QR é o
+          caminho de verdade: no balcão, com fila, ninguém digita isso.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ══ MENSAGENS ═════════════════════════════════════════════════ -->
+  <div class="painel" data-painel="mensagens" hidden>
+    <section>
+      <h2>O que sai no WhatsApp</h2>
+      <p class="prose">Tudo sai pelo número da gestão (final <strong>6629</strong>) — o mesmo do
+      fechamento de caixa e dos checklists. Clique para ver o texto exato de cada momento.</p>
+      <div class="grade" id="gradeMsg">
+        <button class="topico" data-msg="m1"><span class="t">A senha</span><span class="q">logo após o cadastro</span></button>
+        <button class="topico" data-msg="m2"><span class="t">Confirmação</span><span class="q">quando ela responde "sim"</span></button>
+        <button class="topico" data-msg="m3"><span class="t">Insistência</span><span class="q">se responder outra coisa</span></button>
+        <button class="topico" data-msg="m4"><span class="t">Ganhou a torta</span><span class="q">no sorteio ao vivo</span></button>
+        <button class="topico" data-msg="m5"><span class="t">Ganhou a caixa</span><span class="q">no sorteio ao vivo</span></button>
+        <button class="topico" data-msg="m6"><span class="t">O voucher</span><span class="q">dias depois</span></button>
+      </div>
+      <div class="visor" id="visorMsg" hidden></div>
+    </section>
+  </div>
+
+  <!-- ══ OPERAÇÃO ══════════════════════════════════════════════════ -->
+  <div class="painel" data-painel="operacao" hidden>
+    <section>
+      <h2>Como rodar</h2>
+      <div class="grade" id="gradeOp">
+        <button class="topico" data-op="o1"><span class="t">O token</span><span class="q">abre as telas de operação</span></button>
+        <button class="topico" data-op="o2"><span class="t">No evento</span><span class="q">a ordem dos botões</span></button>
+        <button class="topico" data-op="o3"><span class="t">O disparo do bônus</span><span class="q">por que é lento</span></button>
+        <button class="topico" data-op="o4"><span class="t">Conferir no balcão</span><span class="q">quando o voucher chega</span></button>
+        <button class="topico" data-op="o5"><span class="t">Quando dá errado</span><span class="q">os casos previstos</span></button>
+        <button class="topico" data-op="o6"><span class="t">As fotos dos prêmios</span><span class="q">como trocar</span></button>
+      </div>
+      <div class="visor" id="visorOp" hidden></div>
+    </section>
+  </div>
+
+</div>
+
+<script>
+/* ── Abas ─────────────────────────────────────────────────────────── */
+document.querySelectorAll('.abas [role="tab"]').forEach(bt => {
+  bt.addEventListener("click", () => {
+    document.querySelectorAll('.abas [role="tab"]').forEach(b => b.setAttribute("aria-selected", String(b === bt)));
+    document.querySelectorAll("[data-painel]").forEach(p => { p.hidden = p.dataset.painel !== bt.dataset.aba; });
+  });
+});
+
+/* ── Fluxo: caixinha → detalhe ────────────────────────────────────── */
+const PASSOS = {
+  p1: ["Lê o QR code", "O QR está no display do balcão e nos materiais do evento. Abre a página de cadastro no navegador do celular — sem app, sem login, sem baixar nada."],
+  p2: ["Preenche o cadastro", "Quatro campos: condomínio onde mora, nome, WhatsApp e cargo no condomínio. O cargo é texto livre — síndico, subsíndico, conselheiro, zelador, o que for. O mesmo condomínio pode ter várias pessoas; o mesmo WhatsApp, não."],
+  p3: ["Recebe a senha", "Na hora, cai no WhatsApp dela uma imagem de bilhete com o número do sorteio em letra grande, o nome e o condomínio. O número é sequencial: 001 é o primeiro que se cadastrou. A tela também mostra o número, caso o WhatsApp demore."],
+  p4: ["Responde \"sim\"", "A mensagem pede para confirmar. Ela responde \"sim\" e recebe de volta a validação. Se responder qualquer outra coisa, o número pede o \"sim\" de novo — uma vez só, sem insistir para sempre. Quem não responder continua concorrendo do mesmo jeito."],
+  p5: ["Sorteio ao vivo", "Na tela projetada: primeiro a torta, depois as 5 caixas. A tela mostra nome, condomínio, cargo e só os 4 últimos dígitos do celular — a sala inteira está vendo."],
+  p6: ["Ganhador é avisado", "Um botão por ganhador. Aperta e sai no WhatsApp dele a foto do prêmio mais \"parabéns, retire no balcão do evento\". O botão trava depois de apertado, para ninguém ser avisado duas vezes."],
+  p7: ["Voucher, dias depois", "Em outro dia, a tela do Bônus dispara para todos os participantes uma imagem de voucher com os dados dela, um código e a validade. É isso que leva a pessoa até a loja."],
+};
+document.querySelectorAll(".passo").forEach(bt => {
+  bt.addEventListener("click", () => {
+    const ja = bt.getAttribute("aria-pressed") === "true";
+    document.querySelectorAll(".passo").forEach(b => b.setAttribute("aria-pressed", "false"));
+    const visor = document.getElementById("detalheFluxo");
+    if (ja) { visor.hidden = true; return; }
+    bt.setAttribute("aria-pressed", "true");
+    const [tit, txt] = PASSOS[bt.dataset.passo];
+    visor.innerHTML = "";
+    const h = document.createElement("div"); h.className = "tit"; h.textContent = tit;
+    const p = document.createElement("p"); p.className = "prose"; p.textContent = txt;
+    visor.append(h, p);
+    visor.hidden = false;
+  });
+});
+
+/* ── Mensagens ────────────────────────────────────────────────────── */
+const MSGS = {
+  m1: ["A senha", "logo após o cadastro",
+    "Maria, seu cadastro está feito! 🍪\n\n*Seu número para o sorteio é o 007.*\n\nConfirme que esse é o seu número respondendo *sim*.",
+    "Vai junto a imagem do bilhete, com o número em letra grande, o nome e o condomínio."],
+  m2: ["Confirmação", "quando ela responde \"sim\"",
+    "Confirmado! ✅\n\nAvisaremos você se você for sorteado nesse número aqui — o *007*.\n\nBoa sorte! 🍪", ""],
+  m3: ["Insistência", "se responder outra coisa",
+    "Só pra confirmar: o seu número do sorteio é o *007*.\n\nResponde *sim* que eu valido ele pra você. 🍪",
+    "Sai uma vez por mensagem não reconhecida, e só até ela confirmar. Depois de confirmada, o número para de responder a ela."],
+  m4: ["Ganhou a torta", "no sorteio ao vivo",
+    "🎉 *PARABÉNS, MARIA!*\n\nO número *007* foi sorteado — você ganhou a *Torta Kinder Completa* (massa de cookie, Kinder e muita Nutella).\n\nVem retirar aqui no *balcão do evento*! 🍪",
+    "Vai junto a foto da torta."],
+  m5: ["Ganhou a caixa", "no sorteio ao vivo",
+    "🎉 *PARABÉNS, MARIA!*\n\nO número *007* foi sorteado — você ganhou uma *Caixa Misteriosa com 4 cookies*.\n\nVem retirar aqui no *balcão do evento*! 🍪",
+    "Vai junto a foto da caixa."],
+  m6: ["O voucher", "dias depois",
+    "Maria, tem bônus pra você! 🍪\n\nVocê participou do nosso sorteio, e por isso ganhou *1 cookie grátis* na loja — qualquer sabor.\n\nSó chegar e apresentar este voucher no balcão.\n\n📍 Rua Quinze de Novembro, 630 — Centro, Piracicaba/SP\n🗓️ Válido até *18/10/2026*",
+    "Vai junto a imagem do voucher, com nome, condomínio, cargo, WhatsApp, código e número do cadastro."],
+};
+document.querySelectorAll("[data-msg]").forEach(bt => {
+  bt.addEventListener("click", () => {
+    const ja = bt.getAttribute("aria-pressed") === "true";
+    document.querySelectorAll("[data-msg]").forEach(b => b.setAttribute("aria-pressed", "false"));
+    const visor = document.getElementById("visorMsg");
+    if (ja) { visor.hidden = true; return; }
+    bt.setAttribute("aria-pressed", "true");
+    const [tit, quando, texto, anexo] = MSGS[bt.dataset.msg];
+    visor.innerHTML = "";
+    const q = document.createElement("div"); q.className = "quando"; q.textContent = quando;
+    const h = document.createElement("div"); h.className = "tit"; h.textContent = tit;
+    const b = document.createElement("div"); b.className = "balao"; b.textContent = texto;
+    visor.append(q, h, b);
+    if (anexo) { const a = document.createElement("p"); a.className = "anexo"; a.textContent = anexo; visor.append(a); }
+    visor.hidden = false;
+  });
+});
+
+/* ── Operação ─────────────────────────────────────────────────────── */
+const OPS = {
+  o1: ["O token", [
+    "As telas de Sorteio, Participantes e Bônus pedem um token na primeira vez. Ele fica guardado no navegador — digita uma vez por aparelho e pronto.",
+    "O token existe porque essas telas mostram o WhatsApp de todo mundo e disparam mensagem. A tela de Cadastro é a única aberta, porque é a que o visitante usa.",
+    "O token está no Sistema-HC, na variável SORTEIO_ADMIN_TOKEN. Se vazar, é só trocar lá e pedir de novo nas telas.",
+  ]],
+  o2: ["No evento", [
+    "1. Abra a tela de Rodar o sorteio no aparelho que vai ser projetado e confira o número de participantes.",
+    "2. Sorteie a TORTA primeiro. Quem ganha a torta sai do bolo das caixas — na ordem inversa isso não acontece.",
+    "3. Aperte \"Avisar no WhatsApp\" do ganhador da torta.",
+    "4. Troque para a aba das caixas e sorteie as 5 de uma vez.",
+    "5. Avise as 5 pessoas, uma de cada vez, nos botões de cada uma.",
+    "Dá para recarregar a página no meio do evento sem perder nada: o que já foi sorteado volta na tela.",
+  ]],
+  o3: ["O disparo do bônus", [
+    "O voucher sai pelo número da gestão, que é o mesmo do fechamento de caixa e dos checklists das lojas. Esse número é Baileys (WhatsApp não oficial): disparar dezenas de mensagens de uma vez para gente que nunca falou com a loja é o caminho mais curto para ele ser banido — e aí cai a operação junto.",
+    "Por isso a fila anda devagar: 3 por rodada, cerca de 40 segundos entre cada um, uma rodada a cada 5 minutos. Dá mais ou menos 36 vouchers por hora.",
+    "A ordem é aleatória de propósito — a fila do cadastro é, na prática, a ordem em que as pessoas estavam no balcão, ou seja, agrupada por condomínio.",
+    "Pode fechar a tela depois de disparar: quem envia é o relógio do servidor, não o navegador.",
+  ]],
+  o4: ["Conferir no balcão", [
+    "A pessoa chega com a imagem do voucher no celular. O atendente confere o nome e o código contra a tela de Participantes — o campo de busca aceita o código, o nome, o condomínio ou o WhatsApp.",
+    "Achou: marca o checkbox \"Voucher utilizado\" na linha dela. Salva sozinho, na hora.",
+    "É esse checkbox que impede a mesma imagem de rodar o condomínio inteiro. Sem marcar, o voucher vale para sempre, para qualquer um que receber o print.",
+  ]],
+  o5: ["Quando dá errado", [
+    "O WhatsApp não chegou no cadastro — a pessoa continua participando, e o número aparece na tela dela para anotar. Dá para conferir depois na tela de Participantes.",
+    "Avisou a pessoa errada — o botão de \"sortear de novo\" devolve todo mundo ao bolo e sorteia outra vez, mas quem já recebeu o \"parabéns\" não tem como ser desavisado. A tela avisa quantos estavam nessa situação.",
+    "WhatsApp digitado errado — corrija na tela de Participantes. Se o voucher ainda não saiu, ele vai para o número corrigido.",
+    "Precisa parar o disparo do bônus no meio — o botão \"Parar a fila\" interrompe. O que já saiu não volta.",
+  ]],
+  o6: ["As fotos dos prêmios", [
+    "As fotos da torta e da caixa moram no repositório das páginas, em img/torta.jpg e img/caixa-misteriosa.jpg. Trocar a foto é um commit, sem mexer no Sistema-HC.",
+    "Se a foto não estiver lá, o aviso do ganhador sai só com o texto — não falha. Num evento ao vivo, avisar sem foto é melhor que não avisar.",
+    "A mesma pasta guarda o QR code do cadastro.",
+  ]],
+};
+document.querySelectorAll("[data-op]").forEach(bt => {
+  bt.addEventListener("click", () => {
+    const ja = bt.getAttribute("aria-pressed") === "true";
+    document.querySelectorAll("[data-op]").forEach(b => b.setAttribute("aria-pressed", "false"));
+    const visor = document.getElementById("visorOp");
+    if (ja) { visor.hidden = true; return; }
+    bt.setAttribute("aria-pressed", "true");
+    const [tit, itens] = OPS[bt.dataset.op];
+    visor.innerHTML = "";
+    const h = document.createElement("div"); h.className = "tit"; h.textContent = tit;
+    visor.append(h);
+    const ul = document.createElement("ul"); ul.className = "pontos";
+    for (const i of itens) { const li = document.createElement("li"); li.textContent = i; ul.append(li); }
+    visor.append(ul);
+    visor.hidden = false;
+  });
+});
+</script>
+</body>
+</html>

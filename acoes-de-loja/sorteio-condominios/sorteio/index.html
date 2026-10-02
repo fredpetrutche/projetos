@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17130D">
+<title>Rodar o sorteio — Holy Cook</title>
+<meta name="description" content="Tela do sorteio ao vivo: roda a torta e as 5 caixas misteriosas e avisa cada ganhador no WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
+<style>
+  /* Esta tela nasce escura: ela é projetada numa sala, não lida num celular. */
+  :root {
+    --paper:#17130D; --surface:#211B13; --surface-2:#2A231A; --ink:#F7F2E8;
+    --ink-soft:#B3A896; --ink-faint:#7A7162; --rule:#3A3123;
+    --marca:#E8755A; --marca-ink:#17130D; --good:#74BC92; --bad:#E4907F;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 1.75rem 1.1rem 4rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .voltar { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); text-decoration: none; }
+  .voltar:hover { color: var(--marca); }
+
+  header { display: flex; flex-direction: column; gap: .3rem; }
+  .marca { font-family: var(--mono); font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--marca); font-weight: 700; }
+  h1 { font-size: clamp(1.5rem, 4.5vw, 2.1rem); font-weight: 700; letter-spacing: -.02em; }
+
+  /* Painel do token — some assim que o token é aceito. */
+  .porta { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem; display: flex; flex-direction: column; gap: .7rem; }
+  .porta[hidden] { display: none; }
+  .porta p { font-size: .88rem; color: var(--ink-soft); }
+  .porta .linha { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .porta input { flex: 1 1 14rem; font-family: var(--mono); font-size: .95rem; padding: .6rem .7rem; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper); color: var(--ink); }
+
+  .placar { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .placar > div { background: var(--surface); padding: .9rem 1rem; display: flex; flex-direction: column; gap: .15rem; }
+  .placar .v { font-family: var(--mono); font-size: 1.9rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+  .placar .s { font-size: .75rem; color: var(--ink-faint); }
+
+  .abas { display: flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .abas button { flex: 1; font-family: var(--sans); font-size: .95rem; font-weight: 600; padding: .8rem .6rem; background: var(--surface); color: var(--ink-soft); border: none; cursor: pointer; }
+  .abas button + button { border-left: 1px solid var(--rule); }
+  .abas button[aria-selected="true"] { background: var(--marca); color: var(--marca-ink); }
+
+  .painel { display: flex; flex-direction: column; gap: 1.1rem; }
+  .painel[hidden] { display: none; }
+
+  .premio-cabeca { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
+  .premio-cabeca .nome { font-size: 1.2rem; font-weight: 700; }
+  .premio-cabeca .desc { font-size: .88rem; color: var(--ink-soft); }
+
+  button.rodar { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; padding: 1.15rem 1rem; border: none; border-radius: 6px; background: var(--marca); color: var(--marca-ink); cursor: pointer; width: 100%; }
+  button.rodar:hover:not(:disabled) { filter: brightness(1.08); }
+  button.rodar:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* O rolo: nomes passando rápido até parar no ganhador. */
+  .rolo { background: var(--surface-2); border: 1px solid var(--rule); border-radius: 6px; padding: 2.5rem 1rem; text-align: center; font-family: var(--mono); font-size: clamp(1.3rem, 5vw, 2.2rem); font-weight: 700; color: var(--marca); min-height: 7rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .rolo[hidden] { display: none; }
+
+  .ganhadores { display: flex; flex-direction: column; gap: .9rem; }
+  .ganhadores[hidden] { display: none; }
+
+  .ganhador { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--marca); border-radius: 6px; padding: 1.15rem 1.25rem; display: flex; flex-direction: column; gap: .75rem; }
+  .ganhador .topo { display: flex; align-items: baseline; gap: .9rem; flex-wrap: wrap; }
+  .ganhador .num { font-family: var(--mono); font-size: 2.6rem; font-weight: 800; color: var(--marca); line-height: 1; letter-spacing: -.03em; }
+  .ganhador .nome { font-size: 1.55rem; font-weight: 700; line-height: 1.15; }
+  .ganhador .dados { display: flex; flex-wrap: wrap; gap: .35rem 1.5rem; font-size: .95rem; color: var(--ink-soft); }
+  .ganhador .dados b { color: var(--ink); font-weight: 600; }
+  .ganhador .acao { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+  button.avisar { font-family: var(--sans); font-size: .92rem; font-weight: 600; padding: .6rem 1rem; border: 1px solid var(--marca); border-radius: 5px; background: transparent; color: var(--marca); cursor: pointer; }
+  button.avisar:hover:not(:disabled) { background: var(--marca); color: var(--marca-ink); }
+  button.avisar:disabled { opacity: .5; cursor: default; }
+  .selo-ok { font-size: .88rem; color: var(--good); font-weight: 600; }
+  .selo-erro { font-size: .88rem; color: var(--bad); }
+
+  .refazer { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); background: none; border: none; cursor: pointer; text-decoration: underline; align-self: flex-start; padding: 0; }
+  .refazer:hover { color: var(--bad); }
+
+  .recado { font-size: .88rem; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem; }
+  .recado[hidden] { display: none; }
+  .recado.ruim { color: var(--bad); border-color: var(--bad); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="voltar" href="../">&larr; Sorteio dos Condomínios</a>
+
+  <header>
+    <div class="marca">Holy Cook &middot; Piracicaba</div>
+    <h1>Rodar o sorteio</h1>
+  </header>
+
+  <div class="porta" id="porta">
+    <p>Esta tela mostra os dados de quem se cadastrou e dispara WhatsApp. Cole o token de operação para abrir.</p>
+    <div class="linha">
+      <input id="campoToken" type="password" placeholder="token de operação" autocomplete="off">
+      <button class="rodar" style="flex:0 0 auto;width:auto;padding:.6rem 1.2rem;font-size:.95rem" id="btToken">Abrir</button>
+    </div>
+    <div class="recado ruim" id="erroToken" hidden></div>
+  </div>
+
+  <div id="tela" hidden>
+    <div class="placar" style="margin-bottom:1.5rem">
+      <div><span class="v" id="vTotal">—</span><span class="s">participando</span></div>
+      <div><span class="v" id="vConfirmados">—</span><span class="s">confirmaram no WhatsApp</span></div>
+      <div><span class="v" id="vDisponiveis">—</span><span class="s">ainda sem prêmio</span></div>
+    </div>
+
+    <div class="abas" role="tablist" style="margin-bottom:1.5rem">
+      <button role="tab" aria-selected="true" data-aba="torta">Torta Kinder</button>
+      <button role="tab" aria-selected="false" data-aba="caixa">5 Caixas Misteriosas</button>
+    </div>
+
+    <div class="painel" data-painel="torta">
+      <div class="premio-cabeca">
+        <div class="nome">Torta Kinder Completa</div>
+        <p class="desc">1 ganhador. Massa de cookie com Kinder e muita Nutella, ~1,7&nbsp;kg, 8 pedaços. Sorteie esta antes das caixas — quem ganha a torta sai do bolo das caixas.</p>
+      </div>
+      <button class="rodar" data-rodar="torta">Sortear a torta</button>
+      <div class="rolo" data-rolo="torta" hidden></div>
+      <div class="ganhadores" data-lista="torta" hidden></div>
+      <button class="refazer" data-refazer="torta" hidden>sortear a torta de novo</button>
+      <div class="recado" data-recado="torta" hidden></div>
+    </div>
+
+    <div class="painel" data-painel="caixa" hidden>
+      <div class="premio-cabeca">
+        <div class="nome">5 Caixas Misteriosas</div>
+        <p class="desc">5 ganhadores, 4 cookies em cada caixa, sabores aleatórios. Quem já ganhou a torta não entra neste sorteio.</p>
+      </div>
+      <button class="rodar" data-rodar="caixa">Sortear as 5 caixas</button>
+      <div class="rolo" data-rolo="caixa" hidden></div>
+      <div class="ganhadores" data-lista="caixa" hidden></div>
+      <button class="refazer" data-refazer="caixa" hidden>sortear as caixas de novo</button>
+      <div class="recado" data-recado="caixa" hidden></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = "https://sistemahc.vercel.app/api/sorteio";
+const CHAVE = "sorteio_token";
+
+let token = "";
+let nomes = [];   // só para o rolo girar com nome de gente de verdade
+
+try { token = localStorage.getItem(CHAVE) || ""; } catch { token = ""; }
+
+const porta = document.getElementById("porta");
+const tela  = document.getElementById("tela");
+
+function cab() { return { "Content-Type": "application/json", "x-sorteio-token": token }; }
+
+async function carregar() {
+  const res = await fetch(`${API}/lista`, { headers: cab() });
+  if (res.status === 401) throw new Error("token");
+  const { participantes } = await res.json();
+
+  nomes = participantes.map(p => p.nome);
+  document.getElementById("vTotal").textContent = participantes.length;
+  document.getElementById("vConfirmados").textContent = participantes.filter(p => p.confirmado).length;
+  document.getElementById("vDisponiveis").textContent = participantes.filter(p => !p.premio).length;
+
+  // Sorteio já rodado (recarregou a página no meio do evento): mostra o que saiu.
+  for (const premio of ["torta", "caixa"]) {
+    const ganhos = participantes.filter(p => p.premio === premio);
+    if (ganhos.length) {
+      desenhar(premio, ganhos.map(p => ({
+        id: p.id, numero: p.numero, nome: p.nome, condominio: p.condominio,
+        cargo: p.cargo, whatsapp_final: String(p.whatsapp).slice(-4), avisado_em: p.avisado_em,
+      })));
+    }
+  }
+}
+
+async function abrir() {
+  try {
+    await carregar();
+    porta.hidden = true;
+    tela.hidden = false;
+  } catch {
+    try { localStorage.removeItem(CHAVE); } catch {}
+    token = "";
+    porta.hidden = false;
+    tela.hidden = true;
+  }
+}
+
+document.getElementById("btToken").addEventListener("click", async () => {
+  token = document.getElementById("campoToken").value.trim();
+  const erro = document.getElementById("erroToken");
+  erro.hidden = true;
+  if (!token) return;
+  try {
+    await carregar();
+    try { localStorage.setItem(CHAVE, token); } catch {}
+    porta.hidden = true;
+    tela.hidden = false;
+  } catch {
+    erro.textContent = "Token não aceito.";
+    erro.hidden = false;
+  }
+});
+document.getElementById("campoToken").addEventListener("keydown", e => {
+  if (e.key === "Enter") document.getElementById("btToken").click();
+});
+
+/* ── Abas ─────────────────────────────────────────────────────────────── */
+document.querySelectorAll('[role="tab"]').forEach(bt => {
+  bt.addEventListener("click", () => {
+    document.querySelectorAll('[role="tab"]').forEach(b => b.setAttribute("aria-selected", String(b === bt)));
+    document.querySelectorAll("[data-painel]").forEach(p => {
+      p.hidden = p.dataset.painel !== bt.dataset.aba;
+    });
+  });
+});
+
+/* ── O rolo ───────────────────────────────────────────────────────────── */
+function girar(premio, ms) {
+  const rolo = document.querySelector(`[data-rolo="${premio}"]`);
+  rolo.hidden = false;
+  return new Promise(resolve => {
+    const fim = Date.now() + ms;
+    const tick = setInterval(() => {
+      rolo.textContent = nomes.length
+        ? nomes[Math.floor(Math.random() * nomes.length)]
+        : "sorteando...";
+      if (Date.now() >= fim) { clearInterval(tick); resolve(); }
+    }, 70);
+  });
+}
+
+/* ── Ganhadores ───────────────────────────────────────────────────────── */
+function desenhar(premio, ganhadores) {
+  const lista = document.querySelector(`[data-lista="${premio}"]`);
+  lista.innerHTML = "";
+
+  for (const g of ganhadores) {
+    const cartao = document.createElement("div");
+    cartao.className = "ganhador";
+
+    const topo = document.createElement("div");
+    topo.className = "topo";
+    topo.innerHTML = `<span class="num">${String(g.numero).padStart(3,"0")}</span><span class="nome"></span>`;
+    topo.querySelector(".nome").textContent = g.nome;
+
+    const dados = document.createElement("div");
+    dados.className = "dados";
+    const cond = document.createElement("span");
+    cond.innerHTML = "Condomínio: <b></b>";
+    cond.querySelector("b").textContent = g.condominio;
+    const cargo = document.createElement("span");
+    cargo.innerHTML = "Cargo: <b></b>";
+    cargo.querySelector("b").textContent = g.cargo;
+    const zap = document.createElement("span");
+    zap.innerHTML = `WhatsApp: <b>••••-${g.whatsapp_final}</b>`;
+    dados.append(cond, cargo, zap);
+
+    const acao = document.createElement("div");
+    acao.className = "acao";
+    const bt = document.createElement("button");
+    bt.className = "avisar";
+    bt.textContent = "Avisar no WhatsApp";
+    const selo = document.createElement("span");
+
+    if (g.avisado_em) {
+      bt.disabled = true;
+      bt.textContent = "Já avisado";
+      selo.className = "selo-ok";
+      selo.textContent = "✓ avisado";
+    }
+
+    bt.addEventListener("click", async () => {
+      bt.disabled = true;
+      bt.textContent = "Enviando...";
+      selo.className = "";
+      selo.textContent = "";
+      try {
+        const res = await fetch(`${API}/notificar`, {
+          method: "POST", headers: cab(), body: JSON.stringify({ id: g.id }),
+        });
+        const d = await res.json();
+        if (res.ok && (d.avisado || d.jaAvisado)) {
+          bt.textContent = "Já avisado";
+          selo.className = "selo-ok";
+          selo.textContent = d.jaAvisado ? "✓ já tinha sido avisado" : "✓ avisado";
+        } else {
+          bt.disabled = false;
+          bt.textContent = "Avisar no WhatsApp";
+          selo.className = "selo-erro";
+          selo.textContent = d.erro || "não enviou";
+        }
+      } catch {
+        bt.disabled = false;
+        bt.textContent = "Avisar no WhatsApp";
+        selo.className = "selo-erro";
+        selo.textContent = "sem conexão";
+      }
+    });
+
+    acao.append(bt, selo);
+    cartao.append(topo, dados, acao);
+    lista.append(cartao);
+  }
+
+  lista.hidden = false;
+  document.querySelector(`[data-rodar="${premio}"]`).hidden = true;
+  document.querySelector(`[data-refazer="${premio}"]`).hidden = false;
+}
+
+async function sortear(premio, refazer) {
+  const botao  = document.querySelector(`[data-rodar="${premio}"]`);
+  const recado = document.querySelector(`[data-recado="${premio}"]`);
+  recado.hidden = true;
+  botao.disabled = true;
+
+  const rolando = girar(premio, 2600);
+
+  try {
+    const res = await fetch(`${API}/sortear`, {
+      method: "POST", headers: cab(), body: JSON.stringify({ premio, refazer: !!refazer }),
+    });
+    const d = await res.json();
+    await rolando;
+    document.querySelector(`[data-rolo="${premio}"]`).hidden = true;
+
+    if (!res.ok) {
+      recado.textContent = d.erro || "Não deu pra sortear.";
+      recado.className = "recado ruim";
+      recado.hidden = false;
+      botao.disabled = false;
+      return;
+    }
+
+    desenhar(premio, d.ganhadores);
+
+    const avisos = [];
+    if (d.jaSorteado) avisos.push("Este prêmio já tinha sido sorteado — estes são os ganhadores que já estavam valendo.");
+    if (d.faltaram > 0) avisos.push(`Faltou gente no bolo: saíram ${d.ganhadores.length} de ${d.ganhadores.length + d.faltaram}.`);
+    if (d.avisadosAntes > 0) avisos.push(`Atenção: ${d.avisadosAntes} ganhador(es) do sorteio anterior já tinham recebido o WhatsApp de parabéns.`);
+    if (avisos.length) {
+      recado.textContent = avisos.join(" ");
+      recado.className = "recado";
+      recado.hidden = false;
+    }
+
+    await carregar();
+  } catch {
+    await rolando;
+    document.querySelector(`[data-rolo="${premio}"]`).hidden = true;
+    recado.textContent = "Sem conexão.";
+    recado.className = "recado ruim";
+    recado.hidden = false;
+    botao.disabled = false;
+  }
+}
+
+document.querySelectorAll("[data-rodar]").forEach(bt => {
+  bt.addEventListener("click", () => sortear(bt.dataset.rodar, false));
+});
+
+document.querySelectorAll("[data-refazer]").forEach(bt => {
+  bt.addEventListener("click", () => {
+    const premio = bt.dataset.refazer;
+    const oque = premio === "torta" ? "a torta" : "as 5 caixas";
+    if (!confirm(`Sortear ${oque} de novo? Quem já tinha sido sorteado volta pro bolo — e quem já recebeu o WhatsApp de parabéns não tem como ser desavisado.`)) return;
+    document.querySelector(`[data-lista="${premio}"]`).hidden = true;
+    bt.hidden = true;
+    const rodar = document.querySelector(`[data-rodar="${premio}"]`);
+    rodar.hidden = false;
+    sortear(premio, true);
+  });
+});
+
+if (token) abrir();
+</script>
+</body>
+</html>

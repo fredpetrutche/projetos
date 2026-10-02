@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
+<title>Bônus surpresa — Holy Cook</title>
+<meta name="description" content="Dispara o voucher de cookie grátis para todo mundo que participou do sorteio, devagar, pra não queimar o número da loja.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
+<style>
+  :root {
+    --paper:#F4EFE4; --surface:#FFFDF8; --surface-2:#EFE8DA; --ink:#241A10;
+    --ink-soft:#6E6253; --ink-faint:#998D7B; --rule:#D6CBB4; --rule-soft:#E4DCCB;
+    --marca:#9C2B1B; --marca-ink:#FFFDF8; --bad:#A32B1F; --good:#2F6B4A; --warn:#8A5C13;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#17130D; --surface:#211B13; --surface-2:#2A231A; --ink:#F3EDE2;
+      --ink-soft:#A99E8D; --ink-faint:#7A7162; --rule:#3A3123; --rule-soft:#2E271C;
+      --marca:#E8755A; --marca-ink:#17130D; --bad:#E4907F; --good:#74BC92; --warn:#DBAE60;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 1.75rem 1.1rem 4rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .voltar { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); text-decoration: none; }
+  .voltar:hover { color: var(--marca); }
+  header { display: flex; flex-direction: column; gap: .3rem; }
+  .marca { font-family: var(--mono); font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--marca); font-weight: 700; }
+  h1 { font-size: clamp(1.5rem, 4.5vw, 2.1rem); font-weight: 700; letter-spacing: -.02em; }
+  .lede { color: var(--ink-soft); }
+
+  .porta { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem; display: flex; flex-direction: column; gap: .7rem; }
+  .porta[hidden] { display: none; }
+  .porta p { font-size: .88rem; color: var(--ink-soft); }
+  .porta .linha { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .porta input { flex: 1 1 14rem; font-family: var(--mono); font-size: .95rem; padding: .6rem .7rem; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper); color: var(--ink); }
+
+  .placar { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .placar > div { background: var(--surface); padding: .9rem 1rem; display: flex; flex-direction: column; }
+  .placar .v { font-family: var(--mono); font-size: 1.8rem; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .placar .v.ativo { color: var(--marca); }
+  .placar .s { font-size: .74rem; color: var(--ink-faint); }
+
+  .nota { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--warn); border-radius: 6px; padding: 1rem 1.15rem; font-size: .92rem; color: var(--ink-soft); display: flex; flex-direction: column; gap: .5rem; }
+  .nota b { color: var(--ink); }
+  .nota .tit { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--warn); font-weight: 700; }
+
+  .previa { background: var(--surface-2); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.15rem; }
+  .previa .tit { font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin-bottom: .6rem; }
+  .previa .balao { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px 10px 10px 2px; padding: .8rem .9rem; font-size: .9rem; white-space: pre-wrap; line-height: 1.5; }
+  .previa .anexo { font-size: .78rem; color: var(--ink-faint); margin-top: .5rem; }
+
+  .botoes { display: flex; gap: .7rem; flex-wrap: wrap; }
+  button.acao { font-family: var(--sans); font-size: 1rem; font-weight: 700; padding: .9rem 1.3rem; border: 1px solid var(--marca); border-radius: 5px; background: var(--marca); color: var(--marca-ink); cursor: pointer; flex: 1 1 14rem; }
+  button.acao.vazado { background: transparent; color: var(--marca); flex: 0 1 auto; font-weight: 600; }
+  button.acao:hover:not(:disabled) { filter: brightness(1.08); }
+  button.acao:disabled { opacity: .5; cursor: not-allowed; }
+
+  .recado { font-size: .9rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem; color: var(--ink-soft); }
+  .recado[hidden] { display: none; }
+  .recado.bom { border-color: var(--good); color: var(--good); }
+  .recado.ruim { border-color: var(--bad); color: var(--bad); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="voltar" href="../">&larr; Sorteio dos Condomínios</a>
+
+  <header>
+    <div class="marca">Holy Cook &middot; Piracicaba</div>
+    <h1>Bônus surpresa</h1>
+    <p class="lede">Todo mundo que participou do sorteio recebe um voucher de 1 cookie grátis na loja.</p>
+  </header>
+
+  <div class="porta" id="porta">
+    <p>Esta tela dispara WhatsApp para todos os participantes. Cole o token de operação para abrir.</p>
+    <div class="linha">
+      <input id="campoToken" type="password" placeholder="token de operação" autocomplete="off">
+      <button class="acao vazado" id="btToken">Abrir</button>
+    </div>
+    <div class="recado ruim" id="erroToken" hidden></div>
+  </div>
+
+  <div id="tela" hidden>
+    <div class="placar" style="margin-bottom:1.5rem">
+      <div><span class="v" id="vTotal">—</span><span class="s">participantes</span></div>
+      <div><span class="v ativo" id="vFila">—</span><span class="s">na fila agora</span></div>
+      <div><span class="v" id="vEnviados">—</span><span class="s">vouchers enviados</span></div>
+      <div><span class="v" id="vUsados">—</span><span class="s">já utilizados</span></div>
+    </div>
+
+    <div class="nota" style="margin-bottom:1.5rem">
+      <span class="tit">Por que demora</span>
+      <p>O disparo sai pelo mesmo número que roda o fechamento de caixa e os checklists das lojas.
+      Mandar dezenas de mensagens de uma vez por esse número é o jeito mais rápido de ele ser
+      banido — e aí cai a operação junto.</p>
+      <p>Por isso o envio é lento e em ordem aleatória: <b>3 por rodada, ~40 segundos entre cada um,
+      uma rodada a cada 5 minutos</b>. Dá mais ou menos <b>36 vouchers por hora</b>. Pode fechar esta
+      página — a fila continua andando sozinha.</p>
+    </div>
+
+    <div class="previa" style="margin-bottom:1.5rem">
+      <div class="tit">O que cada pessoa recebe</div>
+      <div class="balao">Maria, tem bônus pra você! 🍪
+
+Você participou do nosso sorteio, e por isso ganhou <b>1 cookie grátis</b> na loja — qualquer sabor.
+
+Só chegar e apresentar este voucher no balcão.
+
+📍 Rua Quinze de Novembro, 630 — Centro, Piracicaba/SP
+🗓️ Válido até <b>18/10/2026</b></div>
+      <p class="anexo">Junto vai a imagem do voucher, com o nome, o condomínio, o cargo, o WhatsApp, o código e o número do cadastro.</p>
+    </div>
+
+    <div class="botoes" style="margin-bottom:1rem">
+      <button class="acao" id="btDisparar">Disparar o bônus surpresa</button>
+      <button class="acao vazado" id="btParar">Parar a fila</button>
+    </div>
+
+    <div class="recado" id="recado" hidden></div>
+  </div>
+
+</div>
+
+<script>
+const API = "https://sistemahc.vercel.app/api/sorteio";
+const CHAVE = "sorteio_token";
+
+let token = "";
+let relogio = null;
+
+try { token = localStorage.getItem(CHAVE) || ""; } catch { token = ""; }
+
+const porta  = document.getElementById("porta");
+const tela   = document.getElementById("tela");
+const recado = document.getElementById("recado");
+
+function cab() { return { "Content-Type": "application/json", "x-sorteio-token": token }; }
+
+function dizer(msg, tipo) {
+  recado.textContent = msg;
+  recado.className = "recado" + (tipo ? " " + tipo : "");
+  recado.hidden = false;
+}
+
+async function situacao() {
+  const res = await fetch(`${API}/bonus`, { headers: cab() });
+  if (res.status === 401) throw new Error("token");
+  const d = await res.json();
+
+  document.getElementById("vTotal").textContent    = d.total;
+  document.getElementById("vFila").textContent     = d.naFila;
+  document.getElementById("vEnviados").textContent = d.enviados;
+  document.getElementById("vUsados").textContent   = d.utilizados;
+
+  document.getElementById("btDisparar").disabled = d.total === 0 || d.naFila > 0;
+  document.getElementById("btParar").disabled    = d.naFila === 0;
+
+  // Enquanto a fila anda, a tela se atualiza sozinha. Parada, não fica
+  // batendo na API à toa.
+  if (d.naFila > 0 && !relogio) relogio = setInterval(() => situacao().catch(() => {}), 20000);
+  if (d.naFila === 0 && relogio) { clearInterval(relogio); relogio = null; }
+
+  return d;
+}
+
+document.getElementById("btDisparar").addEventListener("click", async () => {
+  const d = await situacao();
+  const horas = (d.total / 36).toFixed(1).replace(".", ",");
+  if (!confirm(
+    `Disparar o voucher para ${d.total} pessoa(s)?\n\n` +
+    `No ritmo de 3 a cada 5 minutos, isso leva cerca de ${horas} hora(s) para terminar.\n\n` +
+    `Depois de começar, dá pra parar a fila — mas o que já saiu não volta.`
+  )) return;
+
+  const bt = document.getElementById("btDisparar");
+  bt.disabled = true;
+  try {
+    const res = await fetch(`${API}/bonus`, {
+      method: "POST", headers: cab(), body: JSON.stringify({ acao: "enfileirar" }),
+    });
+    const r = await res.json();
+    if (!res.ok) return dizer(r.erro || "Não deu pra enfileirar.", "ruim");
+    dizer(`${r.enfileirados} pessoa(s) na fila. O primeiro lote sai na próxima rodada do relógio (até 5 minutos).`, "bom");
+    await situacao();
+  } catch {
+    dizer("Sem conexão.", "ruim");
+  }
+});
+
+document.getElementById("btParar").addEventListener("click", async () => {
+  if (!confirm("Parar a fila? Quem ainda não recebeu fica sem o voucher até você disparar de novo.")) return;
+  try {
+    const res = await fetch(`${API}/bonus`, {
+      method: "POST", headers: cab(), body: JSON.stringify({ acao: "parar" }),
+    });
+    const r = await res.json();
+    if (!res.ok) return dizer(r.erro || "Não deu pra parar.", "ruim");
+    dizer("Fila parada. O que já tinha saído continua valendo.", "bom");
+    await situacao();
+  } catch {
+    dizer("Sem conexão.", "ruim");
+  }
+});
+
+document.getElementById("btToken").addEventListener("click", async () => {
+  token = document.getElementById("campoToken").value.trim();
+  const erro = document.getElementById("erroToken");
+  erro.hidden = true;
+  if (!token) return;
+  try {
+    await situacao();
+    try { localStorage.setItem(CHAVE, token); } catch {}
+    porta.hidden = true;
+    tela.hidden = false;
+  } catch {
+    erro.textContent = "Token não aceito.";
+    erro.hidden = false;
+  }
+});
+document.getElementById("campoToken").addEventListener("keydown", e => {
+  if (e.key === "Enter") document.getElementById("btToken").click();
+});
+
+if (token) {
+  situacao()
+    .then(() => { porta.hidden = true; tela.hidden = false; })
+    .catch(() => { try { localStorage.removeItem(CHAVE); } catch {} token = ""; });
+}
+</script>
+</body>
+</html>

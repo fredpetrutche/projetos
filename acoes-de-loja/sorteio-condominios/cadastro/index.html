@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
+<title>Sorteio dos Condomínios — Holy Cook</title>
+<meta name="description" content="Participe do sorteio de uma Torta Kinder Completa e de 5 Caixas Misteriosas de cookies. Preencha o cadastro e receba o seu número no WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
+<style>
+  :root {
+    --paper:#F4EFE4; --surface:#FFFDF8; --surface-2:#EFE8DA; --ink:#241A10;
+    --ink-soft:#6E6253; --ink-faint:#998D7B; --rule:#D6CBB4; --rule-soft:#E4DCCB;
+    --marca:#9C2B1B; --marca-ink:#FFFDF8; --bad:#A32B1F; --good:#2F6B4A;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#17130D; --surface:#211B13; --surface-2:#2A231A; --ink:#F3EDE2;
+      --ink-soft:#A99E8D; --ink-faint:#7A7162; --rule:#3A3123; --rule-soft:#2E271C;
+      --marca:#E07A63; --marca-ink:#17130D; --bad:#E4907F; --good:#74BC92;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#17130D; --surface:#211B13; --surface-2:#2A231A; --ink:#F3EDE2;
+    --ink-soft:#A99E8D; --ink-faint:#7A7162; --rule:#3A3123; --rule-soft:#2E271C;
+    --marca:#E07A63; --marca-ink:#17130D; --bad:#E4907F; --good:#74BC92;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 34rem; margin: 0 auto; padding: 2rem 1rem 4rem; display: flex; flex-direction: column; gap: 1.75rem; }
+
+  header { display: flex; flex-direction: column; gap: .4rem; align-items: center; text-align: center; }
+  .marca { font-family: var(--mono); font-size: .75rem; letter-spacing: .32em; text-transform: uppercase; color: var(--marca); font-weight: 700; }
+  h1 { font-size: clamp(1.7rem, 7vw, 2.3rem); line-height: 1.1; font-weight: 700; letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); text-wrap: balance; }
+
+  .premios { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .premio { background: var(--surface); display: flex; flex-direction: column; }
+  .premio img { width: 100%; height: 13rem; object-fit: cover; display: block; background: var(--surface-2); }
+  .premio .corpo { padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
+  .premio .selo { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: var(--marca); color: var(--marca-ink); padding: .18rem .45rem; border-radius: 3px; align-self: flex-start; }
+  .premio .nome { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
+  .premio .desc { font-size: .9rem; color: var(--ink-soft); }
+
+  form { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+  .tit-form { font-family: var(--mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+  .explica { font-size: .9rem; color: var(--ink-soft); border-left: 3px solid var(--marca); padding-left: .75rem; }
+  .campo { display: flex; flex-direction: column; gap: .3rem; }
+  label { font-size: .8rem; font-weight: 600; color: var(--ink); }
+  input { font-family: var(--sans); font-size: 1rem; padding: .7rem .8rem; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper); color: var(--ink); width: 100%; }
+  input:focus { outline: 2px solid var(--marca); outline-offset: 1px; border-color: var(--marca); }
+  .dica { font-size: .75rem; color: var(--ink-faint); }
+
+  button.enviar { font-family: var(--sans); font-size: 1.05rem; font-weight: 700; padding: .95rem 1rem; border: none; border-radius: 5px; background: var(--marca); color: var(--marca-ink); cursor: pointer; width: 100%; }
+  button.enviar:hover:not(:disabled) { filter: brightness(1.08); }
+  button.enviar:disabled { opacity: .55; cursor: progress; }
+
+  .erro { background: var(--surface-2); border: 1px solid var(--bad); color: var(--bad); border-radius: 5px; padding: .7rem .85rem; font-size: .9rem; }
+  .erro[hidden] { display: none; }
+
+  /* Tela de "deu certo" — troca o formulário inteiro. */
+  .pronto { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .9rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 2rem 1.25rem; }
+  .pronto[hidden] { display: none; }
+  .pronto .rotulo { font-family: var(--mono); font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); }
+  .pronto .numero { font-family: var(--mono); font-size: clamp(4rem, 22vw, 6.5rem); font-weight: 800; color: var(--marca); line-height: 1; letter-spacing: -.04em; }
+  .pronto .recado { color: var(--ink-soft); text-wrap: balance; }
+  .pronto .recado strong { color: var(--ink); }
+  .pronto .aviso-envio { font-size: .85rem; color: var(--bad); text-wrap: balance; }
+  .pronto .aviso-envio[hidden] { display: none; }
+
+  footer { text-align: center; font-size: .78rem; color: var(--ink-faint); line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="marca">Holy Cook &middot; Piracicaba</div>
+    <h1>Sorteio dos Condomínios</h1>
+    <p class="lede">Preencha o cadastro e concorra. O sorteio é hoje, aqui no evento.</p>
+  </header>
+
+  <div class="premios">
+    <div class="premio">
+      <img src="../img/torta.jpg" alt="Torta Kinder Completa" onerror="this.remove()">
+      <div class="corpo">
+        <span class="selo">1 ganhador</span>
+        <div class="nome">Torta Kinder Completa</div>
+        <p class="desc">Massa de cookie recheada com Kinder e muita Nutella. São ~1,7&nbsp;kg e dá 8 pedaços generosos.</p>
+      </div>
+    </div>
+    <div class="premio">
+      <img src="../img/caixa-misteriosa.jpg" alt="Caixa Misteriosa com cookies" onerror="this.remove()">
+      <div class="corpo">
+        <span class="selo">5 ganhadores</span>
+        <div class="nome">Caixa Misteriosa</div>
+        <p class="desc">4 cookies em cada caixa. Quais sabores? Só abrindo pra saber — por isso ela é misteriosa.</p>
+      </div>
+    </div>
+  </div>
+
+  <form id="form" novalidate>
+    <div class="tit-form">Cadastro para participar</div>
+    <p class="explica">Este é o cadastro do sorteio. É por aqui que avisaremos você, no WhatsApp, se você for sorteado.</p>
+
+    <div class="campo">
+      <label for="condominio">Nome do condomínio onde você mora</label>
+      <input id="condominio" name="condominio" autocomplete="off" enterkeyhint="next" required>
+    </div>
+
+    <div class="campo">
+      <label for="nome">Seu nome</label>
+      <input id="nome" name="nome" autocomplete="name" enterkeyhint="next" required>
+    </div>
+
+    <div class="campo">
+      <label for="whatsapp">Seu WhatsApp</label>
+      <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(19) 99999-9999" enterkeyhint="next" required>
+      <span class="dica">É para onde vai o seu número do sorteio.</span>
+    </div>
+
+    <div class="campo">
+      <label for="cargo">Seu cargo no condomínio</label>
+      <input id="cargo" name="cargo" autocomplete="off" placeholder="Síndico, zelador, conselheiro..." enterkeyhint="go" required>
+    </div>
+
+    <div class="erro" id="erro" hidden></div>
+
+    <button class="enviar" type="submit" id="botao">Quero participar do sorteio</button>
+  </form>
+
+  <div class="pronto" id="pronto" hidden>
+    <div class="rotulo">Seu número do sorteio</div>
+    <div class="numero" id="numero">000</div>
+    <p class="recado" id="recado">Pronto! Mandamos o seu número no <strong>WhatsApp</strong>. Responda <strong>sim</strong> por lá para confirmar.</p>
+    <p class="aviso-envio" id="avisoEnvio" hidden>Não conseguimos mandar no WhatsApp agora — mas você <strong>já está participando</strong>. Anote o seu número.</p>
+  </div>
+
+  <footer>
+    Holy Cook &middot; Rua Quinze de Novembro, 630 — Centro, Piracicaba/SP
+  </footer>
+
+</div>
+
+<script>
+const API = "https://sistemahc.vercel.app/api/sorteio";
+
+const form = document.getElementById("form");
+const botao = document.getElementById("botao");
+const erro = document.getElementById("erro");
+const pronto = document.getElementById("pronto");
+
+/* Máscara de telefone enquanto digita — no balcão, com pressa, o número sai
+   torto com facilidade, e campo torto é lead perdido. */
+const campoZap = document.getElementById("whatsapp");
+campoZap.addEventListener("input", () => {
+  let d = campoZap.value.replace(/\D/g, "").slice(0, 11);
+  if (d.length > 6)      campoZap.value = `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;
+  else if (d.length > 2) campoZap.value = `(${d.slice(0,2)}) ${d.slice(2)}`;
+  else if (d.length > 0) campoZap.value = `(${d}`;
+  else                   campoZap.value = "";
+});
+
+function mostrarErro(msg) {
+  erro.textContent = msg;
+  erro.hidden = false;
+}
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  erro.hidden = true;
+
+  const corpo = {
+    condominio: document.getElementById("condominio").value,
+    nome:       document.getElementById("nome").value,
+    whatsapp:   campoZap.value,
+    cargo:      document.getElementById("cargo").value,
+  };
+
+  for (const [campo, rotulo] of [["condominio","o nome do condomínio"],["nome","o seu nome"],["whatsapp","o seu WhatsApp"],["cargo","o seu cargo"]]) {
+    if (!corpo[campo].trim()) return mostrarErro(`Preencha ${rotulo}.`);
+  }
+
+  botao.disabled = true;
+  botao.textContent = "Enviando...";
+
+  try {
+    const res = await fetch(`${API}/entrar`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(corpo),
+    });
+    const dados = await res.json();
+
+    if (!res.ok) {
+      mostrarErro(dados.erro || "Não deu pra salvar. Tente de novo.");
+      botao.disabled = false;
+      botao.textContent = "Quero participar do sorteio";
+      return;
+    }
+
+    document.getElementById("numero").textContent = String(dados.numero).padStart(3, "0");
+
+    /* Já cadastrado é caso normal, não erro: a pessoa tenta de novo achando que
+       não foi. Mostra o número que ela já tem em vez de assustar. */
+    if (dados.jaCadastrado) {
+      document.getElementById("recado").innerHTML =
+        "Você <strong>já estava cadastrado</strong> — este é o seu número, o mesmo que mandamos no seu WhatsApp.";
+    }
+    if (dados.enviado === false && !dados.jaCadastrado) {
+      document.getElementById("avisoEnvio").hidden = false;
+    }
+
+    form.hidden = true;
+    pronto.hidden = false;
+    pronto.scrollIntoView({ behavior: "smooth", block: "center" });
+  } catch {
+    mostrarErro("Sem conexão. Confira a internet e tente de novo.");
+    botao.disabled = false;
+    botao.textContent = "Quero participar do sorteio";
+  }
+});
+</script>
+</body>
+</html>
