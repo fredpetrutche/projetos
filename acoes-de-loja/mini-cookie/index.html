@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Mini cookie na região — ação de loja</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A acao de loja mais pe no chao: 300 a 500 mini cookies assados e embalados na loja, entregues a pe nos comercios em volta por um funcionario uniformizado, com duas perguntas de script.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23B3692B'/><g fill='none' stroke='white' stroke-width='7' stroke-linejoin='round'><path d='M24 38h52l-5 46H29z'/><path d='M38 38V26a12 12 0 0 1 24 0v12'/></g><g fill='white'><circle cx='43' cy='56' r='4'/><circle cx='58' cy='64' r='4'/><circle cx='50' cy='74' r='3.5'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#B3692B; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#F3E7DA;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#E0A063; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#2E2317;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#E0A063; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#2E2317;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+           font-weight: 500; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; font-weight: 700;
+             color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+             border-radius: 6px; cursor: pointer; padding: .65rem 1.15rem;
+             transition: border-color .15s, color .15s, background .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none !important; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose + .prose { margin-top: .6rem; }
+  .prose a, .painel a, .note-item a { color: var(--accent); text-decoration: none;
+                                      border-bottom: 1px solid currentColor; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px;
+           background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums;
+              letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  /* três colunas de contexto fixo. Não é atividade, não vira card clicável. */
+  .fatores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+             background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 44rem) { .fatores { grid-template-columns: 1fr; } }
+  .fatores > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .fatores .n { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem;
+                border-radius: 2px; align-self: flex-start; text-transform: uppercase; }
+  .fatores .n.vazio { background: var(--bad-bg); color: var(--bad); }
+  .fatores .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .fatores .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .fatores .q { font-family: var(--mono); font-size: .75rem; color: var(--ink-faint);
+                border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 38rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+  td a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.p { background: var(--accent-bg); color: var(--accent); }
+  .tag.f { background: var(--good-bg); color: var(--good); }
+  .tag.t { background: var(--warn-bg); color: var(--warn); }
+  .tag.s { background: var(--surface-2); color: var(--ink-faint); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.mudo { background: var(--surface-2); color: var(--ink-faint); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+              font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos li::marker { color: var(--accent); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+  ul.pontos em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── grade de cards, recursiva: .bloco > .grade > .card-btn + .visor > .painel ── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grade[hidden] { display: none !important; }
+  .card-btn { text-align: left; background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px;
+              cursor: pointer; padding: .8rem .9rem; display: flex; flex-direction: column; gap: .3rem;
+              font-family: var(--sans); color: var(--ink); transition: border-color .15s, background .15s; }
+  .card-btn:hover { border-color: var(--ink-faint); }
+  .card-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .card-btn .cnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700; line-height: 1.3; }
+  .card-btn .cmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; }
+  .card-btn .cdesc { font-size: .75rem; color: var(--ink-soft); line-height: 1.45; }
+  .card-btn.mes .cnome { font-size: 1rem; }
+  /* borda tracejada vermelha = não existe ainda, mesma linguagem das outras páginas */
+  .card-btn.pendente { border-style: dashed; border-color: var(--bad); }
+  .card-btn.pendente .cmeta { color: var(--bad); }
+  .visor { display: flex; flex-direction: column; gap: 1rem; }
+  .visor[hidden] { display: none !important; }
+  .painel { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem;
+            display: flex; flex-direction: column; gap: .85rem; }
+  .painel[hidden] { display: none !important; }
+  .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink);
+                  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+                  color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  /* preâmbulo fixo do nível acima — aparece junto com o painel, não disputa um clique */
+  .grupo-descricao { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: 4px;
+                     padding: .75rem .9rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .grupo-descricao strong { color: var(--ink); font-weight: 600; }
+  .grupo-descricao em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ficha — campos fixos, texto de contexto, não é grade de atividade */
+  .ficha { display: grid; grid-template-columns: 8.5rem 1fr; gap: .4rem .9rem; font-size: .8125rem; }
+  @media (max-width: 34rem) { .ficha { grid-template-columns: 1fr; gap: .15rem; }
+                              .ficha dt { margin-top: .5rem; } }
+  .ficha dt { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+              color: var(--ink-faint); font-weight: 600; padding-top: .15rem; }
+  .ficha dd { color: var(--ink-soft); line-height: 1.55; }
+  .ficha dd strong { color: var(--ink); font-weight: 600; }
+  .ficha dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── fluxo: caixinha → seta → caixinha ── */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 11rem; transition: border-color .15s, background .15s, color .15s; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .passo-caixa.fala { border-style: dashed; }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft);
+                   margin-top: .6rem; }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
+  .passo-detalhe em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  .nd { color: var(--ink-faint); }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+  footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · ação de loja</div>
+    <h1>Mini cookie na região</h1>
+    <p class="lede">A loja compra mini cookies na fábrica, assa e embala na própria manhã, cola o adesivo
+    da marca, e <strong>uma pessoa uniformizada sai a pé entregando nos comércios em volta</strong>. Duas
+    perguntas de script, nenhuma verba de mídia. É a ação mais simples da área — e a que mais depende de
+    execução definida para não virar amostra grátis sem retorno.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" data-tab="operacao" role="tab" aria-selected="false">Operação</button>
+    <button class="tab-btn" data-tab="script" role="tab" aria-selected="false">Script</button>
+    <button class="tab-btn" data-tab="quem" role="tab" aria-selected="false">Quem faz</button>
+    <button class="tab-btn" data-tab="decisoes" role="tab" aria-selected="false">Decisões</button>
+  </div>
+
+<!-- ════════════════════════ ABA 1 · BRIEFING ════════════════════════ -->
+<div class="tab-panel" data-panel="briefing">
+
+  <section>
+    <h2><span class="n">1</span> O que é</h2>
+    <p class="prose">Prospecção a pé no quadrilátero da loja. A rodada é de <strong>300 a 500 mini
+    cookies</strong> comprados na fábrica; de cada vez, a loja assa <strong>100 a 200</strong> de manhã,
+    embala para ficar seguro do ponto de vista alimentar, cola o adesivinho da Holy Cookie, põe tudo numa
+    bag, mochila ou bandeja — e sai.</p>
+    <p class="prose">Nos estabelecimentos em volta, a pessoa se apresenta e faz <em>duas perguntas</em>:
+    se a pessoa gosta de doce, e se ela já conhece a loja. Entre as duas, entrega o cookie. Depois da
+    segunda, fala da loja e de onde ela fica. <strong>A loja já está há um tempo nessas regiões</strong> —
+    é por isso que a segunda pergunta existe.</p>
+    <div class="strip">
+      <div><span class="v">300–500</span><span class="s">mini cookies por rodada</span></div>
+      <div><span class="v">100–200</span><span class="s">assados por manhã</span></div>
+      <div><span class="v">1</span><span class="s">funcionário, por loja</span></div>
+      <div><span class="v">2 de 3</span><span class="s">lojas com pessoa definida</span></div>
+      <div><span class="v">2</span><span class="s">perguntas no script</span></div>
+      <div><span class="v">R$ 0</span><span class="s">de mídia</span></div>
+    </div>
+    <div class="notes">
+      <div class="note-item"><span class="tag warn">a rodada não cabe num dia</span><span>
+        São 300 a 500 comprados e 100 a 200 assados por manhã: <strong>a rodada se divide em três ou
+        quatro saídas</strong>. Quantas saídas, em que dias e com que intervalo entre elas é coisa que
+        ainda não está definida — está na aba <a href="#decisoes">Decisões</a>.
+      </span></div>
+      <div class="note-item"><span class="tag mudo">número atualizado</span><span>
+        As outras páginas da área registram <em>300 a 400</em> unidades. O número desta página é o que
+        ficou dito em <strong>02/10/2026: 300 a 500</strong>.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Qual fator ela move<span class="hint">e aqui tem uma divergência em aberto</span></h2>
+    <p class="prose">A área de loja julga toda ação por uma conta só —
+    <strong>faturamento de loja = pessoas × frequência × ticket</strong>. Toda ação empurra pelo menos um
+    dos três, e é obrigatório dizer qual. Ver <a href="../#ocasiao">o mapa completo da área</a>.</p>
+    <div class="fatores">
+      <div>
+        <span class="n">o que foi dito</span>
+        <span class="t">Reativação</span>
+        <span class="d">A frase é <em>&ldquo;isso é para reativar os clientes&rdquo;</em>. Reativar quem já
+        comprou e parou é <strong>frequência</strong> — fazer a mesma pessoa voltar mais vezes.</span>
+        <span class="q">fator: frequência</span>
+      </div>
+      <div>
+        <span class="n">o que está registrado</span>
+        <span class="t">Prospecção</span>
+        <span class="d">O <a href="../#ocasiao">mapa da área</a> e o
+        <a href="../calendario-4t-2026/#campanhas">calendário do 4T</a> classificam esta ação como
+        <strong>prospecção geográfica · novos clientes</strong> — ou seja, rosto novo.</span>
+        <span class="q">fator: pessoas</span>
+      </div>
+      <div>
+        <span class="n vazio">o script faz os dois</span>
+        <span class="t">Depende da resposta</span>
+        <span class="d">A pergunta <em>&ldquo;você já conhece a nossa loja?&rdquo;</em> é exatamente o que
+        separa um caso do outro — e hoje <strong>as duas respostas recebem a mesma fala de volta</strong>.
+        Nenhuma das duas é tratada de propósito.</span>
+        <span class="q">decisão em aberto</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> O que ela é e o que ela não é</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag good">é a ação mais barata da área</span><span>
+        O custo é só <strong>mini cookie + embalagem + adesivo + a hora da pessoa</strong>. Ela não
+        disputa verba de anúncio nem fila de designer, e por isso pode rodar em paralelo com qualquer
+        campanha sem atrapalhar nenhuma.
+      </span></div>
+      <div class="note-item"><span class="tag good">entrega prova de produto na mão</span><span>
+        Doce não se vende por argumento, se vende por experiência. Quem provou passa a ter
+        <strong>referência</strong> da marca — é o oposto de um anúncio, que entrega imagem e promessa.
+      </span></div>
+      <div class="note-item"><span class="tag bad">não dá motivo para ir hoje</span><span>
+        O que vai junto com o cookie hoje é <strong>o adesivo da marca</strong>. A página da
+        <a href="../../independencia-debora/#p1-minicook">passagem de bastão</a> já tinha registrado o
+        risco em uma frase: <em>mini cookie sem oferta com prazo é só degustação — quem provou não tem
+        motivo para ir</em>. Essa é a primeira decisão da aba <a href="#decisoes">Decisões</a>.
+      </span></div>
+      <div class="note-item"><span class="tag bad">não tem como medir</span><span>
+        Sem código na embalagem nem pergunta no caixa, <strong>ninguém sabe quantos dos que provaram
+        apareceram na loja</strong>. Ação que não dá para medir não dá para repetir com confiança nem
+        para descartar com segurança.
+      </span></div>
+      <div class="note-item"><span class="tag warn">faz a mesma coisa que o panfleto no delivery</span><span>
+        As duas entregam prova/chamada para quem está fora da loja e empurram a mesma alavanca, e
+        <strong>nunca foram comparadas uma com a outra</strong>. A sobreposição está apontada no
+        <a href="../#ocasiao">mapa da área</a> desde agosto e no
+        <a href="../calendario-4t-2026/#decisoes">calendário do 4T</a>. A diferença real é quem recebe: o
+        mini cookie fala com quem <em>passa na região</em>, o panfleto com quem <em>já compra de casa</em>.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> O que esta página fechou<span class="hint">contra os 6 itens que estavam &ldquo;a extrair&rdquo;</span></h2>
+    <p class="prose">A <a href="../../independencia-debora/#p1-minicook">página da passagem de bastão</a>
+    listava seis itens a extrair sobre esta ação. A descrição de 02/10/2026 fechou três deles.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Item</th><th>Status</th><th>O que se sabe hoje</th></tr></thead>
+      <tbody>
+        <tr><td>Onde distribuir</td><td><span class="tag good">fechado</span></td><td>Comércios e estabelecimentos em volta da loja — não condomínio, não escola, não prédio residencial.</td></tr>
+        <tr><td>Quem distribui</td><td><span class="tag good">fechado</span></td><td>Um funcionário da própria loja, uniformizado. Luciana em Paulínia, Áurea em Piracicaba.</td></tr>
+        <tr><td>Quantidade</td><td><span class="tag good">fechado</span></td><td>300 a 500 por rodada, 100 a 200 assados por manhã.</td></tr>
+        <tr><td>O panfleto e a oferta</td><td><span class="tag bad">em aberto</span></td><td>Hoje vai adesivo da marca, não oferta com prazo. <a href="#decisoes">Decisão 1</a>.</td></tr>
+        <tr><td>Quando distribuir</td><td><span class="tag bad">em aberto</span></td><td>Dia da semana, horário e intervalo entre as saídas. <a href="#decisoes">Decisão 4</a>.</td></tr>
+        <tr><td>Como medir o retorno</td><td><span class="tag bad">em aberto</span></td><td>Não existe código nem pergunta no caixa. <a href="#decisoes">Decisão 7</a>.</td></tr>
+        <tr><td>Custo por pessoa alcançada</td><td><span class="tag bad">em aberto</span></td><td>Custo unitário real nunca foi extraído, então não dá para comparar com o custo por pessoa do anúncio pago. <a href="#decisoes">Decisão 6</a>.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 2 · OPERAÇÃO ════════════════════════ -->
+<div class="tab-panel" data-panel="operacao" hidden>
+
+  <section>
+    <h2><span class="n">1</span> A operação de ponta a ponta<span class="hint">clique num bloco, depois num passo</span></h2>
+    <p class="prose">Três blocos, em ordem: o pedido na fábrica, a produção da manhã e a saída para a rua.
+    Nenhum deles depende de fornecedor externo, designer ou verba aprovada — por isso a ação pode começar
+    em qualquer semana.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn mes" data-alvo="b1"><span class="cnome">Antes</span><span class="cmeta">pedido na fábrica</span><span class="cdesc">Comprar os 300 a 500 mini cookies da rodada.</span></button>
+        <button class="card-btn mes" data-alvo="b2"><span class="cnome">Manhã</span><span class="cmeta">produção na loja</span><span class="cdesc">Assar, embalar, adesivar e montar a bag.</span></button>
+        <button class="card-btn mes" data-alvo="b3"><span class="cnome">Rua</span><span class="cmeta">os comércios em volta</span><span class="cdesc">Sair a pé, abordar, entregar e falar da loja.</span></button>
+      </div>
+
+      <div class="visor">
+
+        <!-- ───── ANTES ───── -->
+        <div class="painel" data-alvo="b1" hidden>
+          <span class="ptit">Antes · pedido na fábrica</span>
+          <div class="grupo-descricao">
+            O mini cookie <strong>não é produzido na loja</strong> — vem da fábrica, como os outros
+            produtos. A loja compra a quantidade da rodada inteira de uma vez e vai assando por partes.
+          </div>
+          <dl class="ficha">
+            <dt>o que se compra</dt><dd>De <strong>300 a 500 mini cookies</strong> por rodada.</dd>
+            <dt>por que de uma vez</dt><dd>A massa congelada aguenta esperar; o cookie assado não. Comprar a rodada inteira e assar de 100 a 200 por manhã é o que mantém o produto <em>saindo quente do forno no dia da entrega</em>.</dd>
+            <dt>em aberto</dt><dd>Prazo de pedido na fábrica, custo unitário e se o mini cookie tem sabor fixo ou acompanha o que a loja tem no dia. Nada disso está escrito — ver <a href="#decisoes">Decisão 6</a>.</dd>
+          </dl>
+        </div>
+
+        <!-- ───── MANHÃ ───── -->
+        <div class="painel" data-alvo="b2" hidden>
+          <span class="ptit">Manhã · produção na loja</span>
+          <div class="grupo-descricao">
+            Acontece <strong>na manhã do dia da entrega</strong>, dentro da própria loja, antes de a pessoa
+            sair. São quatro passos, nessa ordem.
+          </div>
+          <div class="fluxo">
+            <button class="passo-caixa" data-detalhe="Assar a quantidade da saída do dia — <strong>100 a 200 unidades</strong>, não a rodada inteira. O resto da compra fica congelado esperando a próxima saída.">1. Assar 100–200</button><span class="seta">→</span>
+            <button class="passo-caixa" data-detalhe="Embalar unidade por unidade, <strong>para ficar seguro do ponto de vista alimentar</strong>. Cookie solto na mão não se entrega em comércio de terceiro: a embalagem é o que torna a entrega aceitável para quem recebe e para quem está atrás do balcão do outro.">2. Embalar</button><span class="seta">→</span>
+            <button class="passo-caixa" data-detalhe="Colar <strong>o adesivinho da Holy Cookie</strong> em cada embalagem. É o que faz o mini cookie virar marca e não doce anônimo — hoje é a única peça que fica com a pessoa depois que o cookie acaba.">3. Adesivo da marca</button><span class="seta">→</span>
+            <button class="passo-caixa" data-detalhe="Montar tudo numa <strong>bag, mochila ou bandeja</strong>. Qual dos três é o padrão ainda não foi escolhido — e a escolha muda a cara da abordagem: bandeja parece degustação, mochila parece entrega.">4. Montar a bag</button>
+          </div>
+          <div class="passo-detalhe"></div>
+          <div>
+            <p class="label" style="margin-bottom:.45rem">Itens para produzir</p>
+            <ul class="pontos">
+              <li><strong>Mini cookie</strong> — comprado da fábrica, assado na loja.</li>
+              <li><strong>Embalagem individual</strong> — por segurança alimentar, uma por unidade.</li>
+              <li><strong>Adesivo da Holy Cookie</strong> — um por embalagem.</li>
+              <li><strong>Bag, mochila ou bandeja</strong> — o que leva tudo até a rua.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ───── RUA ───── -->
+        <div class="painel" data-alvo="b3" hidden>
+          <span class="ptit">Rua · os comércios em volta</span>
+          <div class="grupo-descricao">
+            A pessoa sai da loja com a bag e vai nos <strong>estabelecimentos em volta</strong> — comércio,
+            não casa e não condomínio. Em cada um, a mesma sequência de fala, que está inteira na aba
+            <a href="#script">Script</a>.
+          </div>
+          <dl class="ficha">
+            <dt>quem vai</dt><dd><strong>Um funcionário só</strong>, da própria loja, uniformizado. Ver a aba <a href="#quem">Quem faz</a>.</dd>
+            <dt>o que leva</dt><dd>Os cookies embalados e adesivados, e o script decorado. Nada impresso.</dd>
+            <dt>onde entra</dt><dd>Comércios e estabelecimentos do entorno da loja.</dd>
+            <dt>por que comércio</dt><dd>Comércio tem <em>gente parada e identificável</em>: a mesma pessoa está lá todo dia, no mesmo horário, a poucos metros da loja. É o público de frequência mais provável que existe no raio.</dd>
+            <dt>em aberto</dt><dd><strong>Quais comércios, quantos por saída e em que ordem.</strong> Hoje não existe lista nem roteiro — ver <a href="#decisoes">Decisão 5</a>.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O que a pessoa precisa<span class="hint">três requisitos, e é só isso</span></h2>
+    <p class="prose">A frase que define a complexidade da ação é <em>&ldquo;é bem tranquilo&rdquo;</em>. Não
+    tem treinamento, não tem material, não tem aprovação. Precisa de três coisas.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="r1"><span class="cnome">Estar uniformizada</span><span class="cmeta">requisito 1</span></button>
+        <button class="card-btn" data-alvo="r2"><span class="cnome">Saber o script de cor</span><span class="cmeta">requisito 2</span></button>
+        <button class="card-btn" data-alvo="r3"><span class="cnome">Levar os cookies</span><span class="cmeta">requisito 3</span></button>
+      </div>
+      <div class="visor">
+        <div class="painel" data-alvo="r1" hidden>
+          <span class="ptit">Estar uniformizada</span>
+          <dl class="ficha">
+            <dt>o requisito</dt><dd>A pessoa sai de uniforme, sempre.</dd>
+            <dt>por que pesa</dt><dd>Ela está entrando no comércio de outra pessoa representando a marca. O uniforme é o que faz a abordagem ser recebida como <strong>visita da loja vizinha</strong> e não como panfletagem de rua — e é o que faz a pessoa que recebeu lembrar de onde veio o cookie.</dd>
+            <dt>custo</dt><dd>Zero. O uniforme já existe.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="r2" hidden>
+          <span class="ptit">Saber o script de cor</span>
+          <dl class="ficha">
+            <dt>o requisito</dt><dd>Decorar a sequência de fala. Nada é lido no local.</dd>
+            <dt>dá para decorar</dt><dd>São <strong>duas perguntas e duas falas</strong> — curto o suficiente para sair natural depois do terceiro comércio. A sequência inteira está na aba <a href="#script">Script</a>.</dd>
+            <dt>em aberto</dt><dd>O texto exato da apresentação não está escrito, e não existe fala definida para quando a pessoa <em>não</em> gosta de doce.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="r3" hidden>
+          <span class="ptit">Levar os cookies</span>
+          <dl class="ficha">
+            <dt>o requisito</dt><dd>Sair com os cookies já assados, embalados e adesivados.</dd>
+            <dt>quantos</dt><dd>De <strong>100 a 200</strong> por saída.</dd>
+            <dt>em quê</dt><dd>Bag, mochila ou bandeja. <em>Qual dos três é o padrão ainda não foi escolhido.</em></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 3 · SCRIPT ════════════════════════ -->
+<div class="tab-panel" data-panel="script" hidden>
+
+  <section>
+    <h2><span class="n">1</span> A sequência da abordagem<span class="hint">clique num passo para ver a fala</span></h2>
+    <p class="prose">Cinco passos, iguais em todo comércio. O desenho é de <strong>pergunta antes de
+    oferta</strong>: a primeira pergunta pede licença, a entrega vem depois, e só então entra a pergunta
+    que interessa — se a pessoa já conhece a loja.</p>
+    <div class="fluxo">
+      <button class="passo-caixa" data-detalhe="A pessoa se apresenta: quem é e de qual loja. <em>O texto exato dessa abertura não está escrito</em> — é a primeira lacuna do script.">1. Apresentação</button><span class="seta">→</span>
+      <button class="passo-caixa fala" data-detalhe="<strong>&ldquo;Você gosta de doce? Gosta de cookie?&rdquo;</strong><br><br>É pergunta de licença, não de venda: ela abre a conversa sem já empurrar o brinde na mão de quem não quer. Quem responde que sim <em>se convidou</em> para o resto da conversa.">2. &ldquo;Gosta de doce?&rdquo;</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="<strong>&ldquo;Então tá aqui.&rdquo;</strong><br><br>Entrega o mini cookie embalado e explica o que é. A entrega vem depois do sim — o cookie é a resposta a uma pergunta que a própria pessoa respondeu.">3. Entrega e explica</button><span class="seta">→</span>
+      <button class="passo-caixa fala" data-detalhe="<strong>&ldquo;Você já conhece a nossa loja?&rdquo;</strong><br><br>É a pergunta que importa. A loja <strong>já está há um tempo nessas regiões</strong>, então as duas respostas aparecem de verdade — e é ela que separa quem é cliente parado de quem nunca entrou.">4. &ldquo;Já conhece a loja?&rdquo;</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Sim ou não, a conversa termina no mesmo lugar: <strong>a pessoa fala sobre a loja e que a loja está ali</strong>.<br><br><em>Hoje as duas respostas recebem a mesma fala de volta</em> — e é esse o ponto da divergência de fator no briefing: nem reativação nem aquisição é tratada de propósito.">5. Fala da loja</button>
+    </div>
+    <div class="passo-detalhe"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> As respostas que podem vir<span class="hint">quatro caminhos, e um deles não tem fala</span></h2>
+    <p class="prose">As duas perguntas abrem quatro situações. Três delas o script resolve; uma ainda
+    não tem resposta definida.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="s1"><span class="cnome">&ldquo;Sim, gosto de doce&rdquo;</span><span class="cmeta">pergunta 1 · definido</span></button>
+        <button class="card-btn pendente" data-alvo="s2"><span class="cnome">&ldquo;Não gosto de doce&rdquo;</span><span class="cmeta">pergunta 1 · sem fala</span></button>
+        <button class="card-btn" data-alvo="s3"><span class="cnome">&ldquo;Sim, já conheço a loja&rdquo;</span><span class="cmeta">pergunta 2 · reativação</span></button>
+        <button class="card-btn" data-alvo="s4"><span class="cnome">&ldquo;Não, não conheço&rdquo;</span><span class="cmeta">pergunta 2 · aquisição</span></button>
+      </div>
+      <div class="visor">
+        <div class="painel" data-alvo="s1" hidden>
+          <span class="ptit">&ldquo;Sim, gosto de doce&rdquo; <span class="tag good">definido</span></span>
+          <dl class="ficha">
+            <dt>o que acontece</dt><dd>Segue o fluxo: <strong>&ldquo;então tá aqui&rdquo;</strong>, entrega o cookie, explica o que é, e vai para a segunda pergunta.</dd>
+            <dt>por que funciona</dt><dd>O sim é um micro-compromisso. Quem disse que gosta de doce já está numa conversa — a entrega deixa de ser interrupção e passa a ser consequência.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="s2" hidden>
+          <span class="ptit">&ldquo;Não gosto de doce&rdquo; <span class="tag bad">sem fala definida</span></span>
+          <dl class="ficha">
+            <dt>o que acontece</dt><dd><strong>Não está definido.</strong> A descrição da ação cobre o caminho do sim; o caminho do não não tem fala.</dd>
+            <dt>por que importa</dt><dd>É o único momento em que a pessoa fica sem roteiro, e acontece <em>na frente de quem recebeu bem</em> — o dono do comércio está olhando. Sem fala, cada funcionário improvisa a sua.</dd>
+            <dt>o que falta</dt><dd>Decidir se encerra com cordialidade, se oferece para outra pessoa do mesmo comércio, ou se mesmo assim deixa a informação da loja. Qualquer uma serve — o que não serve é não ter nenhuma.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="s3" hidden>
+          <span class="ptit">&ldquo;Sim, já conheço a loja&rdquo; <span class="tag f">reativação</span></span>
+          <dl class="ficha">
+            <dt>o que acontece</dt><dd>Fala sobre a loja e que a loja está ali — <strong>a mesma fala de quem não conhece</strong>.</dd>
+            <dt>quem é essa pessoa</dt><dd>É o caso de <em>reativação</em>: alguém que já comprou, ou pelo menos já sabe que a loja existe, e não está voltando. É o alvo declarado da ação.</dd>
+            <dt>a oportunidade perdida</dt><dd>Esta é a única pessoa da rua que pode responder <strong>por que parou de ir</strong> — e ninguém pergunta. Uma pergunta a mais aqui transformaria a saída numa pesquisa de campo de graça.</dd>
+            <dt>o que falta</dt><dd>Uma fala própria para quem já é cliente. Falar &ldquo;a loja está ali&rdquo; para quem já conhece a loja não acrescenta nada.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="s4" hidden>
+          <span class="ptit">&ldquo;Não, não conheço&rdquo; <span class="tag p">aquisição</span></span>
+          <dl class="ficha">
+            <dt>o que acontece</dt><dd>Fala sobre a loja e onde ela fica. Aqui a fala é exatamente a certa — a pessoa não sabia que a loja existia e passa a saber, com o produto na mão.</dd>
+            <dt>quem é essa pessoa</dt><dd>Rosto novo a poucos metros da porta. É o caso em que a ação é <em>prospecção</em>, do jeito que o mapa da área registra.</dd>
+            <dt>o que falta</dt><dd>Nada no script. O que falta é o <strong>motivo para ir hoje</strong> — e esse é um problema da peça que vai junto, não da fala. Ver <a href="#decisoes">Decisão 1</a>.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 4 · QUEM FAZ ════════════════════════ -->
+<div class="tab-panel" data-panel="quem" hidden>
+
+  <section>
+    <h2><span class="n">1</span> Uma pessoa por loja<span class="hint">clique na loja</span></h2>
+    <p class="prose">A ação roda com <strong>um funcionário só</strong>. Não precisa de dupla, não precisa
+    de promotor contratado, não precisa de supervisão no local. Duas das três lojas já têm a pessoa
+    definida; a terceira não tem, e por isso ainda não se sabe se a ação roda lá.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn mes" data-alvo="l1"><span class="cnome">Paulínia</span><span class="cmeta">Luciana</span><span class="cdesc">Pessoa definida.</span></button>
+        <button class="card-btn mes" data-alvo="l2"><span class="cnome">Piracicaba</span><span class="cmeta">Áurea</span><span class="cdesc">Pessoa definida.</span></button>
+        <button class="card-btn mes pendente" data-alvo="l3"><span class="cnome">Campinas</span><span class="cmeta">sem pessoa</span><span class="cdesc">Não se sabe se dá para fazer.</span></button>
+      </div>
+      <div class="visor">
+        <div class="painel" data-alvo="l1" hidden>
+          <span class="ptit">Paulínia <span class="tag good">pessoa definida</span></span>
+          <dl class="ficha">
+            <dt>quem faz</dt><dd><strong>Luciana.</strong></dd>
+            <dt>status</dt><dd>A loja tem a pessoa. Falta só o calendário de saídas e a lista de comércios.</dd>
+            <dt>contexto</dt><dd>Paulínia é a loja com mais material de campanha já produzido — foi onde o <a href="../cookie-de-graca/">Cookie de Graça</a> rodou, em 11 e 12 de setembro, e é a única cidade com levantamento de influenciadores pronto.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="l2" hidden>
+          <span class="ptit">Piracicaba <span class="tag good">pessoa definida</span></span>
+          <dl class="ficha">
+            <dt>quem faz</dt><dd><strong>Áurea.</strong></dd>
+            <dt>status</dt><dd>A loja tem a pessoa. Falta o calendário de saídas e a lista de comércios.</dd>
+          </dl>
+        </div>
+        <div class="painel" data-alvo="l3" hidden>
+          <span class="ptit">Campinas <span class="tag bad">sem pessoa</span></span>
+          <dl class="ficha">
+            <dt>quem faz</dt><dd><strong>Ninguém.</strong> Não existe pessoa para fazer isso em Campinas.</dd>
+            <dt>status</dt><dd>Por isso <em>não se sabe se daria para fazer na loja de Campinas</em>. A ação não está descartada lá — está sem responsável.</dd>
+            <dt>o que decidir</dt><dd>Se alguém da equipe assume, se entra na rotina de outra função, ou se Campinas fica fora desta ação. Ver <a href="#decisoes">Decisão 3</a>.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O que a escala precisa prever</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag warn">sai gente do balcão</span><span>
+        A pessoa que entrega é <strong>funcionário da loja</strong>, não promotor contratado. Enquanto ela
+        está na rua, ela não está no balcão — e isso precisa estar previsto na escala. O registro da
+        <a href="../../independencia-debora/#p1-minicook">passagem de bastão</a> é direto: <em>se for
+        equipe da loja, a ação derruba o atendimento no mesmo dia se não estiver na escala</em>.
+      </span></div>
+      <div class="note-item"><span class="tag mudo">é de manhã, nos dois blocos</span><span>
+        A produção é de manhã e a saída vem em seguida. Isso <strong>concentra o custo de escala no mesmo
+        turno</strong>: a mesma pessoa assa, embala, adesiva e sai. Se o turno da manhã já é o de
+        preparação da loja, as duas coisas disputam a mesma hora.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 5 · DECISÕES ════════════════════════ -->
+<div class="tab-panel" data-panel="decisoes" hidden>
+
+  <section>
+    <h2><span class="n">1</span> O que falta decidir<span class="hint">clique numa decisão · nenhuma está tomada</span></h2>
+    <p class="prose">A ação já tem operação, pessoas e script. O que ela não tem é <strong>o que acontece
+    depois que a pessoa prova</strong> — e é aí que estão sete decisões em aberto, na ordem de quanto cada
+    uma muda o resultado.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="d1"><span class="cnome">1 · Adesivo ou oferta com prazo</span><span class="cmeta">a que mais muda o resultado</span></button>
+        <button class="card-btn" data-alvo="d2"><span class="cnome">2 · Reativação ou prospecção</span><span class="cmeta">qual fator ela move</span></button>
+        <button class="card-btn" data-alvo="d3"><span class="cnome">3 · Campinas roda ou não</span><span class="cmeta">sem pessoa</span></button>
+        <button class="card-btn" data-alvo="d4"><span class="cnome">4 · Quando e com que frequência</span><span class="cmeta">a rodada não cabe num dia</span></button>
+        <button class="card-btn" data-alvo="d5"><span class="cnome">5 · Quais comércios e qual roteiro</span><span class="cmeta">não existe lista</span></button>
+        <button class="card-btn" data-alvo="d6"><span class="cnome">6 · Custo por pessoa alcançada</span><span class="cmeta">nunca foi extraído</span></button>
+        <button class="card-btn" data-alvo="d7"><span class="cnome">7 · Como saber se funcionou</span><span class="cmeta">não tem rastreio</span></button>
+      </div>
+
+      <div class="visor">
+
+        <div class="painel" data-alvo="d1" hidden>
+          <span class="ptit">1 · Adesivo ou oferta com prazo <span class="tag bad">em aberto</span></span>
+          <div class="grupo-descricao">
+            É a decisão que separa <strong>degustação</strong> de <strong>campanha</strong>. Tudo o mais
+            desta página já está resolvido ou é detalhe; esta não.
+          </div>
+          <dl class="ficha">
+            <dt>a divergência</dt><dd>O que foi descrito em 02/10/2026 é <strong>adesivo da Holy Cookie</strong> na embalagem. O <a href="../#ocasiao">mapa da área</a>, o <a href="../calendario-4t-2026/#campanhas">calendário do 4T</a> e a <a href="../../independencia-debora/#p1-minicook">passagem de bastão</a> registram esta ação como <em>&ldquo;mini cookie com panfleto puxando para a loja&rdquo;</em>. São duas coisas diferentes: adesivo é marca, panfleto é chamada.</dd>
+            <dt>por que importa</dt><dd>A frase já estava escrita na página da Débora: <strong>mini cookie sem oferta com prazo é só degustação — quem provou não tem motivo para ir</strong>. O adesivo faz a pessoa lembrar da marca; ele não dá data nem condição para ela aparecer.</dd>
+            <dt>o que decidir</dt><dd>Se fica só o adesivo, ou se vai junto uma peça com <strong>prazo, condição e código</strong>. Se for peça, ela precisa de arte e de impressão — e aí a ação deixa de ser &ldquo;bem tranquilo&rdquo;.</dd>
+            <dt>nota</dt><dd>Esta página não corrigiu as outras três. As descrições com &ldquo;panfleto&rdquo; continuam lá, esperando esta decisão.</dd>
+          </dl>
+        </div>
+
+        <div class="painel" data-alvo="d2" hidden>
+          <span class="ptit">2 · Reativação ou prospecção <span class="tag bad">em aberto</span></span>
+          <dl class="ficha">
+            <dt>a divergência</dt><dd>O propósito declarado em 02/10/2026 é <strong>reativar clientes</strong> — fator <em>frequência</em>. O registro da área classifica a ação como <strong>prospecção geográfica · novos clientes</strong> — fator <em>pessoas</em>.</dd>
+            <dt>por que importa</dt><dd>A área julga toda ação por <strong>pessoas × frequência × ticket</strong>, e o mapa de agosto já apontou o desequilíbrio: seis de nove ações empurravam &ldquo;pessoas&rdquo;. Se esta ação for de frequência, ela cobre um fator descoberto; se for de pessoas, ela engrossa a fila do fator que já está cheio.</dd>
+            <dt>o que o script faz hoje</dt><dd>Os dois, sem escolher: a pergunta <em>&ldquo;já conhece a nossa loja?&rdquo;</em> separa os dois casos e <strong>as duas respostas recebem a mesma fala de volta</strong>.</dd>
+            <dt>o que decidir</dt><dd>Qual é o alvo. Se for reativação, o script precisa de uma fala própria para quem já conhece a loja — e provavelmente de uma pergunta sobre por que parou de ir. Se for prospecção, a ação volta a competir com o panfleto no delivery pelo mesmo fator.</dd>
+          </dl>
+        </div>
+
+        <div class="painel" data-alvo="d3" hidden>
+          <span class="ptit">3 · Campinas roda ou não <span class="tag bad">em aberto</span></span>
+          <dl class="ficha">
+            <dt>o que se sabe</dt><dd>Paulínia tem a Luciana, Piracicaba tem a Áurea. <strong>Campinas não tem pessoa para fazer isso.</strong></dd>
+            <dt>por que importa</dt><dd>Não é um problema de verba nem de material — é de responsável. Enquanto não tiver nome, a ação não roda em Campinas, e a loja fica fora de uma ação que custa quase nada nas outras duas.</dd>
+            <dt>o que decidir</dt><dd>Se alguém da equipe de Campinas assume, se isso entra na rotina de uma função que já existe, ou se Campinas fica fora desta ação de propósito.</dd>
+            <dt>contexto</dt><dd>Ver a aba <a href="#quem">Quem faz</a> e, para a estrutura de equipe de cada loja, a página <a href="../../pessoas/">Pessoas</a>.</dd>
+          </dl>
+        </div>
+
+        <div class="painel" data-alvo="d4" hidden>
+          <span class="ptit">4 · Quando e com que frequência <span class="tag bad">em aberto</span></span>
+          <dl class="ficha">
+            <dt>o que se sabe</dt><dd>A rodada é de <strong>300 a 500</strong> e a saída é de <strong>100 a 200</strong>. A conta não fecha num dia: são três ou quatro saídas por rodada.</dd>
+            <dt>o que não se sabe</dt><dd>Quantas saídas, <strong>em que dias da semana, em que horário</strong>, e quanto tempo entre uma rodada e a outra.</dd>
+            <dt>por que importa</dt><dd>Duas razões. Primeira: comércio tem horário de movimento, e entrar na hora errada é falar com quem está ocupado. Segunda: a conversa termina em &ldquo;a loja está ali&rdquo; — <em>os dias em que se quer a pessoa na loja precisam ser escolhidos, não acontecer por acaso</em>.</dd>
+            <dt>o que decidir</dt><dd>Dia, horário, número de saídas por rodada e intervalo entre rodadas. Sem isso a ação depende de alguém lembrar dela — e a <a href="../../independencia-debora/">passagem de bastão</a> já registrou que <strong>ação que nasce por calendário acontece mais vezes do que ação que nasce por iniciativa</strong>.</dd>
+          </dl>
+        </div>
+
+        <div class="painel" data-alvo="d5" hidden>
+          <span class="ptit">5 · Quais comércios e qual roteiro <span class="tag bad">em aberto</span></span>
+          <dl class="ficha">
+            <dt>o que se sabe</dt><dd>São os <strong>comércios e estabelecimentos em volta da loja</strong>. Isso já é mais do que estava registrado antes — a página da Débora listava &ldquo;prédio comercial, condomínio, escola, comércio vizinho&rdquo; como opções abertas.</dd>
+            <dt>o que não se sabe</dt><dd><strong>Quais</strong>, nominalmente, e em que ordem. Não existe lista nem roteiro para nenhuma das duas cidades.</dd>
+            <dt>por que importa</dt><dd>É levantamento de campo que se faz uma vez e serve para sempre: feita a lista, cada saída deixa de ser improviso e passa a ser rota. E é a lista que permite <em>não repetir o mesmo comércio</em> duas rodadas seguidas — ou repetir de propósito, se o alvo for frequência.</dd>
+            <dt>o que decidir</dt><dd>A lista de comércios por loja, com o raio que vale, e se a rota repete ou avança a cada saída.</dd>
+          </dl>
+        </div>
+
+        <div class="painel" data-alvo="d6" hidden>
+          <span class="ptit">6 · Custo por pessoa alcançada <span class="tag bad">em aberto</span></span>
+          <dl class="ficha">
+            <dt>o que não se sabe</dt><dd>O custo real de uma unidade entregue: <strong>mini cookie + embalagem + adesivo + a hora da pessoa</strong>. Nunca foi extraído.</dd>
+            <dt>por que importa</dt><dd>Sem esse número, não existe a única comparação que decide se a ação vale: <strong>quanto custa alcançar uma pessoa aqui versus no anúncio pago</strong>. A intuição diz que é mais barato; a intuição não é número.</dd>
+            <dt>onde está o dado</dt><dd>O custo do produto sai do <a href="https://sistemahc.vercel.app/cmv/laboratorio" target="_blank" rel="noopener">laboratório de CMV do Sistema-HC</a>; a hora da pessoa sai do custo de folha, com os encargos já levantados na página <a href="../../pessoas/">Pessoas</a>. Embalagem e adesivo precisam de cotação.</dd>
+            <dt>o que decidir</dt><dd>Nada — é levantamento, não decisão. Mas é ele que torna as outras seis decidíveis com número em vez de opinião.</dd>
+          </dl>
+        </div>
+
+        <div class="painel" data-alvo="d7" hidden>
+          <span class="ptit">7 · Como saber se funcionou <span class="tag bad">em aberto</span></span>
+          <dl class="ficha">
+            <dt>o que não existe</dt><dd>Nenhum rastreio. Não tem código na embalagem, não tem pergunta no caixa, não tem contagem de quantos comércios foram visitados.</dd>
+            <dt>por que importa</dt><dd>A frase da página da Débora vale inteira: <strong>ação que não dá para medir não dá para repetir nem para descartar com segurança</strong>. Hoje a ação só pode ser defendida ou atacada por impressão.</dd>
+            <dt>o mais barato que resolve</dt><dd>Duas coisas, nenhuma das duas custa peça nova: <em>contar</em> quantas unidades saíram e quantos comércios foram visitados por saída, e <em>perguntar no caixa</em> — a mesma pergunta, sempre igual, para quem chega nos dias seguintes.</dd>
+            <dt>depende da decisão 1</dt><dd>Se entrar uma peça com código, o rastreio vem de graça com ela. Se ficar só o adesivo, a pergunta no caixa é o único caminho.</dd>
+          </dl>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> A ordem em que elas se resolvem</h2>
+    <p class="prose">As sete não são independentes. <strong>A decisão 1 destrava a 7</strong> (peça com
+    código traz rastreio embutido), <strong>a 2 reescreve o script</strong>, e <strong>a 6 é levantamento
+    que não depende de ninguém decidir nada</strong> — pode começar hoje.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag acc">pode começar sem decisão</span><span>
+        <strong>Decisões 5 e 6</strong> são levantamento de campo e de custo: a lista de comércios e o
+        custo unitário. Nenhuma das duas precisa de aprovação, e as duas tornam o resto decidível com
+        número em vez de intuição.
+      </span></div>
+      <div class="note-item"><span class="tag warn">a ação já roda assim</span><span>
+        Nada nesta página impede a ação de sair amanhã — ela está registrada como <em>rodando</em> no
+        <a href="../calendario-4t-2026/#campanhas">calendário do 4T</a>, confirmada para outubro. O que as
+        sete decisões mudam não é <strong>se</strong> ela acontece, é <strong>se dá para saber se valeu</strong>.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+  <footer>
+    Mini cookie na região — ação de loja da Holy Cookie, em Paulínia e Piracicaba.
+    Montada em 02/10/2026 a partir da descrição do Fred, cruzada com o que já estava registrado em
+    <a href="../">Ações de loja</a>, no <a href="../calendario-4t-2026/">Calendário 4T 2026</a> e na
+    <a href="../../independencia-debora/#p1-minicook">passagem de bastão da Débora</a>.
+    <strong>Nenhuma das sete decisões da última aba está tomada</strong>, e a divergência entre
+    &ldquo;adesivo&rdquo; e &ldquo;panfleto&rdquo; continua em aberto nas outras páginas.
+  </footer>
+
+</div>
+
+<script>
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome;
+    else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({ top: 0 }); });
+  });
+  var ABAS = ['briefing', 'operacao', 'script', 'quem', 'decisoes'];
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos href="#decisoes" trocam de aba, não só o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
+
+  // ── cards: escopo pelo .bloco mais próximo, pro padrão poder aninhar sem colidir
+  document.addEventListener('click', function (e) {
+    var bt = e.target.closest('.card-btn[data-alvo]');
+    if (!bt) return;
+    var bloco = bt.closest('.bloco');
+    if (!bloco) return;
+    var alvo = bt.dataset.alvo;
+    var jaAtivo = bt.classList.contains('ativo');
+    bloco.querySelectorAll(':scope > .grade > [data-alvo]').forEach(function (b) {
+      b.classList.toggle('ativo', b === bt && !jaAtivo);
+    });
+    bloco.querySelectorAll(':scope > .visor > .painel[data-alvo]').forEach(function (p) {
+      p.hidden = jaAtivo || p.dataset.alvo !== alvo;
+    });
+  });
+
+  // ── fluxo: clique na caixinha preenche o slot de detalhe logo abaixo
+  document.querySelectorAll('.passo-caixa').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var fluxo = b.closest('.fluxo');
+      var detalhe = fluxo.nextElementSibling;
+      fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+      detalhe.innerHTML = b.dataset.detalhe;
+      detalhe.classList.add('aberto');
+    });
+  });
+</script>
+</body>
+</html>
