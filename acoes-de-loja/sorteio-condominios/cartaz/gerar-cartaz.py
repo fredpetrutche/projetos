@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Cartaz do sorteio dos sindicos — A4 e 10x15, QR vetorial."""
+"""Cartaz do sorteio — versão 1: só tipografia e o QR, em A4, A6 e 10x15."""
+import os
 import segno
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
@@ -7,6 +8,7 @@ from reportlab.lib.colors import HexColor
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
+AQUI = os.path.dirname(os.path.abspath(__file__))
 URL = "https://fredpetrutche.github.io/projetos/acoes-de-loja/sorteio-condominios/cadastro/"
 INK   = HexColor("#1C140C")
 MARCA = HexColor("#9C2B1B")
@@ -98,6 +100,7 @@ def cartaz(arquivo, larg_mm, alt_mm):
     c.showPage(); c.save()
     print("ok", arquivo, f"{larg_mm}x{alt_mm}mm", "QR", round(qr_lado/mm, 1), "mm")
 
-cartaz("cartaz-sorteio-a4.pdf", 210, 297)
-cartaz("cartaz-sorteio-10x15.pdf", 100, 150)
-cartaz("cartaz-sorteio-a6.pdf", 105, 148)
+if __name__ == "__main__":
+    cartaz(os.path.join(AQUI, "cartaz-sorteio-a4.pdf"), 210, 297)
+    cartaz(os.path.join(AQUI, "cartaz-sorteio-10x15.pdf"), 100, 150)
+    cartaz(os.path.join(AQUI, "cartaz-sorteio-a6.pdf"), 105, 148)

@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
 <title>Cartaz do QR code — Sorteio dos Síndicos</title>
-<meta name="description" content="O cartaz do sorteio para imprimir: PDF em 10x15, A6 e A4, com o QR code do cadastro e a assinatura Holy Cook.">
+<meta name="description" content="Os cartazes do sorteio para imprimir: duas versões em 10x15, A6 e A4, com o QR code do cadastro e a marca Holy Cook.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
 <style>
   :root {
@@ -25,7 +25,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 64rem; margin: 0 auto; padding: 2rem 1.1rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 2rem 1.1rem 5rem; display: flex; flex-direction: column; gap: 1.75rem; }
 
   .voltar { font-family: var(--mono); font-size: .72rem; color: var(--ink-faint); text-decoration: none; }
   .voltar:hover { color: var(--marca); }
@@ -40,14 +40,14 @@
   .prose { color: var(--ink-soft); max-width: 68ch; }
   .prose strong { color: var(--ink); font-weight: 600; }
 
-  /* ── Escolha de formato ───────────────────────────────────────── */
-  .formatos { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .7rem; }
-  .formato { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--rule); border-radius: 5px; padding: .9rem 1rem; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: .25rem; color: inherit; font-family: inherit; }
-  .formato:hover { border-color: var(--marca); }
-  .formato[aria-pressed="true"] { border-color: var(--marca); border-left-color: var(--marca); background: var(--surface-2); }
-  .formato .nome { font-size: 1.02rem; font-weight: 700; }
-  .formato .med { font-family: var(--mono); font-size: .68rem; color: var(--marca); font-weight: 700; letter-spacing: .08em; }
-  .formato .uso { font-size: .84rem; color: var(--ink-soft); }
+  /* ── Botões de escolha ────────────────────────────────────────── */
+  .escolhas { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .7rem; }
+  .op { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--rule); border-radius: 5px; padding: .9rem 1rem; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: .25rem; color: inherit; font-family: inherit; }
+  .op:hover { border-color: var(--marca); }
+  .op[aria-pressed="true"] { border-color: var(--marca); border-left-color: var(--marca); background: var(--surface-2); }
+  .op .nome { font-size: 1.02rem; font-weight: 700; }
+  .op .med { font-family: var(--mono); font-size: .68rem; color: var(--marca); font-weight: 700; letter-spacing: .08em; }
+  .op .uso { font-size: .84rem; color: var(--ink-soft); }
 
   .acoes { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
   .btn { font-family: var(--sans); font-size: .86rem; font-weight: 600; padding: .6rem 1rem; border-radius: 4px; border: 1px solid var(--marca); background: var(--marca); color: var(--marca-ink); text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; gap: .4rem; }
@@ -55,35 +55,11 @@
   .btn.sec:hover { border-color: var(--marca); color: var(--marca); }
   .nota { font-size: .8rem; color: var(--ink-faint); }
 
-  /* ── Palco de pré-visualização ────────────────────────────────── */
-  .palco { padding: 0 1.1rem 4rem; display: flex; justify-content: center; }
-  .moldura { transform: scale(var(--z, 1)); transform-origin: top center; box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 14px 40px rgba(0,0,0,.16); }
-
-  /* ── A folha impressa ─────────────────────────────────────────── */
-  .folha {
-    width: var(--w); height: var(--h);
-    background: #FFFFFF; color: #1C140C;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding-bottom: calc(var(--h) * .02);   /* centro óptico: sobe ~1% da altura */
-    overflow: hidden;
-  }
-  .folha .chapeu { font-size: calc(30pt * var(--s)); font-weight: 700; line-height: 1; letter-spacing: .015em; color: #9C2B1B; }
-  .folha .titulo { font-size: calc(86pt * var(--s)); font-weight: 700; line-height: 1; letter-spacing: -.012em; margin-top: calc(5mm * var(--s)); }
-  .folha .regua  { width: 17%; height: calc(1.6mm * var(--s)); background: #9C2B1B; margin-top: calc(9mm * var(--s)); }
-  .folha .instr  { font-size: calc(27pt * var(--s)); font-weight: 500; line-height: 1; margin-top: calc(8mm * var(--s)); }
-  .folha .qr     { width: calc(var(--w) * .66); height: calc(var(--w) * .66); display: block; margin-top: calc(12mm * var(--s)); }
-  .folha .holy   { font-size: calc(34pt * var(--s)); font-weight: 700; line-height: 1; color: #9C2B1B; margin-top: calc(9mm * var(--s)); }
-
-  @media print {
-    .wrap, .voltar { display: none !important; }
-    body { background: #FFFFFF; }
-    .palco { padding: 0; display: block; height: auto !important; }
-    .moldura { transform: none !important; box-shadow: none; }
-    .folha { page-break-after: avoid; }
-  }
+  /* ── A folha ──────────────────────────────────────────────────── */
+  .palco { display: flex; justify-content: center; padding-top: .3rem; }
+  .folha { max-width: min(26rem, 100%); width: 100%; height: auto; display: block; border-radius: 3px;
+           box-shadow: 0 1px 2px rgba(0,0,0,.16), 0 16px 44px rgba(0,0,0,.18); background: #fff; }
 </style>
-<style id="pagina">@page { size: 100mm 150mm; margin: 0; }</style>
 </head>
 <body>
 
@@ -94,96 +70,107 @@
     <span class="marca">Holy Cook · material de balcão</span>
     <h1>Cartaz do QR code</h1>
     <p class="lede">O mesmo QR que já está em uso: ele abre direto a página de cadastro do sorteio,
-    sem login e sem app. Aqui ele vira folha impressa, em três tamanhos.</p>
+    sem login e sem app. Aqui ele vira folha impressa — duas versões, três tamanhos cada.</p>
   </header>
 
   <section>
-    <h2>Escolha o tamanho</h2>
-    <div class="formatos">
-      <button class="formato" data-w="100" data-h="150" aria-pressed="true">
+    <h2>Versão</h2>
+    <div class="escolhas" id="versoes">
+      <button class="op" data-v="torta" aria-pressed="true">
+        <span class="med">COLORIDA</span>
+        <span class="nome">Concorra a uma torta</span>
+        <span class="uso">A identidade da marca: fundo rosa, a foto da torta e o selo Holy Cook. Mostra o prêmio.</span>
+      </button>
+      <button class="op" data-v="sorteio" aria-pressed="false">
+        <span class="med">PRETO E BRANCO</span>
+        <span class="nome">Participe do sorteio</span>
+        <span class="uso">Só tipografia e o QR gigante. Sai bem em qualquer impressora e quase não gasta tinta.</span>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tamanho</h2>
+    <div class="escolhas" id="tamanhos">
+      <button class="op" data-t="10x15" aria-pressed="true">
         <span class="med">10 × 15 CM</span>
         <span class="nome">Foto de balcão</span>
         <span class="uso">O tamanho que a gráfica chama de foto. Vai no display de acrílico, em cima do balcão.</span>
       </button>
-      <button class="formato" data-w="105" data-h="148" aria-pressed="false">
+      <button class="op" data-t="a6" aria-pressed="false">
         <span class="med">A6 · 10,5 × 14,8 CM</span>
         <span class="nome">Papel A6</span>
         <span class="uso">Quase igual ao 10×15, mas na medida exata do papel A6 — quatro por folha A4.</span>
       </button>
-      <button class="formato" data-w="210" data-h="297" aria-pressed="false">
+      <button class="op" data-t="a4" aria-pressed="false">
         <span class="med">A4 · 21 × 29,7 CM</span>
         <span class="nome">Cartaz de parede</span>
-        <span class="uso">Para a parede, a porta ou o cavalete. O QR tem 13,9 cm — lê de longe.</span>
+        <span class="uso">Para a parede, a porta ou o cavalete. O QR passa de 7 cm — lê de longe.</span>
       </button>
     </div>
     <div class="acoes">
-      <a class="btn" id="baixar" href="cartaz-sorteio-10x15.pdf" download>Baixar o PDF</a>
-      <button class="btn sec" id="imprimir">Imprimir desta página</button>
-      <span class="nota" id="nota">PDF em vetor, 10 × 15 cm — é o arquivo que vai para a gráfica.</span>
+      <a class="btn" id="baixar" href="cartaz-torta-10x15.pdf" download>Baixar o PDF</a>
+      <a class="btn sec" id="abrir" href="cartaz-torta-10x15.pdf" target="_blank" rel="noopener">Abrir para imprimir</a>
+      <span class="nota" id="nota"></span>
     </div>
-    <p class="prose">Na hora de imprimir pelo navegador, deixe as margens em <strong>nenhuma</strong> e
-    desmarque cabeçalho e rodapé. Pela gráfica, mande o PDF: ele já sai no tamanho certo e o QR é
-    vetor, não perde nitidez em ampliação nenhuma.</p>
+  </section>
+
+  <div class="palco">
+    <img class="folha" id="previa" src="previas/cartaz-torta-10x15.jpg"
+         alt="Prévia do cartaz" width="640" height="960">
+  </div>
+
+  <section>
+    <h2>Como imprimir</h2>
+    <p class="prose">Pela gráfica, manda o PDF: ele já sai na medida certa e o QR é vetor, não perde
+    nitidez em ampliação nenhuma. Imprimindo aí, abre o PDF e manda imprimir em
+    <strong>tamanho real</strong> (nada de "ajustar à página"), sem cabeçalho e sem rodapé.</p>
+    <p class="prose">Os três tamanhos levam o mesmo QR — o que muda é a folha. E os dois PDFs de
+    10×15 e A6 cabem lado a lado numa folha A4 se você quiser cortar na loja.</p>
   </section>
 </div>
 
-<div class="palco">
-  <div class="moldura">
-    <div class="folha" id="folha" style="--w:100mm; --h:150mm; --s:.4762">
-      <span class="chapeu">PARTICIPE DO</span>
-      <span class="titulo">SORTEIO</span>
-      <span class="regua"></span>
-      <span class="instr">Leia o QR Code</span>
-      <img class="qr" src="../img/qr-cadastro.svg" alt="QR code do cadastro do sorteio">
-      <span class="holy">Holy Cook</span>
-    </div>
-  </div>
-</div>
-
 <script>
-  const folha   = document.getElementById('folha');
-  const moldura = document.querySelector('.moldura');
-  const palco   = document.querySelector('.palco');
-  const pagina  = document.getElementById('pagina');
-  const baixar  = document.getElementById('baixar');
-  const nota    = document.getElementById('nota');
-
-  const ARQUIVO = {
-    '100x150': { pdf: 'cartaz-sorteio-10x15.pdf', rotulo: '10 × 15 cm' },
-    '105x148': { pdf: 'cartaz-sorteio-a6.pdf',    rotulo: 'A6, 10,5 × 14,8 cm' },
-    '210x297': { pdf: 'cartaz-sorteio-a4.pdf',    rotulo: 'A4, 21 × 29,7 cm' }
+  const ARQ = {
+    'torta-10x15':   { rotulo: '10 × 15 cm', qr: '3,6 cm' },
+    'torta-a6':      { rotulo: 'A6, 10,5 × 14,8 cm', qr: '3,7 cm' },
+    'torta-a4':      { rotulo: 'A4, 21 × 29,7 cm', qr: '7,4 cm' },
+    'sorteio-10x15': { rotulo: '10 × 15 cm', qr: '6,6 cm' },
+    'sorteio-a6':    { rotulo: 'A6, 10,5 × 14,8 cm', qr: '6,9 cm' },
+    'sorteio-a4':    { rotulo: 'A4, 21 × 29,7 cm', qr: '13,9 cm' }
   };
+  const PROPORCAO = { '10x15': [640, 960], 'a6': [639, 900], 'a4': [877, 1240] };
 
-  function aplica(w, h) {
-    folha.style.setProperty('--w', w + 'mm');
-    folha.style.setProperty('--h', h + 'mm');
-    folha.style.setProperty('--s', (w / 210).toFixed(4));
-    pagina.textContent = `@page { size: ${w}mm ${h}mm; margin: 0; }`;
-    const arq = ARQUIVO[w + 'x' + h];
-    baixar.href = arq.pdf;
-    baixar.setAttribute('download', arq.pdf);
-    nota.textContent = `PDF em vetor, ${arq.rotulo} — é o arquivo que vai para a gráfica.`;
-    encaixa();
+  let versao = 'torta', tamanho = '10x15';
+  const previa = document.getElementById('previa');
+  const baixar = document.getElementById('baixar');
+  const abrir  = document.getElementById('abrir');
+  const nota   = document.getElementById('nota');
+
+  function aplica() {
+    const chave = versao + '-' + tamanho;
+    const pdf = 'cartaz-' + chave + '.pdf';
+    const [w, h] = PROPORCAO[tamanho];
+    previa.width = w; previa.height = h;
+    previa.src = 'previas/cartaz-' + chave + '.jpg';
+    previa.alt = 'Prévia do cartaz em ' + ARQ[chave].rotulo;
+    baixar.href = pdf; baixar.setAttribute('download', pdf);
+    abrir.href = pdf;
+    nota.textContent = `PDF vetorial, ${ARQ[chave].rotulo} — QR de ${ARQ[chave].qr}.`;
   }
 
-  /* A folha é medida em milímetros de verdade; na tela ela é reduzida para caber. */
-  function encaixa() {
-    const disponivel = Math.min(palco.clientWidth - 36, 820);
-    const z = Math.min(1, disponivel / folha.offsetWidth);
-    moldura.style.setProperty('--z', z);
-    palco.style.height = (folha.offsetHeight * z + 64) + 'px';
-  }
-
-  document.querySelectorAll('.formato').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('.formato').forEach(o => o.setAttribute('aria-pressed', o === b));
-      aplica(+b.dataset.w, +b.dataset.h);
+  function liga(id, atributo, aoEscolher) {
+    document.querySelectorAll('#' + id + ' .op').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('#' + id + ' .op').forEach(o => o.setAttribute('aria-pressed', o === b));
+        aoEscolher(b.dataset[atributo]);
+        aplica();
+      });
     });
-  });
-
-  document.getElementById('imprimir').addEventListener('click', () => window.print());
-  addEventListener('resize', encaixa);
-  encaixa();
+  }
+  liga('versoes', 'v', v => versao = v);
+  liga('tamanhos', 't', t => tamanho = t);
+  aplica();
 </script>
 
 </body>
