@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Calendário 1T 2027 — campanhas de loja</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="O calendario das campanhas de loja de 1 de janeiro a 31 de marco de 2027, em fase de brainstorm: a noticia de cada mes, o que foi falado e o que falta decidir.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='white'><rect x='18' y='26' width='64' height='56' rx='6' fill='none' stroke='white' stroke-width='7'/><rect x='18' y='26' width='64' height='15' /><rect x='31' y='14' width='8' height='16' rx='4'/><rect x='61' y='14' width='8' height='16' rx='4'/><rect x='30' y='52' width='12' height='11' rx='2'/><rect x='58' y='52' width='12' height='11' rx='2'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+           font-weight: 500; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; font-weight: 700;
+             color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+             border-radius: 6px; cursor: pointer; padding: .65rem 1.15rem;
+             transition: border-color .15s, color .15s, background .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none !important; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+           color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose + .prose { margin-top: .6rem; }
+  .prose a, .painel a, .note-item a { color: var(--accent); text-decoration: none;
+                                      border-bottom: 1px solid currentColor; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px;
+           background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums;
+              letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  /* três colunas de contexto fixo — mês/frente/fator. Não é atividade, não vira card clicável. */
+  .fatores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+             background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 44rem) { .fatores { grid-template-columns: 1fr; } }
+  .fatores > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .fatores .n { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem;
+                border-radius: 2px; align-self: flex-start; text-transform: uppercase; }
+  .fatores .n.vazio { background: var(--bad-bg); color: var(--bad); }
+  .fatores .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .fatores .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .fatores .q { font-family: var(--mono); font-size: .75rem; color: var(--ink-faint);
+                border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 38rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+  td a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.p { background: var(--accent-bg); color: var(--accent); }
+  .tag.f { background: var(--good-bg); color: var(--good); }
+  .tag.t { background: var(--warn-bg); color: var(--warn); }
+  .tag.s { background: var(--surface-2); color: var(--ink-faint); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.mudo { background: var(--surface-2); color: var(--ink-faint); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── grade de cards, recursiva: .bloco > .grade > .card-btn + .visor > .painel ── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grade[hidden] { display: none !important; }
+  .card-btn { text-align: left; background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px;
+              cursor: pointer; padding: .8rem .9rem; display: flex; flex-direction: column; gap: .3rem;
+              font-family: var(--sans); color: var(--ink); transition: border-color .15s, background .15s; }
+  .card-btn:hover { border-color: var(--ink-faint); }
+  .card-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .card-btn .cnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700; line-height: 1.3; }
+  .card-btn .cmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; }
+  .card-btn .cdesc { font-size: .75rem; color: var(--ink-soft); line-height: 1.45; }
+  .card-btn.mes .cnome { font-size: 1rem; }
+  .visor { display: flex; flex-direction: column; gap: 1rem; }
+  .visor[hidden] { display: none !important; }
+  .painel { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem;
+            display: flex; flex-direction: column; gap: .85rem; }
+  .painel[hidden] { display: none !important; }
+  .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink);
+                  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+                  color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  /* preâmbulo fixo do nível acima — aparece junto com o painel, não disputa um clique */
+  .grupo-descricao { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: 4px;
+                     padding: .75rem .9rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .grupo-descricao strong { color: var(--ink); font-weight: 600; }
+
+  /* ficha de campanha — campos fixos, texto de contexto, não é grade de atividade */
+  .ficha { display: grid; grid-template-columns: 7.5rem 1fr; gap: .4rem .9rem; font-size: .8125rem; }
+  @media (max-width: 34rem) { .ficha { grid-template-columns: 1fr; gap: .15rem; }
+                              .ficha dt { margin-top: .5rem; } }
+  .ficha dt { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+              color: var(--ink-faint); font-weight: 600; padding-top: .15rem; }
+  .ficha dd { color: var(--ink-soft); line-height: 1.55; }
+  .ficha dd strong { color: var(--ink); font-weight: 600; }
+  .ficha dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── quadro de semanas: régua de acompanhamento ── */
+  .barra { height: .45rem; background: var(--rule); border-radius: 99px; overflow: hidden; }
+  .barra > span { display: block; height: 100%; background: var(--accent); border-radius: 99px;
+                  transition: width .4s ease; }
+  table.semanas { min-width: 34rem; }
+  table.semanas td { font-variant-numeric: tabular-nums; }
+  table.semanas td.per, table.semanas td.sem { font-family: var(--mono); white-space: nowrap; }
+  table.semanas tr.passou td { opacity: .45; }
+  table.semanas tr.agora td { background: var(--accent-bg); }
+  table.semanas tr.agora td.sem { box-shadow: inset 3px 0 0 var(--accent); }
+  table.semanas tr.agora td.sem::after { content: " · agora"; color: var(--accent); font-weight: 700; }
+  table.semanas tr.virada td { border-top: 1px solid var(--ink-faint); }
+  .nd { color: var(--ink-faint); }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+  footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · calendário</div>
+    <h1>Calendário 1T 2027</h1>
+    <p class="lede">De 1º de janeiro a 31 de março. A página foi aberta <strong>três meses antes do
+    trimestre começar</strong>, e por um motivo: tem ação que demora para ficar de pé, e o que falta
+    quando a data chega é tempo de construção. Esta é a <strong>fase de brainstorm</strong> — só está
+    aqui o que o Fred falou, e o resto do espaço está em branco de propósito.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" data-tab="calendario" role="tab" aria-selected="false">Calendário</button>
+    <button class="tab-btn" data-tab="campanhas" role="tab" aria-selected="false">Campanhas</button>
+    <button class="tab-btn" data-tab="decisoes" role="tab" aria-selected="false">Decisões</button>
+  </div>
+
+<!-- ════════════════════════ ABA 1 · BRIEFING ════════════════════════ -->
+<div class="tab-panel" data-panel="briefing">
+
+  <section>
+    <h2><span class="n">1</span> O que este calendário é</h2>
+    <p class="prose">É o começo do planejamento do primeiro trimestre de 2027, aberto em
+    <strong>02/10/2026</strong> — 91 dias antes do trimestre. O motivo é o do Fred: <em>"tem ações que
+    demoram para fazer, a gente precisa de tempo para ir construindo"</em>. Então esta página existe
+    antes de ter conteúdo: ela é o lugar onde o brainstorm acontece e, conforme ele confirma, vira agenda.</p>
+    <p class="prose">A regra é a mesma do <a href="../calendario-4t-2026/">4T 2026</a>: <strong>a agenda
+    nasce vazia</strong>. Entra na aba <a href="#calendario">Calendário</a> só o que o Fred falou. O que eu
+    encontrar no repo ou no histórico, eu <em>menciono</em> — não insiro. Hoje isso dá
+    <strong>uma notícia</strong> (o aniversário da loja de Campinas) e <strong>uma campanha</strong>
+    (a colab com uma hamburgueria). Fevereiro e março estão em branco porque ninguém falou deles ainda,
+    não porque falta acabamento.</p>
+    <div class="strip">
+      <div><span class="v">90</span><span class="s">dias · 1/jan → 31/mar</span></div>
+      <div><span class="v">14</span><span class="s">semanas</span></div>
+      <div><span class="v">1</span><span class="s">notícia de mês · janeiro</span></div>
+      <div><span class="v">1</span><span class="s">campanha no levantamento</span></div>
+      <div><span class="v">0</span><span class="s">com data fechada</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> A notícia de cada mês<span class="hint">é ela que dá motivo pra loja falar</span></h2>
+    <p class="prose">Mesma espinha do trimestre anterior: o mês se organiza pela <strong>notícia</strong>,
+    porque é ela que dá motivo para a loja falar. A diferença é o tipo de notícia. No 4T eram
+    <em>produtos</em> (cardápio de verão, cardápio de Natal) — coisas que precisam ser criadas. Em janeiro é
+    uma <strong>data da própria loja</strong>: ela existe todo ano, ninguém precisa inventá-la, e ela não
+    depende de produto novo.</p>
+    <div class="fatores">
+      <div>
+        <span class="n">janeiro</span>
+        <span class="t">Aniversário da loja de Campinas</span>
+        <span class="d">A única notícia dada. É a data mais barata que existe: a loja faz aniversário
+        de graça. Ela não exige produto novo, só exige <strong>ocasião</strong> — e é nela que a colab com
+        a hamburgueria se encaixa. Falta o dado mais básico: <em>qual é o dia</em>.</span>
+        <span class="q">notícia dada · dia não registrado</span>
+      </div>
+      <div>
+        <span class="n vazio">fevereiro</span>
+        <span class="t">Nada dito ainda</span>
+        <span class="d">Nenhuma notícia e nenhuma campanha foram faladas para fevereiro. O mês tem o
+        Carnaval na terça <strong>9/02</strong>, mas data do calendário não é notícia da loja enquanto
+        ninguém transformar uma na outra.</span>
+        <span class="q">em branco · 4 semanas inteiras</span>
+      </div>
+      <div>
+        <span class="n vazio">março</span>
+        <span class="t">Nada dito ainda — e a Páscoa cai dentro</span>
+        <span class="d">Também em branco. Só que março de 2027 carrega a <strong>Páscoa em 28/03</strong>,
+        e na Holy a Páscoa é temporada de produção, não campanha de mídia. Em 2026 ela caiu em abril, fora
+        do trimestre; em 2027 ela cai dentro.</span>
+        <span class="q">em branco · com a maior data da marca dentro</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> As datas que o trimestre já tem<span class="hint">calendário, não agenda</span></h2>
+    <p class="prose">Estas datas existem independentemente de qualquer decisão nossa — são o calendário que
+    a cidade já tem. <strong>Nenhuma delas é campanha</strong>, e nenhuma entrou na aba Calendário: estão
+    aqui porque é mais fácil fazer o brainstorm olhando o terreno. No 4T a Black Friday apareceu desse
+    mesmo jeito, como pergunta, e só depois virou a Semana do Cookie em Dobro.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Data</th><th>Dia</th><th>Semana</th><th>O que é</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>1º de janeiro</td><td>sexta</td><td>S1</td><td>Feriado de Ano Novo — o trimestre abre num feriado, e a S1 tem só 3 dias.</td><td><span class="nd">nada dito</span></td></tr>
+        <tr><td>Aniversário de Campinas</td><td><span class="nd">?</span></td><td><span class="nd">?</span></td><td>A notícia de janeiro. É a única data desta tabela que é <strong>nossa</strong>.</td><td><span class="tag acc">é a notícia do mês</span></td></tr>
+        <tr><td>Sábados de janeiro</td><td>sáb</td><td>S1–S5</td><td>Dias 2, 9, 16, 23 e 30. A colab é um almoço de sábado, então é entre estes cinco — o dia 2 cai no fim de semana do Ano Novo.</td><td><span class="tag warn">sábado a escolher</span></td></tr>
+        <tr><td>Volta às aulas</td><td>—</td><td>S5–S6</td><td>Fim de janeiro / começo de fevereiro. O 4T tinha duas campanhas presas ao calendário escolar (<em>Aluno nota 10</em> e <em>Dia do aluno</em>) esperando contato com as escolas.</td><td><span class="nd">nada dito</span></td></tr>
+        <tr><td>Carnaval</td><td>terça</td><td>S7</td><td>9/02, com a quarta de cinzas em 10/02. Semana curta de movimento atípico.</td><td><span class="nd">nada dito</span></td></tr>
+        <tr><td>Dia da Mulher</td><td>segunda</td><td>S11</td><td>8/03.</td><td><span class="nd">nada dito</span></td></tr>
+        <tr><td>Sexta-feira Santa</td><td>sexta</td><td>S13</td><td>26/03, feriado.</td><td><span class="nd">nada dito</span></td></tr>
+        <tr><td><strong>Páscoa</strong></td><td>domingo</td><td>S13</td><td>28/03. Na Holy é a temporada de ovo artesanal — <em>"ovos feitos um a um, 9 lojas para atender"</em>, e recorde batido em 2026. As encomendas acontecem nas semanas <em>anteriores</em>.</td><td><span class="tag bad">entrou no trimestre</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Onde a colab cai na conta da área<span class="hint">pessoas × frequência × ticket</span></h2>
+    <p class="prose">A área de loja é organizada por uma conta só: <strong>faturamento de loja = pessoas ×
+    frequência × ticket</strong>. Toda ação tem que dizer qual fator ela empurra, senão não é comparável com
+    nenhuma outra. Ver <a href="../#ocasiao">o mapa da área</a>.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag p">pessoas</span><span>
+        <strong>A colab empurra "pessoas", e por um caminho que a área ainda não usou.</strong> As campanhas
+        de rosto novo do 4T compram atenção com <em>prova grátis e panfleto</em> — mini cookie,
+        cookie de graça, sorvete de graça. Esta compra atenção com o <em>público de outra marca</em>: quem
+        vem almoçar é cliente da hamburgueria, não nosso. Mídia zero, custo em produto e em operação.
+      </span></div>
+      <div class="note-item"><span class="tag warn">a mesma ideia do 4T, com o fluxo ao contrário</span><span>
+        O inventário do 4T tem uma campanha chamada <strong>combo com restaurante</strong>: o restaurante
+        vende o nosso cookie como sobremesa, no balcão dele. Ela está marcada <em>fora do escopo</em>, e o
+        motivo escrito é exato: <em>"vende no balcão de outra empresa"</em> — não leva ninguém para dentro
+        da loja. <strong>A colab de janeiro é a mesma parceria com a seta invertida:</strong> em vez de o
+        nosso cookie ir para a casa dele, a cozinha dele vem para a nossa casa, e o cliente dele atravessa a
+        nossa porta. É por isso que uma está fora do calendário e a outra está dentro — e vale saber que a
+        diferença entre as duas é só a direção do tráfego, não a ideia.
+      </span></div>
+      <div class="note-item"><span class="tag f">o que ela não resolve</span><span>
+        Como toda campanha de rosto novo, ela traz gente <strong>uma vez</strong>. Nada no formato descrito
+        faz a pessoa voltar numa segunda-feira qualquer — não tem voucher de volta, não tem motivo de
+        retorno. O molde do <a href="../cookie-de-graca/">Cookie de Graça</a> resolveu isso com uma segunda
+        camada (voucher para a visita seguinte); aqui essa camada não foi mencionada.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> O quadro de hoje<span class="hint">uma linha · detalhe na aba Campanhas</span></h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Campanha</th><th>Frente</th><th>Fator</th><th>Status</th><th>No calendário</th></tr></thead>
+      <tbody>
+        <tr><td>Colab com hamburgueria no aniversário de Campinas</td><td>alcance</td><td><span class="tag p">novos clientes</span></td><td>ideia · trazida pelo Fred em 02/10/2026</td><td><span class="tag acc">jan · sábado a definir</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="notes">
+      <div class="note-item"><span class="tag mudo">por que só uma linha</span><span>
+        Porque o levantamento é <strong>a lista que o Fred deu</strong>, não a união dela com o que existe no
+        repo. Em 02/10/2026, no calendário do 4T, ele cortou uma campanha que eu tinha incluído por conta
+        própria: <em>"eu não falei nela, você colocou porque você quis"</em>. Então a tabela cresce quando ele
+        falar, e o que eu achei fica na aba <a href="#campanhas">Campanhas</a> como menção, com a pergunta
+        em aberto.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span> O que este começo já mostra</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag good">a notícia de janeiro é a mais barata do ano</span><span>
+        O 4T gastou o trimestre inteiro esperando <strong>produto</strong>: o cardápio de verão travou o
+        lançamento de outubro, e o cardápio de Natal — que não existia no papel — travou dezembro.
+        <strong>Aniversário de loja não precisa ser criado.</strong> A data já está lá, repete todo ano, e o
+        trabalho é só decidir o que fazer com ela. É a primeira notícia do ano que não depende de cozinha.
+      </span></div>
+      <div class="note-item"><span class="tag bad">a Páscoa entrou no trimestre e ninguém falou dela</span><span>
+        Em 2026 a Páscoa foi em <strong>5 de abril</strong> — fora do 1T. Em 2027 ela é <strong>28 de
+        março</strong>, dentro. E na Holy a Páscoa não é campanha de loja: é <em>temporada de produção</em>,
+        com ovo artesanal feito um a um para as lojas da rede. O que isso faz com este calendário é
+        simples: <strong>as últimas semanas de março não estão livres</strong>, e a encomenda acontece antes
+        da data. Isso é exatamente o tipo de coisa que o aviso do Fred — <em>"tem ação que demora"</em> —
+        existe para pegar.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o ativo da colab é uma lista que não existe</span><span>
+        A campanha não depende de mídia nem de verba: depende de <strong>qual hamburgueria</strong> aceita, e
+        essa lista não existe. É a <em>terceira vez</em> que o mesmo padrão aparece — o Cookietone para
+        empresas parou na lista de empresas da região, os vídeos com influenciadores pararam na lista de
+        criadores de Piracicaba e Campinas. Em todas, o levantamento é o trabalho e define a data possível;
+        a campanha é a parte fácil.
+      </span></div>
+      <div class="note-item"><span class="tag f">janeiro é mês de movimento baixo — e isso é a favor</span><span>
+        Janeiro é conhecido na operação como o mês em que o movimento cai. Uma ação de rosto novo tem mais
+        valor marginal num mês fraco do que num mês de pico: em dezembro ela disputa com a fila, em janeiro
+        ela preenche. <strong>A notícia e a fraqueza do mês coincidem</strong> — não é sempre que isso
+        acontece.
+      </span></div>
+      <div class="note-item"><span class="tag bad">duas lacunas de quatro semanas cada</span><span>
+        Fevereiro e março não têm nada: <strong>nove das quatorze semanas estão em branco</strong>. No 4T o
+        buraco era novembro, e a causa era conhecida (não tinha notícia). Aqui a causa é diferente e mais
+        simples: <em>o brainstorm começou por janeiro e ainda não chegou nos outros dois</em>. É isso que
+        esta página está aqui para resolver.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 2 · CALENDÁRIO ════════════════════════ -->
+<div class="tab-panel" data-panel="calendario" hidden>
+
+  <section>
+    <h2><span class="n">1</span> Os três meses<span class="hint">clique num mês, depois numa campanha</span></h2>
+    <p class="prose">Cada mês abre com a sua notícia e <strong>só o que o Fred falou</strong>. Hoje isso é
+    janeiro com uma campanha; fevereiro e março abrem vazios. O vazio é informação — enquanto ele estiver
+    ali, é porque a decisão não foi tomada, não porque a página está incompleta.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn mes" data-alvo="jan"><span class="cnome">Janeiro</span><span class="cmeta">aniversário de Campinas</span><span class="cdesc">A única notícia do trimestre, e a única campanha falada até agora.</span></button>
+        <button class="card-btn mes" data-alvo="fev"><span class="cnome">Fevereiro</span><span class="cmeta">nada dito ainda</span><span class="cdesc">Quatro semanas inteiras, sem notícia e sem campanha. Carnaval em 9/02.</span></button>
+        <button class="card-btn mes" data-alvo="mar"><span class="cnome">Março</span><span class="cmeta">a Páscoa cai em 28/03</span><span class="cdesc">Também em branco — com a maior data de produção da marca dentro dele.</span></button>
+      </div>
+
+      <div class="visor">
+
+        <!-- ───── JANEIRO ───── -->
+        <div class="painel" data-alvo="jan" hidden>
+          <span class="ptit">Janeiro <span class="tag acc">1 campanha falada</span></span>
+          <div class="grupo-descricao">
+            A notícia é o <strong>aniversário da loja de Campinas</strong>, e ela é diferente de tudo que o
+            4T teve: não precisa ser produzida, só precisa de ocasião. O <strong>dia exato não está
+            registrado em lugar nenhum</strong> que eu tenha acesso — e sem ele não dá para escolher o
+            sábado do almoço. O que o histórico mostra é que a loja de Campinas já existia na Páscoa de
+            <strong>março de 2024</strong> (o post de 30/03/2024 diz <em>"nossa primeira Páscoa na Holy,
+            Campinas"</em>) e que um post de agosto de 2025 fala da chegada a Campinas como <em>"ano
+            passado"</em> — o que aponta para abertura no começo de 2024 e, portanto, <strong>3 anos em
+            janeiro de 2027</strong>. É inferência, não registro: precisa de confirmação.<br><br>
+            A loja abre <strong>sábado das 11h às 18h</strong>, então um almoço de sábado cabe no horário
+            normal de funcionamento — não exige abrir fora de hora.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="jan1"><span class="cnome">1 · Colab com hamburgueria no aniversário</span><span class="cmeta">almoço de sábado · nada fechado</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="jan1" hidden><span class="ptit">Colab com hamburgueria no aniversário de Campinas</span>
+                <span class="psub">trazida pelo Fred em 02/10/2026 · sem data, sem parceiro, sem quantidade</span>
+                <p class="prose">Uma hamburgueria da cidade vem para <strong>dentro da nossa loja</strong> e
+                serve um almoço num sábado de janeiro. Eles trazem o <strong>hambúrguer, a batata frita e o
+                milkshake</strong>; <strong>o cookie é nosso</strong>. O aniversário da loja é o motivo que
+                faz o convite fazer sentido para os dois lados.</p>
+                <p class="prose">O que ela compra não é mídia: é <strong>o público do outro</strong>. Quem vai
+                almoçar hambúrguer num sábado é cliente da hamburgueria, e naquele dia ele atravessa a nossa
+                porta, come no nosso salão e termina a refeição com um cookie. É a primeira ação da área que
+                traz gente sem comprar atenção com prova grátis.</p>
+                <dl class="ficha">
+                  <dt>o que é nosso</dt><dd>O espaço, o salão, a data e <strong>o cookie</strong> — a sobremesa do almoço. O resto do menu é dele.</dd>
+                  <dt>o que falta</dt><dd><strong>Tudo.</strong> Quem é a empresa · quem faz o contato · qual sábado · a quantidade · como funciona na prática · quem recebe o dinheiro de quê. Nada disso foi decidido.</dd>
+                  <dt>o primeiro passo</dt><dd>Não é a data, é a <strong>lista de hamburguerias de Campinas</strong>. Ela não existe, e é ela que define o que é possível: um parceiro que já faz evento fora de casa é um projeto; um que nunca saiu da própria cozinha é outro.</dd>
+                  <dt>o dia depende</dt><dd>Do aniversário. Os sábados de janeiro são <strong>2, 9, 16, 23 e 30</strong> — e o dia 2 é o fim de semana do Ano Novo, com a cidade vazia.</dd>
+                  <dt>a conta de dois lados</dt><dd>São <em>duas cozinhas comprometidas no mesmo dia</em>. A quantidade não é só nossa: é quantos hambúrgueres ele consegue produzir num espaço que não é o dele, e quantos cookies a gente produz sem parar a venda normal do sábado.</dd>
+                  <dt>o risco de operação</dt><dd>Sábado das 11h às 18h é horário normal de venda. Um almoço dentro do salão <strong>ocupa mesa, fila e balcão</strong> — o cliente que viria comprar cookie encontra uma loja cheia de gente almoçando. Isso pode ser exatamente o objetivo, mas é uma escolha, não um detalhe.</dd>
+                  <dt>o que ela não faz</dt><dd>Não cria motivo de volta. Se a ideia é que o cliente da hamburgueria se torne cliente nosso, falta a <em>segunda camada</em> — o que ele leva na mão para voltar.</dd>
+                  <dt>parente no 4T</dt><dd>É o <strong>combo com restaurante</strong> com a seta invertida (ver o Briefing). Aquele estava fora do escopo por vender no balcão do outro; este traz o cliente do outro para o nosso balcão.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── FEVEREIRO ───── -->
+        <div class="painel" data-alvo="fev" hidden>
+          <span class="ptit">Fevereiro <span class="tag mudo">vazio</span></span>
+          <div class="grupo-descricao">
+            <strong>Nada foi falado para fevereiro</strong> — nem notícia, nem campanha. Não tem card aqui
+            porque não tem item, e o espaço fica em branco de propósito.<br><br>
+            O que o mês tem, de fato: <strong>quatro semanas inteiras</strong> (S6 a S9, de 1º a 28/02 —
+            fevereiro de 2027 começa numa segunda e termina num domingo, então ele cabe exatamente em quatro
+            blocos), o <strong>Carnaval na terça 9/02</strong> com a quarta de cinzas em 10/02, e a volta às
+            aulas logo na virada de janeiro. Nenhuma dessas datas é campanha enquanto ninguém decidir que é.
+          </div>
+        </div>
+
+        <!-- ───── MARÇO ───── -->
+        <div class="painel" data-alvo="mar" hidden>
+          <span class="ptit">Março <span class="tag mudo">vazio</span> <span class="tag bad">Páscoa 28/03</span></span>
+          <div class="grupo-descricao">
+            <strong>Também nada foi falado para março</strong> — e é o mês que tem a coisa mais pesada do
+            trimestre dentro dele.<br><br>
+            A <strong>Páscoa cai em 28 de março de 2027</strong> (domingo), com a sexta-feira santa em 26/03.
+            Na Holy, a Páscoa é <em>temporada de produção</em>, não campanha de mídia: ovo artesanal feito um
+            a um, para a rede inteira, com recorde batido em 2026. E a encomenda não acontece na data — ela
+            acontece nas <strong>semanas anteriores</strong>, ou seja, dentro deste calendário.<br><br>
+            Em 2026 a Páscoa foi em 5 de abril, fora do 1T. <strong>Em 2027 ela entra</strong>, e é a S13
+            (22 a 28/03) que recebe o impacto. Nada disso é decisão desta página — é informação que a
+            decisão precisa ter.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> As 14 semanas<span class="hint">a régua pra acompanhar</span></h2>
+    <p class="prose">O trimestre tem <strong>90 dias</strong> — 12 semanas e 6 dias. Na régua de segunda a
+    domingo isso cai em <strong>14 blocos</strong>, a primeira e a última parciais: o período começa numa
+    sexta (1º de janeiro) e termina numa quarta (31 de março).</p>
+    <p class="prose"><strong>Nenhuma semana atravessa o mês.</strong> É uma coincidência de calendário que o
+    4T não tinha (lá eram duas) e que facilita o planejamento: fevereiro de 2027 começa numa segunda e termina
+    num domingo, então janeiro, fevereiro e março são blocos fechados de semana. <em>Fevereiro são
+    exatamente quatro semanas, do primeiro ao último dia.</em></p>
+
+    <div class="strip" id="contador">
+      <div><span class="label">Hoje</span><span class="v" data-c="hoje">—</span><span class="s" data-c="hoje-s">dia do trimestre</span></div>
+      <div><span class="label">Decorrido</span><span class="v" data-c="dia">—</span><span class="s">de 90 dias</span></div>
+      <div><span class="label">Falta</span><span class="v" data-c="falta">—</span><span class="s" data-c="falta-s">até 31 de março</span></div>
+      <div><span class="label">Semana</span><span class="v" data-c="semana">—</span><span class="s" data-c="semana-s">de 14</span></div>
+      <div><span class="label">Até a Páscoa</span><span class="v" data-c="pascoa">—</span><span class="s" data-c="pascoa-s">dias · 28/03/2027</span></div>
+    </div>
+    <div class="barra" role="img" aria-label="progresso do trimestre"><span data-c="barra" style="width:0%"></span></div>
+
+    <div class="tablewrap"><table class="semanas">
+      <thead><tr><th>Semana</th><th>Período</th><th>Dias</th><th>Notícia do mês</th><th>Marcado</th></tr></thead>
+      <tbody>
+        <tr data-ini="2027-01-01" data-fim="2027-01-03"><td class="sem">S1</td><td class="per">1 → 3 jan</td><td>3</td><td>aniversário</td><td><span class="nd">parcial · abre no feriado de Ano Novo · sábado 2</span></td></tr>
+        <tr data-ini="2027-01-04" data-fim="2027-01-10"><td class="sem">S2</td><td class="per">4 → 10 jan</td><td>7</td><td>aniversário</td><td><span class="nd">sem data · sábado 9</span></td></tr>
+        <tr data-ini="2027-01-11" data-fim="2027-01-17"><td class="sem">S3</td><td class="per">11 → 17 jan</td><td>7</td><td>aniversário</td><td><span class="nd">sem data · sábado 16</span></td></tr>
+        <tr data-ini="2027-01-18" data-fim="2027-01-24"><td class="sem">S4</td><td class="per">18 → 24 jan</td><td>7</td><td>aniversário</td><td><span class="nd">sem data · sábado 23</span></td></tr>
+        <tr data-ini="2027-01-25" data-fim="2027-01-31"><td class="sem">S5</td><td class="per">25 → 31 jan</td><td>7</td><td>aniversário</td><td><span class="nd">sem data · sábado 30 · volta às aulas</span></td></tr>
+        <tr class="virada" data-ini="2027-02-01" data-fim="2027-02-07"><td class="sem">S6</td><td class="per">1 → 7 fev</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="nd">vazia</span></td></tr>
+        <tr data-ini="2027-02-08" data-fim="2027-02-14"><td class="sem">S7</td><td class="per">8 → 14 fev</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="tag warn">Carnaval · ter 9</span> <span class="nd">movimento atípico</span></td></tr>
+        <tr data-ini="2027-02-15" data-fim="2027-02-21"><td class="sem">S8</td><td class="per">15 → 21 fev</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="nd">vazia</span></td></tr>
+        <tr data-ini="2027-02-22" data-fim="2027-02-28"><td class="sem">S9</td><td class="per">22 → 28 fev</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="nd">vazia · fecha fevereiro exato</span></td></tr>
+        <tr class="virada" data-ini="2027-03-01" data-fim="2027-03-07"><td class="sem">S10</td><td class="per">1 → 7 mar</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="nd">vazia</span></td></tr>
+        <tr data-ini="2027-03-08" data-fim="2027-03-14"><td class="sem">S11</td><td class="per">8 → 14 mar</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="nd">Dia da Mulher · seg 8</span></td></tr>
+        <tr data-ini="2027-03-15" data-fim="2027-03-21"><td class="sem">S12</td><td class="per">15 → 21 mar</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="tag bad">encomenda de Páscoa</span> <span class="nd">a semana antes</span></td></tr>
+        <tr data-ini="2027-03-22" data-fim="2027-03-28"><td class="sem">S13</td><td class="per">22 → 28 mar</td><td>7</td><td><span class="nd">nada dito</span></td><td><span class="tag bad">Páscoa · dom 28</span> <span class="nd">sexta santa 26</span></td></tr>
+        <tr data-ini="2027-03-29" data-fim="2027-03-31"><td class="sem">S14</td><td class="per">29 → 31 mar</td><td>3</td><td><span class="nd">nada dito</span></td><td><span class="nd">parcial · a semana depois da Páscoa</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="notes">
+      <div class="note-item"><span class="tag bad">nove das quatorze semanas estão vazias</span><span>
+        Janeiro tem a notícia do mês em todas as cinco semanas, mas <strong>nenhuma tem data marcada</strong>
+        — a colab é um sábado, e o sábado depende do dia do aniversário. Fevereiro e março somam
+        <strong>nove semanas sem nada</strong>, das quais só duas têm sequer uma data do calendário encostada
+        nelas (S7, Carnaval, e S13, Páscoa).
+      </span></div>
+      <div class="note-item"><span class="tag acc">a primeira semana tem 3 dias e abre num feriado</span><span>
+        A S1 vai de sexta 1º a domingo 3 de janeiro, e o dia 1º é feriado. <strong>O primeiro sábado do
+        trimestre, dia 2, é o do fim de semana do Ano Novo</strong> — tecnicamente é um sábado de janeiro,
+        praticamente é o dia em que a cidade está fora.
+      </span></div>
+      <div class="note-item"><span class="tag warn">a Páscoa come as duas últimas semanas, não só a data</span><span>
+        A Páscoa é domingo 28/03, na S13. Mas a produção e a encomenda de ovo acontecem <em>antes</em>: a
+        S12 (15–21/03) e a S13 são as semanas em que a cozinha está comprometida. <strong>Campanha de loja
+        que estreie em março disputa cozinha com a Páscoa</strong> — e a S14, a semana parcial depois da
+        data, é o único pedaço de março que a Páscoa não pega.
+      </span></div>
+      <div class="note-item"><span class="tag f">5 semanas de janeiro · 4 de fevereiro · 5 de março</span><span>
+        Contando as parciais. Sem elas, cada mês tem quatro janelas de semana cheia — o mesmo tamanho de
+        janela que o 4T tinha. A diferença é que <strong>aqui nenhuma semana é dividida entre dois
+        meses</strong>, então o mês fecha exatamente onde a semana fecha.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 3 · CAMPANHAS ════════════════════════ -->
+<div class="tab-panel" data-panel="campanhas" hidden>
+
+  <section>
+    <h2><span class="n">1</span> O levantamento<span class="hint">clique na campanha</span></h2>
+    <p class="prose">Uma campanha, porque uma foi falada. Esta aba cresce do mesmo jeito que a do 4T cresceu:
+    o Fred fala, eu levanto o contexto dela — preço, prazo, histórico, o que já existe no repo — e ela entra
+    com o estado <strong>real</strong>, não o desejado.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="c1"><span class="cnome">Colab com hamburgueria no aniversário de Campinas</span><span class="cmeta">ideia · janeiro · nada fechado</span></button>
+      </div>
+      <div class="visor">
+        <div class="painel" data-alvo="c1" hidden><span class="ptit">Colab com hamburgueria no aniversário de Campinas <span class="tag p">novos clientes</span></span>
+          <dl class="ficha">
+            <dt>o que é</dt><dd>Uma hamburgueria da cidade serve um <strong>almoço num sábado de janeiro dentro da nossa loja</strong>, no aniversário dela. Eles levam hambúrguer, batata frita e milkshake; <strong>o cookie é nosso</strong>.</dd>
+            <dt>status</dt><dd><strong>Ideia.</strong> Trazida pelo Fred em 02/10/2026. Nada decidido: nem parceiro, nem data, nem quantidade, nem mecânica.</dd>
+            <dt>quem traz o público</dt><dd>Ele. É o ponto da campanha: o cliente que vem almoçar é da hamburgueria, e naquele dia ele entra na nossa loja. Mídia zero.</dd>
+            <dt>o fator</dt><dd><span class="tag p">pessoas</span> — rosto novo no salão. Não encosta em frequência nem em ticket, no formato descrito.</dd>
+            <dt>o ativo que falta</dt><dd>A <strong>lista de hamburguerias de Campinas</strong>. Não existe. É o mesmo gargalo do Cookietone (lista de empresas) e dos vídeos com influenciadores (lista de criadores): o levantamento é o trabalho, a campanha é a parte fácil.</dd>
+            <dt>critério sugerido</dt><dd>Hamburgueria que <em>já faz pop-up ou evento fora de casa</em> vale mais que a maior da cidade: ela sabe operar numa cozinha que não é dela. E o público dela tem que ser o mesmo nosso <strong>em outro momento do dia</strong> — é o mesmo critério que foi escrito para a parceria com loja da região no 4T.</dd>
+            <dt>as cinco datas possíveis</dt><dd>Sábados 2, 9, 16, 23 e 30 de janeiro. O dia 2 é o fim de semana do Ano Novo. Qual deles depende do dia do aniversário, que não está registrado.</dd>
+            <dt>a conta que ninguém fez</dt><dd>Quem cobra o quê. O hambúrguer é venda dele dentro da nossa loja; o cookie é nossa. <strong>Se o almoço é pago, há dois caixas na mesma mesa</strong> — e se é oferecido, alguém está pagando o custo. Nada disso foi dito.</dd>
+            <dt>o custo escondido</dt><dd>Sábado das 11h às 18h é horário cheio de venda. O salão ocupado por um almoço é <em>mesa que o cliente de cookie não usa</em> — a mesma lição da degustação com influenciadores do 4T: fechar ou ocupar um horário é faturamento que não entra, e tem que ser escolha consciente.</dd>
+            <dt>mês</dt><dd><strong>Janeiro</strong> — foi o Fred quem colocou ali, junto com a notícia do mês.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O que existe e <em>não</em> entrou<span class="hint">menção, não inserção</span></h2>
+    <p class="prose">Isto não é inventário do 1T — é a lista do que já está construído e pode ser chamado,
+    se ele quiser. <strong>Nada daqui entra sem ele falar.</strong> Está aqui porque seria pior deixar o
+    trabalho pronto escondido do brainstorm.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag mudo">no 4T e não confirmado</span><span>
+        Nove campanhas do <a href="../calendario-4t-2026/">calendário do 4T</a> ficaram no inventário sem
+        serem confirmadas: <strong>Cookie de Graça em Piracicaba e Campinas</strong>, <strong>Aluno nota
+        10</strong>, <strong>Dia do aluno da escola</strong>, <strong>vídeos com influenciadores</strong>,
+        <strong>post em parceria com loja da região</strong>, <strong>Cookietone para empresas</strong>,
+        <strong>combo com restaurante</strong>, <strong>experiência do salão</strong> e <strong>avaliação no
+        Google</strong>. Duas delas têm ligação direta com o 1T: as <em>duas de escola</em> dependem do
+        calendário de provas, que é justamente janeiro e fevereiro; e a <em>experiência do salão</em> trata
+        do ambiente onde este almoço vai acontecer.
+      </span></div>
+      <div class="note-item"><span class="tag mudo">páginas de campanha que já existem no repo</span><span>
+        <a href="../mini-cookie/">Mini Cookie na região</a>, <a href="../cookie-de-graca/">Cookie de
+        Graça</a>, <a href="../campanha-fidelizacao/">campanha de fidelização</a>,
+        <a href="../sorteio-condominios/">sorteio em condomínios</a>,
+        <a href="../indicacao-uber/">indicação Uber</a>, <a href="../cartaz-pix/">cartaz do Pix</a>,
+        <a href="../cardapio-que-cabe-no-bolso/">cardápio que cabe no bolso</a>,
+        <a href="../programa-de-indicacao/">programa de indicação</a> e
+        <a href="../campanha-sorvete/">Tá calor, tem Holy</a>. São moldes prontos — o que falta a cada uma
+        é data e decisão, não construção.
+      </span></div>
+      <div class="note-item"><span class="tag acc">a regra desta aba</span><span>
+        <strong>Mencionar não é inserir.</strong> Em 02/10/2026 o Fred cortou uma campanha que eu tinha
+        colocado no inventário do 4T por conta própria. O acordo que ficou: eu digo que achei, ele diz se
+        entra. Então estas duas listas são <em>oferta</em>, e a tabela de campanhas acima é
+        <em>decisão</em>.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 4 · DECISÕES ════════════════════════ -->
+<div class="tab-panel" data-panel="decisoes" hidden>
+
+  <section>
+    <h2><span class="n">1</span> O que falta decidir<span class="hint">clique num card</span></h2>
+    <p class="prose">Dez perguntas em aberto. As duas primeiras são de <strong>dado</strong>, não de decisão
+    — sem elas nenhuma data pode ser escolhida. As duas últimas são de prazo: <em>são as que, se ficarem
+    para dezembro, chegam tarde</em> — e é exatamente por isso que esta página existe em outubro.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="d1"><span class="cnome">Qual é o dia do aniversário de Campinas</span><span class="cmeta">dado · trava todo o resto</span></button>
+        <button class="card-btn" data-alvo="d2"><span class="cnome">"Tem todo mês de aniversário pra gente pensar"</span><span class="cmeta">dado · pode ser a espinha do trimestre</span></button>
+        <button class="card-btn" data-alvo="d3"><span class="cnome">Quem é a hamburgueria</span><span class="cmeta">o ativo da campanha</span></button>
+        <button class="card-btn" data-alvo="d4"><span class="cnome">Qual sábado de janeiro</span><span class="cmeta">cinco opções · uma é o Ano Novo</span></button>
+        <button class="card-btn" data-alvo="d5"><span class="cnome">A quantidade, de dois lados</span><span class="cmeta">duas cozinhas no mesmo dia</span></button>
+        <button class="card-btn" data-alvo="d6"><span class="cnome">Quem cobra o quê</span><span class="cmeta">dois caixas na mesma mesa</span></button>
+        <button class="card-btn" data-alvo="d7"><span class="cnome">O almoço ocupa o salão num sábado cheio</span><span class="cmeta">custo escondido</span></button>
+        <button class="card-btn" data-alvo="d8"><span class="cnome">O cliente leva algo para voltar?</span><span class="cmeta">a segunda camada</span></button>
+        <button class="card-btn" data-alvo="d9"><span class="cnome">A Páscoa de 28/03 entrou no trimestre</span><span class="cmeta">prazo curto</span></button>
+        <button class="card-btn" data-alvo="d10"><span class="cnome">Fevereiro e março estão vazios</span><span class="cmeta">prazo curto · 9 semanas</span></button>
+      </div>
+
+      <div class="visor">
+        <div class="painel" data-alvo="d1" hidden><span class="ptit">Qual é o dia do aniversário de Campinas</span>
+          <p class="prose">É a pergunta mais simples da página e a que trava mais coisa. <strong>O dia não
+          está registrado em nenhum lugar que eu alcance</strong> — nem nas páginas do repo, nem no histórico
+          de posts da loja que eu tenho.</p>
+          <p class="prose">O que o histórico permite inferir: o post de <strong>30/03/2024</strong> fala da
+          <em>"nossa primeira Páscoa na Holy, Campinas"</em>, e um post de agosto de 2025 descreve a chegada a
+          Campinas como <em>"ano passado"</em>. Isso coloca a abertura no <strong>começo de 2024</strong> e
+          aponta para <strong>3 anos em janeiro de 2027</strong> — mas é inferência, e o número de anos é o
+          tipo de coisa que vai no cartaz.</p>
+          <p class="prose">Sem o dia, o sábado do almoço é escolhido no escuro: um almoço <em>no</em>
+          aniversário e um almoço três semanas depois do aniversário são campanhas diferentes.</p>
+        </div>
+        <div class="painel" data-alvo="d2" hidden><span class="ptit">"Tem todo mês de aniversário pra gente pensar"</span>
+          <p class="prose">Essa frase pode querer dizer duas coisas diferentes, e elas mudam a página
+          inteira:</p>
+          <p class="prose"><strong>(a) O mês inteiro é o aniversário.</strong> Janeiro todo é comemoração, não
+          só o dia — e então a colab é uma peça dentro de uma campanha de mês, não um evento de sábado.</p>
+          <p class="prose"><strong>(b) Cada loja tem o seu mês de aniversário.</strong> Campinas em janeiro, e
+          Piracicaba e Paulínia em outros meses — possivelmente dentro deste mesmo trimestre. Se for isso,
+          <em>o aniversário deixa de ser a notícia de janeiro e passa a ser a espinha dos três meses</em>, e
+          fevereiro e março param de estar vazios.</p>
+          <p class="prose">Não tenho os meses de abertura de Piracicaba e Paulínia — nenhum registro no repo
+          traz isso. Essa é a resposta que mais muda o calendário, e é um dado, não uma decisão.</p>
+        </div>
+        <div class="painel" data-alvo="d3" hidden><span class="ptit">Quem é a hamburgueria</span>
+          <p class="prose">É o primeiro passo real, e não é a data. <strong>A lista de hamburguerias de
+          Campinas não existe</strong> — e é ela, não a mecânica, que define o que a campanha pode ser.</p>
+          <p class="prose">Esse padrão já apareceu duas vezes no trimestre anterior e nas duas o levantamento
+          foi o gargalo: o <em>Cookietone para empresas</em> parou na lista de empresas da região, e os
+          <em>vídeos com influenciadores</em> pararam na lista de criadores de Piracicaba e Campinas. A lição
+          que ficou vale aqui: <strong>o levantamento é o trabalho e ele define a data possível</strong>, não
+          o contrário.</p>
+          <p class="prose">Um critério que já está escrito na área e serve: vale o parceiro que tem
+          <em>o mesmo cliente em outro momento do dia</em>. E um critério novo, que é específico desta
+          campanha: <strong>hamburgueria que já fez pop-up ou evento fora de casa</strong> vale mais que a
+          maior da cidade — ela sabe cozinhar num lugar que não é o dela, e é isso que vai acontecer.</p>
+        </div>
+        <div class="painel" data-alvo="d4" hidden><span class="ptit">Qual sábado de janeiro</span>
+          <p class="prose">Os sábados são <strong>2, 9, 16, 23 e 30</strong>. O dia 2 é o fim de semana do Ano
+          Novo — tecnicamente um sábado de janeiro, praticamente o dia em que a cidade está fora. Na prática
+          são quatro opções.</p>
+          <p class="prose">A escolha depende de duas coisas que ainda não existem: <strong>o dia do
+          aniversário</strong> (d1) e <strong>a agenda do parceiro</strong> (d3). Hamburgueria boa tem sábado
+          cheio: o sábado que a gente quer pode ser exatamente o que ele não pode dar — e então o aniversário
+          é que vai ter que ceder, ou a campanha muda de dia da semana.</p>
+        </div>
+        <div class="painel" data-alvo="d5" hidden><span class="ptit">A quantidade, de dois lados</span>
+          <p class="prose">A quantidade não é uma pergunta nossa — são <strong>duas cozinhas comprometidas no
+          mesmo dia</strong>, cada uma com um teto diferente:</p>
+          <p class="prose"><strong>Do lado dele:</strong> quantos hambúrgueres ele consegue produzir num espaço
+          que não é o dele, com o equipamento que couber na nossa loja. <strong>Do nosso lado:</strong> quantos
+          cookies a mais, sem parar a produção normal de um sábado — que é dia cheio de venda.</p>
+          <p class="prose">O número que fecha a campanha é o <em>menor dos dois</em>. E ele tem que ser
+          decidido antes da divulgação, porque almoço que acaba na metade do sábado é uma experiência pior do
+          que almoço que não aconteceu.</p>
+        </div>
+        <div class="painel" data-alvo="d6" hidden><span class="ptit">Quem cobra o quê</span>
+          <p class="prose">O almoço tem dois donos. O hambúrguer, a batata e o milkshake são dele; o cookie é
+          nosso. <strong>Se o almoço é vendido, há dois caixas na mesma mesa</strong> — e aí tem que ficar
+          decidido quem registra, quem emite, e o que acontece com o nosso cookie dentro do preço dele.</p>
+          <p class="prose">Se o almoço é oferecido — de graça, por ser aniversário — então alguém está pagando
+          o custo, e isso também não foi dito. As duas versões são defensáveis; o que não funciona é descobrir
+          isso no sábado.</p>
+          <p class="prose">Vale olhar para o lado: o <em>combo com restaurante</em> do 4T foi marcado como
+          "precisa de conta própria — preço de atacado, quem entrega, como a marca aparece". A colab precisa
+          da mesma conta, só com a seta virada.</p>
+        </div>
+        <div class="painel" data-alvo="d7" hidden><span class="ptit">O almoço ocupa o salão num sábado cheio</span>
+          <p class="prose">A loja de Campinas abre <strong>sábado das 11h às 18h</strong>. A boa notícia é que
+          um almoço cabe no horário normal — não precisa abrir fora de hora. A outra metade é que
+          <strong>sábado é dia de venda</strong>, e um almoço dentro do salão ocupa mesa, fila e balcão.</p>
+          <p class="prose">Isso pode ser exatamente o objetivo: loja cheia é o próprio conteúdo da campanha.
+          Mas é escolha, não detalhe — e a lição da degustação com influenciadores do 4T é literalmente essa:
+          <em>ocupar um horário da loja é faturamento que não entra</em>, então escolhe-se a faixa consciente
+          de quanto custa.</p>
+        </div>
+        <div class="painel" data-alvo="d8" hidden><span class="ptit">O cliente leva algo para voltar?</span>
+          <p class="prose">No formato descrito, a campanha traz o cliente da hamburgueria <strong>uma
+          vez</strong>. Ele almoça, come o cookie e vai embora. Nada no que foi falado faz ele voltar numa
+          segunda-feira qualquer.</p>
+          <p class="prose">O molde do <a href="../cookie-de-graca/">Cookie de Graça</a> resolveu isso com
+          camadas: o brinde compra a visita de hoje, o <strong>voucher compra a segunda visita</strong>, e o
+          sorteio faz o story sair caprichado. Aqui só existe a primeira camada. A pergunta é se a segunda
+          entra — e ela é barata: é um papel na mão de quem está sentado comendo.</p>
+        </div>
+        <div class="painel" data-alvo="d9" hidden><span class="ptit">A Páscoa de 28/03 entrou no trimestre</span>
+          <p class="prose">Em 2026 a Páscoa caiu em <strong>5 de abril</strong>, fora do primeiro trimestre.
+          Em 2027 ela cai em <strong>28 de março</strong> — dentro. E na Holy a Páscoa não é campanha de loja:
+          é <em>temporada de produção</em>, com ovo artesanal feito um a um para a rede inteira e recorde
+          batido em 2026.</p>
+          <p class="prose">A consequência para este calendário é concreta: a encomenda e a produção acontecem
+          nas <strong>semanas anteriores à data</strong> — S12 e S13 —, então <em>as duas últimas semanas
+          cheias de março não estão livres</em>. Qualquer campanha de loja que estreie em março disputa cozinha
+          com a Páscoa.</p>
+          <p class="prose">Nada disso é decisão desta página: a Páscoa é da rede, não da área de loja. Mas é
+          informação que a decisão de março precisa ter — e é o exemplo mais claro do motivo pelo qual este
+          calendário foi aberto com três meses de antecedência.</p>
+        </div>
+        <div class="painel" data-alvo="d10" hidden><span class="ptit">Fevereiro e março estão vazios</span>
+          <p class="prose"><strong>Nove das quatorze semanas não têm nada</strong>, e nenhuma delas tem
+          notícia de mês. No 4T o buraco era novembro, e a causa era estrutural: não existia notícia nova
+          naquele mês. Aqui a causa é outra, e mais fácil de resolver: <em>o brainstorm começou por janeiro e
+          ainda não chegou nos outros dois meses</em>.</p>
+          <p class="prose">O que o terreno oferece, sem nenhuma decisão tomada: <strong>Carnaval</strong>
+          (terça 9/02), <strong>volta às aulas</strong> (que é o que destrava as duas campanhas de escola
+          paradas no 4T), <strong>Dia da Mulher</strong> (segunda 8/03) e a <strong>Páscoa</strong> (28/03,
+          que é produção e não mídia). E, se a resposta de d2 for "cada loja tem o seu mês", o aniversário de
+          Piracicaba ou de Paulínia pode preencher um desses meses sem precisar inventar nada.</p>
+          <p class="prose">A regra continua valendo: <strong>eu não preencho</strong>. O vazio fica visível até
+          ele falar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+  <footer>
+    Calendário do 1º trimestre de 2027 — campanhas de loja da Holy Cookie, de 1º de janeiro a 31 de março.
+    Aberto em 02/10/2026, em fase de <strong>brainstorm</strong>, a pedido do Fred: ação que demora precisa de
+    tempo de construção. Contém só o que ele falou — uma notícia de mês e uma campanha. As datas de calendário
+    (Carnaval, Dia da Mulher, Páscoa) estão na página como <em>terreno</em>, não como agenda.
+    <strong>Nada aqui está aprovado</strong>, e nenhuma data está fechada.
+    Ver também o <a href="../calendario-4t-2026/">Calendário 4T 2026</a> e a
+    <a href="../">página da área</a>.
+  </footer>
+
+</div>
+
+<script>
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome;
+    else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({ top: 0 }); });
+  });
+  var ABAS = ['briefing', 'calendario', 'campanhas', 'decisoes'];
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos href="#campanhas" trocam de aba, não só o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
+
+  // ── régua do trimestre: dias decorridos/restantes e a semana de agora
+  (function () {
+    var cont = document.getElementById('contador');
+    if (!cont) return;
+    var MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    var DIA = 864e5;
+    function d(iso) { var p = iso.split('-'); return new Date(+p[0], p[1] - 1, +p[2]); }
+    function zera(x) { return new Date(x.getFullYear(), x.getMonth(), x.getDate()); }
+    var INICIO = d('2027-01-01'), FIM = d('2027-03-31'), TOTAL = Math.round((FIM - INICIO) / DIA) + 1;
+    var PASCOA = d('2027-03-28');
+    var hoje = zera(new Date());
+    function poe(k, v) { var e = cont.querySelector('[data-c="' + k + '"]'); if (e) e.textContent = v; }
+
+    poe('hoje', hoje.getDate() + '/' + MES[hoje.getMonth()]);
+    var decorrido = Math.round((hoje - INICIO) / DIA) + 1;
+    var falta = Math.round((FIM - hoje) / DIA);
+    var dentro = decorrido >= 1 && falta >= 0;
+
+    if (decorrido < 1) {
+      poe('hoje-s', 'antes do trimestre');
+      poe('dia', '0'); poe('falta', String(1 - decorrido)); poe('falta-s', 'até 1º de janeiro');
+    } else if (falta < 0) {
+      poe('hoje-s', 'trimestre encerrado');
+      poe('dia', String(TOTAL)); poe('falta', '0'); poe('falta-s', 'o calendário fechou em 31/mar');
+    } else {
+      poe('hoje-s', 'dia do trimestre');
+      poe('dia', String(decorrido));
+      poe('falta', String(falta));
+      poe('falta-s', falta === 1 ? 'dia até 31 de março' : 'dias até 31 de março');
+    }
+
+    var linhas = document.querySelectorAll('table.semanas tbody tr');
+    var atual = 0;
+    linhas.forEach(function (tr, i) {
+      var a = d(tr.dataset.ini), b = d(tr.dataset.fim);
+      tr.classList.remove('agora', 'passou');
+      if (hoje > b) tr.classList.add('passou');
+      else if (hoje >= a) { tr.classList.add('agora'); atual = i + 1; }
+    });
+    poe('semana', dentro && atual ? String(atual) : '—');
+    poe('semana-s', dentro && atual ? 'de ' + linhas.length + ' · restam ' + (linhas.length - atual) : 'de ' + linhas.length);
+
+    var ate = Math.round((PASCOA - hoje) / DIA);
+    if (ate > 0) { poe('pascoa', String(ate)); poe('pascoa-s', (ate === 1 ? 'dia' : 'dias') + ' · 28/03/2027'); }
+    else if (ate === 0) { poe('pascoa', 'hoje'); poe('pascoa-s', 'domingo de Páscoa'); }
+    else { poe('pascoa', '—'); poe('pascoa-s', 'a Páscoa já passou'); }
+
+    var barra = cont.parentNode.querySelector('[data-c="barra"]');
+    if (barra) {
+      var pct = Math.max(0, Math.min(100, (decorrido / TOTAL) * 100));
+      barra.style.width = pct.toFixed(1) + '%';
+    }
+  })();
+
+  // ── cards: escopo pelo .bloco mais próximo, pro padrão poder aninhar sem colidir
+  document.addEventListener('click', function (e) {
+    var bt = e.target.closest('.card-btn[data-alvo]');
+    if (!bt) return;
+    var bloco = bt.closest('.bloco');
+    if (!bloco) return;
+    var alvo = bt.dataset.alvo;
+    var jaAtivo = bt.classList.contains('ativo');
+    bloco.querySelectorAll(':scope > .grade > [data-alvo]').forEach(function (b) {
+      b.classList.toggle('ativo', b === bt && !jaAtivo);
+    });
+    bloco.querySelectorAll(':scope > .visor > .painel[data-alvo]').forEach(function (p) {
+      p.hidden = jaAtivo || p.dataset.alvo !== alvo;
+    });
+  });
+</script>
+</body>
+</html>
