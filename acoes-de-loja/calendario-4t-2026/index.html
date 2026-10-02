@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Calendário 4T 2026 — campanhas de loja</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="O calendario das campanhas de loja de outubro a 25 de dezembro de 2026: a noticia de cada mes, o inventario das campanhas e o que falta decidir.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%2333417E'/><g fill='white'><rect x='18' y='26' width='64' height='56' rx='6' fill='none' stroke='white' stroke-width='7'/><rect x='18' y='26' width='64' height='15' /><rect x='31' y='14' width='8' height='16' rx='4'/><rect x='61' y='14' width='8' height='16' rx='4'/><rect x='30' y='52' width='12' height='11' rx='2'/><rect x='58' y='52' width='12' height='11' rx='2'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#33417E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E3E6F1;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#96A8E6; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1E2436;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+           font-weight: 500; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; font-weight: 700;
+             color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+             border-radius: 6px; cursor: pointer; padding: .65rem 1.15rem;
+             transition: border-color .15s, color .15s, background .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none !important; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+           color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose + .prose { margin-top: .6rem; }
+  .prose a, .painel a, .note-item a { color: var(--accent); text-decoration: none;
+                                      border-bottom: 1px solid currentColor; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px;
+           background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums;
+              letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  /* três colunas de contexto fixo — mês/frente/fator. Não é atividade, não vira card clicável. */
+  .fatores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+             background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 44rem) { .fatores { grid-template-columns: 1fr; } }
+  .fatores > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .fatores .n { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem;
+                border-radius: 2px; align-self: flex-start; text-transform: uppercase; }
+  .fatores .n.vazio { background: var(--bad-bg); color: var(--bad); }
+  .fatores .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .fatores .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .fatores .q { font-family: var(--mono); font-size: .75rem; color: var(--ink-faint);
+                border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 38rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+  td a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.p { background: var(--accent-bg); color: var(--accent); }
+  .tag.f { background: var(--good-bg); color: var(--good); }
+  .tag.t { background: var(--warn-bg); color: var(--warn); }
+  .tag.s { background: var(--surface-2); color: var(--ink-faint); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.mudo { background: var(--surface-2); color: var(--ink-faint); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── grade de cards, recursiva: .bloco > .grade > .card-btn + .visor > .painel ── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grade[hidden] { display: none !important; }
+  .card-btn { text-align: left; background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px;
+              cursor: pointer; padding: .8rem .9rem; display: flex; flex-direction: column; gap: .3rem;
+              font-family: var(--sans); color: var(--ink); transition: border-color .15s, background .15s; }
+  .card-btn:hover { border-color: var(--ink-faint); }
+  .card-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .card-btn .cnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700; line-height: 1.3; }
+  .card-btn .cmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; }
+  .card-btn .cdesc { font-size: .75rem; color: var(--ink-soft); line-height: 1.45; }
+  .card-btn.mes .cnome { font-size: 1rem; }
+  .visor { display: flex; flex-direction: column; gap: 1rem; }
+  .visor[hidden] { display: none !important; }
+  .painel { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem;
+            display: flex; flex-direction: column; gap: .85rem; }
+  .painel[hidden] { display: none !important; }
+  .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink);
+                  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+                  color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  /* preâmbulo fixo do nível acima — aparece junto com o painel, não disputa um clique */
+  .grupo-descricao { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: 4px;
+                     padding: .75rem .9rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .grupo-descricao strong { color: var(--ink); font-weight: 600; }
+
+  /* ficha de campanha — campos fixos, texto de contexto, não é grade de atividade */
+  .ficha { display: grid; grid-template-columns: 7.5rem 1fr; gap: .4rem .9rem; font-size: .8125rem; }
+  @media (max-width: 34rem) { .ficha { grid-template-columns: 1fr; gap: .15rem; }
+                              .ficha dt { margin-top: .5rem; } }
+  .ficha dt { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+              color: var(--ink-faint); font-weight: 600; padding-top: .15rem; }
+  .ficha dd { color: var(--ink-soft); line-height: 1.55; }
+  .ficha dd strong { color: var(--ink); font-weight: 600; }
+  .ficha dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+  footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · calendário</div>
+    <h1>Calendário 4T 2026</h1>
+    <p class="lede">De 1º de outubro a 25 de dezembro. O que cada mês tem de notícia, quais campanhas
+    existem para trabalhar essa notícia, e o que ainda não foi decidido. Só entra aqui o que
+    <strong>leva cliente para dentro da loja</strong>.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" data-tab="calendario" role="tab" aria-selected="false">Calendário</button>
+    <button class="tab-btn" data-tab="campanhas" role="tab" aria-selected="false">Campanhas</button>
+    <button class="tab-btn" data-tab="decisoes" role="tab" aria-selected="false">Decisões</button>
+  </div>
+
+<!-- ════════════════════════ ABA 1 · BRIEFING ════════════════════════ -->
+<div class="tab-panel" data-panel="briefing">
+
+  <section>
+    <h2><span class="n">1</span> O que este calendário é</h2>
+    <p class="prose">É o levantamento de <strong>tudo que existe hoje</strong> para trabalhar os três
+    meses finais do ano — não um plano aprovado. Cada campanha entra com o status real: rodando,
+    página pronta, ou ideia que nunca foi aplicada. <em>Nenhuma data está marcada ainda.</em></p>
+    <p class="prose">O trimestre é organizado pela <strong>notícia</strong>, porque é ela que dá
+    motivo para a loja falar: em outubro, o cardápio de verão; em dezembro, o cardápio de Natal.
+    Novembro não tem notícia nova — e é por isso que ele é o mês mais difícil dos três.</p>
+    <div class="strip">
+      <div><span class="v">86</span><span class="s">dias · 1/out → 25/dez</span></div>
+      <div><span class="v">13</span><span class="s">campanhas no inventário</span></div>
+      <div><span class="v">3</span><span class="s">rodando hoje</span></div>
+      <div><span class="v">8</span><span class="s">ainda são ideia</span></div>
+      <div><span class="v">1</span><span class="s">mês sem notícia</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> A notícia de cada mês<span class="hint">é ela que dá motivo pra loja falar</span></h2>
+    <div class="fatores">
+      <div>
+        <span class="n">outubro</span>
+        <span class="t">Cardápio de verão</span>
+        <span class="d">O grande lançamento do trimestre. Dez produtos fechados em 21/08, mais duas
+        sugestões a decidir, e degustação da equipe feita em 12/09. É a única notícia que já está
+        pronta para ir à rua.</span>
+        <span class="q">notícia forte · campanha de inauguração a definir</span>
+      </div>
+      <div>
+        <span class="n vazio">novembro</span>
+        <span class="t">Nenhuma</span>
+        <span class="d">Nada novo entra. O cardápio de verão continua sendo trabalhado, mas já não é
+        novidade — e o Natal ainda não chegou. Quem sustenta novembro são as campanhas que
+        <em>não dependem de produto novo</em>.</span>
+        <span class="q">o buraco do trimestre</span>
+      </div>
+      <div>
+        <span class="n">dezembro</span>
+        <span class="t">Cardápio de Natal</span>
+        <span class="d">A segunda notícia do trimestre, e o mês de maior movimento. Só que
+        <strong>não existe nada escrito sobre ele ainda</strong>: nem produtos, nem prazo de
+        fechamento, nem campanha de lançamento.</span>
+        <span class="q">notícia prevista · conteúdo zero</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> As duas frentes<span class="hint">e como elas caem na conta da área</span></h2>
+    <p class="prose">As campanhas servem a duas coisas diferentes: <strong>trazer rosto novo</strong> e
+    <strong>fazer o mesmo cliente voltar mais vezes</strong>. Na conta que organiza a área de loja —
+    <strong>faturamento = pessoas × frequência × ticket</strong> — a primeira frente empurra "pessoas"
+    e a segunda empurra "frequência". Como os três fatores multiplicam, <em>é sempre o mais fraco que
+    segura o resultado</em>. Ver <a href="../#ocasiao">o mapa completo da área</a>.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag p">novos clientes</span><span>
+        <strong>Oito das treze campanhas estão aqui.</strong> É a frente mais povoada, de longe —
+        e a lista de hoje repete o desequilíbrio que o mapa da área já apontava em agosto.
+      </span></div>
+      <div class="note-item"><span class="tag f">frequência</span><span>
+        <strong>Três campanhas</strong>: promo do dia, experiência do salão e avaliação no Google.
+        Nenhuma das três existe hoje — e a quarta, a campanha de fidelização por visitas, acabou de
+        <em>sair do tabuleiro</em> (ver aba Decisões).
+      </span></div>
+      <div class="note-item"><span class="tag t">ticket</span><span>
+        <strong>Uma campanha</strong>: os displays da "Tá calor, tem Holy", que falam com quem já
+        entrou. Ticket continua o fator mais barato de mexer e o menos trabalhado.
+      </span></div>
+      <div class="note-item"><span class="tag bad">fora dos três</span><span>
+        <strong>O combo com restaurante</strong> vende o cookie no balcão de outra empresa. Pode ser
+        bom negócio, mas <em>não leva ninguém para a loja</em> — e o critério deste calendário é
+        exatamente esse. Fica registrada, fora da disputa pela atenção do trimestre.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> O quadro de hoje<span class="hint">detalhe de cada uma na aba Campanhas</span></h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Campanha</th><th>Frente</th><th>Fator</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Sorvete de Graça</td><td>venda</td><td><span class="tag p">novos clientes</span></td><td>ideia · molde pronto</td></tr>
+        <tr><td>Cookie de Graça — Piracicaba e Campinas</td><td>venda</td><td><span class="tag p">novos clientes</span></td><td>rodou só em Paulínia</td></tr>
+        <tr><td><a href="../campanha-sorvete/">Tá calor, tem Holy</a></td><td>venda</td><td><span class="tag t">ticket</span></td><td>página pronta · falta orçar</td></tr>
+        <tr><td>Mini Cookie na região</td><td>venda</td><td><span class="tag p">novos clientes</span></td><td>rodando</td></tr>
+        <tr><td>Panfleto no delivery</td><td>venda</td><td><span class="tag p">novos clientes</span></td><td>rodando</td></tr>
+        <tr><td>Aluno nota 10</td><td>venda</td><td><span class="tag p">novos clientes</span></td><td>ideia · nunca aplicada</td></tr>
+        <tr><td>Dia do aluno da escola</td><td>venda</td><td><span class="tag p">novos clientes</span></td><td>ideia</td></tr>
+        <tr><td>Promo do dia</td><td>venda</td><td><span class="tag f">frequência</span></td><td>ideia · nunca feita</td></tr>
+        <tr><td>Vídeos com influenciadores</td><td>alcance</td><td><span class="tag p">novos clientes</span></td><td>rodando · só Paulínia tem lista</td></tr>
+        <tr><td>Post em parceria com loja da região</td><td>alcance</td><td><span class="tag p">novos clientes</span></td><td>ideia · não existe</td></tr>
+        <tr><td>Combo com restaurante</td><td>alcance</td><td><span class="tag s">fora dos três</span></td><td>ideia · fora do escopo de loja</td></tr>
+        <tr><td>Experiência do salão</td><td>recorrência</td><td><span class="tag f">frequência</span></td><td>investimento · não começou</td></tr>
+        <tr><td>Avaliação no Google</td><td>recorrência</td><td><span class="tag f">frequência</span></td><td>construído · não ligado</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> O que este inventário mostra</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag bad">novembro está descoberto duas vezes</span><span>
+        Não tem notícia nova <em>e</em> as campanhas que funcionariam sem notícia — promo do dia e
+        experiência do salão — são justamente as que ainda não existem. Novembro é o mês que mais
+        precisa de decisão e o que tem menos coisa pronta.
+      </span></div>
+      <div class="note-item"><span class="tag warn">dezembro depende de uma coisa que não começou</span><span>
+        O cardápio de Natal é a notícia do mês de maior movimento do ano, e <strong>não existe nada
+        escrito</strong>. O cardápio de verão levou da coleta à degustação cerca de seis semanas —
+        se o Natal seguir o mesmo caminho, <em>o prazo para começar é agora, em outubro</em>.
+      </span></div>
+      <div class="note-item"><span class="tag warn">duas campanhas disputam o mesmo dinheiro</span><span>
+        <strong>Mini Cookie na região</strong> e <strong>panfleto no delivery</strong> fazem a mesma
+        coisa: prova grátis com panfleto puxando para a loja. As duas rodam, e nunca foram comparadas
+        uma com a outra.
+      </span></div>
+      <div class="note-item"><span class="tag acc">o cookie de graça não precisa de produto novo</span><span>
+        A notícia dele é <em>a cidade</em>, não o produto — por isso ele é a única campanha de peso que
+        pode sustentar novembro sem depender de lançamento. Rodou em Paulínia em 11 e 12 de setembro;
+        Piracicaba e Campinas continuam sem.
+      </span></div>
+      <div class="note-item"><span class="tag bad">o chão ainda não foi tratado</span><span>
+        Das treze, só a <strong>experiência do salão</strong> encosta em ambiente. Enquanto ela não sai
+        do papel, as oito campanhas de rosto novo correm o risco de <em>encher um balde furado</em>:
+        pagar para trazer gente numa loja que talvez não segure ninguém. É a mesma conclusão da
+        <a href="../">página da área</a>, de agosto — e segue aberta.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 2 · CALENDÁRIO ════════════════════════ -->
+<div class="tab-panel" data-panel="calendario" hidden>
+
+  <section>
+    <h2><span class="n">1</span> Os três meses<span class="hint">clique num mês, depois numa campanha</span></h2>
+    <p class="prose">Cada mês abre com a sua notícia e as campanhas que podem trabalhar essa notícia.
+    O que aparece em mais de um mês aparece com <strong>papel diferente</strong> em cada um — a mesma
+    campanha em outubro e em dezembro não faz a mesma coisa.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn mes" data-alvo="out"><span class="cnome">Outubro</span><span class="cmeta">cardápio de verão</span><span class="cdesc">O mês com mais munição: a notícia está pronta e a campanha de inauguração tem molde.</span></button>
+        <button class="card-btn mes" data-alvo="nov"><span class="cnome">Novembro</span><span class="cmeta">nenhuma notícia</span><span class="cdesc">O mês difícil. Só sustenta quem não depende de produto novo.</span></button>
+        <button class="card-btn mes" data-alvo="dez"><span class="cnome">Dezembro</span><span class="cmeta">até dia 25 · Natal</span><span class="cdesc">Maior movimento do ano, e a notícia dele ainda não existe no papel.</span></button>
+      </div>
+
+      <div class="visor">
+
+        <!-- ───── OUTUBRO ───── -->
+        <div class="painel" data-alvo="out" hidden>
+          <span class="ptit">Outubro <span class="tag acc">a notícia está pronta</span></span>
+          <div class="grupo-descricao">
+            A notícia é o <strong>cardápio de verão</strong>: dez produtos fechados, duas sugestões a
+            decidir, degustação da equipe feita em 12/09. É o mês em que mais coisa pode acontecer ao
+            mesmo tempo — e também o mês em que o Natal precisa começar a ser preparado, mesmo sem
+            aparecer para o cliente.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="out1"><span class="cnome">Sorvete de Graça</span><span class="cmeta">a campanha-mãe do mês</span></button>
+              <button class="card-btn" data-alvo="out2"><span class="cnome">Tá calor, tem Holy</span><span class="cmeta">degustação + displays</span></button>
+              <button class="card-btn" data-alvo="out3"><span class="cnome">Influenciadores</span><span class="cmeta">o verão em quem tem público</span></button>
+              <button class="card-btn" data-alvo="out4"><span class="cnome">Mini Cookie na região</span><span class="cmeta">roda hoje</span></button>
+              <button class="card-btn" data-alvo="out5"><span class="cnome">Panfleto no delivery</span><span class="cmeta">roda hoje</span></button>
+              <button class="card-btn" data-alvo="out6"><span class="cnome">Promo do dia</span><span class="cmeta">se nascer, nasce agora</span></button>
+              <button class="card-btn" data-alvo="out7"><span class="cnome">Experiência do salão</span><span class="cmeta">obra com prazo de dezembro</span></button>
+              <button class="card-btn" data-alvo="out8"><span class="cnome">Preparar o Natal</span><span class="cmeta">invisível para o cliente</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="out1" hidden><span class="ptit">Sorvete de Graça</span>
+                <span class="psub">inauguração do cardápio de verão</span>
+                <p class="prose">É a campanha de abertura do verão, e é uma <strong>cópia do molde do
+                Cookie de Graça</strong> — mesma mecânica, trocando o cookie por um sorvete na casquinha
+                de cookie. Como o molde já existe inteiro (mecânica, roteiro de balcão, voucher de volta,
+                sorteio do Melhor Stories), o trabalho aqui é de execução, não de criação.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd><strong>Data, cidades e verba.</strong> O Cookie de Graça rodou dois dias com R$ 5 mil em uma cidade — ainda não foi decidido se o sorvete repete esse tamanho.</dd>
+                  <dt>decisão fina</dt><dd>Se as três camadas se repetem: o brinde compra a visita de hoje, o <em>voucher</em> compra a segunda visita, o <em>sorteio</em> faz o story sair caprichado. Tirar uma camada muda o resultado.</dd>
+                  <dt>atenção</dt><dd>Precisa de lista de influenciadores da cidade escolhida. O ranking é por <strong>views por seguidor</strong>, não por número de seguidores.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out2" hidden><span class="ptit">Tá calor, tem Holy</span>
+                <span class="psub">página pronta · <a href="../campanha-sorvete/">abrir</a></span>
+                <p class="prose">Não confundir com a de cima: esta <strong>não traz ninguém de fora</strong>.
+                Ela resolve o fato de que o sorvete já está na loja e quem entra não repara. São três ações —
+                degustação de 30 ml no balcão (R$ 1,61 por pessoa), displays com foto, e sorvete entrando no
+                conteúdo junto da torta e do cookie.</p>
+                <p class="prose">É a dupla natural do Sorvete de Graça: uma puxa rosto novo para a porta,
+                a outra faz quem entrou pedir.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd>Os <strong>displays nunca foram orçados</strong> — nem quantos por loja, nem custo de impressão. É a ação mais barata das três e a única sem número nenhum.</dd>
+                  <dt>e também</dt><dd>Quem entrega o copinho e com que frase. Degustação sem frase não vira pedido.</dd>
+                  <dt>revalidar</dt><dd>A cotação de R$ 1,61 é de Campinas e de uma época anterior. O sorvete é 71% do custo e é o que mais varia.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out3" hidden><span class="ptit">Vídeos com influenciadores</span>
+                <span class="psub">roda hoje</span>
+                <p class="prose">Em outubro o conteúdo tem o melhor assunto do trimestre nas mãos: produto
+                novo e calor. É o mês em que o influenciador tem o que mostrar sem precisar de promoção
+                nenhuma.</p>
+                <dl class="ficha">
+                  <dt>limite atual</dt><dd>A lista ranqueada por views/seguidor existe <strong>só para Paulínia</strong>. Piracicaba e Campinas não têm levantamento — o método serve, os nomes não.</dd>
+                  <dt>régua honesta</dt><dd>O maior perfil de Paulínia tem mediana de 9.677 views. Não prometer o alcance de perfis de Campinas em cidade menor.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out4" hidden><span class="ptit">Mini Cookie na região</span>
+                <span class="psub">roda hoje</span>
+                <p class="prose">Prospecção geográfica: 300 a 400 mini cookies com panfleto puxando para a
+                loja. Em outubro ela carrega a notícia do verão no panfleto — é o mesmo custo com um motivo
+                melhor.</p>
+                <dl class="ficha">
+                  <dt>conflito</dt><dd>Faz <strong>a mesma coisa</strong> que o panfleto no delivery: prova grátis + panfleto. As duas rodam e nunca foram comparadas.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out5" hidden><span class="ptit">Panfleto no delivery</span>
+                <span class="psub">roda hoje</span>
+                <p class="prose">Migra delivery → loja dentro do próprio pedido. Não cria cliente novo: pega
+                quem já compra e move para o canal de margem melhor — o que já conta como ganho na meta de
+                faturamento de loja.</p>
+                <dl class="ficha">
+                  <dt>em outubro</dt><dd>O panfleto passa a anunciar o cardápio de verão. É o canal mais barato de avisar quem já é cliente que tem coisa nova na loja.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out6" hidden><span class="ptit">Promo do dia</span>
+                <span class="psub">nunca foi feita</span>
+                <p class="prose">Um item diferente em promoção cada dia da semana. É a <strong>única campanha
+                do inventário que ataca o motivo de voltar amanhã</strong> — e por isso é a que mais se
+                beneficia de nascer no começo do trimestre: criada em outubro, ela rende os 86 dias.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd>Quais itens entram, qual desconto, e <strong>onde isso é anunciado todo dia</strong>. Sem canal de aviso diário a promo não existe para quem está em casa.</dd>
+                  <dt>cuidado</dt><dd>Promo em item de margem apertada vira desconto em quem ia comprar de qualquer jeito. O preço real por loja vem do histórico de vendas, não da tabela de CMV.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out7" hidden><span class="ptit">Experiência do salão</span>
+                <span class="psub">não começou</span>
+                <p class="prose">Neon, brinquedoteca, fotos e adesivos na parede: deixar o salão aconchegante
+                para a pessoa <em>ficar</em> — e voltar. É obra, não campanha, e por isso tem prazo próprio:
+                <strong>precisa estar pronta antes do pico de dezembro</strong>, não durante.</p>
+                <dl class="ficha">
+                  <dt>por que agora</dt><dd>Começar em outubro é o que garante o salão pronto no mês de maior movimento do ano. Começar em dezembro é obra no meio da festa.</dd>
+                  <dt>o que falta</dt><dd>Orçamento, quais lojas, e quem executa.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="out8" hidden><span class="ptit">Preparar o cardápio de Natal</span>
+                <span class="psub">invisível para o cliente, decisivo para dezembro</span>
+                <p class="prose">Não é campanha de outubro — é o <strong>prazo</strong> de outubro. O cardápio
+                de verão levou cerca de seis semanas da coleta de sugestões até a degustação da equipe. Se o
+                Natal seguir o mesmo caminho, outubro é o último mês em que começar ainda cabe.</p>
+                <dl class="ficha">
+                  <dt>o que existe</dt><dd><strong>Nada.</strong> Nem produtos, nem prazo, nem campanha de lançamento.</dd>
+                  <dt>caminho conhecido</dt><dd>Coleta e votação com a equipe → CMV no laboratório do Sistema-HC → degustação → briefing de conteúdo. O caminho do verão serve inteiro.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── NOVEMBRO ───── -->
+        <div class="painel" data-alvo="nov" hidden>
+          <span class="ptit">Novembro <span class="tag bad">sem notícia nova</span></span>
+          <div class="grupo-descricao">
+            Nada novo entra no cardápio. O verão continua sendo trabalhado, mas deixou de ser novidade,
+            e o Natal ainda não chegou. <strong>Só sustenta novembro a campanha que não depende de produto
+            novo</strong> — e aí a notícia tem que vir de outro lugar: de uma cidade que nunca teve a
+            campanha, de uma data do varejo, ou de um motivo criado pela própria loja.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="nov1"><span class="cnome">Cookie de Graça — Piracicaba</span><span class="cmeta">nunca rodou lá</span></button>
+              <button class="card-btn" data-alvo="nov2"><span class="cnome">Cookie de Graça — Campinas</span><span class="cmeta">também dá</span></button>
+              <button class="card-btn" data-alvo="nov3"><span class="cnome">Promo do dia</span><span class="cmeta">o motivo que a loja cria</span></button>
+              <button class="card-btn" data-alvo="nov4"><span class="cnome">Parceria com loja da região</span><span class="cmeta">ideia · não existe</span></button>
+              <button class="card-btn" data-alvo="nov5"><span class="cnome">Avaliação no Google</span><span class="cmeta">construído, não ligado</span></button>
+              <button class="card-btn" data-alvo="nov6"><span class="cnome">Aluno nota 10</span><span class="cmeta">fechamento de bimestre</span></button>
+              <button class="card-btn" data-alvo="nov7"><span class="cnome">Black Friday · 27/11</span><span class="cmeta">sexta · sem dono</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="nov1" hidden><span class="ptit">Cookie de Graça — Piracicaba</span>
+                <span class="psub">a campanha que salva novembro</span>
+                <p class="prose">A campanha rodou em <strong>11 e 12 de setembro, só em Paulínia</strong>, com
+                R$ 5 mil. Piracicaba não teve. E é exatamente por isso que ela serve para novembro: a notícia
+                dela é <em>a cidade</em>, não o produto — funciona sem lançamento nenhum.</p>
+                <p class="prose">A página da campanha está pronta com sete abas, da mecânica ao roteiro de
+                balcão. O que não se copia é a lista de nomes.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd><strong>Levantamento de influenciadores de Piracicaba</strong> — o método serve, os nomes não. Mais data e verba.</dd>
+                  <dt>ponto de atrito</dt><dd>Em Paulínia o atrito nº 1 do balcão foi o voucher não ser cumulativo com a própria campanha. Já está resolvido na página — reusar a frase, não reinventar.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="nov2" hidden><span class="ptit">Cookie de Graça — Campinas</span>
+                <span class="psub">a terceira cidade</span>
+                <p class="prose">Campinas também aguenta a campanha. É a cidade com o maior mercado de perfis
+                de comida da região — o vídeo-modelo da campanha original (@comendoporcampinas, 107 mil views)
+                é de lá.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd>Decidir se roda <strong>junto com Piracicaba ou em semana separada</strong>. Duas cidades no mesmo fim de semana dobram o custo e dividem a atenção da operação.</dd>
+                  <dt>a favor</dt><dd>Campinas já tem 124 avaliações no Google contra 45 de Paulínia — é a loja com mais base pronta para ser ativada.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="nov3" hidden><span class="ptit">Promo do dia</span>
+                <span class="psub">em novembro ela deixa de ser opcional</span>
+                <p class="prose">Novembro é o mês em que a promo do dia faz mais diferença, porque é o único
+                mês sem notícia: ela <strong>cria o motivo que o calendário não dá</strong>. Um item por dia,
+                anunciado todo dia, é notícia feita em casa.</p>
+                <dl class="ficha">
+                  <dt>dependência</dt><dd>Precisa existir desde outubro para chegar em novembro já conhecida. Promo que estreia no mês em que é mais necessária estreia fraca.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="nov4" hidden><span class="ptit">Post em parceria com loja da região</span>
+                <span class="psub">ideia · não existe ainda</span>
+                <p class="prose">Troca de público com comércio vizinho: a gente aparece na página dele, ele
+                aparece na nossa. Custo de mídia zero, e serve para novembro porque <strong>não precisa de
+                produto novo</strong> — o que é novo é o público.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd>Tudo: quais lojas, o que cada lado entrega, e o formato do post.</dd>
+                  <dt>critério</dt><dd>Vale a loja que tem <em>o mesmo cliente em outro momento do dia</em> — academia, salão, papelaria, pet — não a que vende a mesma coisa.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="nov5" hidden><span class="ptit">Campanha de avaliação no Google</span>
+                <span class="psub">separada da fidelização · decidido em 02/10</span>
+                <p class="prose">Medir engajamento pela quantidade e qualidade de avaliações
+                <strong>espontâneas</strong> — é isso que mede retenção de verdade. Esta campanha agora anda
+                <em>sozinha</em>: foi desacoplada da campanha de fidelização por visitas, que é complexa demais
+                e não está saindo do lugar.</p>
+                <p class="prose">A coleta diária e o relatório semanal já estão construídos no Sistema-HC, com
+                as 9 lojas da rede mapeadas. O que falta é aval para ligar.</p>
+                <dl class="ficha">
+                  <dt>dois fatos</dt><dd>A marca no Google Maps é <strong>"Holy Cook"</strong>, não "Holy Cookie". E <strong>Piracicaba não tem ficha no Maps</strong> — loja sem ficha não recebe avaliação nenhuma: é torneira fechada, não problema de volume.</dd>
+                  <dt>ritmo de hoje</dt><dd>Campinas 3,5 avaliações/mês, Paulínia 1,3. Lojas da rede com mais tempo passam de 200 acumuladas.</dd>
+                  <dt>não copiar</dt><dd>Benchmark com 5 avaliações em 3 dias, uma delas de outra loja da rede, é avaliação incentivada. Não é a régua que queremos.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="nov6" hidden><span class="ptit">Aluno nota 10</span>
+                <span class="psub">ideia · nunca aplicada</span>
+                <p class="prose">O aluno mostra o boletim e, com nota alta, leva um cookie. Em novembro o
+                encaixe é o <strong>fechamento de bimestre</strong>; em dezembro, o boletim final — que é o
+                encaixe mais forte dos dois.</p>
+                <dl class="ficha">
+                  <dt>o que falta</dt><dd>Qual nota qualifica, como se comprova sem virar discussão no balcão, e se vale em todas as lojas.</dd>
+                  <dt>ganho escondido</dt><dd>Criança não vem sozinha. A campanha dá um cookie e recebe uma mesa — por isso ela encosta em ticket, não só em rosto novo.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="nov7" hidden><span class="ptit">Black Friday — sexta, 27 de novembro</span>
+                <span class="psub">a data está no mês · nada está apontado para ela</span>
+                <p class="prose">É a maior data de varejo do trimestre depois do Natal, cai dentro justamente
+                do mês sem notícia, e <strong>nenhuma campanha do inventário está apontada para ela</strong>.
+                Fica aqui como pergunta, não como campanha: ou a data ganha dono, ou ela passa.</p>
+                <dl class="ficha">
+                  <dt>a decidir</dt><dd>Se entra, com que mecânica: desconto não combina com doce. As alternativas que o inventário já tem são <em>promo do dia</em> ampliada ou brinde por valor de compra.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── DEZEMBRO ───── -->
+        <div class="painel" data-alvo="dez" hidden>
+          <span class="ptit">Dezembro — até dia 25 <span class="tag warn">maior movimento, menor preparo</span></span>
+          <div class="grupo-descricao">
+            A notícia é o <strong>cardápio de Natal</strong>, e ele ainda não existe no papel. É o mês de
+            maior movimento do ano: o que estiver pronto rende o dobro, e o que não estiver não dá tempo de
+            ficar. Por isso o trabalho de dezembro é quase todo feito em <strong>outubro e novembro</strong>.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="dez1"><span class="cnome">Cardápio de Natal</span><span class="cmeta">produto · não existe</span></button>
+              <button class="card-btn" data-alvo="dez2"><span class="cnome">Lançamento do Natal</span><span class="cmeta">campanha · o molde serve</span></button>
+              <button class="card-btn" data-alvo="dez3"><span class="cnome">Aluno nota 10</span><span class="cmeta">boletim final · melhor encaixe</span></button>
+              <button class="card-btn" data-alvo="dez4"><span class="cnome">Promo do dia</span><span class="cmeta">cuidado com margem no pico</span></button>
+              <button class="card-btn" data-alvo="dez5"><span class="cnome">Panfleto e Mini Cookie</span><span class="cmeta">rodam hoje</span></button>
+              <button class="card-btn" data-alvo="dez6"><span class="cnome">Salão pronto</span><span class="cmeta">prazo, não obra</span></button>
+              <button class="card-btn" data-alvo="dez7"><span class="cnome">Influenciadores no Natal</span><span class="cmeta">a pauta mais fácil do ano</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="dez1" hidden><span class="ptit">Cardápio de Natal</span>
+                <span class="psub">o furo maior deste calendário</span>
+                <p class="prose">É a notícia do mês mais importante do trimestre e <strong>não existe nada
+                escrito sobre ele</strong>: nem produtos, nem prazo de fechamento, nem CMV, nem conteúdo.</p>
+                <p class="prose">O caminho já é conhecido, porque o verão acabou de percorrê-lo: coleta e
+                votação com a equipe, CMV no laboratório do Sistema-HC, degustação, briefing de conteúdo.</p>
+                <dl class="ficha">
+                  <dt>prazo real</dt><dd>O verão levou cerca de <strong>seis semanas</strong> desse ciclo. Para estrear no começo de dezembro, a coleta começa em outubro.</dd>
+                  <dt>filtro que já existe</dt><dd>Produto tem que passar nos dois: vender pelos olhos, e ser <em>montagem</em> e não receita — o atendente não é chef.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="dez2" hidden><span class="ptit">Campanha de lançamento do Natal</span>
+                <span class="psub">não existe · mas o molde está pronto duas vezes</span>
+                <p class="prose">O trimestre vai ter usado o mesmo molde duas vezes antes disso — Cookie de
+                Graça em setembro, Sorvete de Graça em outubro. Para o Natal ele serve de novo, com um
+                detalhe a favor: em dezembro a loja <strong>não precisa comprar movimento</strong>, ele já
+                vem. O que a campanha faz no Natal é escolher <em>o que</em> a pessoa compra, não se ela vem.</p>
+                <dl class="ficha">
+                  <dt>a decidir</dt><dd>Se o Natal pede brinde (trazer gente) ou <strong>combo e presente</strong> (vender mais para quem já entrou). No mês de pico, a segunda opção é a mais barata.</dd>
+                  <dt>data limite</dt><dd>25/12 é sexta. A campanha tem que estar no ar antes da semana do Natal, não dentro dela.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="dez3" hidden><span class="ptit">Aluno nota 10</span>
+                <span class="psub">o encaixe natural da ideia</span>
+                <p class="prose">Dezembro é quando sai o <strong>boletim final</strong> — o documento que a
+                campanha pede, no mês em que ele tem mais significado para a família. Se a ideia vai ser
+                aplicada alguma vez, é aqui.</p>
+                <dl class="ficha">
+                  <dt>janela</dt><dd>Termina com o ano escolar, que fecha antes do Natal. Não é campanha de 25/12 — é de primeira quinzena.</dd>
+                  <dt>o que falta</dt><dd>Qual nota qualifica e como se comprova. A definição é a mesma de novembro; só a data muda.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="dez4" hidden><span class="ptit">Promo do dia</span>
+                <span class="psub">em dezembro ela precisa de freio</span>
+                <p class="prose">No mês de pico, desconto diário desconta quem viria de qualquer jeito. A promo
+                do dia continua, mas em dezembro ela deveria mirar <strong>o item que não sai</strong>, não o
+                campeão de vendas.</p>
+                <dl class="ficha">
+                  <dt>régua</dt><dd>Qual item está parado sai do histórico de vendas da própria loja — e cada loja tem preferência diferente de sabor.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="dez5" hidden><span class="ptit">Panfleto no delivery e Mini Cookie</span>
+                <span class="psub">rodam hoje · papel muda em dezembro</span>
+                <p class="prose">As duas continuam, agora anunciando o Natal. Em dezembro o panfleto no
+                delivery tem o melhor argumento do ano: <strong>quem pede em casa é quem já gosta</strong>, e
+                é a ele que o cardápio de Natal interessa primeiro.</p>
+                <dl class="ficha">
+                  <dt>decisão pendente</dt><dd>As duas disputam o mesmo dinheiro fazendo a mesma coisa. No mês mais caro do ano, escolher uma libera verba para a campanha de Natal.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="dez6" hidden><span class="ptit">Salão pronto</span>
+                <span class="psub">é prazo, não obra</span>
+                <p class="prose">A experiência do salão não é uma ação de dezembro — é uma <strong>condição
+                de dezembro</strong>. O mês de maior movimento é o que mais traz gente que nunca entrou; é
+                também o que mais decide se essa gente volta em janeiro.</p>
+                <dl class="ficha">
+                  <dt>o risco</dt><dd>Dezembro traz o maior volume de primeira visita do ano. Salão ruim no pico desperdiça a maior safra de clientes novos que a loja vai ter.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="dez7" hidden><span class="ptit">Influenciadores no Natal</span>
+                <span class="psub">roda hoje</span>
+                <p class="prose">Dezembro é a pauta mais fácil do ano para conteúdo: produto novo, data
+                afetiva e loja cheia. É também o mês em que o criador tem mais concorrência de marca —
+                fechar <strong>antes</strong> de dezembro muda o preço.</p>
+                <dl class="ficha">
+                  <dt>limite atual</dt><dd>Só Paulínia tem lista pronta. Se Piracicaba e Campinas vão entrar, o levantamento precisa estar feito em novembro.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 3 · CAMPANHAS ════════════════════════ -->
+<div class="tab-panel" data-panel="campanhas" hidden>
+
+  <section>
+    <h2><span class="n">1</span> O inventário<span class="hint">clique na frente, depois na campanha</span></h2>
+    <p class="prose">As treze campanhas agrupadas pelo que elas fazem, não pelo mês em que caem. Cada
+    ficha diz o que a campanha é, em que estado ela está de verdade, e o que falta para ela rodar.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn mes" data-alvo="gv"><span class="cnome">Venda</span><span class="cmeta">8 campanhas</span><span class="cdesc">Oferta que faz a pessoa entrar na loja hoje.</span></button>
+        <button class="card-btn mes" data-alvo="ga"><span class="cnome">Alcance</span><span class="cmeta">3 campanhas</span><span class="cdesc">Fazer mais gente saber que a loja existe.</span></button>
+        <button class="card-btn mes" data-alvo="gr"><span class="cnome">Recorrência</span><span class="cmeta">2 campanhas</span><span class="cdesc">Fazer quem já veio voltar mais vezes.</span></button>
+      </div>
+
+      <div class="visor">
+
+        <!-- ───── VENDA ───── -->
+        <div class="painel" data-alvo="gv" hidden>
+          <span class="ptit">Venda <span class="tag p">oferta</span></span>
+          <div class="grupo-descricao">
+            São as campanhas com <strong>oferta na ponta</strong>: alguma coisa muda no que a pessoa recebe
+            ou paga, e é isso que faz ela entrar. Sete empurram rosto novo; uma — a promo do dia — é a única
+            do grupo que empurra frequência.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="v1"><span class="cnome">Sorvete de Graça</span><span class="cmeta">ideia · molde pronto</span></button>
+              <button class="card-btn" data-alvo="v2"><span class="cnome">Cookie de Graça</span><span class="cmeta">rodou · 1 de 3 cidades</span></button>
+              <button class="card-btn" data-alvo="v3"><span class="cnome">Tá calor, tem Holy</span><span class="cmeta">página pronta</span></button>
+              <button class="card-btn" data-alvo="v4"><span class="cnome">Mini Cookie na região</span><span class="cmeta">rodando</span></button>
+              <button class="card-btn" data-alvo="v5"><span class="cnome">Panfleto no delivery</span><span class="cmeta">rodando</span></button>
+              <button class="card-btn" data-alvo="v6"><span class="cnome">Aluno nota 10</span><span class="cmeta">ideia</span></button>
+              <button class="card-btn" data-alvo="v7"><span class="cnome">Dia do aluno da escola</span><span class="cmeta">ideia</span></button>
+              <button class="card-btn" data-alvo="v8"><span class="cnome">Promo do dia</span><span class="cmeta">ideia · a única de frequência</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="v1" hidden><span class="ptit">Sorvete de Graça <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Campanha de inauguração do cardápio de verão. <strong>Cópia da campanha Cookie de Graça</strong>, trocando o cookie por um sorvete na casquinha de cookie. Todo o resto segue o mesmo molde.</dd>
+                  <dt>status</dt><dd>Ideia, com o molde inteiro pronto: mecânica de 7 passos, roteiro de balcão, voucher de volta e sorteio do Melhor Stories.</dd>
+                  <dt>onde está</dt><dd>O molde é a página <a href="../cookie-de-graca/">Cookie de Graça</a>. Esta campanha ainda não tem página própria.</dd>
+                  <dt>o que falta</dt><dd>Data, cidades, verba e lista de influenciadores da cidade escolhida.</dd>
+                  <dt>mês</dt><dd>Outubro — é a abertura do verão.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v2" hidden><span class="ptit">Cookie de Graça <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Vai na loja → segue o perfil → posta story e marca → leva um cookie → leva um voucher para voltar → concorre ao sorteio do Melhor Stories. Três camadas: o brinde compra a visita de hoje, o voucher compra a segunda, o sorteio faz o story sair caprichado.</dd>
+                  <dt>status</dt><dd>Rodou em <strong>11 e 12 de setembro, só em Paulínia</strong>, com verba de R$ 5 mil. <em>Piracicaba não rodou. Campinas também dá.</em></dd>
+                  <dt>onde está</dt><dd><a href="../cookie-de-graca/">Página com 7 abas</a>: briefing, vídeo-modelo, influenciadores, briefing do criador, roteiro de balcão, Melhor Stories e voucher.</dd>
+                  <dt>o que falta</dt><dd>Levantamento de influenciadores de <strong>Piracicaba</strong> e de <strong>Campinas</strong> — o método serve, os nomes não. Mais data e verba de cada cidade.</dd>
+                  <dt>mês</dt><dd>Novembro — é a única campanha de peso que funciona sem produto novo.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v3" hidden><span class="ptit">Tá calor, tem Holy <span class="tag t">ticket</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Três ações para o sorvete que <em>já está na loja</em> aparecer: degustação de 30 ml no balcão (R$ 1,61 por pessoa), displays com foto, e sorvete entrando no conteúdo junto da torta e do cookie.</dd>
+                  <dt>não confundir</dt><dd>Não é o Sorvete de Graça e não é o cardápio de verão. <strong>Não traz ninguém de fora</strong> — fala com quem já entrou.</dd>
+                  <dt>status</dt><dd>Página pronta com a conta do copinho e o simulador por loja. Os <strong>displays nunca foram orçados</strong>.</dd>
+                  <dt>onde está</dt><dd><a href="../campanha-sorvete/">Página da campanha</a>, 6 seções.</dd>
+                  <dt>o que falta</dt><dd>Orçar os displays, decidir quem entrega o copinho e com que frase, e revalidar a cotação (é de Campinas e de época anterior).</dd>
+                  <dt>mês</dt><dd>Outubro, junto com a inauguração do verão.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v4" hidden><span class="ptit">Mini Cookie na região <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Prospecção geográfica: 300 a 400 mini cookies entregues na região com panfleto puxando para a loja.</dd>
+                  <dt>status</dt><dd>Rodando.</dd>
+                  <dt>conflito</dt><dd>Faz <strong>exatamente a mesma coisa</strong> que o panfleto no delivery — prova grátis + panfleto — e as duas nunca foram comparadas uma com a outra. Disputam o mesmo dinheiro para mover o mesmo fator.</dd>
+                  <dt>mês</dt><dd>Todos. O que muda a cada mês é a notícia impressa no panfleto.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v5" hidden><span class="ptit">Panfleto no delivery <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Panfleto dentro do pedido de delivery, chamando a pessoa para ir à loja.</dd>
+                  <dt>o que ele realmente faz</dt><dd>Migra <strong>delivery → loja</strong>. Não cria cliente novo: pega quem já compra e move para o canal de margem melhor — o que já conta como ganho na meta de faturamento de loja.</dd>
+                  <dt>status</dt><dd>Rodando.</dd>
+                  <dt>a favor</dt><dd>É o canal mais barato de avisar quem já é cliente que tem coisa nova. Em dezembro é o que tem o melhor argumento: quem pede em casa é quem já gosta.</dd>
+                  <dt>mês</dt><dd>Todos.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v6" hidden><span class="ptit">Aluno nota 10 <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>O aluno mostra o boletim; com nota alta, leva um cookie de graça.</dd>
+                  <dt>status</dt><dd><strong>Ideia — nunca foi aplicada.</strong></dd>
+                  <dt>ganho escondido</dt><dd>Criança não vem sozinha: dá um cookie e recebe uma mesa. Encosta em ticket, não só em rosto novo.</dd>
+                  <dt>o que falta</dt><dd>Qual nota qualifica, como se comprova sem virar discussão no balcão, e se vale nas três lojas.</dd>
+                  <dt>mês</dt><dd>Novembro (fechamento de bimestre) e <strong>dezembro (boletim final — o encaixe mais forte)</strong>.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v7" hidden><span class="ptit">Dia do aluno da escola <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Um vídeo dedicado a uma escola específica, com anúncio pago segmentado só para o público daquela escola.</dd>
+                  <dt>status</dt><dd>Ideia.</dd>
+                  <dt>relação com o Aluno nota 10</dt><dd>São peças da mesma jogada: esta é <em>como se chega</em> na escola, aquela é <em>o que se oferece</em> quando chega. Rodar as duas juntas custa um anúncio e entrega duas campanhas.</dd>
+                  <dt>o que falta</dt><dd>Quais escolas, verba de anúncio, e o roteiro do vídeo.</dd>
+                  <dt>mês</dt><dd>Acompanha o Aluno nota 10.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="v8" hidden><span class="ptit">Promo do dia <span class="tag f">frequência</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Todo dia um item diferente em promoção.</dd>
+                  <dt>por que ela é diferente das outras sete</dt><dd>É a <strong>única campanha de venda do inventário que ataca o motivo de voltar amanhã</strong>. Todas as outras do grupo trazem rosto novo.</dd>
+                  <dt>status</dt><dd>Ideia — nunca foi feita.</dd>
+                  <dt>o que falta</dt><dd>Quais itens, qual desconto, e <strong>onde isso é anunciado todo dia</strong>. Sem canal de aviso diário, a promo não existe para quem está em casa.</dd>
+                  <dt>cuidado</dt><dd>Promo em campeão de vendas é desconto em quem já ia comprar. O preço e o giro reais por loja vêm do histórico de vendas, não da tabela de CMV.</dd>
+                  <dt>mês</dt><dd>Nasce em outubro para render os 86 dias; <strong>em novembro ela é o que cria a notícia que o mês não tem</strong>.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── ALCANCE ───── -->
+        <div class="painel" data-alvo="ga" hidden>
+          <span class="ptit">Alcance <span class="tag p">exposição</span></span>
+          <div class="grupo-descricao">
+            Aqui não tem oferta: o que muda é <strong>quanta gente fica sabendo</strong>. É a frente mais
+            barata de todas quando funciona por conteúdo, e a mais difícil de medir — nenhuma das três tem
+            régua própria hoje.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="a1"><span class="cnome">Vídeos com influenciadores</span><span class="cmeta">rodando</span></button>
+              <button class="card-btn" data-alvo="a2"><span class="cnome">Parceria com loja da região</span><span class="cmeta">ideia · não existe</span></button>
+              <button class="card-btn" data-alvo="a3"><span class="cnome">Combo com restaurante</span><span class="cmeta">ideia · fora do escopo</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="a1" hidden><span class="ptit">Vídeos com influenciadores <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Criador local grava na loja e publica no perfil dele.</dd>
+                  <dt>status</dt><dd>Rodando. A lista ranqueada existe <strong>só para Paulínia</strong>.</dd>
+                  <dt>régua certa</dt><dd>Ranquear por <strong>views por seguidor</strong>, não por número de seguidores — foi assim que a melhor opção de Paulínia apareceu (2,65 views por seguidor).</dd>
+                  <dt>régua honesta</dt><dd>O vídeo-modelo da campanha tem 107 mil views, mas é de um canal de Campinas cuja mediana é 94 mil: foi resultado <em>normal</em>, não estouro. O maior perfil de Paulínia tem mediana de 9.677. Não prometer alcance de cidade grande em cidade pequena.</dd>
+                  <dt>o que falta</dt><dd>Levantamento de Piracicaba e de Campinas. Se eles vão entrar em dezembro, o levantamento tem que estar feito em novembro.</dd>
+                  <dt>mês</dt><dd>Todos. Outubro e dezembro são os meses com melhor pauta.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="a2" hidden><span class="ptit">Post em parceria com loja da região <span class="tag p">novos clientes</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Troca de público com comércio vizinho: a gente aparece na página dele, ele aparece na nossa. Mídia zero.</dd>
+                  <dt>status</dt><dd><strong>Ideia. Não existe ainda — vai ter que ser criada.</strong></dd>
+                  <dt>por que serve em novembro</dt><dd>Não depende de produto novo. O que é novo é o público do outro lado.</dd>
+                  <dt>critério sugerido</dt><dd>Vale a loja que tem <em>o mesmo cliente em outro momento do dia</em> — academia, salão, papelaria, pet — não a que vende a mesma coisa.</dd>
+                  <dt>o que falta</dt><dd>Quais lojas, o que cada lado entrega, e o formato do post.</dd>
+                  <dt>mês</dt><dd>Novembro.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="a3" hidden><span class="ptit">Combo com restaurante <span class="tag s">fora dos três fatores</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Parceria em que o restaurante vende o nosso cookie como sobremesa: a pessoa compra o burger e leva o cookie junto.</dd>
+                  <dt>status</dt><dd>Ideia.</dd>
+                  <dt>por que está marcada</dt><dd>O critério deste calendário é <strong>levar cliente para dentro da loja</strong>, e esta campanha vende no balcão de outra empresa. Pode ser bom negócio — <em>só não é negócio de loja</em>, e não deveria disputar a atenção do trimestre com quem é.</dd>
+                  <dt>se for feita</dt><dd>Vira canal novo (venda por terceiro), com conta própria: preço de atacado, quem entrega, e como a marca aparece no cardápio do parceiro.</dd>
+                  <dt>mês</dt><dd>Fora do calendário.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── RECORRÊNCIA ───── -->
+        <div class="painel" data-alvo="gr" hidden>
+          <span class="ptit">Recorrência <span class="tag f">frequência</span></span>
+          <div class="grupo-descricao">
+            As duas campanhas que tratam de <strong>quem já veio</strong>. Era um grupo de três: a campanha
+            de fidelização por visitas saiu do trimestre — complexa demais, não está andando. Ficaram estas
+            duas, e <em>nenhuma das duas está no ar hoje</em>.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="r1"><span class="cnome">Experiência do salão</span><span class="cmeta">investimento · não começou</span></button>
+              <button class="card-btn" data-alvo="r2"><span class="cnome">Avaliação no Google</span><span class="cmeta">construído · não ligado</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="r1" hidden><span class="ptit">Experiência do salão <span class="tag f">frequência</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Investir no ambiente do salão onde ficam as mesas: <strong>neon, brinquedoteca, fotos e adesivos na parede</strong>, para a sala ficar aconchegante.</dd>
+                  <dt>status</dt><dd>Não começou. É investimento, não campanha.</dd>
+                  <dt>por que ela pesa mais do que parece</dt><dd>É a <strong>única ação do inventário que encosta em ambiente</strong> — o chão que decide se a pessoa volta. Sem ela, as oito campanhas de rosto novo correm o risco de encher um balde furado.</dd>
+                  <dt>prazo</dt><dd><strong>Pronta antes do pico de dezembro</strong>, não durante. Dezembro traz o maior volume de primeira visita do ano; é a maior safra de clientes novos que a loja vai ter para segurar.</dd>
+                  <dt>o que falta</dt><dd>Orçamento, quais lojas e quem executa.</dd>
+                  <dt>mês</dt><dd>Obra em outubro e novembro; resultado em dezembro.</dd>
+                </dl></div>
+              <div class="painel" data-alvo="r2" hidden><span class="ptit">Campanha de avaliação no Google <span class="tag f">frequência</span></span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Medir engajamento das lojas pela quantidade e qualidade de avaliações <strong>espontâneas</strong> — sem incentivo, porque é a avaliação espontânea que mede retenção de verdade.</dd>
+                  <dt>decidido em 02/10</dt><dd><strong>Anda separada da campanha de fidelização por visitas.</strong> A fidelização é complexa demais e não está saindo do lugar; amarrar as duas trava a que é simples.</dd>
+                  <dt>status</dt><dd>Coleta diária e relatório semanal <strong>já construídos</strong> no Sistema-HC, com as 9 lojas da rede mapeadas. A migration do banco espera aval — sem ela, nada roda.</dd>
+                  <dt>dois fatos</dt><dd>A marca no Google Maps é <strong>"Holy Cook"</strong>, não "Holy Cookie" — buscar pelo nome errado não acha a rede. E <strong>Piracicaba não tem ficha no Maps</strong>: loja sem ficha não recebe avaliação nenhuma. É torneira fechada, não problema de volume.</dd>
+                  <dt>ponto de partida</dt><dd>Campinas 3,5 avaliações/mês (124 acumuladas), Paulínia 1,3 (45). Lojas mais antigas da rede passam de 200.</dd>
+                  <dt>não copiar</dt><dd>Benchmark com 5 avaliações em 3 dias, uma delas feita por outra loja da rede, é avaliação incentivada — o oposto do que se quer medir.</dd>
+                  <dt>mês</dt><dd>Novembro, quando o calendário está vazio e sobra atenção para ligar o que já está construído.</dd>
+                </dl></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 4 · DECISÕES ════════════════════════ -->
+<div class="tab-panel" data-panel="decisoes" hidden>
+
+  <section>
+    <h2><span class="n">1</span> O que falta decidir<span class="hint">clique num card</span></h2>
+    <p class="prose">Dez decisões em aberto. Elas não estão em ordem de importância, mas as três
+    primeiras têm <strong>prazo curto</strong>: cada semana de outubro que passa tira opção de dezembro.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="d1"><span class="cnome">Nenhuma data está marcada</span><span class="cmeta">prazo curto</span></button>
+        <button class="card-btn" data-alvo="d2"><span class="cnome">O cardápio de Natal</span><span class="cmeta">prazo curto</span></button>
+        <button class="card-btn" data-alvo="d3"><span class="cnome">O buraco de novembro</span><span class="cmeta">prazo curto</span></button>
+        <button class="card-btn" data-alvo="d4"><span class="cnome">Black Friday sem dono</span><span class="cmeta">27/11, sexta</span></button>
+        <button class="card-btn" data-alvo="d5"><span class="cnome">Quantas cidades no Cookie de Graça</span><span class="cmeta">custo × atenção</span></button>
+        <button class="card-btn" data-alvo="d6"><span class="cnome">A frequência perdeu a campanha principal</span><span class="cmeta">decidido em 02/10</span></button>
+        <button class="card-btn" data-alvo="d7"><span class="cnome">Mini Cookie × panfleto</span><span class="cmeta">fazem a mesma coisa</span></button>
+        <button class="card-btn" data-alvo="d8"><span class="cnome">O combo com restaurante</span><span class="cmeta">dentro ou fora</span></button>
+        <button class="card-btn" data-alvo="d9"><span class="cnome">Piracicaba sem ficha no Google</span><span class="cmeta">torneira fechada</span></button>
+        <button class="card-btn" data-alvo="d10"><span class="cnome">A verba do trimestre</span><span class="cmeta">não definida</span></button>
+      </div>
+
+      <div class="visor">
+        <div class="painel" data-alvo="d1" hidden><span class="ptit">Nenhuma data está marcada</span>
+          <p class="prose">Outubro já começou e o calendário não tem <strong>uma única data definida</strong>:
+          nem a inauguração do verão, nem o Cookie de Graça das outras cidades, nem o lançamento do Natal.</p>
+          <p class="prose">A referência que existe é o Cookie de Graça de setembro: rodou numa
+          <strong>sexta e num sábado</strong>, dois dias, uma cidade. É o formato que o molde assume por
+          padrão — se alguma campanha for fugir dele, é decisão consciente.</p>
+        </div>
+        <div class="painel" data-alvo="d2" hidden><span class="ptit">O cardápio de Natal</span>
+          <p class="prose">É a notícia do mês mais importante do trimestre e <strong>não existe nada escrito
+          sobre ele</strong>. O verão levou cerca de seis semanas da coleta de sugestões até a degustação da
+          equipe — e esse é o ciclo mínimo, com a equipe já treinada no processo.</p>
+          <p class="prose">A decisão não é "quais produtos" ainda. É <em>quando a coleta começa</em>, porque
+          é isso que define se dezembro tem notícia ou não.</p>
+        </div>
+        <div class="painel" data-alvo="d3" hidden><span class="ptit">O buraco de novembro</span>
+          <p class="prose">Novembro está descoberto duas vezes: não tem notícia nova <strong>e</strong> as
+          duas campanhas que funcionariam sem notícia — promo do dia e experiência do salão — são justamente
+          as que ainda não existem.</p>
+          <p class="prose">O inventário oferece três saídas, e elas não se excluem: <strong>Cookie de Graça
+          em cidade nova</strong> (a notícia é a cidade), <strong>promo do dia</strong> (a notícia é feita em
+          casa, todo dia) e <strong>parceria com loja da região</strong> (a notícia é o público do outro).
+          A decisão é quantas das três entram.</p>
+        </div>
+        <div class="painel" data-alvo="d4" hidden><span class="ptit">Black Friday — sexta, 27 de novembro</span>
+          <p class="prose">A maior data de varejo do trimestre depois do Natal cai dentro do mês sem notícia,
+          e <strong>nenhuma campanha do inventário está apontada para ela</strong>.</p>
+          <p class="prose">Se entrar, a mecânica precisa de escolha: desconto puro não combina com doce —
+          doce é pausa, não é compra racional. As alternativas que o inventário já tem são
+          <em>promo do dia ampliada</em> ou <em>brinde por valor de compra</em>. Se não entrar, é melhor
+          decidir isso agora do que descobrir na semana.</p>
+        </div>
+        <div class="painel" data-alvo="d5" hidden><span class="ptit">Quantas cidades no Cookie de Graça</span>
+          <p class="prose">Piracicaba não teve a campanha e Campinas também aguenta. A pergunta é se as duas
+          rodam <strong>no mesmo fim de semana ou em semanas separadas</strong>.</p>
+          <p class="prose">Juntas: dobra o custo e divide a atenção da operação — e a operação de Piracicaba
+          é a mais frágil das três hoje. Separadas: viram duas notícias em vez de uma, o que é exatamente o
+          que novembro precisa. Cada cidade exige o <strong>seu próprio levantamento de influenciadores</strong>;
+          esse trabalho é o que define a data possível, não o contrário.</p>
+        </div>
+        <div class="painel" data-alvo="d6" hidden><span class="ptit">A frequência perdeu a campanha principal</span>
+          <p class="prose">A <strong>campanha de fidelização por visitas</strong> era a única ação da área de
+          loja que atacava frequência com número projetado (+13,5% estabilizada) — e saiu do trimestre por ser
+          complexa demais para o momento. A campanha de avaliação no Google, que estava amarrada nela, foi
+          <strong>desacoplada em 02/10</strong> justamente para não travar junto.</p>
+          <p class="prose">O efeito colateral: a frequência do 4T fica sustentada por <em>promo do dia</em>,
+          <em>experiência do salão</em> e <em>avaliação no Google</em> — nenhuma das três no ar hoje. Como os
+          três fatores multiplicam, é sempre o mais fraco que segura o resultado.</p>
+        </div>
+        <div class="painel" data-alvo="d7" hidden><span class="ptit">Mini Cookie × panfleto no delivery</span>
+          <p class="prose">As duas rodam, as duas fazem <strong>prova grátis com panfleto puxando para a
+          loja</strong>, e nunca foram comparadas uma com a outra. Disputam o mesmo dinheiro para mover o
+          mesmo fator.</p>
+          <p class="prose">A diferença real está em quem recebe: o Mini Cookie fala com quem
+          <em>nunca comprou</em> (prospecção geográfica, custo pago antes), e o panfleto fala com quem
+          <em>já compra pelo delivery</em> (custo quase zero, piggyback no pedido). No mês mais caro do ano,
+          escolher uma libera verba para a campanha de Natal.</p>
+        </div>
+        <div class="painel" data-alvo="d8" hidden><span class="ptit">O combo com restaurante</span>
+          <p class="prose">A campanha vende o cookie no balcão de outra empresa. Pelo critério deste
+          calendário — levar cliente para dentro da loja — ela está <strong>fora</strong>, e está marcada
+          assim para não competir pela atenção do trimestre.</p>
+          <p class="prose">Mas ela não é ruim: é <em>outro negócio</em>. Se virar prioridade, precisa de conta
+          própria (preço de atacado, entrega, como a marca aparece no cardápio do parceiro) e de um lugar
+          próprio no cardápio de projetos — não desta página.</p>
+        </div>
+        <div class="painel" data-alvo="d9" hidden><span class="ptit">Piracicaba não tem ficha no Google Maps</span>
+          <p class="prose">A loja não apareceu em nenhuma busca. <strong>Loja sem ficha não recebe avaliação
+          nenhuma</strong> — é torneira fechada, não problema de volume. Enquanto a ficha não existir,
+          qualquer meta de avaliação para Piracicaba é meta sem canal.</p>
+          <p class="prose">Criar a ficha é tarefa de minutos comparada ao resto deste calendário, e destrava
+          um fator inteiro numa das três lojas. Confirmar se realmente não existe antes de criar — pode haver
+          ficha com nome errado.</p>
+        </div>
+        <div class="painel" data-alvo="d10" hidden><span class="ptit">A verba do trimestre</span>
+          <p class="prose">Não existe número definido para o trimestre. A única referência de tamanho é o
+          Cookie de Graça: <strong>R$ 5 mil para dois dias em uma cidade</strong>.</p>
+          <p class="prose">O que o inventário já deixa claro é onde o dinheiro vai ser pedido: três execuções
+          do molde de brinde (sorvete + duas cidades), os displays nunca orçados, a obra do salão, o anúncio
+          segmentado por escola, e o copinho da degustação, que é o único custo que <em>cresce com o
+          movimento</em> — R$ 1,61 por pessoa, em cima de 3.152 visitas/mês nas três lojas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+  <footer>
+    Calendário do 4º trimestre de 2026 — campanhas de loja da Holy Cookie, de 1º de outubro a 25 de dezembro.
+    Montado em 02/10/2026 a partir do levantamento do Fred, cruzado com as páginas que já existem em
+    <a href="../">Ações de loja</a>. Status de cada campanha é o estado real, não o desejado:
+    <strong>rodando</strong>, <strong>página pronta</strong> ou <strong>ideia</strong>.
+    Nenhuma data deste calendário está aprovada.
+  </footer>
+
+</div>
+
+<script>
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome;
+    else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({ top: 0 }); });
+  });
+  var ABAS = ['briefing', 'calendario', 'campanhas', 'decisoes'];
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos href="#campanhas" trocam de aba, não só o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
+
+  // ── cards: escopo pelo .bloco mais próximo, pro padrão poder aninhar sem colidir
+  document.addEventListener('click', function (e) {
+    var bt = e.target.closest('.card-btn[data-alvo]');
+    if (!bt) return;
+    var bloco = bt.closest('.bloco');
+    if (!bloco) return;
+    var alvo = bt.dataset.alvo;
+    var jaAtivo = bt.classList.contains('ativo');
+    bloco.querySelectorAll(':scope > .grade > [data-alvo]').forEach(function (b) {
+      b.classList.toggle('ativo', b === bt && !jaAtivo);
+    });
+    bloco.querySelectorAll(':scope > .visor > .painel[data-alvo]').forEach(function (p) {
+      p.hidden = jaAtivo || p.dataset.alvo !== alvo;
+    });
+  });
+</script>
+</body>
+</html>
