@@ -1,0 +1,1613 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Sorvete de Graça — lançamento do cardápio de verão · 3 cidades</title>
+<meta name="description" content="A campanha de lançamento do cardapio de verao: tres dias de fim de tarde, 100 casquinhas de cookie por dia entregues na janela do carro, em tres cidades.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231A6E8E'/><g fill='%23FFFDF8'><circle cx='50' cy='38' r='19'/><path d='M32 48 L50 90 L68 48 Z'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#1A6E8E; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#DFEBF1;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#6EC2DE; --accent-ink:#0C1419; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1A2B33;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#6EC2DE; --accent-ink:#0C1419; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1A2B33;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag, .vnum { font-family: var(--mono); }
+  a { color: var(--accent); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center; gap: .45rem;
+            align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; font-weight: 700; color: var(--ink-soft);
+             background: var(--surface); border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer;
+             padding: .65rem 1.15rem; transition: border-color .15s, color .15s, background .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none !important; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink);
+       padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none; color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose + .prose { margin-top: .6rem; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.mudo { background: var(--surface-2); color: var(--ink-faint); }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start; font-size: .875rem; color: var(--ink-soft);
+               background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+
+  /* ── grade de cards (recursiva) ── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grade[hidden] { display: none !important; }
+  .card-btn { text-align: left; background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px; cursor: pointer;
+              padding: .8rem .9rem; display: flex; flex-direction: column; gap: .3rem; font-family: var(--sans); color: var(--ink);
+              transition: border-color .15s, background .15s; }
+  .card-btn:hover { border-color: var(--ink-faint); }
+  .card-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .card-btn .cnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700; line-height: 1.3; }
+  .card-btn .cmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; }
+  .card-btn .cdesc { font-size: .75rem; color: var(--ink-soft); line-height: 1.45; }
+  .visor { display: flex; flex-direction: column; gap: 1rem; }
+  .visor[hidden] { display: none !important; }
+  .painel { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem;
+            display: flex; flex-direction: column; gap: .85rem; }
+  .painel[hidden] { display: none !important; }
+  .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink); }
+  .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  .grupo-descricao { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: 4px;
+                     padding: .75rem .9rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .grupo-descricao strong { color: var(--ink); font-weight: 600; }
+  /* bloco de texto pronto pra copiar — display:block de propósito: .painel é flex-column
+     e transformaria cada <a> interno numa linha separada */
+  .copiavel { display: block; background: var(--surface-2); border: 1px solid var(--rule);
+              border-radius: 5px; padding: 1.1rem 1.2rem; white-space: pre-wrap;
+              font-size: .8125rem; line-height: 1.65; overflow-wrap: anywhere; }
+  .dica { font-size: .75rem; color: var(--ink-faint); font-family: var(--mono); }
+
+  /* ── ficha de definição ── */
+  dl.ficha { display: grid; grid-template-columns: 7.5rem 1fr; gap: .4rem .9rem; font-size: .8125rem; margin: 0; }
+  dl.ficha dt, dl.ficha dd { margin: 0; }
+  @media (max-width: 34rem) { dl.ficha { grid-template-columns: 1fr; gap: .15rem; }
+                              dl.ficha dt { margin-top: .5rem; } }
+  dl.ficha dt { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+                color: var(--ink-faint); font-weight: 600; padding-top: .15rem; }
+  dl.ficha dd { color: var(--ink-soft); line-height: 1.55; }
+  dl.ficha dd strong { color: var(--ink); font-weight: 600; }
+  dl.ficha dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  ul.pontos { margin: 0; padding-left: 1.15rem; display: flex; flex-direction: column; gap: .4rem; font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+  ul.pontos li::marker { color: var(--ink-faint); }
+
+  /* ── fluxo de caixinhas ── */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: stretch; gap: .3rem; }
+  .fluxo .seta { align-self: center; color: var(--ink-faint); font-size: .8rem; }
+  .passo-caixa { background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px; cursor: pointer; padding: .5rem .6rem;
+                 display: flex; flex-direction: column; gap: .1rem; font-family: var(--mono); color: var(--ink); min-width: 5.3rem; max-width: 9.5rem; text-align: left; }
+  .passo-caixa:hover { border-color: var(--ink-faint); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .passo-caixa.pendente { border-style: dashed; border-color: var(--bad); }
+  .passo-caixa .quem { font-size: .625rem; letter-spacing: .06em; color: var(--accent); font-weight: 700; }
+  .passo-caixa .qtxt { font-size: .75rem; font-weight: 600; line-height: 1.25; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 32rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: .5rem .8rem; text-align: right; vertical-align: top; }
+  th:first-child, td:first-child { text-align: left; white-space: nowrap; }
+  th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) { text-align: left; white-space: normal; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.mark td { background: var(--surface-2); }
+  td .vago { color: var(--bad); font-family: var(--mono); font-size: .75rem; }
+
+  /* ── perfis ── */
+  .perfilhead { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .perfilhead .h { font-family: var(--mono); font-size: 1rem; font-weight: 700; }
+  .perfilhead .nm { font-size: .8125rem; color: var(--ink-soft); }
+  .nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .nums > div { background: var(--surface-2); padding: .55rem .7rem; display: flex; flex-direction: column; gap: .1rem; }
+  .nums .v { font-family: var(--mono); font-size: .9375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .nums .s { font-size: .625rem; color: var(--ink-faint); line-height: 1.3; }
+  .nums .v.dest { color: var(--accent); }
+
+  .aberto { border-left: 3px solid var(--warn); }
+  .fechado { border-left: 3px solid var(--good); }
+
+  /* ── checklist ── */
+  .chk-lista { display: flex; flex-direction: column; gap: .1rem; }
+  .chk-item { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: start;
+              padding: .5rem .1rem; border-top: 1px solid var(--rule-soft); }
+  .chk-item:first-child { border-top: none; }
+  .chk-item input { margin-top: .28rem; width: .95rem; height: .95rem; accent-color: var(--accent);
+                    cursor: pointer; flex: none; }
+  .chk-item label { cursor: pointer; font-size: .875rem; color: var(--ink); line-height: 1.45; }
+  /* inline-block de propósito: decoração de texto do label não atravessa a borda de um
+     inline-block, então o risco do item marcado não pega a linha de explicação */
+  .chk-item label .por { display: inline-block; width: 100%; font-size: .75rem;
+                         color: var(--ink-faint); margin-top: .1rem; }
+  .chk-item input:checked + label { color: var(--ink-faint); text-decoration: line-through; }
+  .chk-item input:checked + label .por { text-decoration: none; }
+  .prazo { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase;
+           font-weight: 700; padding: .1rem .34rem; border-radius: 2px; margin-right: .35rem;
+           white-space: nowrap; }
+  .prazo.ja { background: var(--bad-bg); color: var(--bad); }
+  .prazo.antes { background: var(--warn-bg); color: var(--warn); }
+  .prazo.dia { background: var(--accent); color: var(--accent-ink); }
+  .prazo.dep { background: var(--good-bg); color: var(--good); }
+  .contagem { font-family: var(--mono); font-size: .6875rem; font-weight: 700; color: var(--accent); }
+  .contagem.full { color: var(--good); }
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="voltar" href="../../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+<header>
+  <div class="eyebrow">Holy Cook · três cidades · ação de loja</div>
+  <h1>Sorvete de Graça</h1>
+  <p class="lede">A campanha que anuncia o <strong>cardápio de verão</strong>. Três dias de fim de tarde,
+  das 17h às 18h: quem passar de carro na frente da loja buzinando leva uma <strong>casquinha de cookie
+  com sorvete de Nutella</strong> pela janela — 100 por dia, em Campinas, Paulínia e Piracicaba. Junto com
+  o sorvete vai o panfleto do cardápio novo, com o QR do cardápio online.</p>
+  <p class="lede">Mesmo molde do <a href="../cookie-de-graca/">Cookie de Graça</a>, com uma diferença que
+  muda tudo: <strong>aqui a pessoa não entra na loja.</strong></p>
+</header>
+
+<div class="strip">
+  <div><span class="v">3 dias</span><span class="s">dias da semana, a definir — exemplo: quarta, quinta e sexta</span></div>
+  <div><span class="v">17h–18h</span><span class="s">ou 17h30–18h30 · fim do expediente</span></div>
+  <div><span class="v">100/dia</span><span class="s">casquinhas por loja, por dia</span></div>
+  <div><span class="v">900</span><span class="s">casquinhas no total — 3 dias × 3 cidades</span></div>
+  <div><span class="v">1 + 4</span><span class="s">uma página da cidade e quatro criadores, por cidade</span></div>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+  <button class="tab-btn" type="button" data-tab="mecanica" role="tab" aria-selected="false">A mecânica</button>
+  <button class="tab-btn" type="button" data-tab="story" role="tab" aria-selected="false">O problema do story</button>
+  <button class="tab-btn" type="button" data-tab="cidades" role="tab" aria-selected="false">As três cidades</button>
+  <button class="tab-btn" type="button" data-tab="divulgacao" role="tab" aria-selected="false">Divulgação</button>
+  <button class="tab-btn" type="button" data-tab="pecas" role="tab" aria-selected="false">Peças</button>
+  <button class="tab-btn" type="button" data-tab="custo" role="tab" aria-selected="false">O custo</button>
+  <button class="tab-btn" type="button" data-tab="checklist" role="tab" aria-selected="false">Checklist</button>
+</div>
+
+<div class="tab-panel" data-panel="briefing" role="tabpanel">
+
+<section>
+  <h2><span class="n">1</span> O que a campanha é<span class="hint">e o que ela não é</span></h2>
+  <p class="prose">Três dias de fim de tarde dando um produto do cardápio de verão na janela do carro.
+  O produto é a <strong>casquinha de cookie com sorvete de Nutella e pedaços de cookie dentro</strong> — que
+  não é um brinde inventado pra campanha: é um dos dez itens do
+  <a href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/" target="_blank" rel="noopener">cardápio de verão</a>.
+  A pessoa não está ganhando um agrado, está provando o lançamento.</p>
+  <p class="prose">E não é o Cookie de Graça com outro produto. O molde é o mesmo — divulgação com criadores,
+  cobertura no dia, uma entrega de graça —, mas tem uma diferença estrutural: <strong>no Cookie de Graça a
+  pessoa atravessava a porta da loja.</strong> Via a vitrine, sentia o cheiro, olhava o cardápio na parede,
+  conversava com o atendente e saía com um voucher na mão. Aqui ela recebe pela janela, com o motor ligado,
+  e vai embora.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a consequência disso</span><span>
+      No Cookie de Graça <strong>a loja vendia</strong> — o cookie era só o motivo de entrar. No Sorvete de
+      Graça <strong>o panfleto vende</strong>, porque a loja não tem chance de falar. Isso tira o panfleto e o
+      cardápio online do lugar de &ldquo;material de apoio&rdquo; e os coloca no lugar de
+      <strong>produto principal da campanha</strong>. Se o QR não funcionar, ou o cardápio online não estiver
+      no ar, a campanha entregou 900 sorvetes e nenhuma mensagem.</span></div>
+    <div class="note-item"><span class="tag acc">o que ela compra que o Cookie de Graça não comprava</span><span>
+      <strong>Uma imagem.</strong> Cem carros buzinando na frente de uma loja, três dias seguidos, é um
+      acontecimento de rua. O Cookie de Graça não tinha imagem própria — tinha fila de balcão, que é igual à
+      fila de qualquer balcão, e por isso precisava que o cliente gerasse o conteúdo pra ele. Aqui o conteúdo
+      é o evento. Essa é a razão mais forte pra essa mecânica existir, e é o que justifica a cobertura.</span></div>
+    <div class="note-item"><span class="tag warn">o número que ninguém olhou ainda</span><span>
+      <strong>100 casquinhas em 60 minutos é uma a cada 36 segundos</strong>, com carro encostando e saindo.
+      Não é fila de balcão: é operação de rua, e precisa de gente na calçada, não atrás do caixa. Se a conta
+      não fechar na prática, o teto do dia não é 100 — é o que duas pessoas conseguem entregar numa hora. Vale
+      cronometrar uma entrega inteira antes de prometer 100 no criativo.</span></div>
+    <div class="note-item"><span class="tag bad">a camada que está faltando</span><span>
+      Um sorvete entregue na janela do carro <strong>não é uma visita</strong>. A visita é a próxima vez. Hoje
+      a campanha não tem nada que compre essa próxima vez — nem voucher, nem cadastro, nem sorteio. É a
+      decisão nº 1 desta página, e está na seção 3.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> A régua de julgamento<span class="hint">a mesma de toda ação de loja</span></h2>
+  <p class="prose">Faturamento = <strong>pessoas × frequência × ticket</strong>. Esta ação encosta em
+  <strong>pessoas</strong> (rosto novo descobrindo que a loja existe e que tem cardápio novo) e aposta em
+  <strong>frequência</strong> no retorno. Ticket ela não move, e não deveria tentar.</p>
+  <p class="prose">Só que ela encosta em pessoas de um jeito mais frouxo que o Cookie de Graça: lá, quem
+  recebeu o cookie <em>estava dentro da loja</em> — já era uma visita contada. Aqui, quem recebeu a casquinha
+  continua sendo um carro que passou. <strong>O número que julga a campanha não é 900 casquinhas
+  entregues</strong> — esse é o número fácil, e é o que vai parecer sucesso. O número que julga é quantas
+  dessas pessoas apareceram na loja depois.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">o risco de leitura</span><span>
+      Fila de carro é a métrica mais fotogênica e a mais enganosa que esta campanha produz. Ela vai estar no
+      vídeo, vai estar no grupo, e vai dar a sensação de que deu certo <em>antes</em> de qualquer venda ter
+      acontecido. Combinar <strong>antes do dia 1</strong> qual é o número que decide — e como ele vai ser
+      contado — é mais importante aqui do que foi no Cookie de Graça.</span></div>
+    <div class="note-item"><span class="tag mudo">o que o Cookie de Graça já ensinou</span><span>
+      Ele rodou dois dias com R$ 5 mil em <strong>uma</strong> cidade, e a lição que sobrou foi exatamente
+      esta: movimento no dia é fácil, retorno depois é o que paga. A aba
+      <a href="../cookie-de-graca/#voucher">Voucher de volta</a> dele tem as quatro opções de benefício já
+      com o lucro de cada uma — serve de ponto de partida aqui, não precisa recomeçar.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> As camadas<span class="hint">clique num card</span></h2>
+  <p class="prose">O Cookie de Graça tinha três camadas, e cada uma comprava uma coisa diferente: o brinde
+  comprava a visita de hoje, o voucher comprava a segunda visita, e o sorteio do Melhor Stories fazia o story
+  sair caprichado em vez de mínimo. Tirar uma camada muda o resultado. Aqui as camadas são quatro — e
+  <strong>duas delas ainda não existem</strong>.</p>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="c1"><span class="cnome">1 · O sorvete</span><span class="cmeta">pronto</span><span class="cdesc">Compra a atenção. Não compra a visita — e é importante não confundir as duas.</span></button>
+      <button class="card-btn" data-alvo="c2"><span class="cnome">2 · O panfleto e o QR</span><span class="cmeta">desenhado, não produzido</span><span class="cdesc">É a única camada que faz a pessoa saber que tem cardápio novo.</span></button>
+      <button class="card-btn" data-alvo="c3"><span class="cnome">3 · O retorno</span><span class="cmeta">não existe</span><span class="cdesc">Nada hoje compra a segunda visita. Decisão nº 1.</span></button>
+      <button class="card-btn" data-alvo="c4"><span class="cnome">4 · O conteúdo</span><span class="cmeta">muda de dono</span><span class="cdesc">No Cookie de Graça vinha do cliente. Aqui tem que vir da gente.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="c1" hidden><span class="ptit">1 · O sorvete</span>
+        <span class="psub">compra a atenção</span>
+        <p class="prose">Casquinha de cookie, sorvete de Nutella, pedaços de cookie dentro. É o item que faz o
+        carro parar — e é o item que prova que o cardápio de verão é bom, porque a pessoa prova de verdade, não
+        vê foto.</p>
+        <p class="prose">Vale registrar o que isso resolve no projeto do produto: a casquinha estava no cardápio
+        com três perguntas abertas, e uma delas era <em>&ldquo;qual o sabor&rdquo;</em>. A campanha responde:
+        <strong>Nutella com pedaços de cookie</strong>. As outras duas continuam abertas e agora têm prazo, porque
+        a campanha depende delas.</p>
+        <dl class="ficha">
+          <dt>o que ficou de fora</dt><dd>O <strong>cookie de cone</strong> que estava na lista de produtos não deu — a casquinha de cookie é o que entrou no lugar. Não é a mesma coisa e não deve ser chamada assim no material.</dd>
+          <dt>o que ainda falta</dt><dd><strong>Bola porcionada ou sorvete de máquina?</strong> É a resposta que mais muda o investimento da loja — e numa operação de 36 segundos por carro, muda também se a campanha é possível.</dd>
+          <dt>e também</dt><dd>A casquinha é comprada pronta ou é feita de massa de cookie na loja? Ela <strong>quebra fácil no transporte</strong> e ocupa espaço seco — 900 unidades é volume que nenhuma das três lojas já manuseou.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="c2" hidden><span class="ptit">2 · O panfleto e o QR</span>
+        <span class="psub">é o que vende — porque a loja não vai falar</span>
+        <p class="prose">A miniatura do cardápio de verão, entregue na mão junto com a casquinha, com um QR que
+        abre o <strong>cardápio de verão online</strong>: foto de cada produto e uma linha explicando o que é.</p>
+        <p class="prose">Esta é a camada mais importante da campanha e a mais fácil de tratar como detalhe. Ela
+        é o único momento em que a marca diz alguma coisa — e ela diz num papel que vai ser lido depois, dentro
+        de um carro, por alguém com a mão suja de sorvete. O detalhe de produção está na aba
+        <a href="#pecas">Peças</a>.</p>
+        <dl class="ficha">
+          <dt>o bloqueio real</dt><dd><strong>O cardápio de verão online não existe.</strong> Sem ele o QR não tem pra onde apontar, e sem o QR o panfleto é um papel bonito. É o item que trava a campanha inteira — não a casquinha.</dd>
+          <dt>dependência</dt><dd>As fotos. A decisão <em>&ldquo;sessão fotográfica profissional ou IA&rdquo;</em> já está aberta no projeto do cardápio de verão e <strong>ninguém ficou responsável por ela</strong>. Ela trava a página online, que trava o QR, que trava o panfleto.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="c3" hidden><span class="ptit">3 · O retorno <span class="tag bad">não existe</span></span>
+        <span class="psub">a decisão nº 1 da campanha</span>
+        <p class="prose">No Cookie de Graça esta camada era o <strong>voucher de volta</strong>, e era ela que
+        transformava fila em cliente. Aqui não tem nada. A pessoa recebe, prova, gosta — e não tem nenhum motivo
+        marcado pra aparecer na loja.</p>
+        <p class="prose">Três caminhos, e <strong>&ldquo;nenhum&rdquo; é um deles</strong> — só precisa ser
+        escolhido de propósito, não por esquecimento:</p>
+        <ul class="pontos">
+          <li><strong>Voucher impresso no próprio panfleto.</strong> Custo zero de peça nova: o panfleto já vai
+          na mão da pessoa, e uma tarja atrás resolve. Não dá cadastro, não dá pra avisar ninguém — mas é o
+          caminho que não depende de nada estar pronto.</li>
+          <li><strong>QR que cadastra.</strong> A pessoa escaneia, deixa nome e WhatsApp, e recebe o voucher
+          nominal por lá. Isso é o que vira base de cliente e permite falar com ela na semana seguinte. O fluxo
+          inteiro já foi desenhado no Cookie de Graça e não precisa ser inventado de novo.</li>
+          <li><strong>Nada.</strong> A campanha é amostragem de produto novo, ponto. É defensável — mas então o
+          único número que ela pode ser julgada por é faturamento da loja nas semanas seguintes, e isso tem que
+          estar combinado antes, porque depois ninguém aceita.</li>
+        </ul>
+        <dl class="ficha">
+          <dt>atenção</dt><dd>Se a escolha for QR que cadastra, <strong>são dois QR no mesmo panfleto</strong> — um do cardápio e um do voucher. Dois QR lado a lado num papel pequeno, lido dentro de um carro, é um erro de leitura esperando acontecer. Ou separa em frente e verso, ou faz um QR só que cai numa página com as duas coisas.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="c4" hidden><span class="ptit">4 · O conteúdo</span>
+        <span class="psub">no Cookie de Graça vinha do cliente — aqui não vem</span>
+        <p class="prose">A quarta camada do Cookie de Graça era o story do cliente, cobrado no balcão e premiado
+        pelo sorteio do Melhor Stories. Aqui ela não se sustenta: quem está no volante, com carro atrás, não abre
+        o Instagram. A aba <a href="#story">O problema do story</a> é inteira sobre isso.</p>
+        <p class="prose">O resumo: <strong>essa camada não precisa ser salva, precisa ser trocada.</strong> Ela
+        existia pra resolver um problema que esta campanha não tem.</p></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span> O que está fechado e o que falta<span class="hint">clique num card</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="f1"><span class="cnome">Fechado</span><span class="cmeta">o que não se discute mais</span></button>
+      <button class="card-btn" data-alvo="f2"><span class="cnome">Em aberto · decide o tamanho</span><span class="cmeta">verba, datas, cidades</span></button>
+      <button class="card-btn" data-alvo="f3"><span class="cnome">Em aberto · decide se dá</span><span class="cmeta">a rua, a cozinha, o tempo</span></button>
+      <button class="card-btn" data-alvo="f4"><span class="cnome">Em aberto · decide se valeu</span><span class="cmeta">o retorno e a medição</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel fechado" data-alvo="f1" hidden><span class="ptit">Fechado</span>
+        <span class="psub">não precisa voltar a discutir</span>
+        <ul class="pontos">
+          <li><strong>O produto:</strong> casquinha de cookie com sorvete de Nutella e pedaços de cookie dentro.</li>
+          <li><strong>A mecânica:</strong> passa de carro buzinando na frente da loja e retira pela janela.</li>
+          <li><strong>O volume:</strong> 100 casquinhas por dia, por loja.</li>
+          <li><strong>A duração:</strong> três dias, em dias de semana.</li>
+          <li><strong>A janela:</strong> fim do expediente — 17h–18h ou 17h30–18h30.</li>
+          <li><strong>O alcance:</strong> três cidades, uma página da cidade e quatro criadores em cada.</li>
+          <li><strong>O que a pessoa leva junto:</strong> a miniatura do cardápio de verão com o QR.</li>
+          <li><strong>Na loja:</strong> folhas A4 com os produtos impressos, pra quem entra.</li>
+          <li><strong>A degustação com influenciadores é outra campanha</strong> — tem página própria:
+          <a href="../degustacao-influenciadores/">Menu Degustação</a>.</li>
+        </ul></div>
+
+      <div class="painel aberto" data-alvo="f2" hidden><span class="ptit">Em aberto · decide o tamanho</span>
+        <span class="psub">sem isso não dá pra orçar nem agendar</span>
+        <dl class="ficha">
+          <dt>as datas</dt><dd><strong>Quais três dias.</strong> O exemplo é quarta, quinta e sexta — e vale manter nessa ordem, não por acaso: sexta é o dia mais forte dos três e quarta o mais fraco, então o dia 1 é o teste e o dia 3 é o pico. E o vídeo da quarta vai ao ar com quinta e sexta pela frente, virando chamada em vez de relato.</dd>
+          <dt>a hora</dt><dd><strong>17h–18h ou 17h30–18h30.</strong> Os 30 minutos de diferença mudam quem passa na rua — e mudam o trânsito que a gente vai ter que atravessar.</dd>
+          <dt>as três de uma vez?</dt><dd>Rodar Campinas, Paulínia e Piracicaba <strong>na mesma semana</strong> triplica tudo: 900 casquinhas, 12 criadores, três ruas. Rodar uma cidade primeiro custa uma semana e devolve a mecânica testada. Não está decidido.</dd>
+          <dt>a verba</dt><dd>Não existe número ainda. O Cookie de Graça rodou com <strong>R$ 5 mil em uma cidade</strong> — se isso se repetir por cidade, são R$ 15 mil. A conta está na aba <a href="#custo">O custo</a>, com o CMV em branco.</dd>
+          <dt>1 ou 4 por carro?</dt><dd>Carro com quatro pessoas leva uma casquinha ou quatro? <strong>É a pergunta que mais mexe no orçamento</strong> — no limite multiplica o custo de produto por quatro — e é a que o atendente vai ter que responder sozinho na rua se ninguém responder antes.</dd>
+        </dl></div>
+
+      <div class="painel aberto" data-alvo="f3" hidden><span class="ptit">Em aberto · decide se dá</span>
+        <span class="psub">as três coisas que podem simplesmente não funcionar</span>
+        <dl class="ficha">
+          <dt>a rua</dt><dd><strong>Onde o carro para.</strong> As três lojas ficam em via movimentada e o horário escolhido é o pior trânsito do dia. Isso não foi olhado em nenhuma das três cidades, e é por cidade — ver a aba <a href="#cidades">As três cidades</a>.</dd>
+          <dt>a buzina</dt><dd>O Código de Trânsito trata buzina como <strong>sinal de advertência</strong>, não como saudação, e uso indevido é infração. Não sei o quanto isso é cobrado num evento de uma hora, mas é o tipo de coisa que, num criativo que diz &ldquo;vem buzinar&rdquo;, vale confirmar antes — e vale ter um gesto alternativo pronto (pisca-alerta, sinal de luz), que entrega a mesma participação sem o barulho e, no vídeo, fica até melhor.</dd>
+          <dt>a cozinha</dt><dd><strong>100 casquinhas montadas em 60 minutos.</strong> Sorvete derrete; casquinha pré-montada em bandeja não espera uma hora. Ou monta na hora (e aí o gargalo é a mão de obra) ou monta em lotes (e aí o gargalo é o freezer na calçada). Nenhum dos dois foi testado.</dd>
+          <dt>a chuva</dt><dd>Fim de tarde de verão em Campinas, Paulínia e Piracicaba chove. <strong>O plano B não pode ser &ldquo;cancela&rdquo;</strong>, porque a divulgação já foi paga: ou passa pro dia seguinte, ou entrega no balcão. Decidir antes, não na hora.</dd>
+        </dl></div>
+
+      <div class="painel aberto" data-alvo="f4" hidden><span class="ptit">Em aberto · decide se valeu</span>
+        <span class="psub">o que vai ser cobrado depois</span>
+        <dl class="ficha">
+          <dt>o retorno</dt><dd><strong>Voucher, cadastro ou nada</strong> — a camada 3. É a decisão nº 1 da campanha.</dd>
+          <dt>o story</dt><dd>O que substitui a troca &ldquo;posta e leva&rdquo; do Cookie de Graça. Aba própria: <a href="#story">O problema do story</a>.</dd>
+          <dt>a medição</dt><dd>Qual número decide, e quem anota. Candidatos: casquinhas entregues (fácil e enganoso), vouchers resgatados, seguidores antes e depois, faturamento das semanas seguintes contra as anteriores, e <strong>quantas pessoas abriram o cardápio pelo QR</strong> — esse último sai de graça se o link for rastreável, e é a medida mais direta de que a mensagem chegou.</dd>
+          <dt>quem toca</dt><dd>Por cidade. Se a resposta das três for a mesma pessoa, a campanha não roda em três cidades na mesma semana.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="mecanica" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> O fluxo na rua<span class="hint">clique numa caixinha</span></h2>
+  <p class="prose">Sete passos, do aviso que a pessoa viu até ela ir embora. O passo 4 está tracejado porque
+  <strong>é o único que ninguém desenhou ainda</strong> — e é ele que decide se a campanha é possível na rua de
+  cada loja. O passo 6 é o único momento de venda que esta campanha tem: oito segundos, por uma janela.</p>
+  <div class="bloco">
+    <div class="fluxo">
+      <button class="passo-caixa" data-alvo="m1"><span class="quem">1</span><span class="qtxt">Vê o aviso</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="m2"><span class="quem">2</span><span class="qtxt">Passa de carro</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="m3"><span class="quem">3</span><span class="qtxt">Buzina</span></button><span class="seta">→</span>
+      <button class="passo-caixa pendente" data-alvo="m4"><span class="quem">4</span><span class="qtxt">Encosta onde?</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="m5"><span class="quem">5</span><span class="qtxt">Recebe a casquinha</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="m6"><span class="quem">6</span><span class="qtxt">Ouve uma frase</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="m7"><span class="quem">7</span><span class="qtxt">Vai embora</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="m1" hidden><span class="ptit">1 · Vê o aviso</span>
+        <span class="psub">antes do dia</span>
+        <p class="prose">A pessoa precisa saber <strong>que dia, que hora e o que fazer</strong> — e &ldquo;o que
+        fazer&rdquo; aqui é uma instrução estranha, não é &ldquo;vem na loja&rdquo;. Instrução estranha precisa
+        de mais repetição que oferta comum, não de menos.</p>
+        <p class="prose">A frase tem que caber em uma linha e sobreviver a ser ouvida de passagem. Algo como:
+        <strong>&ldquo;Quarta, quinta e sexta, das 17h às 18h: passa de carro na frente da Holy Cook buzinando e
+        leva um sorvete de graça.&rdquo;</strong> Os quatro canais estão na aba <a href="#divulgacao">Divulgação</a>.</p>
+        <dl class="ficha">
+          <dt>o canal mais barato</dt><dd>A <strong>faixa na frente da própria loja</strong>, na semana anterior. Quem passa de carro na frente da loja todo dia é literalmente o público-alvo desta campanha — e esse canal custa o preço de uma faixa.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="m2" hidden><span class="ptit">2 · Passa de carro</span>
+        <span class="psub">17h–18h</span>
+        <p class="prose">O fim do expediente foi escolhido porque é quando tem carro na rua. É a mesma razão pela
+        qual é o pior horário pra pedir que um carro pare: <strong>o que faz a mecânica funcionar é o que a torna
+        difícil.</strong></p>
+        <p class="prose">Vale olhar de que lado da via a loja fica. Se o fluxo de volta do trabalho passa do lado
+        oposto, metade do público teria que atravessar ou dar a volta — e aí o aviso precisa dizer isso, ou a
+        janela precisa mudar de horário.</p></div>
+
+      <div class="painel" data-alvo="m3" hidden><span class="ptit">3 · Buzina</span>
+        <span class="psub">o gesto que diz &ldquo;eu sou da promoção&rdquo;</span>
+        <p class="prose">A buzina serve a duas coisas: avisa a equipe sem precisar de fila, e <strong>faz
+        barulho</strong> — barulho é o que transforma uma entrega numa cena. É um bom gesto.</p>
+        <p class="prose">Com uma ressalva que precisa ser checada antes de ir pro criativo: buzina em via urbana
+        tem regra, e a regra é que ela é sinal de advertência. Um gesto alternativo — <strong>pisca-alerta
+        ligado</strong> — entrega a mesma participação, não incomoda vizinho nenhum, e cem carros com o
+        pisca-alerta ligado em fila é uma imagem melhor do que som que ninguém vê. Dá pra manter o nome
+        &ldquo;buzinaço&rdquo; e usar o pisca como alternativa onde a rua não permitir.</p></div>
+
+      <div class="painel aberto" data-alvo="m4" hidden><span class="ptit">4 · Encosta onde? <span class="tag bad">não desenhado</span></span>
+        <span class="psub">o passo que decide se dá ou não dá</span>
+        <p class="prose">Este é o buraco da mecânica. Entre buzinar e receber, o carro tem que <strong>parar em
+        algum lugar</strong> — e esse lugar não foi escolhido em nenhuma das três cidades. As três lojas ficam em
+        via movimentada, no horário de maior trânsito do dia.</p>
+        <p class="prose">O que precisa existir, por cidade:</p>
+        <ul class="pontos">
+          <li><strong>Um ponto marcado</strong>, visível de longe, fora da faixa de rolamento se possível: vaga em
+          frente, bolsão, entrada de estacionamento, rua lateral.</li>
+          <li><strong>Alguém na calçada</strong> apontando pra onde ir — não dá pra esperar que o motorista
+          entenda sozinho em movimento.</li>
+          <li><strong>Um limite de fila</strong> definido antes: quantos carros a gente aguenta encostados antes
+          de a rua travar, e o que acontece quando passa disso.</li>
+          <li><strong>Um combinado com quem é afetado</strong>: vizinho de porta, vaga de carga e descarga,
+          garagem de condomínio. Uma hora por três dias é pouco pra pedir autorização e muito pra ninguém
+          reclamar.</li>
+        </ul>
+        <dl class="ficha">
+          <dt>o teste que resolve</dt><dd>Ir na rua da loja no horário da campanha, num dia qualquer, e <strong>ver</strong>. Dez minutos de observação respondem mais do que qualquer plano feito de longe — e respondem diferente em cada uma das três cidades.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="m5" hidden><span class="ptit">5 · Recebe a casquinha</span>
+        <span class="psub">o gargalo de produção</span>
+        <p class="prose">A entrega em si é rápida. O que não é rápido é <strong>ter cem casquinhas prontas
+        chegando na calçada ao longo de uma hora</strong>, sem derreter e sem quebrar.</p>
+        <ul class="pontos">
+          <li><strong>Duas pessoas na rua, no mínimo:</strong> uma entrega e uma repõe. Uma pessoa só não faz uma
+          a cada 36 segundos com carro manobrando ao lado.</li>
+          <li><strong>Onde o sorvete fica.</strong> Freezer na calçada, caixa térmica, ou idas e vindas até dentro
+          da loja — cada opção tem um custo de tempo diferente e nenhuma foi escolhida.</li>
+          <li><strong>Guardanapo e porta-casquinha.</strong> Sorvete na mão de quem está dirigindo vai pingar no
+          volante. Isso não é detalhe de etiqueta: é a diferença entre lembrar bem e lembrar mal da marca.</li>
+          <li><strong>O panfleto vai junto, na mesma mão.</strong> Combinar a ordem: panfleto primeiro, casquinha
+          depois — quem recebe sorvete primeiro não pega mais nada.</li>
+        </ul></div>
+
+      <div class="painel" data-alvo="m6" hidden><span class="ptit">6 · Ouve uma frase</span>
+        <span class="psub">o único momento de venda da campanha</span>
+        <p class="prose">É aqui que a loja fala — e é o único lugar onde ela fala. Oito segundos, por uma janela
+        de carro, com motor ligado. <strong>Essa frase tem que estar escrita</strong>, e tem que estar escrita
+        antes do dia 1, porque improvisada ela vira &ldquo;toma, tchau&rdquo;.</p>
+        <p class="prose">A versão proposta, uma frase e uma entrega:</p>
+        <div class="copiavel">— Esse é um dos dez produtos novos do nosso cardápio de verão. Os outros nove estão aqui, nesse QR. Aproveita!</div>
+        <p class="prose">O que ela faz em três partes: diz que <strong>é produto de cardápio</strong> (e não brinde),
+        diz que <strong>tem mais nove</strong> (o que dá motivo pra olhar o papel), e <strong>aponta pro QR</strong>
+        (sem o que o papel vira lixo de porta-luvas).</p>
+        <dl class="ficha">
+          <dt>o que não dizer</dt><dd>Endereço — a pessoa está na frente da loja. Horário de funcionamento — não cabe. Nada que precise de resposta, porque não há tempo pra conversa e tem carro atrás.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="m7" hidden><span class="ptit">7 · Vai embora</span>
+        <span class="psub">e aqui a campanha perde a pessoa</span>
+        <p class="prose">No Cookie de Graça este passo era &ldquo;recebe o voucher&rdquo; e &ldquo;entra no
+        sorteio&rdquo;. Aqui é só ir embora. <strong>É neste ponto que a camada 3 falta</strong> — e é por isso
+        que ela é a decisão nº 1 do briefing.</p>
+        <p class="prose">O que existe hoje pra segurar a pessoa depois que o carro arranca é só o papel na mão
+        dela. Tudo o que a campanha vai colher depois depende de o QR daquele papel ser escaneado.</p></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> As exceções<span class="hint">clique num card · é o que o atendente vai ter que responder sozinho</span></h2>
+  <p class="prose">No Cookie de Graça as exceções foram escritas e impressas, e viraram o roteiro de balcão. Aqui
+  elas são mais duras, porque a decisão é tomada em pé na rua, com carro esperando. <strong>O que não estiver
+  respondido aqui vai ser respondido de um jeito diferente por cada atendente</strong>, nos três dias e nas três
+  cidades.</p>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="e1"><span class="cnome">Carro com 4 pessoas</span><span class="cmeta">decide o orçamento</span></button>
+      <button class="card-btn" data-alvo="e2"><span class="cnome">Pedestre</span><span class="cmeta">decide o volume</span></button>
+      <button class="card-btn" data-alvo="e3"><span class="cnome">Moto, bike, Uber</span><span class="cmeta">caso frequente</span></button>
+      <button class="card-btn" data-alvo="e4"><span class="cnome">A fila travou a rua</span><span class="cmeta">quem corta e com que frase</span></button>
+      <button class="card-btn" data-alvo="e5"><span class="cnome">Acabou antes da hora</span><span class="cmeta">vai acontecer</span></button>
+      <button class="card-btn" data-alvo="e6"><span class="cnome">Voltou no dia seguinte</span><span class="cmeta">controla ou não</span></button>
+      <button class="card-btn" data-alvo="e7"><span class="cnome">Chegou 17h55</span><span class="cmeta">a frase do corte</span></button>
+      <button class="card-btn" data-alvo="e8"><span class="cnome">Choveu</span><span class="cmeta">plano B</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel aberto" data-alvo="e1" hidden><span class="ptit">Carro com 4 pessoas</span>
+        <span class="psub">em aberto · é a decisão de orçamento disfarçada de exceção</span>
+        <p class="prose">Uma casquinha por carro ou uma por pessoa? Se for por pessoa, <strong>100 carros podem
+        virar 250 ou 300 casquinhas</strong> e o custo de produto sai do controle no primeiro dia. Se for por
+        carro, o atendente vai ter que dizer não pra uma criança no banco de trás — cem vezes por dia.</p>
+        <p class="prose">Caminho do meio possível: <strong>o limite é por carro, mas o volume é contado em
+        casquinhas, não em carros.</strong> Isto é: &ldquo;100 casquinhas por dia&rdquo; já é o teto, e aí tanto
+        faz como elas saem. Isso resolve o orçamento e tira a decisão da mão do atendente — mas encurta a hora, e
+        a campanha pode acabar em 25 minutos.</p></div>
+
+      <div class="painel aberto" data-alvo="e2" hidden><span class="ptit">Pedestre</span>
+        <span class="psub">em aberto</span>
+        <p class="prose">Alguém passa a pé, vê a fila, pede. Se a resposta for sim, duas coisas mudam: as 100
+        acabam mais rápido, e <strong>a cena perde força</strong> — o que faz esta campanha ser filmável é ser
+        uma fila de carros, não uma aglomeração na calçada.</p>
+        <p class="prose">Mas dizer não pra quem está na porta da loja é ruim de outro jeito. Alternativa que não
+        custa nada: pedestre não entra na mecânica do buzinaço, <strong>mas leva o panfleto</strong> — o que ele
+        receberia de mais útil mesmo é o papel, não o sorvete.</p></div>
+
+      <div class="painel aberto" data-alvo="e3" hidden><span class="ptit">Moto, bicicleta, Uber</span>
+        <span class="psub">em aberto</span>
+        <p class="prose">Moto buzina e para mais fácil que carro — provavelmente é o participante ideal.
+        Bicicleta não tem buzina. E o motorista de aplicativo com passageiro dentro: leva uma, duas, ou nenhuma?</p>
+        <p class="prose">Não precisa de regra pra cada um. Precisa de <strong>um princípio em uma frase</strong>
+        que o atendente aplique sozinho — por exemplo: <em>&ldquo;qualquer veículo que encoste no ponto leva
+        uma.&rdquo;</em> Simples o bastante pra não travar e firme o bastante pra não virar discussão.</p></div>
+
+      <div class="painel aberto" data-alvo="e4" hidden><span class="ptit">A fila travou a rua</span>
+        <span class="psub">em aberto · é o risco de imagem da campanha</span>
+        <p class="prose">Carro parado em via de fluxo no horário de pico gera buzina de quem <em>não</em> é da
+        promoção, e eventualmente guarda municipal. Precisa estar decidido antes: <strong>quantos carros
+        encostados é o limite</strong>, quem olha, e o que a pessoa ouve quando é mandada dar a volta.</p>
+        <p class="prose">E precisa ter alguém com essa função e só essa — quem está entregando sorvete não está
+        olhando o trânsito.</p></div>
+
+      <div class="painel aberto" data-alvo="e5" hidden><span class="ptit">Acabou antes da hora</span>
+        <span class="psub">em aberto · provavelmente é o cenário mais provável</span>
+        <p class="prose">Cem casquinhas numa rua movimentada no fim do expediente podem sair em 20 minutos. Aí
+        sobram 40 minutos de carros buzinando pra nada — e <strong>essa é a pior imagem possível</strong> da
+        campanha, pior do que não ter feito.</p>
+        <p class="prose">Duas defesas, e as duas são baratas:</p>
+        <ul class="pontos">
+          <li><strong>Uma placa de &ldquo;acabou&rdquo;</strong> grande, pronta antes, pra ser levantada na
+          calçada. Sem ela, a equipe vai ficar explicando um por um.</li>
+          <li><strong>Um aviso no story na hora</strong>, do perfil da loja — quem está vindo pra lá está olhando
+          o celular no semáforo.</li>
+        </ul>
+        <p class="prose">E vale escrever no criativo desde o começo: <strong>&ldquo;são 100 por dia, até
+        acabar&rdquo;</strong>. Escassez anunciada antes é promoção; escassez descoberta na hora é frustração.</p></div>
+
+      <div class="painel aberto" data-alvo="e6" hidden><span class="ptit">Voltou no dia seguinte</span>
+        <span class="psub">em aberto</span>
+        <p class="prose">A mesma pessoa nos três dias: tudo bem ou não? No Cookie de Graça a resposta foi anotar
+        o CPF numa planilha. <strong>Aqui não tem como</strong> — anotar CPF pela janela do carro custa mais tempo
+        do que a campanha tem por carro.</p>
+        <p class="prose">Na prática, as opções reais são: deixar acontecer (e aceitar que parte das 300 vai pra
+        quem já conhece), ou fazer disso uma coisa boa de propósito — <em>três dias, três sabores
+        diferentes</em>, o que dá motivo pra voltar e vira conteúdo sozinho. A segunda opção depende de a cozinha
+        dar conta, e aumenta a lista de insumos.</p></div>
+
+      <div class="painel aberto" data-alvo="e7" hidden><span class="ptit">Chegou 17h55</span>
+        <span class="psub">em aberto · precisa de uma frase, não de uma regra</span>
+        <p class="prose">Quem chega nos cinco minutos finais, ou às 18h01, não vai aceitar bem um &ldquo;acabou o
+        horário&rdquo;. A frase de corte precisa dar uma saída, não só fechar a porta — e a saída natural é a
+        própria loja: <strong>&ldquo;a promoção fechou, mas a casquinha tá no cardápio aqui dentro.&rdquo;</strong></p>
+        <p class="prose">Essa é, aliás, a única conversão direta de venda que a mecânica permite. Vale estar
+        escrita.</p></div>
+
+      <div class="painel aberto" data-alvo="e8" hidden><span class="ptit">Choveu</span>
+        <span class="psub">em aberto · decidir antes, não na hora</span>
+        <p class="prose">Fim de tarde de verão nas três cidades chove. E a divulgação já foi paga quando chove —
+        então <strong>cancelar não é uma opção neutra</strong>, é jogar a verba fora.</p>
+        <dl class="ficha">
+          <dt>opção 1</dt><dd><strong>Empurra um dia.</strong> Mantém a mecânica, mas exige que o aviso já tenha dito que pode acontecer — e exige um canal rápido pra avisar (story + o perfil dos criadores).</dd>
+          <dt>opção 2</dt><dd><strong>Vira retirada no balcão naquele dia.</strong> Perde a cena, salva a entrega e salva a verba. E tem um efeito colateral bom: quem entra na loja vê os A4 e o cardápio.</dd>
+          <dt>o que não fazer</dt><dd>Decidir isso às 16h40 do dia, por mensagem, com a equipe já montando o ponto na calçada.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="story" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> Por que a troca do Cookie de Graça não funciona aqui<span class="hint">a conta de tempo</span></h2>
+  <p class="prose">No Cookie de Graça o story era a <strong>moeda</strong>: a pessoa pagava o cookie com um story
+  marcando a loja, e o atendente conferia a tela antes de entregar. Isso funcionava porque ela estava parada, em
+  pé, num balcão, e tinha tempo.</p>
+  <p class="prose">Aqui ela está no volante, com o motor ligado e carro atrás. Qualquer passo de verificação —
+  abrir o Instagram, gravar, postar, marcar, mostrar a tela — custa <strong>30 a 60 segundos por carro</strong>.
+  E o orçamento de tempo inteiro por carro, pra entregar 100 em uma hora, é <strong>36 segundos</strong>. A conta
+  não fecha nem no melhor caso: o story não cabe na mecânica, não é questão de treinar melhor a equipe.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a conclusão que vem antes das opções</span><span>
+      <strong>Essa camada não precisa ser salva — precisa ser trocada.</strong> Ela existia pra resolver um
+      problema que esta campanha não tem. O Cookie de Graça precisava que o cliente gerasse a imagem, porque fila
+      de balcão não é imagem: é igual à fila de qualquer lugar. Aqui a imagem é a própria rua. Trocar
+      &ldquo;story do cliente&rdquo; por <strong>&ldquo;vídeo do buzinaço&rdquo;</strong> é mais barato, mais
+      previsível e mais forte — e não depende de ninguém colaborar.</span></div>
+    <div class="note-item"><span class="tag mudo">o que se perde na troca</span><span>
+      O story do cliente tem uma coisa que o nosso vídeo não tem: <strong>ele aparece na rede de amigos
+      dele</strong>, e isso é alcance que não se compra. Perder essa camada é perder alcance orgânico de verdade —
+      só não a ponto de valer travar a operação na rua por causa dela. O caminho é recuperá-la <em>fora</em> do
+      momento da entrega, sem condicionar nada.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> As cinco saídas<span class="hint">clique num card · nenhuma está escolhida</span></h2>
+  <p class="prose">Cada card diz <strong>o que custa</strong>, <strong>o que ganha</strong> e <strong>o que precisa
+  estar pronto antes</strong>. A recomendação é a <strong>D combinada com a A</strong> — a D porque o conteúdo
+  passa a ser nosso e deixa de depender de colaboração, e a A porque recupera parte do alcance orgânico sem
+  custar um segundo na rua.</p>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="s1"><span class="cnome">A · Story opcional, prêmio por fora</span><span class="cmeta">recomendada junto com a D</span><span class="cdesc">Entrega sem condição; o convite vai impresso no panfleto.</span></button>
+      <button class="card-btn" data-alvo="s2"><span class="cnome">B · O QR vira a inscrição</span><span class="cmeta">a que constrói base</span><span class="cdesc">Troca alcance por cadastro. O fluxo já existe.</span></button>
+      <button class="card-btn" data-alvo="s3"><span class="cnome">C · Duas portas: carro e balcão</span><span class="cmeta">a mais cara de operar</span><span class="cdesc">Carro leva o sorvete; quem entra troca story por um extra.</span></button>
+      <button class="card-btn" data-alvo="s4"><span class="cnome">D · O conteúdo é nosso</span><span class="cmeta">recomendada</span><span class="cdesc">A loja filma o buzinaço. Não depende de ninguém colaborar.</span></button>
+      <button class="card-btn" data-alvo="s5"><span class="cnome">E · Nada</span><span class="cmeta">o mínimo honesto</span><span class="cdesc">É amostragem de produto novo e pronto. Válido se for medido.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="s1" hidden><span class="ptit">A · Story opcional, prêmio por fora</span>
+        <span class="psub">recomendada, em conjunto com a D</span>
+        <p class="prose">A casquinha é entregue sem nenhuma condição. O convite ao story vai <strong>impresso no
+        panfleto</strong>, pra ser lido depois: <em>&ldquo;Poste um story com a casquinha até 23h marcando
+        @holycook.[cidade] e você concorre a [prêmio].&rdquo;</em></p>
+        <p class="prose">O ponto que faz isso funcionar melhor do que parece: <strong>o story bom não aconteceria
+        no carro de qualquer jeito.</strong> Ele acontece quando a pessoa chega em casa, ou estaciona e come — com
+        luz boa e sem pressa. Tirar a cobrança do momento da entrega não reduz a qualidade do story; aumenta.</p>
+        <dl class="ficha">
+          <dt>o que custa</dt><dd>Conversão baixa. Sem verificação, a maioria não posta — contar com 5% a 10%, não com os quase 100% que o balcão do Cookie de Graça conseguia.</dd>
+          <dt>o que ganha</dt><dd><strong>Zero segundo de atrito na rua.</strong> E stories melhores entre os que vierem.</dd>
+          <dt>o que precisa antes</dt><dd>Decidir o prêmio (o combo do Cookie de Graça serve), escrever a frase no panfleto, e ter alguém olhando as menções à noite nos três dias.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="s2" hidden><span class="ptit">B · O QR vira a inscrição</span>
+        <span class="psub">a que constrói base de cliente</span>
+        <p class="prose">O papel já vai na mão da pessoa. Se o QR, além do cardápio, pedir <strong>nome e
+        WhatsApp</strong> e devolver um voucher nominal, a campanha deixa de ser anônima: dá pra falar com essas
+        pessoas na semana seguinte, e dá pra medir quantas voltaram.</p>
+        <p class="prose">Esse fluxo não precisa ser inventado — <strong>ele já foi desenhado no Cookie de
+        Graça</strong> (escaneia → nome, WhatsApp e CPF → recebe o voucher no WhatsApp) e ficou sem ser fechado
+        lá. Aqui ele vale mais, porque é a única ponte que existe entre o carro e a loja.</p>
+        <dl class="ficha">
+          <dt>o que custa</dt><dd>Não gera alcance nenhum: ninguém vê. E tem uma taxa de abandono real — pedir dado pessoal em troca de um sorvete que a pessoa <em>já recebeu</em> converte pouco.</dd>
+          <dt>o que ganha</dt><dd><strong>A única medição confiável da campanha</strong>, e a base pra conversar depois. É também o que resolve a camada 3 de uma vez.</dd>
+          <dt>o que precisa antes</dt><dd>A página de cadastro no ar, o disparo de WhatsApp funcionando, e o benefício do voucher escolhido. É a opção que depende de mais coisa pronta.</dd>
+          <dt>cuidado</dt><dd>Não transformar isso em <strong>dois QR no mesmo papel</strong>. Um QR só, caindo numa página que mostra o cardápio e oferece o voucher embaixo.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="s3" hidden><span class="ptit">C · Duas portas: carro e balcão</span>
+        <span class="psub">a mais cara de operar</span>
+        <p class="prose">Quem passa de carro leva a casquinha, sem condição. Quem <strong>estaciona e entra na
+        loja</strong> leva a casquinha mais um extra, em troca do story feito ali dentro — com tempo, no balcão,
+        como no Cookie de Graça.</p>
+        <p class="prose">É a opção que recupera a camada inteira sem quebrar a rua. E é a que resolve a maior
+        fraqueza da campanha: <strong>dá um motivo pra alguém entrar na loja.</strong></p>
+        <dl class="ficha">
+          <dt>o que custa</dt><dd>Duas mecânicas pra explicar no mesmo criativo — e criativo com duas regras converte menos que criativo com uma. Duas filas, duas equipes, dois estoques. Em três cidades, é bastante coisa.</dd>
+          <dt>o que ganha</dt><dd>Story de qualidade, visita de verdade contada, e a loja volta a ter chance de vender.</dd>
+          <dt>o que precisa antes</dt><dd>Definir o extra do balcão, e definir se as 100 do dia são compartilhadas entre as duas portas ou se cada uma tem a sua cota.</dd>
+          <dt>opinião</dt><dd>Boa ideia, prazo ruim. Se a campanha roda nas três cidades de uma vez, <strong>isto é complexidade demais pra primeira edição</strong> — vale guardar pra segunda, quando a mecânica de rua já tiver sido testada uma vez.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="s4" hidden><span class="ptit">D · O conteúdo é nosso: o vídeo do buzinaço</span>
+        <span class="psub">recomendada</span>
+        <p class="prose">Em vez de pedir que cem pessoas produzam conteúdo ruim, a loja produz <strong>um conteúdo
+        bom</strong>. A cena existe de graça: fila de carro, buzina, mão saindo pela janela, casquinha em close,
+        criança no banco de trás, o contador chegando em 100.</p>
+        <p class="prose">E a mecânica dá três dias de publicação encadeada, que é mais do que o Cookie de Graça
+        conseguiu em dois: <strong>o vídeo do dia 1 vai ao ar com o dia 2 e o dia 3 pela frente</strong> — ele
+        deixa de ser relato e vira chamada. Quem viu a fila na quarta e não sabia da promoção aparece na quinta.</p>
+        <dl class="ficha">
+          <dt>o que custa</dt><dd>Uma pessoa dedicada a filmar, nos três dias, em cada cidade — <strong>que não pode ser a mesma que entrega</strong>. E a edição no mesmo dia, porque vídeo do dia 1 postado no dia 4 não serve pra nada.</dd>
+          <dt>o que ganha</dt><dd>Conteúdo previsível, no nosso tempo, no nosso padrão. <strong>Não depende de colaboração de ninguém</strong> — é a diferença mais importante em relação ao story do cliente.</dd>
+          <dt>o que precisa antes</dt><dd>A lista de planos a gravar (está na aba <a href="#divulgacao">Divulgação</a>), quem grava em cada cidade, e o horário de publicação combinado — logo depois do fim, ainda na mesma noite.</dd>
+          <dt>por que ela é a principal</dt><dd>É a única opção que <strong>melhora</strong> quando a campanha dá certo. Se vier mais carro do que o previsto, o story do cliente não muda de qualidade, mas a imagem da rua cheia fica melhor.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="s5" hidden><span class="ptit">E · Nada</span>
+        <span class="psub">o mínimo honesto — e é melhor que uma camada mal feita</span>
+        <p class="prose">Entrega o sorvete, entrega o panfleto, acabou. A campanha é <strong>amostragem de produto
+        novo</strong>, e o retorno fica inteiramente por conta do cardápio online e da própria loja.</p>
+        <p class="prose">Isso é defensável — amostragem de lançamento é uma coisa legítima e é literalmente o que a
+        Mini Cookie na região já faz. O que <strong>não</strong> é defensável é escolher isso por omissão e depois
+        cobrar da campanha um número de retorno que ela nunca foi desenhada pra entregar.</p>
+        <dl class="ficha">
+          <dt>a condição</dt><dd>Se for essa, fica combinado desde já que o julgamento é <strong>faturamento da loja nas semanas seguintes</strong> contra as semanas anteriores, e nada mais. Sem voucher resgatado, sem cadastro, sem story contado.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="cidades" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> O que é igual e o que é por cidade<span class="hint">a lição que o Cookie de Graça deixou</span></h2>
+  <p class="prose">O briefing, a mecânica, o produto, o panfleto e o roteiro da frase são <strong>os mesmos nas
+  três cidades</strong>. Não se refaz nada disso por cidade — é justamente o que faz valer a pena ter um molde.</p>
+  <p class="prose">O que é obrigatoriamente por cidade são cinco coisas, e todas as cinco são locais por
+  natureza: <strong>os dias, a rua, a página da cidade, os quatro criadores e quem toca o dia</strong>. O Cookie
+  de Graça aprendeu isso do jeito caro: ele foi montado como campanha de duas cidades, rodou em uma, e a lista de
+  influenciadores que tinha era só de Paulínia. <em>O método serve, os nomes não.</em></p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a régua dos criadores</span><span>
+      O ranking <strong>não é por seguidor</strong> — é por <strong>views por seguidor</strong>: a mediana dos
+      reels dividida pelo tamanho do perfil. Seguidor mede o passado; views por seguidor mede se a entrega ainda
+      acontece hoje. Na lista de Paulínia tem perfil de 16 mil seguidores entregando menos que perfil de 2,3 mil.
+      Mediana dos últimos 24 posts, não média — um viral isolado não distorce.</span></div>
+    <div class="note-item"><span class="tag warn">o que muda em relação ao Cookie de Graça</span><span>
+      Lá era <strong>1 página + 2 criadores</strong>. Aqui são <strong>1 página + 4 criadores por cidade</strong> —
+      ou seja, três páginas e doze criadores no total. É o dobro de contratação, o dobro de briefing enviado e o
+      dobro de peça pra validar, numa campanha que roda em três lugares ao mesmo tempo. Isso é trabalho de
+      produção que não aparece no orçamento de mídia.</span></div>
+    <div class="note-item"><span class="tag bad">as três ruas, que é o ponto cego</span><span>
+      Nenhuma das três ruas foi olhada. A mecânica foi desenhada no abstrato — &ldquo;passa na frente da
+      loja&rdquo; — e <strong>cada uma das três lojas tem uma situação de rua diferente</strong>, no pior horário
+      de trânsito do dia. É o que pode fazer a campanha ser possível em duas cidades e não na terceira.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> Cada cidade<span class="hint">clique na cidade</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="cid-pau"><span class="cnome">Paulínia</span><span class="cmeta contagem">pronta de criador</span><span class="cdesc">A única com lista de influenciadores levantada — veio do Cookie de Graça.</span></button>
+      <button class="card-btn" data-alvo="cid-cps"><span class="cnome">Campinas</span><span class="cmeta">o maior alcance</span><span class="cdesc">Tem o perfil mais forte das três cidades, e é o único já conhecido.</span></button>
+      <button class="card-btn" data-alvo="cid-pir"><span class="cnome">Piracicaba</span><span class="cmeta">nada levantado</span><span class="cdesc">Nenhum nome, nenhum número. Começa do zero.</span></button>
+    </div>
+    <div class="visor">
+
+      <!-- ───────── PAULÍNIA ───────── -->
+      <div class="painel" data-alvo="cid-pau" hidden><span class="ptit">Paulínia</span>
+        <span class="psub">a cidade mais adiantada das três</span>
+        <div class="grupo-descricao">
+          É a única cidade com <strong>os criadores já levantados com número real</strong> — a lista veio do
+          Cookie de Graça, que rodou aqui em setembro, e serve inteira: a página da cidade mais exatamente quatro
+          criadores. O que falta em Paulínia é o resto: a rua, os dias e quem toca.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="pau-rua"><span class="cnome">A rua e a fachada</span><span class="cmeta">em aberto</span></button>
+            <button class="card-btn" data-alvo="pau-pag"><span class="cnome">A página da cidade</span><span class="cmeta">já escolhida uma vez</span></button>
+            <button class="card-btn" data-alvo="pau-cri"><span class="cnome">Os 4 criadores</span><span class="cmeta">lista com número real</span></button>
+            <button class="card-btn" data-alvo="pau-dias"><span class="cnome">Dias e horário</span><span class="cmeta">em aberto</span></button>
+            <button class="card-btn" data-alvo="pau-quem"><span class="cnome">Quem toca o dia</span><span class="cmeta">em aberto</span></button>
+          </div>
+          <div class="visor">
+            <div class="painel aberto" data-alvo="pau-rua" hidden><span class="ptit">A rua e a fachada</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">A loja fica na <strong>Av. José Paulino, 1615 · Centro</strong>. É avenida, e a
+              campanha é às 17h de um dia de semana — ou seja, <strong>o cenário mais difícil dos três</strong>:
+              via de fluxo, no pico.</p>
+              <p class="prose">O que precisa ser respondido indo lá ver: tem vaga em frente? Dá pra usar uma rua
+              lateral como ponto de encosto? De que lado da avenida passa o fluxo de volta do trabalho? Quantos
+              carros encostados antes de travar a faixa?</p></div>
+            <div class="painel" data-alvo="pau-pag" hidden><span class="ptit">A página da cidade</span>
+              <span class="psub">já foi escolhida uma vez, com motivo</span>
+              <div class="perfilhead"><span class="h">@livepaulinianilsao</span><span class="nm">Live Paulínia / Nilsão</span></div>
+              <div class="nums">
+                <div><span class="v">69.873</span><span class="s">seguidores</span></div>
+                <div><span class="v">9.677</span><span class="s">mediana de views</span></div>
+                <div><span class="v">3,2</span><span class="s">posts por semana</span></div>
+                <div><span class="v dest">maior</span><span class="s">alcance de Paulínia</span></div>
+              </div>
+              <p class="prose">Foi a escolhida no Cookie de Graça, e a escolha foi consciente:
+              <strong>alcance em vez de encaixe</strong>. É página de notícia com rosto — o post entra como pauta
+              da cidade, não como recomendação de comida.</p>
+              <p class="prose">Para esta campanha isso é melhor do que foi lá, porque <strong>o buzinaço é
+              notícia de verdade</strong>: &ldquo;vai ter sorvete de graça na avenida quarta, quinta e sexta&rdquo;
+              é exatamente o tipo de coisa que uma página de cidade publica bem. O cuidado continua o mesmo:
+              combinar que a peça seja vídeo, não card de aviso.</p></div>
+            <div class="painel" data-alvo="pau-cri" hidden><span class="ptit">Os 4 criadores</span>
+              <span class="psub">números da API do Instagram, 03/09/2026 · mediana dos últimos 24 posts</span>
+              <p class="prose">A lista do Cookie de Graça tinha exatamente quatro nomes além da página — dá os
+              quatro desta campanha sem levantamento novo. Ordem por <strong>views por seguidor</strong>.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Por que está aqui</th><th>Seguidores</th><th>Views/seg.</th></tr></thead>
+                <tbody>
+                  <tr class="mark"><td><a href="https://www.instagram.com/bellaraamalho/" target="_blank" rel="noopener">@bellaraamalho</a></td><td>O melhor número da lista inteira: 11% de curtidas sobre seguidor. Já postou sobre a loja em dezembro. É audiência que assiste, não audiência que existe.</td><td>2.354</td><td>2,65</td></tr>
+                  <tr><td><a href="https://www.instagram.com/comendoporpaulinia/" target="_blank" rel="noopener">@comendoporpaulinia</a></td><td>Análogo direto do @comendoporcampinas que fez o vídeo-modelo do Cookie de Graça: mesmo formato, mesma promessa, 7,2% de curtidas. Ficou de fora lá só por tamanho.</td><td>1.733</td><td>1,80</td></tr>
+                  <tr><td><a href="https://www.instagram.com/sarahnogue/" target="_blank" rel="noopener">@sarahnogue</a></td><td>Era a reserva do Cookie de Graça. Tem um reel que bateu 2,5 milhões.</td><td>—</td><td>1,46</td></tr>
+                  <tr><td><a href="https://www.instagram.com/mila_moralees/" target="_blank" rel="noopener">@mila_moralees</a></td><td>Rainha da Festa do Peão de Paulínia 2025 — reconhecimento de cidade, não de nicho. Mediana de 7.921 views e um reel de 292 mil. Já postou sobre a loja em março.</td><td>10.163</td><td>0,78</td></tr>
+                </tbody>
+              </table></div>
+              <div class="notes">
+                <div class="note-item"><span class="tag warn">o teto de Paulínia</span><span>
+                  O maior perfil da cidade tem mediana de <strong>9.677 views</strong>. O vídeo-modelo do Cookie
+                  de Graça fez 107 mil porque era um canal de Campinas com 552 mil seguidores.
+                  <strong>Não prometer alcance de Campinas em Paulínia</strong> — o que se reproduz é a construção
+                  do vídeo e a conversão de quem vê, não o número.</span></div>
+                <div class="note-item"><span class="tag mudo">o que ficou sem resposta no Cookie de Graça</span><span>
+                  <strong>Se há cachê em dinheiro</strong> além do produto e do voucher. O combinado lá foi
+                  produtos de foto, 3 cookies e bebidas pra consumir, e voucher de R$ 80 — dinheiro nunca foi
+                  mencionado, e ficou registrado como pendência. Com <em>doze</em> criadores agora, isso deixa de
+                  ser detalhe e passa a ser linha de orçamento.</span></div>
+              </div></div>
+            <div class="painel aberto" data-alvo="pau-dias" hidden><span class="ptit">Dias e horário</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">Três dias de semana, exemplo quarta/quinta/sexta, 17h–18h ou 17h30–18h30. Se as
+              três cidades rodarem na mesma semana, vale checar se <strong>os criadores das três cidades postam no
+              mesmo dia</strong> — porque aí a campanha tem um só dia de pico de divulgação e não três.</p></div>
+            <div class="painel aberto" data-alvo="pau-quem" hidden><span class="ptit">Quem toca o dia</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">São três funções simultâneas na rua, e elas não podem ser a mesma pessoa:
+              <strong>quem entrega</strong>, <strong>quem repõe o sorvete</strong> e <strong>quem filma e olha o
+              trânsito</strong>. Mais o balcão da loja, que continua funcionando.</p>
+              <p class="prose">Em Paulínia vale a mesma pergunta do Cookie de Graça: se a resposta de quem manda
+              no dia for &ldquo;a Débora&rdquo;, a campanha não conta como transferida mesmo que dê certo.</p></div>
+          </div>
+        </div></div>
+
+      <!-- ───────── CAMPINAS ───────── -->
+      <div class="painel" data-alvo="cid-cps" hidden><span class="ptit">Campinas</span>
+        <span class="psub">o maior alcance das três cidades</span>
+        <div class="grupo-descricao">
+          Campinas é a cidade onde o alcance existe de verdade: <strong>@comendoporcampinas tem 552 mil seguidores
+          e mediana de 94 mil views</strong> — foi dele o vídeo que serviu de modelo pro Cookie de Graça. É o único
+          perfil já conhecido e medido das três cidades, e é um perfil de outro patamar. Em troca, nenhum criador
+          de Campinas foi levantado ainda.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="cps-rua"><span class="cnome">A rua e a fachada</span><span class="cmeta">em aberto · tem agravante</span></button>
+            <button class="card-btn" data-alvo="cps-pag"><span class="cnome">A página da cidade</span><span class="cmeta">candidato conhecido</span></button>
+            <button class="card-btn" data-alvo="cps-cri"><span class="cnome">Os 4 criadores</span><span class="cmeta">a levantar</span></button>
+            <button class="card-btn" data-alvo="cps-dias"><span class="cnome">Dias e horário</span><span class="cmeta">em aberto</span></button>
+            <button class="card-btn" data-alvo="cps-quem"><span class="cnome">Quem toca o dia</span><span class="cmeta">em aberto</span></button>
+          </div>
+          <div class="visor">
+            <div class="painel aberto" data-alvo="cps-rua" hidden><span class="ptit">A rua e a fachada</span>
+              <span class="psub">em aberto · com um agravante que as outras não têm</span>
+              <p class="prose">A loja fica no <strong>Taquaral, de frente para o Colégio Liceu</strong> — é o que o
+              vídeo-modelo do Cookie de Graça usa como referência de endereço.</p>
+              <p class="prose">O agravante: <strong>estar de frente para uma escola muda a rua às 17h.</strong>
+              Pode ser ótimo (pai esperando filho, movimento garantido, carro já parado) ou péssimo (fila dupla de
+              escola somada à fila da promoção, e a rua trava). Das três, é a que mais precisa de olho no local
+              antes de qualquer decisão — e é a única em que vale avisar a escola.</p></div>
+            <div class="painel" data-alvo="cps-pag" hidden><span class="ptit">A página da cidade</span>
+              <span class="psub">candidato conhecido, e de outro patamar</span>
+              <div class="perfilhead"><span class="h">@comendoporcampinas</span><span class="nm">a página que fez o vídeo-modelo do Cookie de Graça</span></div>
+              <div class="nums">
+                <div><span class="v">552 mil</span><span class="s">seguidores</span></div>
+                <div><span class="v">94 mil</span><span class="s">mediana de views</span></div>
+                <div><span class="v dest">10×</span><span class="s">a mediana do maior perfil de Paulínia</span></div>
+              </div>
+              <p class="prose">É o perfil cujo reel de abril de 2025 (107 mil views) foi destrinchado plano a plano
+              na aba <a href="../cookie-de-graca/#video">Vídeo modelo</a> do Cookie de Graça — então
+              <strong>já se sabe exatamente como ele monta um vídeo de &ldquo;coisa de graça&rdquo;</strong>, e esse
+              trabalho não precisa ser refeito.</p>
+              <p class="prose">Duas coisas pra registrar antes de empolgar: <strong>os 107 mil views foram
+              resultado normal daquele canal, não estouro</strong> — a mediana dele é 94 mil. E um perfil desse
+              tamanho provavelmente custa outra ordem de grandeza de cachê, o que até agora não entrou em nenhuma
+              conta.</p></div>
+            <div class="painel aberto" data-alvo="cps-cri" hidden><span class="ptit">Os 4 criadores</span>
+              <span class="psub">a levantar · o método já está escrito</span>
+              <p class="prose">Nenhum nome de Campinas foi levantado. O levantamento é o mesmo que foi feito pra
+              Paulínia, e são três buscas cruzadas:</p>
+              <ul class="pontos">
+                <li><strong>Quem já marcou a loja.</strong> Os posts em que o perfil da loja foi marcado — são os
+                contatos mornos, que já estiveram lá e já postaram por conta própria.</li>
+                <li><strong>Busca de perfis</strong> por termos ligados à cidade: comida, dicas, guia, notícia,
+                rolê, mãe, shopping.</li>
+                <li><strong>Hashtags da cidade</strong> — e em Campinas há muito mais volume do que em Paulínia, o
+                que torna essa etapa mais trabalhosa e mais produtiva ao mesmo tempo.</li>
+              </ul>
+              <p class="prose">Ranquear por <strong>views por seguidor</strong>, mediana dos últimos 24 posts. Em
+              Campinas é provável que apareça perfil grande com entrega fraca — a régua existe exatamente pra isso.</p></div>
+            <div class="painel aberto" data-alvo="cps-dias" hidden><span class="ptit">Dias e horário</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">Mesma pergunta das outras duas. Em Campinas há um fator extra: o horário de saída
+              do Colégio Liceu. Vale escolher a janela da campanha <em>em função dele</em> — logo depois, pra
+              aproveitar o movimento sem disputar a rua com ele.</p></div>
+            <div class="painel aberto" data-alvo="cps-quem" hidden><span class="ptit">Quem toca o dia</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">As mesmas três funções simultâneas: entrega, reposição, e filmagem + trânsito.</p></div>
+          </div>
+        </div></div>
+
+      <!-- ───────── PIRACICABA ───────── -->
+      <div class="painel" data-alvo="cid-pir" hidden><span class="ptit">Piracicaba</span>
+        <span class="psub">começa do zero nas cinco frentes</span>
+        <div class="grupo-descricao">
+          Piracicaba <strong>não tem nada levantado</strong>: nenhum perfil, nenhum número, nenhuma rua olhada.
+          Não é esquecimento — é que a cidade nunca entrou numa campanha de divulgação até aqui. O Cookie de Graça
+          foi desenhado pra rodar em Paulínia e Piracicaba e <strong>acabou rodando só em Paulínia</strong>, e a
+          lista de influenciadores que ele produziu era toda de Paulínia.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="pir-rua"><span class="cnome">A rua e a fachada</span><span class="cmeta">em aberto</span></button>
+            <button class="card-btn" data-alvo="pir-pag"><span class="cnome">A página da cidade</span><span class="cmeta">a levantar</span></button>
+            <button class="card-btn" data-alvo="pir-cri"><span class="cnome">Os 4 criadores</span><span class="cmeta">a levantar</span></button>
+            <button class="card-btn" data-alvo="pir-dias"><span class="cnome">Dias e horário</span><span class="cmeta">em aberto</span></button>
+            <button class="card-btn" data-alvo="pir-quem"><span class="cnome">Quem toca o dia</span><span class="cmeta">em aberto · é o risco maior</span></button>
+          </div>
+          <div class="visor">
+            <div class="painel aberto" data-alvo="pir-rua" hidden><span class="ptit">A rua e a fachada</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">Não tenho o endereço da loja de Piracicaba registrado em nenhum lugar deste
+              projeto, então as perguntas da rua ficam todas abertas: via movimentada ou não, vaga em frente,
+              lateral, lado do fluxo.</p>
+              <p class="prose">Um sinal de que a cidade está menos mapeada que as outras: <strong>a loja de
+              Piracicaba não tem ficha no Google Maps</strong>. Isso é relevante pra esta campanha porque quem vê o
+              post do criador e quer saber onde é vai procurar no mapa — e não vai achar.</p></div>
+            <div class="painel aberto" data-alvo="pir-pag" hidden><span class="ptit">A página da cidade</span>
+              <span class="psub">a levantar</span>
+              <p class="prose">Nenhum candidato. O levantamento é o mesmo das outras duas. Como referência de
+              formato, o que se procura é o equivalente local do <strong>@livepaulinianilsao</strong> (página de
+              notícia da cidade, com rosto) ou do <strong>@comendoporcampinas</strong> (guia de comida) — os dois
+              formatos funcionam, e os dois já têm vídeo de referência destrinchado no Cookie de Graça.</p></div>
+            <div class="painel aberto" data-alvo="pir-cri" hidden><span class="ptit">Os 4 criadores</span>
+              <span class="psub">a levantar</span>
+              <p class="prose">Mesmas três buscas cruzadas, mesma régua de views por seguidor. Piracicaba é bem
+              maior que Paulínia em população, então é razoável esperar <strong>mais nomes e medianas mais
+              altas</strong> do que a lista de Paulínia — mas isso é expectativa, não dado: só o levantamento
+              responde.</p></div>
+            <div class="painel aberto" data-alvo="pir-dias" hidden><span class="ptit">Dias e horário</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">Mesma pergunta das outras duas.</p></div>
+            <div class="painel aberto" data-alvo="pir-quem" hidden><span class="ptit">Quem toca o dia</span>
+              <span class="psub">em aberto · é o risco maior de Piracicaba</span>
+              <p class="prose">Piracicaba é a loja com <strong>crise de equipe aberta</strong> — líder e
+              funcionária contaminados, e o bloqueio comum é salário. Uma campanha de rua que exige três funções
+              simultâneas, nos três dias, não é o tipo de coisa que se apoia numa equipe instável.</p>
+              <p class="prose">Essa é a razão mais forte pra <strong>Piracicaba ser a última das três</strong>, ou
+              pra ficar de fora da primeira edição — e é uma decisão de operação, não de marketing.</p></div>
+          </div>
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Três de uma vez, ou uma por vez?<span class="hint">a recomendação</span></h2>
+  <p class="prose">A campanha está escrita como campanha de três cidades, e o molde suporta isso. O que o molde
+  não resolve é que <strong>a mecânica de rua nunca foi executada</strong> — nem uma vez. Fazer o primeiro teste
+  de uma mecânica nova simultaneamente em três ruas diferentes, com 12 criadores contratados e 900 unidades de um
+  produto que a cozinha ainda não produziu em escala, é o cenário em que um erro vira três erros.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">recomendação</span><span>
+      <strong>Paulínia primeiro</strong>, sozinha — é a cidade com os criadores já levantados, com a equipe que já
+      rodou o Cookie de Graça e com a mecânica de campanha de rua mais fresca na cabeça. Campinas e Piracicaba na
+      semana seguinte, com o ponto de encosto, o tempo real por carro e a frase de balcão já testados. Custa uma
+      semana e devolve a mecânica funcionando.</span></div>
+    <div class="note-item"><span class="tag mudo">o argumento contrário, que é legítimo</span><span>
+      As três de uma vez fazem <strong>o lançamento do cardápio de verão parecer um lançamento</strong> — três
+      cidades falando da mesma coisa na mesma semana é notícia, três semanas seguidas é rotina. Se a data do
+      lançamento do cardápio for fixa e a campanha tiver que acontecer nela, esse argumento ganha, e aí o que
+      muda é outra coisa: <strong>reduzir as 100 do primeiro dia</strong> até a operação provar que aguenta.</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="divulgacao" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> As três janelas<span class="hint">clique num card</span></h2>
+  <p class="prose">A divulgação desta campanha tem uma exigência que o Cookie de Graça não tinha: ela precisa
+  ensinar <strong>uma instrução estranha</strong>. &ldquo;Vai na loja e ganha um cookie&rdquo; se entende de
+  primeira; &ldquo;passa de carro buzinando entre 17h e 18h e recebe pela janela&rdquo; precisa ser dito mais de
+  uma vez pra ser acreditado. Instrução incomum pede <strong>mais repetição, não menos</strong>.</p>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="d1"><span class="cnome">Antes</span><span class="cmeta">cinco canais</span><span class="cdesc">É aqui que a campanha é ganha ou perdida — rua vazia no dia 1 não tem conserto.</span></button>
+      <button class="card-btn" data-alvo="d2"><span class="cnome">No dia</span><span class="cmeta">a cobertura</span><span class="cdesc">A cena existe de graça. O que falta é alguém com a função de gravá-la.</span></button>
+      <button class="card-btn" data-alvo="d3"><span class="cnome">Depois</span><span class="cmeta">o que fica</span><span class="cdesc">O cardápio de verão continua no ar depois que os três dias acabam.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="d1" hidden><span class="ptit">Antes</span>
+        <span class="psub">cinco canais — dois deles de graça</span>
+        <div class="grupo-descricao">
+          A ordem de importância aqui não é a ordem de custo. O canal mais barato dos cinco — <strong>a faixa na
+          frente da própria loja</strong> — fala exatamente com quem a campanha quer: gente que já passa de carro
+          ali todo dia.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="d1a"><span class="cnome">A faixa na frente da loja</span><span class="cmeta">o mais barato e o mais certeiro</span></button>
+            <button class="card-btn" data-alvo="d1b"><span class="cnome">A página da cidade</span><span class="cmeta">1 por cidade</span></button>
+            <button class="card-btn" data-alvo="d1c"><span class="cnome">Os 4 criadores</span><span class="cmeta">4 por cidade · 12 no total</span></button>
+            <button class="card-btn" data-alvo="d1d"><span class="cnome">O perfil da loja</span><span class="cmeta">de graça</span></button>
+            <button class="card-btn" data-alvo="d1e"><span class="cnome">O panfleto do delivery</span><span class="cmeta">carona em campanha que já roda</span></button>
+          </div>
+          <div class="visor">
+            <div class="painel" data-alvo="d1a" hidden><span class="ptit">A faixa na frente da loja</span>
+              <span class="psub">na semana anterior</span>
+              <p class="prose">Quem passa de carro na frente da loja todo dia <strong>é literalmente o público-alvo
+              desta campanha</strong>. Nenhum outro canal tem essa precisão, e esse custa o preço de uma faixa de
+              lona.</p>
+              <p class="prose">Tem que ser legível a 40 km/h, o que significa <strong>poucas palavras e números
+              grandes</strong>: o dia, a hora, e o que fazer. Endereço não entra — quem lê está na frente da loja.</p>
+              <div class="copiavel">QUA · QUI · SEX — 17h às 18h
+SORVETE DE GRAÇA
+passa de carro buzinando e retira na janela
+100 por dia, até acabar</div></div>
+            <div class="painel" data-alvo="d1b" hidden><span class="ptit">A página da cidade</span>
+              <span class="psub">uma por cidade</span>
+              <p class="prose">É o canal de maior alcance e o que dá credibilidade de &ldquo;isso é verdade&rdquo; —
+              página de cidade publicando funciona como notícia, não como anúncio.</p>
+              <p class="prose">E aqui a campanha tem uma vantagem sobre o Cookie de Graça: <strong>o buzinaço é
+              notícia de verdade.</strong> &ldquo;Vai ter sorvete de graça na avenida quarta, quinta e sexta&rdquo; é
+              exatamente o tipo de pauta que uma página de cidade publica bem, e sem parecer publicidade.</p>
+              <dl class="ficha">
+                <dt>o cuidado</dt><dd>Página de notícia tende a entregar <strong>card de aviso</strong> em vez de vídeo. Combinar que seja vídeo, com a oferta nos 4 primeiros segundos — é a mesma exigência do briefing do criador do Cookie de Graça.</dd>
+              </dl></div>
+            <div class="painel" data-alvo="d1c" hidden><span class="ptit">Os 4 criadores</span>
+              <span class="psub">quatro por cidade · doze no total</span>
+              <p class="prose">O briefing do criador do Cookie de Graça serve quase inteiro — mudam o produto, a
+              data e a instrução. As seis exigências dele continuam valendo, e a principal é
+              <strong>a oferta nos 4 primeiros segundos</strong>.</p>
+              <p class="prose">Três coisas específicas desta campanha que o briefing precisa acrescentar:</p>
+              <ul class="pontos">
+                <li><strong>A instrução tem que ser dita e mostrada</strong>, não só dita: a pessoa buzinando no
+                carro aparece na tela. Instrução incomum precisa de demonstração.</li>
+                <li><strong>O limite entra no vídeo</strong> — &ldquo;100 por dia, até acabar&rdquo;. Escassez
+                anunciada é promoção; descoberta na hora é frustração.</li>
+                <li><strong>O cardápio de verão é a notícia, o sorvete é a isca.</strong> Se o criador falar só do
+                sorvete de graça, a campanha entregou fila e não anunciou o cardápio.</li>
+              </ul>
+              <dl class="ficha">
+                <dt>em aberto</dt><dd>Se há <strong>cachê em dinheiro</strong> além de produto. Com 12 criadores, essa pendência deixa de ser detalhe e vira linha de orçamento. Ficou sem resposta no Cookie de Graça, com 2.</dd>
+                <dt>prazo</dt><dd>O post precisa sair <strong>com antecedência suficiente pra virar plano</strong>, não no próprio dia. Se sair no dia, pega só quem já ia passar ali.</dd>
+              </dl></div>
+            <div class="painel" data-alvo="d1d" hidden><span class="ptit">O perfil da loja</span>
+              <span class="psub">de graça, e o único canal que dá pra usar na hora</span>
+              <p class="prose">Post e stories na semana anterior, e — mais importante — <strong>o único canal que
+              funciona durante o evento</strong>: avisar que está rolando, avisar que está acabando, avisar que
+              acabou. Quem está vindo pra lá olha o celular no semáforo.</p></div>
+            <div class="painel" data-alvo="d1e" hidden><span class="ptit">O panfleto do delivery</span>
+              <span class="psub">carona numa campanha que já roda</span>
+              <p class="prose">O <strong>panfleto no delivery</strong> e a <strong>Mini Cookie na região</strong> já
+              estão rodando em outubro e já vão carregar a notícia do cardápio de verão. Acrescentar a data do
+              Sorvete de Graça nessas peças é <strong>o mesmo custo com um motivo melhor</strong> — é divulgação de
+              graça pra quem já é cliente.</p>
+              <p class="prose">Detalhe de encaixe: quem recebe panfleto no delivery é justamente quem
+              <em>não</em> vai à loja. Dar a ele um motivo de carro é um bom caminho de migração delivery → loja,
+              que é a alavanca que as duas campanhas de outubro já persegui&shy;am.</p></div>
+          </div>
+        </div></div>
+
+      <div class="painel" data-alvo="d2" hidden><span class="ptit">No dia</span>
+        <span class="psub">a cobertura — e por que ela é a camada 4</span>
+        <div class="grupo-descricao">
+          Esta é a opção <strong>D</strong> da aba <a href="#story">O problema do story</a>, e é o que substitui o
+          story do cliente. A cena existe de graça; o que falta é <strong>alguém com a função de gravá-la</strong>,
+          que não pode ser quem está entregando.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="d2a"><span class="cnome">Os planos a gravar</span><span class="cmeta">lista fechada</span></button>
+            <button class="card-btn" data-alvo="d2b"><span class="cnome">O vídeo da noite</span><span class="cmeta">o encadeamento dos 3 dias</span></button>
+            <button class="card-btn" data-alvo="d2c"><span class="cnome">Quem grava</span><span class="cmeta">em aberto</span></button>
+          </div>
+          <div class="visor">
+            <div class="painel" data-alvo="d2a" hidden><span class="ptit">Os planos a gravar</span>
+              <span class="psub">lista pronta — pra não depender de inspiração na hora</span>
+              <ul class="pontos">
+                <li><strong>O primeiro carro.</strong> Antes de ter fila. É o plano que não dá pra repetir depois.</li>
+                <li><strong>A rua cheia, de longe e de cima</strong> se houver onde subir. É o plano que prova o
+                acontecimento — e o único que depende de a campanha ter dado certo.</li>
+                <li><strong>A mão saindo pela janela</strong> recebendo a casquinha. É o plano que explica a
+                mecânica sem narração.</li>
+                <li><strong>Close da casquinha</strong>, com o sorvete e os pedaços de cookie à mostra. É o plano de
+                apetite, e é o que vende o produto no cardápio depois.</li>
+                <li><strong>A criança no banco de trás.</strong> Reação sem produção.</li>
+                <li><strong>A contagem.</strong> &ldquo;Casquinha 100&rdquo;, ou a placa de ACABOU sendo levantada.
+                É o plano que cria urgência pro dia seguinte.</li>
+                <li><strong>O panfleto na mão</strong>, com o QR legível. É o único plano que anuncia o cardápio —
+                sem ele o vídeo inteiro fala só de sorvete grátis.</li>
+              </ul></div>
+            <div class="painel" data-alvo="d2b" hidden><span class="ptit">O vídeo da noite</span>
+              <span class="psub">o maior ganho de ter três dias em vez de dois</span>
+              <p class="prose">O Cookie de Graça já tinha essa lógica no vídeo das 21h, e ela era explícita:
+              <strong>o vídeo da sexta era o mais importante porque ia ao ar com o sábado inteiro pela
+              frente</strong> — virava chamada, não aviso.</p>
+              <p class="prose">Com três dias isso fica mais forte: o vídeo da <strong>quarta</strong> tem dois dias
+              pela frente. Quem viu a rua cheia na quarta e nem sabia da promoção aparece na quinta. É a camada de
+              divulgação mais barata da campanha inteira, porque a matéria-prima é o próprio evento.</p>
+              <dl class="ficha">
+                <dt>a condição</dt><dd>Publicar <strong>na mesma noite</strong>. Vídeo do dia 1 postado no dia 4 não serve pra nada — o encadeamento é o valor inteiro.</dd>
+                <dt>o que ele diz</dt><dd>&ldquo;Foi assim hoje, e amanhã tem de novo, mesma hora, 100 casquinhas.&rdquo; Mais o QR do cardápio.</dd>
+              </dl></div>
+            <div class="painel aberto" data-alvo="d2c" hidden><span class="ptit">Quem grava</span>
+              <span class="psub">em aberto</span>
+              <p class="prose">Precisa ser uma pessoa <strong>dedicada</strong>, nos três dias, em cada cidade — e
+              ela acumula a função de olhar o trânsito, que é a outra coisa que não pode ficar com quem entrega.
+              Mais a edição na mesma noite.</p>
+              <p class="prose">Se não houver essa pessoa, a camada 4 não existe — e aí a campanha fica sem nenhuma
+              camada de conteúdo, porque a do cliente já não existe.</p></div>
+          </div>
+        </div></div>
+
+      <div class="painel" data-alvo="d3" hidden><span class="ptit">Depois</span>
+        <span class="psub">o que fica quando os três dias acabam</span>
+        <p class="prose">A diferença entre esta campanha e o Cookie de Graça é que <strong>ela deixa uma coisa
+        atrás de si</strong>: o cardápio de verão continua no cardápio. O Cookie de Graça acabava quando o sábado
+        acabava.</p>
+        <ul class="pontos">
+          <li><strong>O cardápio online fica no ar</strong>, e o QR dele vai pro adesivo das mesas, pro perfil, pro
+          panfleto do delivery. A página paga por si mesma depois da campanha.</li>
+          <li><strong>O melhor vídeo dos três dias vira peça</strong> — pode ser impulsionado depois, ou servir de
+          abertura pra próxima ação.</li>
+          <li><strong>O que foi medido</strong> decide se a mecânica se repete: a lista está no card
+          &ldquo;decide se valeu&rdquo; do <a href="#briefing">Briefing</a>.</li>
+          <li><strong>Remarketing</strong> pra quem interagiu com o perfil durante os três dias. Estava no backlog
+          do Cookie de Graça (~R$ 300) e foi adiado lá — aqui tem mais sentido, porque o produto anunciado continua
+          disponível depois.</li>
+        </ul></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="pecas" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> O que precisa existir<span class="hint">clique num card</span></h2>
+  <p class="prose">Cinco peças, e a ordem de dependência entre elas é rígida: <strong>as fotos destravam o
+  cardápio online, que destrava o QR, que destrava o panfleto.</strong> O panfleto é a última coisa a ser impressa
+  e a mais importante de todas — e por isso é o item que mais corre risco de atrasar.</p>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="p1"><span class="cnome">1 · O cardápio de verão online</span><span class="cmeta contagem">não existe · trava tudo</span><span class="cdesc">A página com foto e explicação de cada produto. É pra onde o QR aponta.</span></button>
+      <button class="card-btn" data-alvo="p2"><span class="cnome">2 · O panfleto</span><span class="cmeta">a peça principal</span><span class="cdesc">A miniatura do cardápio que vai na mão. É o que vende, porque a loja não fala.</span></button>
+      <button class="card-btn" data-alvo="p3"><span class="cnome">3 · Os A4 da loja</span><span class="cmeta">pra quem entra</span><span class="cdesc">Os produtos na parede, pra quem nunca viu o que a loja vende.</span></button>
+      <button class="card-btn" data-alvo="p4"><span class="cnome">4 · A sinalização de rua</span><span class="cmeta">em aberto</span><span class="cdesc">A faixa, o ponto de encosto, e a placa de ACABOU.</span></button>
+      <button class="card-btn" data-alvo="p5"><span class="cnome">5 · O voucher</span><span class="cmeta">depende da camada 3</span><span class="cdesc">Só existe se o retorno for voucher. Pode ser tarja no próprio panfleto.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel aberto" data-alvo="p1" hidden><span class="ptit">1 · O cardápio de verão online <span class="tag bad">não existe</span></span>
+        <span class="psub">é o item que trava a campanha inteira</span>
+        <p class="prose">Uma página com <strong>foto de cada produto do cardápio de verão e uma linha explicando o
+        que é</strong>. É o destino do QR, e é a única coisa que a campanha tem pra contar a história completa.</p>
+        <p class="prose">Ela não existe. E o Cookie de Graça já tinha batido nisso: o checklist dele registrava
+        <em>&ldquo;o cardápio online não existe mais — tem que montar a página antes do QR&rdquo;</em>, pro adesivo
+        das mesas. O problema voltou maior, porque aqui o QR não é um adesivo de mesa: <strong>é a campanha.</strong></p>
+        <dl class="ficha">
+          <dt>a dependência</dt><dd><strong>As fotos.</strong> A decisão <em>&ldquo;sessão fotográfica profissional ou IA&rdquo;</em> está aberta no projeto do cardápio de verão e <strong>ninguém ficou responsável por ela</strong>. Ela trava a página, que trava o QR, que trava o panfleto.</dd>
+          <dt>quantos produtos</dt><dd>Dez fechados mais duas sugestões a decidir — Cookie Gateau e a bolacha que o Fred chama de <em>piscininha</em>. A página precisa saber se são 10 ou 12 antes de ser montada.</dd>
+          <dt>o que ela ganha de graça</dt><dd>Se o link for rastreável, ela entrega <strong>quantas pessoas abriram o cardápio</strong> — que é a medida mais direta de que a mensagem chegou, e sai sem custo nenhum.</dd>
+          <dt>e depois</dt><dd>Ela não morre com a campanha: vira o cardápio digital da loja, o adesivo das mesas e o link do perfil. É a peça com maior vida útil das cinco.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="p2" hidden><span class="ptit">2 · O panfleto</span>
+        <span class="psub">a peça principal da campanha</span>
+        <p class="prose">A miniatura do cardápio de verão, entregue junto com a casquinha. <strong>É o único
+        momento em que a marca fala</strong> — e ela fala num papel que vai ser lido depois, dentro de um carro,
+        por alguém com a mão suja de sorvete.</p>
+        <p class="prose">Isso impõe condições de projeto que um panfleto comum não tem:</p>
+        <ul class="pontos">
+          <li><strong>O QR tem que ser grande.</strong> Vai ser lido de dentro de um carro, com o papel numa mão.
+          QR pequeno e bonito é QR que não é lido.</li>
+          <li><strong>Papel que aguenta mão molhada.</strong> Sorvete pinga. Papel comum vira massa e o QR vai com
+          ele — vale couché ou plastificado, mesmo custando mais.</li>
+          <li><strong>Uma frase só no topo</strong>, que diga o que é aquilo. Quem recebe não sabe que recebeu um
+          cardápio; ele parece um panfleto de promoção.</li>
+          <li><strong>Tamanho que caiba numa mão</strong> junto com a casquinha, e que entre no bolso ou no
+          porta-luvas sem dobrar o QR.</li>
+          <li><strong>Sem endereço de uma loja só</strong>, se a peça for a mesma nas três cidades — ou faz três
+          versões, ou não põe endereço.</li>
+        </ul>
+        <dl class="ficha">
+          <dt>quantidade</dt><dd><strong>Mais que 900.</strong> Pedestre leva panfleto sem levar sorvete, e sobra serve pro balcão e pro delivery nas semanas seguintes. É a peça mais barata da campanha — faltar dela é o erro mais bobo possível.</dd>
+          <dt>em aberto</dt><dd>Se o voucher entra como tarja atrás. Decidir <strong>antes</strong> de imprimir, porque reimprimir 900 panfletos não é uma correção, é uma segunda compra.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="p3" hidden><span class="ptit">3 · Os A4 da loja</span>
+        <span class="psub">pra quem entra na loja</span>
+        <p class="prose">Folhas A4 impressas com os produtos, nas paredes. Público diferente do carro: é quem
+        <strong>entra</strong> — e, nesta campanha, quem entra é quase sempre alguém que não foi atraído por ela.</p>
+        <p class="prose">O motivo de existir não é estético e já apareceu no Cookie de Graça: uma cliente nova
+        <strong>não conseguiu ver os produtos porque naquele dia não tinha torta exposta na vitrine</strong>. Papel
+        na parede resolve o que a vitrine não mostra quando o produto acabou.</p>
+        <dl class="ficha">
+          <dt>vantagem</dt><dd>Imprime em casa, em horário de cabeça cansada. É tarefa braçal e não depende de gráfica.</dd>
+          <dt>dependência</dt><dd>As mesmas fotos do cardápio online. Se as fotos atrasarem, atrasa junto.</dd>
+        </dl></div>
+
+      <div class="painel aberto" data-alvo="p4" hidden><span class="ptit">4 · A sinalização de rua</span>
+        <span class="psub">em aberto · depende de olhar a rua de cada cidade</span>
+        <p class="prose">Três peças, e as três só podem ser especificadas depois de alguém ir ver a rua:</p>
+        <ul class="pontos">
+          <li><strong>A faixa da fachada</strong>, na semana anterior — é também o canal de divulgação mais barato
+          da campanha. Texto proposto na aba <a href="#divulgacao">Divulgação</a>.</li>
+          <li><strong>A marcação do ponto de encosto</strong>: onde o carro para. Cone, placa, seta, alguém de
+          colete. É o passo 4 da mecânica, que hoje está tracejado.</li>
+          <li><strong>A placa de ACABOU</strong>, grande, pronta antes. Sem ela a equipe vai explicar um por um,
+          com carro buzinando — e é o cenário mais provável do dia, não o menos.</li>
+        </ul></div>
+
+      <div class="painel aberto" data-alvo="p5" hidden><span class="ptit">5 · O voucher</span>
+        <span class="psub">só existe se a camada 3 existir</span>
+        <p class="prose">Se o retorno for por voucher, a forma mais barata é <strong>uma tarja no próprio
+        panfleto</strong> — a peça já está na mão da pessoa e não precisa de um segundo papel, que ela não ia
+        conseguir segurar de qualquer jeito.</p>
+        <p class="prose">O benefício ainda não foi escolhido, e não precisa ser inventado: as <strong>quatro opções
+        compre-e-ganhe com o lucro de cada uma</strong> estão na aba
+        <a href="../cookie-de-graca/#voucher">Voucher de volta</a> do Cookie de Graça, com CMV real. O raciocínio de
+        lá vale aqui com um ajuste: lá a regra era não repetir o cookie que a pessoa acabou de ganhar;
+        <strong>aqui é não repetir o sorvete.</strong></p>
+        <dl class="ficha">
+          <dt>a janela</dt><dd>No Cookie de Graça o voucher valia a semana seguinte e <strong>não era cumulativo</strong> com a própria campanha — e isso foi registrado como o ponto de atrito nº 1 do balcão. Aqui o atrito é menor, porque a pessoa não está num balcão: está lendo um papel depois. É um motivo a mais pra a tarja no panfleto ser clara sobre a data.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="custo" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> A conta, com o que falta marcado<span class="hint">o CMV da casquinha ainda não existe</span></h2>
+  <p class="prose">A estrutura da conta está montada. O que não está é o número que manda nela: <strong>o CMV da
+  casquinha com o sorvete</strong>. Assim que ele sair, a conta fecha sozinha — por isso o que está aqui é a
+  fórmula e a lista do que precisa ser custeado, não estimativa.</p>
+  <div class="strip">
+    <div><span class="v">900</span><span class="s">casquinhas — 100 × 3 dias × 3 cidades</span></div>
+    <div><span class="v">300</span><span class="s">por cidade</span></div>
+    <div><span class="v">—</span><span class="s">CMV por casquinha · a levantar</span></div>
+    <div><span class="v">—</span><span class="s">custo de produto = CMV × 900</span></div>
+  </div>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">onde esse número é calculado</span><span>
+      O Sistema-HC já tem bancada própria pra produto que ainda não existe:
+      <a href="https://fechamento-caixa-nu.vercel.app/cmv/laboratorio" target="_blank" rel="noopener"><strong>/cmv/laboratorio</strong></a>,
+      com os produtos do verão já cadastrados, alvo de CMV de 40% e preço sugerido = custo ÷ 0,40.
+      <strong>A casquinha está lá.</strong> Não montar planilha nova pra isso — o número desta campanha é o mesmo
+      número do produto, e ele tem um lugar.</span></div>
+    <div class="note-item"><span class="tag bad">o multiplicador escondido</span><span>
+      A decisão <strong>&ldquo;uma casquinha por carro ou uma por pessoa&rdquo;</strong> está escrita como exceção
+      de atendimento, mas é decisão de orçamento: no limite ela multiplica o custo de produto por três ou quatro.
+      É a pergunta mais barata de responder e a mais cara de deixar pra depois.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O que precisa ser custeado<span class="hint">linha por linha</span></h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Linha</th><th>O que entra</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr class="mark"><td>Casquinha de cookie</td><td>Comprada pronta ou feita de massa de cookie na loja — ainda não decidido, e muda o custo e o processo. 900 unidades mais quebra, que em casquinha não é desprezível.</td><td><span class="vago">a levantar</span></td></tr>
+      <tr class="mark"><td>Sorvete de Nutella</td><td>A base, mais a Nutella, mais os pedaços de cookie. Bola porcionada ou máquina — a resposta muda o custo e o investimento da loja.</td><td><span class="vago">a levantar</span></td></tr>
+      <tr><td>Embalagem de mão</td><td>Porta-casquinha e guardanapo. Entrega pela janela de carro: sorvete na mão de quem dirige pinga no volante, e isso não é detalhe de etiqueta.</td><td><span class="vago">a levantar</span></td></tr>
+      <tr><td>Panfleto do cardápio</td><td>Mais de 900 — pedestre leva sem levar sorvete, e a sobra serve pro balcão e pro delivery. Papel que aguente mão molhada.</td><td><span class="vago">orçar na gráfica</span></td></tr>
+      <tr><td>Folhas A4 da loja</td><td>Impressão em casa, nas três lojas. Custo baixo.</td><td><span class="vago">baixo</span></td></tr>
+      <tr><td>Sinalização de rua</td><td>Faixa da fachada (3), marcação do ponto de encosto, placa de ACABOU (3).</td><td><span class="vago">orçar</span></td></tr>
+      <tr class="mark"><td>Criadores</td><td><strong>12 criadores + 3 páginas de cidade.</strong> Produto de foto, produto de consumo e voucher já são o combinado do Cookie de Graça — <strong>se há cachê em dinheiro nunca foi respondido</strong>, e com 15 contratações isso é a maior incógnita do orçamento.</td><td><span class="vago">a decidir</span></td></tr>
+      <tr><td>Página da cidade de Campinas</td><td>@comendoporcampinas tem 552 mil seguidores. Um perfil desse tamanho provavelmente custa outra ordem de grandeza, e isso não entrou em nenhuma conta até agora.</td><td><span class="vago">a levantar</span></td></tr>
+      <tr><td>Voucher</td><td>Só se a camada 3 for voucher. Se for tarja no panfleto, custo zero de peça — só o custo do benefício resgatado.</td><td><span class="vago">depende da camada 3</span></td></tr>
+      <tr><td>Mão de obra extra</td><td>Três funções simultâneas por cidade, três dias: entrega, reposição, filmagem + trânsito. Mais a edição na mesma noite.</td><td><span class="vago">a dimensionar</span></td></tr>
+      <tr><td>Cardápio online</td><td>A página em si não custa. <strong>As fotos custam</strong> — e a decisão entre sessão profissional e IA é justamente a que está travada.</td><td><span class="vago">depende da decisão de foto</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <div class="note-item"><span class="tag mudo">referência de tamanho</span><span>
+      O Cookie de Graça rodou <strong>dois dias, uma cidade, R$ 5 mil</strong>, com 1 página + 2 criadores. Esta
+      campanha é três dias, três cidades, 3 páginas + 12 criadores. <strong>Não é a mesma campanha três
+      vezes</strong> — é meio dia a mais por cidade e o dobro de criadores por cidade. O número final não sai de
+      multiplicar R$ 5 mil por três.</span></div>
+    <div class="note-item"><span class="tag warn">o que a conta ainda não tem</span><span>
+      Quanto a campanha precisa <strong>trazer de volta</strong> pra se pagar. Sem o CMV não dá pra calcular, mas a
+      estrutura é simples e vale montar junto: custo total ÷ margem de uma visita = número de visitas que a
+      campanha precisa gerar. Esse é o número que transforma &ldquo;deu movimento&rdquo; em
+      &ldquo;valeu&rdquo;.</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="checklist" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> Onde a campanha está<span class="hint">montado em 02/10/2026</span></h2>
+  <div class="strip">
+    <div><span class="v">sem data</span><span class="s">três dias de semana, a definir</span></div>
+    <div><span class="v">3 cidades</span><span class="s">só Paulínia tem criadores levantados</span></div>
+    <div><span class="v" id="chk-total">0 / 0</span><span class="s">itens abertos</span></div>
+  </div>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">o bloqueio nº 1</span><span>
+      <strong>O cardápio de verão online não existe</strong>, e ele depende de uma decisão de fotos que está aberta
+      sem responsável. Sem a página, o QR não tem destino; sem o QR, o panfleto é papel bonito; sem o panfleto, a
+      campanha dá 900 sorvetes e não anuncia nada. <strong>É o único item que, sozinho, inviabiliza a
+      campanha.</strong></span></div>
+    <div class="note-item"><span class="tag bad">o bloqueio nº 2</span><span>
+      <strong>A rua.</strong> O passo 4 da mecânica — onde o carro encosta — não foi desenhado em nenhuma das três
+      cidades, e as três lojas ficam em via movimentada no pior horário do dia. Resolve com dez minutos de
+      observação por cidade, mas <strong>não resolve de longe</strong>.</span></div>
+    <div class="note-item"><span class="tag warn">o que ninguém testou</span><span>
+      <strong>100 casquinhas em 60 minutos</strong>, uma a cada 36 segundos, montadas sem derreter. Antes de
+      prometer 100 num criativo, vale cronometrar uma entrega inteira: do freezer à janela do carro.</span></div>
+    <div class="note-item"><span class="tag acc">a decisão que estrutura o resto</span><span>
+      <strong>O que compra a segunda visita</strong> — voucher, cadastro ou nada. A escolha muda o panfleto (que é
+      impresso e não se corrige), muda o que a equipe fala na janela e muda o número pelo qual a campanha vai ser
+      julgada. É a primeira a tomar, não a última.</span></div>
+    <div class="note-item"><span class="tag mudo">como usar</span><span>
+      As marcações ficam salvas <strong>neste navegador</strong>. Serve pra acompanhar; pra equipe, imprimir.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O checklist<span class="hint">clique num grupo</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir</span><span class="cmeta contagem" data-conta="dec">0/0</span><span class="cdesc">Treze decisões. Quatro delas travam impressão ou orçamento.</span></button>
+      <button class="card-btn" data-alvo="ck-prod"><span class="cnome">Produto e cozinha</span><span class="cmeta contagem" data-conta="prod">0/0</span><span class="cdesc">O CMV, a casquinha, o sorvete e o teste de 100 em uma hora.</span></button>
+      <button class="card-btn" data-alvo="ck-pec"><span class="cnome">Peças e impressos</span><span class="cmeta contagem" data-conta="pec">0/0</span><span class="cdesc">O cardápio online é o primeiro da fila — tudo depende dele.</span></button>
+      <button class="card-btn" data-alvo="ck-rua"><span class="cnome">Rua e logística</span><span class="cmeta contagem" data-conta="rua">0/0</span><span class="cdesc">O passo 4 da mecânica, por cidade. O bloqueio nº 2.</span></button>
+      <button class="card-btn" data-alvo="ck-equ"><span class="cnome">Equipe</span><span class="cmeta contagem" data-conta="equ">0/0</span><span class="cdesc">Três funções simultâneas por cidade, e a frase da janela.</span></button>
+      <button class="card-btn" data-alvo="ck-cri"><span class="cnome">Criadores</span><span class="cmeta contagem" data-conta="cri">0/0</span><span class="cdesc">15 contratações: 3 páginas e 12 criadores. Paulínia já tem a lista.</span></button>
+      <button class="card-btn" data-alvo="ck-dia"><span class="cnome">Nos três dias</span><span class="cmeta contagem" data-conta="dia">0/0</span><span class="cdesc">A lista repete nos três dias e nas três cidades.</span></button>
+      <button class="card-btn" data-alvo="ck-dep"><span class="cnome">Depois</span><span class="cmeta contagem" data-conta="dep">0/0</span><span class="cdesc">É aqui que se descobre se valeu, e é o que ninguém cobra.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="ck-dec" hidden><span class="ptit">Decidir</span>
+        <span class="psub">13 decisões em aberto</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-dec1" data-g="dec"><label for="ck-dec1"><span class="prazo ja">estrutura tudo</span><strong>O que compra a segunda visita</strong> — voucher, cadastro ou nada.<span class="por">Muda o panfleto (impresso, não se corrige), muda a frase da janela e muda o número que julga a campanha. As quatro opções de benefício com lucro real estão na aba Voucher de volta do Cookie de Graça.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec2" data-g="dec"><label for="ck-dec2"><span class="prazo ja">trava impressão</span><strong>Uma casquinha por carro ou por pessoa.</strong><span class="por">Está escrita como exceção de atendimento, mas é decisão de orçamento: no limite multiplica o custo de produto por três ou quatro. E se não for respondida, o atendente responde sozinho na rua, cem vezes por dia.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec3" data-g="dec"><label for="ck-dec3"><span class="prazo ja">trava o cardápio</span><strong>Sessão fotográfica profissional ou IA.</strong><span class="por">Já está aberta no projeto do cardápio de verão, <em>sem responsável</em>. Trava o cardápio online, que trava o QR, que trava o panfleto. É o item mais à montante de todos.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec4" data-g="dec"><label for="ck-dec4"><span class="prazo ja">trava a divulgação</span><strong>As três datas e a hora</strong> — 17h–18h ou 17h30–18h30.<span class="por">Quarta/quinta/sexta nessa ordem tem lógica: sexta é o dia mais forte, então o dia 1 é teste e o dia 3 é pico, e o vídeo da quarta vira chamada para os outros dois.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec5" data-g="dec"><label for="ck-dec5"><span class="prazo ja">trava o orçamento</span><strong>As três cidades na mesma semana, ou uma por vez.</strong><span class="por">Recomendação da página: Paulínia primeiro, sozinha — é a única com criadores levantados e com a equipe que já rodou o Cookie de Graça. Argumento contrário legítimo: três cidades na mesma semana fazem o lançamento parecer lançamento.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec6" data-g="dec"><label for="ck-dec6"><span class="prazo ja">trava o orçamento</span><strong>Se há cachê em dinheiro pros criadores.</strong><span class="por">Ficou sem resposta no Cookie de Graça, com 2 criadores. Aqui são 12 mais 3 páginas de cidade — e uma delas tem 552 mil seguidores.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec7" data-g="dec"><label for="ck-dec7"><span class="prazo antes">antes do criativo</span><strong>O que substitui o story do cliente.</strong><span class="por">Cinco saídas na aba própria. Recomendação: D (a loja filma o buzinaço) combinada com A (story opcional convidado no panfleto). A opção C — duas portas, carro e balcão — é boa e provavelmente é complexidade demais pra primeira edição.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec8" data-g="dec"><label for="ck-dec8"><span class="prazo antes">antes do criativo</span><strong>Buzina ou pisca-alerta.</strong><span class="por">Buzina em via urbana tem regra no Código de Trânsito — é sinal de advertência, e uso indevido é infração. Vale confirmar antes de um criativo dizer &ldquo;vem buzinar&rdquo;, e ter o pisca-alerta como alternativa pronta: entrega a mesma participação e fica melhor no vídeo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec9" data-g="dec"><label for="ck-dec9"><span class="prazo antes">antes do dia 1</span><strong>Qual número julga a campanha</strong>, e quem anota.<span class="por">Fila de carro é a métrica mais fotogênica e a mais enganosa que esta campanha produz. Se isso não for combinado antes, a campanha vai ser julgada por fila — e aí ela &ldquo;deu certo&rdquo; sem nenhuma venda ter acontecido.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec10" data-g="dec"><label for="ck-dec10"><span class="prazo antes">antes do dia 1</span><strong>O plano de chuva.</strong><span class="por">Empurra um dia ou vira retirada no balcão. Cancelar não é opção neutra: a divulgação já foi paga. E não se decide às 16h40 com a equipe montando o ponto na calçada.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec11" data-g="dec"><label for="ck-dec11"><strong>Pedestre entra na mecânica?</strong><span class="por">Se sim, as 100 acabam mais rápido e a cena perde força — o que torna isto filmável é ser fila de carros. Alternativa que não custa nada: pedestre não leva sorvete, mas leva o panfleto.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec12" data-g="dec"><label for="ck-dec12"><strong>O princípio pra moto, bike e Uber</strong>, em uma frase.<span class="por">Não precisa de regra por veículo. Precisa de algo que o atendente aplique sozinho — por exemplo: &ldquo;qualquer veículo que encoste no ponto leva uma&rdquo;.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dec13" data-g="dec"><label for="ck-dec13"><strong>Três dias, três sabores?</strong><span class="por">Resolveria a exceção de quem volta nos três dias transformando-a em coisa boa, e viraria conteúdo sozinho. Depende da cozinha dar conta e aumenta a lista de insumos.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-prod" hidden><span class="ptit">Produto e cozinha</span>
+        <span class="psub">o produto existe no papel e nunca foi feito em escala</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-prod1" data-g="prod"><label for="ck-prod1"><span class="prazo ja">trava a conta</span><strong>Levantar o CMV da casquinha com o sorvete.</strong><span class="por">É o único número que falta pra fechar o orçamento. Vai no <em>/cmv/laboratorio</em> do Sistema-HC, onde a casquinha já está cadastrada — não montar planilha nova.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod2" data-g="prod"><label for="ck-prod2"><span class="prazo ja">muda o investimento</span><strong>Bola porcionada ou sorvete de máquina.</strong><span class="por">É a resposta que mais muda o investimento da loja — e numa operação de 36 segundos por carro, muda também se a campanha é possível. Já estava aberta no projeto do produto.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod3" data-g="prod"><label for="ck-prod3"><strong>A casquinha é comprada pronta ou feita na loja.</strong><span class="por">Muda custo, processo e prazo. E ela quebra fácil no transporte — 900 unidades é volume que nenhuma das três lojas já manuseou.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod4" data-g="prod"><label for="ck-prod4"><span class="prazo antes">antes de prometer 100</span><strong>Cronometrar uma entrega inteira</strong>, do freezer à janela do carro.<span class="por">100 em 60 minutos é uma a cada 36 segundos. Se a conta não fechar, o teto do dia não é 100 — é o que duas pessoas conseguem numa hora, e o criativo tem que dizer o número certo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod5" data-g="prod"><label for="ck-prod5"><strong>Decidir onde o sorvete fica durante a hora.</strong><span class="por">Freezer na calçada, caixa térmica, ou idas e vindas até dentro da loja. Cada opção tem custo de tempo diferente e nenhuma foi escolhida.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod6" data-g="prod"><label for="ck-prod6"><strong>Comprar porta-casquinha e guardanapo.</strong><span class="por">Sorvete na mão de quem está dirigindo pinga no volante. É a diferença entre lembrar bem e lembrar mal da marca.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod7" data-g="prod"><label for="ck-prod7"><strong>Garantir o insumo nas três lojas.</strong><span class="por">300 casquinhas por cidade, em três dias. No Cookie de Graça o estoque extra foi o item marcado como &ldquo;vai dar problema, tem que olhar hoje&rdquo; — e depende de fornecedor, então nenhum esforço no dia resolve.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-prod8" data-g="prod"><label for="ck-prod8"><strong>Conferir espaço de freezer por loja.</strong><span class="por">Nove dos dez itens do cardápio de verão dependem de frio, e já estava aberto se o freezer das lojas comporta o volume. A campanha chega em cima disso.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-pec" hidden><span class="ptit">Peças e impressos</span>
+        <span class="psub">a ordem de dependência é rígida: fotos → cardápio online → QR → panfleto</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-pec1" data-g="pec"><label for="ck-pec1"><span class="prazo ja">bloqueio nº 1</span><strong>Montar o cardápio de verão online.</strong><span class="por">Foto de cada produto e uma linha explicando. É o destino do QR e a única peça que conta a história completa. Já tinha sido levantado como pendência no Cookie de Graça, pro adesivo das mesas — voltou maior, porque aqui o QR <em>é</em> a campanha.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec2" data-g="pec"><label for="ck-pec2"><strong>Definir se o cardápio tem 10 ou 12 produtos.</strong><span class="por">Dez fechados mais duas sugestões a decidir — Cookie Gateau e a bolacha que o Fred chama de piscininha. A página precisa saber antes de ser montada.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec3" data-g="pec"><label for="ck-pec3"><strong>Deixar o link do cardápio rastreável.</strong><span class="por">Entrega de graça o número de pessoas que abriram o cardápio — a medida mais direta de que a mensagem chegou. Custo zero se for feito antes de o QR ser gerado; impossível depois.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec4" data-g="pec"><label for="ck-pec4"><span class="prazo antes">depois do cardápio</span><strong>Produzir o panfleto.</strong><span class="por">QR grande (lido de dentro do carro), papel que aguente mão molhada, uma frase no topo dizendo o que é aquilo, tamanho que caiba na mão junto com a casquinha. Sem endereço, se a peça for a mesma nas três cidades.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec5" data-g="pec"><label for="ck-pec5"><strong>Imprimir mais de 900 panfletos.</strong><span class="por">Pedestre leva panfleto sem levar sorvete, e a sobra serve pro balcão e pro delivery depois. É a peça mais barata da campanha — faltar dela é o erro mais bobo possível.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec6" data-g="pec"><label for="ck-pec6"><strong>Imprimir os A4 dos produtos</strong> pras paredes das três lojas.<span class="por">Motivo concreto, do Cookie de Graça: uma cliente nova não conseguiu ver os produtos porque naquele dia não tinha torta exposta. Imprime em casa, é tarefa braçal.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec7" data-g="pec"><label for="ck-pec7"><strong>Fazer as três faixas de fachada.</strong><span class="por">Legível a 40 km/h: dia, hora e o que fazer. É o canal de divulgação mais barato e mais certeiro da campanha.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec8" data-g="pec"><label for="ck-pec8"><strong>Fazer as três placas de ACABOU.</strong><span class="por">Grandes, prontas antes. É o cenário mais provável do dia, não o menos — cem casquinhas podem sair em 20 minutos.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-pec9" data-g="pec"><label for="ck-pec9"><strong>Decidir a tarja do voucher antes de imprimir.</strong><span class="por">Reimprimir 900 panfletos não é correção, é segunda compra.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-rua" hidden><span class="ptit">Rua e logística</span>
+        <span class="psub">o bloqueio nº 2 · resolve com dez minutos por cidade, mas não resolve de longe</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-rua1" data-g="rua"><label for="ck-rua1"><span class="prazo ja">bloqueio nº 2</span><strong>Ir na rua das três lojas no horário da campanha e ver.</strong><span class="por">Paulínia é avenida (Av. José Paulino, Centro). Campinas é de frente pro Colégio Liceu — a saída da escola às 17h pode ser o melhor ou o pior fator da campanha. Piracicaba não tem nem endereço registrado neste projeto.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-rua2" data-g="rua"><label for="ck-rua2"><span class="prazo ja">passo 4 da mecânica</span><strong>Escolher o ponto de encosto em cada cidade.</strong><span class="por">Vaga em frente, bolsão, entrada de estacionamento, rua lateral. Fora da faixa de rolamento se possível, e visível de longe.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-rua3" data-g="rua"><label for="ck-rua3"><strong>Definir o limite de fila</strong> — quantos carros antes de a rua travar.<span class="por">E quem olha isso. Quem está entregando sorvete não está olhando o trânsito.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-rua4" data-g="rua"><label for="ck-rua4"><strong>Escrever a frase de quem é mandado dar a volta.</strong><span class="por">Precisa dar uma saída, não só fechar a porta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-rua5" data-g="rua"><label for="ck-rua5"><strong>Avisar quem é afetado na rua.</strong><span class="por">Vizinho de porta, vaga de carga e descarga, garagem de condomínio. Uma hora por três dias é pouco pra pedir autorização e muito pra ninguém reclamar. Em Campinas, a escola entra nessa lista.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-rua6" data-g="rua"><label for="ck-rua6"><strong>Checar a regra da buzina</strong> antes de ela ir pro criativo.<span class="por">E deixar o pisca-alerta pronto como alternativa onde a rua não permitir.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-rua7" data-g="rua"><label for="ck-rua7"><strong>Conferir de que lado da via passa o fluxo de volta do trabalho.</strong><span class="por">Se for o lado oposto, metade do público teria que dar a volta — e aí ou o aviso diz isso, ou o horário muda.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-equ" hidden><span class="ptit">Equipe</span>
+        <span class="psub">três funções simultâneas por cidade, e nenhuma pode ser acumulada</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-equ1" data-g="equ"><label for="ck-equ1"><span class="prazo ja">destrava o resto</span><strong>Escrever o procedimento do dia.</strong><span class="por">Que horas cada um chega, como as casquinhas são produzidas e repostas, quem fica em cada função. É o item que no Cookie de Graça destravava todos os outros.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-equ2" data-g="equ"><label for="ck-equ2"><strong>Definir as três funções, por cidade:</strong> quem entrega, quem repõe, quem filma e olha o trânsito.<span class="por">Mais o balcão da loja, que continua funcionando. Se a resposta das três cidades for a mesma pessoa, a campanha não roda nas três na mesma semana.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-equ3" data-g="equ"><label for="ck-equ3"><span class="prazo antes">antes do dia 1</span><strong>Escrever e treinar a frase da janela.</strong><span class="por">Oito segundos, por uma janela, com motor ligado. Improvisada ela vira &ldquo;toma, tchau&rdquo;. A versão proposta está na aba A mecânica, passo 6.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-equ4" data-g="equ"><label for="ck-equ4"><strong>Imprimir a folha das exceções e deixar na rua.</strong><span class="por">Oito exceções já estão escritas na aba A mecânica. Ninguém consulta uma página no celular com carro buzinando na frente.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-equ5" data-g="equ"><label for="ck-equ5"><strong>Escrever a frase de corte das 18h.</strong><span class="por">&ldquo;A promoção fechou, mas a casquinha tá no cardápio aqui dentro.&rdquo; É a única conversão direta de venda que a mecânica permite.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-equ6" data-g="equ"><label for="ck-equ6"><strong>Resolver quem toca Piracicaba.</strong><span class="por">É a loja com crise de equipe aberta. Uma campanha de rua com três funções simultâneas em três dias não se apoia numa equipe instável — é razão pra Piracicaba ser a última, ou ficar fora da primeira edição.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-equ7" data-g="equ"><label for="ck-equ7"><strong>Programar a resposta automática do WhatsApp.</strong><span class="por">Nos três dias, no horário da campanha, ninguém vai atender. O texto do Cookie de Graça serve.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-cri" hidden><span class="ptit">Criadores</span>
+        <span class="psub">15 contratações: 3 páginas de cidade e 12 criadores</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-cri1" data-g="cri"><label for="ck-cri1"><span class="prazo ja">Paulínia já tem</span><strong>Fechar os 4 criadores de Paulínia.</strong><span class="por">A lista do Cookie de Graça dá exatamente quatro nomes com número real: @bellaraamalho, @comendoporpaulinia, @sarahnogue e @mila_moralees. Mais @livepaulinianilsao como página da cidade. Sem levantamento novo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri2" data-g="cri"><label for="ck-cri2"><span class="prazo ja">do zero</span><strong>Levantar os criadores de Campinas.</strong><span class="por">Três buscas cruzadas: quem já marcou a loja, busca de perfis por termo da cidade, hashtags. Ranquear por views por seguidor, mediana dos últimos 24 posts. @comendoporcampinas (552 mil seguidores, mediana 94 mil) é o candidato conhecido a página da cidade.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri3" data-g="cri"><label for="ck-cri3"><span class="prazo ja">do zero</span><strong>Levantar a página e os criadores de Piracicaba.</strong><span class="por">Nenhum nome, nenhum número. Mesmo método.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri4" data-g="cri"><label for="ck-cri4"><strong>Adaptar o briefing do criador.</strong><span class="por">O do Cookie de Graça serve quase inteiro. Três acréscimos: a instrução tem que ser mostrada (a pessoa buzinando aparece na tela), o limite entra no vídeo (&ldquo;100 por dia, até acabar&rdquo;), e o cardápio de verão é a notícia — se o criador falar só do sorvete, a campanha não anunciou nada.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri5" data-g="cri"><label for="ck-cri5"><strong>Combinar a data de publicação.</strong><span class="por">Com antecedência suficiente pra virar plano, não no próprio dia. E se as três cidades rodam juntas, checar se os posts das três saem no mesmo dia — senão a campanha tem um pico de divulgação e não três.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri6" data-g="cri"><label for="ck-cri6"><strong>Validar cada post quando sair.</strong><span class="por">Conferir as exigências do briefing, principalmente a oferta nos 4 primeiros segundos, a data e a instrução. São 15 peças pra validar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-cri7" data-g="cri"><label for="ck-cri7"><strong>Combinar que a página da cidade entregue vídeo, não card.</strong><span class="por">Página de notícia tende a entregar card de aviso. Aqui tem um ponto a favor: o buzinaço é notícia de verdade, e dá uma pauta boa de cidade.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dia" hidden><span class="ptit">Nos três dias</span>
+        <span class="psub">a lista repete nos três dias e nas três cidades</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-dia1" data-g="dia"><label for="ck-dia1"><span class="prazo dia">antes das 17h</span><strong>Montar o ponto de encosto e a sinalização.</strong><span class="por">E conferir que a placa de ACABOU está à mão, não guardada.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia2" data-g="dia"><label for="ck-dia2"><span class="prazo dia">antes das 17h</span><strong>Produzir e posicionar o estoque de casquinhas.</strong><span class="por">Onde o sorvete fica durante a hora — freezer, caixa térmica ou ida e volta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia3" data-g="dia"><label for="ck-dia3"><span class="prazo dia">17h–18h</span><strong>Entregar: panfleto primeiro, casquinha depois, e a frase.</strong><span class="por">Quem recebe sorvete primeiro não pega mais nada.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia4" data-g="dia"><label for="ck-dia4"><span class="prazo dia">17h–18h</span><strong>Contar as casquinhas que saíram</strong>, e a que horas acabou.<span class="por">É o dado que dimensiona o dia seguinte e a próxima edição.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia5" data-g="dia"><label for="ck-dia5"><span class="prazo dia">17h–18h</span><strong>Gravar os sete planos da lista.</strong><span class="por">Estão na aba Divulgação. O primeiro carro é o único que não dá pra repetir depois.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia6" data-g="dia"><label for="ck-dia6"><span class="prazo dia">durante</span><strong>Avisar nos stories da loja:</strong> começou, está acabando, acabou.<span class="por">É o único canal que funciona em tempo real. Quem está vindo pra lá olha o celular no semáforo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia7" data-g="dia"><label for="ck-dia7"><span class="prazo dia">à noite</span><strong>Editar e postar o vídeo do dia.</strong><span class="por">Na mesma noite. O vídeo da quarta vai ao ar com quinta e sexta pela frente — vira chamada, não relato. Postado no dia 4, não serve pra nada.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dia8" data-g="dia"><label for="ck-dia8"><span class="prazo dia">à noite</span><strong>Olhar as menções</strong>, se a opção A do story estiver valendo.<span class="por">O story bom acontece quando a pessoa chega em casa — então as menções aparecem à noite, não durante a hora.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dep" hidden><span class="ptit">Depois</span>
+        <span class="psub">é aqui que se descobre se valeu — e é o que ninguém cobra</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="ck-dep1" data-g="dep"><label for="ck-dep1"><span class="prazo dep">logo depois</span><strong>Contar quantas pessoas abriram o cardápio pelo QR.</strong><span class="por">É a medida mais direta de que a mensagem chegou — e a única que distingue &ldquo;deu 900 sorvetes&rdquo; de &ldquo;900 pessoas souberam do cardápio de verão&rdquo;. Só existe se o link tiver sido feito rastreável antes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep2" data-g="dep"><label for="ck-dep2"><span class="prazo dep">logo depois</span><strong>Contar os vouchers resgatados</strong>, se houver voucher.<span class="por">No Cookie de Graça este era o número que julgava a campanha. Aqui vale ainda mais, porque a pessoa nunca entrou na loja.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep3" data-g="dep"><label for="ck-dep3"><span class="prazo dep">na semana seguinte</span><strong>Faturamento das semanas seguintes contra as anteriores</strong>, por loja.<span class="por">Se a camada 3 for &ldquo;nada&rdquo;, este é o <em>único</em> número pelo qual a campanha pode ser julgada — e isso tem que estar combinado antes, porque depois ninguém aceita.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep4" data-g="dep"><label for="ck-dep4"><span class="prazo dep">logo depois</span><strong>Seguidores antes e depois</strong>, nas três lojas.<span class="por">A base do dia anterior precisa ser anotada <em>antes</em>, senão o ganho não é mensurável depois.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep5" data-g="dep"><label for="ck-dep5"><span class="prazo dep">logo depois</span><strong>Quanto a casquinha vendeu no cardápio</strong> nas semanas seguintes.<span class="por">É o teste de que a amostragem funcionou: quem provou de graça volta a comprar pagando? Nenhum outro número responde isso.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep6" data-g="dep"><label for="ck-dep6"><span class="prazo dep">logo depois</span><strong>Escrever o que a rua ensinou</strong>, por cidade.<span class="por">Tempo real por carro, onde o carro encostou, quantos pedestres, a que horas acabou, o que travou. É o que faz a segunda edição não repetir a primeira — e é a parte que sempre se perde.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="ck-dep7" data-g="dep"><label for="ck-dep7"><strong>Decidir se o melhor vídeo é impulsionado.</strong><span class="por">Diferente do Cookie de Graça, aqui o produto anunciado <em>continua no cardápio</em> depois — então remarketing tem mais sentido aqui do que tinha lá, onde ficou no backlog.</span></label></div>
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Página do projeto <strong>Sorvete de Graça — lançamento do cardápio de verão</strong> · Holy Cook Campinas,
+  Paulínia e Piracicaba · montada em 02/10/2026.<br>
+  Molde, mecânica de camadas e briefing do criador vêm da <a href="../cookie-de-graca/">campanha Cookie de Graça</a>
+  (setembro de 2026). Números de perfil de Paulínia e de Campinas puxados da API do Instagram em 03/09/2026,
+  mediana dos últimos 24 posts de cada perfil. Produtos, perguntas abertas e prazos do cardápio vêm do projeto
+  <a href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/" target="_blank" rel="noopener">Cardápio de Verão</a>;
+  o CMV é calculado no <a href="https://fechamento-caixa-nu.vercel.app/cmv/laboratorio" target="_blank" rel="noopener">laboratório de CMV</a>
+  do Sistema-HC.<br>
+  A degustação com influenciadores é <strong>outra campanha</strong>, com página própria:
+  <a href="../degustacao-influenciadores/">Menu Degustação</a>.<br>
+  Esta página nomeia perfis reais — por isso vai com <code>noindex</code> e não deve ser divulgada fora da equipe.
+</footer>
+
+</div>
+
+<script>
+  var ABAS = ['briefing','mecanica','story','cidades','divulgacao','pecas','custo','checklist'];
+
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome;
+    else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({top:0}); });
+  });
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos do tipo href="#pecas" trocam de aba, nao so o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
+
+  // ── checklist: marcação persistida neste navegador (localStorage), com contador por grupo
+  (function () {
+    var caixas = document.querySelectorAll('.chk-item input[type="checkbox"]');
+    if (!caixas.length) return;
+    var CHAVE = 'hc-sorvete-de-graca-checklist';
+
+    function ler() {
+      try { return JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) { return {}; }
+    }
+    function gravar(estado) {
+      try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+    }
+    function contar() {
+      var porGrupo = {}, feitosTotal = 0;
+      caixas.forEach(function (c) {
+        var g = c.dataset.g;
+        porGrupo[g] = porGrupo[g] || { feitos: 0, total: 0 };
+        porGrupo[g].total++;
+        if (c.checked) { porGrupo[g].feitos++; feitosTotal++; }
+      });
+      document.querySelectorAll('.contagem[data-conta]').forEach(function (el) {
+        var d = porGrupo[el.dataset.conta];
+        if (!d) return;
+        el.textContent = d.feitos + '/' + d.total;
+        el.classList.toggle('full', d.feitos === d.total);
+      });
+      var tot = document.getElementById('chk-total');
+      if (tot) tot.textContent = feitosTotal + ' / ' + caixas.length;
+    }
+
+    var estado = ler();
+    caixas.forEach(function (c) {
+      c.checked = !!estado[c.id];
+      c.addEventListener('change', function () {
+        var e = ler();
+        if (c.checked) e[c.id] = 1; else delete e[c.id];
+        gravar(e);
+        contar();
+      });
+    });
+    contar();
+  })();
+
+  // ── cards e caixinhas: escopo pelo .bloco mais próximo, para o padrão poder aninhar sem colidir
+  document.addEventListener('click', function (e) {
+    var bt = e.target.closest('.card-btn[data-alvo], .passo-caixa[data-alvo]');
+    if (!bt) return;
+    var bloco = bt.closest('.bloco');
+    if (!bloco) return;
+    var alvo = bt.dataset.alvo;
+    var jaAtivo = bt.classList.contains('ativo');
+    bloco.querySelectorAll(':scope > .grade > [data-alvo], :scope > .fluxo > [data-alvo]').forEach(function (b) {
+      b.classList.toggle('ativo', b === bt && !jaAtivo);
+    });
+    bloco.querySelectorAll(':scope > .visor > .painel[data-alvo]').forEach(function (p) {
+      p.hidden = jaAtivo || p.dataset.alvo !== alvo;
+    });
+  });
+</script>
+</body>
+</html>
