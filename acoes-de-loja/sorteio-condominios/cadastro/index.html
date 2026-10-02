@@ -40,7 +40,9 @@
 
   .premios { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
   .premio { background: var(--surface); display: flex; flex-direction: column; }
-  .premio img { width: 100%; height: 13rem; object-fit: cover; display: block; background: var(--surface-2); }
+  /* A foto é quadrada e vem em arquivo pequeno — exibir num tamanho contido
+     evita o borrão que apareceria numa faixa larga esticada. */
+  .premio img { width: 100%; max-width: 19rem; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 1.1rem auto 0; border-radius: 5px; background: var(--surface-2); }
   .premio .corpo { padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
   .premio .selo { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: var(--marca); color: var(--marca-ink); padding: .18rem .45rem; border-radius: 3px; align-self: flex-start; }
   .premio .nome { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
@@ -90,7 +92,6 @@
       <div class="corpo">
         <span class="selo">1 ganhador</span>
         <div class="nome">Torta Kinder Completa</div>
-        <p class="desc">Massa de cookie recheada com Kinder e muita Nutella. São ~1,7&nbsp;kg e dá 8 pedaços generosos.</p>
       </div>
     </div>
     <div class="premio">
