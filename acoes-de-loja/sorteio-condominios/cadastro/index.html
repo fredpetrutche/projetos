@@ -45,7 +45,7 @@
      uma torta de cima) — no quadrado as duas cortam bem. */
   .carrossel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .carrossel::-webkit-scrollbar { display: none; }
-  .carrossel img { flex: 0 0 100%; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; scroll-snap-align: center; background: var(--surface-2); }
+  .carrossel img { flex: 0 0 100%; width: 100%; height: 15rem; object-fit: contain; display: block; scroll-snap-align: center; background: var(--surface); }
 
   .bolinhas { display: flex; justify-content: center; gap: .4rem; padding: .45rem 0; }
   .bolinhas[hidden] { display: none; }
@@ -93,7 +93,7 @@
   <header>
     <div class="marca">Holy Cook &middot; Piracicaba</div>
     <h1>Sorteio dos Síndicos</h1>
-    <p class="lede">Concorra a uma <strong>Torta Kinder com Nutella</strong> e a <strong>5 Caixas Misteriosas</strong> de cookies.</p>
+    <p class="lede"><strong>1 Torta Kinder</strong> e <strong>5 Caixas Misteriosas</strong></p>
   </header>
 
   <div class="vitrine">
@@ -106,7 +106,7 @@
   </div>
 
   <form id="form" novalidate>
-    <p class="explica">Preencha o cadastro do sorteio. É por aqui que avisaremos você, no WhatsApp, se for sorteado.</p>
+    <p class="explica">Avisamos o ganhador por aqui, no WhatsApp.</p>
 
     <div class="campo">
       <label for="condominio">Nome do condomínio onde você mora</label>
