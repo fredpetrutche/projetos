@@ -41,9 +41,9 @@
   .painel { display: flex; flex-direction: column; gap: 1.1rem; }
   .painel[hidden] { display: none; }
 
-  .premio-cabeca { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
-  .premio-cabeca .nome { font-size: 1.2rem; font-weight: 700; }
-  .premio-cabeca .desc { font-size: .88rem; color: var(--ink-soft); }
+  /* A foto do prêmio aparece inteira (contain): esta tela é projetada, e
+     prêmio cortado no telão não identifica o que a pessoa está ganhando. */
+  .foto-premio { width: 100%; max-width: 24rem; height: 22rem; object-fit: contain; display: block; margin: 0 auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; }
 
   button.rodar { font-family: var(--sans); font-size: 1.15rem; font-weight: 700; padding: 1.15rem 1rem; border: none; border-radius: 6px; background: var(--marca); color: var(--marca-ink); cursor: pointer; width: 100%; }
   button.rodar:hover:not(:disabled) { filter: brightness(1.08); }
@@ -90,8 +90,6 @@
   <div id="tela">
     <div class="placar" style="margin-bottom:1.5rem">
       <div><span class="v" id="vTotal">—</span><span class="s">participando</span></div>
-      <div><span class="v" id="vConfirmados">—</span><span class="s">confirmaram no WhatsApp</span></div>
-      <div><span class="v" id="vDisponiveis">—</span><span class="s">ainda sem prêmio</span></div>
     </div>
 
     <div class="abas" role="tablist" style="margin-bottom:1.5rem">
@@ -100,10 +98,7 @@
     </div>
 
     <div class="painel" data-painel="torta">
-      <div class="premio-cabeca">
-        <div class="nome">Torta Kinder com Nutella</div>
-        <p class="desc">1 ganhador. 700&nbsp;g. Sorteie esta antes das caixas — quem ganha a torta sai do bolo das caixas.</p>
-      </div>
+      <img class="foto-premio" src="../img/torta-inteira.jpg" alt="Torta Kinder com Nutella" onerror="this.remove()">
       <button class="rodar" data-rodar="torta">Sortear a torta</button>
       <div class="rolo" data-rolo="torta" hidden></div>
       <div class="ganhadores" data-lista="torta" hidden></div>
@@ -112,10 +107,7 @@
     </div>
 
     <div class="painel" data-painel="caixa" hidden>
-      <div class="premio-cabeca">
-        <div class="nome">5 Caixas Misteriosas</div>
-        <p class="desc">5 ganhadores, 4 cookies em cada caixa, sabores aleatórios. Quem já ganhou a torta não entra neste sorteio.</p>
-      </div>
+      <img class="foto-premio" src="../img/caixa-misteriosa.jpg" alt="Cookies das Caixas Misteriosas" onerror="this.remove()">
       <button class="rodar" data-rodar="caixa">Sortear as 5 caixas</button>
       <div class="rolo" data-rolo="caixa" hidden></div>
       <div class="ganhadores" data-lista="caixa" hidden></div>
@@ -139,8 +131,6 @@ async function carregar() {
 
   nomes = participantes.map(p => p.nome);
   document.getElementById("vTotal").textContent = participantes.length;
-  document.getElementById("vConfirmados").textContent = participantes.filter(p => p.confirmado).length;
-  document.getElementById("vDisponiveis").textContent = participantes.filter(p => !p.premio).length;
 
   // Sorteio já rodado (recarregou a página no meio do evento): mostra o que saiu.
   for (const premio of ["torta", "caixa"]) {
