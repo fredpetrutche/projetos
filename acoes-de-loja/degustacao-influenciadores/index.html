@@ -1,0 +1,1423 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Menu Degustação — cardápio de verão com influenciadores</title>
+<meta name="description" content="A campanha de degustacao do cardapio de verao: a loja fecha por uma hora para 10 influenciadores da cidade, e todos os produtos novos sao apresentados e provados.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%236E4B9B'/><g fill='none' stroke='%23FFFDF8' stroke-width='7' stroke-linecap='round'><path d='M30 22v24a10 10 0 0 0 20 0V22'/><path d='M40 46v32'/><path d='M70 22c-8 6-8 18 0 24v32'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#6E4B9B; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#EAE2F3;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#BBA2E4; --accent-ink:#120E1A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#272036;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#BBA2E4; --accent-ink:#120E1A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#272036;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, .label, table, .tag, .vnum { font-family: var(--mono); }
+  a { color: var(--accent); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center; gap: .45rem;
+            align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; text-wrap: balance; margin: 0; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; font-weight: 700; color: var(--ink-soft);
+             background: var(--surface); border: 1.5px solid var(--rule); border-radius: 6px; cursor: pointer;
+             padding: .65rem 1.15rem; transition: border-color .15s, color .15s, background .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none !important; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600; margin: 0; color: var(--ink);
+       padding-bottom: .55rem; border-bottom: 2px solid var(--ink); display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none; color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose + .prose { margin-top: .6rem; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.mudo { background: var(--surface-2); color: var(--ink-faint); }
+
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start; font-size: .875rem; color: var(--ink-soft);
+               background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+
+  /* ── grade de cards (recursiva) ── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grade[hidden] { display: none !important; }
+  .card-btn { text-align: left; background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px; cursor: pointer;
+              padding: .8rem .9rem; display: flex; flex-direction: column; gap: .3rem; font-family: var(--sans); color: var(--ink);
+              transition: border-color .15s, background .15s; }
+  .card-btn:hover { border-color: var(--ink-faint); }
+  .card-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .card-btn .cnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700; line-height: 1.3; }
+  .card-btn .cmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; }
+  .card-btn .cdesc { font-size: .75rem; color: var(--ink-soft); line-height: 1.45; }
+  .visor { display: flex; flex-direction: column; gap: 1rem; }
+  .visor[hidden] { display: none !important; }
+  .painel { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem;
+            display: flex; flex-direction: column; gap: .85rem; }
+  .painel[hidden] { display: none !important; }
+  .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink); }
+  .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  .grupo-descricao { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: 4px;
+                     padding: .75rem .9rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .grupo-descricao strong { color: var(--ink); font-weight: 600; }
+  /* bloco de texto pronto pra copiar — display:block de propósito: .painel é flex-column
+     e transformaria cada <a> interno numa linha separada */
+  .copiavel { display: block; background: var(--surface-2); border: 1px solid var(--rule);
+              border-radius: 5px; padding: 1.1rem 1.2rem; white-space: pre-wrap;
+              font-size: .8125rem; line-height: 1.65; overflow-wrap: anywhere; }
+  .dica { font-size: .75rem; color: var(--ink-faint); font-family: var(--mono); }
+
+  /* ── ficha de definição ── */
+  dl.ficha { display: grid; grid-template-columns: 7.5rem 1fr; gap: .4rem .9rem; font-size: .8125rem; margin: 0; }
+  dl.ficha dt, dl.ficha dd { margin: 0; }
+  @media (max-width: 34rem) { dl.ficha { grid-template-columns: 1fr; gap: .15rem; }
+                              dl.ficha dt { margin-top: .5rem; } }
+  dl.ficha dt { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+                color: var(--ink-faint); font-weight: 600; padding-top: .15rem; }
+  dl.ficha dd { color: var(--ink-soft); line-height: 1.55; }
+  dl.ficha dd strong { color: var(--ink); font-weight: 600; }
+  dl.ficha dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  ul.pontos { margin: 0; padding-left: 1.15rem; display: flex; flex-direction: column; gap: .4rem; font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+  ul.pontos li::marker { color: var(--ink-faint); }
+
+  /* ── fluxo de caixinhas ── */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: stretch; gap: .3rem; }
+  .fluxo .seta { align-self: center; color: var(--ink-faint); font-size: .8rem; }
+  .passo-caixa { background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px; cursor: pointer; padding: .5rem .6rem;
+                 display: flex; flex-direction: column; gap: .1rem; font-family: var(--mono); color: var(--ink); min-width: 5.3rem; max-width: 9.5rem; text-align: left; }
+  .passo-caixa:hover { border-color: var(--ink-faint); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .passo-caixa.pendente { border-style: dashed; border-color: var(--bad); }
+  .passo-caixa .quem { font-size: .625rem; letter-spacing: .06em; color: var(--accent); font-weight: 700; }
+  .passo-caixa .qtxt { font-size: .75rem; font-weight: 600; line-height: 1.25; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 32rem; font-variant-numeric: tabular-nums; }
+  th, td { padding: .5rem .8rem; text-align: right; vertical-align: top; }
+  th:first-child, td:first-child { text-align: left; white-space: nowrap; }
+  th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) { text-align: left; white-space: normal; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody tr.mark td { background: var(--surface-2); }
+  td .vago { color: var(--bad); font-family: var(--mono); font-size: .75rem; }
+
+  /* ── perfis ── */
+  .perfilhead { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  .perfilhead .h { font-family: var(--mono); font-size: 1rem; font-weight: 700; }
+  .perfilhead .nm { font-size: .8125rem; color: var(--ink-soft); }
+  .nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .nums > div { background: var(--surface-2); padding: .55rem .7rem; display: flex; flex-direction: column; gap: .1rem; }
+  .nums .v { font-family: var(--mono); font-size: .9375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .nums .s { font-size: .625rem; color: var(--ink-faint); line-height: 1.3; }
+  .nums .v.dest { color: var(--accent); }
+
+  .aberto { border-left: 3px solid var(--warn); }
+  .fechado { border-left: 3px solid var(--good); }
+
+  /* ── checklist ── */
+  .chk-lista { display: flex; flex-direction: column; gap: .1rem; }
+  .chk-item { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: start;
+              padding: .5rem .1rem; border-top: 1px solid var(--rule-soft); }
+  .chk-item:first-child { border-top: none; }
+  .chk-item input { margin-top: .28rem; width: .95rem; height: .95rem; accent-color: var(--accent);
+                    cursor: pointer; flex: none; }
+  .chk-item label { cursor: pointer; font-size: .875rem; color: var(--ink); line-height: 1.45; }
+  /* inline-block de propósito: decoração de texto do label não atravessa a borda de um
+     inline-block, então o risco do item marcado não pega a linha de explicação */
+  .chk-item label .por { display: inline-block; width: 100%; font-size: .75rem;
+                         color: var(--ink-faint); margin-top: .1rem; }
+  .chk-item input:checked + label { color: var(--ink-faint); text-decoration: line-through; }
+  .chk-item input:checked + label .por { text-decoration: none; }
+  .prazo { font-family: var(--mono); font-size: .625rem; letter-spacing: .06em; text-transform: uppercase;
+           font-weight: 700; padding: .1rem .34rem; border-radius: 2px; margin-right: .35rem;
+           white-space: nowrap; }
+  .prazo.ja { background: var(--bad-bg); color: var(--bad); }
+  .prazo.antes { background: var(--warn-bg); color: var(--warn); }
+  .prazo.dia { background: var(--accent); color: var(--accent-ink); }
+  .prazo.dep { background: var(--good-bg); color: var(--good); }
+  .contagem { font-family: var(--mono); font-size: .6875rem; font-weight: 700; color: var(--accent); }
+  .contagem.full { color: var(--good); }
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule); padding-top: 1rem; line-height: 1.6; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<a class="voltar" href="../../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+
+<header>
+  <div class="eyebrow">Holy Cook · três cidades · ação de loja</div>
+  <h1>Menu Degustação</h1>
+  <p class="lede">O cardápio de verão apresentado a <strong>10 influenciadores da cidade</strong>, com a loja
+  fechada só para eles por uma hora. Produto por produto, provando — não é foto de release, é degustação de
+  verdade, com alguém apresentando.</p>
+  <p class="lede">É campanha <strong>separada</strong> do <a href="../sorvete-de-graca/">Sorvete de Graça</a>:
+  as duas anunciam o mesmo cardápio, mas compram coisas opostas.</p>
+</header>
+
+<div class="strip">
+  <div><span class="v">10</span><span class="s">influenciadores por cidade</span></div>
+  <div><span class="v">1 hora</span><span class="s">loja fechada só para eles — horário a definir</span></div>
+  <div><span class="v">10 a 12</span><span class="s">produtos a apresentar — e não dá pra provar todos</span></div>
+  <div><span class="v">3 cidades</span><span class="s">ou uma como piloto, que é a recomendação</span></div>
+  <div><span class="v">—</span><span class="s">quem apresenta · a decisão nº 1</span></div>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+  <button class="tab-btn" type="button" data-tab="evento" role="tab" aria-selected="false">O evento</button>
+  <button class="tab-btn" type="button" data-tab="apresentador" role="tab" aria-selected="false">Quem apresenta</button>
+  <button class="tab-btn" type="button" data-tab="convidados" role="tab" aria-selected="false">Os 10 convidados</button>
+  <button class="tab-btn" type="button" data-tab="roteiro" role="tab" aria-selected="false">O roteiro</button>
+  <button class="tab-btn" type="button" data-tab="kit" role="tab" aria-selected="false">O kit</button>
+  <button class="tab-btn" type="button" data-tab="contrapartida" role="tab" aria-selected="false">A contrapartida</button>
+  <button class="tab-btn" type="button" data-tab="checklist" role="tab" aria-selected="false">Checklist</button>
+</div>
+
+<div class="tab-panel" data-panel="briefing" role="tabpanel">
+
+<section>
+  <h2><span class="n">1</span> O que a campanha é<span class="hint">e por que é separada do Sorvete de Graça</span></h2>
+  <p class="prose">A loja fecha por uma hora. Entram dez criadores da cidade, convidados um por um. Alguém
+  apresenta o cardápio de verão <strong>produto por produto</strong> — o que é, de onde veio, como se faz — e
+  eles provam. Saem com um kit e com material pra postar.</p>
+  <p class="prose">As duas campanhas do verão anunciam o mesmo cardápio e são opostas em tudo:</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th></th><th>Sorvete de Graça</th><th>Menu Degustação</th></tr></thead>
+    <tbody>
+      <tr><td>quem alcança</td><td>900 pessoas que não conhecem a marca</td><td>10 pessoas que têm audiência</td></tr>
+      <tr><td>tempo por pessoa</td><td>cerca de 36 segundos, pela janela do carro</td><td>uma hora, sentada, dentro da loja</td></tr>
+      <tr><td>o que ela compra</td><td>volume e uma cena de rua</td><td>profundidade, autoridade e relação</td></tr>
+      <tr><td>quem produz o conteúdo</td><td>a gente (a loja filma o buzinaço)</td><td>eles (é o ponto da campanha)</td></tr>
+      <tr><td>o que pode dar errado</td><td>a rua travar, ou acabar em 20 minutos</td><td>o produto não estar no padrão na frente de quem vive de comida</td></tr>
+      <tr><td>complexidade</td><td>mecânica nova, mas simples de explicar</td><td>evento, convite, apresentação e contrapartida</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">por que separar</span><span>
+      Porque <strong>juntar as duas faria a mais simples esperar a mais complexa.</strong> O Sorvete de Graça
+      depende de produto, panfleto e rua. A degustação depende de produto, convite, apresentador e
+      contrapartida — e qualquer um desses quatro pode atrasar semanas. Numa campanha só, o atraso de um trava o
+      outro, e a campanha de rua é a que não deveria esperar.</span></div>
+    <div class="note-item"><span class="tag mudo">mas elas se ajudam</span><span>
+      Os <strong>quatro criadores</strong> contratados em cada cidade para o Sorvete de Graça devem estar
+      <strong>entre os dez convidados</strong> da degustação. Mesma pessoa, duas campanhas: a relação fica mais
+      barata, e quem já conheceu o cardápio na degustação divulga o buzinaço sabendo do que está falando.
+      Ordem ideal: <strong>degustação primeiro, buzinaço depois.</strong></span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O que ela compra<span class="hint">clique num card · são quatro coisas, e uma delas quase nunca é contada</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="b1"><span class="cnome">1 · Volume de conteúdo</span><span class="cmeta">10 criadores × 12 produtos</span><span class="cdesc">Muito mais material do que um post por criador — é a aritmética do formato.</span></button>
+      <button class="card-btn" data-alvo="b2"><span class="cnome">2 · Autoridade</span><span class="cmeta">é cardápio, não é item</span><span class="cdesc">Provar que são dez produtos novos, não um lançamento solto.</span></button>
+      <button class="card-btn" data-alvo="b3"><span class="cnome">3 · Relação</span><span class="cmeta">o único formato que cria</span><span class="cdesc">Os mesmos nomes vão ser chamados de novo no Natal.</span></button>
+      <button class="card-btn" data-alvo="b4"><span class="cnome">4 · A última prova do produto</span><span class="cmeta">quase nunca é contada</span><span class="cdesc">Dez pessoas que vivem de comida provando antes do público. É pesquisa de graça.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="b1" hidden><span class="ptit">1 · Volume de conteúdo</span>
+        <span class="psub">a aritmética do formato</span>
+        <p class="prose">Numa campanha normal, um criador entrega um post. Aqui cada criador tem
+        <strong>dez ou doze produtos na frente dele, numa loja vazia, com luz e tempo</strong> — ou seja, material
+        pra uma sequência de stories, um carrossel e um reel, não pra uma peça.</p>
+        <p class="prose">Essa é a razão pela qual a degustação é eficiente apesar de alcançar dez pessoas: ela não
+        compra dez posts, compra <strong>dez séries de posts</strong>. E compra variedade de ângulo, que é
+        exatamente o que falta quando a marca produz tudo sozinha.</p>
+        <dl class="ficha">
+          <dt>a condição</dt><dd>Isso só acontece se os produtos estiverem <strong>fotografáveis</strong> — inteiros, bem montados, bem iluminados. Prato já provado não serve pra câmera nenhuma. É o ponto que está desenvolvido na aba <a href="#roteiro">O roteiro</a>.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="b2" hidden><span class="ptit">2 · Autoridade</span>
+        <span class="psub">a diferença entre lançar um item e lançar um cardápio</span>
+        <p class="prose">Um post dizendo &ldquo;chegou o sorvete de casquinha&rdquo; anuncia um produto. Dez
+        criadores mostrando <strong>dez produtos no mesmo dia</strong> anuncia que a marca fez uma coisa grande —
+        e isso não se compra com mídia, se constrói com simultaneidade.</p>
+        <p class="prose">É também o que justifica o cardápio de verão ter levado seis semanas de trabalho: se o
+        lançamento sair como um item novo por vez, o esforço de dez produtos aparece como o esforço de um.</p></div>
+
+      <div class="painel" data-alvo="b3" hidden><span class="ptit">3 · Relação</span>
+        <span class="psub">o único formato das duas campanhas que cria relação em vez de transação</span>
+        <p class="prose">Contratar um criador é transação: ele posta, recebe, acabou. <strong>Receber alguém numa
+        loja fechada, apresentar o produto pessoalmente e dar o nome de cada coisa é outra categoria</strong> — e é
+        a razão pela qual a próxima campanha vai custar menos.</p>
+        <p class="prose">Isso tem valor concreto e datado: <strong>o cardápio de Natal vem logo depois</strong>,
+        e hoje ele não existe no papel. Os dez nomes convidados agora são os dez nomes que já conhecem a marca
+        quando o Natal precisar de divulgação rápida.</p></div>
+
+      <div class="painel" data-alvo="b4" hidden><span class="ptit">4 · A última prova do produto</span>
+        <span class="psub">o ganho que ninguém coloca no briefing</span>
+        <p class="prose">Dez pessoas que vivem de comida provando dez produtos <strong>antes de eles estarem no
+        cardápio das três lojas</strong>. Isso é pesquisa de produto com gente qualificada, e sai de graça junto
+        com a campanha.</p>
+        <p class="prose">A degustação da equipe já aconteceu em setembro — essa é a externa, e é diferente: a
+        equipe conhece a marca e tende a concordar. <strong>Criador de comida compara com o que ele comeu na semana
+        passada</strong>, e é esse o julgamento que o cliente vai fazer.</p>
+        <div class="notes">
+          <div class="note-item"><span class="tag warn">mas é faca de dois lados</span><span>
+            Se a execução não estiver no padrão, a degustação <strong>amplifica o problema</strong> em vez de
+            escondê-lo: dez pessoas com audiência provando um produto irregular é pior do que dez pessoas não
+            provando nada. Por isso ela exige o produto estável <em>antes</em>, não depois — ver a seção 3.</span></div>
+          <div class="note-item"><span class="tag acc">como extrair isso de propósito</span><span>
+            Perguntar. Uma pergunta por produto, feita por quem apresenta, e <strong>alguém anotando</strong>.
+            Sem isso, os dez vão elogiar tudo por educação e o ganho de pesquisa se perde inteiro. É a
+            diferença entre receber visita e fazer teste.</span></div>
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> O que precisa estar verdadeiro antes<span class="hint">a condição que não é negociável</span></h2>
+  <p class="prose">Esta campanha coloca <strong>dez pessoas com audiência dentro da loja</strong>, provando
+  produtos que a loja acabou de aprender a fazer. É o oposto do Sorvete de Graça, onde o cliente recebe um item
+  pela janela e vai embora: aqui o que está em exposição não é só o produto, <strong>é a loja</strong> — o
+  ambiente, o atendimento, a montagem, o banheiro.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">o portão</span><span>
+      Já existe um critério montado para isso no projeto de <strong>experiência da loja</strong>: um portão de
+      estabilidade de produto, experiência e ambiente que precisa passar antes de campanha subir. Ele foi escrito
+      pra campanha de fidelização, e vale ainda mais aqui — <strong>uma campanha de fidelização falha em silêncio;
+      uma degustação falha na frente de dez criadores.</strong></span></div>
+    <div class="note-item"><span class="tag warn">as três coisas concretas</span><span>
+      <strong>1. Execução consistente</strong> dos produtos que vão ser provados — não da lista inteira,
+      dos que forem servidos. <strong>2. Ficha técnica pronta</strong> dos que entram, senão cada montagem sai
+      diferente. <strong>3. A loja apresentável</strong> no horário escolhido, com quem sabe montar na cozinha
+      naquele turno.</span></div>
+    <div class="note-item"><span class="tag mudo">o que isso implica no calendário</span><span>
+      As fichas técnicas e os vídeos de produção do cardápio de verão são tarefas que já existem no projeto do
+      produto, com prazo &ldquo;depois da degustação da equipe&rdquo;. <strong>A degustação com influenciadores
+      vem depois delas, não antes</strong> — e é essa dependência que define a data possível, mais do que a agenda
+      de ninguém.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span> O que está fechado e o que falta<span class="hint">clique num card</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="a1"><span class="cnome">Fechado</span><span class="cmeta">o formato</span></button>
+      <button class="card-btn" data-alvo="a2"><span class="cnome">Em aberto · trava tudo</span><span class="cmeta">o apresentador</span></button>
+      <button class="card-btn" data-alvo="a3"><span class="cnome">Em aberto · decide o resultado</span><span class="cmeta">contrapartida e roteiro</span></button>
+      <button class="card-btn" data-alvo="a4"><span class="cnome">Em aberto · logística</span><span class="cmeta">data, hora, cidades</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel fechado" data-alvo="a1" hidden><span class="ptit">Fechado</span>
+        <span class="psub">o formato não se discute mais</span>
+        <ul class="pontos">
+          <li><strong>10 influenciadores</strong> da cidade, convidados individualmente.</li>
+          <li><strong>A loja fechada</strong> só pra eles, num horário marcado.</li>
+          <li><strong>Apresentação de todos os produtos</strong> do cardápio de verão, com alguém apresentando.</li>
+          <li><strong>Tem kit</strong> — cada um sai com alguma coisa na mão.</li>
+          <li><strong>É campanha separada</strong> do Sorvete de Graça, com página própria.</li>
+        </ul></div>
+
+      <div class="painel aberto" data-alvo="a2" hidden><span class="ptit">Em aberto · trava tudo</span>
+        <span class="psub">sem apresentador não tem data</span>
+        <p class="prose">A campanha inteira é uma apresentação. Enquanto não houver quem apresenta,
+        <strong>não dá pra marcar data, nem convidar, nem escrever o roteiro</strong> — porque o roteiro depende de
+        quem vai dizer as falas.</p>
+        <dl class="ficha">
+          <dt>a pergunta</dt><dd><strong>O Yuri pode ir?</strong> E se não for o Yuri, quem? A aba <a href="#apresentador">Quem apresenta</a> tem o que o apresentador precisa saber fazer e os planos B.</dd>
+          <dt>o agravante</dt><dd>Três cidades são <strong>três apresentações</strong>. Uma pessoa só provavelmente não faz as três — e isso é mais um argumento pro piloto em uma cidade.</dd>
+        </dl></div>
+
+      <div class="painel aberto" data-alvo="a3" hidden><span class="ptit">Em aberto · decide o resultado</span>
+        <span class="psub">as duas decisões que separam &ldquo;recebi visita&rdquo; de &ldquo;fiz campanha&rdquo;</span>
+        <dl class="ficha">
+          <dt>a contrapartida</dt><dd><strong>É pago ou é permuta? Postar é obrigatório?</strong> Precisa estar dito no convite, não na porta. Aba própria: <a href="#contrapartida">A contrapartida</a>.</dd>
+          <dt>o corte dos produtos</dt><dd><strong>Dez a doze produtos doces não se degustam</strong> — depois de quatro ou cinco itens ninguém sente mais sabor. Quais são servidos em porção e quais em micro-porção, e quais só aparecem pra foto. Aba <a href="#roteiro">O roteiro</a>.</dd>
+          <dt>a pergunta de produto</dt><dd>Se a degustação vai ser usada como <strong>teste</strong> ou só como mídia. Se for teste, precisa de pergunta por produto e alguém anotando.</dd>
+        </dl></div>
+
+      <div class="painel aberto" data-alvo="a4" hidden><span class="ptit">Em aberto · logística</span>
+        <span class="psub">resolve rápido, depois das outras</span>
+        <dl class="ficha">
+          <dt>a hora</dt><dd>Qual hora <strong>custa menos faturamento</strong> — e isso é respondível com o histórico de vendas por hora de cada loja, não por opinião.</dd>
+          <dt>a duração</dt><dd>Uma hora para dez pessoas e dez produtos é apertado. <strong>1h15 a 1h30</strong> é mais realista — e isso muda qual hora fechar.</dd>
+          <dt>as cidades</dt><dd>Três, ou uma como piloto. Recomendação: <strong>uma</strong> — o formato nunca foi feito, e repetir uma apresentação testada é fácil; estrear três ao mesmo tempo não é.</dd>
+          <dt>a data</dt><dd>Depende das fichas técnicas e da estabilidade do produto, não da agenda. E vem <strong>antes</strong> do Sorvete de Graça.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="evento" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> A hora, passo a passo<span class="hint">clique numa caixinha</span></h2>
+  <p class="prose">Sete momentos. O mais importante deles é o <strong>5</strong> — e é o que mais costuma ser
+  esquecido num evento assim: se não houver um tempo reservado só pra eles filmarem, eles filmam
+  <em>durante</em> a apresentação, ninguém ouve nada e o conteúdo sai pior.</p>
+  <div class="bloco">
+    <div class="fluxo">
+      <button class="passo-caixa" data-alvo="h1"><span class="quem">1 · 10 min</span><span class="qtxt">Chegada</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="h2"><span class="quem">2 · 5 min</span><span class="qtxt">Abertura</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="h3"><span class="quem">3 · 30 min</span><span class="qtxt">A apresentação</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="h4"><span class="quem">4 · junto</span><span class="qtxt">A degustação</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="h5"><span class="quem">5 · 20 min</span><span class="qtxt">Tempo de filmar</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="h6"><span class="quem">6 · 10 min</span><span class="qtxt">Kit e o pedido</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="h7"><span class="quem">7 · depois</span><span class="qtxt">O seguimento</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="h1" hidden><span class="ptit">1 · Chegada <span class="tag mudo">10 min</span></span>
+        <span class="psub">a loja já tem que estar pronta quando o primeiro chega</span>
+        <p class="prose">Dez pessoas não chegam juntas: chegam ao longo de quinze minutos, e as primeiras ficam sem
+        saber o que fazer. <strong>Quem chega primeiro precisa ter o que fotografar</strong> — se a mesa dos
+        produtos já estiver montada, esses dez minutos rendem conteúdo em vez de virarem espera.</p>
+        <ul class="pontos">
+          <li><strong>Recepção pelo nome.</strong> Dez nomes decorados, ou uma lista na mão de quem recebe.</li>
+          <li><strong>Lugar marcado</strong> ou pelo menos um lugar claro pra sentar/ficar — loja vazia sem lugar
+          definido deixa todo mundo em pé perto da porta.</li>
+          <li><strong>A mesa já montada</strong>, com os produtos inteiros, bem iluminados.</li>
+          <li><strong>A @ da loja visível</strong> em algum lugar que entre no quadro. Conteúdo gravado numa loja
+          vazia não mostra onde é — e sem isso o post não leva ninguém a lugar nenhum.</li>
+        </ul></div>
+
+      <div class="painel" data-alvo="h2" hidden><span class="ptit">2 · Abertura <span class="tag mudo">5 min</span></span>
+        <span class="psub">curta de propósito</span>
+        <p class="prose">Boas-vindas, por que eles estão ali e como a hora vai funcionar. <strong>Cinco minutos,
+        não quinze.</strong> Eles não vieram ouvir sobre a marca — vieram comer e produzir conteúdo, e a história
+        da marca entra junto com cada produto, não num bloco no começo.</p>
+        <p class="prose">Esse é o erro clássico do formato: a apresentação institucional longa na abertura. Ela
+        gasta a atenção no único momento em que todos estão prestando atenção, e o que sobra pros produtos é
+        pouco.</p>
+        <dl class="ficha">
+          <dt>o que dizer</dt><dd>Quantos produtos são, que eles vão provar, que tem tempo pra filmar depois, e que a loja está fechada só pra eles. A última informação é a que faz o convite valer — e precisa ser dita em voz alta.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="h3" hidden><span class="ptit">3 · A apresentação <span class="tag mudo">30 min</span></span>
+        <span class="psub">produto por produto</span>
+        <p class="prose">O corpo do evento. Cada produto tem <strong>duas ou três frases</strong>: o que é, o que
+        tem dentro, e o que faz dele diferente. Trinta minutos divididos por dez ou doze produtos dão menos de três
+        minutos cada — o roteiro tem que ser escrito nesse tamanho, ou a apresentação estoura e a hora acaba na
+        metade do cardápio.</p>
+        <p class="prose">A ordem não é livre: tem uma ordem que funciona e várias que não. Está na aba
+        <a href="#roteiro">O roteiro</a>.</p>
+        <dl class="ficha">
+          <dt>a pergunta que vem sempre</dt><dd><strong>&ldquo;Quanto custa?&rdquo;</strong> Vale ter o preço de cada produto na mão de quem apresenta — e o preço depende do CMV, que está sendo levantado. Se o preço não estiver definido, dizer isso, não improvisar: preço improvisado na frente de dez criadores vira preço publicado.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="h4" hidden><span class="ptit">4 · A degustação <span class="tag mudo">junto com a apresentação</span></span>
+        <span class="psub">não é um bloco separado — acontece a cada produto</span>
+        <p class="prose">Cada produto é provado <strong>no momento em que é apresentado</strong>, não todos no
+        final. Isso é o que faz a pessoa associar o sabor à história, e é o que dá ritmo à hora.</p>
+        <p class="prose">E aqui está a restrição física que decide o desenho do evento inteiro:
+        <strong>depois de quatro ou cinco itens doces, ninguém sente mais sabor nenhum</strong>. Não é falta de
+        educação nem de interesse — é paladar saturado. Um cardápio de dez a doze produtos doces
+        <em>não pode</em> ser degustado em porções normais. A solução está na aba <a href="#roteiro">O roteiro</a>.</p></div>
+
+      <div class="painel" data-alvo="h5" hidden><span class="ptit">5 · Tempo de filmar <span class="tag acc">20 min</span></span>
+        <span class="psub">o bloco mais importante, e o que mais se esquece de reservar</span>
+        <p class="prose">Vinte minutos <strong>sem ninguém falando</strong>, com os produtos repostos e inteiros, pra
+        eles gravarem. É o momento em que a campanha efetivamente é produzida.</p>
+        <p class="prose">Se esse bloco não existir, acontece o que sempre acontece: eles filmam durante a
+        apresentação — <strong>ninguém ouve a apresentação, e o vídeo sai com alguém falando por cima</strong>. Os
+        dois resultados ficam piores ao mesmo tempo, e ninguém percebe que a causa foi não ter reservado o tempo.</p>
+        <ul class="pontos">
+          <li><strong>Produtos repostos e intactos.</strong> Prato provado não serve pra câmera. Isso tem custo de
+          insumo e precisa estar na conta.</li>
+          <li><strong>Luz.</strong> Loja fechada à tarde ou à noite tem luz diferente da luz de cliente. Vale olhar
+          antes onde a mesa fica melhor.</li>
+          <li><strong>Um fundo com a marca</strong> que entre no quadro naturalmente.</li>
+          <li><strong>Alguém da equipe disponível</strong> pra montar um produto na hora, se alguém quiser filmar a
+          montagem — é o plano que mais engajamento dá e não custa nada ter alguém pronto.</li>
+        </ul></div>
+
+      <div class="painel" data-alvo="h6" hidden><span class="ptit">6 · Kit e o pedido <span class="tag mudo">10 min</span></span>
+        <span class="psub">o único momento de pedir — e precisa ser explícito</span>
+        <p class="prose">Entrega do kit e <strong>o pedido dito em voz alta</strong>: o que a gente gostaria que
+        saísse, e até quando. O pedido já tem que ter sido feito no convite — aqui ele é repetido, não
+        apresentado.</p>
+        <p class="prose">Pedido que fica implícito não acontece. &ldquo;Espero que vocês postem&rdquo; não é pedido;
+        <strong>&ldquo;stories hoje e um post até sexta, marcando @holycook.[cidade]&rdquo;</strong> é.</p>
+        <dl class="ficha">
+          <dt>e o essencial</dt><dd>A <strong>@ certa da loja daquela cidade</strong>, escrita, na mão de cada um. São três perfis diferentes — marcar o perfil errado é o erro mais comum e o mais irreversível.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="h7" hidden><span class="ptit">7 · O seguimento <span class="tag mudo">nos dias seguintes</span></span>
+        <span class="psub">é onde a campanha acontece de verdade</span>
+        <p class="prose">A hora na loja é a produção; <strong>o resultado aparece nos dias seguintes</strong>, e
+        depende de alguém acompanhar.</p>
+        <ul class="pontos">
+          <li><strong>Agradecer individualmente</strong>, no mesmo dia ou no dia seguinte. É o que faz o segundo
+          convite ser aceito.</li>
+          <li><strong>Repostar tudo que sair</strong>, na hora — vale como conteúdo da loja e sinaliza a quem ainda
+          não postou que os outros postaram.</li>
+          <li><strong>Marcar quem não postou</strong>, sem cobrar. É informação para a próxima lista, não para
+          discussão.</li>
+          <li><strong>Reunir o que eles disseram dos produtos</strong> e levar pro projeto do cardápio. É o ganho
+          de pesquisa, e se perde em uma semana se ninguém escrever.</li>
+          <li><strong>Montar um Destaque</strong> no perfil com o melhor material — é a prova social que fica, e
+          serve pra convidar da próxima vez.</li>
+        </ul></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> Qual hora fechar<span class="hint">respondível com dado, não com opinião</span></h2>
+  <p class="prose">Fechar a loja por uma hora custa o faturamento daquela hora. Esse custo não precisa ser
+  estimado: <strong>o histórico de vendas por hora de cada loja responde qual é a hora mais barata de fechar</strong>,
+  e esse dado já existe no Sistema-HC.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">como decidir</span><span>
+      Puxar a venda por faixa de hora, por dia da semana, da loja da cidade escolhida. A hora mais barata de fechar
+      é quase certamente <strong>no meio da tarde de um dia de semana</strong> — mas &ldquo;quase certamente&rdquo;
+      não é o número, e o número existe.</span></div>
+    <div class="note-item"><span class="tag warn">o contrapeso</span><span>
+      A hora mais barata pra loja pode ser a pior pros convidados. Criador de comida trabalha à noite e no fim de
+      semana, e <strong>meio da tarde de terça é o horário em que mais gente diz não</strong>. Se a hora barata
+      derrubar a taxa de aceite de 10 pra 5 convidados, ela saiu caro. Vale perguntar a disponibilidade
+      <em>antes</em> de fixar a hora.</span></div>
+    <div class="note-item"><span class="tag mudo">uma terceira opção</span><span>
+      <strong>Antes de abrir.</strong> Se a loja abre às 11h, uma degustação das 9h30 às 11h não fecha nada e não
+      custa faturamento nenhum — e tem a luz da manhã, que é a melhor pra filmar. O custo passa a ser
+      só a equipe entrar mais cedo. É a opção mais barata das três e a que ninguém propõe.</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="apresentador" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> A decisão nº 1<span class="hint">sem ela não há data</span></h2>
+  <p class="prose">A campanha inteira é uma apresentação — então enquanto não houver quem apresenta, não há data,
+  não há convite e não há roteiro, porque o roteiro depende de quem diz as falas.</p>
+  <p class="prose">A pergunta como ela foi colocada é <strong>&ldquo;o Yuri pode ir?&rdquo;</strong>. Mas a pergunta
+  que importa é a de baixo: <strong>o que o apresentador precisa saber fazer?</strong> Respondida essa, fica claro
+  quem serve — e o Yuri pode ser a melhor resposta ou pode não ser.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">o agravante do calendário</span><span>
+      <strong>Três cidades são três apresentações.</strong> Uma pessoa só provavelmente não faz as três — e se a
+      campanha depender de uma agenda que não cabe, ela não atrasa por falta de material, atrasa por falta de
+      data. É o argumento mais prático a favor do piloto numa cidade.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O que o apresentador precisa saber fazer<span class="hint">quatro coisas · clique num card</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="q1"><span class="cnome">Contar o produto em 2 frases</span><span class="cmeta">dez a doze vezes</span></button>
+      <button class="card-btn" data-alvo="q2"><span class="cnome">Responder &ldquo;quanto custa&rdquo;</span><span class="cmeta">e o que fazer se não souber</span></button>
+      <button class="card-btn" data-alvo="q3"><span class="cnome">Não virar pitch de franquia</span><span class="cmeta">o risco real</span></button>
+      <button class="card-btn" data-alvo="q4"><span class="cnome">Deixar filmar</span><span class="cmeta">e saber calar</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="q1" hidden><span class="ptit">Contar o produto em duas frases</span>
+        <span class="psub">dez a doze vezes seguidas, sem cansar quem ouve</span>
+        <p class="prose">É a habilidade central e é mais difícil do que parece: <strong>duas frases por produto,
+        doze vezes, mantendo energia na décima</strong>. Quem conhece o produto de dentro tende a falar demais no
+        primeiro e correr nos últimos.</p>
+        <p class="prose">Por isso o roteiro escrito importa mais que a eloquência de quem apresenta. Com roteiro,
+        um apresentador médio vai bem; sem roteiro, um apresentador bom estoura o tempo.</p></div>
+
+      <div class="painel" data-alvo="q2" hidden><span class="ptit">Responder &ldquo;quanto custa&rdquo;</span>
+        <span class="psub">a pergunta que vem sempre</span>
+        <p class="prose">Criador de comida pergunta preço — é o dado que o público dele quer. Então o preço de cada
+        produto precisa estar na mão de quem apresenta.</p>
+        <p class="prose">E se o preço ainda não estiver definido, a resposta certa é dizer isso.
+        <strong>Preço improvisado na frente de dez criadores vira preço publicado</strong>, e depois a loja tem que
+        honrar ou desmentir. O preço sai do CMV, que está sendo levantado — se não estiver pronto na data, a frase
+        pronta é &ldquo;esse ainda está fechando preço, eu te mando&rdquo;.</p></div>
+
+      <div class="painel" data-alvo="q3" hidden><span class="ptit">Não virar pitch de franquia</span>
+        <span class="psub">o risco real de quem é dono do negócio apresentar</span>
+        <p class="prose">Quem criou os produtos tende a contar a história do <em>negócio</em>: quantas lojas,
+        como a marca cresceu, o que vem por aí. Isso é interessante pra quem quer ser franqueado.
+        <strong>Os dez convidados não querem ser franqueados</strong> — querem conteúdo e querem comer.</p>
+        <p class="prose">Não é um detalhe de estilo: é a diferença entre eles saírem com dez produtos na cabeça ou
+        com uma impressão geral da marca. A história da marca entra <strong>dentro de cada produto</strong> (&ldquo;essa
+        massa é a mesma do cookie, por isso…&rdquo;), não num capítulo próprio.</p>
+        <dl class="ficha">
+          <dt>a régua</dt><dd>Se, no fim, eles souberem dizer o nome de cinco produtos, a apresentação funcionou. Se souberem dizer quantas lojas a marca tem, ela foi pro lado errado.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="q4" hidden><span class="ptit">Deixar filmar — e saber calar</span>
+        <span class="psub">os vinte minutos do bloco 5</span>
+        <p class="prose">No bloco de filmagem o apresentador precisa <strong>sair de cena</strong> e ficar
+        disponível. É contraintuitivo pra quem está apresentando: o impulso é continuar explicando enquanto eles
+        gravam, e é justamente o que arruína o áudio de dez vídeos ao mesmo tempo.</p></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Os caminhos<span class="hint">clique num card · nenhum escolhido</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="w1"><span class="cnome">A · O Yuri</span><span class="cmeta">primeira opção</span><span class="cdesc">Criou os produtos. É quem tem a história de cada um.</span></button>
+      <button class="card-btn" data-alvo="w2"><span class="cnome">B · O Fred</span><span class="cmeta">plano B direto</span><span class="cdesc">Conhece o cardápio e está nas três cidades.</span></button>
+      <button class="card-btn" data-alvo="w3"><span class="cnome">C · A dois</span><span class="cmeta">recomendada se der</span><span class="cdesc">Quem conta a história + quem monta o produto na frente deles.</span></button>
+      <button class="card-btn" data-alvo="w4"><span class="cnome">D · A líder da loja</span><span class="cmeta">a que escala</span><span class="cdesc">Resolve três cidades e constrói equipe. Exige roteiro e ensaio.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="w1" hidden><span class="ptit">A · O Yuri</span>
+        <span class="psub">primeira opção, e é preciso perguntar</span>
+        <p class="prose">É quem criou os produtos — tem a história de cada um, sabe por que cada decisão foi
+        tomada, e isso é conteúdo que mais ninguém tem. É a escolha que dá mais substância à apresentação.</p>
+        <dl class="ficha">
+          <dt>a pergunta prática</dt><dd><strong>Ele pode ir?</strong> E, se for em três cidades, pode ir três vezes? Precisa ser perguntado antes de qualquer data ser cogitada.</dd>
+          <dt>o cuidado</dt><dd>É também o perfil com mais risco de a apresentação virar pitch de negócio — o que não é defeito dele, é o que acontece naturalmente com quem é dono. Resolve com roteiro escrito.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="w2" hidden><span class="ptit">B · O Fred</span>
+        <span class="psub">plano B direto</span>
+        <p class="prose">Conhece o cardápio inteiro, acompanhou a construção dos dez produtos, e é quem está nas
+        três cidades. Resolve o problema de agenda que o Yuri pode ter.</p>
+        <dl class="ficha">
+          <dt>o que falta</dt><dd>A história de criação de cada produto, que é do Yuri. Resolve com <strong>meia hora de conversa</strong> antes: duas frases por produto, anotadas. É menos do que parece.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="w3" hidden><span class="ptit">C · A dois: quem conta e quem monta</span>
+        <span class="psub">recomendada, se a agenda permitir</span>
+        <p class="prose">Um apresenta e conta a história; <strong>outro monta o produto ali, na frente deles</strong>.
+        A montagem é o melhor conteúdo que esse evento pode gerar — é o plano que mais engaja em vídeo de comida, e
+        é o único que só existe se alguém estiver montando ao vivo.</p>
+        <p class="prose">E resolve dois problemas de uma vez: quem apresenta não precisa parar pra montar, e quem
+        monta não precisa saber falar.</p>
+        <dl class="ficha">
+          <dt>quem monta</dt><dd>Alguém da cozinha daquela loja, que já faz o produto todo dia. Não precisa apresentar nada — precisa montar bonito e deixar filmar.</dd>
+          <dt>por que é a recomendada</dt><dd>É a única das quatro que <strong>aumenta o material produzido</strong>, em vez de só resolver quem fala.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="w4" hidden><span class="ptit">D · A líder da loja</span>
+        <span class="psub">a opção que escala e a que forma gente</span>
+        <p class="prose">Se a apresentação tem roteiro escrito, ela não exige o dono da marca —
+        <strong>exige alguém treinado nesse roteiro</strong>. E aí três cidades deixam de ser um problema de agenda,
+        porque cada cidade apresenta a sua.</p>
+        <p class="prose">Tem um ganho que não é de marketing: é exatamente o tipo de responsabilidade que faz a
+        operação andar sem depender de quem está no topo. A mesma lógica que está em jogo na passagem de bastão da
+        loja de Paulínia.</p>
+        <dl class="ficha">
+          <dt>o custo</dt><dd><strong>Exige o roteiro escrito e um ensaio.</strong> Sem os dois, é a pior das quatro opções — apresentar dez produtos para dez criadores não é tarefa que se improvisa.</dd>
+          <dt>quando escolher</dt><dd>Não na primeira. A primeira define o roteiro; a segunda e a terceira cidades podem rodar assim.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="convidados" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> A régua aqui é diferente<span class="hint">não é a mesma lista do Sorvete de Graça</span></h2>
+  <p class="prose">No <a href="../sorvete-de-graca/">Sorvete de Graça</a> o que se compra é <strong>alcance</strong>:
+  um post, muita gente vendo. Lá a régua é <em>views por seguidor</em>, e um perfil de notícia da cidade serve
+  perfeitamente — não precisa entender de comida, precisa ser visto.</p>
+  <p class="prose">Aqui o que se compra é <strong>uma sequência de conteúdo sobre dez produtos</strong>. Isso muda
+  quem serve: <em>página de notícia não produz sequência de comida</em>. Quem produz é criador de comida, que
+  aparece, que prova na frente da câmera e que já faz esse tipo de conteúdo. <strong>A régua passa a ser formato,
+  não tamanho.</strong></p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">os três critérios, em ordem</span><span>
+      <strong>1. Faz conteúdo de comida com o próprio rosto</strong> — quem só reposta não serve, porque aqui a
+      prova é o rosto provando. <strong>2. Já publica em sequência</strong> (stories encadeados, carrossel), porque
+      é isso que dez produtos pedem. <strong>3. Entrega de verdade</strong> — views por seguidor, mediana dos últimos
+      24 posts, como na outra campanha. Nessa ordem: um perfil grande que não faz comida vale menos aqui do que um
+      pequeno que faz.</span></div>
+    <div class="note-item"><span class="tag acc">os 4 do Sorvete de Graça entram</span><span>
+      Os quatro criadores contratados em cada cidade para o buzinaço devem estar <strong>entre os dez</strong>.
+      Mesma pessoa, duas campanhas: a relação fica mais barata e quem conheceu o cardápio na degustação divulga o
+      buzinaço sabendo do que está falando. <strong>Degustação primeiro, buzinaço depois.</strong></span></div>
+    <div class="note-item"><span class="tag warn">dez é mais gente do que parece</span><span>
+      Dez convidados significam <strong>convidar quinze</strong> — taxa de aceite nunca é 100%, e em horário
+      comercial é bem menor. E significam dez conversas individuais, dez confirmações e dez lembretes no dia
+      anterior. É trabalho de produção que não aparece em orçamento nenhum, e é o que costuma faltar.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> Por cidade<span class="hint">clique na cidade</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="cv-pau"><span class="cnome">Paulínia</span><span class="cmeta">4 de 10 já levantados</span><span class="cdesc">A lista do Cookie de Graça dá o começo — faltam seis.</span></button>
+      <button class="card-btn" data-alvo="cv-cps"><span class="cnome">Campinas</span><span class="cmeta">a levantar · cidade grande</span><span class="cdesc">Mais oferta de criador de comida que as outras duas juntas.</span></button>
+      <button class="card-btn" data-alvo="cv-pir"><span class="cnome">Piracicaba</span><span class="cmeta">do zero</span><span class="cdesc">Nenhum nome levantado, e a loja tem crise de equipe aberta.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="cv-pau" hidden><span class="ptit">Paulínia</span>
+        <span class="psub">4 de 10 já têm número real</span>
+        <p class="prose">A lista levantada para o Cookie de Graça serve de base — foram <strong>11 criadores que já
+        marcaram a loja</strong> desde dezembro de 2025, e quatro deles já têm número medido. Esses quatro são
+        contato morno: já estiveram na loja e já postaram por conta própria, o que é a melhor condição possível pra
+        um convite.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Perfil</th><th>Por que serve pra degustação</th><th>Seguidores</th><th>Views/seg.</th></tr></thead>
+          <tbody>
+            <tr class="mark"><td><a href="https://www.instagram.com/bellaraamalho/" target="_blank" rel="noopener">@bellaraamalho</a></td><td>O melhor número da lista: 11% de curtidas sobre seguidor. Já postou sobre a loja em dezembro.</td><td>2.354</td><td>2,65</td></tr>
+            <tr class="mark"><td><a href="https://www.instagram.com/comendoporpaulinia/" target="_blank" rel="noopener">@comendoporpaulinia</a></td><td><strong>É o perfil mais indicado dos quatro para este formato</strong> — é guia de comida, e guia de comida é exatamente quem faz sequência sobre vários pratos.</td><td>1.733</td><td>1,80</td></tr>
+            <tr><td><a href="https://www.instagram.com/sarahnogue/" target="_blank" rel="noopener">@sarahnogue</a></td><td>Tem um reel que bateu 2,5 milhões. Era a reserva do Cookie de Graça.</td><td>—</td><td>1,46</td></tr>
+            <tr><td><a href="https://www.instagram.com/mila_moralees/" target="_blank" rel="noopener">@mila_moralees</a></td><td>Rainha da Festa do Peão de Paulínia 2025 — reconhecimento de cidade. Já postou sobre a loja em março.</td><td>10.163</td><td>0,78</td></tr>
+          </tbody>
+        </table></div>
+        <dl class="ficha">
+          <dt>faltam seis</dt><dd>Os outros sete perfis que já marcaram a loja são o primeiro lugar pra procurar — <strong>a lista existe e nunca foi aberta inteira</strong>. Depois, busca de perfis e hashtags da cidade, filtrando por quem faz comida com o próprio rosto.</dd>
+          <dt>a página da cidade</dt><dd><strong>@livepaulinianilsao</strong> (69.873 seguidores) é a página escolhida pro buzinaço. Pra degustação ela é dispensável — é notícia, não comida. Se sobrar vaga, convida; não é prioridade.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="cv-cps" hidden><span class="ptit">Campinas</span>
+        <span class="psub">a levantar · e é a cidade com mais oferta</span>
+        <p class="prose">Campinas tem muito mais criador de comida que Paulínia e Piracicaba — é cidade grande com
+        cena gastronômica própria. <strong>Dez convidados é fácil em Campinas</strong>; o trabalho é escolher, não
+        encontrar.</p>
+        <p class="prose">O perfil conhecido é <strong>@comendoporcampinas</strong> (552 mil seguidores, mediana de
+        94 mil views) — foi dele o vídeo que serviu de modelo pro Cookie de Graça. Para esta campanha ele é
+        <em>mais</em> indicado que pro buzinaço: é guia de comida, o formato dele é exatamente mostrar vários pratos,
+        e ele é de outro patamar de alcance. Em troca, um perfil desse tamanho provavelmente não aceita permuta.</p>
+        <dl class="ficha">
+          <dt>o levantamento</dt><dd>Quem já marcou a loja, busca de perfis por termos de comida da cidade, hashtags. Ranquear por formato primeiro, views por seguidor depois.</dd>
+          <dt>atenção</dt><dd>Em Campinas é onde mais vai aparecer <strong>perfil grande com entrega fraca</strong>. A régua de views por seguidor existe exatamente pra isso — a lista de Paulínia tinha perfil de 16 mil entregando menos que um de 2,3 mil.</dd>
+          <dt>vantagem de logística</dt><dd>É a cidade onde a loja fica <strong>de frente pro Colégio Liceu, no Taquaral</strong> — endereço fácil de achar e de explicar, o que ajuda na taxa de aceite.</dd>
+        </dl></div>
+
+      <div class="painel aberto" data-alvo="cv-pir" hidden><span class="ptit">Piracicaba</span>
+        <span class="psub">do zero, e com um problema anterior ao marketing</span>
+        <p class="prose">Nenhum nome levantado, nenhum número. A cidade nunca entrou em campanha de divulgação —
+        o Cookie de Graça foi desenhado para Paulínia e Piracicaba e <strong>acabou rodando só em Paulínia</strong>.</p>
+        <p class="prose">E há um obstáculo que não é de lista: <strong>a loja de Piracicaba tem crise de equipe
+        aberta</strong> — líder e funcionária contaminados. Receber dez criadores numa loja fechada, com apresentação
+        e montagem ao vivo, é o evento que mais depende da equipe estar bem das três campanhas em discussão.</p>
+        <dl class="ficha">
+          <dt>recomendação</dt><dd><strong>Piracicaba é a última das três</strong>, ou fica fora desta edição. Não é decisão de marketing — é de operação.</dd>
+          <dt>um detalhe que afeta o convite</dt><dd>A loja <strong>não tem ficha no Google Maps</strong>. Convidado que recebe um convite e procura o endereço no mapa não acha — e isso derruba aceite. Vale resolver antes de convidar qualquer pessoa.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> O convite<span class="hint">é peça de campanha, não mensagem avulsa</span></h2>
+  <p class="prose">O convite é o que determina a taxa de aceite, e tem uma coisa a vender que vale mais que produto
+  grátis: <strong>a loja vai fechar só pra eles.</strong> Isso é exclusividade de verdade, e é a parte do convite
+  que não pode ficar implícita.</p>
+  <p class="prose">Ele também precisa <strong>dizer a contrapartida</strong>. Pedido que aparece só na porta gera
+  constrangimento e posts de obrigação; pedido que está no convite é acordo.</p>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="cnv1"><span class="cnome">O que o convite precisa dizer</span><span class="cmeta">sete itens</span></button>
+      <button class="card-btn" data-alvo="cnv2"><span class="cnome">O texto</span><span class="cmeta">rascunho pra adaptar</span></button>
+      <button class="card-btn" data-alvo="cnv3"><span class="cnome">Como mandar</span><span class="cmeta">e o lembrete</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="cnv1" hidden><span class="ptit">O que o convite precisa dizer</span>
+        <span class="psub">sete itens, nenhum opcional</span>
+        <ul class="pontos">
+          <li><strong>Que a loja vai fechar só pra eles.</strong> É o maior ativo do convite.</li>
+          <li><strong>Quantos serão.</strong> &ldquo;Dez criadores da cidade&rdquo; posiciona como seleção, não como
+          lista de transmissão.</li>
+          <li><strong>O que vai acontecer:</strong> apresentação do cardápio novo, produto por produto, com
+          degustação.</li>
+          <li><strong>Quantos produtos.</strong> &ldquo;Dez produtos novos&rdquo; é a informação que faz o criador
+          entender que tem conteúdo pra uma semana ali.</li>
+          <li><strong>Data, hora e duração.</strong> Duração importa: criador precisa saber se cabe na agenda dele.</li>
+          <li><strong>Que tem tempo reservado pra filmar.</strong> É o que distingue este convite de um convite pra
+          almoçar — e é o que o criador está realmente avaliando.</li>
+          <li><strong>A contrapartida, explícita.</strong> O que a gente pede e até quando.</li>
+        </ul>
+        <dl class="ficha">
+          <dt>o que não dizer</dt><dd><strong>&ldquo;Traga um acompanhante.&rdquo;</strong> Dez criadores com acompanhante são vinte pessoas numa loja, e metade não produz conteúdo — muda o evento inteiro. Se for permitido, é decisão consciente, não gentileza de última hora na porta.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="cnv2" hidden><span class="ptit">O texto</span>
+        <span class="psub">rascunho pra adaptar por cidade — trocar [ ] pelos dados reais</span>
+        <div class="copiavel">Oi, [nome]! Aqui é [quem], da Holy Cook [cidade].
+
+A gente acabou de fechar o cardápio de verão — são [10] produtos novos, e quase todos nunca existiram na loja: casquinha de cookie com sorvete, cookie no palito, panelinha, frozen, torta gelada.
+
+Antes de abrir pro público, a gente vai fechar a loja por uma hora e apresentar tudo pra 10 criadores da cidade. Um a um: o que é, como é feito, e provando.
+
+Queria te convidar.
+
+É [dia], às [hora], e dura mais ou menos [1h30]. A loja fica fechada só pra vocês, e tem um tempo reservado no meio só pra filmar, com os produtos montados e a loja vazia.
+
+Em troca eu te peço [stories durante e um post até (data), marcando @holycook.(cidade)].
+
+Topa? Me confirma até [data] que eu já reservo seu lugar.</div>
+        <p class="dica">O que esse texto faz, na ordem: dá a notícia (cardápio novo), dá o tamanho (10 produtos),
+        dá a exclusividade (loja fechada, 10 criadores), dá o benefício de trabalho (tempo de filmar), pede, e pede
+        confirmação com prazo.</p></div>
+
+      <div class="painel" data-alvo="cnv3" hidden><span class="ptit">Como mandar — e o lembrete</span>
+        <span class="psub">o detalhe operacional que decide quantos aparecem</span>
+        <ul class="pontos">
+          <li><strong>Um por um, nunca em grupo.</strong> Convite em lista de transmissão deixa de ser seleção.</li>
+          <li><strong>Com antecedência de pelo menos uma semana.</strong> Criador tem agenda de gravação.</li>
+          <li><strong>Convidar quinze pra ter dez.</strong> E ter claro quem é reserva, pra não convidar demais e
+          lotar.</li>
+          <li><strong>Pedir confirmação com prazo.</strong> &ldquo;Topa?&rdquo; sem data de resposta não fecha lista.</li>
+          <li><strong>Lembrete no dia anterior.</strong> É o item mais barato e o que mais muda a presença — quem
+          confirmou numa segunda esquece na quinta.</li>
+          <li><strong>Endereço e ponto de referência</strong> na confirmação. Em Piracicaba isso é crítico, porque a
+          loja não aparece no Google Maps.</li>
+        </ul></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="roteiro" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> A restrição que decide tudo<span class="hint">é física, não é opinião</span></h2>
+  <p class="prose">O cardápio de verão tem <strong>dez produtos fechados mais duas sugestões</strong>, e
+  praticamente todos são doces e gelados. <strong>Isso não se degusta em porções normais.</strong> Depois de quatro
+  ou cinco itens doces, o paladar satura e as pessoas param de sentir diferença — não por falta de interesse, por
+  fisiologia. Do sexto em diante, o que elas vão dizer de cada produto é a mesma coisa.</p>
+  <p class="prose">Se a degustação for montada como &ldquo;doze porções servidas em sequência&rdquo;, acontecem três
+  coisas previsíveis: a maioria não termina, os últimos produtos do roteiro são avaliados mal sem merecer, e o custo
+  de insumo é alto pra comida que vai pro lixo. <strong>O desenho do evento inteiro sai dessa restrição.</strong></p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a solução em três partes</span><span>
+      <strong>1. Micro-porção:</strong> uma garfada ou uma colherada de cada, não uma porção. <strong>2. Ordem por
+      bloco:</strong> leve → pesado, frio → quente, com pausa entre blocos. <strong>3. Dois ou três heróis em porção
+      cheia</strong>, o resto em prova. Os heróis são os produtos que a loja mais quer vender, não os mais
+      bonitos.</span></div>
+    <div class="note-item"><span class="tag acc">e o que quase sempre falta: cada produto aparece duas vezes</span><span>
+      <strong>Um montado inteiro pra câmera, outro em micro-porção pra provar.</strong> É o detalhe que decide se o
+      evento produz conteúdo ou só boa vontade: prato já provado não serve pra filmar, e criador não filma sobra.
+      Isso tem custo de insumo — e é custo de campanha, não desperdício.</span></div>
+    <div class="note-item"><span class="tag mudo">água e café</span><span>
+      Entre blocos, <strong>água e café sem açúcar</strong>. Custa quase nada e é o que recupera o paladar. Sem
+      isso, o bloco 3 é avaliado pelo que sobrou do bloco 2.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> A ordem proposta<span class="hint">clique num bloco · quatro blocos, 30 a 40 minutos</span></h2>
+  <p class="prose">A ordem segue duas lógicas que não conflitam: <strong>do mais leve pro mais pesado</strong> (pra
+  não saturar no começo) e <strong>do frio pro quente</strong> (porque o quente tem que sair do forno na hora e não
+  espera). O que vai em cada bloco depende de quais produtos estiverem aprovados e executáveis na data — a estrutura
+  é a mesma, os nomes se ajustam.</p>
+  <div class="bloco">
+    <div class="fluxo">
+      <button class="passo-caixa" data-alvo="r1"><span class="quem">bloco 1</span><span class="qtxt">Gelado leve</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="r2"><span class="quem">bloco 2</span><span class="qtxt">O herói</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="r3"><span class="quem">pausa</span><span class="qtxt">Água e café</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="r4"><span class="quem">bloco 3</span><span class="qtxt">Gelado denso</span></button><span class="seta">→</span>
+      <button class="passo-caixa" data-alvo="r5"><span class="quem">bloco 4</span><span class="qtxt">Quente, por último</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="r1" hidden><span class="ptit">Bloco 1 · Gelado leve</span>
+        <span class="psub">abre o paladar, não satura</span>
+        <p class="prose">Começa pelo mais leve: o <strong>frozen de maracujá com manga</strong>. É fruta, é ácido,
+        é refrescante — abre o apetite em vez de fechar, e é o único item do cardápio que não é chocolate.</p>
+        <p class="prose">É também um bom primeiro produto pra <em>contar</em>: a loja já vende frozen de morango, o
+        que entra novo é o sabor. A história é curta e mostra como o cardápio foi construído — aproveitando o que a
+        loja já sabe fazer.</p>
+        <dl class="ficha">
+          <dt>porção</dt><dd>Copo pequeno. Como é bebida, é o item que menos satura — pode ser servido quase cheio.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="r2" hidden><span class="ptit">Bloco 2 · O herói</span>
+        <span class="psub">porção cheia, enquanto o paladar está inteiro</span>
+        <p class="prose">O produto que a loja mais quer vender vai <strong>no começo, em porção cheia</strong>, não
+        no fim. Quem decide essa ordem é a estratégia de venda, não a estética do roteiro.</p>
+        <p class="prose">Candidato natural: a <strong>casquinha de cookie com sorvete</strong> — é o produto que vai
+        ser a cara do lançamento, é o que o Sorvete de Graça vai distribuir, e é o mais fotogênico do cardápio. Se é
+        esse que o público vai ver primeiro na rua, é esse que os dez criadores precisam ter provado bem.</p>
+        <dl class="ficha">
+          <dt>por que aqui</dt><dd>Segundo produto servido = paladar ainda limpo, atenção no máximo, bateria do celular cheia. O que for servido no nono lugar vai ser avaliado pior <em>independentemente de qualidade</em>.</dd>
+          <dt>quantos heróis</dt><dd>Dois ou três no total, espalhados — não todos juntos. Mais que três e a saturação volta.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="r3" hidden><span class="ptit">Pausa · Água e café</span>
+        <span class="psub">cinco minutos · o item mais barato do roteiro</span>
+        <p class="prose">Água e café sem açúcar. <strong>Cinco minutos de pausa recuperam o paladar</strong> e
+        compram atenção pros blocos seguintes — e é também o momento natural pras perguntas de produto, se a
+        degustação for usada como teste.</p>
+        <p class="prose">É um bom lugar pra deixar a conversa solta: é quando as pessoas falam o que realmente
+        acharam, e não quando o apresentador pergunta na frente de todos.</p></div>
+
+      <div class="painel" data-alvo="r4" hidden><span class="ptit">Bloco 3 · Gelado denso</span>
+        <span class="psub">micro-porção, obrigatoriamente</span>
+        <p class="prose">O bloco mais cheio e o que mais precisa de micro-porção: <strong>Ice Cookie</strong>,
+        <strong>cookie com sorvete</strong>, <strong>cookie fries com sorvete</strong>, <strong>cookie no
+        palito</strong>, <strong>Cookie da Felicidade</strong>, <strong>torta gelada</strong>. São seis itens que se
+        parecem entre si — cookie e sorvete em combinações diferentes.</p>
+        <p class="prose">E é exatamente por se parecerem que a apresentação importa aqui mais que em qualquer outro
+        bloco: <strong>o que o criador precisa levar embora é o que diferencia um do outro</strong>, senão ele vai
+        postar &ldquo;tem vários cookies com sorvete&rdquo;, que é o resumo que destrói o trabalho de seis produtos.</p>
+        <dl class="ficha">
+          <dt>porção</dt><dd>Uma garfada de cada, em prato pequeno ou colher de degustação. Seis porções cheias aqui é o fim do evento.</dd>
+          <dt>cuidado de produção</dt><dd>O <strong>cookie no palito</strong> tem cobertura que derrete fora da geladeira — sai do freezer na hora de servir, não antes. E o bloco inteiro é congelado: precisa de espaço de freezer reservado no dia.</dd>
+          <dt>o que dizer em cada um</dt><dd>Uma frase sobre <em>o que ele tem que os outros não têm</em>. Não a história da marca — a diferença concreta.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="r5" hidden><span class="ptit">Bloco 4 · Quente, por último</span>
+        <span class="psub">e é o melhor final possível</span>
+        <p class="prose"><strong>Panelinha</strong> e <strong>torta quente</strong> fecham. Por três razões que
+        apontam pro mesmo lugar:</p>
+        <ul class="pontos">
+          <li><strong>Sai do forno na hora</strong> — não pode esperar, então tem que ser o último.</li>
+          <li><strong>Reacorda o paladar.</strong> Quente depois de gelado é um contraste que recupera a percepção
+          mesmo depois de muitos doces.</li>
+          <li><strong>É o melhor plano de vídeo do cardápio.</strong> A panelinha junta quente e frio na mesma
+          montagem — sorvete derretendo em cima do cookie assado, feita na frente deles. Se existe um momento pra
+          montar ao vivo, é esse, e é por isso que ele vai no fim: a câmera de todos já está na mão.</li>
+        </ul>
+        <dl class="ficha">
+          <dt>a montagem ao vivo</dt><dd>É aqui que a opção <strong>C</strong> da aba <a href="#apresentador">Quem apresenta</a> se paga: alguém da cozinha montando a panelinha na frente deles. É o plano com mais chance de viralizar de todo o evento.</dd>
+          <dt>prende o forno</dt><dd>Assar na hora ocupa o forno do cookie. Num evento com a loja fechada isso é tranquilo — mas precisa estar no procedimento, porque é o mesmo forno de sempre.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> O corte<span class="hint">decisão em aberto</span></h2>
+  <p class="prose">Com <strong>dez produtos fechados mais duas sugestões</strong> — Cookie Gateau e a bolacha que o
+  Fred chama de <em>piscininha</em> —, a primeira pergunta do roteiro é quantos realmente entram.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a recomendação</span><span>
+      <strong>Apresentar todos, servir de 7 a 8.</strong> Os que não forem servidos aparecem <em>montados na
+      mesa</em>, com nome e explicação — eles contam pro efeito de &ldquo;é um cardápio inteiro&rdquo;, que é
+      metade do valor da campanha, e são fotografáveis sem serem provados. Quem quiser provar, prova; quem não
+      quiser, já tem o que postar.</span></div>
+    <div class="note-item"><span class="tag warn">quais não servir</span><span>
+      Os que se parecem mais com outro do mesmo bloco. Se <strong>Ice Cookie</strong> e <strong>cookie com
+      sorvete</strong> são cookie e sorvete em formatos diferentes, servir os dois em prova gasta duas garfadas pra
+      ensinar uma coisa. Serve um, mostra o outro montado.</span></div>
+    <div class="note-item"><span class="tag bad">e o filtro de verdade</span><span>
+      <strong>Só entra o que a loja consegue executar com consistência na data.</strong> Produto que sai diferente
+      cada vez que é montado não deve ir pra degustação — vai ser julgado pela vez que saiu pior, na frente de dez
+      pessoas que vivem de comparar comida. Esse filtro vem antes de qualquer critério de roteiro.</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="kit" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> Para que o kit serve<span class="hint">não é lembrancinha</span></h2>
+  <p class="prose">O kit tem uma função específica e nada sentimental: <strong>o conteúdo não é produzido na loja,
+  é produzido depois.</strong> O criador grava ali, mas escreve a legenda à noite, no sofá, lembrando de doze
+  produtos que viu uma vez. O kit é o que impede que ele erre o nome, erre o perfil e esqueça metade.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">o item mais valioso é o mais barato</span><span>
+      <strong>A folha com o nome correto de cada produto.</strong> Doze produtos com nomes específicos — Ice Cookie,
+      Panelinha, Cookie fries, Cookie da Felicidade, frozen de maracujá com manga — não se decoram numa hora. E
+      <strong>nome errado no post é irreversível</strong>: o público aprende o nome errado, e o produto sai do
+      cardápio chamado de outra coisa.</span></div>
+    <div class="note-item"><span class="tag bad">o erro mais comum e o mais caro</span><span>
+      <strong>Marcar o perfil errado.</strong> São três perfis de cidade diferentes. Um criador de Paulínia que marca
+      a loja de Campinas entregou o post pra audiência errada e não tem como corrigir depois de publicado. A @ certa
+      vai <em>escrita</em> no kit, não dita na porta.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O que vai dentro<span class="hint">clique num card · quatro essenciais e dois opcionais</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="k1"><span class="cnome">1 · A folha dos nomes</span><span class="cmeta">essencial · custa centavos</span><span class="cdesc">Os doze produtos com nome correto e uma linha cada.</span></button>
+      <button class="card-btn" data-alvo="k2"><span class="cnome">2 · A @ da loja da cidade</span><span class="cmeta">essencial</span><span class="cdesc">Escrita, não dita. São três perfis diferentes.</span></button>
+      <button class="card-btn" data-alvo="k3"><span class="cnome">3 · O panfleto do cardápio</span><span class="cmeta">essencial · a mesma peça</span><span class="cdesc">A mesma miniatura com QR que o Sorvete de Graça usa.</span></button>
+      <button class="card-btn" data-alvo="k4"><span class="cnome">4 · O pedido por escrito</span><span class="cmeta">essencial</span><span class="cdesc">O que a gente pede e até quando. Pedido só falado não acontece.</span></button>
+      <button class="card-btn" data-alvo="k5"><span class="cnome">5 · Produto pra levar</span><span class="cmeta">opcional · e tem um motivo forte</span><span class="cdesc">Gera um segundo conteúdo, em outro dia, de graça.</span></button>
+      <button class="card-btn" data-alvo="k6"><span class="cnome">6 · Voucher</span><span class="cmeta">opcional</span><span class="cdesc">Faz ele voltar pagando — ou trazer alguém.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="k1" hidden><span class="ptit">1 · A folha dos nomes</span>
+        <span class="psub">essencial · é o item de melhor retorno do kit inteiro</span>
+        <p class="prose">Uma folha com <strong>os produtos na ordem em que foram apresentados</strong>, o nome
+        correto de cada um e uma linha dizendo o que é. É o roteiro da apresentação virado material de consulta.</p>
+        <p class="prose">Serve a três coisas de uma vez: o criador acerta o nome, lembra o que viu, e tem a frase
+        pronta pra escrever a legenda. Custa uma impressão em casa.</p>
+        <dl class="ficha">
+          <dt>e também</dt><dd>Marcar quais produtos <strong>já estão à venda</strong> e quais entram depois. Se o criador postar um produto que a loja ainda não vende, gera cliente procurando algo que não existe — e isso é pior que não ter o post.</dd>
+          <dt>o preço entra?</dt><dd>Se estiver definido, sim. Se não, não inventar — e dizer na folha que o preço sai depois, pra ele não publicar um número chutado.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="k2" hidden><span class="ptit">2 · A @ da loja da cidade</span>
+        <span class="psub">essencial · escrita, nunca só dita</span>
+        <p class="prose">São três perfis diferentes, um por cidade. A @ correta vai <strong>escrita e em destaque</strong>
+        no kit — e vale repetir em voz alta no bloco 6 do evento.</p>
+        <p class="prose">Junto com ela, duas coisas: <strong>o endereço da loja</strong> (pra entrar na legenda) e,
+        se houver, a hashtag da campanha. Conteúdo gravado dentro de uma loja fechada não mostra onde é — então a
+        localização tem que vir do texto, não da imagem.</p></div>
+
+      <div class="painel" data-alvo="k3" hidden><span class="ptit">3 · O panfleto do cardápio</span>
+        <span class="psub">essencial · é a mesma peça da outra campanha</span>
+        <p class="prose">A <strong>miniatura do cardápio de verão com o QR</strong> — exatamente a mesma peça que o
+        <a href="../sorvete-de-graca/">Sorvete de Graça</a> entrega na janela do carro. Mesma arte, mesma impressão,
+        custo marginal zero pra esta campanha.</p>
+        <p class="prose">Para o criador ela tem uma função extra: <strong>é o link que ele pode mandar pra audiência
+        dele</strong>. Quem pergunta &ldquo;onde tem isso?&rdquo; nos comentários recebe o QR do cardápio — e aí o post
+        dele deixa de ser elogio e passa a converter.</p>
+        <dl class="ficha">
+          <dt>dependência</dt><dd>O <strong>cardápio online não existe ainda</strong>, e ele depende da decisão de fotos que está aberta no projeto do produto. Se a degustação acontecer antes da página, o kit sai sem o QR — e perde o melhor item dele.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="k4" hidden><span class="ptit">4 · O pedido por escrito</span>
+        <span class="psub">essencial</span>
+        <p class="prose">O que a gente gostaria que saísse e <strong>até quando</strong> — a mesma coisa que estava no
+        convite, repetida. Não é desconfiança: é que ninguém guarda uma combinação feita por mensagem três semanas
+        antes.</p>
+        <p class="prose">Uma linha resolve: <strong>&ldquo;stories hoje e um post até [data], marcando
+        @holycook.[cidade]&rdquo;</strong>. Com data, não com &ldquo;quando der&rdquo;.</p></div>
+
+      <div class="painel" data-alvo="k5" hidden><span class="ptit">5 · Produto pra levar</span>
+        <span class="psub">opcional · e o motivo de incluir é melhor do que parece</span>
+        <p class="prose">A razão não é agradar: <strong>é gerar um segundo conteúdo, em outro dia, de graça.</strong>
+        O criador que leva produto pra casa filma de novo — em casa, com outra luz, pra outra audiência, num segundo
+        momento. É o conteúdo mais barato da campanha inteira.</p>
+        <p class="prose">O que levar bem: o que <strong>aguenta transporte</strong>. E aí o cardápio de verão tem um
+        problema específico — <em>nove dos dez itens dependem de frio</em>. Casquinha quebra, sorvete derrete, o
+        cookie no palito tem cobertura que derrete fora da geladeira. Sobram a torta e os produtos de forno, que são
+        exatamente os que viajam.</p>
+        <dl class="ficha">
+          <dt>o cuidado</dt><dd>Produto que derrete no caminho vira conteúdo ruim — e vira conteúdo ruim <em>com a marca marcada</em>. Melhor dar o que viaja bem do que o mais bonito.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="k6" hidden><span class="ptit">6 · Voucher</span>
+        <span class="psub">opcional</span>
+        <p class="prose">No Cookie de Graça cada criador recebeu um <strong>voucher de R$ 80</strong> pra voltar outro
+        dia. Aqui faz o mesmo sentido, e um pouco mais: <strong>faz o criador voltar como cliente</strong>, e
+        normalmente ele volta com alguém — o que gera uma segunda visita e, muitas vezes, um segundo post sem ter
+        sido pedido.</p>
+        <dl class="ficha">
+          <dt>coerência</dt><dd>Se o voucher do Sorvete de Graça for definido, usar <strong>o mesmo</strong>. Dois vouchers diferentes na mesma temporada é confusão de balcão sem ganho nenhum.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="contrapartida" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> As duas perguntas<span class="hint">e as duas precisam ser respondidas antes do convite</span></h2>
+  <p class="prose">A degustação pode ser <strong>permuta</strong> (eles vêm pela experiência e pelo produto) ou
+  <strong>contratação</strong> (eles vêm porque estão sendo pagos). E postar pode ser <strong>obrigatório</strong>
+  ou <strong>voluntário</strong>. As duas respostas mudam o convite, mudam quem aceita e mudam o que sai.</p>
+  <p class="prose">A pendência não é nova: no Cookie de Graça ficou registrado que <strong>&ldquo;se há cachê em
+  dinheiro&rdquo; nunca foi mencionado</strong> com os criadores — e lá eram dois. Aqui são dez por cidade, e a
+  conversa não pode acontecer na porta.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">o trade-off, dito sem rodeio</span><span>
+      <strong>Dez pessoas com obrigação de postar entregam dez posts medianos.</strong> Dez pessoas sem obrigação
+      entregam quatro ou cinco posts bons — e os bons são bons justamente porque quem postou quis postar. É escolha
+      entre volume previsível e qualidade imprevisível, e não existe opção que dê os dois.</span></div>
+    <div class="note-item"><span class="tag mudo">o que o formato já paga sozinho</span><span>
+      O convite tem valor real antes de qualquer dinheiro: <strong>loja fechada só pra eles, dez produtos novos antes
+      do público, e vinte minutos reservados pra filmar com a loja vazia.</strong> Pra criador de comida, loja vazia
+      com produto montado e tempo pra gravar é condição de trabalho que ele normalmente não consegue. Isso sustenta
+      permuta — não com qualquer perfil, mas com a maioria.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> Os três arranjos<span class="hint">clique num card</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="t1"><span class="cnome">A · Permuta, post voluntário</span><span class="cmeta">o mais leve</span><span class="cdesc">Convida, entrega bem, e pede sem cobrar.</span></button>
+      <button class="card-btn" data-alvo="t2"><span class="cnome">B · Permuta com combinado</span><span class="cmeta">recomendada</span><span class="cdesc">Sem dinheiro, mas com entrega acordada e data.</span></button>
+      <button class="card-btn" data-alvo="t3"><span class="cnome">C · Pago</span><span class="cmeta">para quem não aceita permuta</span><span class="cdesc">Poucos nomes, escolhidos — não os dez.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="t1" hidden><span class="ptit">A · Permuta com post voluntário</span>
+        <span class="psub">o mais leve de operar</span>
+        <p class="prose">Convida, recebe bem, entrega um kit bom, e pede sem cobrar. Quem gostou posta.</p>
+        <dl class="ficha">
+          <dt>o que ganha</dt><dd>Nenhum atrito, nenhum constrangimento, e os posts que saem são genuínos — o que em conteúdo de comida é a diferença entre parecer recomendação e parecer publicidade.</dd>
+          <dt>o que custa</dt><dd><strong>Imprevisibilidade.</strong> Pode sair muito e pode sair quase nada, e não há como saber antes. Com dez convidados, uma taxa de 40% já é considerada boa — e 40% de dez é quatro.</dd>
+          <dt>quando escolher</dt><dd>Se o objetivo principal for <strong>relação e teste de produto</strong>, e o conteúdo for bônus. É uma escolha legítima, só precisa ser dita assim — senão a campanha vai ser cobrada por dez posts.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="t2" hidden><span class="ptit">B · Permuta com combinado explícito</span>
+        <span class="psub">recomendada</span>
+        <p class="prose">Sem dinheiro, mas <strong>com a entrega combinada e datada no convite</strong>. Não é
+        contrato: é acordo dito em voz alta antes de a pessoa aceitar.</p>
+        <p class="prose">A régua é pedir <strong>menos do que se quer, com data</strong> — porque pedido pequeno e
+        específico é cumprido, e pedido grande e vago não. O que funciona:</p>
+        <div class="copiavel">Stories durante o evento, marcando @holycook.[cidade]
++ 1 post (reel ou carrossel) até [data]</div>
+        <p class="prose">Stories durante o evento são o pedido mais fácil que existe — a pessoa já está lá, já está
+        com o celular na mão, e o conteúdo é interessante pra audiência dela. <strong>Esse é o pedido que quase
+        ninguém recusa</strong>, e sozinho ele já entrega o efeito de dez perfis falando da marca no mesmo dia, que é
+        metade do valor da campanha.</p>
+        <dl class="ficha">
+          <dt>o post, por que separado</dt><dd>Porque ele exige edição e agenda. Com data, entra no planejamento dele; sem data, fica pro fim da fila e não sai.</dd>
+          <dt>o que ganha</dt><dd>Previsibilidade sem custo de mídia. E deixa claro o que é esperado, o que evita o pior cenário: a pessoa sair sem saber se devia postar.</dd>
+          <dt>o que custa</dt><dd>Alguns vão dizer não — e é melhor que digam no convite do que que apareçam e não postem.</dd>
+        </dl></div>
+
+      <div class="painel" data-alvo="t3" hidden><span class="ptit">C · Pago</span>
+        <span class="psub">para os nomes que não aceitam permuta</span>
+        <p class="prose">Alguns perfis não trabalham por permuta, e é razoável. <strong>@comendoporcampinas, com 552
+        mil seguidores, é o exemplo óbvio</strong> — um perfil desse tamanho tem tabela.</p>
+        <p class="prose">A saída não é pagar os dez: é <strong>pagar um ou dois e convidar os outros oito em
+        permuta</strong>. Os pagos entram pelo alcance; os de permuta entram pelo efeito de simultaneidade. São duas
+        funções diferentes na mesma campanha, e misturar as duas num preço único desperdiça as duas.</p>
+        <dl class="ficha">
+          <dt>o cuidado</dt><dd>Se os dez souberem que alguns foram pagos e outros não, há desgaste. Não esconder nem anunciar — convidar individualmente, com o combinado de cada um sendo o combinado de cada um.</dd>
+          <dt>o que entra na conta</dt><dd>Este é um valor que <strong>não existe em nenhum orçamento</strong> hoje — nem nesta campanha nem no Sorvete de Graça, onde a mesma pendência está aberta com 12 criadores.</dd>
+        </dl></div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> E se não postar<span class="hint">a decisão que ninguém quer tomar antes</span></h2>
+  <p class="prose">Com dez convidados, <strong>alguém não vai postar</strong>. Isso é estatística, não má-fé — e vale
+  decidir antes o que acontece, porque na hora a tendência é não fazer nada e ficar o incômodo.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">a recomendação</span><span>
+      <strong>Nada acontece, e fica anotado.</strong> Cobrar um criador por um post de permuta custa a relação e
+      rende, no melhor caso, um post feito de má vontade. O que serve é a <strong>lista</strong>: quem postou entra
+      na lista do Natal, quem não postou não. A seleção da próxima campanha é a consequência, e é suficiente.</span></div>
+    <div class="note-item"><span class="tag mudo">o que fazer em vez de cobrar</span><span>
+      <strong>Repostar quem postou, na hora.</strong> Isso vale como conteúdo da loja, agradece publicamente, e
+      sinaliza a quem ainda não postou que os outros postaram — o que funciona melhor do que qualquer mensagem de
+      cobrança.</span></div>
+    <div class="note-item"><span class="tag warn">o caso diferente</span><span>
+      Se alguém foi <strong>pago</strong> e não postou, aí é outra conversa: é entrega combinada que não aconteceu, e
+      cobrar é normal. Mais uma razão pra deixar claro, no convite, qual dos dois arranjos vale para cada pessoa.</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="checklist" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> Onde a campanha está<span class="hint">montado em 02/10/2026</span></h2>
+  <div class="strip">
+    <div><span class="v">sem data</span><span class="s">depende das fichas técnicas, não de agenda</span></div>
+    <div><span class="v">sem apresentador</span><span class="s">a decisão que trava tudo</span></div>
+    <div><span class="v" id="chk-total">0 / 0</span><span class="s">itens abertos</span></div>
+  </div>
+  <div class="notes">
+    <div class="note-item"><span class="tag bad">o bloqueio nº 1</span><span>
+      <strong>Quem apresenta.</strong> A campanha inteira é uma apresentação — sem apresentador não há data, não há
+      convite e não há roteiro, porque o roteiro depende de quem diz as falas. A pergunta imediata é se o Yuri pode
+      ir, e se pode ir <em>três vezes</em>.</span></div>
+    <div class="note-item"><span class="tag bad">o bloqueio nº 2</span><span>
+      <strong>O produto estar no padrão.</strong> Dez pessoas que vivem de comida provando produtos que a loja
+      acabou de aprender a fazer: se a execução estiver irregular, a degustação amplifica o problema em vez de
+      esconder. Depende das fichas técnicas, que já são tarefa aberta no projeto do cardápio.</span></div>
+    <div class="note-item"><span class="tag warn">a restrição que desenha o evento</span><span>
+      <strong>Dez a doze produtos doces não se degustam em porção normal.</strong> Depois de quatro ou cinco itens o
+      paladar satura. Micro-porção, ordem por bloco, água e café entre blocos, e cada produto aparecendo duas vezes
+      — um pra foto, um pra provar.</span></div>
+    <div class="note-item"><span class="tag acc">a ordem entre as duas campanhas</span><span>
+      <strong>Degustação primeiro, Sorvete de Graça depois.</strong> Os quatro criadores contratados pro buzinaço
+      devem estar entre os dez convidados — divulgam melhor depois de ter provado, e a relação sai mais
+      barata.</span></div>
+    <div class="note-item"><span class="tag mudo">como usar</span><span>
+      As marcações ficam salvas <strong>neste navegador</strong>. Serve pra acompanhar; pra equipe, imprimir.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span> O checklist<span class="hint">clique num grupo</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir</span><span class="cmeta contagem" data-conta="dec">0/0</span><span class="cdesc">Nove decisões. A primeira é quem apresenta.</span></button>
+      <button class="card-btn" data-alvo="ck-prod"><span class="cnome">Produto</span><span class="cmeta contagem" data-conta="prod">0/0</span><span class="cdesc">O portão de estabilidade e o corte do roteiro.</span></button>
+      <button class="card-btn" data-alvo="ck-conv"><span class="cnome">Convidados e convite</span><span class="cmeta contagem" data-conta="conv">0/0</span><span class="cdesc">Levantar, convidar quinze, confirmar dez, lembrar no dia anterior.</span></button>
+      <button class="card-btn" data-alvo="ck-rot"><span class="cnome">Roteiro e apresentação</span><span class="cmeta contagem" data-conta="rot">0/0</span><span class="cdesc">Escrever, cortar, ensaiar. É o que permite não depender de uma pessoa só.</span></button>
+      <button class="card-btn" data-alvo="ck-kit"><span class="cnome">Kit e peças</span><span class="cmeta contagem" data-conta="kit">0/0</span><span class="cdesc">A folha dos nomes é o item de melhor retorno, e custa uma impressão.</span></button>
+      <button class="card-btn" data-alvo="ck-loj"><span class="cnome">Loja e logística</span><span class="cmeta contagem" data-conta="loj">0/0</span><span class="cdesc">Fechar a loja, montar a mesa, freezer, forno e luz.</span></button>
+      <button class="card-btn" data-alvo="ck-dia"><span class="cnome">No dia</span><span class="cmeta contagem" data-conta="dia">0/0</span><span class="cdesc">A hora, do primeiro que chega ao último que sai.</span></button>
+      <button class="card-btn" data-alvo="ck-dep"><span class="cnome">Depois</span><span class="cmeta contagem" data-conta="dep">0/0</span><span class="cdesc">É aqui que a campanha acontece — e é o que mais se perde.</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="ck-dec" hidden><span class="ptit">Decidir</span>
+        <span class="psub">9 decisões em aberto</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-dec1" data-g="dec"><label for="dg-dec1"><span class="prazo ja">trava tudo</span><strong>Quem apresenta.</strong><span class="por">Falar com o Yuri: ele pode ir, e pode ir nas três cidades? Se não, as opções são Fred, a dupla &ldquo;quem conta + quem monta&rdquo; (recomendada, porque aumenta o material produzido) ou a líder da loja com roteiro e ensaio.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec2" data-g="dec"><label for="dg-dec2"><span class="prazo ja">trava o convite</span><strong>Permuta ou pago, e se postar é obrigatório.</strong><span class="por">Recomendação: permuta com combinado explícito e datado — stories durante + 1 post até uma data. Dez com obrigação entregam dez posts medianos; dez sem obrigação entregam quatro ou cinco bons. E pagar um ou dois nomes grandes em vez dos dez.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec3" data-g="dec"><label for="dg-dec3"><span class="prazo ja">trava o convite</span><strong>Uma cidade como piloto, ou as três.</strong><span class="por">Recomendação: uma. O formato nunca foi feito, e repetir uma apresentação testada é fácil — estrear três ao mesmo tempo, com um apresentador só, não é.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec4" data-g="dec"><label for="dg-dec4"><span class="prazo antes">antes do convite</span><strong>Data, hora e duração.</strong><span class="por">A hora mais barata de fechar sai do histórico de vendas por hora, não de opinião. Mas a hora barata pra loja pode ser a pior pros convidados — e tem uma terceira opção que ninguém propõe: <em>antes de abrir</em>, que não fecha nada e tem a melhor luz. 1h15 a 1h30 é mais realista que 1h.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec5" data-g="dec"><label for="dg-dec5"><span class="prazo antes">antes do roteiro</span><strong>Quantos produtos são servidos.</strong><span class="por">Recomendação: apresentar todos, servir 7 ou 8 em micro-porção, e os outros aparecem montados na mesa com nome e explicação. Cortar os que se parecem com outro do mesmo bloco.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec6" data-g="dec"><label for="dg-dec6"><span class="prazo antes">antes do roteiro</span><strong>Quais são os 2 ou 3 heróis</strong> — os que vão em porção cheia.<span class="por">Quem decide é a estratégia de venda, não a estética. Candidato natural: a casquinha com sorvete, que é o que o Sorvete de Graça vai distribuir na rua.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec7" data-g="dec"><label for="dg-dec7"><strong>A degustação é teste de produto ou só mídia?</strong><span class="por">Se for teste, precisa de uma pergunta por produto e alguém anotando. Sem isso os dez vão elogiar tudo por educação e o ganho de pesquisa se perde inteiro — e esse ganho é de graça.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec8" data-g="dec"><label for="dg-dec8"><strong>Acompanhante é permitido?</strong><span class="por">Dez criadores com acompanhante são vinte pessoas, e metade não produz conteúdo — muda o evento. Se for sim, é decisão consciente, não gentileza na porta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec9" data-g="dec"><label for="dg-dec9"><strong>O que vai no kit</strong>, e se tem produto pra levar e voucher.<span class="por">Se houver voucher, usar o mesmo do Sorvete de Graça — dois vouchers diferentes na mesma temporada é confusão de balcão sem ganho.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-prod" hidden><span class="ptit">Produto</span>
+        <span class="psub">o bloqueio nº 2 · vem antes de qualquer data</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-prod1" data-g="prod"><label for="dg-prod1"><span class="prazo ja">bloqueio nº 2</span><strong>Garantir execução consistente</strong> dos produtos que vão ser servidos.<span class="por">Não da lista inteira — dos servidos. Produto que sai diferente cada vez vai ser julgado pela vez que saiu pior, na frente de dez pessoas que vivem de comparar comida.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod2" data-g="prod"><label for="dg-prod2"><span class="prazo ja">destrava a data</span><strong>Fechar as fichas técnicas</strong> dos produtos que entram.<span class="por">Já é tarefa aberta no projeto do cardápio de verão, com prazo &ldquo;depois da degustação da equipe&rdquo;. Sem ficha, cada montagem sai diferente — e é essa dependência que define a data possível.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod3" data-g="prod"><label for="dg-prod3"><strong>Passar o portão de estabilidade da loja.</strong><span class="por">O critério de produto, experiência e ambiente já existe no projeto de experiência da loja. Campanha de fidelização falha em silêncio; degustação falha na frente de dez criadores.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod4" data-g="prod"><label for="dg-prod4"><strong>Definir se são 10 ou 12 produtos</strong> no cardápio.<span class="por">Dez fechados mais duas sugestões: Cookie Gateau e a bolacha que o Fred chama de piscininha. O roteiro e a folha dos nomes precisam saber antes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod5" data-g="prod"><label for="dg-prod5"><strong>Ter o preço de cada produto na mão de quem apresenta.</strong><span class="por">&ldquo;Quanto custa&rdquo; vem sempre. O preço sai do CMV, que está sendo levantado no laboratório do Sistema-HC. Se não estiver pronto, a frase é &ldquo;esse ainda está fechando preço, eu te mando&rdquo; — preço improvisado na frente de dez criadores vira preço publicado.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod6" data-g="prod"><label for="dg-prod6"><strong>Calcular o insumo em dobro</strong> dos produtos de foto.<span class="por">Cada produto aparece duas vezes: um montado pra câmera e um em micro-porção pra provar. É custo de campanha, não desperdício — e se não estiver previsto, no dia alguém serve o prato da foto e o bloco de filmagem acaba sem produto.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-conv" hidden><span class="ptit">Convidados e convite</span>
+        <span class="psub">dez convidados é mais trabalho de produção do que parece</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-conv1" data-g="conv"><label for="dg-conv1"><span class="prazo ja">Paulínia tem 4</span><strong>Levantar os 10 nomes da cidade escolhida.</strong><span class="por">A régua aqui é diferente da do Sorvete de Graça: <em>formato antes de tamanho</em> — faz comida com o próprio rosto, publica em sequência, e só então views por seguidor. Em Paulínia, 4 já têm número real e os outros 7 perfis que já marcaram a loja são o primeiro lugar pra procurar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv2" data-g="conv"><label for="dg-conv2"><strong>Incluir os 4 criadores do Sorvete de Graça entre os 10.</strong><span class="por">Mesma pessoa, duas campanhas: relação mais barata, e quem provou o cardápio divulga o buzinaço sabendo do que fala.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv3" data-g="conv"><label for="dg-conv3"><strong>Escrever o convite</strong>, com a contrapartida dentro.<span class="por">Sete itens obrigatórios e um rascunho de texto estão na aba Os 10 convidados. O maior ativo do convite é &ldquo;a loja vai fechar só pra vocês&rdquo; — não pode ficar implícito.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv4" data-g="conv"><label for="dg-conv4"><strong>Convidar quinze pra ter dez</strong>, um por um.<span class="por">Nunca em lista de transmissão — convite em grupo deixa de ser seleção. Com pelo menos uma semana de antecedência, e com prazo de resposta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv5" data-g="conv"><label for="dg-conv5"><strong>Perguntar disponibilidade antes de fixar a hora.</strong><span class="por">Criador de comida trabalha à noite e no fim de semana. Se a hora mais barata pra loja derrubar o aceite de 10 pra 5, ela saiu caro.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv6" data-g="conv"><label for="dg-conv6"><strong>Mandar endereço e ponto de referência</strong> na confirmação.<span class="por">Em Piracicaba isso é crítico: a loja não tem ficha no Google Maps, então quem procura não acha — e isso derruba presença.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv7" data-g="conv"><label for="dg-conv7"><span class="prazo antes">dia anterior</span><strong>Lembrete no dia anterior.</strong><span class="por">O item mais barato da lista e o que mais muda a presença — quem confirmou na segunda esquece na quinta.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-rot" hidden><span class="ptit">Roteiro e apresentação</span>
+        <span class="psub">o roteiro escrito é o que tira a campanha da dependência de uma pessoa</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-rot1" data-g="rot"><label for="dg-rot1"><span class="prazo ja">destrava o resto</span><strong>Escrever o roteiro: duas ou três frases por produto.</strong><span class="por">Trinta minutos divididos por dez ou doze produtos dá menos de três minutos cada. Com roteiro, um apresentador médio vai bem; sem roteiro, um bom estoura o tempo e a hora acaba na metade do cardápio.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot2" data-g="rot"><label for="dg-rot2"><strong>Pegar a história de criação de cada produto com o Yuri.</strong><span class="por">Meia hora de conversa, duas frases por produto, anotadas. É o conteúdo que mais ninguém tem — e se o apresentador não for ele, é o que falta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot3" data-g="rot"><label for="dg-rot3"><strong>Definir a ordem por blocos.</strong><span class="por">Gelado leve → herói em porção cheia → pausa com água e café → gelado denso em micro-porção → quente por último. O quente fecha porque sai do forno na hora, reacorda o paladar, e a panelinha montada ao vivo é o melhor plano de vídeo do cardápio.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot4" data-g="rot"><label for="dg-rot4"><strong>Reservar os 20 minutos de filmagem no roteiro.</strong><span class="por">É o bloco mais importante e o que mais se esquece. Sem ele, eles filmam durante a apresentação — ninguém ouve e o vídeo sai com voz por cima. Os dois resultados pioram juntos e ninguém percebe a causa.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot5" data-g="rot"><label for="dg-rot5"><strong>Escrever a frase de diferença de cada produto do bloco denso.</strong><span class="por">São seis itens que se parecem — cookie e sorvete em combinações diferentes. Se o criador não levar a diferença, ele posta &ldquo;tem vários cookies com sorvete&rdquo;, que é o resumo que destrói o trabalho de seis produtos.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot6" data-g="rot"><label for="dg-rot6"><strong>Ensaiar uma vez</strong>, com o tempo cronometrado.<span class="por">Obrigatório se quem apresenta for a líder da loja. Útil em qualquer caso: é como se descobre que a apresentação dura 50 minutos e não 30.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot7" data-g="rot"><label for="dg-rot7"><strong>Combinar quem monta ao vivo</strong>, se for a opção da dupla.<span class="por">Alguém da cozinha daquela loja, que já faz o produto todo dia. Não precisa apresentar — precisa montar bonito e deixar filmar.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-kit" hidden><span class="ptit">Kit e peças</span>
+        <span class="psub">o conteúdo é escrito depois, em casa — o kit é o que impede o erro</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-kit1" data-g="kit"><label for="dg-kit1"><span class="prazo ja">melhor retorno do kit</span><strong>Fazer a folha com o nome correto de cada produto.</strong><span class="por">Na ordem da apresentação, com uma linha explicando cada um. Doze nomes específicos não se decoram numa hora, e nome errado no post é irreversível: o público aprende o nome errado.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit2" data-g="kit"><label for="dg-kit2"><strong>Marcar na folha o que já está à venda</strong> e o que entra depois.<span class="por">Post de produto que a loja ainda não vende gera cliente procurando algo que não existe — pior que não ter o post.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit3" data-g="kit"><label for="dg-kit3"><strong>Pôr a @ da loja da cidade no kit, escrita.</strong><span class="por">São três perfis diferentes. Marcar o perfil errado entrega o post pra audiência errada e não tem correção depois de publicado. Junto: endereço, pra entrar na legenda — conteúdo gravado em loja fechada não mostra onde é.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit4" data-g="kit"><label for="dg-kit4"><strong>Pôr o pedido por escrito no kit.</strong><span class="por">O mesmo do convite, repetido com data. Ninguém guarda uma combinação feita por mensagem três semanas antes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit5" data-g="kit"><label for="dg-kit5"><strong>Incluir o panfleto do cardápio com QR.</strong><span class="por">A mesma peça do Sorvete de Graça, custo marginal zero. Pro criador ela é o link que ele manda pra quem perguntar nos comentários — é o que faz o post converter em vez de só elogiar. <em>Depende do cardápio online existir.</em></span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit6" data-g="kit"><label for="dg-kit6"><strong>Escolher o produto pra levar</strong>, se houver.<span class="por">O motivo não é agradar: é gerar um segundo conteúdo em outro dia, de graça. Escolher o que <em>aguenta transporte</em> — nove dos dez itens dependem de frio, então sobram a torta e os de forno. Produto que derrete no caminho vira conteúdo ruim com a marca marcada.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-loj" hidden><span class="ptit">Loja e logística</span>
+        <span class="psub">o que está em exposição não é só o produto, é a loja</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-loj1" data-g="loj"><label for="dg-loj1"><strong>Puxar a venda por hora da loja</strong> pra escolher a hora de fechar.<span class="por">O dado existe no Sistema-HC. É o que transforma &ldquo;qual hora fechar&rdquo; de opinião em conta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj2" data-g="loj"><label for="dg-loj2"><strong>Avisar que a loja fecha</strong> — no perfil, na porta e no WhatsApp.<span class="por">Cliente que chega e encontra fechado sem aviso é o custo invisível do evento. E a resposta automática do WhatsApp precisa cobrir aquela hora.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj3" data-g="loj"><label for="dg-loj3"><strong>Definir onde fica a mesa dos produtos</strong>, pensando na luz.<span class="por">Loja fechada à tarde ou à noite tem luz diferente da luz de cliente. Vale olhar antes — é o que decide se dez pessoas filmam bem ou mal.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj4" data-g="loj"><label for="dg-loj4"><strong>Garantir que a marca entre no quadro.</strong><span class="por">Um fundo, uma parede, o letreiro. Conteúdo gravado numa loja vazia sem marca visível não leva ninguém a lugar nenhum.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj5" data-g="loj"><label for="dg-loj5"><strong>Reservar espaço de freezer pro dia.</strong><span class="por">O bloco denso é todo congelado, e cada produto em dobro (foto + prova). Já está aberto no projeto do cardápio se o freezer das lojas comporta o volume normal — o evento chega em cima disso.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj6" data-g="loj"><label for="dg-loj6"><strong>Prever o forno pro bloco quente.</strong><span class="por">Panelinha e torta quente assam na hora e prendem o forno do cookie. Com a loja fechada é tranquilo, mas tem que estar no procedimento.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj7" data-g="loj"><label for="dg-loj7"><strong>Água e café prontos pra pausa.</strong><span class="por">Custa quase nada e é o que recupera o paladar. Sem isso, o bloco 3 é avaliado pelo que sobrou do bloco 2.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj8" data-g="loj"><label for="dg-loj8"><strong>Definir quem da equipe fica</strong> na cozinha e no salão.<span class="por">Quem monta na cozinha naquele turno tem que ser quem sabe montar. E alguém disponível pra montar um produto na hora, se alguém quiser filmar a montagem.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dia" hidden><span class="ptit">No dia</span>
+        <span class="psub">a hora, do primeiro que chega ao último que sai</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-dia1" data-g="dia"><label for="dg-dia1"><span class="prazo dia">antes</span><strong>Montar a mesa antes do primeiro chegar.</strong><span class="por">Dez pessoas chegam ao longo de quinze minutos. Quem chega primeiro precisa ter o que fotografar — senão esses minutos viram espera em vez de conteúdo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia2" data-g="dia"><label for="dg-dia2"><span class="prazo dia">na chegada</span><strong>Receber pelo nome</strong>, com a lista na mão.</label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia3" data-g="dia"><label for="dg-dia3"><span class="prazo dia">5 min</span><strong>Abertura curta.</strong><span class="por">Cinco minutos, não quinze. O erro clássico é a apresentação institucional longa na abertura: gasta a atenção no único momento em que todos estão prestando atenção. A história da marca entra dentro de cada produto.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia4" data-g="dia"><label for="dg-dia4"><span class="prazo dia">30 min</span><strong>Apresentar e servir, bloco por bloco.</strong><span class="por">Cada produto é provado no momento em que é apresentado, não todos no final.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia5" data-g="dia"><label for="dg-dia5"><span class="prazo dia">na pausa</span><strong>Fazer a pergunta de produto</strong>, se a degustação for teste.<span class="por">A pausa é quando as pessoas falam o que realmente acharam — não quando o apresentador pergunta na frente de todos. E alguém anotando.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia6" data-g="dia"><label for="dg-dia6"><span class="prazo dia">20 min</span><strong>Repor os produtos e abrir o bloco de filmagem.</strong><span class="por">Produtos inteiros, ninguém falando. O apresentador sai de cena e fica disponível — o impulso de continuar explicando enquanto eles gravam arruína o áudio de dez vídeos de uma vez.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia7" data-g="dia"><label for="dg-dia7"><span class="prazo dia">10 min</span><strong>Entregar o kit e dizer o pedido em voz alta.</strong><span class="por">&ldquo;Espero que vocês postem&rdquo; não é pedido. &ldquo;Stories hoje e um post até sexta, marcando @holycook.(cidade)&rdquo; é.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia8" data-g="dia"><label for="dg-dia8"><span class="prazo dia">durante</span><strong>A loja também grava.</strong><span class="por">A mesa montada, a apresentação, a montagem ao vivo, a mesa cheia de gente. Rende conteúdo da marca e rende o Destaque que serve pra convidar na próxima.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dep" hidden><span class="ptit">Depois</span>
+        <span class="psub">a hora na loja é a produção · o resultado é aqui</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-dep1" data-g="dep"><label for="dg-dep1"><span class="prazo dep">mesmo dia</span><strong>Agradecer individualmente.</strong><span class="por">É o que faz o segundo convite ser aceito — e o segundo convite é o do cardápio de Natal, que vem logo depois e hoje não existe no papel.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep2" data-g="dep"><label for="dg-dep2"><span class="prazo dep">na hora</span><strong>Repostar tudo que sair.</strong><span class="por">Vale como conteúdo da loja e sinaliza a quem ainda não postou que os outros postaram — funciona melhor que qualquer mensagem de cobrança.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep3" data-g="dep"><label for="dg-dep3"><strong>Anotar quem postou e quem não postou.</strong><span class="por">Sem cobrar. A consequência é a lista da próxima campanha — quem postou entra na do Natal, quem não postou não. Isso é suficiente.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep4" data-g="dep"><label for="dg-dep4"><span class="prazo dep">na semana</span><strong>Reunir o que eles disseram dos produtos</strong> e levar pro projeto do cardápio.<span class="por">É o ganho de pesquisa — dez pessoas que vivem de comida avaliando antes do público. Se ninguém escrever, se perde em uma semana.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep5" data-g="dep"><label for="dg-dep5"><strong>Montar um Destaque no perfil</strong> com o melhor material.<span class="por">É a prova social que fica, e é o que se mostra pra convidar da próxima vez.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep6" data-g="dep"><label for="dg-dep6"><strong>Contar o que saiu:</strong> quantos postaram, quantos stories, quantos posts, alcance somado.<span class="por">É o número que diz se permuta funcionou — e que decide o arranjo de contrapartida da próxima.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep7" data-g="dep"><label for="dg-dep7"><strong>Escrever o que o evento ensinou</strong>, pra repetir nas outras cidades.<span class="por">Quanto tempo a apresentação durou de verdade, quantos produtos deu pra servir, o que saturou, quem apareceu. É o que transforma o piloto em formato — e é a parte que sempre se perde.</span></label></div>
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Página do projeto <strong>Menu Degustação — cardápio de verão com influenciadores</strong> · Holy Cook Campinas,
+  Paulínia e Piracicaba · montada em 02/10/2026.<br>
+  Produtos, perguntas abertas, fichas técnicas e prazos vêm do projeto
+  <a href="https://fredpetrutche.github.io/holy-cook-reunioes/cardapio-verao/" target="_blank" rel="noopener">Cardápio de Verão</a>;
+  o preço de cada produto sai do <a href="https://fechamento-caixa-nu.vercel.app/cmv/laboratorio" target="_blank" rel="noopener">laboratório de CMV</a>
+  do Sistema-HC. Números de perfil de Paulínia e Campinas puxados da API do Instagram em 03/09/2026, mediana dos
+  últimos 24 posts. O critério de estabilidade de produto e ambiente vem do projeto
+  <a href="../../experiencia-holy-cookie/">Experiência Holy Cookie</a>.<br>
+  A campanha de rua é outra: <a href="../sorvete-de-graca/">Sorvete de Graça</a> — e a ordem recomendada é
+  <strong>degustação primeiro, buzinaço depois</strong>.<br>
+  Esta página nomeia perfis reais — por isso vai com <code>noindex</code> e não deve ser divulgada fora da equipe.
+</footer>
+
+</div>
+
+<script>
+  var ABAS = ['briefing','evento','apresentador','convidados','roteiro','kit','contrapartida','checklist'];
+
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome;
+    else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({top:0}); });
+  });
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos do tipo href="#roteiro" trocam de aba, nao so o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
+
+  // ── checklist: marcação persistida neste navegador (localStorage), com contador por grupo
+  (function () {
+    var caixas = document.querySelectorAll('.chk-item input[type="checkbox"]');
+    if (!caixas.length) return;
+    var CHAVE = 'hc-degustacao-influenciadores-checklist';
+
+    function ler() {
+      try { return JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) { return {}; }
+    }
+    function gravar(estado) {
+      try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) { /* modo privado */ }
+    }
+    function contar() {
+      var porGrupo = {}, feitosTotal = 0;
+      caixas.forEach(function (c) {
+        var g = c.dataset.g;
+        porGrupo[g] = porGrupo[g] || { feitos: 0, total: 0 };
+        porGrupo[g].total++;
+        if (c.checked) { porGrupo[g].feitos++; feitosTotal++; }
+      });
+      document.querySelectorAll('.contagem[data-conta]').forEach(function (el) {
+        var d = porGrupo[el.dataset.conta];
+        if (!d) return;
+        el.textContent = d.feitos + '/' + d.total;
+        el.classList.toggle('full', d.feitos === d.total);
+      });
+      var tot = document.getElementById('chk-total');
+      if (tot) tot.textContent = feitosTotal + ' / ' + caixas.length;
+    }
+
+    var estado = ler();
+    caixas.forEach(function (c) {
+      c.checked = !!estado[c.id];
+      c.addEventListener('change', function () {
+        var e = ler();
+        if (c.checked) e[c.id] = 1; else delete e[c.id];
+        gravar(e);
+        contar();
+      });
+    });
+    contar();
+  })();
+
+  // ── cards e caixinhas: escopo pelo .bloco mais próximo, para o padrão poder aninhar sem colidir
+  document.addEventListener('click', function (e) {
+    var bt = e.target.closest('.card-btn[data-alvo], .passo-caixa[data-alvo]');
+    if (!bt) return;
+    var bloco = bt.closest('.bloco');
+    if (!bloco) return;
+    var alvo = bt.dataset.alvo;
+    var jaAtivo = bt.classList.contains('ativo');
+    bloco.querySelectorAll(':scope > .grade > [data-alvo], :scope > .fluxo > [data-alvo]').forEach(function (b) {
+      b.classList.toggle('ativo', b === bt && !jaAtivo);
+    });
+    bloco.querySelectorAll(':scope > .visor > .painel[data-alvo]').forEach(function (p) {
+      p.hidden = jaAtivo || p.dataset.alvo !== alvo;
+    });
+  });
+</script>
+</body>
+</html>
