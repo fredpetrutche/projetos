@@ -167,7 +167,7 @@ document.querySelectorAll("[data-carrossel]").forEach(trilho => {
       b.type = "button";
       b.setAttribute("aria-label", `Foto ${i + 1} de ${vivos.length}`);
       b.setAttribute("aria-current", String(i === 0));
-      b.addEventListener("click", () => trilho.scrollTo({ left: trilho.clientWidth * i }));
+      b.addEventListener("click", () => { parar(); trilho.scrollTo({ left: trilho.clientWidth * i }); });
       bolinhas.append(b);
     });
   }
@@ -177,7 +177,50 @@ document.querySelectorAll("[data-carrossel]").forEach(trilho => {
     [...bolinhas.children].forEach((b, j) => b.setAttribute("aria-current", String(j === i)));
   }, { passive: true });
 
+  /* ── Giro automático, de 3 em 3 segundos ──────────────────────────────
+     Para de vez assim que a pessoa encosta: ela escolheu uma foto, e um
+     carrossel que continua puxando depois disso atrapalha quem está
+     preenchendo o cadastro logo abaixo. */
+  let relogio = null;
+  let tocado = false;   // uma vez que a pessoa encosta, não volta a girar
+
+  function proxima() {
+    const quantas = trilho.querySelectorAll("img").length;
+    if (quantas < 2) return;
+    const atual = Math.round(trilho.scrollLeft / trilho.clientWidth);
+    trilho.scrollTo({ left: trilho.clientWidth * ((atual + 1) % quantas), behavior: "smooth" });
+  }
+
+  function pausar() {
+    clearInterval(relogio);
+    relogio = null;
+  }
+
+  function parar() {
+    tocado = true;
+    pausar();
+  }
+
+  function comecar() {
+    if (tocado || relogio) return;
+    // Quem pediu menos movimento no sistema não recebe carrossel girando.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (trilho.querySelectorAll("img").length < 2) return;
+    relogio = setInterval(proxima, 3000);
+  }
+
+  trilho.addEventListener("pointerdown", parar, { passive: true });
+  trilho.addEventListener("touchstart", parar, { passive: true });
+
+  // Aba escondida não precisa girar nada — mas voltar pra aba não ressuscita
+  // o giro de quem já encostou.
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pausar();
+    else comecar();
+  });
+
   montar();
+  comecar();
 });
 
 const API = "https://sistemahc.vercel.app/api/sorteio";
