@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
-<title>Sorteio dos Condomínios — Holy Cook</title>
-<meta name="description" content="A ação do evento de condomínios: cadastro por QR code, sorteio da torta e das 5 caixas misteriosas, e o voucher de cookie grátis disparado depois.">
+<title>Sorteio dos Síndicos — Holy Cook</title>
+<meta name="description" content="A ação do evento de síndicos: cadastro por QR code, sorteio da torta e das 5 caixas misteriosas, e o voucher de cookie grátis disparado depois.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
 <style>
   :root {
@@ -45,6 +45,9 @@
   .abas button { font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; padding: .6rem .9rem; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; color: var(--ink-faint); cursor: pointer; white-space: nowrap; font-weight: 600; }
   .abas button[aria-selected="true"] { color: var(--marca); border-bottom-color: var(--marca); }
   .painel { display: flex; flex-direction: column; gap: 1.5rem; }
+  /* Dentro das abas as seções eram filhas do .painel e herdavam o gap;
+     as duas que subiram pro topo (navegação e QR) precisam do seu. */
+  section { display: flex; flex-direction: column; gap: 1rem; }
   .painel[hidden] { display: none; }
 
   h2 { font-family: var(--mono); font-size: .76rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 700; padding-bottom: .5rem; border-bottom: 2px solid var(--ink); }
@@ -106,11 +109,55 @@
 
   <header>
     <div class="marca">Holy Cook &middot; Piracicaba</div>
-    <h1>Sorteio dos Condomínios</h1>
+    <h1>Sorteio dos Síndicos</h1>
     <p class="lede">Captação de leads no evento de condomínios: a pessoa se cadastra pelo QR code,
     recebe o número do sorteio no WhatsApp, e dias depois recebe um voucher de cookie grátis para
     aparecer na loja.</p>
   </header>
+
+  <section class="navegacao">
+    <h2>Abrir uma tela</h2>
+    <div class="grade-telas">
+      <a class="tela" href="cadastro/" style="--cor:#2F6B4A">
+        <span class="quando">no evento &middot; aberta ao público</span>
+        <span class="nome">Cadastro</span>
+        <span class="desc">A página que a pessoa abre no celular. Prêmios, formulário e o número dela na tela ao terminar.</span>
+        <span class="pe">cadastro/</span>
+      </a>
+      <a class="tela" href="sorteio/" style="--cor:#9C2B1B">
+        <span class="quando">no evento &middot; projetada</span>
+        <span class="nome">Rodar o sorteio</span>
+        <span class="desc">Conta quem está participando, roda a torta e as 5 caixas, e avisa cada ganhador no WhatsApp.</span>
+        <span class="pe">sorteio/</span>
+      </a>
+      <a class="tela" href="participantes/" style="--cor:#8A5C13">
+        <span class="quando">durante e depois</span>
+        <span class="nome">Cadastro de participantes</span>
+        <span class="desc">Todo mundo numa tabela. Edita qualquer campo, marca o voucher como utilizado e exporta para o Excel.</span>
+        <span class="pe">participantes/</span>
+      </a>
+      <a class="tela" href="bonus/" style="--cor:#146A7C">
+        <span class="quando">dias depois</span>
+        <span class="nome">Bônus surpresa</span>
+        <span class="desc">Dispara o voucher de cookie grátis para todo mundo, devagar, sem queimar o número da loja.</span>
+        <span class="pe">bonus/</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>O QR code do balcão</h2>
+    <div class="qr">
+      <img src="img/qr-cadastro.png" alt="QR code do cadastro" onerror="this.remove()">
+      <div class="txt">
+        <p class="prose">É este QR que vai no display do balcão e nos materiais do evento. Ele abre
+        direto a página de cadastro — sem login, sem app.</p>
+        <span class="url">fredpetrutche.github.io/projetos/acoes-de-loja/sorteio-condominios/cadastro/</span>
+        <p class="prose">Quem não quiser apontar a câmera consegue digitar o endereço, mas o QR é o
+        caminho de verdade: no balcão, com fila, ninguém digita isso.</p>
+      </div>
+    </div>
+  </section>
 
   <div class="strip">
     <div><span class="v">1 torta</span><span class="s">Kinder com Nutella, 700g</span></div>
@@ -121,7 +168,6 @@
 
   <div class="abas" role="tablist">
     <button role="tab" aria-selected="true" data-aba="briefing">Briefing</button>
-    <button role="tab" aria-selected="false" data-aba="telas">Telas</button>
     <button role="tab" aria-selected="false" data-aba="mensagens">Mensagens</button>
     <button role="tab" aria-selected="false" data-aba="operacao">Operação</button>
   </div>
@@ -164,52 +210,6 @@
     </section>
   </div>
 
-  <!-- ══ TELAS ═════════════════════════════════════════════════════ -->
-  <div class="painel" data-painel="telas" hidden>
-    <section>
-      <h2>As quatro telas</h2>
-      <div class="grade-telas">
-        <a class="tela" href="cadastro/" style="--cor:#2F6B4A">
-          <span class="quando">no evento &middot; aberta ao público</span>
-          <span class="nome">Cadastro</span>
-          <span class="desc">A página que a pessoa abre no celular. Prêmios, formulário e o número dela na tela ao terminar.</span>
-          <span class="pe">cadastro/</span>
-        </a>
-        <a class="tela" href="sorteio/" style="--cor:#9C2B1B">
-          <span class="quando">no evento &middot; projetada</span>
-          <span class="nome">Rodar o sorteio</span>
-          <span class="desc">Conta quem está participando, roda a torta e as 5 caixas, e avisa cada ganhador no WhatsApp.</span>
-          <span class="pe">sorteio/</span>
-        </a>
-        <a class="tela" href="participantes/" style="--cor:#8A5C13">
-          <span class="quando">durante e depois</span>
-          <span class="nome">Cadastro de participantes</span>
-          <span class="desc">Todo mundo numa tabela. Edita qualquer campo, marca o voucher como utilizado e exporta para o Excel.</span>
-          <span class="pe">participantes/</span>
-        </a>
-        <a class="tela" href="bonus/" style="--cor:#146A7C">
-          <span class="quando">dias depois</span>
-          <span class="nome">Bônus surpresa</span>
-          <span class="desc">Dispara o voucher de cookie grátis para todo mundo, devagar, sem queimar o número da loja.</span>
-          <span class="pe">bonus/</span>
-        </a>
-      </div>
-    </section>
-
-    <section>
-      <h2>O QR code do balcão</h2>
-      <div class="qr">
-        <img src="img/qr-cadastro.png" alt="QR code do cadastro" onerror="this.remove()">
-        <div class="txt">
-          <p class="prose">É este QR que vai no display do balcão e nos materiais do evento. Ele abre
-          direto a página de cadastro — sem login, sem app.</p>
-          <span class="url">fredpetrutche.github.io/projetos/acoes-de-loja/sorteio-condominios/cadastro/</span>
-          <p class="prose">Quem não quiser apontar a câmera consegue digitar o endereço, mas o QR é o
-          caminho de verdade: no balcão, com fila, ninguém digita isso.</p>
-        </div>
-      </div>
-    </section>
-  </div>
 
   <!-- ══ MENSAGENS ═════════════════════════════════════════════════ -->
   <div class="painel" data-painel="mensagens" hidden>

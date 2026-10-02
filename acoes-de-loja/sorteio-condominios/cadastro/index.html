@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
-<title>Sorteio dos Condomínios — Holy Cook</title>
+<title>Sorteio dos Síndicos — Holy Cook</title>
 <meta name="description" content="Participe do sorteio de uma Torta Kinder com Nutella e de 5 Caixas Misteriosas de cookies. Preencha o cadastro e receba o seu número no WhatsApp.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
 <style>
@@ -38,23 +38,24 @@
   h1 { font-size: clamp(1.7rem, 7vw, 2.3rem); line-height: 1.1; font-weight: 700; letter-spacing: -.02em; text-wrap: balance; }
   .lede { color: var(--ink-soft); text-wrap: balance; }
 
-  .premios { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
-  .premio { background: var(--surface); display: flex; flex-direction: column; }
+  .vitrine { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
   /* Carrossel: rolagem horizontal com encaixe. Arrasta no dedo, sem lib.
      Quadrado porque as fotos vêm em formatos diferentes (uma fatia deitada,
      uma torta de cima) — no quadrado as duas cortam bem. */
   .carrossel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .carrossel::-webkit-scrollbar { display: none; }
   .carrossel img { flex: 0 0 100%; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; scroll-snap-align: center; background: var(--surface-2); }
-  .premio > img { width: 100%; max-width: 19rem; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 1.1rem auto 0; border-radius: 5px; background: var(--surface-2); }
+
   .bolinhas { display: flex; justify-content: center; gap: .4rem; padding: .7rem 0 0; }
   .bolinhas[hidden] { display: none; }
   .bolinhas button { width: .5rem; height: .5rem; padding: 0; border: none; border-radius: 50%; background: var(--rule); cursor: pointer; }
   .bolinhas button[aria-current="true"] { background: var(--marca); }
-  .premio .corpo { padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
-  .premio .selo { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: var(--marca); color: var(--marca-ink); padding: .18rem .45rem; border-radius: 3px; align-self: flex-start; }
-  .premio .nome { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
-  .premio .desc { font-size: .9rem; color: var(--ink-soft); }
+  /* O que está em jogo, em duas linhas — a foto vende, estas linhas informam. */
+  .premios-linha { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border-top: 1px solid var(--rule); }
+  .premios-linha > div { background: var(--surface); padding: .8rem 1.1rem; display: flex; align-items: baseline; gap: .65rem; }
+  .premios-linha .q { font-family: var(--mono); font-size: .7rem; font-weight: 700; letter-spacing: .06em; background: var(--marca); color: var(--marca-ink); padding: .2rem .45rem; border-radius: 3px; flex: none; }
+  .premios-linha .n { font-size: .98rem; font-weight: 700; line-height: 1.3; }
+  .premios-linha .d { font-size: .85rem; color: var(--ink-soft); }
 
   form { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
   .tit-form { font-family: var(--mono); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
@@ -90,29 +91,20 @@
 
   <header>
     <div class="marca">Holy Cook &middot; Piracicaba</div>
-    <h1>Sorteio dos Condomínios</h1>
+    <h1>Sorteio dos Síndicos</h1>
     <p class="lede">Preencha o cadastro e concorra. O sorteio é hoje, aqui no evento.</p>
   </header>
 
-  <div class="premios">
-    <div class="premio">
-      <div class="carrossel" data-carrossel>
-        <img src="../img/torta.jpg" alt="Fatia da torta Kinder, com a Nutella escorrendo">
-        <img src="../img/torta-inteira.jpg" alt="A torta Kinder inteira, na embalagem da Holy Cook">
-      </div>
-      <div class="bolinhas" data-bolinhas></div>
-      <div class="corpo">
-        <div class="nome">Torta Kinder com Nutella</div>
-        <p class="desc">700g</p>
-      </div>
+  <div class="vitrine">
+    <div class="carrossel" data-carrossel>
+      <img src="../img/torta.jpg" alt="Pedaço da torta Kinder, com a Nutella escorrendo">
+      <img src="../img/torta-inteira.jpg" alt="A torta Kinder inteira, na embalagem da Holy Cook">
+      <img src="../img/caixa-misteriosa.jpg" alt="Cookies empilhados, recheados">
     </div>
-    <div class="premio">
-      <img src="../img/caixa-misteriosa.jpg" alt="Caixa Misteriosa com cookies" onerror="this.remove()">
-      <div class="corpo">
-        <span class="selo">5 ganhadores</span>
-        <div class="nome">Caixa Misteriosa</div>
-        <p class="desc">4 cookies em cada caixa, sabores surpresa.</p>
-      </div>
+    <div class="bolinhas" data-bolinhas></div>
+    <div class="premios-linha">
+      <div><span class="q">1</span><span><span class="n">Torta Kinder com Nutella</span><br><span class="d">700g</span></span></div>
+      <div><span class="q">5</span><span><span class="n">Caixas Misteriosas</span><br><span class="d">4 cookies em cada, sabores surpresa</span></span></div>
     </div>
   </div>
 
