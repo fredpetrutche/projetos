@@ -113,7 +113,7 @@
   </header>
 
   <div class="strip">
-    <div><span class="v">1 torta</span><span class="s">Kinder Completa</span></div>
+    <div><span class="v">1 torta</span><span class="s">Kinder com Nutella, 700g</span></div>
     <div><span class="v">5 caixas</span><span class="s">misteriosas, 4 cookies cada</span></div>
     <div><span class="v">1 voucher</span><span class="s">cookie grátis, para todos</span></div>
     <div><span class="v">18/10/2026</span><span class="s">validade do voucher</span></div>
@@ -234,7 +234,7 @@
     <section>
       <h2>Como rodar</h2>
       <div class="grade" id="gradeOp">
-        <button class="topico" data-op="o1"><span class="t">O token</span><span class="q">abre as telas de operação</span></button>
+        <button class="topico" data-op="o1"><span class="t">Os endereços</span><span class="q">as telas são abertas</span></button>
         <button class="topico" data-op="o2"><span class="t">No evento</span><span class="q">a ordem dos botões</span></button>
         <button class="topico" data-op="o3"><span class="t">O disparo do bônus</span><span class="q">por que é lento</span></button>
         <button class="topico" data-op="o4"><span class="t">Conferir no balcão</span><span class="q">quando o voucher chega</span></button>
@@ -293,7 +293,7 @@ const MSGS = {
     "Só pra confirmar: o seu número do sorteio é o *007*.\n\nResponde *sim* que eu valido ele pra você. 🍪",
     "Sai uma vez por mensagem não reconhecida, e só até ela confirmar. Depois de confirmada, o número para de responder a ela."],
   m4: ["Ganhou a torta", "no sorteio ao vivo",
-    "🎉 *PARABÉNS, MARIA!*\n\nO número *007* foi sorteado — você ganhou a *Torta Kinder Completa* (massa de cookie, Kinder e muita Nutella).\n\nVem retirar aqui no *balcão do evento*! 🍪",
+    "🎉 *PARABÉNS, MARIA!*\n\nO número *007* foi sorteado — você ganhou a *Torta Kinder com Nutella* de 700g.\n\nVem retirar aqui no *balcão do evento*! 🍪",
     "Vai junto a foto da torta."],
   m5: ["Ganhou a caixa", "no sorteio ao vivo",
     "🎉 *PARABÉNS, MARIA!*\n\nO número *007* foi sorteado — você ganhou uma *Caixa Misteriosa com 4 cookies*.\n\nVem retirar aqui no *balcão do evento*! 🍪",
@@ -322,10 +322,10 @@ document.querySelectorAll("[data-msg]").forEach(bt => {
 
 /* ── Operação ─────────────────────────────────────────────────────── */
 const OPS = {
-  o1: ["O token", [
-    "As telas de Sorteio, Participantes e Bônus pedem um token na primeira vez. Ele fica guardado no navegador — digita uma vez por aparelho e pronto.",
-    "O token existe porque essas telas mostram o WhatsApp de todo mundo e disparam mensagem. A tela de Cadastro é a única aberta, porque é a que o visitante usa.",
-    "O token está no Sistema-HC, na variável SORTEIO_ADMIN_TOKEN. Se vazar, é só trocar lá e pedir de novo nas telas.",
+  o1: ["Os endereços", [
+    "Nenhuma tela pede senha nem token: abriu o link, está dentro. É só colar o endereço no navegador do aparelho que vai usar.",
+    "O que isso significa, para ficar dito: quem tiver o endereço da tela de Participantes vê o WhatsApp de todos os cadastrados, e quem tiver o da tela de Bônus consegue disparar o lote de voucher pelo número da loja.",
+    "O que segura é o endereço não estar publicado. Não ponha os links das telas de operação em story, grupo ou material impresso — só o QR do cadastro é para circular.",
   ]],
   o2: ["No evento", [
     "1. Abra a tela de Rodar o sorteio no aparelho que vai ser projetado e confira o número de participantes.",

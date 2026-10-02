@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
 <title>Sorteio dos Condomínios — Holy Cook</title>
-<meta name="description" content="Participe do sorteio de uma Torta Kinder Completa e de 5 Caixas Misteriosas de cookies. Preencha o cadastro e receba o seu número no WhatsApp.">
+<meta name="description" content="Participe do sorteio de uma Torta Kinder com Nutella e de 5 Caixas Misteriosas de cookies. Preencha o cadastro e receba o seu número no WhatsApp.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%239C2B1B'/><g fill='white'><circle cx='50' cy='50' r='27'/><circle cx='40' cy='42' r='5' fill='%239C2B1B'/><circle cx='60' cy='48' r='4' fill='%239C2B1B'/><circle cx='47' cy='60' r='4.5' fill='%239C2B1B'/></g></svg>">
 <style>
   :root {
@@ -40,9 +40,17 @@
 
   .premios { display: flex; flex-direction: column; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
   .premio { background: var(--surface); display: flex; flex-direction: column; }
-  /* A foto é quadrada e vem em arquivo pequeno — exibir num tamanho contido
-     evita o borrão que apareceria numa faixa larga esticada. */
-  .premio img { width: 100%; max-width: 19rem; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 1.1rem auto 0; border-radius: 5px; background: var(--surface-2); }
+  /* Carrossel: rolagem horizontal com encaixe. Arrasta no dedo, sem lib.
+     Quadrado porque as fotos vêm em formatos diferentes (uma fatia deitada,
+     uma torta de cima) — no quadrado as duas cortam bem. */
+  .carrossel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .carrossel::-webkit-scrollbar { display: none; }
+  .carrossel img { flex: 0 0 100%; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; scroll-snap-align: center; background: var(--surface-2); }
+  .premio > img { width: 100%; max-width: 19rem; aspect-ratio: 1 / 1; object-fit: cover; display: block; margin: 1.1rem auto 0; border-radius: 5px; background: var(--surface-2); }
+  .bolinhas { display: flex; justify-content: center; gap: .4rem; padding: .7rem 0 0; }
+  .bolinhas[hidden] { display: none; }
+  .bolinhas button { width: .5rem; height: .5rem; padding: 0; border: none; border-radius: 50%; background: var(--rule); cursor: pointer; }
+  .bolinhas button[aria-current="true"] { background: var(--marca); }
   .premio .corpo { padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .3rem; }
   .premio .selo { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: var(--marca); color: var(--marca-ink); padding: .18rem .45rem; border-radius: 3px; align-self: flex-start; }
   .premio .nome { font-size: 1.15rem; font-weight: 700; line-height: 1.2; }
@@ -88,10 +96,14 @@
 
   <div class="premios">
     <div class="premio">
-      <img src="../img/torta.jpg" alt="Torta Kinder Completa" onerror="this.remove()">
+      <div class="carrossel" data-carrossel>
+        <img src="../img/torta.jpg" alt="Fatia da torta Kinder, com a Nutella escorrendo">
+        <img src="../img/torta-inteira.jpg" alt="A torta Kinder inteira, na embalagem da Holy Cook">
+      </div>
+      <div class="bolinhas" data-bolinhas></div>
       <div class="corpo">
-        <span class="selo">1 ganhador</span>
-        <div class="nome">Torta Kinder Completa</div>
+        <div class="nome">Torta Kinder com Nutella</div>
+        <p class="desc">700g</p>
       </div>
     </div>
     <div class="premio">
@@ -148,6 +160,39 @@
 </div>
 
 <script>
+/* ── Carrossel ──────────────────────────────────────────────────────────
+   O arrasto é do próprio navegador (scroll-snap). O JS só desenha as
+   bolinhas e mantém a bolinha certa acesa. Sem foto, nada aparece. */
+document.querySelectorAll("[data-carrossel]").forEach(trilho => {
+  const bolinhas = trilho.parentElement.querySelector("[data-bolinhas]");
+  const fotos = [...trilho.querySelectorAll("img")];
+
+  // Foto que não carregou sai do carrossel, pra não virar slide em branco.
+  fotos.forEach(img => img.addEventListener("error", () => { img.remove(); montar(); }));
+
+  function montar() {
+    const vivos = [...trilho.querySelectorAll("img")];
+    bolinhas.innerHTML = "";
+    bolinhas.hidden = vivos.length < 2;
+    if (vivos.length < 2) return;
+    vivos.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", `Foto ${i + 1} de ${vivos.length}`);
+      b.setAttribute("aria-current", String(i === 0));
+      b.addEventListener("click", () => trilho.scrollTo({ left: trilho.clientWidth * i }));
+      bolinhas.append(b);
+    });
+  }
+
+  trilho.addEventListener("scroll", () => {
+    const i = Math.round(trilho.scrollLeft / trilho.clientWidth);
+    [...bolinhas.children].forEach((b, j) => b.setAttribute("aria-current", String(j === i)));
+  }, { passive: true });
+
+  montar();
+});
+
 const API = "https://sistemahc.vercel.app/api/sorteio";
 
 const form = document.getElementById("form");

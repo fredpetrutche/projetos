@@ -34,11 +34,6 @@
   h1 { font-size: clamp(1.5rem, 4.5vw, 2.1rem); font-weight: 700; letter-spacing: -.02em; }
   .lede { color: var(--ink-soft); }
 
-  .porta { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1.1rem; display: flex; flex-direction: column; gap: .7rem; }
-  .porta[hidden] { display: none; }
-  .porta p { font-size: .88rem; color: var(--ink-soft); }
-  .porta .linha { display: flex; gap: .5rem; flex-wrap: wrap; }
-  .porta input { flex: 1 1 14rem; font-family: var(--mono); font-size: .95rem; padding: .6rem .7rem; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper); color: var(--ink); }
 
   .placar { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
   .placar > div { background: var(--surface); padding: .9rem 1rem; display: flex; flex-direction: column; }
@@ -78,16 +73,7 @@
     <p class="lede">Todo mundo que participou do sorteio recebe um voucher de 1 cookie grátis na loja.</p>
   </header>
 
-  <div class="porta" id="porta">
-    <p>Esta tela dispara WhatsApp para todos os participantes. Cole o token de operação para abrir.</p>
-    <div class="linha">
-      <input id="campoToken" type="password" placeholder="token de operação" autocomplete="off">
-      <button class="acao vazado" id="btToken">Abrir</button>
-    </div>
-    <div class="recado ruim" id="erroToken" hidden></div>
-  </div>
-
-  <div id="tela" hidden>
+  <div id="tela">
     <div class="placar" style="margin-bottom:1.5rem">
       <div><span class="v" id="vTotal">—</span><span class="s">participantes</span></div>
       <div><span class="v ativo" id="vFila">—</span><span class="s">na fila agora</span></div>
@@ -130,18 +116,12 @@ Só chegar e apresentar este voucher no balcão.
 
 <script>
 const API = "https://sistemahc.vercel.app/api/sorteio";
-const CHAVE = "sorteio_token";
 
-let token = "";
 let relogio = null;
 
-try { token = localStorage.getItem(CHAVE) || ""; } catch { token = ""; }
-
-const porta  = document.getElementById("porta");
-const tela   = document.getElementById("tela");
 const recado = document.getElementById("recado");
 
-function cab() { return { "Content-Type": "application/json", "x-sorteio-token": token }; }
+function cab() { return { "Content-Type": "application/json" }; }
 
 function dizer(msg, tipo) {
   recado.textContent = msg;
@@ -151,7 +131,6 @@ function dizer(msg, tipo) {
 
 async function situacao() {
   const res = await fetch(`${API}/bonus`, { headers: cab() });
-  if (res.status === 401) throw new Error("token");
   const d = await res.json();
 
   document.getElementById("vTotal").textContent    = d.total;
@@ -209,30 +188,8 @@ document.getElementById("btParar").addEventListener("click", async () => {
   }
 });
 
-document.getElementById("btToken").addEventListener("click", async () => {
-  token = document.getElementById("campoToken").value.trim();
-  const erro = document.getElementById("erroToken");
-  erro.hidden = true;
-  if (!token) return;
-  try {
-    await situacao();
-    try { localStorage.setItem(CHAVE, token); } catch {}
-    porta.hidden = true;
-    tela.hidden = false;
-  } catch {
-    erro.textContent = "Token não aceito.";
-    erro.hidden = false;
-  }
-});
-document.getElementById("campoToken").addEventListener("keydown", e => {
-  if (e.key === "Enter") document.getElementById("btToken").click();
-});
 
-if (token) {
-  situacao()
-    .then(() => { porta.hidden = true; tela.hidden = false; })
-    .catch(() => { try { localStorage.removeItem(CHAVE); } catch {} token = ""; });
-}
+situacao().catch(() => {});
 </script>
 </body>
 </html>
