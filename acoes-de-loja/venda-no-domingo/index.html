@@ -1,0 +1,1707 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F1EFE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131109" media="(prefers-color-scheme: dark)">
+<title>Venda no domingo — abrir a loja no sétimo dia</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="A acao de abrir a loja no domingo nas tres lojas: Paulinia na fase de consolidar o faturamento, Campinas a organizar, Piracicaba a comecar. Equipe de domingo, banco de freelancers, checklist de treinamento e divulgacao.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232F6B4A'/><g stroke='white' stroke-width='7' stroke-linecap='round' fill='none'><circle cx='50' cy='46' r='15'/><path d='M50 16v8M50 68v8M20 46h8M72 46h8M28 24l6 6M66 62l6 6M72 24l-6 6M34 62l-6 6'/></g></svg>">
+<style>
+  :root {
+    --paper:#F1EFE9; --surface:#FFFDF8; --surface-2:#F7F4EC; --ink:#191712;
+    --ink-soft:#6B6459; --ink-faint:#96907F; --rule:#DBD5C7; --rule-soft:#E8E3D7;
+    --accent:#2F6B4A; --accent-ink:#FFFDF8; --good:#2F6B4A; --bad:#A32B1F; --warn:#8A5C13;
+    --good-bg:#E4EDE6; --bad-bg:#F5E3DF; --warn-bg:#F6EBD8; --accent-bg:#E2EBE5;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Cascadia Mono", "Consolas", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+      --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+      --accent:#7FC39A; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+      --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1C2A22;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#131109; --surface:#1C1913; --surface-2:#232018; --ink:#F0EDE3;
+    --ink-soft:#9E9788; --ink-faint:#6F6959; --rule:#35301F; --rule-soft:#2A2619;
+    --accent:#7FC39A; --accent-ink:#12100A; --good:#74BC92; --bad:#E4907F; --warn:#DBAE60;
+    --good-bg:#1B2A20; --bad-bg:#33201B; --warn-bg:#302516; --accent-bg:#1C2A22;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 15px;
+         line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem;
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  h1, h2, h3, h4, h5, .label, table, .tag { font-family: var(--mono); }
+
+  .voltar { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--ink-faint); text-decoration: none; display: inline-flex; align-items: center;
+            gap: .45rem; align-self: flex-start; margin-bottom: -1.25rem; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4;
+                stroke-linecap: round; stroke-linejoin: round; }
+
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--mono); font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase;
+             color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(1.5rem, 3.6vw, 2.15rem); line-height: 1.15; font-weight: 600;
+       letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--ink-soft); max-width: 62ch; }
+  .label { font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase; color: var(--ink-faint);
+           font-weight: 500; }
+
+  .tabs { display: flex; gap: .6rem; flex-wrap: wrap; }
+  .tab-btn { font-family: var(--mono); font-size: .9375rem; letter-spacing: .02em; font-weight: 700;
+             color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+             border-radius: 6px; cursor: pointer; padding: .65rem 1.15rem;
+             transition: border-color .15s, color .15s, background .15s; }
+  .tab-btn:hover { color: var(--ink); border-color: var(--ink-faint); }
+  .tab-btn.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+  .tab-panel { display: flex; flex-direction: column; gap: 2.25rem; }
+  .tab-panel[hidden] { display: none !important; }
+
+  section { display: flex; flex-direction: column; gap: 1rem; }
+  section[hidden] { display: none !important; }
+  h2 { font-size: .8125rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+       color: var(--ink); padding-bottom: .55rem; border-bottom: 2px solid var(--ink);
+       display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+  h2 .n { color: var(--accent); font-weight: 700; }
+  h2 .hint { margin-left: auto; font-size: .6875rem; letter-spacing: .06em; text-transform: none;
+             color: var(--ink-faint); font-weight: 400; }
+  h3.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+           color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.3rem; }
+  h4.sub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .11em; text-transform: uppercase;
+           color: var(--ink-faint); font-weight: 600; margin: .4rem 0 -.2rem; }
+  p { margin: 0; }
+  .prose { color: var(--ink-soft); max-width: 68ch; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose em { color: var(--ink); font-style: normal; font-weight: 600; }
+  .prose + .prose { margin-top: .6rem; }
+  .prose a, .painel a, .note-item a, .grupo-descricao a { color: var(--accent); text-decoration: none;
+                                      border-bottom: 1px solid currentColor; }
+
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1px;
+           background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .strip > div { background: var(--surface); padding: .85rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+  .strip .v { font-family: var(--mono); font-size: 1.2rem; font-weight: 600; font-variant-numeric: tabular-nums;
+              letter-spacing: -.02em; }
+  .strip .s { font-size: .75rem; color: var(--ink-faint); }
+
+  .fatores { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+             background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  @media (max-width: 44rem) { .fatores { grid-template-columns: 1fr; } }
+  .fatores > div { background: var(--surface); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .4rem; }
+  .fatores .n { font-family: var(--mono); font-size: .625rem; font-weight: 700; letter-spacing: .1em;
+                background: var(--accent); color: var(--accent-ink); padding: .12rem .42rem;
+                border-radius: 2px; align-self: flex-start; text-transform: uppercase; }
+  .fatores .n.vazio { background: var(--bad-bg); color: var(--bad); }
+  .fatores .n.meio { background: var(--warn-bg); color: var(--warn); }
+  .fatores .t { font-family: var(--mono); font-size: .9375rem; font-weight: 600; }
+  .fatores .d { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+  .fatores .q { font-family: var(--mono); font-size: .75rem; color: var(--ink-faint);
+                border-top: 1px dashed var(--rule); padding-top: .45rem; margin-top: auto; }
+
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .8125rem; min-width: 34rem; }
+  th, td { padding: .55rem .8rem; text-align: left; vertical-align: top; }
+  thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint);
+             font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
+  tbody td:first-child { color: var(--ink); font-weight: 600; }
+  tfoot td { border-top: 1px solid var(--ink-faint); font-weight: 700; color: var(--ink); }
+  td a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); white-space: nowrap; }
+  tr.bateu td.num.alvo { color: var(--good); font-weight: 700; }
+  tr.falhou td.num.alvo { color: var(--bad); font-weight: 700; }
+  td.alvo { color: var(--accent); font-weight: 700; }
+  .obs { color: var(--ink-faint); font-weight: 400; font-size: .6875rem; }
+  .nd { color: var(--ink-faint); font-weight: 400; }
+  .nota-tabela { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); }
+  code { font-family: var(--mono); font-size: .9em; background: var(--surface-2); color: var(--ink);
+         border: 1px solid var(--rule-soft); border-radius: 3px; padding: .05em .3em; }
+
+  .tag { font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700;
+         padding: .1rem .38rem; border-radius: 2px; white-space: nowrap; flex: none; font-family: var(--mono); }
+  .tag.p { background: var(--accent-bg); color: var(--accent); }
+  .tag.f { background: var(--good-bg); color: var(--good); }
+  .tag.t { background: var(--warn-bg); color: var(--warn); }
+  .tag.s { background: var(--surface-2); color: var(--ink-faint); }
+  .tag.acc { background: var(--accent); color: var(--accent-ink); }
+  .tag.warn { background: var(--warn-bg); color: var(--warn); }
+  .tag.good { background: var(--good-bg); color: var(--good); }
+  .tag.bad { background: var(--bad-bg); color: var(--bad); }
+  .tag.mudo { background: var(--surface-2); color: var(--ink-faint); }
+
+  .notes { display: flex; flex-direction: column; gap: .7rem; }
+  .note-item { display: grid; grid-template-columns: auto 1fr; gap: .75rem; align-items: start;
+               font-size: .875rem; color: var(--ink-soft); background: var(--surface);
+               border: 1px solid var(--rule); border-radius: 3px; padding: .8rem 1rem; }
+  .note-item strong { color: var(--ink); font-weight: 600; }
+  .note-item em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  ul.pontos { padding-left: 1.35rem; display: flex; flex-direction: column; gap: .4rem;
+              font-size: .875rem; color: var(--ink-soft); }
+  ul.pontos li::marker { color: var(--accent); }
+  ul.pontos strong { color: var(--ink); font-weight: 600; }
+  ul.pontos em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+  .checklist li { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+  .checklist label { display: flex; align-items: flex-start; gap: .6rem; padding: .55rem .75rem;
+                     font-size: .875rem; color: var(--ink-soft); cursor: pointer; }
+  .checklist input[type="checkbox"] { margin-top: .15rem; width: 1rem; height: 1rem; flex: 0 0 auto;
+                                      accent-color: var(--accent); cursor: pointer; }
+  .checklist li.marcado label { color: var(--ink-faint); text-decoration: line-through; }
+  .checklist strong { color: var(--ink); font-weight: 600; }
+
+  /* ── grade de cards, recursiva: .bloco > .grade > .card-btn + .visor > .painel ── */
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  .grade[hidden] { display: none !important; }
+  .card-btn { text-align: left; background: var(--surface); border: 1.5px solid var(--rule); border-radius: 5px;
+              cursor: pointer; padding: .8rem .9rem; display: flex; flex-direction: column; gap: .3rem;
+              font-family: var(--sans); color: var(--ink); transition: border-color .15s, background .15s; }
+  .card-btn:hover { border-color: var(--ink-faint); }
+  .card-btn.ativo { border-color: var(--accent); background: var(--accent-bg); }
+  .card-btn .cnome { font-family: var(--mono); font-size: .8125rem; font-weight: 700; line-height: 1.3; }
+  .card-btn .cmeta { font-size: .6875rem; color: var(--ink-faint); font-family: var(--mono); letter-spacing: .04em; }
+  .card-btn .cdesc { font-size: .75rem; color: var(--ink-soft); line-height: 1.45; }
+  .card-btn.loja .cnome { font-size: 1rem; }
+  .visor { display: flex; flex-direction: column; gap: 1rem; }
+  .visor[hidden] { display: none !important; }
+  .visor-vazio { font-size: .8125rem; color: var(--ink-faint); font-family: var(--mono); }
+  .painel { background: var(--surface); border: 1px solid var(--rule); border-radius: 5px; padding: 1.1rem 1.2rem;
+            display: flex; flex-direction: column; gap: .85rem; }
+  .painel[hidden] { display: none !important; }
+  .painel .ptit { font-family: var(--mono); font-size: .9375rem; font-weight: 700; color: var(--ink);
+                  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .painel .psub { font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+                  color: var(--accent); font-weight: 700; margin-top: -.6rem; }
+  /* preâmbulo fixo do nível acima — aparece junto com o painel, não disputa um clique */
+  .grupo-descricao { background: var(--surface-2); border: 1px solid var(--rule-soft); border-radius: 4px;
+                     padding: .75rem .9rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.55; }
+  .grupo-descricao strong { color: var(--ink); font-weight: 600; }
+  .grupo-descricao em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ficha — campos fixos, texto de contexto, não é grade de atividade */
+  .ficha { display: grid; grid-template-columns: 8.5rem 1fr; gap: .4rem .9rem; font-size: .8125rem; }
+  @media (max-width: 34rem) { .ficha { grid-template-columns: 1fr; gap: .15rem; }
+                              .ficha dt { margin-top: .5rem; } }
+  .ficha dt { font-family: var(--mono); font-size: .625rem; letter-spacing: .09em; text-transform: uppercase;
+              color: var(--ink-faint); font-weight: 600; padding-top: .15rem; }
+  .ficha dd { color: var(--ink-soft); line-height: 1.55; }
+  .ficha dd strong { color: var(--ink); font-weight: 600; }
+  .ficha dd em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── fluxo: caixinha → seta → caixinha ── */
+  .fluxo { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; }
+  .passo-caixa { font: inherit; font-family: var(--mono); font-size: .75rem; font-weight: 600;
+                 color: var(--ink-soft); background: var(--surface); border: 1.5px solid var(--rule);
+                 border-radius: 6px; padding: .5rem .7rem; cursor: pointer; text-align: left;
+                 max-width: 11rem; transition: border-color .15s, background .15s, color .15s; }
+  .passo-caixa:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .passo-caixa.ativo { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .seta { color: var(--ink-faint); font-weight: 700; flex: 0 0 auto; }
+  .passo-detalhe { display: none; background: var(--surface-2); border: 1px solid var(--rule);
+                   border-radius: 4px; padding: .85rem 1.05rem; font-size: .875rem; color: var(--ink-soft);
+                   margin-top: .6rem; line-height: 1.55; }
+  .passo-detalhe.aberto { display: block; }
+  .passo-detalhe strong { color: var(--ink); }
+  .passo-detalhe em { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ── barra de hora: onde a venda do domingo cai ── */
+  .horas { display: flex; flex-direction: column; gap: .3rem; font-size: .8125rem; }
+  .hora-linha { display: grid; grid-template-columns: 3rem 1fr 5.5rem; gap: .6rem; align-items: center; }
+  .hora-linha .hh { font-family: var(--mono); font-size: .75rem; color: var(--ink-faint); text-align: right; }
+  .hora-linha .bar { height: .7rem; background: var(--rule-soft); border-radius: 2px; overflow: hidden; }
+  .hora-linha .bar > span { display: block; height: 100%; background: var(--rule); border-radius: 2px; }
+  .hora-linha.pico .bar > span { background: var(--accent); }
+  .hora-linha .vv { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft);
+                    font-variant-numeric: tabular-nums; }
+  .hora-linha.pico .vv { color: var(--ink); font-weight: 700; }
+
+  footer { font-size: .75rem; color: var(--ink-faint); border-top: 1px solid var(--rule);
+           padding-top: 1rem; line-height: 1.6; }
+  footer a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Ações de loja</a>
+
+  <header>
+    <div class="eyebrow">Holy Cookie · ação de loja</div>
+    <h1>Venda no domingo</h1>
+    <p class="lede">Abrir a loja no sétimo dia. Começou em <strong>Paulínia</strong> e deu certo — duas vezes
+    o domingo passou de R$&nbsp;1.000 de venda de loja. Agora vai para <strong>Campinas</strong>, e depois
+    para <strong>Piracicaba</strong>. As três lojas estão em fases diferentes da mesma ação, e é por isso
+    que elas não recebem a mesma coisa.</p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+    <button class="tab-btn" data-tab="lojas" role="tab" aria-selected="false">As três lojas</button>
+    <button class="tab-btn" data-tab="equipe" role="tab" aria-selected="false">Equipe</button>
+    <button class="tab-btn" data-tab="divulgacao" role="tab" aria-selected="false">Divulgação</button>
+    <button class="tab-btn" data-tab="placar" role="tab" aria-selected="false">Placar</button>
+    <button class="tab-btn" data-tab="pendencias" role="tab" aria-selected="false">Pendências</button>
+  </div>
+
+<!-- ════════════════════════ ABA 1 · BRIEFING ════════════════════════ -->
+<div class="tab-panel" data-panel="briefing">
+
+  <section>
+    <div class="strip">
+      <div><span class="v">R$ 1.000</span><span class="s">a meta de um domingo, em venda de loja</span></div>
+      <div><span class="v">2 de 4</span><span class="s">domingos de Paulínia que bateram</span></div>
+      <div><span class="v">15h&ndash;17h</span><span class="s">onde cai 2/3 da venda do domingo</span></div>
+      <div><span class="v">3ª</span><span class="s">ação de frequência da área &mdash; o fator mais fraco</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">1</span> O que é a ação</h2>
+    <p class="prose">Abrir a loja no domingo. Não é campanha, não tem data de fim e não tem peça: é um
+    <strong>dia novo de operação</strong>. O custo é de mão de obra e o ganho é de faturamento de loja —
+    o canal de margem melhor.</p>
+    <p class="prose">A ação já existe na prática: <strong>Paulínia abre domingo há cerca de três semanas</strong>
+    e os números confirmam que funciona. O que esta página organiza é o que o Fred apontou como risco:
+    <em>o domingo depende de gente treinada estar lá, e de alguém ter avisado o cliente que a loja abre.</em>
+    Sem as duas coisas, um dia novo de operação é só um dia novo de custo.</p>
+
+    <h3 class="sub">O fator que ela move</h3>
+    <div class="fatores">
+      <div>
+        <span class="n">frequência</span>
+        <span class="t">É a terceira ação do fator</span>
+        <span class="d">O mesmo cliente ganha <strong>uma ocasião a mais por semana</strong> de voltar. No mapa
+        da área são <strong>12 ações de novos clientes contra 2 de frequência</strong> — e como os fatores se
+        multiplicam, a terceira ação de frequência rende mais que a décima terceira de novos clientes.</span>
+        <span class="q">o fator mais fraco é o que segura o resultado</span>
+      </div>
+      <div>
+        <span class="n meio">e é a única que não depende do cadastro</span>
+        <span class="t">As outras duas, sim</span>
+        <span class="d">A campanha de fidelização e a lista de transmissão <em>dependem do mesmo cadastro de
+        cliente</em> — sem base de contato, as duas param. O domingo não precisa de cadastro nenhum para
+        existir: <strong>precisa de porta aberta e de gente dentro.</strong></span>
+        <span class="q">é a ação de frequência que já está faturando</span>
+      </div>
+      <div>
+        <span class="n">ticket</span>
+        <span class="t">De brinde, e é alto</span>
+        <span class="d">O ticket do domingo em Paulínia é <strong>R$ 51,36</strong> — o maior de todos os dias
+        da semana (o sábado, segundo melhor, faz R$ 42,21). Domingo é <em>fluxo</em>: pouca gente, cesta grande.
+        Isso muda quem a divulgação tem que chamar.</span>
+        <span class="q">59 pedidos nos 3 domingos medidos</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> As três fases<span class="hint">clique numa caixinha</span></h2>
+    <p class="prose">A ação não é um interruptor: ela tem uma ordem, e cada loja está num ponto diferente dela.
+    <strong>A fase 3 é o nome que o Fred deu</strong> — &ldquo;consolidação do faturamento&rdquo;. As duas
+    primeiras são a leitura do que ele descreveu como pré-requisito, e valem conferir.</p>
+    <div class="fluxo">
+      <button class="passo-caixa" data-detalhe="<strong>Fase 1 — Montar.</strong> Antes de abrir, as quatro perguntas do Fred precisam ter resposta escrita: <em>quem é a equipe de domingo</em> (as mesmas pessoas sempre? quantas? se não, quem e em que calendário), <em>quem são os becaps</em> (o banco de freelancers), <em>em que atividades essas pessoas precisam ser treinadas</em> (o checklist de treinamento) e <em>se essas pessoas são boas</em>. Sem isso, o domingo depende de quem aparecer. É aqui que Campinas está.">1. Montar</button><span class="seta">&rarr;</span>
+      <button class="passo-caixa" data-detalhe="<strong>Fase 2 — Abrir e provar.</strong> A loja abre e o domingo tem que passar de <strong>R$ 1.000 de venda de loja</strong>. É um teste com número, não uma impressão: ou o domingo paga o dia, ou ele é um custo novo sem receita. Paulínia atravessou esta fase — bateu R$ 1.181 em 13/09 e R$ 1.203 em 20/09.">2. Abrir e provar</button><span class="seta">&rarr;</span>
+      <button class="passo-caixa" data-detalhe="<strong>Fase 3 — Consolidar o faturamento.</strong> Nome do Fred. O domingo passa de R$ 1.000 <em>sempre</em>, não uma vez — e às vezes sobe. As duas alavancas que ele nomeou para esta fase são <strong>divulgação de marketing</strong> e <strong>divulgação em loja</strong>. É onde Paulínia está, e é a fase que precisa de controle: dos 4 domingos, 2 ficaram abaixo da meta.">3. Consolidar</button>
+    </div>
+    <div class="passo-detalhe"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Onde cada loja está hoje</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Loja</th><th>Fase</th><th class="num">Domingo hoje</th><th>O que ela precisa agora</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Paulínia</td>
+          <td><span class="tag good">3 · consolidar</span></td>
+          <td class="num">R$ 1.181 · 1.203 · 646</td>
+          <td>Não parar de faturar. <strong>Divulgação de marketing e divulgação em loja</strong> — e o
+          controle semana a semana, porque os dois últimos domingos ficaram abaixo da meta.</td>
+        </tr>
+        <tr>
+          <td>Campinas</td>
+          <td><span class="tag warn">1 · montar</span></td>
+          <td class="num">R$ 307 <span class="obs">(média)</span></td>
+          <td>Organizar. <strong>Equipe de domingo, becaps, treinamento e divulgação antes de abrir</strong> —
+          é a loja onde o Fred disse que, sem boa divulgação, vai dar o mesmo problema.</td>
+        </tr>
+        <tr>
+          <td>Piracicaba</td>
+          <td><span class="tag mudo">0 · não começou</span></td>
+          <td class="num">R$ 386 <span class="obs">(1 domingo em 9)</span></td>
+          <td>Esperar. A equipe nova está em treinamento até 18/10 e a loja precisa de 133% de crescimento —
+          <strong>o domingo entra depois que a equipe estiver de pé</strong>, não antes.</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <p class="nota-tabela">Venda de loja (caixa + balcão + mesa), sem delivery. Fonte: Sistema&nbsp;HC, lido em 05/10/2026.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> O que o número já diz, e contraria a impressão</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag bad">a queda não começou com a chuva</span><span>
+        A leitura de hoje é &ldquo;Paulínia bateu R$ 1.000 e só caiu no domingo de chuva&rdquo;. O dado mostra
+        outra coisa: <strong>27/09 fez R$ 646</strong> — um terço abaixo da meta, <em>uma semana antes</em> do
+        domingo chuvoso. Foram <strong>duas quedas seguidas</strong>, não uma. A chuva explica o segundo
+        domingo fraco; ela não explica o primeiro.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o domingo não tem checklist nenhuma</span><span>
+        Os quatro checklists de loja (Abertura, Meio do Dia, Fechamento, Fechamento Delivery) estão
+        agendados para os sete dias da semana — mas o <code>store_horarios</code> das <strong>três
+        lojas</strong> ainda diz que <em>domingo a loja está fechada</em>, e o disparador pula qualquer
+        checklist de loja num dia marcado como fechado. Resultado medido: <strong>os domingos 20/09, 27/09 e
+        04/10 têm zero execuções de checklist, nas três lojas</strong>. Os três domingos da ação em Paulínia
+        rodaram sem abertura, sem meio do dia e sem fechamento conferidos.
+      </span></div>
+      <div class="note-item"><span class="tag bad">a folha não sabe quem abre o domingo</span><span>
+        No cadastro de colaboradores, <strong>Paulínia tem zero pessoas ativas</strong> — a Luciana, a Renata
+        e o Tiago não estão lá. E das 6 pessoas ativas nas três lojas, <strong>uma só tem domingo na escala</strong>:
+        a Nicole, em Campinas, com folga quinzenal de domingo. A pergunta &ldquo;quem é a equipe de
+        domingo?&rdquo; <em>hoje não tem resposta no sistema</em> — nem na loja que já abre.
+      </span></div>
+      <div class="note-item"><span class="tag acc">o teto do domingo é metade de um sábado</span><span>
+        O sábado de Paulínia faz <strong>R$ 2.284</strong> e 55 pedidos, em média, no mesmo mês. O melhor
+        domingo fez R$ 1.203 e 23 pedidos — <strong>53% do dinheiro e 42% dos pedidos</strong>. A meta de
+        R$ 1.000 não é um teto inventado: é mais ou menos onde um domingo bem divulgado chega, e o espaço
+        entre ele e o sábado é o que a fase 3 persegue.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Como esta página foi montada</h2>
+    <p class="prose">O que o Fred falou em <strong>05/10/2026</strong> está marcado como fala dele. O resto
+    dos números vem de duas fontes, e nenhuma delas é estimativa: o <strong>Sistema&nbsp;HC</strong>
+    (pedido a pedido, tabela de colaboradores, agendamento de checklist), lido em 05/10/2026, e a página
+    <a href="../../prioridades/">Prioridades</a>, que já tem a média por dia da semana e a meta de cada loja.</p>
+    <p class="prose">Onde a fala e o dado discordam, as duas versões estão na página — não escolhi uma.
+    As discordâncias estão na aba <strong>Pendências</strong>, como pergunta.</p>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 2 · AS TRÊS LOJAS ════════════════════════ -->
+<div class="tab-panel" data-panel="lojas" hidden>
+
+  <section>
+    <h2><span class="n">1</span> Cada loja na sua fase<span class="hint">clique numa loja, depois num item</span></h2>
+    <p class="prose">A mesma ação em três estados diferentes. Dar a mesma lista para as três é o jeito mais
+    rápido de atrasar a que está na frente e afobar a que não tem equipe.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn loja" data-alvo="pau"><span class="cnome">Paulínia</span><span class="cmeta">fase 3 · consolidar</span><span class="cdesc">Abre há ~3 semanas. Bateu R$ 1.000 duas vezes e caiu nas duas seguintes. Precisa de divulgação e controle.</span></button>
+        <button class="card-btn loja" data-alvo="cps"><span class="cnome">Campinas</span><span class="cmeta">fase 1 · montar</span><span class="cdesc">É a próxima. Nada da fase 1 está respondido: nem equipe, nem becaps, nem treinamento, nem divulgação.</span></button>
+        <button class="card-btn loja" data-alvo="pira"><span class="cnome">Piracicaba</span><span class="cmeta">fase 0 · não começou</span><span class="cdesc">Depois de Campinas. Equipe nova em treinamento até 18/10 — o domingo espera a equipe, não o contrário.</span></button>
+      </div>
+
+      <div class="visor">
+        <p class="visor-vazio">Clique numa loja para ver o que ela precisa agora.</p>
+
+        <!-- ───── PAULÍNIA ───── -->
+        <div class="painel" data-alvo="pau" hidden>
+          <span class="ptit">Paulínia <span class="tag good">fase 3</span> <span class="tag warn">2 domingos abaixo da meta</span></span>
+          <div class="grupo-descricao">
+            A loja que provou a ação. <strong>Luciana (líder) está tocando bem a loja</strong> — é o ponto
+            firme da operação hoje, e é o que permitiu abrir o domingo primeiro aqui.<br><br>
+            Os quatro domingos desde a abertura: <strong>R$ 1.181 (13/09) &middot; R$ 1.203 (20/09) &middot;
+            R$ 646 (27/09) &middot; ~R$ 800 (04/10, relato do Fred, chovendo)</strong>. Bateu duas, perdeu duas.
+            O Fred foi direto ao ponto: <em>&ldquo;eles precisam de controle&rdquo;</em>.<br><br>
+            <strong>O que esta loja NÃO precisa é de atenção de emergência.</strong> Ela cresceu 34% de agosto
+            para setembro, está a 92% da meta mensal no ritmo de setembro, e foi a loja que recebeu zero visita
+            do gerente na quinzena. O que ela precisa é não ser interrompida — e receber as duas peças da fase 3.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="pau1"><span class="cnome">1 · Divulgação de marketing do domingo</span><span class="cmeta">fase 3 · não existe ainda</span></button>
+              <button class="card-btn" data-alvo="pau2"><span class="cnome">2 · Divulgação em loja no domingo</span><span class="cmeta">fase 3 · não existe ainda</span></button>
+              <button class="card-btn" data-alvo="pau3"><span class="cnome">3 · O controle semana a semana</span><span class="cmeta">o que faltou pra ver a queda</span></button>
+              <button class="card-btn" data-alvo="pau4"><span class="cnome">4 · Registrar a equipe de domingo</span><span class="cmeta">a folha está vazia</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="pau1" hidden>
+                <span class="ptit">Divulgação de marketing do domingo</span>
+                <span class="psub">uma das duas alavancas que o Fred nomeou para a fase 3</span>
+                <p class="prose">Hoje o domingo de Paulínia <strong>não é divulgado</strong> — ele acontece.
+                Os dois domingos de R$ 1.200 vieram da novidade de a loja estar aberta; a queda das duas
+                semanas seguintes é o que acontece quando a novidade passa e não entra nada no lugar.</p>
+                <p class="prose">O detalhe que a divulgação tem que respeitar está no horário:
+                <strong>15h a 17h concentra 63% dos pedidos e 66% da venda</strong> do domingo. Então a
+                mensagem não pode chegar no domingo às 17h — ela tem que chegar <em>antes</em>: sábado ou
+                domingo cedo. Ver a aba <a href="#divulgacao">Divulgação</a>.</p>
+                <div class="note-item"><span class="tag bad">em aberto</span><span>
+                  Nenhuma mecânica foi decidida: <strong>se tem oferta ou não</strong>, qual canal, quem
+                  dispara e em que horário. Nada disso está definido, e nada entra no calendário da loja
+                  antes do Fred decidir.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="pau2" hidden>
+                <span class="ptit">Divulgação em loja no domingo</span>
+                <span class="psub">a segunda alavanca da fase 3</span>
+                <p class="prose">Fala com quem já entrou — e no domingo ela tem um alvo específico, porque o
+                domingo é o dia de <strong>maior ticket da semana (R$ 51,36)</strong>. Quem vem no domingo
+                já vem disposto a gastar mais: é o dia certo para a peça de balcão oferecer a torta, o
+                sorvete e a bebida, não o dia de desconto.</p>
+                <p class="prose">Tem uma segunda função, mais barata e mais imediata: <strong>avisar de
+                segunda a sábado que a loja abre domingo</strong>. Quem já é cliente não sabe. Uma peça no
+                balcão durante a semana divulga o domingo para o público que custa zero para alcançar.</p>
+                <div class="note-item"><span class="tag acc">a ação-mãe existe no cardápio</span><span>
+                  <strong>Divulgação em loja</strong> é uma ação própria da área, ainda trancada — display,
+                  cardápio, banner e cartaz. O domingo é um motivo concreto para ela sair do papel, com uma
+                  peça só.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="pau3" hidden>
+                <span class="ptit">O controle semana a semana</span>
+                <span class="psub">foi o que faltou para ver a queda de 27/09</span>
+                <p class="prose">A queda de 27/09 (R$ 646) passou batido: a leitura que chegou foi
+                &ldquo;bateu R$ 1.000, e caiu agora por chuva&rdquo;. <strong>Duas semanas se passaram antes
+                de alguém olhar o número do domingo.</strong> Num dia que custa mão de obra extra, duas
+                semanas de atraso é o intervalo entre perder dinheiro e saber que está perdendo.</p>
+                <ul class="checklist">
+                  <li><label><input type="checkbox" data-id="pau-controle-numero">O número do domingo é lido na <strong>segunda-feira</strong>, não no fim do mês</label></li>
+                  <li><label><input type="checkbox" data-id="pau-controle-motivo">Domingo abaixo de R$ 1.000 entra com <strong>motivo escrito</strong> — chuva, falta de gente, falta de produto</label></li>
+                  <li><label><input type="checkbox" data-id="pau-controle-dono">Definir <strong>quem</strong> faz essa leitura: líder de loja ou gerente</label></li>
+                </ul>
+                <div class="note-item"><span class="tag warn">por que o motivo importa</span><span>
+                  Sem motivo registrado, dois domingos fracos parecem a mesma coisa — e <em>chuva</em> e
+                  <em>faltou gente na loja</em> exigem decisões opostas. A página Prioridades já usa essa
+                  regra para falta de produto; aqui ela vale para o domingo.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="pau4" hidden>
+                <span class="ptit">Registrar a equipe de domingo</span>
+                <span class="psub">a loja que abre domingo tem zero pessoas no cadastro</span>
+                <p class="prose">No <code>colaboradores_rh</code> do Sistema&nbsp;HC, <strong>nenhum
+                colaborador de Paulínia está ativo</strong>. Os três nomes que tocam a loja hoje — Luciana
+                (líder), Renata e Tiago (a entrar) — não existem lá. Os registros de Paulínia que existem
+                (Talita, Ana Beatriz, Samara) estão todos encerrados.</p>
+                <p class="prose">A consequência prática: <strong>o relatório de ponto não sabe quem deveria
+                estar na loja no domingo</strong>, então não sabe cobrar. Não é burocracia — é a única
+                resposta automática que existe para a primeira pergunta do Fred.</p>
+                <div class="note-item"><span class="tag bad">não vou mexer sem aval</span><span>
+                  Cadastrar pessoa e mudar escala é alteração de banco. <strong>Fica como pendência para o
+                  Fred liberar item a item</strong> — ver a aba Pendências.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── CAMPINAS ───── -->
+        <div class="painel" data-alvo="cps" hidden>
+          <span class="ptit">Campinas <span class="tag warn">fase 1</span> <span class="tag bad">nada respondido</span></span>
+          <div class="grupo-descricao">
+            A próxima da fila, e a que o Fred já marcou como risco: <em>&ldquo;se não fizer uma boa
+            divulgação, vai dar o mesmo problema também&rdquo;</em>.<br><br>
+            <strong>O domingo de Campinas é o maior buraco da semana em qualquer das três lojas.</strong>
+            R$ 307 em média, 7 pedidos — contra R$ 1.274 na segunda, que já é o pior dia útil. O domingo
+            rende <em>um quarto do segundo pior dia</em>. Em setembro melhorou um pouco (R$ 410 em média,
+            4 domingos), mas continua longe.<br><br>
+            E é a loja onde o domingo <strong>vale mais em dinheiro</strong>: levar o domingo a R$ 1.000
+            são <strong>+R$ 3.001 por mês, 27% do buraco de R$ 11.260</strong> que a loja tem contra a meta —
+            sem campanha, sem desconto, sem trazer um rosto novo.<br><br>
+            O bloqueador de Campinas é conhecido e <em>não é salário, é jornada</em>: o mercado que disputa
+            a mesma gente (grandes supermercados, McDonald's, Burger King) oferece <strong>5x2 com o mesmo
+            salário</strong>, e o Holy Cookie oferece 6x1. Abrir domingo mexe exatamente nesse ponto — ver
+            Pendências.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="cps1"><span class="cnome">1 · Quem é a equipe de domingo</span><span class="cmeta">hoje: 1 pessoa, e é da noite</span></button>
+              <button class="card-btn" data-alvo="cps2"><span class="cnome">2 · O que o domingo de Campinas já vende</span><span class="cmeta">não é zero — e isso muda o plano</span></button>
+              <button class="card-btn" data-alvo="cps3"><span class="cnome">3 · Divulgação antes de abrir</span><span class="cmeta">o aviso do Fred</span></button>
+              <button class="card-btn" data-alvo="cps4"><span class="cnome">4 · O treinamento de domingo que já está marcado</span><span class="cmeta">cruza com Prioridades</span></button>
+              <button class="card-btn" data-alvo="cps5"><span class="cnome">5 · Os feriados que não existem no sistema</span><span class="cmeta">15/11 cai num domingo</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="cps1" hidden>
+                <span class="ptit">Quem é a equipe de domingo em Campinas</span>
+                <span class="psub">a resposta do sistema, lida em 05/10/2026</span>
+                <p class="prose">Campinas tem <strong>5 pessoas ativas</strong> no cadastro: Andreza (líder de
+                cozinha), Nicole (atendente noturna), Emanuely (atendente), Camilly Victoria (estagiária) e
+                Ana Cleia (atendente, entrou em 16/09).</p>
+                <p class="prose"><strong>Dessas cinco, uma só tem domingo na escala: a Nicole</strong> — e
+                com <em>folga de domingo quinzenal</em>, ou seja, ela trabalha um domingo e folga o seguinte.
+                Pela referência cadastrada (26/04/2026), ela <strong>folga em 11/10 e 25/10</strong> e
+                trabalha em 18/10 e 01/11.</p>
+                <p class="prose">E tem um detalhe que muda tudo: a Nicole é do <strong>turno da noite</strong>.
+                Pela regra do próprio sistema, o domingo de quem trabalha domingo usa a escala de segunda — e a
+                segunda dela é <strong>18:00 às 00:15</strong>. Ou seja: <em>a única pessoa escalada para
+                domingo em Campinas entra depois da janela de venda do domingo fechar.</em></p>
+                <div class="note-item"><span class="tag bad">o buraco, em uma frase</span><span>
+                  Dos seis turnos cadastrados, <strong>só os dois noturnos têm domingo</strong>
+                  (<code>lider_noite</code> e <code>colab_noite</code>). <code>colab_manha</code>,
+                  <code>lider_manha</code>, <code>forneiro</code> e <code>estagio</code> não têm domingo
+                  nenhum. <strong>O turno que vende o domingo não existe na escala</strong> — em nenhuma das
+                  três lojas.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="cps2" hidden>
+                <span class="ptit">O que o domingo de Campinas já vende</span>
+                <span class="psub">cuidado: não é uma loja fechada</span>
+                <p class="prose">O plano é &ldquo;começar em Campinas&rdquo;, mas <strong>o PDV registra venda
+                presencial em todos os domingos medidos</strong>: R$ 93 · 164 · 520 · 38 · 509 · 519 · 299 ·
+                314, de 02/08 a 27/09. E os pedidos saem espalhados de <strong>11h às 20h</strong>, o que é
+                comportamento de loja aberta, não de uma venda isolada.</p>
+                <p class="prose">Ao mesmo tempo, o <code>store_horarios</code> diz que Campinas
+                <strong>não abre no domingo</strong> (<code>loja_aberta: false</code>, atualizado em
+                01/07/2026) — mesmo tendo horário de 11h às 18h preenchido na linha.</p>
+                <div class="note-item"><span class="tag warn">a pergunta que isso abre</span><span>
+                  <strong>Campinas já abre domingo com pouco movimento, ou essas vendas são outra coisa?</strong>
+                  A resposta muda a ação inteira: se a loja já abre, Campinas não está na fase 1 por falta de
+                  porta aberta — está por falta de <em>equipe escalada e divulgação</em>, e o salto esperado é
+                  de R$ 307 para R$ 1.000, não de zero para R$ 1.000. Está na aba Pendências.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="cps3" hidden>
+                <span class="ptit">Divulgação antes de abrir</span>
+                <span class="psub">fala do Fred, 05/10/2026</span>
+                <p class="prose">O aviso foi explícito: <em>&ldquo;Campinas, se não fizer uma boa divulgação,
+                vai dar o mesmo problema também.&rdquo;</em> O problema a que ele se refere é o de Paulínia —
+                domingo abaixo de R$ 1.000.</p>
+                <p class="prose">A diferença de ordem importa. Em Paulínia a divulgação chega na fase 3, para
+                segurar um domingo que já vende. <strong>Em Campinas ela é pré-requisito da fase 1</strong>,
+                porque o ponto de partida é R$ 307 — não existe novidade de abertura para carregar as duas
+                primeiras semanas como carregou em Paulínia.</p>
+                <div class="note-item"><span class="tag acc">o que o número de Paulínia ensina para cá</span><span>
+                  Os dois domingos de R$ 1.200 de Paulínia foram <em>sem divulgação nenhuma</em> — foi a
+                  novidade. Quando ela passou, caiu para R$ 646. <strong>Em Campinas não há novidade para
+                  gastar</strong>, então o que em Paulínia foi a fase 3 aqui tem que estar pronto no primeiro
+                  domingo.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="cps4" hidden>
+                <span class="ptit">O treinamento de domingo que já está marcado</span>
+                <span class="psub">cruza com a página Prioridades, grupo Gasto de coordenação</span>
+                <p class="prose">Já existe um treinamento de domingo em Campinas no quadro de
+                <a href="../../prioridades/">Prioridades</a>: o Eduardo (gerente geral) vai treinar uma
+                funcionária nova, com custo de <strong>R$ 300 de diária mais R$ 100 de deslocamento</strong>.
+                O item que está lá é justamente <em>&ldquo;o treinamento de Campinas deste domingo sai com
+                gente da loja&rdquo;</em> — a regra é que <strong>quem forma é a loja, não o gerente</strong>.</p>
+                <p class="prose">Para esta ação isso é um presente de timing: <strong>o treinamento do domingo
+                de Campinas já tem data e já tem gente indo</strong>. O que falta é ele treinar
+                <em>o domingo</em>, com o checklist da aba Equipe, em vez de treinar genericamente.</p>
+                <div class="note-item"><span class="tag warn">o único valor de diária que existe escrito</span><span>
+                  R$ 300 + R$ 100 é a diária <strong>do gerente</strong>, não a de um freelancer. O valor da
+                  diária de becap <em>não existe em lugar nenhum</em> — é uma das pendências.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="cps5" hidden>
+                <span class="ptit">Os feriados que não existem no sistema</span>
+                <span class="psub">achado de banco, 05/10/2026</span>
+                <p class="prose">Paulínia e Piracicaba têm <strong>7 feriados cadastrados</strong> cada uma,
+                com horário especial de loja (13h às 18h). <strong>Campinas tem zero.</strong> Em dia de
+                feriado, portanto, Campinas cai na regra do dia da semana — e se for domingo, cai na regra de
+                loja fechada.</p>
+                <p class="prose">O feriado que importa aqui: <strong>15/11/2026 (Proclamação da República) cai
+                num domingo</strong>. Paulínia e Piracicaba têm esse domingo cadastrado como loja aberta;
+                Campinas não tem linha nenhuma. É um domingo de feriado — o tipo de dia que o domingo bem
+                divulgado aproveita melhor.</p>
+                <div class="note-item"><span class="tag bad">não vou cadastrar sem aval</span><span>
+                  São 7 linhas novas numa tabela do Sistema&nbsp;HC. <strong>Fica como pendência</strong>, não
+                  como coisa feita.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── PIRACICABA ───── -->
+        <div class="painel" data-alvo="pira" hidden>
+          <span class="ptit">Piracicaba <span class="tag mudo">fase 0</span> <span class="tag bad">equipe em prova</span></span>
+          <div class="grupo-descricao">
+            A terceira da fila, e a que tem o motivo mais forte para esperar.<br><br>
+            <strong>A loja trocou a equipe em outubro.</strong> A Rayane foi desligada e o Henrique saiu em
+            05/10. Entraram uma <strong>líder de loja nova</strong> (possível futura sócia operadora, em teste
+            de pelo menos 3 meses) e uma <strong>atendente nova</strong> — as duas treinam com o Eduardo de
+            05 a 18/10, com validação do atendimento no fim de semana de 17 a 19/10. <em>Os nomes das duas
+            ainda não estão confirmados</em>, e a saída da Alice do turno da noite deixou um lugar sem nome.<br><br>
+            <strong>A loja precisa de 133% de crescimento</strong> contra a meta (R$ 12.873 de R$ 30.000) —
+            o dobro das outras duas, que precisam de 23% e 25%. E caiu 12% de agosto para setembro.<br><br>
+            O domingo aqui vale <strong>+R$ 4.333 por mês se bater R$ 1.000</strong> (25% do buraco), mas é a
+            loja onde a fase 1 está mais longe de pronta: <em>a equipe de domingo não pode ser a mesma equipe
+            que ainda está sendo testada nos dias úteis.</em>
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="pira1"><span class="cnome">1 · O domingo que já aconteceu</span><span class="cmeta">20/09 · R$ 386 · ticket R$ 55</span></button>
+              <button class="card-btn" data-alvo="pira2"><span class="cnome">2 · O portão: a equipe nova precisa passar primeiro</span><span class="cmeta">18/10 é a data</span></button>
+              <button class="card-btn" data-alvo="pira3"><span class="cnome">3 · A contradição dos dois campos</span><span class="cmeta">funciona_domingo diz uma coisa, o horário diz outra</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="pira1" hidden>
+                <span class="ptit">O domingo que já aconteceu</span>
+                <span class="psub">único domingo com venda de loja em nove</span>
+                <p class="prose">Em 20/09, Piracicaba fez <strong>R$ 386 de venda de loja, com 7 pedidos e
+                ticket de R$ 55,14</strong> — o maior ticket de domingo das três lojas. Os pedidos saíram entre
+                14h e 17h, a mesma janela de Paulínia. Nos outros oito domingos medidos, a loja só teve
+                delivery.</p>
+                <p class="prose">Sete pedidos é pouco para concluir qualquer coisa. O que esse domingo diz,
+                e é útil: <strong>quem veio, veio na janela da tarde e gastou mais que a média</strong>.
+                Não contradiz nada do que Paulínia mostrou.</p>
+              </div>
+
+              <div class="painel" data-alvo="pira2" hidden>
+                <span class="ptit">O portão: a equipe nova precisa passar primeiro</span>
+                <span class="psub">18/10/2026 é a data que libera a conversa</span>
+                <p class="prose">A líder nova e a atendente nova estão em treinamento com o Eduardo
+                <strong>até 18/10</strong>, com validação do atendimento no fim de semana de 17 a 19/10.
+                Antes disso, a loja não tem equipe formada para escalar num dia a mais.</p>
+                <p class="prose">Tem um motivo além do óbvio: <strong>a líder nova está em teste de pelo menos
+                3 meses</strong> como possível sócia operadora. Pendurar um dia novo de operação em cima de
+                alguém que ainda está sendo avaliada mistura duas provas diferentes — e se o domingo der
+                errado, ninguém saberá dizer se o problema foi o domingo ou a pessoa.</p>
+                <ul class="checklist">
+                  <li><label><input type="checkbox" data-id="pira-portao-treino">Treinamento da equipe nova concluído (até 18/10)</label></li>
+                  <li><label><input type="checkbox" data-id="pira-portao-valida">Validação do atendimento no fim de semana de 17&ndash;19/10</label></li>
+                  <li><label><input type="checkbox" data-id="pira-portao-outubro">Outubro fechado &mdash; a primeira medição que diz se a troca virou venda</label></li>
+                  <li><label><input type="checkbox" data-id="pira-portao-noite">O lugar da Alice no turno da noite tem nome</label></li>
+                </ul>
+                <div class="note-item"><span class="tag warn">ordem, não pressa</span><span>
+                  Piracicaba é a loja que mais precisa de faturamento e a que menos pode receber um dia novo
+                  agora. <strong>O domingo não é a alavanca dela em outubro</strong> — a equipe é.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="pira3" hidden>
+                <span class="ptit">A contradição dos dois campos</span>
+                <span class="psub">achado de banco, 05/10/2026</span>
+                <p class="prose">O Sistema&nbsp;HC guarda a informação &ldquo;esta loja opera no
+                domingo?&rdquo; em <strong>dois lugares, e eles discordam</strong>:</p>
+                <div class="tablewrap"><table>
+                  <thead><tr><th>Loja</th><th><code>stores.funciona_domingo</code></th><th><code>store_horarios</code> · domingo</th><th>A realidade</th></tr></thead>
+                  <tbody>
+                    <tr><td>Piracicaba</td><td><span class="tag good">true</span></td><td><span class="tag bad">loja fechada</span></td><td>1 domingo com venda em 9</td></tr>
+                    <tr><td>Paulínia</td><td><span class="tag bad">false</span></td><td><span class="tag bad">loja fechada</span></td><td><strong>abre todo domingo há ~3 semanas</strong></td></tr>
+                    <tr><td>Campinas</td><td><span class="tag good">true</span></td><td><span class="tag bad">loja fechada</span></td><td>venda presencial em todos os domingos medidos</td></tr>
+                  </tbody>
+                </table></div>
+                <p class="prose">A loja que mais abre domingo é a única marcada como <code>false</code>. E o
+                campo que <em>importa de verdade</em> — o <code>store_horarios</code> — diz loja fechada nas
+                três, o que é o motivo de <strong>nenhum checklist de loja disparar no domingo</strong>.</p>
+                <div class="note-item"><span class="tag bad">não vou corrigir sem aval</span><span>
+                  São dois campos em duas tabelas, nas três lojas. Mexer neles <strong>liga os checklists de
+                  domingo</strong> — efeito real na operação, não cosmético. Está na aba Pendências, item a item.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 3 · EQUIPE ════════════════════════ -->
+<div class="tab-panel" data-panel="equipe" hidden>
+
+  <section>
+    <h2><span class="n">1</span> As quatro perguntas do Fred<span class="hint">clique num grupo, depois num item</span></h2>
+    <p class="prose">O Fred listou quatro coisas que precisam estar resolvidas antes do domingo virar rotina
+    em qualquer loja. Elas estão aqui na ordem em que ele falou, e cada uma abre o que o sistema já responde
+    e o que ainda não tem resposta.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="eq1"><span class="cnome">1 · Quem é a equipe de domingo</span><span class="cmeta">as mesmas pessoas? quantas? qual calendário?</span></button>
+        <button class="card-btn" data-alvo="eq2"><span class="cnome">2 · Os becaps</span><span class="cmeta">o banco de freelancers</span></button>
+        <button class="card-btn" data-alvo="eq3"><span class="cnome">3 · Checklist de treinamento</span><span class="cmeta">em que atividades treinar</span></button>
+        <button class="card-btn" data-alvo="eq4"><span class="cnome">4 · A pessoa é boa?</span><span class="cmeta">a régua, e quem aplica</span></button>
+      </div>
+
+      <div class="visor">
+        <p class="visor-vazio">Clique numa pergunta.</p>
+
+        <!-- ───── 1 · QUEM É A EQUIPE ───── -->
+        <div class="painel" data-alvo="eq1" hidden>
+          <span class="ptit">Quem é a equipe de domingo <span class="tag bad">sem resposta no sistema</span></span>
+          <div class="grupo-descricao">
+            A pergunta do Fred tem quatro partes, e é melhor não misturá-las: <strong>são as mesmas pessoas
+            sempre? quantas pessoas são? se não são as mesmas, quais são? e qual é o calendário de cada
+            uma?</strong><br><br>
+            A resposta curta do sistema, lido em 05/10/2026: <strong>dos 6 colaboradores ativos nas três
+            lojas, 1 tem domingo na escala</strong>. E a loja que abre domingo tem zero pessoas cadastradas.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="eq1a"><span class="cnome">O que a folha responde hoje</span><span class="cmeta">6 ativos · 1 com domingo</span></button>
+              <button class="card-btn" data-alvo="eq1b"><span class="cnome">O turno de domingo não existe</span><span class="cmeta">só os 2 noturnos têm domingo</span></button>
+              <button class="card-btn" data-alvo="eq1c"><span class="cnome">As 4 partes da pergunta</span><span class="cmeta">o que cada loja tem que escrever</span></button>
+              <button class="card-btn" data-alvo="eq1d"><span class="cnome">A jornada 6x1 e o domingo</span><span class="cmeta">por que isso não é detalhe</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="eq1a" hidden>
+                <span class="ptit">O que a folha responde hoje</span>
+                <span class="psub">colaboradores_rh · Sistema HC · lido em 05/10/2026</span>
+                <div class="tablewrap"><table>
+                  <thead><tr><th>Pessoa</th><th>Loja</th><th>Função</th><th>Turno</th><th>Domingo na escala?</th></tr></thead>
+                  <tbody>
+                    <tr><td>Nicole</td><td>Campinas</td><td>Atendente Noturna</td><td>Líder Noite</td><td><span class="tag warn">sim, quinzenal</span></td></tr>
+                    <tr><td>Andreza</td><td>Campinas</td><td>Líder de cozinha</td><td>Colab. Manhã</td><td><span class="tag mudo">não</span></td></tr>
+                    <tr><td>Emanuely</td><td>Campinas</td><td>Atendente</td><td>Colab. Manhã</td><td><span class="tag mudo">não</span></td></tr>
+                    <tr><td>Ana Cleia</td><td>Campinas</td><td>Atendente</td><td>Colab. Manhã</td><td><span class="tag mudo">não</span></td></tr>
+                    <tr><td>Camilly Victoria</td><td>Campinas</td><td>Estagiária</td><td>Estágio</td><td><span class="tag mudo">não</span></td></tr>
+                    <tr><td>Henrique</td><td>Piracicaba</td><td>Atendente</td><td>Colab. Manhã</td><td><span class="tag bad">cadastro atrasado &mdash; desligado em 05/10</span></td></tr>
+                    <tr><td colspan="4"><strong>Paulínia</strong> &mdash; a loja que abre domingo</td><td><span class="tag bad">zero pessoas ativas</span></td></tr>
+                  </tbody>
+                </table></div>
+                <div class="note-item"><span class="tag bad">a folha de Paulínia está vazia</span><span>
+                  Luciana (líder), Renata e Tiago <strong>não estão no cadastro</strong>. Os registros de
+                  Paulínia que existem — Talita, Ana Beatriz, Samara — estão todos encerrados. Então
+                  <em>a loja que já abre domingo é a que o sistema menos consegue descrever.</em>
+                </span></div>
+                <div class="note-item"><span class="tag warn">a folga quinzenal da Nicole</span><span>
+                  <code>folga_domingo: quinzenal</code>, referência 26/04/2026 — ela trabalha um domingo e
+                  folga o seguinte. Pela paridade: <strong>folga em 11/10 e 25/10</strong>, trabalha em 18/10
+                  e 01/11. É a resposta exata para &ldquo;qual é o calendário de cada&rdquo;, e vale para uma
+                  pessoa só nas três lojas.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq1b" hidden>
+                <span class="ptit">O turno de domingo não existe</span>
+                <span class="psub">turnos_rh · 6 turnos cadastrados</span>
+                <p class="prose">Dos seis turnos cadastrados, <strong>só dois têm domingo</strong> — e os dois
+                são noturnos:</p>
+                <div class="tablewrap"><table>
+                  <thead><tr><th>Turno</th><th>Domingo</th><th>Observação</th></tr></thead>
+                  <tbody>
+                    <tr><td>Líder Noite</td><td>11:30 &rarr; 22:30</td><td>único turno com domingo diurno na tabela</td></tr>
+                    <tr><td>Colaborador Noite</td><td>10:00 &rarr; 23:30</td><td>13,5 h &mdash; dia inteiro</td></tr>
+                    <tr><td>Colaborador Manhã</td><td><span class="tag bad">não tem</span></td><td>é o turno da maioria das pessoas</td></tr>
+                    <tr><td>Líder Manhã</td><td><span class="tag bad">não tem</span></td><td>&mdash;</td></tr>
+                    <tr><td>Forno</td><td><span class="tag bad">não tem</span></td><td>é quem assa o cookie</td></tr>
+                    <tr><td>Estágio</td><td><span class="tag bad">não tem</span></td><td>&mdash;</td></tr>
+                  </tbody>
+                </table></div>
+                <p class="prose">E tem a regra escondida: para quem trabalha domingo, o relatório de ponto
+                <strong>usa a escala de segunda como referência do domingo</strong>. A segunda da Nicole é
+                18:00 às 00:15 — então, para o sistema, <em>o domingo dela começa às 18h</em>, depois das 17h
+                em que a venda do domingo já acabou.</p>
+                <div class="note-item"><span class="tag bad">o que falta não é uma pessoa, é um turno</span><span>
+                  A venda do domingo acontece entre <strong>13h e 19h</strong>, com pico de 15h a 17h.
+                  <strong>Não existe turno cadastrado que cubra essa faixa num domingo.</strong> Antes de
+                  escalar alguém, o turno de domingo precisa existir — senão a pessoa é escalada num horário
+                  que o ponto não sabe conferir.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq1c" hidden>
+                <span class="ptit">As 4 partes da pergunta</span>
+                <span class="psub">o que cada loja tem que escrever, com nome e data</span>
+                <p class="prose">Essa é a parte que só a operação responde. O formato abaixo é o mínimo para a
+                resposta ser útil — &ldquo;a equipe de domingo é a equipe da loja&rdquo; não é resposta, porque
+                nenhuma pessoa pode trabalhar sete dias.</p>
+                <div class="tablewrap"><table>
+                  <thead><tr><th>Parte da pergunta</th><th>O que a resposta tem que conter</th><th>Paulínia</th><th>Campinas</th></tr></thead>
+                  <tbody>
+                    <tr><td>São as mesmas pessoas sempre?</td><td>Sim ou não, e <strong>por quê</strong> &mdash; equipe fixa, rodízio ou becap</td><td><span class="tag bad">em aberto</span></td><td><span class="tag bad">em aberto</span></td></tr>
+                    <tr><td>Quantas pessoas são?</td><td>Um número por domingo, separado por função (atendimento / forno)</td><td><span class="tag bad">em aberto</span></td><td><span class="tag bad">em aberto</span></td></tr>
+                    <tr><td>Se não são as mesmas, quais são?</td><td><strong>Lista de nomes</strong> de quem pode pegar domingo &mdash; não um cargo</td><td><span class="tag bad">em aberto</span></td><td><span class="tag bad">em aberto</span></td></tr>
+                    <tr><td>Qual o calendário de cada?</td><td>Que domingo cada nome pega, com <strong>data</strong>, como já existe para a Nicole</td><td><span class="tag bad">em aberto</span></td><td><span class="tag warn">só a Nicole</span></td></tr>
+                  </tbody>
+                </table></div>
+                <ul class="checklist">
+                  <li><label><input type="checkbox" data-id="eq-paulinia-nomes">Paulínia: os nomes de quem está nos domingos que já aconteceram (13/09, 20/09, 27/09, 04/10)</label></li>
+                  <li><label><input type="checkbox" data-id="eq-paulinia-calend">Paulínia: o calendário dos próximos 4 domingos, nome por nome</label></li>
+                  <li><label><input type="checkbox" data-id="eq-campinas-nomes">Campinas: quem pode pegar domingo, e quantas pessoas por domingo</label></li>
+                  <li><label><input type="checkbox" data-id="eq-campinas-calend">Campinas: o calendário do primeiro mês de domingos</label></li>
+                  <li><label><input type="checkbox" data-id="eq-turno-domingo">O turno de domingo (faixa da tarde) existe na escala das duas lojas</label></li>
+                </ul>
+              </div>
+
+              <div class="painel" data-alvo="eq1d" hidden>
+                <span class="ptit">A jornada 6x1 e o domingo</span>
+                <span class="psub">o bloqueador de Campinas, e ele encosta nesta ação</span>
+                <p class="prose">O bloqueador de contratação em Campinas não é salário, é jornada: o mercado
+                que disputa a mesma gente — grandes supermercados, McDonald's, Burger King — trabalha
+                <strong>5x2 com o mesmo salário</strong>, e o Holy Cookie oferece <strong>6x1</strong>.
+                <em>Salário é preço; jornada é condição</em> — aumentar salário não resolve a vaga. A decisão
+                está em aberto e vale para todos os colaboradores.</p>
+                <p class="prose">Abrir o domingo mexe exatamente aqui. <strong>Um sétimo dia de operação com
+                uma equipe 6x1 significa que alguém trabalha no dia que era a folga dele</strong> — ou entra
+                gente de fora. São dois caminhos diferentes, com custos diferentes, e é por isso que a pergunta
+                dos becaps vem logo depois.</p>
+                <div class="note-item"><span class="tag acc">o ângulo que vale olhar</span><span>
+                  Se a loja opera sete dias com uma escala desenhada para isso, <strong>5x2 deixa de ser
+                  concessão e passa a ser arquitetura</strong>: sete dias cobertos por gente que folga dois.
+                  Não é decisão desta página — mas é a primeira vez que as duas conversas se cruzam com um
+                  motivo concreto.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── 2 · BECAPS ───── -->
+        <div class="painel" data-alvo="eq2" hidden>
+          <span class="ptit">Os becaps &mdash; o banco de freelancers <span class="tag warn">já é passo 2 em Prioridades</span></span>
+          <div class="grupo-descricao">
+            Nas palavras do Fred: <em>&ldquo;se essas pessoas não forem, quem são os becaps que a gente chama,
+            que é o banco de freelancers?&rdquo;</em><br><br>
+            Ele não nasce aqui. O <strong>banco de freelancers já está registrado como &ldquo;passo 2&rdquo;</strong>
+            na página <a href="../../prioridades/">Prioridades</a>, grupo Crise de Equipe — veio da troca de
+            equipe de Piracicaba. O domingo é o <strong>primeiro uso concreto</strong> dele: um dia que
+            acontece toda semana, com gente que não está na escala dos outros seis.<br><br>
+            <strong>Importante não confundir as duas coisas.</strong> Becap não é a equipe de domingo — é quem
+            cobre quando a equipe de domingo falta. Se o domingo <em>depende</em> de freelancer para existir,
+            a resposta da pergunta 1 é &ldquo;não temos equipe de domingo&rdquo;, e isso muda a conversa.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="eq2a"><span class="cnome">O que já existe</span><span class="cmeta">Trilha do Freelancer · 11 passos · parcial</span></button>
+              <button class="card-btn" data-alvo="eq2b"><span class="cnome">O que o domingo precisa</span><span class="cmeta">quantos becaps, e para qual função</span></button>
+              <button class="card-btn" data-alvo="eq2c"><span class="cnome">O que falta decidir</span><span class="cmeta">diária, quem chama, até quando chamar</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="eq2a" hidden>
+                <span class="ptit">O que já existe</span>
+                <span class="psub">certificacao-holy-cookie/material · tópico 25, marcado como parcial</span>
+                <p class="prose">A <strong>Trilha do Freelancer</strong> já está escrita no Material de
+                Certificação, com a sequência definida em 11 passos: Conhecer a Holy &rarr; Cardápio &rarr;
+                Comanda e pedido &rarr; Limpeza &rarr; Boas práticas &rarr; Cookies &rarr; Bebidas &rarr;
+                Sorvetes &rarr; Salgados &rarr; Brownie &rarr; Torta.</p>
+                <p class="prose">Ela está marcada como <strong>parcial</strong> por um motivo honesto: a
+                sequência existe, mas o conteúdo de cada passo é o que estiver escrito nos outros cards do
+                Material — e <strong>9 dos 26 tópicos ainda não estão escritos</strong> (10 prontos, 7
+                parciais). Entre os que faltam está o <em>Script de Vendas</em>.</p>
+                <div class="note-item"><span class="tag acc">não começar do zero</span><span>
+                  O treinamento do becap de domingo <strong>não precisa de material novo</strong> — precisa de
+                  um recorte da trilha que já existe. Qual recorte é a pergunta do card 3 desta aba.
+                  Ver <a href="../../certificacao-holy-cookie/material/">o Material</a>.
+                </span></div>
+                <div class="note-item"><span class="tag warn">o que a própria trilha deixa em aberto</span><span>
+                  O Material registra: <em>existe um caminho separado para quando o freelancer passa a ser
+                  chamado com mais frequência — e o critério de quando isso acontece ainda não está
+                  definido.</em> Para o domingo, que é semanal, esse critério fica mais urgente: um becap
+                  chamado todo domingo não é freelancer, é funcionário.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq2b" hidden>
+                <span class="ptit">O que o domingo precisa</span>
+                <span class="psub">o que o número de pedidos permite afirmar</span>
+                <p class="prose">O domingo de Paulínia, nos três domingos medidos, fez <strong>59 pedidos de
+                loja em 6 horas</strong> — média de 20 pedidos por domingo, com pico de 17 pedidos na hora das
+                16h. Para comparação, o sábado da mesma loja faz <strong>55 pedidos por dia</strong>.</p>
+                <p class="prose">O que isso permite dizer, e é tudo: <strong>o domingo é um dia de movimento
+                de sábado dividido por dois e meio</strong>, concentrado numa janela curta. Quantas pessoas
+                isso exige é decisão da operação — depende de quem faz o quê na loja, e não dá para tirar do
+                número de pedidos.</p>
+                <div class="note-item"><span class="tag warn">a pergunta que precisa de resposta de dentro</span><span>
+                  <strong>Quantas pessoas, e em quais funções, um domingo exige?</strong> Atendimento e forno
+                  são as duas funções que aparecem nos pedidos; se o forno pode assar na véspera ou tem que
+                  assar no dia muda o número. Essa conta é da loja, e não vou estimá-la daqui.
+                </span></div>
+                <div class="note-item"><span class="tag bad">a regra que não pode faltar</span><span>
+                  Seja o número que for, <strong>o domingo não pode depender de uma pessoa só</strong>. Hoje,
+                  se a única pessoa escalada falta num domingo, a loja não abre — e um dia que não abre com a
+                  divulgação já feita custa mais que um dia que nunca abriu.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq2c" hidden>
+                <span class="ptit">O que falta decidir</span>
+                <span class="psub">cinco perguntas, nenhuma respondível daqui</span>
+                <ul class="pontos">
+                  <li><strong>Quanto é a diária de um becap?</strong> O único valor escrito em qualquer lugar é
+                  a diária do gerente — R$ 300 mais R$ 100 de deslocamento, no treinamento de domingo em
+                  Campinas. <em>Esse não é o valor de um freelancer</em>, e sem o valor certo não existe conta
+                  de quanto custa o domingo.</li>
+                  <li><strong>Quem chama o becap?</strong> O líder de loja ou o gerente. Se for o gerente,
+                  repete o padrão que a página Prioridades já identificou como problema: cada evento da loja
+                  virando uma ida dele.</li>
+                  <li><strong>Com quanta antecedência?</strong> Um domingo que depende de alguém aceitar na
+                  sexta é um domingo que pode não abrir.</li>
+                  <li><strong>Quantos becaps formados por loja?</strong> Um banco com uma pessoa é um ponto
+                  único de falha com nome novo.</li>
+                  <li><strong>Qual a contrapartida?</strong> A certificação prevê bonificação para quem está
+                  certificado. Se o becap passa pela trilha, ele entra nessa regra ou não?</li>
+                </ul>
+                <div class="note-item"><span class="tag bad">a contradição de contrato que está aberta</span><span>
+                  Vale lembrar antes de desenhar qualquer coisa: a <strong>Renata está sem carteira assinada</strong>
+                  em Paulínia, e o Fred chamou isso de &ldquo;um grande problema pra gente pensar&rdquo;. Até
+                  setembro a regra escrita era contratar sem CLT; a fala de 05/10 trata o sem-carteira como
+                  problema. <em>As duas leituras não podem valer ao mesmo tempo</em>, e um banco de freelancers
+                  é exatamente o tipo de coisa que depende de qual delas vale.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── 3 · CHECKLIST DE TREINAMENTO ───── -->
+        <div class="painel" data-alvo="eq3" hidden>
+          <span class="ptit">Checklist de treinamento do domingo <span class="tag warn">recorte do que existe</span></span>
+          <div class="grupo-descricao">
+            A pergunta do Fred: <em>&ldquo;quais são as atividades em que essas pessoas precisam ser
+            treinadas?&rdquo;</em><br><br>
+            O domingo não tem atividade exclusiva — é a operação normal da loja num dia com menos gente dentro
+            e menos gente para pedir ajuda. Então o checklist de treinamento do domingo é um
+            <strong>recorte do que já está escrito</strong> no Material de Certificação, mais o que o
+            domingo tem de diferente: <strong>ninguém para socorrer, e o pico inteiro em duas horas.</strong><br><br>
+            Os blocos abaixo seguem a ordem do dia. Cada um diz o que já está escrito e o que falta.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="eq3a"><span class="cnome">Abertura</span><span class="cmeta">o checklist que hoje não dispara</span></button>
+              <button class="card-btn" data-alvo="eq3b"><span class="cnome">Forno e vitrine</span><span class="cmeta">quantidade certa pro dia curto</span></button>
+              <button class="card-btn" data-alvo="eq3c"><span class="cnome">Atendimento e salão</span><span class="cmeta">pronto no Material</span></button>
+              <button class="card-btn" data-alvo="eq3d"><span class="cnome">Caixa e plataformas</span><span class="cmeta">sem líder por perto</span></button>
+              <button class="card-btn" data-alvo="eq3e"><span class="cnome">Fechamento</span><span class="cmeta">dois fechamentos, não um</span></button>
+              <button class="card-btn" data-alvo="eq3f"><span class="cnome">Resolver sozinho</span><span class="cmeta">o que o domingo tem de único</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="eq3a" hidden>
+                <span class="ptit">Abertura</span>
+                <span class="psub">template ABERTURA · 10h · hoje não dispara no domingo</span>
+                <p class="prose">O checklist de <strong>ABERTURA</strong> já existe no Sistema&nbsp;HC,
+                preenchido pelo líder de loja, e cobre banheiro, estacionamento, salão, balcão, cozinha, caixa,
+                insumos, equipamentos e infraestrutura. Está agendado para <strong>os sete dias da semana</strong>,
+                com disparo a partir do horário de abertura da loja.</p>
+                <p class="prose">E não roda no domingo. <strong>Desde 01/08, só 2 execuções de ABERTURA caíram
+                num domingo</strong>, em 672 execuções no período — e <strong>nos domingos 20/09, 27/09 e 04/10
+                não houve nenhuma, em nenhuma das três lojas</strong>. A causa é o <code>store_horarios</code>
+                dizer que a loja está fechada no domingo.</p>
+                <ul class="checklist">
+                  <li><label><input type="checkbox" data-id="tr-abertura-liga">Ligar o checklist de abertura do domingo (depende do aval do Fred &mdash; ver Pendências)</label></li>
+                  <li><label><input type="checkbox" data-id="tr-abertura-treina">A pessoa do domingo sabe preencher o checklist de abertura sozinha</label></li>
+                  <li><label><input type="checkbox" data-id="tr-abertura-foto">Ela sabe que cada bloco fecha com uma foto de evidência</label></li>
+                </ul>
+                <div class="note-item"><span class="tag acc">o checklist é a resposta à pergunta 4</span><span>
+                  &ldquo;Essas pessoas são boas?&rdquo; tem uma resposta parcial de graça: o checklist de
+                  abertura já tem <strong>avaliação de foto por IA</strong> no Sistema&nbsp;HC, com revisão
+                  humana. Ligar o domingo <em>dá uma medição do domingo</em>, não só uma rotina.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq3b" hidden>
+                <span class="ptit">Forno e vitrine</span>
+                <span class="psub">Material: Cookies &mdash; Modelagem e Decoração · Fluxo de Preparação (pronto)</span>
+                <p class="prose">O que o domingo tem de diferente é <strong>quantidade</strong>. O dia tem
+                movimento de 20 pedidos concentrados entre 15h e 17h — assar como num sábado de 55 pedidos
+                sobra, assar como numa segunda falta na hora do pico.</p>
+                <p class="prose">O <em>Fluxo de Preparação dos Pedidos</em> está marcado como <strong>pronto</strong>
+                no Material, e o 80/20 da certificação já define o critério de produto: <strong>fornada sempre
+                boa, quantidade certa de insumos — não &ldquo;no olho&rdquo;</strong>, e cookie fresco é
+                &ldquo;saiu do forno há menos de 2 a 3 horas&rdquo;.</p>
+                <div class="note-item"><span class="tag warn">a pergunta da loja</span><span>
+                  <strong>O cookie do domingo é assado no domingo ou na véspera?</strong> Se for no dia, o
+                  domingo precisa de alguém de forno — e isso muda o número de pessoas da pergunta 2. Se for na
+                  véspera, o critério de 2 a 3 horas da vitrine não fecha. É decisão da operação.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq3c" hidden>
+                <span class="ptit">Atendimento e salão</span>
+                <span class="psub">Material: Atendimento na Loja &mdash; marcado como pronto</span>
+                <p class="prose">Esta parte <strong>já está escrita e pronta</strong>. O fluxo de servir na mesa
+                tem seis passos: identificar &rarr; chamar discretamente &rarr; sorrir e cumprimentar &rarr;
+                apresentar o pedido (falar os sabores, avisar quando o cookie está quente) &rarr;
+                &ldquo;boa sobremesa&rdquo; &rarr; pedir licença.</p>
+                <p class="prose">E a lista de responsabilidades do atendente também está lá: olho nas mesas,
+                entrega de delivery no prazo, salão e vitrine limpos, repor açúcar e guardanapo,
+                <strong>oferecer outros produtos</strong>, passagem de turno.</p>
+                <div class="note-item"><span class="tag acc">o que o ticket do domingo pede</span><span>
+                  O domingo tem o <strong>maior ticket da semana (R$ 51,36)</strong>. A responsabilidade
+                  &ldquo;aumentar as vendas oferecendo outros produtos, explicando o cardápio&rdquo; <em>é a
+                  mais rentável do domingo</em> — é o dia em que o cliente já veio disposto. Vale treinar essa
+                  especificamente.
+                </span></div>
+                <div class="note-item"><span class="tag bad">o que falta no Material</span><span>
+                  <strong>Script de Vendas está marcado como &ldquo;falta&rdquo;</strong> — é justamente a peça
+                  que faria o parágrafo acima virar treinamento em vez de intenção.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq3d" hidden>
+                <span class="ptit">Caixa e plataformas</span>
+                <span class="psub">Material: Plataformas (iFood / 99Food / Cardápio Web) · WhatsApp</span>
+                <p class="prose">No domingo o delivery continua. Em Paulínia, os domingos de setembro tiveram
+                <strong>delivery no mesmo dia da venda de loja</strong> — R$ 1.408 em 13/09, R$ 722 em 20/09,
+                R$ 463 em 27/09. Quem está na loja no domingo atende os dois canais.</p>
+                <p class="prose">O que muda é que <strong>não tem líder por perto para resolver o caso
+                estranho</strong>: pedido lançado no canal errado, troco, cancelamento, cliente reclamando na
+                plataforma. Nos dias úteis isso sobe para alguém; no domingo, não.</p>
+                <div class="note-item"><span class="tag warn">por que isso é mais que incômodo</span><span>
+                  Pedido lançado no canal errado <strong>contamina a medição do próprio domingo</strong>: um
+                  delivery digitado como balcão entra como venda de loja, e o número que decide se o domingo
+                  bateu R$ 1.000 fica errado. Treinar a classificação certa é treinar o indicador.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq3e" hidden>
+                <span class="ptit">Fechamento</span>
+                <span class="psub">dois templates: FECHAMENTO LOJA (18h) e FECHAMENTO DELIVERY NOITE (23h)</span>
+                <p class="prose">São <strong>dois fechamentos diferentes</strong> no Sistema&nbsp;HC, e os dois
+                estão agendados para os sete dias: o <em>Fechamento de Loja</em> (salão, forno, cozinha, caixa,
+                disparo às 18h) e o <em>Fechamento de Delivery da Noite</em> (cozinha, trancamento, caixa,
+                disparo às 23h).</p>
+                <p class="prose">Nos três domingos da ação em Paulínia, <strong>nenhum dos dois rodou</strong>.
+                O último domingo com qualquer execução de fechamento em qualquer loja foi <strong>13/09</strong>,
+                e foi só o de delivery.</p>
+                <div class="note-item"><span class="tag bad">o que fecha a loja no domingo</span><span>
+                  Se o fechamento de loja não dispara e o de delivery também não, <strong>o domingo termina sem
+                  conferência de caixa, de forno desligado e de loja trancada</strong>. Num dia em que a pessoa
+                  está sozinha, é o pior dia para não haver lista.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq3f" hidden>
+                <span class="ptit">Resolver sozinho</span>
+                <span class="psub">o que o domingo tem de único, e não está escrito em lugar nenhum</span>
+                <p class="prose">Todos os blocos acima são recorte de material que existe. <strong>Este não
+                é.</strong> O domingo tem uma característica que nenhum outro dia tem: <em>a pessoa está sem
+                rede</em>. Não tem líder de manhã, não tem gerente a caminho, não tem o colega do outro turno
+                chegando às 18h.</p>
+                <h4 class="sub">O que precisa estar decidido antes, não na hora</h4>
+                <ul class="pontos">
+                  <li><strong>Acabou um sabor no meio do pico.</strong> Tira da vitrine? Avisa o cliente? Quem
+                  decide o substituto?</li>
+                  <li><strong>Quebrou equipamento.</strong> Quem ela liga, num domingo, e até que horas essa
+                  pessoa responde?</li>
+                  <li><strong>Cliente reclamando, caso que não está no manual.</strong> O Material tem o tópico
+                  <em>Resolvendo Problemas</em>; qual é o limite de alçada dela num domingo?</li>
+                  <li><strong>Ela faltou.</strong> Quem é o becap, e quem liga para ele — a própria pessoa ou o
+                  líder?</li>
+                </ul>
+                <div class="note-item"><span class="tag warn">a regra mais barata do domingo</span><span>
+                  <strong>Um nome e um telefone, escritos, de quem atende no domingo.</strong> Não é material de
+                  treinamento, é um papel colado na parede — e é o item mais rápido de resolver desta aba inteira.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───── 4 · A PESSOA É BOA ───── -->
+        <div class="painel" data-alvo="eq4" hidden>
+          <span class="ptit">A pessoa é boa? <span class="tag warn">a régua existe; quem aplica, não</span></span>
+          <div class="grupo-descricao">
+            A última pergunta do Fred, e a mais difícil de responder à distância: <em>&ldquo;se essas pessoas
+            são boas&rdquo;</em>.<br><br>
+            A régua já existe e não precisa ser inventada: a <a href="../../certificacao-holy-cookie/">Certificação
+            de Funções</a> responde isso por <strong>prova oral mais prova física</strong> — a pessoa fala e
+            depois faz de verdade. O objetivo declarado pelo Fred é <em>equipe homogênea e consistente</em>,
+            não equipe de alta performance.<br><br>
+            O problema é quem aplica a régua num domingo. É o mesmo furo que a certificação já registrou: o
+            <strong>link de checklist do Sistema&nbsp;HC é aberto para a equipe da própria loja</strong>, então
+            serve como rotina interna e <em>não serve como avaliação externa</em> — quem é avaliado não pode ser
+            quem preenche.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="eq4a"><span class="cnome">O que dá pra medir à distância</span><span class="cmeta">sem ninguém ir à loja</span></button>
+              <button class="card-btn" data-alvo="eq4b"><span class="cnome">O que não dá</span><span class="cmeta">e o que a certificação já diz sobre isso</span></button>
+              <button class="card-btn" data-alvo="eq4c"><span class="cnome">A validação antes do primeiro domingo</span><span class="cmeta">o modelo que Piracicaba já usa</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="eq4a" hidden>
+                <span class="ptit">O que dá pra medir à distância</span>
+                <span class="psub">tudo isso já existe no Sistema HC — basta o domingo entrar</span>
+                <ul class="pontos">
+                  <li><strong>O checklist de abertura e de fechamento foi preenchido?</strong> Preenchimento e
+                  horário são fato, não opinião. Hoje não dá para medir, porque o domingo não dispara.</li>
+                  <li><strong>As fotos de evidência passam?</strong> O Sistema&nbsp;HC já avalia foto por IA
+                  (aprovado/reprovado com comentário) e tem tela de revisão humana. É a medição mais barata que
+                  existe de &ldquo;a loja estava apresentável&rdquo;.</li>
+                  <li><strong>O domingo bateu R$ 1.000?</strong> O número do dia é o resultado, e ele já está
+                  no sistema pedido a pedido.</li>
+                  <li><strong>Os pedidos foram classificados no canal certo?</strong> Delivery digitado como
+                  balcão aparece na conferência de pedidos atípicos.</li>
+                </ul>
+                <div class="note-item"><span class="tag acc">a conclusão prática</span><span>
+                  <strong>Ligar o checklist de domingo resolve a pergunta 4 em boa parte</strong>, sem ninguém
+                  ir à loja no domingo. É por isso que esse item pequeno está na frente da fila de pendências.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq4b" hidden>
+                <span class="ptit">O que não dá</span>
+                <span class="psub">o furo que a certificação já tinha identificado</span>
+                <p class="prose">O <strong>atendimento</strong> é o que não dá para medir pelo checklist — e é
+                justamente o que mais aparece nos comentários das lojas, elogio e reclamação. A própria
+                certificação deixou a coluna &ldquo;Colaborador&rdquo; do atendimento <em>vazia de
+                propósito</em>: não é autopreenchimento, é <strong>revisão de câmera por outra pessoa</strong>.</p>
+                <p class="prose">A câmera existe — confirmado. O que não existe é <strong>quem revisa e com que
+                frequência</strong>: é um ponto registrado como aberto na certificação desde agosto. Para o
+                domingo ele fica mais apertado, porque é o dia sem testemunha nenhuma.</p>
+                <div class="note-item"><span class="tag warn">a fiscalização de domingo tem dono, no papel</span><span>
+                  A certificação já definiu: o <strong>Líder de Loja analisa a checklist do turno de folga no
+                  mínimo a cada 15 dias</strong>, e do noturno 1× por semana. A análise é da checklist já
+                  preenchida, então não exige estar no turno. <em>Isso só funciona se a checklist de domingo
+                  existir.</em>
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq4c" hidden>
+                <span class="ptit">A validação antes do primeiro domingo</span>
+                <span class="psub">o modelo já está rodando em Piracicaba</span>
+                <p class="prose">Piracicaba está fazendo exatamente isso com a equipe nova: treinamento de 05 a
+                18/10 e <strong>validação do atendimento no fim de semana de 17 a 19/10</strong> — a prova
+                acontece no dia de movimento, não numa sala.</p>
+                <p class="prose">É o modelo que serve para o domingo de Campinas: <strong>a pessoa faz um
+                sábado acompanhada antes de fazer um domingo sozinha.</strong> O sábado é o dia mais parecido
+                com o domingo em perfil — ticket alto, movimento de fluxo — e tem gente na loja para corrigir
+                na hora.</p>
+                <ul class="checklist">
+                  <li><label><input type="checkbox" data-id="val-sabado">Cada pessoa do domingo fez pelo menos um sábado acompanhada</label></li>
+                  <li><label><input type="checkbox" data-id="val-abertura">Ela abriu a loja com o checklist de abertura, ao menos uma vez, com alguém conferindo</label></li>
+                  <li><label><input type="checkbox" data-id="val-fechamento">Ela fechou a loja e o caixa, ao menos uma vez, com alguém conferindo</label></li>
+                  <li><label><input type="checkbox" data-id="val-contato">Ela tem o nome e o telefone de quem atende no domingo</label></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 4 · DIVULGAÇÃO ════════════════════════ -->
+<div class="tab-panel" data-panel="divulgacao" hidden>
+
+  <section>
+    <h2><span class="n">1</span> O que a divulgação do domingo tem que fazer</h2>
+    <p class="prose">A pergunta do Fred foi direta: <em>&ldquo;como é que é a divulgação de marketing desses
+    dias, do domingo especificamente, porque tem que faturar no mínimo R$ 1.000 num dia?&rdquo;</em></p>
+    <p class="prose">A resposta começa num fato que o dado entrega de graça: <strong>o domingo não é um dia,
+    é uma janela de duas horas</strong>. Em Paulínia, 15h a 17h concentra 63% dos pedidos e 66% da venda. Uma
+    divulgação que chega às 16h chega quando o dia já está decidido.</p>
+    <p class="prose">E tem um segundo fato, mais incômodo: <strong>os dois domingos de R$ 1.200 aconteceram
+    sem divulgação nenhuma.</strong> Foi a novidade de a loja estar aberta. Quando a novidade passou, caiu para
+    R$ 646. A divulgação não é o que vai levar o domingo além de R$ 1.000 — é o que vai <em>substituir a
+    novidade</em> quando ela acabar. Em Campinas, onde não há novidade para gastar, ela precisa estar pronta no
+    primeiro domingo.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> A janela do domingo<span class="hint">Paulínia · 13, 20 e 27/09 · 59 pedidos de loja</span></h2>
+    <div class="horas">
+      <div class="hora-linha"><span class="hh">13h</span><span class="bar"><span style="width:41%"></span></span><span class="vv">7 ped · R$ 378</span></div>
+      <div class="hora-linha"><span class="hh">14h</span><span class="bar"><span style="width:47%"></span></span><span class="vv">8 ped · R$ 413</span></div>
+      <div class="hora-linha pico"><span class="hh">15h</span><span class="bar"><span style="width:71%"></span></span><span class="vv">12 ped · R$ 836</span></div>
+      <div class="hora-linha pico"><span class="hh">16h</span><span class="bar"><span style="width:100%"></span></span><span class="vv">17 ped · R$ 791</span></div>
+      <div class="hora-linha pico"><span class="hh">17h</span><span class="bar"><span style="width:47%"></span></span><span class="vv">8 ped · R$ 364</span></div>
+      <div class="hora-linha"><span class="hh">18h</span><span class="bar"><span style="width:35%"></span></span><span class="vv">6 ped · R$ 203</span></div>
+      <div class="hora-linha"><span class="hh">19h</span><span class="bar"><span style="width:6%"></span></span><span class="vv">1 ped · R$ 46</span></div>
+    </div>
+    <p class="nota-tabela">Barra proporcional ao número de pedidos da hora. Em destaque, a janela de 15h a 17h.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag acc">o que a janela decide</span><span>
+        A mensagem tem que chegar <strong>antes das 15h de domingo</strong> — ou seja, no sábado, ou no domingo
+        de manhã. E a peça de loja tem que estar de pé <em>durante a semana</em>, porque quem já é cliente não
+        sabe que a loja abre domingo.
+      </span></div>
+      <div class="note-item"><span class="tag warn">Campinas não tem essa janela</span><span>
+        Os pedidos de domingo de Campinas saem espalhados de <strong>11h às 20h</strong>, sem concentração — 37
+        pedidos em setembro, pico de 9 na hora das 15h. <strong>Uma loja sem pico é uma loja sem ocasião</strong>:
+        não há hora em que valha a pena chamar, porque ninguém combinou de ir. Construir a janela é parte do
+        trabalho em Campinas, não um dado de partida.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> O inventário de canais<span class="hint">clique num canal</span></h2>
+    <p class="prose"><strong>Nada aqui está decidido.</strong> Isto é o inventário do que existe e do que cada
+    canal pode fazer pelo domingo — a mecânica, a oferta e o calendário são decisão do Fred, e só entram na
+    agenda da loja depois que ele escolher.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn" data-alvo="dv1"><span class="cnome">Lista de transmissão</span><span class="cmeta">WhatsApp · ação da área, trancada</span></button>
+        <button class="card-btn" data-alvo="dv2"><span class="cnome">Divulgação em loja</span><span class="cmeta">ação da área, trancada · a mais barata</span></button>
+        <button class="card-btn" data-alvo="dv3"><span class="cnome">Instagram</span><span class="cmeta">rodando · dois perfis</span></button>
+        <button class="card-btn" data-alvo="dv4"><span class="cnome">Google e Maps</span><span class="cmeta">o horário que o cliente consulta</span></button>
+        <button class="card-btn" data-alvo="dv5"><span class="cnome">O que a copy do domingo pode e não pode</span><span class="cmeta">regra de narrativa já definida</span></button>
+      </div>
+
+      <div class="visor">
+        <p class="visor-vazio">Clique num canal para ver o que ele faz pelo domingo.</p>
+
+        <div class="painel" data-alvo="dv1" hidden>
+          <span class="ptit">Lista de transmissão <span class="tag f">frequência</span></span>
+          <span class="psub">ação própria da área, ainda trancada no cardápio</span>
+          <p class="prose">Disparo no WhatsApp para quem já comprou — um diário e um semanal. É o canal mais
+          alinhado com o domingo: fala com <strong>quem já é cliente</strong>, que é exatamente quem não sabe
+          que a loja abre no sétimo dia, e custa zero de mídia.</p>
+          <p class="prose">O problema é a dependência: <strong>ela depende do cadastro que a campanha de
+          fidelização instala.</strong> Sem base de contato, não há lista. É a mesma trava das duas ações de
+          frequência da área.</p>
+          <div class="note-item"><span class="tag warn">o domingo pode ser o motivo dela sair do papel</span><span>
+            A lista está trancada porque não tem motivo urgente. <strong>Um dia de operação que precisa bater
+            R$ 1.000 toda semana é um motivo urgente</strong> — e um disparo de sábado é o uso mais simples
+            possível dela, sem precisar do calendário diário pronto.
+          </span></div>
+        </div>
+
+        <div class="painel" data-alvo="dv2" hidden>
+          <span class="ptit">Divulgação em loja <span class="tag t">ticket</span></span>
+          <span class="psub">ação própria da área, ainda trancada · a mais barata que existe</span>
+          <p class="prose">Display de balcão, cardápio, banner, cartaz. Fala com quem já está dentro — não
+          custa alcance, custa a peça. Para o domingo ela faz <strong>duas coisas diferentes</strong>, e vale
+          separá-las:</p>
+          <ul class="pontos">
+            <li><strong>De segunda a sábado: avisar que a loja abre domingo.</strong> É divulgação de domingo
+            feita no dia útil, para o público que custa zero alcançar. Nenhum cliente de Paulínia foi avisado
+            disso por uma peça.</li>
+            <li><strong>No domingo: subir o ticket que já é o maior da semana.</strong> R$ 51,36 de ticket é
+            gente disposta. É o dia certo para a peça oferecer torta, sorvete e bebida — e lembrar que hoje 92%
+            dos pedidos não levam torta.</li>
+          </ul>
+          <div class="note-item"><span class="tag acc">por que ela vem primeiro</span><span>
+            É a única peça desta lista que <strong>não depende de cadastro, de verba de mídia nem de alguém
+            postar na hora certa</strong>. Um cartaz de balcão resolve a parte mais barata da pergunta do Fred.
+          </span></div>
+        </div>
+
+        <div class="painel" data-alvo="dv3" hidden>
+          <span class="ptit">Instagram <span class="tag p">novos clientes</span></span>
+          <span class="psub">rodando — conteúdo das lojas do Fred e da marca Holy Cookie</span>
+          <p class="prose">Os dois perfis já estão rodando como ações de conteúdo. Para o domingo, o encaixe
+          natural é o <strong>story e o post de sábado e de domingo de manhã</strong> — dentro da janela em que
+          a mensagem ainda decide o dia.</p>
+          <p class="prose">Se virar post, ele segue as regras que já valem para todo post do Holy Cookie:
+          <strong>sempre as duas versões de legenda</strong> (A food porn e B emocional), e o gancho é a frase
+          de tela, escrita a partir do vídeo assistido — não da descrição verbal.</p>
+          <div class="note-item"><span class="tag mudo">fora do escopo desta página</span><span>
+            Escrever o gancho e a legenda tem fluxo próprio e <strong>depende do vídeo</strong>. Esta página só
+            registra que o canal existe e qual é a janela; o texto não se escreve de memória.
+          </span></div>
+        </div>
+
+        <div class="painel" data-alvo="dv4" hidden>
+          <span class="ptit">Google e Maps</span>
+          <span class="psub">o canal que ninguém divulga, e que o cliente consulta sozinho</span>
+          <p class="prose">É onde a pessoa olha antes de sair de casa num domingo. E é o canal mais exposto ao
+          problema desta página: <strong>se o horário publicado diz que a loja fecha no domingo, a divulgação
+          toda briga contra a própria ficha.</strong></p>
+          <p class="prose">Vale conferir, loja por loja, o que o horário de domingo diz hoje — no Google, no
+          iFood e no 99Food. <em>Não dá para verificar isso daqui</em>: é uma olhada na ficha de cada uma. Em
+          Piracicaba há uma questão a mais: a marca no Maps é &ldquo;Holy Cook&rdquo; e a loja não tem ficha
+          própria.</p>
+          <ul class="checklist">
+            <li><label><input type="checkbox" data-id="dv-google-pau">Paulínia: horário de domingo correto no Google, iFood e 99Food</label></li>
+            <li><label><input type="checkbox" data-id="dv-google-cps">Campinas: horário de domingo correto nos três, antes do primeiro domingo</label></li>
+          </ul>
+          <div class="note-item"><span class="tag bad">o item mais barato da página inteira</span><span>
+            Corrigir um horário publicado custa cinco minutos e <strong>não precisa de decisão de ninguém</strong>.
+            Se estiver errado, toda a divulgação paga do domingo está sendo desmentida pela própria ficha da loja.
+          </span></div>
+        </div>
+
+        <div class="painel" data-alvo="dv5" hidden>
+          <span class="ptit">O que a copy do domingo pode e não pode</span>
+          <span class="psub">regra de narrativa já definida para o Holy Cookie</span>
+          <p class="prose">Há três regras já fechadas que a divulgação do domingo tem que respeitar, e uma
+          delas pega de jeito:</p>
+          <ul class="pontos">
+            <li><strong>Sem urgência.</strong> Doce é pausa, não é corrida. &ldquo;Só hoje&rdquo;,
+            &ldquo;últimas horas&rdquo; e contagem regressiva estão fora — o que derruba o jeito mais óbvio de
+            divulgar um dia específico.</li>
+            <li><strong>Sem endereço.</strong> São três cidades; a peça não fala de uma.</li>
+            <li><strong>Payoff grande mesmo em tempo curto.</strong> A mensagem entrega a cena completa, não
+            uma chamada seca.</li>
+          </ul>
+          <div class="note-item"><span class="tag acc">o encaixe que resolve a contradição</span><span>
+            A regra &ldquo;sem urgência&rdquo; não proíbe falar do domingo — ela proíbe falar do domingo como
+            <em>prazo</em>. <strong>Domingo não é escassez, é ocasião</strong>: é o dia da pausa, e o doce é a
+            pausa. É a única regra de copy da marca que o domingo ajuda em vez de atrapalhar.
+          </span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> O que falta decidir</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag bad">tem oferta ou não tem?</span><span>
+        É a decisão que define todas as outras. <strong>Domingo com oferta</strong> traz gente mas derruba o
+        ticket mais alto da semana; <strong>domingo sem oferta</strong> depende só de lembrar que a loja abre.
+        O ticket de R$ 51,36 é um argumento forte contra desconto — mas é decisão do Fred, não conclusão desta
+        página.
+      </span></div>
+      <div class="note-item"><span class="tag bad">quem dispara, e quando?</span><span>
+        A janela exige que a mensagem saia <strong>sábado ou domingo até as 14h</strong>. Isso é um horário de
+        trabalho de alguém, num fim de semana. Sem dono nomeado, a divulgação do domingo é a primeira coisa que
+        não acontece.
+      </span></div>
+      <div class="note-item"><span class="tag warn">a mesma peça serve as três lojas?</span><span>
+        Paulínia está consolidando, Campinas vai abrir e Piracicaba não abre. <strong>Uma peça só para as três
+        divulga um domingo que não existe em uma delas</strong> — e a regra &ldquo;sem endereço&rdquo; dificulta
+        separar. É uma pergunta real, sem resposta óbvia.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 5 · PLACAR ════════════════════════ -->
+<div class="tab-panel" data-panel="placar" hidden>
+
+  <section>
+    <h2><span class="n">1</span> Domingo a domingo<span class="hint">venda de loja · caixa + balcão + mesa</span></h2>
+    <p class="prose">Todos os domingos com registro no PDV, de 02/08 a 27/09/2026. A linha de corte é a meta do
+    Fred: <strong>R$ 1.000 de venda de loja num domingo</strong>. Delivery fica de fora — é outro canal e não
+    entra na meta.</p>
+
+    <h3 class="sub">Paulínia</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Domingo</th><th class="num">Venda de loja</th><th class="num">Pedidos</th><th class="num">Ticket</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>02/08</td><td class="num">584</td><td class="num">13</td><td class="num">44,90</td><td class="obs">antes da ação organizada</td></tr>
+        <tr><td>09/08</td><td class="num">28</td><td class="num">2</td><td class="num">13,89</td><td class="obs">antes da ação organizada</td></tr>
+        <tr><td>16/08</td><td class="num">164</td><td class="num">4</td><td class="num">41,03</td><td class="obs">antes da ação organizada</td></tr>
+        <tr><td>23/08</td><td class="num">887</td><td class="num">22</td><td class="num">40,30</td><td class="obs">antes da ação organizada</td></tr>
+        <tr><td>30/08</td><td class="num">623</td><td class="num">11</td><td class="num">56,66</td><td class="obs">antes da ação organizada</td></tr>
+        <tr><td>06/09</td><td class="num">336</td><td class="num">10</td><td class="num">33,60</td><td class="obs">antes da ação organizada</td></tr>
+        <tr class="bateu"><td>13/09</td><td class="num alvo">1.181</td><td class="num">23</td><td class="num">51,35</td><td><strong>bateu</strong> &mdash; 1º domingo da ação</td></tr>
+        <tr class="bateu"><td>20/09</td><td class="num alvo">1.203</td><td class="num">23</td><td class="num">52,32</td><td><strong>bateu</strong> &mdash; melhor domingo registrado</td></tr>
+        <tr class="falhou"><td>27/09</td><td class="num alvo">646</td><td class="num">13</td><td class="num">49,68</td><td><strong>não bateu</strong> &mdash; e não foi chuva</td></tr>
+        <tr class="falhou"><td>04/10</td><td class="num alvo">~800</td><td class="num nd">&mdash;</td><td class="num nd">&mdash;</td><td><strong>não bateu</strong> &mdash; relato do Fred, chovendo</td></tr>
+      </tbody>
+      <tfoot><tr><td>Os 3 domingos da ação com dado</td><td class="num">3.030</td><td class="num">59</td><td class="num">51,36</td><td>média R$ 1.010 por domingo</td></tr></tfoot>
+    </table></div>
+
+    <h3 class="sub">Campinas</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Domingo</th><th class="num">Venda de loja</th><th class="num">Pedidos</th><th class="num">Ticket</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>02/08</td><td class="num">93</td><td class="num">2</td><td class="num">46,25</td><td class="obs">&mdash;</td></tr>
+        <tr><td>09/08</td><td class="num">164</td><td class="num">3</td><td class="num">54,70</td><td class="obs">&mdash;</td></tr>
+        <tr><td>16/08</td><td class="num nd">sem registro</td><td class="num nd">&mdash;</td><td class="num nd">&mdash;</td><td class="obs">&mdash;</td></tr>
+        <tr><td>23/08</td><td class="num">520</td><td class="num">15</td><td class="num">34,66</td><td class="obs">melhor domingo de agosto</td></tr>
+        <tr><td>30/08</td><td class="num">38</td><td class="num">1</td><td class="num">37,80</td><td class="obs">&mdash;</td></tr>
+        <tr><td>06/09</td><td class="num">509</td><td class="num">12</td><td class="num">42,42</td><td class="obs">&mdash;</td></tr>
+        <tr><td>13/09</td><td class="num">519</td><td class="num">10</td><td class="num">51,90</td><td class="obs">&mdash;</td></tr>
+        <tr><td>20/09</td><td class="num">299</td><td class="num">9</td><td class="num">33,18</td><td class="obs">&mdash;</td></tr>
+        <tr><td>27/09</td><td class="num">314</td><td class="num">6</td><td class="num">52,33</td><td class="obs">&mdash;</td></tr>
+      </tbody>
+      <tfoot><tr><td>Média de 8 domingos medidos</td><td class="num">307</td><td class="num">7,2</td><td class="num">42,33</td><td>nenhum domingo chegou perto de R$ 1.000</td></tr></tfoot>
+    </table></div>
+
+    <h3 class="sub">Piracicaba</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Domingo</th><th class="num">Venda de loja</th><th class="num">Pedidos</th><th class="num">Ticket</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>20/09</td><td class="num">386</td><td class="num">7</td><td class="num">55,14</td><td>único domingo com venda de loja em nove &mdash; <strong>maior ticket de domingo das três</strong></td></tr>
+        <tr><td>Outros 8 domingos</td><td class="num">0</td><td class="num">0</td><td class="num nd">&mdash;</td><td class="obs">só delivery</td></tr>
+      </tbody>
+    </table></div>
+    <p class="nota-tabela">Fonte: Sistema&nbsp;HC, <code>vendas_consumer_pedidos_individual</code>, lido em 05/10/2026.
+    Outubro ainda não foi importado — nenhum dia de outubro está nas tabelas acima.</p>
+
+    <div class="notes">
+      <div class="note-item"><span class="tag warn">o buraco de outubro</span><span>
+        <strong>Nenhum dia de outubro está no sistema ainda.</strong> O domingo de 04/10 que o Fred relatou
+        (~R$ 800, chovendo) não pôde ser conferido — ele está aqui como fala, não como dado. Enquanto a
+        importação de outubro não acontece, <em>o controle semana a semana do domingo não tem de onde sair</em>.
+      </span></div>
+      <div class="note-item"><span class="tag acc">a média dos 3 domingos da ação dá exatamente a meta</span><span>
+        R$ 3.030 em três domingos é <strong>R$ 1.010 de média</strong> — a meta, na vírgula. Mas a média
+        esconde o que importa: <em>dois domingos muito acima e um muito abaixo</em>. É o caso clássico em que
+        a média diz que está tudo bem e a série diz que está piorando.
+      </span></div>
+      <div class="note-item"><span class="tag bad">agosto não serve de linha de base</span><span>
+        Os domingos de agosto de Paulínia são erráticos: R$ 584, 28, 164, 887, 623. Isso não é
+        comportamento de loja que abre todo domingo — <strong>é comportamento de dia que às vezes acontece</strong>.
+        Por isso a tabela separa &ldquo;antes da ação organizada&rdquo;, e por isso a data exata em que o
+        domingo virou rotina em Paulínia é uma pergunta na aba Pendências.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Quanto o domingo vale, loja por loja</h2>
+    <p class="prose">A conta é simples e vale a pena estar escrita: <strong>4,33 domingos por mês</strong>,
+    multiplicados pela diferença entre o domingo de hoje e a meta de R$ 1.000. O buraco de cada loja contra a
+    meta mensal vem da página <a href="../../prioridades/">Prioridades</a>.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Loja</th><th class="num">Domingo hoje</th><th class="num">Ganho/mês se bater R$ 1.000</th><th class="num">Buraco da loja</th><th class="num">Quanto o domingo cobre</th></tr></thead>
+      <tbody>
+        <tr><td>Campinas</td><td class="num">307</td><td class="num alvo">+3.001</td><td class="num">11.260</td><td class="num alvo">27%</td></tr>
+        <tr><td>Piracicaba</td><td class="num">0</td><td class="num alvo">+4.333</td><td class="num">17.127</td><td class="num alvo">25%</td></tr>
+        <tr><td>Paulínia</td><td class="num">628</td><td class="num alvo">+1.611</td><td class="num">9.962</td><td class="num alvo">16%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="nota-tabela">Domingo de hoje: média de ago+set/2026 de venda de loja. Piracicaba a zero porque a
+    loja não abre no domingo. Valores em R$/mês.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag acc">o domingo é a maior ação única de Campinas</span><span>
+        <strong>27% do buraco de Campinas num dia só</strong>, sem campanha, sem desconto e sem trazer um rosto
+        novo. Nenhuma outra ação da área entrega isso com tão poucas peças móveis — o que ela exige é
+        <em>equipe escalada e divulgação</em>, não verba.
+      </span></div>
+      <div class="note-item"><span class="tag warn">esses números são de receita, não de resultado</span><span>
+        <strong>A conta de custo não está aqui, e não dá para montá-la daqui.</strong> O domingo custa mão de
+        obra — turno, becap ou hora extra — e esse valor não existe escrito em lugar nenhum. O único número de
+        diária que existe é o do gerente (R$ 300 + R$ 100 de deslocamento), que não serve. <em>Enquanto a
+        diária do domingo não tiver um número, &ldquo;o domingo deu certo&rdquo; é uma afirmação sobre
+        faturamento, não sobre lucro.</em>
+      </span></div>
+      <div class="note-item"><span class="tag bad">o buraco de Piracicaba não se resolve no domingo</span><span>
+        São 25% de cobertura, mas de um buraco que exige <strong>133% de crescimento</strong>. Mesmo com o
+        domingo perfeito, sobram R$ 12.794 por mês. O domingo é uma peça lá, não a resposta — e a ordem é
+        equipe primeiro.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA 6 · PENDÊNCIAS ════════════════════════ -->
+<div class="tab-panel" data-panel="pendencias" hidden>
+
+  <section>
+    <h2><span class="n">1</span> As perguntas que travam o desenho</h2>
+    <p class="prose">Nenhuma destas pode ser respondida por mim. Elas estão na ordem em que travam as outras —
+    as duas primeiras mudam a leitura de toda a página.</p>
+    <div class="notes">
+      <div class="note-item"><span class="tag bad">1</span><span>
+        <strong>Em que data o domingo de Paulínia virou rotina?</strong> &ldquo;Faz três semanas&rdquo; aponta
+        para 13/09, e os números concordam (R$ 1.181 e R$ 1.203 nos dois domingos seguintes). Mas o PDV
+        registra venda presencial de domingo em Paulínia desde 02/08, inclusive R$ 887 em 23/08.
+        <em>Os domingos de agosto eram a mesma coisa, ou eram avulsos?</em> A resposta decide o que é
+        &ldquo;antes&rdquo; e o que é &ldquo;depois&rdquo; no placar.
+      </span></div>
+      <div class="note-item"><span class="tag bad">2</span><span>
+        <strong>Campinas já abre domingo?</strong> O plano é &ldquo;começar em Campinas&rdquo;, mas o PDV tem
+        venda presencial em todos os domingos medidos, de 11h às 20h, com até 15 pedidos num domingo. Se a loja
+        já abre, Campinas não está na fase 1 por falta de porta aberta — está por falta de equipe escalada e
+        divulgação, e o salto é de R$ 307 para R$ 1.000, não de zero.
+      </span></div>
+      <div class="note-item"><span class="tag bad">3</span><span>
+        <strong>Quem trabalhou nos domingos de Paulínia que já aconteceram?</strong> Nome por nome, nos quatro
+        domingos. É a única forma de responder &ldquo;são as mesmas pessoas sempre?&rdquo; olhando para trás em
+        vez de para frente.
+      </span></div>
+      <div class="note-item"><span class="tag bad">4</span><span>
+        <strong>Quantas pessoas um domingo exige, e em quais funções?</strong> Depende de o cookie ser assado no
+        dia ou na véspera, e de quem atende o delivery. É conta de dentro da loja — não vou estimá-la.
+      </span></div>
+      <div class="note-item"><span class="tag bad">5</span><span>
+        <strong>Quanto é a diária de um becap, e quem o chama?</strong> Sem esse número não existe conta de
+        custo do domingo, e sem dono nomeado o domingo que depende de becap é um domingo que pode não abrir.
+      </span></div>
+      <div class="note-item"><span class="tag bad">6</span><span>
+        <strong>O domingo tem oferta ou não tem?</strong> Define a divulgação inteira. O ticket de R$ 51,36 é
+        argumento contra desconto, mas a decisão é sua.
+      </span></div>
+      <div class="note-item"><span class="tag bad">7</span><span>
+        <strong>27/09 caiu por quê?</strong> R$ 646, uma semana antes do domingo de chuva. Se houve um motivo
+        (falta de gente, falta de produto, tempo), ele é o primeiro registro do controle semana a semana. Se não
+        houve, a queda é a novidade passando — e isso é mais sério.
+      </span></div>
+      <div class="note-item"><span class="tag warn">8</span><span>
+        <strong>A jornada vira 5x2?</strong> Decisão que já estava aberta e que o domingo aproxima: sete dias de
+        operação com equipe 6x1 significa alguém trabalhando na própria folga, ou gente de fora toda semana.
+        Vale para todos os colaboradores, não só para o domingo.
+      </span></div>
+      <div class="note-item"><span class="tag warn">9</span><span>
+        <strong>Os nomes de Piracicaba.</strong> A líder nova e a atendente nova (&ldquo;Gabi ou Babi&rdquo;)
+        não estão confirmados, e o lugar da Alice no turno da noite não tem nome. Nada de Piracicaba avança sem
+        isso.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O que eu não mexi, e precisa do seu aval item a item</h2>
+    <p class="prose">Tudo abaixo é alteração no banco do Sistema&nbsp;HC. <strong>Não encostei em nenhuma</strong> —
+    estão aqui descritas com o efeito que cada uma tem, para você liberar uma por uma.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>O que mudaria</th><th>Onde</th><th>Efeito real</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Domingo passa a contar como dia de loja aberta</td>
+          <td><code>store_horarios</code>, linha <code>domingo</code> &mdash; <code>loja_aberta</code>,
+          <code>loja_abre</code>, <code>loja_fecha</code>. Hoje: fechada nas <strong>três lojas</strong>.</td>
+          <td><strong>Liga os 4 checklists de domingo</strong> (abertura, meio do dia, fechamento de loja,
+          fechamento de delivery). É o item que resolve mais com menos: dá rotina e dá medição ao domingo de uma
+          vez. <em>Começar só por Paulínia, que já abre.</em></td>
+        </tr>
+        <tr>
+          <td>Corrigir a contradição do <code>funciona_domingo</code></td>
+          <td><code>stores.funciona_domingo</code>. Hoje: Paulínia <code>false</code> (e é a que abre),
+          Campinas e Piracicaba <code>true</code>.</td>
+          <td>Dois campos do sistema discordam entre si. Vale descobrir o que cada um controla antes de mexer —
+          posso rastrear onde cada um é lido, se você quiser.</td>
+        </tr>
+        <tr>
+          <td>Cadastrar a equipe de Paulínia</td>
+          <td><code>colaboradores_rh</code>. Hoje: <strong>zero ativos</strong> em Paulínia; Luciana, Renata e
+          Tiago não existem lá.</td>
+          <td>É o que faz o relatório de ponto saber quem deveria estar na loja no domingo. Envolve dado de
+          pessoa e de salário &mdash; nada disso entra sem você passar os valores.</td>
+        </tr>
+        <tr>
+          <td>Criar um turno de domingo</td>
+          <td><code>turnos_rh</code>. Hoje: dos 6 turnos, só os 2 noturnos têm domingo.</td>
+          <td>Sem turno que cubra a faixa de 13h a 19h num domingo, quem for escalado fica num horário que o
+          ponto não confere. <strong>É pré-requisito de escalar qualquer pessoa.</strong></td>
+        </tr>
+        <tr>
+          <td>Atualizar o cadastro do Henrique</td>
+          <td><code>colaboradores_rh</code>. Hoje: ativo em Piracicaba; a operação diz que ele foi desligado em
+          05/10.</td>
+          <td>Cadastro atrasado faz o sistema contar gente que não está lá — e o único &ldquo;ativo&rdquo; de
+          Piracicaba hoje é ele.</td>
+        </tr>
+        <tr>
+          <td>Cadastrar os feriados de Campinas</td>
+          <td><code>checklist_feriados</code>. Hoje: Paulínia e Piracicaba têm 7 cada; <strong>Campinas tem
+          zero</strong>.</td>
+          <td>Em feriado, Campinas cai na regra do dia da semana. O caso que importa:
+          <strong>15/11/2026 cai num domingo</strong> e as outras duas lojas já o têm como loja aberta 13h&ndash;18h.</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="note-item"><span class="tag acc">a ordem que eu sugeriria, se fosse escolher uma só</span><span>
+      <strong>O domingo de Paulínia no <code>store_horarios</code>.</strong> É uma linha, numa loja, e liga os
+      quatro checklists do dia que já está acontecendo às cegas há três semanas — abertura, meio do dia,
+      fechamento, e a avaliação de foto por IA que vem junto. É o único item da lista que responde a pergunta
+      &ldquo;essas pessoas são boas?&rdquo; sem ninguém ir à loja no domingo.
+    </span></div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> O que dá pra fazer sem aval de ninguém</h2>
+    <div class="notes">
+      <div class="note-item"><span class="tag good">hoje</span><span>
+        <strong>Conferir o horário de domingo publicado</strong> no Google, no iFood e no 99Food das lojas que
+        abrem. Cinco minutos, zero decisão — e se estiver errado, está desmentindo toda a divulgação do domingo.
+      </span></div>
+      <div class="note-item"><span class="tag good">hoje</span><span>
+        <strong>Um papel na parede com nome e telefone de quem atende no domingo.</strong> É o item mais barato
+        da página e resolve o maior risco do dia: a pessoa está sem rede.
+      </span></div>
+      <div class="note-item"><span class="tag good">esta semana</span><span>
+        <strong>Ler o número do domingo na segunda-feira.</strong> Foi a falta disso que deixou a queda de 27/09
+        passar duas semanas sem ninguém ver. Depende da importação de outubro entrar no sistema.
+      </span></div>
+    </div>
+  </section>
+
+</div>
+
+  <footer>
+    Página criada em 05/10/2026, a partir da conversa com o Fred no mesmo dia e dos dados do
+    Sistema&nbsp;HC lidos na data. Venda de loja = caixa + balcão + mesa, sem delivery.
+    Outubro ainda não está importado. Ações irmãs:
+    <a href="../">Ações de loja</a> ·
+    <a href="../../prioridades/">Prioridades</a> ·
+    <a href="../../certificacao-holy-cookie/">Certificação de Funções</a> ·
+    <a href="../../pessoas/">Pessoas</a>.
+  </footer>
+
+</div>
+
+<script>
+  var ABAS = ['briefing', 'lojas', 'equipe', 'divulgacao', 'placar', 'pendencias'];
+
+  function abrirAba(nome) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) {
+      var ativo = b.dataset.tab === nome;
+      b.classList.toggle('active', ativo);
+      b.setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    document.querySelectorAll('.tab-panel').forEach(function (p) {
+      p.hidden = p.dataset.panel !== nome;
+    });
+    if (nome !== 'briefing') location.hash = nome;
+    else history.replaceState(null, '', location.pathname);
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { abrirAba(b.dataset.tab); window.scrollTo({ top: 0 }); });
+  });
+  var inicial = location.hash.replace('#', '');
+  if (ABAS.indexOf(inicial) > 0) abrirAba(inicial);
+
+  // links internos href="#divulgacao" trocam de aba, não só o hash
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var alvo = a.getAttribute('href').slice(1);
+    if (ABAS.indexOf(alvo) < 0) return;
+    e.preventDefault();
+    abrirAba(alvo);
+    window.scrollTo({ top: 0 });
+  });
+
+  // ── cards: escopo pelo .bloco mais próximo, pro padrão poder aninhar sem colidir
+  document.addEventListener('click', function (e) {
+    var bt = e.target.closest('.card-btn[data-alvo]');
+    if (!bt) return;
+    var bloco = bt.closest('.bloco');
+    if (!bloco) return;
+    var alvo = bt.dataset.alvo;
+    var jaAtivo = bt.classList.contains('ativo');
+    bloco.querySelectorAll(':scope > .grade > [data-alvo]').forEach(function (b) {
+      b.classList.toggle('ativo', b === bt && !jaAtivo);
+    });
+    bloco.querySelectorAll(':scope > .visor > .painel[data-alvo]').forEach(function (p) {
+      p.hidden = jaAtivo || p.dataset.alvo !== alvo;
+    });
+    var vazio = bloco.querySelector(':scope > .visor > .visor-vazio');
+    if (vazio) vazio.hidden = !jaAtivo;
+  });
+
+  // ── fluxo: caixinha → seta → caixinha
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.passo-caixa[data-detalhe]');
+    if (!b) return;
+    var fluxo = b.closest('.fluxo');
+    var detalhe = fluxo.nextElementSibling;
+    if (!detalhe || !detalhe.classList.contains('passo-detalhe')) return;
+    fluxo.querySelectorAll('.passo-caixa').forEach(function (x) { x.classList.toggle('ativo', x === b); });
+    detalhe.innerHTML = b.dataset.detalhe;
+    detalhe.classList.add('aberto');
+  });
+
+  // ── checkboxes: estado só no navegador de quem abre
+  (function () {
+    var CHAVE = 'venda-no-domingo-checklist-v1';
+    var estado = {};
+    try { estado = JSON.parse(localStorage.getItem(CHAVE) || '{}'); } catch (e) {}
+    document.querySelectorAll('.checklist input[type="checkbox"]').forEach(function (cb) {
+      var id = cb.dataset.id;
+      if (!id) return;
+      if (Object.prototype.hasOwnProperty.call(estado, id)) { cb.checked = estado[id]; }
+      cb.closest('li').classList.toggle('marcado', cb.checked);
+      cb.addEventListener('change', function () {
+        estado[id] = cb.checked;
+        try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) {}
+        cb.closest('li').classList.toggle('marcado', cb.checked);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
