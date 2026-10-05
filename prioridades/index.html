@@ -149,6 +149,22 @@
   .item-conteudo h5 { font-size: .9375rem; font-weight: 600; color: var(--ink); font-family: var(--sans); }
   .item-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
 
+  /* ---------- tabela de números ---------- */
+  .tnum-wrap { overflow-x: auto; }
+  .tnum { width: 100%; border-collapse: collapse; font-size: .8125rem; min-width: 30rem; }
+  .tnum th, .tnum td { padding: .4rem .5rem; text-align: right; border-bottom: 1px solid var(--rule-soft); }
+  .tnum th:first-child, .tnum td:first-child { text-align: left; }
+  .tnum thead th { font-family: var(--mono); font-size: .625rem; letter-spacing: .08em;
+                   text-transform: uppercase; color: var(--ink-faint); font-weight: 700;
+                   border-bottom: 1px solid var(--rule); }
+  .tnum td { font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .tnum td:first-child { color: var(--ink); font-weight: 600; }
+  .tnum tfoot td { font-weight: 700; color: var(--ink); border-top: 1px solid var(--rule);
+                   border-bottom: none; background: var(--surface-2); }
+  .tnum .acima { color: var(--bad); font-weight: 700; }
+  .tnum .abaixo { color: var(--good); font-weight: 700; }
+  .tnum-nota { font-size: .75rem; color: var(--ink-faint); }
+
   /* ---------- visor de conteúdo ---------- */
   #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
            padding: 1.5rem 1.5rem 1.75rem; scroll-margin-top: 1.5rem; }
@@ -231,7 +247,7 @@
     <div class="grade-topicos" data-grupo="custos" hidden>
       <button class="topico-btn" data-topico="custos-projecao"><span class="tnome">Projeção de custos do mês</span><span class="tag acc">instrumento principal</span></button>
       <button class="topico-btn" data-topico="custos-nf"><span class="tnome">Piracicaba — emitir nota fiscal</span><span class="tag bad">não está emitindo</span></button>
-      <button class="topico-btn" data-topico="custos-coordenacao"><span class="tnome">Gasto de coordenação</span><span class="tag warn">cabe no orçamento?</span></button>
+      <button class="topico-btn" data-topico="custos-coordenacao"><span class="tnome">Gasto de coordenação</span><span class="tag acc">teto: R$ 5.200/mês</span></button>
       <button class="topico-btn" data-topico="custos-folha-paulinia"><span class="tnome">Paulínia — folha de pagamento</span><span class="tag warn">Luciana, Tiago e Renata</span></button>
       <button class="topico-btn" data-topico="custos-varredura"><span class="tnome">O que mais dá pra reduzir</span><span class="tag acc">varredura</span></button>
     </div>
@@ -998,14 +1014,211 @@
       </div>
 
       <div class="topico-conteudo" data-topico="custos-coordenacao" hidden>
-        <h3>Gasto de coordenação<span class="tag warn">cabe no orçamento?</span></h3>
-        <div class="note-item"><span class="tag warn">o que verificar</span><span>
-          Ver se o <strong>gasto de coordenação cabe no orçamento</strong>. É um dos dois itens que o Fred
-          listou pra olhar de perto agora, junto com a projeção do mês.
+        <h3>Gasto de coordenação<span class="tag acc">teto: R$ 5.200/mês</span></h3>
+        <div class="note-item"><span class="tag acc">a conta, em uma linha</span><span>
+          Uma ida do gerente custa <strong>R$ 400</strong> &mdash; R$ 300 de diária mais R$ 100 de deslocamento.
+          O combinado (<strong>1 dia inteiro por semana em cada loja</strong>) dá <strong>R$ 1.733 por
+          loja</strong>, <strong>R$ 5.200/mês</strong> nas três e <strong>R$ 62.400 no ano</strong>. Esse é o
+          teto que faltava pra pergunta &ldquo;cabe no orçamento?&rdquo; ter resposta.
         </span></div>
-        <div class="note-item"><span class="tag bad">pergunta aberta</span><span>
-          Qual é o número e qual é o teto. Sem os dois, &ldquo;cabe ou não cabe&rdquo; não tem resposta.
+        <div class="note-item"><span class="tag bad">onde estamos &mdash; 05/10/2026</span><span>
+          Nas duas semanas já combinadas são <strong>10 idas contra as 6 do teto</strong>: R$ 4.000 contra
+          R$ 2.400, <strong>R$ 1.600 a mais</strong>. Se esse ritmo virar o mês inteiro, são R$ 8.667 contra
+          R$ 5.200 &mdash; <strong>R$ 3.467 a mais por mês, R$ 41.600 no ano</strong>.
         </span></div>
+        <div class="note-item"><span class="tag warn">o que a conta mostra</span><span>
+          O problema não é só volume, é <strong>distribuição</strong>. Piracicaba está com 8 das 10 idas
+          &mdash; e tem motivo com data (o treinamento da equipe nova até 18/10). <strong>Paulínia recebeu
+          zero</strong>, e é justamente a loja que está deixando faltar produto. O gerente está indo onde
+          grita, não onde está programado.
+        </span></div>
+
+        <h4 class="sub">A conta e as quatro frentes<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> &mdash; clique num card</span></h4>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="coord-teto">O teto &mdash; R$ 5.200/mês</button>
+          <button class="item-btn" data-item="coord-real">O que está sendo gasto</button>
+          <button class="item-btn" data-item="coord-dia-fixo">1. Dia fixo por loja</button>
+          <button class="item-btn" data-item="coord-compras">2. Compras e transporte</button>
+          <button class="item-btn" data-item="coord-estoque">3. Estoque de segurança &mdash; Paulínia</button>
+          <button class="item-btn" data-item="coord-treinamento">4. Treinamento é da loja</button>
+          <button class="item-btn" data-item="coord-abertas">O que falta decidir</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique num card para ver a conta ou a frente.</p>
+
+          <div class="item-conteudo" data-item="coord-teto" hidden>
+            <h5>O teto &mdash; R$ 5.200/mês</h5>
+            <span class="item-tags"><span class="tag acc">orçamento de gestão</span></span>
+            <p>O modelo pelo qual o Eduardo foi contratado: <strong>um dia inteiro por semana em cada
+            loja</strong> &mdash; um em Piracicaba, um em Paulínia, um em Campinas. Nesse dia ele faz supervisão
+            e o administrativo das quatro responsabilidades dele: <strong>compras, financeiro, manutenção da
+            loja e recrutamento e seleção</strong>.</p>
+            <p>A R$ 400 por ida e 4,33 semanas no mês, o orçamento de gestão fica assim:</p>
+            <div class="tnum-wrap"><table class="tnum">
+              <thead><tr><th>Loja</th><th>Idas/mês</th><th>Diária</th><th>Deslocamento</th><th>Total/mês</th></tr></thead>
+              <tbody>
+                <tr><td>Piracicaba</td><td>4,33</td><td>1.300</td><td>433</td><td>1.733</td></tr>
+                <tr><td>Paulínia</td><td>4,33</td><td>1.300</td><td>433</td><td>1.733</td></tr>
+                <tr><td>Campinas</td><td>4,33</td><td>1.300</td><td>433</td><td>1.733</td></tr>
+              </tbody>
+              <tfoot><tr><td>Total</td><td>13</td><td>3.900</td><td>1.300</td><td>5.200</td></tr></tfoot>
+            </table></div>
+            <p class="tnum-nota">Valores em R$. 13 idas por mês, R$ 62.400 no ano.</p>
+            <p><strong>É esse o teto a defender com o Eduardo:</strong> 1 dia por loja por semana, e nada fora
+            disso sem aprovação.</p>
+            <div class="note-item"><span class="tag warn">premissa</span><span>
+              A diária é <strong>por dia trabalhado</strong>, sem piso mensal contratado, e o deslocamento é
+              R$ 100 igual pras três lojas. Se alguma das duas coisas for diferente, o teto muda &mdash; está
+              no card <strong>O que falta decidir</strong>.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="coord-real" hidden>
+            <h5>O que está sendo gasto &mdash; 05/10/2026</h5>
+            <span class="item-tags"><span class="tag bad">+R$ 1.600 em 2 semanas</span></span>
+            <p>Só o que já está combinado nas duas semanas, sem projeção:</p>
+            <div class="tnum-wrap"><table class="tnum">
+              <thead><tr><th>Loja</th><th>Esta semana</th><th>Semana que vem</th><th>Idas</th><th>Custo</th><th>Teto</th><th>Diferença</th></tr></thead>
+              <tbody>
+                <tr><td>Piracicaba</td><td>4</td><td>4</td><td>8</td><td>3.200</td><td>800</td><td class="acima">+2.400</td></tr>
+                <tr><td>Campinas</td><td>2</td><td>&mdash;</td><td>2</td><td>800</td><td>800</td><td>0</td></tr>
+                <tr><td>Paulínia</td><td>0</td><td>&mdash;</td><td>0</td><td>0</td><td>800</td><td class="abaixo">&minus;800</td></tr>
+              </tbody>
+              <tfoot><tr><td>Total</td><td>6</td><td>4</td><td>10</td><td>4.000</td><td>2.400</td><td class="acima">+1.600</td></tr></tfoot>
+            </table></div>
+            <p class="tnum-nota">Valores em R$. A semana que vem ainda não está fechada pra Campinas e Paulínia.</p>
+            <p>Dez idas contra as seis do teto. Se esse ritmo (5 idas por semana) for o mês inteiro, são
+            <strong>R$ 8.667 contra R$ 5.200</strong> &mdash; R$ 3.467 a mais por mês, R$ 41.600 no ano. Nesse
+            ritmo, <strong>Piracicaba sozinha custa R$ 6.933/mês</strong>: 4x o orçamento dela e quase o das
+            três lojas somadas.</p>
+            <div class="note-item"><span class="tag good">o excedente de Piracicaba tem nome e tem data</span><span>
+              As 8 idas são o <strong>treinamento da equipe nova</strong>, de 05 a 18/10 &mdash; está no card
+              <strong>Treinamento com o Eduardo</strong>, no grupo Equipe. É investimento com prazo, não
+              desorganização. <strong>O teste é a semana de 19/10:</strong> se Piracicaba não voltar pra 1 ida
+              por semana depois da validação, aí sim o gasto saiu do controle.
+            </span></div>
+            <div class="note-item"><span class="tag bad">o que não tem explicação</span><span>
+              <strong>Paulínia com zero visita</strong> na quinzena, sendo a loja com falta de produto. O
+              orçamento dela não foi economizado &mdash; foi gasto em Piracicaba.
+            </span></div>
+            <div class="note-item"><span class="tag warn">o que falta na conta</span><span>
+              Não dá pra saber quais idas foram supervisão, transporte, treinamento ou emergência &mdash;
+              <strong>esse registro não existe</strong>. É o que o card <strong>Dia fixo por loja</strong>
+              cria, e sem ele não há como discutir corte com fato na mão.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="coord-dia-fixo" hidden>
+            <h5>1. Dia fixo por loja</h5>
+            <span class="item-tags"><span class="tag acc">é o que destrava as outras três</span></span>
+            <p>Definir com o Eduardo <strong>o dia da semana de cada loja</strong> e concentrar tudo nele:
+            supervisão, compras, financeiro, manutenção e recrutamento. Enquanto o dia não é fixo, a entrega
+            chega picada e cada lembrança vira uma ida de R$ 400.</p>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-id="coord-definir-dias">Definir o dia da semana de cada loja &mdash; Piracicaba, Paulínia e Campinas</label></li>
+              <li><label><input type="checkbox" data-id="coord-aprovacao">Ida fora do dia fixo só com aprovação prévia, e com o motivo escrito</label></li>
+              <li><label><input type="checkbox" data-id="coord-motivo">O motivo cai sempre numa das 4 responsabilidades: compras, financeiro, manutenção ou recrutamento</label></li>
+            </ul>
+            <div class="note-item"><span class="tag acc">por que a aprovação prévia importa</span><span>
+              Em 30 dias ela vira <strong>a lista real dos problemas</strong> que impedem o modelo de 1 dia.
+              Hoje essa lista não existe: quando o Eduardo diz que &ldquo;tem outros problemas na loja&rdquo;,
+              não há com o que responder. Com o registro, cada motivo que se repete vira um item pra resolver
+              &mdash; e o gasto extra passa a ter nome, em vez de virar discussão.
+            </span></div>
+            <div class="note-item"><span class="tag warn">amarra com o grupo Equipe</span><span>
+              É o mesmo item do card <strong>Novo hábito: visita semanal + checklist de equipe</strong>. Lá ele
+              é hábito de gestão; aqui é linha de orçamento. <strong>É a mesma decisão</strong>, e enquanto
+              estiver &ldquo;a discutir&rdquo; nos dois lugares, o teto não existe na prática.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="coord-compras" hidden>
+            <h5>2. Compras e transporte</h5>
+            <span class="item-tags"><span class="tag warn">o que mais consome dia</span></span>
+            <p>É o trabalho que mais puxa o Eduardo pra estrada. Como ele vai várias vezes, acaba
+            <strong>levando as compras picadas</strong> &mdash; e tem dia em que a ida inteira é só uma entrega
+            ou outra. Cada uma dessas custa R$ 400 entre diária e deslocamento, e come o tempo que deveria ser
+            de supervisão.</p>
+            <p>O que precisa ser levantado com ele, <strong>item a item</strong>:</p>
+            <ul class="pontos">
+              <li><strong>O que</strong> ele transporta hoje &mdash; produto, insumo, material, equipamento.</li>
+              <li><strong>De onde pra onde</strong>, e <strong>com que frequência</strong>.</li>
+              <li><strong>Por que não vai direto</strong> &mdash; entrega do fornecedor, transportadora ou retirada pela própria loja.</li>
+            </ul>
+            <div class="note-item"><span class="tag acc">a regra que fecha o assunto</span><span>
+              Transporte pode <strong>pegar carona no dia fixo, nunca ser o motivo da ida</strong>. Se a única
+              razão de ir é entregar, não é visita de gerente &mdash; é frete. E frete se compara com o preço
+              de um frete, não com uma diária de R$ 400.
+            </span></div>
+            <div class="note-item"><span class="tag warn">amarra com a divisão de cargos</span><span>
+              Compras <strong>saiu do líder de loja</strong> na decisão de 15/09 &mdash; card <strong>Base:
+              dividir atividades por cargo</strong>. Sair do líder não quer dizer virar transporte do gerente.
+              Definir quem compra o quê é pré-requisito desse levantamento.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="coord-estoque" hidden>
+            <h5>3. Estoque de segurança &mdash; Paulínia</h5>
+            <span class="item-tags"><span class="tag bad">está faltando produto</span></span>
+            <p>Paulínia tem <strong>deixado faltar produto</strong> por falta de gestão do estoque de segurança.
+            Falta gera dois custos: a <strong>venda perdida</strong> e a <strong>compra de urgência</strong>
+            &mdash; mais cara, e normalmente com uma ida extra do gerente junto.</p>
+            <p>A responsabilidade passa pra <strong>líder de loja</strong>: ela acompanha o nível, projeta o
+            consumo e <strong>pede com antecedência</strong>, dentro do prazo do dia fixo do gerente. Não é ela
+            quem compra &mdash; é ela quem avisa a tempo.</p>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-id="coord-estoque-minimo">Definir o estoque mínimo de segurança por item em Paulínia</label></li>
+              <li><label><input type="checkbox" data-id="coord-estoque-pedido">A líder passa a pedir com antecedência, respeitando o dia fixo da loja</label></li>
+              <li><label><input type="checkbox" data-id="coord-estoque-registro">Toda falta de produto é registrada com o motivo &mdash; é o que mostra se o problema é processo ou pessoa</label></li>
+            </ul>
+            <div class="note-item"><span class="tag bad">a linha que precisa ficar clara</span><span>
+              <strong>O líder projeta e pede; o gerente compra.</strong> Sem isso escrito, &ldquo;compras saiu
+              do líder&rdquo; é lido como &ldquo;estoque não é problema meu&rdquo; &mdash; que é exatamente
+              onde a loja está hoje.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="coord-treinamento" hidden>
+            <h5>4. Treinamento é da loja, não do gerente</h5>
+            <span class="item-tags"><span class="tag bad">R$ 400 neste fim de semana</span></span>
+            <p>Com a troca grande de colaboradores, o treinamento sobrou pro Eduardo. O exemplo é
+            <strong>deste domingo</strong>: ele vai a Campinas treinar uma funcionária nova &mdash; R$ 300 de
+            diária mais R$ 100 de deslocamento. Quem deveria treinar é <strong>um funcionário da própria
+            loja</strong>.</p>
+            <p>O gerente contrata; <strong>quem forma é a loja</strong>. Enquanto o treinamento for dele, cada
+            contratação nova vira um pacote de idas extras &mdash; e a conta de recrutamento não fecha nunca,
+            porque a rotatividade é justamente o que o cargo deveria estar resolvendo.</p>
+            <ul class="checklist">
+              <li><label><input type="checkbox" data-id="coord-trein-quem">Definir quem treina em cada loja &mdash; funcionário de referência, não o gerente</label></li>
+              <li><label><input type="checkbox" data-id="coord-trein-campinas">O treinamento de Campinas deste domingo sai com gente da loja</label></li>
+              <li><label><input type="checkbox" data-id="coord-trein-rotina">Rotina de treinamento escrita, pra não depender de quem está na escala</label></li>
+            </ul>
+            <div class="note-item"><span class="tag warn">do que isso depende</span><span>
+              De ter <strong>um bom líder de loja</strong> em cada unidade &mdash; é o pré-requisito. Em
+              Piracicaba a líder nova está em treinamento com o próprio Eduardo até 18/10: ali o gasto é
+              investimento com data, não padrão. O que não pode é <strong>repetir isso a cada
+              contratação</strong>.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="coord-abertas" hidden>
+            <h5>O que falta decidir</h5>
+            <span class="item-tags"><span class="tag bad">3 perguntas</span></span>
+            <div class="note-item"><span class="tag bad">1. tem piso mínimo contratado?</span><span>
+              Com 13 idas no mês, o Eduardo recebe <strong>R$ 5.200</strong>. Isso segura o gerente, ou o corte
+              custa a pessoa? A resposta <strong>muda o teto</strong>, não o gasto &mdash; se tiver piso, parte
+              do custo é fixo e a economia real é só o deslocamento.
+            </span></div>
+            <div class="note-item"><span class="tag bad">2. o deslocamento é R$ 100 pras três lojas?</span><span>
+              Se Campinas for a base dele, ou ficar mais perto, o orçamento de Campinas cai e o das outras duas
+              pesa mais. A conta aqui assume <strong>R$ 100 igual pras três</strong>.
+            </span></div>
+            <div class="note-item"><span class="tag bad">3. quem compra o quê?</span><span>
+              Depois que compras saiu do líder de loja, a divisão não foi escrita. Sem ela, o levantamento de
+              transporte não tem onde chegar &mdash; e o estoque de segurança de Paulínia fica sem dono.
+            </span></div>
+          </div>
+        </div>
       </div>
 
       <div class="topico-conteudo" data-topico="custos-folha-paulinia" hidden>
@@ -1112,7 +1325,7 @@
     turno da noite sem nome depois da saída da Alice, banco de freelancers como passo 2, validação da checklist
     80/20 à distância, Tiago e a folha de Paulínia, a Renata sem carteira assinada, a jornada 6x1 vs 5x2 em
     Campinas, o quadro novo de redução de custos do caixa (projeção do mês, nota fiscal de Piracicaba, gasto de
-    coordenação) e o risco de calor em out/nov. <strong>Corrigido na mesma conversa:</strong> o Cardápio de Verão
+    coordenação &mdash; este agora com o <strong>orçamento de gestão fechado: R$ 1.733 por loja, R$ 5.200/mês nas três lojas</strong>, contra as 10 idas das duas semanas da virada de outubro) e o risco de calor em out/nov. <strong>Corrigido na mesma conversa:</strong> o Cardápio de Verão
     <strong>não foi lançado</strong> — o lançamento é em outubro ou novembro e o trabalho é deste mês — e as
     <strong>campanhas de manutenção não foram feitas</strong>, com as duas primeiras sendo anúncios na região
     (tráfego) e influenciadores, com foco grande em Piracicaba. Entrou a <strong>meta de faturamento diário das
