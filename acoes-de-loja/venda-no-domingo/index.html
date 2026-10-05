@@ -248,6 +248,7 @@
     <button class="tab-btn active" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
     <button class="tab-btn" data-tab="lojas" role="tab" aria-selected="false">As três lojas</button>
     <button class="tab-btn" data-tab="equipe" role="tab" aria-selected="false">Equipe</button>
+    <button class="tab-btn" data-tab="conta" role="tab" aria-selected="false">A conta</button>
     <button class="tab-btn" data-tab="divulgacao" role="tab" aria-selected="false">Divulgação</button>
     <button class="tab-btn" data-tab="placar" role="tab" aria-selected="false">Placar</button>
     <button class="tab-btn" data-tab="pendencias" role="tab" aria-selected="false">Pendências</button>
@@ -260,7 +261,7 @@
     <div class="strip">
       <div><span class="v">R$ 1.000</span><span class="s">a meta de um domingo, em venda de loja</span></div>
       <div><span class="v">437 &rarr; 1.010</span><span class="s">a rampa de Paulínia: 6 primeiros domingos, 3 últimos</span></div>
-      <div><span class="v">15h&ndash;17h</span><span class="s">onde cai 2/3 da venda do domingo</span></div>
+      <div><span class="v">R$ 538</span><span class="s">a margem que os R$ 1.000 de loja deixam</span></div>
       <div><span class="v">7 por domingo</span><span class="s">pedidos que batem na porta fechada de Campinas</span></div>
     </div>
   </section>
@@ -396,6 +397,20 @@
         e o Tiago não estão lá. E das 6 pessoas ativas nas três lojas, <strong>uma só tem domingo na escala</strong>:
         a Nicole, em Campinas, com folga quinzenal de domingo. A pergunta &ldquo;quem é a equipe de
         domingo?&rdquo; <em>hoje não tem resposta no sistema</em> — nem na loja que abre domingo há dez semanas.
+      </span></div>
+      <div class="note-item"><span class="tag good">o líder que falta se paga no próprio domingo</span><span>
+        O problema nº 1 do Fred é não ter líder para conduzir o domingo, e a sugestão dele é um líder fixo a
+        <strong>R$ 25/hora</strong> — 50% acima do auxiliar de R$ 17. A conta responde sem drama: um domingo de
+        R$ 1.000 de loja deixa <strong>R$ 538 de margem</strong> (depois de CMV, embalagem, imposto e
+        royalties), e o turno de 12h&ndash;18h desse líder custa <strong>R$ 150</strong>. Com um auxiliar ao
+        lado, R$ 252 — <em>e ainda sobram R$ 286 sem encostar na margem do delivery</em>. Ver
+        <a href="#conta">A conta</a>.
+      </span></div>
+      <div class="note-item"><span class="tag bad">e o backup de emergência custa o dobro do titular</span><span>
+        Hoje <strong>não existe nenhum becap</strong>. Se faltar alguém, ou a loja atende reduzida, ou vai o
+        Eduardo a <strong>R$ 300 de diária</strong> — o dobro do turno do líder, e <strong>56% da margem do
+        domingo</strong>. Um freelancer de 6 horas custa R$ 102. <em>A diferença de R$ 198 por falta coberta é
+        a justificativa inteira do banco de freelancers.</em>
       </span></div>
       <div class="note-item"><span class="tag acc">o teto do domingo é metade de um sábado</span><span>
         O sábado de Paulínia faz <strong>R$ 2.284</strong> e 55 pedidos, em média, no mesmo mês. O melhor
@@ -791,14 +806,126 @@
 
     <div class="bloco">
       <div class="grade">
-        <button class="card-btn" data-alvo="eq1"><span class="cnome">1 · Quem é a equipe de domingo</span><span class="cmeta">as mesmas pessoas? quantas? qual calendário?</span></button>
-        <button class="card-btn" data-alvo="eq2"><span class="cnome">2 · Os becaps</span><span class="cmeta">o banco de freelancers</span></button>
-        <button class="card-btn" data-alvo="eq3"><span class="cnome">3 · Checklist de treinamento</span><span class="cmeta">em que atividades treinar</span></button>
-        <button class="card-btn" data-alvo="eq4"><span class="cnome">4 · A pessoa é boa?</span><span class="cmeta">a régua, e quem aplica</span></button>
+        <button class="card-btn" data-alvo="eq0"><span class="cnome">1 · Quem é o líder do domingo</span><span class="cmeta">o problema nº 1 · R$ 25/h, todos os domingos</span></button>
+        <button class="card-btn" data-alvo="eq1"><span class="cnome">2 · Quem é a equipe de domingo</span><span class="cmeta">as mesmas pessoas? quantas? qual calendário?</span></button>
+        <button class="card-btn" data-alvo="eq5"><span class="cnome">3 · Elas sabem atender?</span><span class="cmeta">só fizeram delivery · validar no 1º fim de semana</span></button>
+        <button class="card-btn" data-alvo="eq2"><span class="cnome">4 · Os becaps</span><span class="cmeta">hoje são zero · precisa de 2 ou 3</span></button>
+        <button class="card-btn" data-alvo="eq3"><span class="cnome">5 · Checklist de treinamento</span><span class="cmeta">em que atividades treinar</span></button>
+        <button class="card-btn" data-alvo="eq4"><span class="cnome">6 · A pessoa é boa?</span><span class="cmeta">a régua, e quem aplica</span></button>
       </div>
 
       <div class="visor">
         <p class="visor-vazio">Clique numa pergunta.</p>
+
+        <!-- ───── 0 · QUEM É O LÍDER ───── -->
+        <div class="painel" data-alvo="eq0" hidden>
+          <span class="ptit">Quem é o líder do domingo <span class="tag bad">o problema nº 1</span></span>
+          <div class="grupo-descricao">
+            Nas palavras do Fred, em 05/10/2026: <strong>&ldquo;não tem um líder bom o suficiente para
+            conduzir o domingo&rdquo;</strong>. Essa é a trava de verdade — vem antes de equipe, antes de
+            treinamento e antes de divulgação. Uma loja aberta sem alguém conduzindo não é uma loja aberta,
+            é um risco aberto.<br><br>
+            <strong>A Nicole é a pessoa mais experiente da loja, e não resolve.</strong> Dois motivos, os
+            dois do Fred: ela <em>não tem capacidade de liderar os auxiliares</em>, e ela vai
+            <em>dia sim, dia não</em> — o que o cadastro confirma (<code>folga_domingo = quinzenal</code>:
+            folga 11/10 e 25/10, trabalha 18/10 e 01/11). <strong>Metade dos domingos ela não está.</strong>
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="eq0a"><span class="cnome">A vaga, como o Fred desenhou</span><span class="cmeta">R$ 25/h · todos os domingos · 12h–18h + delivery</span></button>
+              <button class="card-btn" data-alvo="eq0b"><span class="cnome">A conta dessa vaga fecha?</span><span class="cmeta">sim, e com folga</span></button>
+              <button class="card-btn" data-alvo="eq0c"><span class="cnome">Por que a Nicole não resolve</span><span class="cmeta">dois motivos, nenhum de esforço</span></button>
+              <button class="card-btn" data-alvo="eq0d"><span class="cnome">&ldquo;Precisa entender se ela fica&rdquo;</span><span class="cmeta">a pergunta que o Fred deixou aberta</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="eq0a" hidden>
+                <span class="ptit">A vaga, como o Fred desenhou</span>
+                <span class="psub">primeira sugestão dele, 05/10/2026 — não é proposta minha</span>
+                <dl class="ficha">
+                  <dt>o que é</dt><dd>Um líder que <strong>queira todos os domingos</strong> — não um rodízio. Um nome fixo, toda semana.</dd>
+                  <dt>quanto ganha</dt><dd><strong>50% a mais que um auxiliar.</strong> O auxiliar está a <strong>R$ 17/hora</strong>; essa pessoa fica em <strong>~R$ 25/hora</strong>.</dd>
+                  <dt>o que faz</dt><dd>Três coisas, e as três são requisito: <strong>atendimento presencial</strong> · a <strong>loja das 12h às 18h</strong> · e <strong>depois o delivery</strong>.</dd>
+                  <dt>por que as três</dt><dd>Porque é uma pessoa só cobrindo o dia inteiro. Quem só atende não fecha; quem só fecha não vende; quem sai às 18h deixa o delivery sem dono até as 23h30.</dd>
+                  <dt>a pergunta de pé</dt><dd><em>&ldquo;Precisa entender se ela fica.&rdquo;</em> Um domingo fixo é a folga da pessoa — o risco não é contratar, é a rotatividade nessa vaga.</dd>
+                </dl>
+                <div class="note-item"><span class="tag acc">a janela de 12h–18h bate com o dado</span><span>
+                  Em Paulínia, <strong>15h a 17h concentra 63% dos pedidos</strong> e o movimento vai de 13h às
+                  19h. Em Campinas, quem bate na porta aparece de 11h às 20h, com pico às 15h. <strong>O turno
+                  de 12h–18h cobre o pico das duas</strong> — a ponta que ele deixa de fora é 18h–19h, que em
+                  Paulínia vale R$ 249 nos três domingos medidos (8% do total).
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq0b" hidden>
+                <span class="ptit">A conta dessa vaga fecha?</span>
+                <span class="psub">resposta curta: sim, e com folga — ver a aba <a href="#conta">A conta</a></span>
+                <p class="prose">Um domingo de Campinas com R$ 1.000 de loja deixa <strong>R$ 538 de
+                margem</strong> só da loja (depois de CMV, embalagem, imposto e royalties). O líder de
+                <strong>12h às 18h custa R$ 150</strong>; esticado até as 23h30, <strong>R$ 287</strong>.</p>
+                <div class="tablewrap"><table>
+                  <thead><tr><th>Equipe</th><th class="num">Custo</th><th class="num">Sobra só da loja</th></tr></thead>
+                  <tbody>
+                    <tr><td>1 líder 12h&ndash;18h (6 h)</td><td class="num">150</td><td class="num alvo">388</td></tr>
+                    <tr><td>1 líder 12h&ndash;18h + 1 auxiliar 6 h</td><td class="num">252</td><td class="num alvo">286</td></tr>
+                    <tr><td>1 líder 12h&ndash;23h30 (11,5 h)</td><td class="num">288</td><td class="num alvo">251</td></tr>
+                    <tr><td>1 líder 11,5 h + 1 auxiliar 6 h</td><td class="num">390</td><td class="num alvo">149</td></tr>
+                  </tbody>
+                </table></div>
+                <p class="nota-tabela">Em R$, por domingo. Líder R$ 25/h, auxiliar R$ 17/h — valores do Fred.
+                &ldquo;Sobra só da loja&rdquo; usa <em>apenas</em> a margem dos R$ 1.000 de loja, sem contar o
+                delivery, que já acontece hoje.</p>
+                <div class="note-item"><span class="tag good">o líder se paga sozinho</span><span>
+                  <strong>Nenhum cenário com um líder fica negativo.</strong> Mesmo o mais caro — líder de
+                  11,5 h mais um auxiliar — deixa R$ 149 contando só a loja. A vaga que o Fred desenhou
+                  <em>cabe no domingo com folga</em>, e isso vale mesmo ignorando toda a margem do delivery.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq0c" hidden>
+                <span class="ptit">Por que a Nicole não resolve</span>
+                <span class="psub">os dois motivos são do Fred — e o sistema confirma o segundo</span>
+                <ul class="pontos">
+                  <li><strong>Ela não lidera auxiliares.</strong> É a pessoa mais experiente da loja, o que
+                  resolve &ldquo;sabe fazer&rdquo; e não resolve &ldquo;conduz quem não sabe&rdquo;. São
+                  habilidades diferentes, e o domingo exige a segunda: é o dia em que ninguém pode subir uma
+                  dúvida para outra pessoa.</li>
+                  <li><strong>Ela vai dia sim, dia não.</strong> O cadastro confirma:
+                  <code>folga_domingo = quinzenal</code>, referência 26/04/2026. Ela folga <strong>11/10 e
+                  25/10</strong> e trabalha 18/10 e 01/11. <em>Metade dos domingos a loja fica sem a única
+                  pessoa experiente.</em></li>
+                  <li><strong>E o turno dela é da noite.</strong> Pela regra do próprio sistema, o domingo de
+                  quem trabalha domingo usa a escala de segunda — a dela é <strong>18:00 às 00:15</strong>.
+                  Ou seja: na escala que existe hoje, ela entra <em>depois</em> do turno de 12h&ndash;18h
+                  acabar.</li>
+                </ul>
+                <div class="note-item"><span class="tag bad">a soma dos três</span><span>
+                  Em metade dos domingos ela não está; nos outros, entra quando a venda já acabou; e em
+                  nenhum deles ela é quem conduz a equipe. <strong>Não é um problema de escala, é a ausência
+                  do cargo.</strong>
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq0d" hidden>
+                <span class="ptit">&ldquo;Precisa entender se ela fica&rdquo;</span>
+                <span class="psub">a pergunta que o Fred deixou aberta, e ela tem precedente</span>
+                <p class="prose">O risco da vaga não é o custo — a conta fecha. É a <strong>permanência</strong>.
+                Um líder de domingo fixo trabalha no dia em que todo mundo descansa, toda semana, por
+                R$ 25/hora.</p>
+                <p class="prose">E tem um precedente que não dá para ignorar: o bloqueador de contratação de
+                Campinas <em>já é jornada</em> — o mercado que disputa a mesma gente (grandes supermercados,
+                McDonald's, Burger King) oferece <strong>5x2 com o mesmo salário</strong>, contra o 6x1 da
+                casa. <strong>A vaga de domingo é a mais exposta a esse problema</strong>, porque é a que mais
+                pesa no lado da condição.</p>
+                <div class="note-item"><span class="tag warn">o que isso sugere perguntar</span><span>
+                  Se um domingo fixo é difícil de preencher e difícil de segurar, a pergunta não é só
+                  &ldquo;quanto pagar&rdquo; — é <strong>se a vaga é de domingo ou se é de fim de semana com
+                  dois dias de folga no meio</strong>. Isso é a conversa de 5x2 chegando por outra porta. Não
+                  é decisão desta página.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- ───── 1 · QUEM É A EQUIPE ───── -->
         <div class="painel" data-alvo="eq1" hidden>
@@ -921,23 +1048,130 @@
           </div>
         </div>
 
+        <!-- ───── 5 · ELAS SABEM ATENDER? ───── -->
+        <div class="painel" data-alvo="eq5" hidden>
+          <span class="ptit">Elas sabem atender? <span class="tag bad">ninguém nunca viu</span></span>
+          <div class="grupo-descricao">
+            O risco que o Fred levantou, e é o mais fácil de deixar passar: <strong>as três ou quatro pessoas
+            que estão na loja hoje fazem atendimento de delivery.</strong> Nas palavras dele: <em>&ldquo;isso
+            significa que elas não têm experiência. A gente nunca viu elas atendendo pessoal, então pode ser
+            que elas não saibam atender.&rdquo;</em><br><br>
+            <strong>São duas competências diferentes com o mesmo nome.</strong> Atender delivery é montar
+            pedido certo, no prazo, e falar por mensagem. Atender presencialmente é alguém olhando no olho:
+            cumprimentar, explicar o cardápio, oferecer, servir, despedir. O dado reforça — o
+            <code>store_horarios</code> diz que Campinas só faz delivery no domingo, e a venda presencial que
+            aparece é de quem bate na porta.<br><br>
+            O problema concreto: <em>abrir no domingo com uma equipe que não sabe fazer atendimento.</em>
+            E o domingo é o pior dia para descobrir isso, porque é o dia de <strong>maior ticket da
+            semana</strong> — é quando o cliente está mais disposto a gastar e mais sujeito a ser perdido.
+          </div>
+          <div class="bloco">
+            <div class="grade">
+              <button class="card-btn" data-alvo="eq5a"><span class="cnome">A validação do 1º fim de semana</span><span class="cmeta">Eduardo e Fred, pessoalmente</span></button>
+              <button class="card-btn" data-alvo="eq5b"><span class="cnome">O que validar, item por item</span><span class="cmeta">o fluxo já está escrito no Material</span></button>
+              <button class="card-btn" data-alvo="eq5c"><span class="cnome">Por que isso vem antes da divulgação</span><span class="cmeta">a ordem importa, e custa dinheiro</span></button>
+            </div>
+            <div class="visor">
+              <div class="painel" data-alvo="eq5a" hidden>
+                <span class="ptit">A validação do 1º fim de semana</span>
+                <span class="psub">decidido pelo Fred em 05/10/2026</span>
+                <p class="prose">A decisão dele: <strong>no primeiro fim de semana, o Eduardo e o próprio Fred
+                validam se essas pessoas fazem um bom atendimento — e treinam.</strong> Não é delegado e não é
+                à distância: é olhar a pessoa atendendo.</p>
+                <p class="prose">É a única forma de responder essa pergunta hoje, e o motivo está registrado na
+                <a href="../../certificacao-holy-cookie/">Certificação</a>: o <strong>link de checklist do
+                Sistema&nbsp;HC é aberto para a equipe da própria loja</strong>, então ele serve de rotina
+                interna e não de avaliação — quem é avaliado não pode ser quem preenche. <em>Atendimento é
+                justamente o item que a checklist não mede.</em></p>
+                <ul class="checklist">
+                  <li><label><input type="checkbox" data-id="val-1fds-data">Definir <strong>qual</strong> é esse primeiro fim de semana</label></li>
+                  <li><label><input type="checkbox" data-id="val-1fds-quem">Lista das pessoas a validar, com nome</label></li>
+                  <li><label><input type="checkbox" data-id="val-1fds-veredito">Veredito por pessoa: atende / treinar / não serve pro domingo</label></li>
+                  <li><label><input type="checkbox" data-id="val-1fds-treino">Quem não passou foi treinado, com data</label></li>
+                </ul>
+                <div class="note-item"><span class="tag warn">é investimento com data, não padrão</span><span>
+                  O quadro de <a href="../../prioridades/">Prioridades</a> já tem a regra:
+                  <strong>quem forma é a loja, não o gerente</strong> — cada contratação que vira ida do
+                  Eduardo é R$ 300 de diária mais R$ 100 de deslocamento. Esta validação é exceção com
+                  propósito: é a <em>primeira</em> vez. Se virar rotina, a conta do domingo muda de sinal.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq5b" hidden>
+                <span class="ptit">O que validar, item por item</span>
+                <span class="psub">não precisa inventar régua — ela já existe no Material</span>
+                <p class="prose">O tópico <strong>Atendimento na Loja</strong> do
+                <a href="../../certificacao-holy-cookie/material/">Material de Certificação</a> está marcado
+                como <em>pronto</em>, e é exatamente isto. O fluxo de servir na mesa, em seis passos:</p>
+                <div class="fluxo">
+                  <button class="passo-caixa" data-detalhe="Tentar identificar quem é, antes de servir. No delivery isso não existe — o pedido tem nome na etiqueta.">1. Identificar</button><span class="seta">&rarr;</span>
+                  <button class="passo-caixa" data-detalhe="Chamar o cliente o mais discretamente possível — <strong>nunca gritar</strong>, muito menos da porta da cozinha. É o erro mais comum de quem só fez delivery: no delivery se chama alto, porque quem espera está em pé no balcão.">2. Chamar discretamente</button><span class="seta">&rarr;</span>
+                  <button class="passo-caixa" data-detalhe="Sorrir e cumprimentar: bom dia, boa tarde, olá.">3. Sorrir/cumprimentar</button><span class="seta">&rarr;</span>
+                  <button class="passo-caixa" data-detalhe="Ao entregar: apresentar o pedido, <strong>falar os sabores dos cookies</strong>, avisar quando o cookie estiver quente.">4. Apresentar o pedido</button><span class="seta">&rarr;</span>
+                  <button class="passo-caixa" data-detalhe="Falar &ldquo;boa sobremesa&rdquo;.">5. Boa sobremesa</button><span class="seta">&rarr;</span>
+                  <button class="passo-caixa" data-detalhe="Pedir licença ao se retirar.">6. Pedir licença</button>
+                </div>
+                <div class="passo-detalhe"></div>
+                <h4 class="sub">E o que nunca fazer, que o Material também já lista</h4>
+                <ul class="pontos">
+                  <li>Colocar o pedido no balcão e sair — o cliente interpreta como descaso</li>
+                  <li>Chegar sem falar nada e só entregar</li>
+                  <li>Chegar com cara fechada</li>
+                </ul>
+                <div class="note-item"><span class="tag bad">o que falta na régua</span><span>
+                  <strong>Script de Vendas está marcado como &ldquo;falta&rdquo;</strong> no Material. É a peça
+                  que faria &ldquo;oferecer outros produtos&rdquo; virar treinamento em vez de intenção — e no
+                  domingo, que tem o maior ticket da semana, é o item que mais vale dinheiro.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq5c" hidden>
+                <span class="ptit">Por que isso vem antes da divulgação</span>
+                <span class="psub">a ordem não é preferência, é o custo de errar</span>
+                <p class="prose">A divulgação do domingo serve para <strong>encurtar a rampa</strong> — levar
+                gente antes de o boca a boca levar. Mas divulgar para uma loja que atende mal é
+                <em>pagar para apresentar a loja no pior dia dela</em>.</p>
+                <p class="prose">O risco tem tamanho: em Campinas, o domingo tem o <strong>maior ticket da
+                semana</strong> e já tem gente batendo na porta — ou seja, <em>a demanda chega disposta</em>.
+                Perder essa pessoa no primeiro contato é mais caro que não tê-la trazido.</p>
+                <div class="note-item"><span class="tag acc">a sequência que o dado sustenta</span><span>
+                  <strong>1.</strong> Validar e treinar atendimento (Eduardo + Fred, 1º fim de semana) &rarr;
+                  <strong>2.</strong> Abrir com o líder definido &rarr;
+                  <strong>3.</strong> Divulgar. Pular o passo 1 é o único jeito de gastar dinheiro para piorar
+                  o resultado.
+                </span></div>
+                <div class="note-item"><span class="tag warn">e isso casa com o portão que já existe</span><span>
+                  É o mesmo princípio do projeto <a href="../../experiencia-holy-cookie/">Experiência de
+                  loja</a>: produto, experiência e ambiente têm que estar de pé antes de a aquisição subir,
+                  senão a ação de trazer gente enche um balde furado.
+                </span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- ───── 2 · BECAPS ───── -->
         <div class="painel" data-alvo="eq2" hidden>
-          <span class="ptit">Os becaps &mdash; o banco de freelancers <span class="tag warn">já é passo 2 em Prioridades</span></span>
+          <span class="ptit">Os becaps &mdash; o banco de freelancers <span class="tag bad">hoje são zero</span> <span class="tag warn">precisa de 2 ou 3</span></span>
           <div class="grupo-descricao">
-            Nas palavras do Fred: <em>&ldquo;se essas pessoas não forem, quem são os becaps que a gente chama,
-            que é o banco de freelancers?&rdquo;</em><br><br>
-            Ele não nasce aqui. O <strong>banco de freelancers já está registrado como &ldquo;passo 2&rdquo;</strong>
-            na página <a href="../../prioridades/">Prioridades</a>, grupo Crise de Equipe — veio da troca de
-            equipe de Piracicaba. O domingo é o <strong>primeiro uso concreto</strong> dele: um dia que
-            acontece toda semana, com gente que não está na escala dos outros seis.<br><br>
-            <strong>Importante não confundir as duas coisas.</strong> Becap não é a equipe de domingo — é quem
-            cobre quando a equipe de domingo falta. Se o domingo <em>depende</em> de freelancer para existir,
-            a resposta da pergunta 1 é &ldquo;não temos equipe de domingo&rdquo;, e isso muda a conversa.
+            O terceiro ponto do Fred, e ele já trouxe o número: <strong>&ldquo;hoje não tem nenhum
+            backup&rdquo;</strong>, e precisa de <strong>pelo menos dois ou três que possam nesse
+            horário</strong>.<br><br>
+            O que acontece hoje se faltar uma pessoa, nas palavras dele: <em>&ldquo;ou fica com a equipe
+            reduzida e pode prejudicar o atendimento, ou tem que ir o Eduardo, que é R$ 300 a diária. Então
+            não dá.&rdquo;</em> As duas saídas são ruins, e a segunda tem preço: <strong>R$ 300 contra R$ 102
+            de um freelancer de 6 horas</strong> — quase três vezes.<br><br>
+            O banco não nasce aqui. Ele <strong>já está registrado como &ldquo;passo 2&rdquo;</strong> na
+            página <a href="../../prioridades/">Prioridades</a>, grupo Crise de Equipe, e veio da troca de
+            equipe de Piracicaba. O domingo é o <strong>primeiro uso concreto</strong> dele.<br><br>
+            <strong>E não confundir com a equipe.</strong> Becap é quem cobre a falta — não é quem segura o
+            domingo. Se o domingo <em>depende</em> de freelancer para existir, a resposta da pergunta 2 é
+            &ldquo;não temos equipe de domingo&rdquo;, e isso é outra conversa.
           </div>
           <div class="bloco">
             <div class="grade">
               <button class="card-btn" data-alvo="eq2a"><span class="cnome">O que já existe</span><span class="cmeta">Trilha do Freelancer · 11 passos · parcial</span></button>
+              <button class="card-btn" data-alvo="eq2d"><span class="cnome">A conta de faltar alguém</span><span class="cmeta">R$ 300 do Eduardo vs. R$ 102 de freelancer</span></button>
               <button class="card-btn" data-alvo="eq2b"><span class="cnome">O que o domingo precisa</span><span class="cmeta">quantos becaps, e para qual função</span></button>
               <button class="card-btn" data-alvo="eq2c"><span class="cnome">O que falta decidir</span><span class="cmeta">diária, quem chama, até quando chamar</span></button>
             </div>
@@ -963,6 +1197,32 @@
                   chamado com mais frequência — e o critério de quando isso acontece ainda não está
                   definido.</em> Para o domingo, que é semanal, esse critério fica mais urgente: um becap
                   chamado todo domingo não é freelancer, é funcionário.
+                </span></div>
+              </div>
+
+              <div class="painel" data-alvo="eq2d" hidden>
+                <span class="ptit">A conta de faltar alguém</span>
+                <span class="psub">as três saídas, com preço — um domingo de Campinas deixa R$ 538 de margem de loja</span>
+                <div class="tablewrap"><table>
+                  <thead><tr><th>Se faltar uma pessoa</th><th class="num">Custo</th><th class="num">Sobra da loja</th><th>O que acontece de verdade</th></tr></thead>
+                  <tbody>
+                    <tr><td>Equipe reduzida</td><td class="num">0</td><td class="num alvo">538</td><td>Não custa dinheiro, custa <strong>o atendimento</strong> — no dia de maior ticket da semana, com uma equipe que ainda não foi validada</td></tr>
+                    <tr><td>Vai o Eduardo</td><td class="num">300</td><td class="num alvo">238</td><td><strong>Come 56% da margem do domingo</strong>, e o Eduardo deixa de fazer o que o cargo dele deveria fazer. Fala do Fred: <em>&ldquo;então não dá&rdquo;</em></td></tr>
+                    <tr><td>Freelancer 6 h a R$ 17/h</td><td class="num">102</td><td class="num alvo">436</td><td><strong>19% da margem.</strong> É a única das três que não quebra nem o atendimento nem a conta</td></tr>
+                  </tbody>
+                </table></div>
+                <p class="nota-tabela">Em R$, por domingo. &ldquo;Sobra da loja&rdquo; = a margem dos R$ 1.000
+                de loja (R$ 538) menos o custo da coluna, sem contar o resto da equipe nem o delivery.</p>
+                <div class="note-item"><span class="tag good">o banco de freelancers se paga numa única falta</span><span>
+                  A diferença entre chamar um freelancer e mandar o Eduardo é <strong>R$ 198 por
+                  ocorrência</strong>. Montar o banco <em>não é custo</em> — formar 2 ou 3 pessoas consome
+                  horas de treinamento uma vez, e cada falta coberta devolve R$ 198. <strong>Uma falta por mês
+                  paga o esforço com folga.</strong>
+                </span></div>
+                <div class="note-item"><span class="tag warn">o que a tabela não mostra</span><span>
+                  A linha &ldquo;equipe reduzida&rdquo; parece a mais barata e é a mais perigosa:
+                  <strong>o custo dela não aparece no domingo</strong>, aparece nas semanas seguintes, em
+                  cliente que não voltou. Ela é zero na coluna de custo e desconhecida na de resultado.
                 </span></div>
               </div>
 
@@ -992,26 +1252,43 @@
                 <span class="ptit">O que falta decidir</span>
                 <span class="psub">cinco perguntas, nenhuma respondível daqui</span>
                 <ul class="pontos">
-                  <li><strong>Quanto é a diária de um becap?</strong> O único valor escrito em qualquer lugar é
-                  a diária do gerente — R$ 300 mais R$ 100 de deslocamento, no treinamento de domingo em
-                  Campinas. <em>Esse não é o valor de um freelancer</em>, e sem o valor certo não existe conta
-                  de quanto custa o domingo.</li>
+                  <li><span class="tag good">respondido</span> <strong>Quanto é a diária de um becap?</strong>
+                  O Fred deu a régua em 05/10: <strong>auxiliar a R$ 17/hora</strong>, líder 50% acima
+                  (~R$ 25/h). Um becap de 6 horas custa <strong>R$ 102</strong>. O que precisa ser conferido é
+                  outra coisa — ver a nota abaixo.</li>
+                  <li><span class="tag good">respondido</span> <strong>Quantos becaps?</strong>
+                  <strong>Pelo menos dois ou três</strong>, e que possam <em>nesse horário</em> — a restrição
+                  de horário é parte do requisito, não detalhe.</li>
                   <li><strong>Quem chama o becap?</strong> O líder de loja ou o gerente. Se for o gerente,
                   repete o padrão que a página Prioridades já identificou como problema: cada evento da loja
                   virando uma ida dele.</li>
                   <li><strong>Com quanta antecedência?</strong> Um domingo que depende de alguém aceitar na
                   sexta é um domingo que pode não abrir.</li>
-                  <li><strong>Quantos becaps formados por loja?</strong> Um banco com uma pessoa é um ponto
-                  único de falha com nome novo.</li>
+                  <li><strong>Quem forma esses 2 ou 3?</strong> A trilha existe (parcial), mas formar três
+                  pessoas é trabalho de alguém. Se cair no Eduardo, são idas a R$ 400 — a mesma conta que o
+                  banco deveria estar evitando.</li>
                   <li><strong>Qual a contrapartida?</strong> A certificação prevê bonificação para quem está
                   certificado. Se o becap passa pela trilha, ele entra nessa regra ou não?</li>
+                  <li><strong>O contrato.</strong> A <strong>Renata está sem carteira assinada</strong> em
+                  Paulínia e o Fred chamou isso de &ldquo;um grande problema pra gente pensar&rdquo;. Um banco
+                  de freelancers é exatamente o tipo de coisa que depende de qual regra vale.</li>
                 </ul>
-                <div class="note-item"><span class="tag bad">a contradição de contrato que está aberta</span><span>
-                  Vale lembrar antes de desenhar qualquer coisa: a <strong>Renata está sem carteira assinada</strong>
-                  em Paulínia, e o Fred chamou isso de &ldquo;um grande problema pra gente pensar&rdquo;. Até
-                  setembro a regra escrita era contratar sem CLT; a fala de 05/10 trata o sem-carteira como
-                  problema. <em>As duas leituras não podem valer ao mesmo tempo</em>, e um banco de freelancers
-                  é exatamente o tipo de coisa que depende de qual delas vale.
+                <div class="note-item"><span class="tag warn">a única conferência que a conta precisa</span><span>
+                  <strong>R$ 17/hora é custo cheio ou é o que a pessoa recebe?</strong> A pergunta não é
+                  acadêmica: ela muda a conta do domingo em quase 50%. E tem uma coincidência que vale olhar —
+                  um atendente CLT de Campinas custa <strong>R$ 2.066 de salário + 49,04% de encargos + VT e VA
+                  (R$ 700), o que dá R$ 3.778/mês ÷ 220 h = R$ 17,17/hora</strong>. Bate com os R$ 17 na
+                  vírgula. <em>Se é isso, R$ 17 já é custo cheio e nada se soma por cima</em> — foi assim que
+                  usei na conta. Se os R$ 17 forem o líquido de um freelancer, o número continua sendo custo
+                  cheio (freelancer não tem encargo), e a conta também vale. <strong>Ela só erraria se R$ 17
+                  fosse salário bruto de CLT sem encargos</strong> — aí o custo real seria ~R$ 25 e o do líder,
+                  ~R$ 37.
+                </span></div>
+                <div class="note-item"><span class="tag bad">sobre o item do contrato, acima</span><span>
+                  Até setembro a regra escrita era contratar <strong>sem CLT</strong>, exigindo que a pessoa
+                  tivesse &ldquo;algo a perder&rdquo; (seguro-desemprego, bolsa, auxílio). A fala de 05/10
+                  trata o sem-carteira como problema. <em>As duas leituras não podem valer ao mesmo tempo</em> —
+                  e o becap de domingo é a primeira contratação que cai nessa dúvida.
                 </span></div>
               </div>
             </div>
@@ -1250,6 +1527,209 @@
 
       </div>
     </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════ ABA · A CONTA ════════════════════════ -->
+<div class="tab-panel" data-panel="conta" hidden>
+
+  <section>
+    <div class="strip">
+      <div><span class="v">R$ 538</span><span class="s">margem que os R$ 1.000 de loja deixam, em Campinas</span></div>
+      <div><span class="v">R$ 2.549</span><span class="s">margem do domingo inteiro, com o delivery</span></div>
+      <div><span class="v">R$ 150</span><span class="s">o líder de 12h–18h a R$ 25/h</span></div>
+      <div><span class="v">R$ 300</span><span class="s">a diária do Eduardo — 56% da margem da loja</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">1</span> O que sobra de um domingo<span class="hint">sem custo fixo, por decisão do Fred</span></h2>
+    <p class="prose">A conta é a que o Fred pediu: <strong>faturamento menos CMV, imposto e royalties</strong>.
+    Não é lucro — é a <em>margem</em> de onde a mão de obra sai. Os custos fixos ficam fora de propósito:
+    a loja já opera seis dias e já abre o delivery no domingo, então aluguel e energia de um dia a mais são
+    ínfimos.</p>
+    <p class="prose">Duas coisas entraram além do pedido, e as duas são variáveis, não fixas:
+    <strong>a embalagem</strong> (caixinha, divisória e kraft por pedido — some com a venda, não com o mês) e
+    <strong>as deduções de plataforma no delivery</strong> (comissão, taxa e frete do iFood e do 99Food).
+    Ignorar as deduções inflaria a margem do delivery em mais de 20 pontos.</p>
+
+    <div class="bloco">
+      <div class="grade">
+        <button class="card-btn loja" data-alvo="cta-cps"><span class="cnome">Campinas</span><span class="cmeta">a loja da decisão</span><span class="cdesc">O caso limpo: entrega parceira, então todas as deduções do iFood já estão no número.</span></button>
+        <button class="card-btn loja" data-alvo="cta-pau"><span class="cnome">Paulínia</span><span class="cmeta">a que já abre</span><span class="cdesc">Entrega própria — o frete do motoboy é mensal e não recorta por dia, então a margem dela está otimista.</span></button>
+      </div>
+
+      <div class="visor">
+        <p class="visor-vazio">Clique numa loja para ver a conta do domingo.</p>
+
+        <div class="painel" data-alvo="cta-cps" hidden>
+          <span class="ptit">Campinas — um domingo <span class="tag acc">com R$ 1.000 de loja</span></span>
+          <div class="grupo-descricao">
+            O cenário é o que o Fred pediu: <strong>R$ 1.000 de loja (a meta mínima) somado ao delivery real do
+            domingo</strong>. O delivery não é hipótese — é a média dos nove domingos de ago+set/2026:
+            <strong>R$ 4.219 de iFood e R$ 967 de 99Food</strong>, 95 pedidos somados.<br><br>
+            Campinas é o caso limpo da conta: a entrega é <em>parceira</em>, então o frete já vem dentro das
+            taxas do iFood e não existe conta de motoboy por fora. <strong>A margem abaixo é completa.</strong>
+          </div>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Canal</th><th class="num">Faturam.</th><th class="num">Deduções</th><th class="num">CMV</th><th class="num">Embalag.</th><th class="num">Imposto</th><th class="num">Royalty</th><th class="num">Margem</th><th class="num">Mrg%</th></tr></thead>
+            <tbody>
+              <tr><td>Loja</td><td class="num">1.000</td><td class="num nd">&mdash;</td><td class="num">308</td><td class="num">37</td><td class="num">80</td><td class="num">37</td><td class="num alvo">538</td><td class="num alvo">53,8%</td></tr>
+              <tr><td>iFood</td><td class="num">4.219</td><td class="num">942</td><td class="num">1.070</td><td class="num">106</td><td class="num">338</td><td class="num">118</td><td class="num alvo">1.645</td><td class="num">39,0%</td></tr>
+              <tr><td>99Food</td><td class="num">967</td><td class="num">231</td><td class="num">245</td><td class="num">22</td><td class="num">77</td><td class="num">26</td><td class="num alvo">365</td><td class="num">37,8%</td></tr>
+            </tbody>
+            <tfoot><tr><td>Domingo inteiro</td><td class="num">6.186</td><td class="num">1.173</td><td class="num">1.624</td><td class="num">165</td><td class="num">495</td><td class="num">181</td><td class="num alvo">2.549</td><td class="num alvo">41,2%</td></tr></tfoot>
+          </table></div>
+          <p class="nota-tabela">Em R$, por domingo. CMV da loja 30,8% e do delivery 25,4% — medidos no
+          cesto real de domingo, item por item, com 100% e 99,2% dos produtos mapeados. Imposto 8% sobre o
+          faturamento bruto; royalty 4% sobre a base (faturamento &minus; deduções &minus; imposto). Embalagem
+          por pedido: R$ 1,56 na loja (2,50 itens/pedido), R$ 1,34 no delivery (2,34).</p>
+          <div class="note-item"><span class="tag good">a loja é o canal de melhor margem da casa, e por muito</span><span>
+            <strong>53,8% contra 39,0% do iFood.</strong> A diferença não é CMV — é que a loja
+            <em>não paga comissão, taxa nem frete</em>. Cada R$ 1.000 que migra de delivery para loja vale
+            ~R$ 150 a mais de margem com o mesmo cookie. É a razão de a área toda existir, e o domingo é a
+            forma mais direta de fazer isso.
+          </span></div>
+          <div class="note-item"><span class="tag warn">a margem grande do domingo não é do domingo novo</span><span>
+            Os R$ 2.549 do domingo inteiro são <strong>em sua maior parte delivery que já acontece hoje</strong>
+            — e que já tem gente paga para fazer. <em>A margem que a abertura da loja realmente adiciona é
+            R$ 538</em>, e é essa que precisa pagar a equipe nova. A próxima seção usa as duas, separadas.
+          </span></div>
+        </div>
+
+        <div class="painel" data-alvo="cta-pau" hidden>
+          <span class="ptit">Paulínia — um domingo <span class="tag acc">com R$ 1.000 de loja</span></span>
+          <div class="grupo-descricao">
+            Mesma conta, mesmo cenário de R$ 1.000 de loja. O delivery de domingo de Paulínia é bem menor:
+            <strong>R$ 1.013 de iFood</strong>, 17 pedidos, e não há 99Food.<br><br>
+            <strong>Esta margem está otimista, e é importante saber por quê.</strong> Paulínia é
+            <em>entrega própria</em>: o frete é o motoboy da loja, e esse repasse é <strong>mensal</strong> —
+            não recorta por dia. Então a linha de deduções do iFood (20,0%) cobre comissão e taxa, mas
+            <em>não o frete real</em>. A margem verdadeira é menor que a da tabela.
+          </div>
+          <div class="tablewrap"><table>
+            <thead><tr><th>Canal</th><th class="num">Faturam.</th><th class="num">Deduções</th><th class="num">CMV</th><th class="num">Embalag.</th><th class="num">Imposto</th><th class="num">Royalty</th><th class="num">Margem</th><th class="num">Mrg%</th></tr></thead>
+            <tbody>
+              <tr><td>Loja</td><td class="num">1.000</td><td class="num nd">&mdash;</td><td class="num">353</td><td class="num">33</td><td class="num">80</td><td class="num">37</td><td class="num alvo">497</td><td class="num alvo">49,7%</td></tr>
+              <tr><td>iFood</td><td class="num">1.013</td><td class="num">203</td><td class="num">280</td><td class="num">23</td><td class="num">81</td><td class="num">29</td><td class="num alvo">397</td><td class="num">39,2%</td></tr>
+            </tbody>
+            <tfoot><tr><td>Domingo inteiro</td><td class="num">2.013</td><td class="num">203</td><td class="num">633</td><td class="num">57</td><td class="num">161</td><td class="num">66</td><td class="num alvo">894</td><td class="num alvo">44,4%</td></tr></tfoot>
+          </table></div>
+          <p class="nota-tabela">Em R$, por domingo. CMV da loja 35,3% e do delivery 27,6%, medidos no cesto
+          real de domingo com 100% dos produtos mapeados. <strong>Sem o frete de motoboy</strong>, que é mensal.</p>
+          <div class="note-item"><span class="tag warn">o CMV de loja de Paulínia é 4,5 pontos pior que o de Campinas</span><span>
+            <strong>35,3% contra 30,8%</strong>, no mesmo dia da semana. Isso não é preço — é
+            <em>mix</em>: no domingo a loja vende mais do que tem CMV alto. São R$ 45 por domingo de diferença
+            em R$ 1.000 de venda, e é o tipo de coisa que a divulgação em loja consegue mover, escolhendo o que
+            oferecer.
+          </span></div>
+          <div class="note-item"><span class="tag bad">o domingo de Paulínia tem menos margem para pagar equipe</span><span>
+            <strong>R$ 894 contra R$ 2.549 de Campinas</strong> — porque o delivery de domingo de lá é um
+            quinto. A margem incremental da loja é parecida (R$ 497 contra R$ 538), mas o colchão por trás é
+            muito menor. <em>Paulínia tem menos espaço para errar na equipe de domingo que Campinas.</em>
+          </span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O orçamento de mão de obra<span class="hint">Campinas · líder R$ 25/h · auxiliar R$ 17/h</span></h2>
+    <p class="prose">A pergunta é quanto cabe. Há <strong>duas bolsas</strong>, e escolher a errada muda a
+    decisão: a margem do <em>domingo inteiro</em> (R$ 2.549) é de onde sai a folha de todo mundo que trabalha
+    no domingo, incluindo quem já faz o delivery hoje. A margem <em>só da loja aberta</em> (R$ 538) é o que a
+    abertura adiciona — e é ela que tem que pagar a <strong>gente nova</strong>.</p>
+    <div class="fatores">
+      <div>
+        <span class="n">R$ 538</span>
+        <span class="t">Só a loja aberta</span>
+        <span class="d">A bolsa da decisão. Paga <strong>31,7 h de auxiliar</strong> ou <strong>21,5 h de
+        líder</strong> antes de zerar. É contra ela que a equipe nova tem que ser medida.</span>
+        <span class="q">o que a abertura adiciona</span>
+      </div>
+      <div>
+        <span class="n meio">R$ 2.549</span>
+        <span class="t">O domingo inteiro</span>
+        <span class="d">Paga <strong>149,9 h de auxiliar</strong> ou <strong>101,9 h de líder</strong>. Mas
+        a maior parte é delivery que <em>já roda e já tem gente paga</em> — usar essa bolsa para justificar a
+        equipe nova é contar dinheiro duas vezes.</span>
+        <span class="q">a folha de domingo inteira sai daqui</span>
+      </div>
+      <div>
+        <span class="n">R$ 102</span>
+        <span class="t">Um becap de 6 h</span>
+        <span class="d">Contra <strong>R$ 300 da diária do Eduardo</strong>. A diferença é
+        <strong>R$ 198 por falta coberta</strong> — é a conta que justifica o banco de freelancers sozinha.</span>
+        <span class="q">R$ 17/h × 6 h</span>
+      </div>
+    </div>
+
+    <h3 class="sub">Os cenários de equipe, contra as duas bolsas</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Equipe do domingo</th><th class="num">Custo</th><th class="num">Sobra · só a loja</th><th class="num">Sobra · domingo inteiro</th></tr></thead>
+      <tbody>
+        <tr><td>1 líder 12h&ndash;18h (6 h)</td><td class="num">150</td><td class="num alvo">388</td><td class="num">2.399</td></tr>
+        <tr><td>1 líder 12h&ndash;18h + 1 auxiliar 6 h</td><td class="num">252</td><td class="num alvo">286</td><td class="num">2.297</td></tr>
+        <tr><td>1 líder 12h&ndash;23h30 (11,5 h)</td><td class="num">288</td><td class="num alvo">251</td><td class="num">2.261</td></tr>
+        <tr><td>1 líder 12h&ndash;18h + 2 auxiliares 6 h</td><td class="num">354</td><td class="num alvo">184</td><td class="num">2.195</td></tr>
+        <tr><td>1 líder 11,5 h + 1 auxiliar 6 h</td><td class="num">390</td><td class="num alvo">149</td><td class="num">2.159</td></tr>
+        <tr><td>1 líder 11,5 h + 2 auxiliares 6 h</td><td class="num">492</td><td class="num alvo">47</td><td class="num">2.057</td></tr>
+        <tr class="falhou"><td>1 líder 11,5 h + 2 auxiliares 11,5 h</td><td class="num">679</td><td class="num alvo">&minus;140</td><td class="num">1.870</td></tr>
+      </tbody>
+    </table></div>
+    <p class="nota-tabela">Em R$, por domingo. Os valores-hora são os do Fred: líder R$ 25, auxiliar R$ 17.
+    &ldquo;Só a loja&rdquo; parte de R$ 538; &ldquo;domingo inteiro&rdquo; parte de R$ 2.549.</p>
+
+    <div class="notes">
+      <div class="note-item"><span class="tag good">a equipe que o Fred desenhou cabe, e sobra</span><span>
+        <strong>Um líder de 12h às 18h mais um auxiliar custa R$ 252 e deixa R$ 286</strong> — contando
+        <em>só</em> a margem da loja aberta, sem encostar no delivery. A vaga de R$ 25/hora não precisa de
+        justificativa criativa: ela se paga na própria loja que ela abre.
+      </span></div>
+      <div class="note-item"><span class="tag warn">o limite aparece quando a equipe cresce em horas, não em gente</span><span>
+        O único cenário negativo é <strong>três pessoas por 11,5 horas</strong> (R$ 679, &minus;R$ 140). O que
+        quebra a conta não é contratar o líder — é <em>esticar todo mundo até o fim do delivery</em>. Se o
+        delivery da noite precisa de gente, ela sai da bolsa do domingo inteiro, não da bolsa da loja.
+      </span></div>
+      <div class="note-item"><span class="tag bad">uma ida do Eduardo custa mais que o líder inteiro</span><span>
+        <strong>R$ 300 de diária contra R$ 150 do turno de 12h&ndash;18h do líder.</strong> O backup de
+        emergência é <em>o dobro</em> do titular, e come 56% da margem da loja. É exatamente o que o Fred
+        disse — <em>&ldquo;então não dá&rdquo;</em> — e agora tem número.
+      </span></div>
+      <div class="note-item"><span class="tag acc">a conta da rampa, que não aparece nesta tabela</span><span>
+        Tudo aqui usa <strong>R$ 1.000 de loja</strong>. Mas pela rampa de Paulínia, o <em>primeiro mês</em> de
+        Campinas tende a render perto de <strong>R$ 437 por domingo</strong> — e aí a margem da loja cai para
+        ~R$ 235, que não paga o líder mais um auxiliar. <strong>Os primeiros domingos dão prejuízo por
+        desenho</strong>, e isso precisa estar decidido antes de abrir, não descoberto na terceira semana.
+      </span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> De onde vem cada número</h2>
+    <p class="prose">Nada aqui é estimativa de alíquota. Tudo saiu do próprio Sistema&nbsp;HC, lido em
+    05/10/2026, com as mesmas regras que a tela de Royalty usa — para que esta página não discorde dela.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Linha</th><th>Valor</th><th>Fonte</th></tr></thead>
+      <tbody>
+        <tr><td>Imposto</td><td><strong>8%</strong> sobre o faturamento bruto</td><td>Simples Nacional, <code>IMPOSTO_PCT_PADRAO</code> — o mesmo padrão do Simulador iFood e do acompanhamento de experimentos</td></tr>
+        <tr><td>Royalty</td><td><strong>4%</strong> sobre a base</td><td>Regra combinada com a franqueadora: <em>base = faturamento &minus; comissão &minus; taxa &minus; frete &minus; imposto</em>. Na loja não há deduções, então o royalty efetivo é 3,68% do faturamento</td></tr>
+        <tr><td>CMV da loja</td><td><strong>30,8%</strong> Campinas · <strong>35,3%</strong> Paulínia</td><td>Cesto real dos domingos, item por item: cada produto vendido × o <code>cmv_unitario</code> da ficha. Cobertura de mapeamento: <strong>100%</strong> nas duas</td></tr>
+        <tr><td>CMV do delivery</td><td><strong>25,4%</strong> Campinas · <strong>27,6%</strong> Paulínia</td><td>Mesma conta, sobre os itens do iFood nos domingos. Cobertura 99,2% e 100%</td></tr>
+        <tr><td>Embalagem</td><td>R$ <strong>1,56</strong>/pedido na loja · R$ <strong>1,34</strong> no delivery</td><td>Caixinha + divisória + kraft, pelo tier de itens por pedido (2,50 na loja, 2,34 no delivery). Valores vigentes da tabela de embalagem</td></tr>
+        <tr><td>Deduções do iFood</td><td><strong>22,3%</strong> Campinas · 20,0% Paulínia</td><td>Separadas por alíquota de contrato: 12% comissão + 3,2% transação + 11% frete na entrega parceira. Campinas é parceira (completo); Paulínia é própria (<strong>falta o motoboy</strong>)</td></tr>
+        <tr><td>Deduções do 99Food</td><td><strong>23,9%</strong></td><td>O relatório do 99Food já separa comissão, taxa de pagamento e logística em colunas próprias</td></tr>
+        <tr><td>Faturamento de delivery</td><td>R$ <strong>4.219</strong> iFood + R$ <strong>967</strong> 99Food</td><td>Média dos 9 domingos de ago+set/2026, dia a dia, do relatório de cada plataforma</td></tr>
+        <tr><td>Valor-hora</td><td>R$ <strong>17</strong> auxiliar · R$ <strong>25</strong> líder</td><td>Dados pelo Fred em 05/10/2026 — tratados como <strong>custo cheio</strong>. Ver a nota na aba Equipe</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note-item"><span class="tag warn">o que esta conta não é</span><span>
+      <strong>Não é lucro.</strong> Ficaram fora, por decisão do Fred, os custos fixos — aluguel, energia,
+      água — porque a loja já opera seis dias e já abre o delivery no domingo, então o rateio de um dia a mais
+      é ínfimo. Também ficam fora taxa de cartão, perdas e quebra. <em>É a margem de contribuição do domingo</em>,
+      que é exatamente a régua certa para decidir quanta gente cabe.
+    </span></div>
   </section>
 
 </div>
@@ -1558,12 +2038,11 @@
         novo. Nenhuma outra ação da área entrega isso com tão poucas peças móveis — o que ela exige é
         <em>equipe escalada e divulgação</em>, não verba.
       </span></div>
-      <div class="note-item"><span class="tag warn">esses números são de receita, não de resultado</span><span>
-        <strong>A conta de custo não está aqui, e não dá para montá-la daqui.</strong> O domingo custa mão de
-        obra — turno, becap ou hora extra — e esse valor não existe escrito em lugar nenhum. O único número de
-        diária que existe é o do gerente (R$ 300 + R$ 100 de deslocamento), que não serve. <em>Enquanto a
-        diária do domingo não tiver um número, &ldquo;o domingo deu certo&rdquo; é uma afirmação sobre
-        faturamento, não sobre lucro.</em>
+      <div class="note-item"><span class="tag good">esses números são de receita — o resultado está na aba <a href="#conta">A conta</a></span><span>
+        Faturamento não é margem. Em Campinas, <strong>os R$ 1.000 de loja deixam R$ 538</strong> depois de
+        CMV, embalagem, imposto e royalties — e o domingo inteiro, com o delivery, deixa R$ 2.549. A mão de
+        obra sai daí: o líder de 12h&ndash;18h a R$ 25/h custa R$ 150. <em>A conta fecha com folga, e a aba
+        A conta mostra todos os cenários.</em>
       </span></div>
       <div class="note-item"><span class="tag bad">o buraco de Piracicaba não se resolve no domingo</span><span>
         São 24% de cobertura, mas de um buraco que exige <strong>133% de crescimento</strong>. Mesmo com o
@@ -1605,24 +2084,43 @@
         dia ou na véspera, e de quem atende o delivery. É conta de dentro da loja — não vou estimá-la.
       </span></div>
       <div class="note-item"><span class="tag bad">4</span><span>
-        <strong>Quanto é a diária de um becap, e quem o chama?</strong> Sem esse número não existe conta de
-        custo do domingo, e sem dono nomeado o domingo que depende de becap é um domingo que pode não abrir.
+        <strong>Quem chama o becap, e com quanta antecedência?</strong> O valor já existe (R$ 17/h, R$ 102 por
+        6 horas) e a quantidade também (2 ou 3). O que falta é dono: se cair no gerente, repete o padrão que
+        Prioridades já identificou como problema — cada evento da loja virando uma ida dele.
       </span></div>
       <div class="note-item"><span class="tag bad">5</span><span>
+        <strong>R$ 17/hora é custo cheio ou é o que a pessoa recebe?</strong> É a única conferência que a aba
+        <a href="#conta">A conta</a> precisa. Tratei como custo cheio, e há uma coincidência que sustenta isso:
+        um atendente CLT de Campinas custa R$ 2.066 + 49,04% de encargos + VT/VA ÷ 220 h =
+        <strong>R$ 17,17/hora</strong>. Se os R$ 17 forem salário bruto sem encargos, o custo real é ~R$ 25 e o
+        do líder ~R$ 37 — e os cenários mais caros viram prejuízo.
+      </span></div>
+      <div class="note-item"><span class="tag bad">6</span><span>
+        <strong>Quem forma os 2 ou 3 becaps?</strong> A trilha existe (parcial), mas formar três pessoas é
+        trabalho de alguém. Se cair no Eduardo, são idas a R$ 400 — a mesma conta que o banco deveria estar
+        evitando.
+      </span></div>
+      <div class="note-item"><span class="tag bad">7</span><span>
+        <strong>Os primeiros domingos de Campinas dão prejuízo — isso está aceito?</strong> Pela rampa de
+        Paulínia, o primeiro mês rende perto de R$ 437 por domingo, o que deixa ~R$ 235 de margem e
+        <em>não paga líder mais auxiliar</em>. É uma escolha deliberada de investir nas primeiras semanas, e
+        precisa estar decidida antes de abrir, não descoberta na terceira semana.
+      </span></div>
+      <div class="note-item"><span class="tag bad">8</span><span>
         <strong>O domingo tem oferta ou não tem?</strong> Define a divulgação inteira. O ticket de R$ 51,36 é
         argumento contra desconto, mas a decisão é sua.
       </span></div>
-      <div class="note-item"><span class="tag warn">6</span><span>
+      <div class="note-item"><span class="tag warn">9</span><span>
         <strong>Piracicaba é o mesmo caso de Campinas?</strong> A loja não abre domingo, e o domingo de 20/09
         tem R$ 386 com 7 pedidos. A leitura provável é a mesma — gente batendo na porta — mas você confirmou
         isso para Campinas, não para Piracicaba. <em>Com um domingo só em nove, nem dá para ver padrão.</em>
       </span></div>
-      <div class="note-item"><span class="tag warn">7</span><span>
+      <div class="note-item"><span class="tag warn">10</span><span>
         <strong>A jornada vira 5x2?</strong> Decisão que já estava aberta e que o domingo aproxima: sete dias de
         operação com equipe 6x1 significa alguém trabalhando na própria folga, ou gente de fora toda semana.
         Vale para todos os colaboradores, não só para o domingo.
       </span></div>
-      <div class="note-item"><span class="tag warn">8</span><span>
+      <div class="note-item"><span class="tag warn">11</span><span>
         <strong>Os nomes de Piracicaba.</strong> A líder nova e a atendente nova (&ldquo;Gabi ou Babi&rdquo;)
         não estão confirmados, e o lugar da Alice no turno da noite não tem nome. Nada de Piracicaba avança sem
         isso.
@@ -1747,7 +2245,7 @@
 </div>
 
 <script>
-  var ABAS = ['briefing', 'lojas', 'equipe', 'divulgacao', 'placar', 'pendencias'];
+  var ABAS = ['briefing', 'lojas', 'equipe', 'conta', 'divulgacao', 'placar', 'pendencias'];
 
   function abrirAba(nome) {
     document.querySelectorAll('.tab-btn').forEach(function (b) {
