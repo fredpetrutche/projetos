@@ -151,7 +151,7 @@
   thead th { font-size: .625rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); }
   tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
   tbody tr.mark td { background: var(--surface-2); }
-  td .vago { color: var(--bad); font-family: var(--mono); font-size: .75rem; }
+  .vago { color: var(--bad); font-family: var(--mono); font-size: .75rem; }
 
   /* ── perfis ── */
   .perfilhead { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
@@ -260,7 +260,7 @@
         <div class="chk-lista">
           <div class="chk-item"><input type="checkbox" id="dg-prod1" data-g="prod"><label for="dg-prod1"><span class="prazo ja">antes da data</span><strong>Garantir execução consistente</strong> dos produtos que vão ser servidos.<span class="por">Não da lista inteira — dos servidos. Produto que sai diferente cada vez vai ser julgado pela vez que saiu pior, na frente de dez pessoas que vivem de comparar comida.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="dg-prod2" data-g="prod"><label for="dg-prod2"><span class="prazo ja">destrava a data</span><strong>Fechar as fichas técnicas</strong> dos produtos que entram.<span class="por">Já é tarefa aberta no projeto do cardápio de verão, com prazo &ldquo;depois da degustação da equipe&rdquo;. Sem ficha, cada montagem sai diferente — e é essa dependência que define a data possível.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-prod3" data-g="prod"><label for="dg-prod3"><strong>Passar o portão de estabilidade da loja.</strong><span class="por">O critério de produto, experiência e ambiente já existe no projeto de experiência da loja. Campanha de fidelização falha em silêncio; degustação falha na frente de dez criadores.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod3" data-g="prod"><label for="dg-prod3"><strong>Conferir a loja com olho de cliente, não de operação:</strong> o produto chega do jeito que foi criado, o atendimento, e o ambiente — mesa, cadeira, limpeza, temperatura, som.<span class="por">São os três pilares que decidem se a pessoa volta, e a régua deles está no projeto <a href="../../experiencia-holy-cookie/">Experiência Holy Cookie</a>: a loja &ldquo;passa&rdquo; quando fica 3 semanas seguidas sem item crítico aberto. Aqui o motivo é direto — campanha de fidelização falha em silêncio, degustação falha na frente de dez criadores.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="dg-prod4" data-g="prod"><label for="dg-prod4"><strong>Definir se são 10 ou 12 produtos</strong> no cardápio.<span class="por">Dez fechados mais duas sugestões: Cookie Gateau e a bolacha que o Fred chama de piscininha. O roteiro e a folha dos nomes precisam saber antes.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="dg-prod5" data-g="prod"><label for="dg-prod5"><strong>Ter o preço de cada produto na mão de quem apresenta.</strong><span class="por">&ldquo;Quanto custa&rdquo; vem sempre. O preço sai do CMV, que está sendo levantado no laboratório do Sistema-HC. Se não estiver pronto, a frase é &ldquo;esse ainda está fechando preço, eu te mando&rdquo; — preço improvisado na frente de dez criadores vira preço publicado.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="dg-prod6" data-g="prod"><label for="dg-prod6"><strong>Calcular o insumo em dobro</strong> dos produtos de foto.<span class="por">Cada produto aparece duas vezes: um montado pra câmera e um em micro-porção pra provar. É custo de campanha, não desperdício — e se não estiver previsto, no dia alguém serve o prato da foto e o bloco de filmagem acaba sem produto.</span></label></div>
@@ -414,8 +414,7 @@
 <section>
   <h2><span class="n">3</span> O que precisa estar verdadeiro antes<span class="hint">a condição que não é negociável</span></h2>
   <p class="prose">Esta campanha coloca <strong>dez pessoas com audiência dentro da loja</strong>, provando
-  produtos que a loja acabou de aprender a fazer. É o oposto do Sorvete de Graça, onde o cliente recebe um item
-  pela janela e vai embora: aqui o que está em exposição não é só o produto, <strong>é a loja</strong> — o
+  produtos que a loja acabou de aprender a fazer. Aqui o que está em exposição não é só o produto, <strong>é a loja</strong> — o
   ambiente, o atendimento, a montagem, o banheiro.</p>
   <div class="notes">
     <div class="note-item"><span class="tag bad">o portão</span><span>
@@ -454,7 +453,6 @@
           <li><strong>A loja fechada</strong> só pra eles, num horário marcado.</li>
           <li><strong>Apresentação de todos os produtos</strong> do cardápio de verão, com alguém apresentando.</li>
           <li><strong>Tem kit</strong> — cada um sai com alguma coisa na mão.</li>
-          <li><strong>É campanha separada</strong> do Sorvete de Graça, com página própria.</li>
         </ul></div>
 
       <div class="painel aberto" data-alvo="a2" hidden><span class="ptit">Em aberto · trava tudo</span>
@@ -758,25 +756,18 @@
 <div class="tab-panel" data-panel="convidados" role="tabpanel" hidden>
 
 <section>
-  <h2><span class="n">1</span> A régua aqui é diferente<span class="hint">não é a mesma lista do Sorvete de Graça</span></h2>
-  <p class="prose">No <a href="../sorvete-de-graca/">Sorvete de Graça</a> o que se compra é <strong>alcance</strong>:
-  um post, muita gente vendo. Lá a régua é <em>views por seguidor</em>, e um perfil de notícia da cidade serve
-  perfeitamente — não precisa entender de comida, precisa ser visto.</p>
-  <p class="prose">Aqui o que se compra é <strong>uma sequência de conteúdo sobre dez produtos</strong>. Isso muda
-  quem serve: <em>página de notícia não produz sequência de comida</em>. Quem produz é criador de comida, que
-  aparece, que prova na frente da câmera e que já faz esse tipo de conteúdo. <strong>A régua passa a ser formato,
-  não tamanho.</strong></p>
+  <h2><span class="n">1</span> Quem serve pra esta campanha<span class="hint">a régua é formato, não tamanho</span></h2>
+  <p class="prose">O que esta campanha compra é <strong>uma sequência de conteúdo sobre dez produtos</strong> — e
+  isso decide quem serve: <em>página de notícia não produz sequência de comida</em>. Quem produz é criador de
+  comida, que aparece, que prova na frente da câmera e que já faz esse tipo de conteúdo. <strong>A régua é
+  formato, não tamanho.</strong></p>
   <div class="notes">
     <div class="note-item"><span class="tag acc">os três critérios, em ordem</span><span>
       <strong>1. Faz conteúdo de comida com o próprio rosto</strong> — quem só reposta não serve, porque aqui a
       prova é o rosto provando. <strong>2. Já publica em sequência</strong> (stories encadeados, carrossel), porque
       é isso que dez produtos pedem. <strong>3. Entrega de verdade</strong> — views por seguidor, mediana dos últimos
-      24 posts, como na outra campanha. Nessa ordem: um perfil grande que não faz comida vale menos aqui do que um
+      24 posts. Nessa ordem: um perfil grande que não faz comida vale menos aqui do que um
       pequeno que faz.</span></div>
-    <div class="note-item"><span class="tag acc">os 4 do Sorvete de Graça entram</span><span>
-      Os quatro criadores contratados em cada cidade para o buzinaço devem estar <strong>entre os dez</strong>.
-      Mesma pessoa, duas campanhas: a relação fica mais barata e quem conheceu o cardápio na degustação divulga o
-      buzinaço sabendo do que está falando. <strong>Degustação primeiro, buzinaço depois.</strong></span></div>
     <div class="note-item"><span class="tag warn">dez é mais gente do que parece</span><span>
       Dez convidados significam <strong>convidar quinze</strong> — taxa de aceite nunca é 100%, e em horário
       comercial é bem menor. E significam dez conversas individuais, dez confirmações e dez lembretes no dia
@@ -785,68 +776,227 @@
 </section>
 
 <section>
-  <h2><span class="n">2</span> Por cidade<span class="hint">clique na cidade</span></h2>
+  <h2><span class="n">2</span> O que existe hoje, por cidade<span class="hint">levantado em 05/10/2026</span></h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Cidade</th><th>Perfis com número medido</th><th>Já postaram sobre a loja</th><th>Fonte e data da medição</th></tr></thead>
+    <tbody>
+      <tr class="mark"><td>Campinas</td><td><strong>60</strong> — 50 da planilha de seeding + 10 descobertos por menção à marca</td><td><strong>22</strong></td><td>Planilha de seeding de mar–mai/2025, remedida com Apify em 12/08/2026</td></tr>
+      <tr class="mark"><td>Paulínia</td><td><strong>19</strong> — 11 criadores e 8 páginas da cidade</td><td><strong>11</strong> desde dez/2025</td><td>API do Instagram em 03/09/2026, mediana dos últimos 24 posts</td></tr>
+      <tr><td>Piracicaba</td><td><span class="vago">nenhum</span></td><td><span class="vago">não levantado</span></td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="notes">
+    <div class="note-item"><span class="tag acc">é o contrário do que a gente imaginava</span><span>
+      <strong>Campinas é a cidade mais bem levantada das três, e Piracicaba é a que não tem nada.</strong> Campinas
+      tem 60 perfis com mediana de views medida, 22 deles já tendo postado sobre a loja — veio da ação de seeding
+      de 2025, que ninguém tinha ligado a esta campanha. As duas páginas desta campanha diziam que Campinas estava
+      por levantar; estava errado, e foi corrigido.</span></div>
+    <div class="note-item"><span class="tag warn">os números das duas cidades não se comparam entre si</span><span>
+      Campinas foi medida com <strong>Apify, em 12/08/2026</strong>; Paulínia com a <strong>API do Instagram, em
+      03/09/2026</strong>, sobre os últimos 24 posts. Janelas e ferramentas diferentes dão medianas diferentes para
+      o mesmo perfil — <strong>@comendoporcampinas aparece com mediana de 69.802 numa medição e 94.159 na
+      outra</strong>. Dentro de cada cidade o ranking é válido; cruzar cidade com cidade, não.</span></div>
+    <div class="note-item"><span class="tag good">a lista de Campinas já tem página no ar</span><span>
+      <a href="https://holycampinas.github.io/influenciadores-holy-cookie/" target="_blank" rel="noopener">holycampinas.github.io/influenciadores-holy-cookie</a> —
+      os 60 perfis com alcance típico, outperformance por reel e o funil da ação de 2025. O que está abaixo é o
+      recorte que serve pra escolher os dez convidados; a página tem a lista inteira.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span> Os perfis<span class="hint">clique na cidade</span></h2>
   <div class="bloco">
     <div class="grade">
-      <button class="card-btn" data-alvo="cv-pau"><span class="cnome">Paulínia</span><span class="cmeta">4 de 10 já levantados</span><span class="cdesc">A lista do Cookie de Graça dá o começo — faltam seis.</span></button>
-      <button class="card-btn" data-alvo="cv-cps"><span class="cnome">Campinas</span><span class="cmeta">a levantar · cidade grande</span><span class="cdesc">Mais oferta de criador de comida que as outras duas juntas.</span></button>
-      <button class="card-btn" data-alvo="cv-pir"><span class="cnome">Piracicaba</span><span class="cmeta">do zero</span><span class="cdesc">Nenhum nome levantado, e a loja tem crise de equipe aberta.</span></button>
+      <button class="card-btn" data-alvo="cv-cps"><span class="cnome">Campinas</span><span class="cmeta">60 perfis · 22 já postaram</span></button>
+      <button class="card-btn" data-alvo="cv-pau"><span class="cnome">Paulínia</span><span class="cmeta">19 perfis · 11 já postaram</span></button>
+      <button class="card-btn" data-alvo="cv-pir"><span class="cnome">Piracicaba</span><span class="cmeta">nenhum perfil</span></button>
     </div>
     <div class="visor">
 
-      <div class="painel" data-alvo="cv-pau" hidden><span class="ptit">Paulínia</span>
-        <span class="psub">4 de 10 já têm número real</span>
-        <p class="prose">A lista levantada para o Cookie de Graça serve de base — foram <strong>11 criadores que já
-        marcaram a loja</strong> desde dezembro de 2025, e quatro deles já têm número medido. Esses quatro são
-        contato morno: já estiveram na loja e já postaram por conta própria, o que é a melhor condição possível pra
-        um convite.</p>
-        <div class="tablewrap"><table>
-          <thead><tr><th>Perfil</th><th>Por que serve pra degustação</th><th>Seguidores</th><th>Views/seg.</th></tr></thead>
-          <tbody>
-            <tr class="mark"><td><a href="https://www.instagram.com/bellaraamalho/" target="_blank" rel="noopener">@bellaraamalho</a></td><td>O melhor número da lista: 11% de curtidas sobre seguidor. Já postou sobre a loja em dezembro.</td><td>2.354</td><td>2,65</td></tr>
-            <tr class="mark"><td><a href="https://www.instagram.com/comendoporpaulinia/" target="_blank" rel="noopener">@comendoporpaulinia</a></td><td><strong>É o perfil mais indicado dos quatro para este formato</strong> — é guia de comida, e guia de comida é exatamente quem faz sequência sobre vários pratos.</td><td>1.733</td><td>1,80</td></tr>
-            <tr><td><a href="https://www.instagram.com/sarahnogue/" target="_blank" rel="noopener">@sarahnogue</a></td><td>Tem um reel que bateu 2,5 milhões. Era a reserva do Cookie de Graça.</td><td>—</td><td>1,46</td></tr>
-            <tr><td><a href="https://www.instagram.com/mila_moralees/" target="_blank" rel="noopener">@mila_moralees</a></td><td>Rainha da Festa do Peão de Paulínia 2025 — reconhecimento de cidade. Já postou sobre a loja em março.</td><td>10.163</td><td>0,78</td></tr>
-          </tbody>
-        </table></div>
-        <dl class="ficha">
-          <dt>faltam seis</dt><dd>Os outros sete perfis que já marcaram a loja são o primeiro lugar pra procurar — <strong>a lista existe e nunca foi aberta inteira</strong>. Depois, busca de perfis e hashtags da cidade, filtrando por quem faz comida com o próprio rosto.</dd>
-          <dt>a página da cidade</dt><dd><strong>@livepaulinianilsao</strong> (69.873 seguidores) é a página escolhida pro buzinaço. Pra degustação ela é dispensável — é notícia, não comida. Se sobrar vaga, convida; não é prioridade.</dd>
-        </dl></div>
-
+      <!-- ───────── CAMPINAS ───────── -->
       <div class="painel" data-alvo="cv-cps" hidden><span class="ptit">Campinas</span>
-        <span class="psub">a levantar · e é a cidade com mais oferta</span>
-        <p class="prose">Campinas tem muito mais criador de comida que Paulínia e Piracicaba — é cidade grande com
-        cena gastronômica própria. <strong>Dez convidados é fácil em Campinas</strong>; o trabalho é escolher, não
-        encontrar.</p>
-        <p class="prose">O perfil conhecido é <strong>@comendoporcampinas</strong> (552 mil seguidores, mediana de
-        94 mil views) — foi dele o vídeo que serviu de modelo pro Cookie de Graça. Para esta campanha ele é
-        <em>mais</em> indicado que pro buzinaço: é guia de comida, o formato dele é exatamente mostrar vários pratos,
-        e ele é de outro patamar de alcance. Em troca, um perfil desse tamanho provavelmente não aceita permuta.</p>
-        <dl class="ficha">
-          <dt>o levantamento</dt><dd>Quem já marcou a loja, busca de perfis por termos de comida da cidade, hashtags. Ranquear por formato primeiro, views por seguidor depois.</dd>
-          <dt>atenção</dt><dd>Em Campinas é onde mais vai aparecer <strong>perfil grande com entrega fraca</strong>. A régua de views por seguidor existe exatamente pra isso — a lista de Paulínia tinha perfil de 16 mil entregando menos que um de 2,3 mil.</dd>
-          <dt>vantagem de logística</dt><dd>É a cidade onde a loja fica <strong>de frente pro Colégio Liceu, no Taquaral</strong> — endereço fácil de achar e de explicar, o que ajuda na taxa de aceite.</dd>
-        </dl></div>
+        <div class="grupo-descricao">
+          Dez convidados é fácil aqui — o trabalho é escolher, não encontrar. Os <strong>22 que já postaram sobre a
+          loja</strong> são o primeiro lugar pra procurar: já estiveram lá, já publicaram por conta própria, e o
+          convite chega como continuação e não como abordagem.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="cps-morno"><span class="cnome">Já postaram sobre a loja</span><span class="cmeta">22 perfis · contato morno</span></button>
+            <button class="card-btn" data-alvo="cps-alcance"><span class="cnome">Maior alcance da lista</span><span class="cmeta">12 perfis · nunca contatados</span></button>
+            <button class="card-btn" data-alvo="cps-vaza"><span class="cnome">O que a ação de 2025 ensinou</span><span class="cmeta">o funil e o vazamento</span></button>
+          </div>
+          <div class="visor">
 
-      <div class="painel aberto" data-alvo="cv-pir" hidden><span class="ptit">Piracicaba</span>
-        <span class="psub">do zero, e com um problema anterior ao marketing</span>
-        <p class="prose">Nenhum nome levantado, nenhum número. A cidade nunca entrou em campanha de divulgação —
-        o Cookie de Graça foi desenhado para Paulínia e Piracicaba e <strong>acabou rodando só em Paulínia</strong>.</p>
-        <p class="prose">E há um obstáculo que não é de lista: <strong>a loja de Piracicaba tem crise de equipe
-        aberta</strong> — líder e funcionária contaminados. Receber dez criadores numa loja fechada, com apresentação
-        e montagem ao vivo, é o evento que mais depende da equipe estar bem das três campanhas em discussão.</p>
+            <div class="painel" data-alvo="cps-morno" hidden><span class="ptit">Já postaram sobre a loja</span>
+              <p class="prose">Os dez descobertos por menção à marca <strong>postaram todos</strong> — e os três
+              primeiros são de outro patamar de alcance. Mais doze da planilha de seeding que também divulgaram.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th></tr></thead>
+                <tbody>
+                  <tr class="mark"><td><a href="https://www.instagram.com/comendoporcampinas/" target="_blank" rel="noopener">@comendoporcampinas</a></td><td>550.420</td><td><strong>69.802</strong></td><td>0,13</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/gbpassarelli_/" target="_blank" rel="noopener">@gbpassarelli_</a></td><td>186.827</td><td><strong>57.750</strong></td><td>0,31</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/agata.queirozz/" target="_blank" rel="noopener">@agata.queirozz</a></td><td>67.911</td><td><strong>33.857</strong></td><td>0,50</td></tr>
+                  <tr><td><a href="https://www.instagram.com/ferpenachim/" target="_blank" rel="noopener">@ferpenachim</a></td><td>26.246</td><td>9.156</td><td>0,35</td></tr>
+                  <tr><td><a href="https://www.instagram.com/isa_milan/" target="_blank" rel="noopener">@isa_milan</a></td><td>94.674</td><td>7.256</td><td>0,08</td></tr>
+                  <tr><td><a href="https://www.instagram.com/laizcormanich/" target="_blank" rel="noopener">@laizcormanich</a></td><td>15.070</td><td>4.772</td><td>0,32</td></tr>
+                  <tr><td><a href="https://www.instagram.com/beatrizchavesbc/" target="_blank" rel="noopener">@beatrizchavesbc</a></td><td>15.084</td><td>4.341</td><td>0,29</td></tr>
+                  <tr><td><a href="https://www.instagram.com/_carolboscolo/" target="_blank" rel="noopener">@_carolboscolo</a></td><td>18.031</td><td>3.892</td><td>0,22</td></tr>
+                  <tr><td><a href="https://www.instagram.com/vicky__beatriz/" target="_blank" rel="noopener">@vicky__beatriz</a></td><td>5.202</td><td>3.881</td><td>0,75</td></tr>
+                  <tr><td><a href="https://www.instagram.com/gigicagil.oficial/" target="_blank" rel="noopener">@gigicagil.oficial</a></td><td>103.150</td><td>3.278</td><td>0,03</td></tr>
+                  <tr><td><a href="https://www.instagram.com/lannymaartinss/" target="_blank" rel="noopener">@lannymaartinss</a></td><td>13.528</td><td>3.133</td><td>0,23</td></tr>
+                  <tr><td><a href="https://www.instagram.com/nandasalless/" target="_blank" rel="noopener">@nandasalless</a></td><td>24.072</td><td>3.013</td><td>0,13</td></tr>
+                  <tr><td><a href="https://www.instagram.com/fernandarodriguescerimonial/" target="_blank" rel="noopener">@fernandarodriguescerimonial</a></td><td>1.768</td><td>2.892</td><td><strong>1,64</strong></td></tr>
+                  <tr><td><a href="https://www.instagram.com/dranilanaalmeida/" target="_blank" rel="noopener">@dranilanaalmeida</a></td><td>20.074</td><td>2.095</td><td>0,10</td></tr>
+                  <tr><td><a href="https://www.instagram.com/by.juliaeduarda/" target="_blank" rel="noopener">@by.juliaeduarda</a></td><td>17.360</td><td>1.528</td><td>0,09</td></tr>
+                  <tr><td><a href="https://www.instagram.com/acamilanatale/" target="_blank" rel="noopener">@acamilanatale</a></td><td>13.846</td><td>1.463</td><td>0,11</td></tr>
+                  <tr><td><a href="https://www.instagram.com/nicolekevellin/" target="_blank" rel="noopener">@nicolekevellin</a></td><td>66.399</td><td>1.224</td><td>0,02</td></tr>
+                  <tr><td><a href="https://www.instagram.com/rolezices/" target="_blank" rel="noopener">@rolezices</a></td><td>206</td><td>1.137</td><td><strong>5,52</strong></td></tr>
+                  <tr><td><a href="https://www.instagram.com/oquebelavive/" target="_blank" rel="noopener">@oquebelavive</a></td><td>2.111</td><td>891</td><td>0,42</td></tr>
+                  <tr><td><a href="https://www.instagram.com/autistilo_criativo/" target="_blank" rel="noopener">@autistilo_criativo</a></td><td>139</td><td>592</td><td><strong>4,26</strong></td></tr>
+                  <tr><td><a href="https://www.instagram.com/dailyfrantomaz/" target="_blank" rel="noopener">@dailyfrantomaz</a></td><td>67</td><td>575</td><td><strong>8,58</strong></td></tr>
+                  <tr><td><a href="https://www.instagram.com/nunes_ana_/" target="_blank" rel="noopener">@nunes_ana_</a></td><td>1.349</td><td>527</td><td>0,39</td></tr>
+                </tbody>
+              </table></div>
+              <dl class="ficha">
+                <dt>os quatro com alc/seg alto</dt><dd>@dailyfrantomaz, @rolezices, @autistilo_criativo e @fernandarodriguescerimonial entregam <strong>muito mais views que o próprio tamanho</strong>. Audiência pequena e fiel — e para uma degustação isso vale mais do que parece, porque quem assiste tudo de um perfil pequeno vê a sequência inteira dos dez produtos.</dd>
+                <dt>cuidado com os de cima</dt><dd>Os três primeiros são perfis grandes, e <strong>perfil grande normalmente não aceita permuta.</strong> Entram pela via paga, e um ou dois bastam.</dd>
+              </dl></div>
+
+            <div class="painel" data-alvo="cps-alcance" hidden><span class="ptit">Maior alcance da lista</span>
+              <p class="prose">Os doze maiores por <strong>mediana de views</strong> — não por seguidor. A mediana é
+              o melhor previsor de quanto alcance um convite compra: seguidor é número de vaidade, view é gente que
+              assistiu.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.instagram.com/colanojapa/" target="_blank" rel="noopener">@colanojapa</a></td><td>172.307</td><td><strong>57.307</strong></td><td>0,33</td><td>4,47%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/luanadosantoss/" target="_blank" rel="noopener">@luanadosantoss</a></td><td>78.568</td><td><strong>37.367</strong></td><td>0,48</td><td>2,52%</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/gigiramba/" target="_blank" rel="noopener">@gigiramba</a></td><td>26.147</td><td><strong>33.403</strong></td><td><strong>1,28</strong></td><td>7,4%</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/tabataboccatto/" target="_blank" rel="noopener">@tabataboccatto</a></td><td>98.238</td><td><strong>29.652</strong></td><td>0,30</td><td><strong>9,37%</strong></td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/solaurasilveira/" target="_blank" rel="noopener">@solaurasilveira</a></td><td>6.796</td><td>13.821</td><td><strong>2,03</strong></td><td>—</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/gihpilotto/" target="_blank" rel="noopener">@gihpilotto</a></td><td>11.741</td><td>13.068</td><td><strong>1,11</strong></td><td>4,58%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/ingridpraado/" target="_blank" rel="noopener">@ingridpraado</a></td><td>149.774</td><td>12.854</td><td>0,09</td><td>2,96%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/drabrendamoreira/" target="_blank" rel="noopener">@drabrendamoreira</a></td><td>23.018</td><td>10.049</td><td>0,44</td><td>—</td></tr>
+                  <tr><td><a href="https://www.instagram.com/rrenatagois/" target="_blank" rel="noopener">@rrenatagois</a></td><td>127.114</td><td>9.159</td><td>0,07</td><td>3,27%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/vitoriascorsi/" target="_blank" rel="noopener">@vitoriascorsi</a></td><td>11.209</td><td>7.419</td><td>0,66</td><td>4,26%</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/mari_solx_/" target="_blank" rel="noopener">@mari_solx_</a></td><td>4.786</td><td>7.080</td><td><strong>1,48</strong></td><td>3,46%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/maritudobom/" target="_blank" rel="noopener">@maritudobom</a></td><td>21.893</td><td>6.494</td><td>0,30</td><td>2,8%</td></tr>
+                </tbody>
+              </table></div>
+              <dl class="ficha">
+                <dt>os cinco marcados</dt><dd>@gigiramba, @tabataboccatto, @solaurasilveira, @gihpilotto e @mari_solx_ — ou entregam acima da própria base (alc/seg acima de 1,0, o algoritmo distribui bem) ou têm engajamento alto. <strong>São os melhores candidatos a convite de permuta</strong> da lista inteira.</dd>
+                <dt>atenção em @solaurasilveira</dt><dd>A mediana dela sai de <strong>só 2 reels</strong>. É indício, não fato — tratar com a mesma régua de quem não tem número.</dd>
+                <dt>o que falta checar</dt><dd>Esta lista foi medida em 12/08/2026 e <strong>nunca foi filtrada por formato</strong>: ela ranqueia alcance, não &ldquo;faz comida com o próprio rosto&rdquo;. A régua da seção 1 ainda precisa passar por cima dela antes de virar lista de convite.</dd>
+              </dl></div>
+
+            <div class="painel" data-alvo="cps-vaza" hidden><span class="ptit">O que a ação de 2025 ensinou</span>
+              <p class="prose">A mesma lista já foi usada numa ação de seeding em Campinas, entre março e maio de
+              2025. O funil dela é o aviso mais útil que existe pra esta campanha:</p>
+              <div class="strip">
+                <div><span class="v">89%</span><span class="s">foram contatados</span></div>
+                <div><span class="v">44%</span><span class="s">aceitaram</span></div>
+                <div><span class="v">20%</span><span class="s">receberam o produto</span></div>
+                <div><span class="v">20%</span><span class="s">divulgaram</span></div>
+              </div>
+              <div class="notes">
+                <div class="note-item"><span class="tag bad">o vazamento</span><span>
+                  <strong>16 perfis aceitaram e nunca receberam o produto.</strong> Foi o maior buraco da ação:
+                  perdeu-se o sim que já estava dado. Numa degustação isso tem tradução direta — <strong>aceite não
+                  é presença.</strong> Entre o sim e o dia tem que haver confirmação e lembrete, senão metade da
+                  mesa fica vazia.</span></div>
+                <div class="note-item"><span class="tag warn">taxa real de divulgação</span><span>
+                  <strong>13 dos 63 divulgaram, 20%.</strong> Esse é o número que a permuta entregou na prática
+                  nesta cidade, com produto enviado. Serve de base pra calibrar a expectativa da degustação — e é
+                  argumento forte pro <em>combinado explícito</em> em vez do post voluntário.</span></div>
+                <div class="note-item"><span class="tag mudo">alcance somado</span><span>
+                  Os 13 que divulgaram somaram cerca de <strong>549 mil de alcance</strong>.</span></div>
+              </div></div>
+
+          </div>
+        </div></div>
+
+      <!-- ───────── PAULÍNIA ───────── -->
+      <div class="painel" data-alvo="cv-pau" hidden><span class="ptit">Paulínia</span>
+        <div class="grupo-descricao">
+          Dezenove perfis medidos na API do Instagram em 03/09/2026 — <strong>11 criadores e 8 páginas da
+          cidade</strong>. Os 11 criadores são todos perfis que <em>já marcaram a loja</em> desde dezembro de 2025,
+          ou seja, a lista inteira é contato morno.
+        </div>
+        <div class="bloco">
+          <div class="grade">
+            <button class="card-btn" data-alvo="pau-cri"><span class="cnome">Os 11 criadores</span><span class="cmeta">todos já marcaram a loja</span></button>
+            <button class="card-btn" data-alvo="pau-pag"><span class="cnome">As 8 páginas da cidade</span><span class="cmeta">alcance, não encaixe</span></button>
+          </div>
+          <div class="visor">
+            <div class="painel" data-alvo="pau-cri" hidden><span class="ptit">Os 11 criadores</span>
+              <p class="prose">Ordenados por <strong>views por seguidor</strong> — a mediana dos reels dividida pelo
+              tamanho do perfil. Seguidor mede o passado; views por seguidor mede se a entrega ainda acontece.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Seguidores</th><th>Views mediana</th><th>Views/seg.</th><th>Curtidas/seg.</th></tr></thead>
+                <tbody>
+                  <tr class="mark"><td><a href="https://www.instagram.com/bellaraamalho/" target="_blank" rel="noopener">@bellaraamalho</a></td><td>2.354</td><td>6.234</td><td><strong>2,65</strong></td><td><strong>11,0%</strong></td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/t.atianerodrigues/" target="_blank" rel="noopener">@t.atianerodrigues</a></td><td>1.737</td><td>2.600</td><td><strong>1,50</strong></td><td>4,1%</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/sarahnogue/" target="_blank" rel="noopener">@sarahnogue</a></td><td>3.784</td><td>5.522</td><td><strong>1,46</strong></td><td>5,0%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/amandaolvsouza/" target="_blank" rel="noopener">@amandaolvsouza</a></td><td>2.448</td><td>2.446</td><td>1,00</td><td>2,4%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/mila_moralees/" target="_blank" rel="noopener">@mila_moralees</a></td><td>10.163</td><td><strong>7.921</strong></td><td>0,78</td><td>1,4%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/alinepattero/" target="_blank" rel="noopener">@alinepattero</a></td><td>5.056</td><td>1.857</td><td>0,37</td><td>1,1%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/legabbi/" target="_blank" rel="noopener">@legabbi</a></td><td>7.131</td><td>2.583</td><td>0,36</td><td>1,5%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/_biagaudencio/" target="_blank" rel="noopener">@_biagaudencio</a></td><td>8.055</td><td>2.393</td><td>0,30</td><td>0,2%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/vitoriapigatto/" target="_blank" rel="noopener">@vitoriapigatto</a></td><td>16.388</td><td>3.494</td><td>0,21</td><td>0,3%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/fabiolagabriel__/" target="_blank" rel="noopener">@fabiolagabriel__</a></td><td>1.509</td><td>292</td><td>0,19</td><td>0,5%</td></tr>
+                  <tr><td><a href="https://www.instagram.com/momisso.lais/" target="_blank" rel="noopener">@momisso.lais</a></td><td>5.503</td><td>884</td><td>0,16</td><td>0,6%</td></tr>
+                </tbody>
+              </table></div>
+              <dl class="ficha">
+                <dt>o que a tabela mostra de uma vez</dt><dd><strong>@vitoriapigatto tem 16.388 seguidores e entrega menos que @bellaraamalho com 2.354.</strong> É o exemplo de por que a régua é views por seguidor e não tamanho.</dd>
+                <dt>faltam 2 para os 10</dt><dd>São 11 criadores, mas <strong>os 11 ainda não foram filtrados por formato</strong> — quem faz comida com o próprio rosto e publica em sequência. Depois do filtro é possível que sobrem menos de 10, e aí entram as páginas ou um levantamento novo.</dd>
+              </dl></div>
+            <div class="painel" data-alvo="pau-pag" hidden><span class="ptit">As 8 páginas da cidade</span>
+              <p class="prose">Para a degustação elas são <strong>secundárias</strong>: página de notícia não produz
+              sequência de comida. Ficam registradas porque são o canal de divulgação do Sorvete de Graça e porque,
+              se sobrar vaga, duas delas têm número bom.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Seguidores</th><th>Views mediana</th><th>Views/seg.</th></tr></thead>
+                <tbody>
+                  <tr class="mark"><td><a href="https://www.instagram.com/conexaopaulinianews/" target="_blank" rel="noopener">@conexaopaulinianews</a></td><td>941</td><td>2.613</td><td><strong>2,78</strong></td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/comendoporpaulinia/" target="_blank" rel="noopener">@comendoporpaulinia</a></td><td>1.733</td><td>3.120</td><td><strong>1,80</strong></td></tr>
+                  <tr><td><a href="https://www.instagram.com/diariodepaulinia/" target="_blank" rel="noopener">@diariodepaulinia</a></td><td>37.609</td><td>6.491</td><td>0,17</td></tr>
+                  <tr><td><a href="https://www.instagram.com/maesdepaulinia/" target="_blank" rel="noopener">@maesdepaulinia</a></td><td>5.781</td><td>932</td><td>0,16</td></tr>
+                  <tr><td><a href="https://www.instagram.com/livepaulinianilsao/" target="_blank" rel="noopener">@livepaulinianilsao</a></td><td><strong>69.873</strong></td><td><strong>9.677</strong></td><td>0,14</td></tr>
+                  <tr><td><a href="https://www.instagram.com/portal_paulinia/" target="_blank" rel="noopener">@portal_paulinia</a></td><td><strong>72.716</strong></td><td>6.515</td><td>0,09</td></tr>
+                  <tr><td><a href="https://www.instagram.com/pauliniainstagram/" target="_blank" rel="noopener">@pauliniainstagram</a></td><td>40.043</td><td>3.348</td><td>0,08</td></tr>
+                  <tr><td><a href="https://www.instagram.com/guiapaulinia/" target="_blank" rel="noopener">@guiapaulinia</a></td><td>9.078</td><td><span class="vago">sem reel</span></td><td>—</td></tr>
+                </tbody>
+              </table></div>
+              <dl class="ficha">
+                <dt>o destaque</dt><dd><strong>@comendoporpaulinia</strong> é a única das oito que é guia de comida — e guia de comida é exatamente quem faz sequência sobre vários pratos. Para esta campanha ela vale mais que as de 70 mil seguidores.</dd>
+                <dt>o teto da cidade</dt><dd>O maior perfil de Paulínia tem mediana de <strong>9.677 views</strong>. O de Campinas tem 69.802. É diferença de uma ordem de grandeza — não prometer alcance de Campinas em Paulínia.</dd>
+              </dl></div>
+          </div>
+        </div></div>
+
+      <!-- ───────── PIRACICABA ───────── -->
+      <div class="painel aberto" data-alvo="cv-pir" hidden><span class="ptit">Piracicaba <span class="tag bad">nenhum perfil</span></span>
+        <div class="grupo-descricao">
+          Procurei nos projetos e <strong>não existe lista de Piracicaba em lugar nenhum</strong> — nem perfil, nem
+          número. A cidade nunca entrou em ação de divulgação: o Cookie de Graça foi desenhado para Paulínia e
+          Piracicaba e acabou rodando só em Paulínia, e a planilha de seeding de 2025 é só de Campinas.
+        </div>
         <dl class="ficha">
-          <dt>recomendação</dt><dd><strong>Piracicaba é a última das três</strong>, ou fica fora desta edição. Não é decisão de marketing — é de operação.</dd>
-          <dt>um detalhe que afeta o convite</dt><dd>A loja <strong>não tem ficha no Google Maps</strong>. Convidado que recebe um convite e procura o endereço no mapa não acha — e isso derruba aceite. Vale resolver antes de convidar qualquer pessoa.</dd>
+          <dt>a única pista</dt><dd><strong><a href="https://www.instagram.com/marisarcampos/" target="_blank" rel="noopener">@marisarcampos</a></strong> — apareceu na busca de menções à marca com a bio <em>&ldquo;O melhor de Piracicaba e região&rdquo;</em>. <strong>Não tem número medido</strong> e não está em nenhum ranking: é um nome pra checar, não uma lista.</dd>
+          <dt>o que achei de útil</dt><dd>O <strong>endereço da loja</strong>, que não estava registrado em nenhum lugar deste projeto: <strong>Rua Quinze de Novembro, nº 630, Centro</strong> — de um post da marca que lista as unidades. Vale confirmar antes de usar em convite.</dd>
+          <dt>e segue valendo</dt><dd>A loja <strong>não tem ficha no Google Maps</strong>. Convidado que recebe o convite e procura no mapa não acha — e isso derruba aceite antes de qualquer lista existir.</dd>
+          <dt>o levantamento</dt><dd>Mesmo método das outras duas: quem já marcou o perfil da loja, busca por termos de comida da cidade, e hashtags. A ferramenta que mediu Campinas já existe e serve pra qualquer lista — <code>scrape_reels.py</code>, em <em>Squad de Marketing/influenciadores-holy-cookie/</em>, aceita qualquer CSV com uma coluna <code>handle</code>.</dd>
         </dl></div>
 
     </div>
   </div>
 </section>
 
+
 <section>
-  <h2><span class="n">3</span> O convite<span class="hint">é peça de campanha, não mensagem avulsa</span></h2>
+  <h2><span class="n">4</span> O convite<span class="hint">é peça de campanha, não mensagem avulsa</span></h2>
   <p class="prose">O convite é o que determina a taxa de aceite, e tem uma coisa a vender que vale mais que produto
   grátis: <strong>a loja vai fechar só pra eles.</strong> Isso é exclusividade de verdade, e é a parte do convite
   que não pode ficar implícita.</p>
