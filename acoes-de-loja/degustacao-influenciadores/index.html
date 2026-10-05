@@ -205,8 +205,6 @@
   <p class="lede">O cardápio de verão apresentado a <strong>10 influenciadores da cidade</strong>, com a loja
   fechada só para eles por uma hora. Produto por produto, provando — não é foto de release, é degustação de
   verdade, com alguém apresentando.</p>
-  <p class="lede">É campanha <strong>separada</strong> do <a href="../sorvete-de-graca/">Sorvete de Graça</a>:
-  as duas anunciam o mesmo cardápio, mas compram coisas opostas.</p>
 </header>
 
 <div class="strip">
@@ -218,47 +216,136 @@
 </div>
 
 <div class="tabs" role="tablist">
-  <button class="tab-btn active" type="button" data-tab="briefing" role="tab" aria-selected="true">Briefing</button>
+  <button class="tab-btn active" type="button" data-tab="checklist" role="tab" aria-selected="true">Checklist</button>
+  <button class="tab-btn" type="button" data-tab="briefing" role="tab" aria-selected="false">Briefing</button>
   <button class="tab-btn" type="button" data-tab="evento" role="tab" aria-selected="false">O evento</button>
   <button class="tab-btn" type="button" data-tab="apresentador" role="tab" aria-selected="false">Quem apresenta</button>
   <button class="tab-btn" type="button" data-tab="convidados" role="tab" aria-selected="false">Os 10 convidados</button>
   <button class="tab-btn" type="button" data-tab="roteiro" role="tab" aria-selected="false">O roteiro</button>
   <button class="tab-btn" type="button" data-tab="kit" role="tab" aria-selected="false">O kit</button>
   <button class="tab-btn" type="button" data-tab="contrapartida" role="tab" aria-selected="false">A contrapartida</button>
-  <button class="tab-btn" type="button" data-tab="checklist" role="tab" aria-selected="false">Checklist</button>
 </div>
 
-<div class="tab-panel" data-panel="briefing" role="tabpanel">
+<div class="tab-panel" data-panel="checklist" role="tabpanel">
 
 <section>
-  <h2><span class="n">1</span> O que a campanha é<span class="hint">e por que é separada do Sorvete de Graça</span></h2>
+  <h2>O checklist<span class="hint">clique num grupo</span></h2>
+  <div class="bloco">
+    <div class="grade">
+      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir</span><span class="cmeta contagem" data-conta="dec">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-prod"><span class="cnome">Produto</span><span class="cmeta contagem" data-conta="prod">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-conv"><span class="cnome">Convidados e convite</span><span class="cmeta contagem" data-conta="conv">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-rot"><span class="cnome">Roteiro e apresentação</span><span class="cmeta contagem" data-conta="rot">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-kit"><span class="cnome">Kit e peças</span><span class="cmeta contagem" data-conta="kit">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-loj"><span class="cnome">Loja e logística</span><span class="cmeta contagem" data-conta="loj">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-dia"><span class="cnome">No dia</span><span class="cmeta contagem" data-conta="dia">0/0</span></button>
+      <button class="card-btn" data-alvo="ck-dep"><span class="cnome">Depois</span><span class="cmeta contagem" data-conta="dep">0/0</span></button>
+    </div>
+    <div class="visor">
+
+      <div class="painel" data-alvo="ck-dec" hidden><span class="ptit">Decidir</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-dec1" data-g="dec"><label for="dg-dec1"><span class="prazo ja">trava tudo</span><strong>Quem apresenta.</strong><span class="por">Falar com o Yuri: ele pode ir, e pode ir nas três cidades? Se não, as opções são Fred, a dupla &ldquo;quem conta + quem monta&rdquo; (recomendada, porque aumenta o material produzido) ou a líder da loja com roteiro e ensaio.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec2" data-g="dec"><label for="dg-dec2"><span class="prazo ja">trava o convite</span><strong>Permuta ou pago, e se postar é obrigatório.</strong><span class="por">Recomendação: permuta com combinado explícito e datado — stories durante + 1 post até uma data. Dez com obrigação entregam dez posts medianos; dez sem obrigação entregam quatro ou cinco bons. E pagar um ou dois nomes grandes em vez dos dez.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec3" data-g="dec"><label for="dg-dec3"><span class="prazo ja">trava o convite</span><strong>Uma cidade como piloto, ou as três.</strong><span class="por">Recomendação: uma. O formato nunca foi feito, e repetir uma apresentação testada é fácil — estrear três ao mesmo tempo, com um apresentador só, não é.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec4" data-g="dec"><label for="dg-dec4"><span class="prazo antes">antes do convite</span><strong>Data, hora e duração.</strong><span class="por">A hora mais barata de fechar sai do histórico de vendas por hora, não de opinião. Mas a hora barata pra loja pode ser a pior pros convidados — e tem uma terceira opção que ninguém propõe: <em>antes de abrir</em>, que não fecha nada e tem a melhor luz. 1h15 a 1h30 é mais realista que 1h.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec5" data-g="dec"><label for="dg-dec5"><span class="prazo antes">antes do roteiro</span><strong>Quantos produtos são servidos.</strong><span class="por">Recomendação: apresentar todos, servir 7 ou 8 em micro-porção, e os outros aparecem montados na mesa com nome e explicação. Cortar os que se parecem com outro do mesmo bloco.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec6" data-g="dec"><label for="dg-dec6"><span class="prazo antes">antes do roteiro</span><strong>Quais são os 2 ou 3 heróis</strong> — os que vão em porção cheia.<span class="por">Quem decide é a estratégia de venda, não a estética. Candidato natural: a casquinha com sorvete, que é o que o Sorvete de Graça vai distribuir na rua.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec7" data-g="dec"><label for="dg-dec7"><strong>A degustação é teste de produto ou só mídia?</strong><span class="por">Se for teste, precisa de uma pergunta por produto e alguém anotando. Sem isso os dez vão elogiar tudo por educação e o ganho de pesquisa se perde inteiro — e esse ganho é de graça.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec8" data-g="dec"><label for="dg-dec8"><strong>Acompanhante é permitido?</strong><span class="por">Dez criadores com acompanhante são vinte pessoas, e metade não produz conteúdo — muda o evento. Se for sim, é decisão consciente, não gentileza na porta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dec9" data-g="dec"><label for="dg-dec9"><strong>O que vai no kit</strong>, e se tem produto pra levar e voucher.<span class="por">Se houver voucher, usar o mesmo do Sorvete de Graça — dois vouchers diferentes na mesma temporada é confusão de balcão sem ganho.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-prod" hidden><span class="ptit">Produto</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-prod1" data-g="prod"><label for="dg-prod1"><span class="prazo ja">antes da data</span><strong>Garantir execução consistente</strong> dos produtos que vão ser servidos.<span class="por">Não da lista inteira — dos servidos. Produto que sai diferente cada vez vai ser julgado pela vez que saiu pior, na frente de dez pessoas que vivem de comparar comida.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod2" data-g="prod"><label for="dg-prod2"><span class="prazo ja">destrava a data</span><strong>Fechar as fichas técnicas</strong> dos produtos que entram.<span class="por">Já é tarefa aberta no projeto do cardápio de verão, com prazo &ldquo;depois da degustação da equipe&rdquo;. Sem ficha, cada montagem sai diferente — e é essa dependência que define a data possível.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod3" data-g="prod"><label for="dg-prod3"><strong>Passar o portão de estabilidade da loja.</strong><span class="por">O critério de produto, experiência e ambiente já existe no projeto de experiência da loja. Campanha de fidelização falha em silêncio; degustação falha na frente de dez criadores.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod4" data-g="prod"><label for="dg-prod4"><strong>Definir se são 10 ou 12 produtos</strong> no cardápio.<span class="por">Dez fechados mais duas sugestões: Cookie Gateau e a bolacha que o Fred chama de piscininha. O roteiro e a folha dos nomes precisam saber antes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod5" data-g="prod"><label for="dg-prod5"><strong>Ter o preço de cada produto na mão de quem apresenta.</strong><span class="por">&ldquo;Quanto custa&rdquo; vem sempre. O preço sai do CMV, que está sendo levantado no laboratório do Sistema-HC. Se não estiver pronto, a frase é &ldquo;esse ainda está fechando preço, eu te mando&rdquo; — preço improvisado na frente de dez criadores vira preço publicado.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-prod6" data-g="prod"><label for="dg-prod6"><strong>Calcular o insumo em dobro</strong> dos produtos de foto.<span class="por">Cada produto aparece duas vezes: um montado pra câmera e um em micro-porção pra provar. É custo de campanha, não desperdício — e se não estiver previsto, no dia alguém serve o prato da foto e o bloco de filmagem acaba sem produto.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-conv" hidden><span class="ptit">Convidados e convite</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-conv1" data-g="conv"><label for="dg-conv1"><span class="prazo ja">Paulínia tem 4</span><strong>Levantar os 10 nomes da cidade escolhida.</strong><span class="por">A régua aqui é diferente da do Sorvete de Graça: <em>formato antes de tamanho</em> — faz comida com o próprio rosto, publica em sequência, e só então views por seguidor. Em Paulínia, 4 já têm número real e os outros 7 perfis que já marcaram a loja são o primeiro lugar pra procurar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv2" data-g="conv"><label for="dg-conv2"><strong>Incluir os 4 criadores do Sorvete de Graça entre os 10.</strong><span class="por">Mesma pessoa, duas campanhas: relação mais barata, e quem provou o cardápio divulga o buzinaço sabendo do que fala.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv3" data-g="conv"><label for="dg-conv3"><strong>Escrever o convite</strong>, com a contrapartida dentro.<span class="por">Sete itens obrigatórios e um rascunho de texto estão na aba Os 10 convidados. O maior ativo do convite é &ldquo;a loja vai fechar só pra vocês&rdquo; — não pode ficar implícito.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv4" data-g="conv"><label for="dg-conv4"><strong>Convidar quinze pra ter dez</strong>, um por um.<span class="por">Nunca em lista de transmissão — convite em grupo deixa de ser seleção. Com pelo menos uma semana de antecedência, e com prazo de resposta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv5" data-g="conv"><label for="dg-conv5"><strong>Perguntar disponibilidade antes de fixar a hora.</strong><span class="por">Criador de comida trabalha à noite e no fim de semana. Se a hora mais barata pra loja derrubar o aceite de 10 pra 5, ela saiu caro.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv6" data-g="conv"><label for="dg-conv6"><strong>Mandar endereço e ponto de referência</strong> na confirmação.<span class="por">Em Piracicaba isso é crítico: a loja não tem ficha no Google Maps, então quem procura não acha — e isso derruba presença.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv7" data-g="conv"><label for="dg-conv7"><span class="prazo antes">dia anterior</span><strong>Lembrete no dia anterior.</strong><span class="por">O item mais barato da lista e o que mais muda a presença — quem confirmou na segunda esquece na quinta.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-rot" hidden><span class="ptit">Roteiro e apresentação</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-rot1" data-g="rot"><label for="dg-rot1"><span class="prazo ja">destrava o resto</span><strong>Escrever o roteiro: duas ou três frases por produto.</strong><span class="por">Trinta minutos divididos por dez ou doze produtos dá menos de três minutos cada. Com roteiro, um apresentador médio vai bem; sem roteiro, um bom estoura o tempo e a hora acaba na metade do cardápio.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot2" data-g="rot"><label for="dg-rot2"><strong>Pegar a história de criação de cada produto com o Yuri.</strong><span class="por">Meia hora de conversa, duas frases por produto, anotadas. É o conteúdo que mais ninguém tem — e se o apresentador não for ele, é o que falta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot3" data-g="rot"><label for="dg-rot3"><strong>Definir a ordem por blocos.</strong><span class="por">Gelado leve → herói em porção cheia → pausa com água e café → gelado denso em micro-porção → quente por último. O quente fecha porque sai do forno na hora, reacorda o paladar, e a panelinha montada ao vivo é o melhor plano de vídeo do cardápio.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot4" data-g="rot"><label for="dg-rot4"><strong>Reservar os 20 minutos de filmagem no roteiro.</strong><span class="por">É o bloco mais importante e o que mais se esquece. Sem ele, eles filmam durante a apresentação — ninguém ouve e o vídeo sai com voz por cima. Os dois resultados pioram juntos e ninguém percebe a causa.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot5" data-g="rot"><label for="dg-rot5"><strong>Escrever a frase de diferença de cada produto do bloco denso.</strong><span class="por">São seis itens que se parecem — cookie e sorvete em combinações diferentes. Se o criador não levar a diferença, ele posta &ldquo;tem vários cookies com sorvete&rdquo;, que é o resumo que destrói o trabalho de seis produtos.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot6" data-g="rot"><label for="dg-rot6"><strong>Ensaiar uma vez</strong>, com o tempo cronometrado.<span class="por">Obrigatório se quem apresenta for a líder da loja. Útil em qualquer caso: é como se descobre que a apresentação dura 50 minutos e não 30.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-rot7" data-g="rot"><label for="dg-rot7"><strong>Combinar quem monta ao vivo</strong>, se for a opção da dupla.<span class="por">Alguém da cozinha daquela loja, que já faz o produto todo dia. Não precisa apresentar — precisa montar bonito e deixar filmar.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-kit" hidden><span class="ptit">Kit e peças</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-kit1" data-g="kit"><label for="dg-kit1"><span class="prazo ja">melhor retorno do kit</span><strong>Fazer a folha com o nome correto de cada produto.</strong><span class="por">Na ordem da apresentação, com uma linha explicando cada um. Doze nomes específicos não se decoram numa hora, e nome errado no post é irreversível: o público aprende o nome errado.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit2" data-g="kit"><label for="dg-kit2"><strong>Marcar na folha o que já está à venda</strong> e o que entra depois.<span class="por">Post de produto que a loja ainda não vende gera cliente procurando algo que não existe — pior que não ter o post.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit3" data-g="kit"><label for="dg-kit3"><strong>Pôr a @ da loja da cidade no kit, escrita.</strong><span class="por">São três perfis diferentes. Marcar o perfil errado entrega o post pra audiência errada e não tem correção depois de publicado. Junto: endereço, pra entrar na legenda — conteúdo gravado em loja fechada não mostra onde é.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit4" data-g="kit"><label for="dg-kit4"><strong>Pôr o pedido por escrito no kit.</strong><span class="por">O mesmo do convite, repetido com data. Ninguém guarda uma combinação feita por mensagem três semanas antes.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit5" data-g="kit"><label for="dg-kit5"><strong>Incluir o panfleto do cardápio com QR.</strong><span class="por">A mesma peça do Sorvete de Graça, custo marginal zero. Pro criador ela é o link que ele manda pra quem perguntar nos comentários — é o que faz o post converter em vez de só elogiar. <em>Depende do cardápio online existir.</em></span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-kit6" data-g="kit"><label for="dg-kit6"><strong>Escolher o produto pra levar</strong>, se houver.<span class="por">O motivo não é agradar: é gerar um segundo conteúdo em outro dia, de graça. Escolher o que <em>aguenta transporte</em> — nove dos dez itens dependem de frio, então sobram a torta e os de forno. Produto que derrete no caminho vira conteúdo ruim com a marca marcada.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-loj" hidden><span class="ptit">Loja e logística</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-loj1" data-g="loj"><label for="dg-loj1"><strong>Puxar a venda por hora da loja</strong> pra escolher a hora de fechar.<span class="por">O dado existe no Sistema-HC. É o que transforma &ldquo;qual hora fechar&rdquo; de opinião em conta.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj2" data-g="loj"><label for="dg-loj2"><strong>Avisar que a loja fecha</strong> — no perfil, na porta e no WhatsApp.<span class="por">Cliente que chega e encontra fechado sem aviso é o custo invisível do evento. E a resposta automática do WhatsApp precisa cobrir aquela hora.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj3" data-g="loj"><label for="dg-loj3"><strong>Definir onde fica a mesa dos produtos</strong>, pensando na luz.<span class="por">Loja fechada à tarde ou à noite tem luz diferente da luz de cliente. Vale olhar antes — é o que decide se dez pessoas filmam bem ou mal.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj4" data-g="loj"><label for="dg-loj4"><strong>Garantir que a marca entre no quadro.</strong><span class="por">Um fundo, uma parede, o letreiro. Conteúdo gravado numa loja vazia sem marca visível não leva ninguém a lugar nenhum.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj5" data-g="loj"><label for="dg-loj5"><strong>Reservar espaço de freezer pro dia.</strong><span class="por">O bloco denso é todo congelado, e cada produto em dobro (foto + prova). Já está aberto no projeto do cardápio se o freezer das lojas comporta o volume normal — o evento chega em cima disso.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj6" data-g="loj"><label for="dg-loj6"><strong>Prever o forno pro bloco quente.</strong><span class="por">Panelinha e torta quente assam na hora e prendem o forno do cookie. Com a loja fechada é tranquilo, mas tem que estar no procedimento.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj7" data-g="loj"><label for="dg-loj7"><strong>Água e café prontos pra pausa.</strong><span class="por">Custa quase nada e é o que recupera o paladar. Sem isso, o bloco 3 é avaliado pelo que sobrou do bloco 2.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-loj8" data-g="loj"><label for="dg-loj8"><strong>Definir quem da equipe fica</strong> na cozinha e no salão.<span class="por">Quem monta na cozinha naquele turno tem que ser quem sabe montar. E alguém disponível pra montar um produto na hora, se alguém quiser filmar a montagem.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dia" hidden><span class="ptit">No dia</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-dia1" data-g="dia"><label for="dg-dia1"><span class="prazo dia">antes</span><strong>Montar a mesa antes do primeiro chegar.</strong><span class="por">Dez pessoas chegam ao longo de quinze minutos. Quem chega primeiro precisa ter o que fotografar — senão esses minutos viram espera em vez de conteúdo.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia2" data-g="dia"><label for="dg-dia2"><span class="prazo dia">na chegada</span><strong>Receber pelo nome</strong>, com a lista na mão.</label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia3" data-g="dia"><label for="dg-dia3"><span class="prazo dia">5 min</span><strong>Abertura curta.</strong><span class="por">Cinco minutos, não quinze. O erro clássico é a apresentação institucional longa na abertura: gasta a atenção no único momento em que todos estão prestando atenção. A história da marca entra dentro de cada produto.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia4" data-g="dia"><label for="dg-dia4"><span class="prazo dia">30 min</span><strong>Apresentar e servir, bloco por bloco.</strong><span class="por">Cada produto é provado no momento em que é apresentado, não todos no final.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia5" data-g="dia"><label for="dg-dia5"><span class="prazo dia">na pausa</span><strong>Fazer a pergunta de produto</strong>, se a degustação for teste.<span class="por">A pausa é quando as pessoas falam o que realmente acharam — não quando o apresentador pergunta na frente de todos. E alguém anotando.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia6" data-g="dia"><label for="dg-dia6"><span class="prazo dia">20 min</span><strong>Repor os produtos e abrir o bloco de filmagem.</strong><span class="por">Produtos inteiros, ninguém falando. O apresentador sai de cena e fica disponível — o impulso de continuar explicando enquanto eles gravam arruína o áudio de dez vídeos de uma vez.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia7" data-g="dia"><label for="dg-dia7"><span class="prazo dia">10 min</span><strong>Entregar o kit e dizer o pedido em voz alta.</strong><span class="por">&ldquo;Espero que vocês postem&rdquo; não é pedido. &ldquo;Stories hoje e um post até sexta, marcando @holycook.(cidade)&rdquo; é.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dia8" data-g="dia"><label for="dg-dia8"><span class="prazo dia">durante</span><strong>A loja também grava.</strong><span class="por">A mesa montada, a apresentação, a montagem ao vivo, a mesa cheia de gente. Rende conteúdo da marca e rende o Destaque que serve pra convidar na próxima.</span></label></div>
+        </div></div>
+
+      <div class="painel" data-alvo="ck-dep" hidden><span class="ptit">Depois</span>
+        <div class="chk-lista">
+          <div class="chk-item"><input type="checkbox" id="dg-dep1" data-g="dep"><label for="dg-dep1"><span class="prazo dep">mesmo dia</span><strong>Agradecer individualmente.</strong><span class="por">É o que faz o segundo convite ser aceito — e o segundo convite é o do cardápio de Natal, que vem logo depois e hoje não existe no papel.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep2" data-g="dep"><label for="dg-dep2"><span class="prazo dep">na hora</span><strong>Repostar tudo que sair.</strong><span class="por">Vale como conteúdo da loja e sinaliza a quem ainda não postou que os outros postaram — funciona melhor que qualquer mensagem de cobrança.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep3" data-g="dep"><label for="dg-dep3"><strong>Anotar quem postou e quem não postou.</strong><span class="por">Sem cobrar. A consequência é a lista da próxima campanha — quem postou entra na do Natal, quem não postou não. Isso é suficiente.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep4" data-g="dep"><label for="dg-dep4"><span class="prazo dep">na semana</span><strong>Reunir o que eles disseram dos produtos</strong> e levar pro projeto do cardápio.<span class="por">É o ganho de pesquisa — dez pessoas que vivem de comida avaliando antes do público. Se ninguém escrever, se perde em uma semana.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep5" data-g="dep"><label for="dg-dep5"><strong>Montar um Destaque no perfil</strong> com o melhor material.<span class="por">É a prova social que fica, e é o que se mostra pra convidar da próxima vez.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep6" data-g="dep"><label for="dg-dep6"><strong>Contar o que saiu:</strong> quantos postaram, quantos stories, quantos posts, alcance somado.<span class="por">É o número que diz se permuta funcionou — e que decide o arranjo de contrapartida da próxima.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-dep7" data-g="dep"><label for="dg-dep7"><strong>Escrever o que o evento ensinou</strong>, pra repetir nas outras cidades.<span class="por">Quanto tempo a apresentação durou de verdade, quantos produtos deu pra servir, o que saturou, quem apareceu. É o que transforma o piloto em formato — e é a parte que sempre se perde.</span></label></div>
+        </div></div>
+
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tab-panel" data-panel="briefing" role="tabpanel" hidden>
+
+<section>
+  <h2><span class="n">1</span> O que a campanha é</h2>
   <p class="prose">A loja fecha por uma hora. Entram dez criadores da cidade, convidados um por um. Alguém
   apresenta o cardápio de verão <strong>produto por produto</strong> — o que é, de onde veio, como se faz — e
   eles provam. Saem com um kit e com material pra postar.</p>
-  <p class="prose">As duas campanhas do verão anunciam o mesmo cardápio e são opostas em tudo:</p>
-  <div class="tablewrap"><table>
-    <thead><tr><th></th><th>Sorvete de Graça</th><th>Menu Degustação</th></tr></thead>
-    <tbody>
-      <tr><td>quem alcança</td><td>900 pessoas que não conhecem a marca</td><td>10 pessoas que têm audiência</td></tr>
-      <tr><td>tempo por pessoa</td><td>cerca de 36 segundos, pela janela do carro</td><td>uma hora, sentada, dentro da loja</td></tr>
-      <tr><td>o que ela compra</td><td>volume e uma cena de rua</td><td>profundidade, autoridade e relação</td></tr>
-      <tr><td>quem produz o conteúdo</td><td>a gente (a loja filma o buzinaço)</td><td>eles (é o ponto da campanha)</td></tr>
-      <tr><td>o que pode dar errado</td><td>a rua travar, ou acabar em 20 minutos</td><td>o produto não estar no padrão na frente de quem vive de comida</td></tr>
-      <tr><td>complexidade</td><td>mecânica nova, mas simples de explicar</td><td>evento, convite, apresentação e contrapartida</td></tr>
-    </tbody>
-  </table></div>
-  <div class="notes">
-    <div class="note-item"><span class="tag acc">por que separar</span><span>
-      Porque <strong>juntar as duas faria a mais simples esperar a mais complexa.</strong> O Sorvete de Graça
-      depende de produto, panfleto e rua. A degustação depende de produto, convite, apresentador e
-      contrapartida — e qualquer um desses quatro pode atrasar semanas. Numa campanha só, o atraso de um trava o
-      outro, e a campanha de rua é a que não deveria esperar.</span></div>
-    <div class="note-item"><span class="tag mudo">mas elas se ajudam</span><span>
-      Os <strong>quatro criadores</strong> contratados em cada cidade para o Sorvete de Graça devem estar
-      <strong>entre os dez convidados</strong> da degustação. Mesma pessoa, duas campanhas: a relação fica mais
-      barata, e quem já conheceu o cardápio na degustação divulga o buzinaço sabendo do que está falando.
-      Ordem ideal: <strong>degustação primeiro, buzinaço depois.</strong></span></div>
-  </div>
 </section>
 
 <section>
@@ -1162,156 +1249,6 @@ Topa? Me confirma até [data] que eu já reservo seu lugar.</div>
 
 </div>
 
-<div class="tab-panel" data-panel="checklist" role="tabpanel" hidden>
-
-<section>
-  <h2><span class="n">1</span> Onde a campanha está<span class="hint">montado em 02/10/2026</span></h2>
-  <div class="strip">
-    <div><span class="v">sem data</span><span class="s">depende das fichas técnicas, não de agenda</span></div>
-    <div><span class="v">sem apresentador</span><span class="s">a decisão que trava tudo</span></div>
-    <div><span class="v" id="chk-total">0 / 0</span><span class="s">itens abertos</span></div>
-  </div>
-  <div class="notes">
-    <div class="note-item"><span class="tag bad">o bloqueio nº 1</span><span>
-      <strong>Quem apresenta.</strong> A campanha inteira é uma apresentação — sem apresentador não há data, não há
-      convite e não há roteiro, porque o roteiro depende de quem diz as falas. A pergunta imediata é se o Yuri pode
-      ir, e se pode ir <em>três vezes</em>.</span></div>
-    <div class="note-item"><span class="tag bad">o bloqueio nº 2</span><span>
-      <strong>O produto estar no padrão.</strong> Dez pessoas que vivem de comida provando produtos que a loja
-      acabou de aprender a fazer: se a execução estiver irregular, a degustação amplifica o problema em vez de
-      esconder. Depende das fichas técnicas, que já são tarefa aberta no projeto do cardápio.</span></div>
-    <div class="note-item"><span class="tag warn">a restrição que desenha o evento</span><span>
-      <strong>Dez a doze produtos doces não se degustam em porção normal.</strong> Depois de quatro ou cinco itens o
-      paladar satura. Micro-porção, ordem por bloco, água e café entre blocos, e cada produto aparecendo duas vezes
-      — um pra foto, um pra provar.</span></div>
-    <div class="note-item"><span class="tag acc">a ordem entre as duas campanhas</span><span>
-      <strong>Degustação primeiro, Sorvete de Graça depois.</strong> Os quatro criadores contratados pro buzinaço
-      devem estar entre os dez convidados — divulgam melhor depois de ter provado, e a relação sai mais
-      barata.</span></div>
-    <div class="note-item"><span class="tag mudo">como usar</span><span>
-      As marcações ficam salvas <strong>neste navegador</strong>. Serve pra acompanhar; pra equipe, imprimir.</span></div>
-  </div>
-</section>
-
-<section>
-  <h2><span class="n">2</span> O checklist<span class="hint">clique num grupo</span></h2>
-  <div class="bloco">
-    <div class="grade">
-      <button class="card-btn" data-alvo="ck-dec"><span class="cnome">Decidir</span><span class="cmeta contagem" data-conta="dec">0/0</span><span class="cdesc">Nove decisões. A primeira é quem apresenta.</span></button>
-      <button class="card-btn" data-alvo="ck-prod"><span class="cnome">Produto</span><span class="cmeta contagem" data-conta="prod">0/0</span><span class="cdesc">O portão de estabilidade e o corte do roteiro.</span></button>
-      <button class="card-btn" data-alvo="ck-conv"><span class="cnome">Convidados e convite</span><span class="cmeta contagem" data-conta="conv">0/0</span><span class="cdesc">Levantar, convidar quinze, confirmar dez, lembrar no dia anterior.</span></button>
-      <button class="card-btn" data-alvo="ck-rot"><span class="cnome">Roteiro e apresentação</span><span class="cmeta contagem" data-conta="rot">0/0</span><span class="cdesc">Escrever, cortar, ensaiar. É o que permite não depender de uma pessoa só.</span></button>
-      <button class="card-btn" data-alvo="ck-kit"><span class="cnome">Kit e peças</span><span class="cmeta contagem" data-conta="kit">0/0</span><span class="cdesc">A folha dos nomes é o item de melhor retorno, e custa uma impressão.</span></button>
-      <button class="card-btn" data-alvo="ck-loj"><span class="cnome">Loja e logística</span><span class="cmeta contagem" data-conta="loj">0/0</span><span class="cdesc">Fechar a loja, montar a mesa, freezer, forno e luz.</span></button>
-      <button class="card-btn" data-alvo="ck-dia"><span class="cnome">No dia</span><span class="cmeta contagem" data-conta="dia">0/0</span><span class="cdesc">A hora, do primeiro que chega ao último que sai.</span></button>
-      <button class="card-btn" data-alvo="ck-dep"><span class="cnome">Depois</span><span class="cmeta contagem" data-conta="dep">0/0</span><span class="cdesc">É aqui que a campanha acontece — e é o que mais se perde.</span></button>
-    </div>
-    <div class="visor">
-
-      <div class="painel" data-alvo="ck-dec" hidden><span class="ptit">Decidir</span>
-        <span class="psub">9 decisões em aberto</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-dec1" data-g="dec"><label for="dg-dec1"><span class="prazo ja">trava tudo</span><strong>Quem apresenta.</strong><span class="por">Falar com o Yuri: ele pode ir, e pode ir nas três cidades? Se não, as opções são Fred, a dupla &ldquo;quem conta + quem monta&rdquo; (recomendada, porque aumenta o material produzido) ou a líder da loja com roteiro e ensaio.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec2" data-g="dec"><label for="dg-dec2"><span class="prazo ja">trava o convite</span><strong>Permuta ou pago, e se postar é obrigatório.</strong><span class="por">Recomendação: permuta com combinado explícito e datado — stories durante + 1 post até uma data. Dez com obrigação entregam dez posts medianos; dez sem obrigação entregam quatro ou cinco bons. E pagar um ou dois nomes grandes em vez dos dez.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec3" data-g="dec"><label for="dg-dec3"><span class="prazo ja">trava o convite</span><strong>Uma cidade como piloto, ou as três.</strong><span class="por">Recomendação: uma. O formato nunca foi feito, e repetir uma apresentação testada é fácil — estrear três ao mesmo tempo, com um apresentador só, não é.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec4" data-g="dec"><label for="dg-dec4"><span class="prazo antes">antes do convite</span><strong>Data, hora e duração.</strong><span class="por">A hora mais barata de fechar sai do histórico de vendas por hora, não de opinião. Mas a hora barata pra loja pode ser a pior pros convidados — e tem uma terceira opção que ninguém propõe: <em>antes de abrir</em>, que não fecha nada e tem a melhor luz. 1h15 a 1h30 é mais realista que 1h.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec5" data-g="dec"><label for="dg-dec5"><span class="prazo antes">antes do roteiro</span><strong>Quantos produtos são servidos.</strong><span class="por">Recomendação: apresentar todos, servir 7 ou 8 em micro-porção, e os outros aparecem montados na mesa com nome e explicação. Cortar os que se parecem com outro do mesmo bloco.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec6" data-g="dec"><label for="dg-dec6"><span class="prazo antes">antes do roteiro</span><strong>Quais são os 2 ou 3 heróis</strong> — os que vão em porção cheia.<span class="por">Quem decide é a estratégia de venda, não a estética. Candidato natural: a casquinha com sorvete, que é o que o Sorvete de Graça vai distribuir na rua.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec7" data-g="dec"><label for="dg-dec7"><strong>A degustação é teste de produto ou só mídia?</strong><span class="por">Se for teste, precisa de uma pergunta por produto e alguém anotando. Sem isso os dez vão elogiar tudo por educação e o ganho de pesquisa se perde inteiro — e esse ganho é de graça.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec8" data-g="dec"><label for="dg-dec8"><strong>Acompanhante é permitido?</strong><span class="por">Dez criadores com acompanhante são vinte pessoas, e metade não produz conteúdo — muda o evento. Se for sim, é decisão consciente, não gentileza na porta.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dec9" data-g="dec"><label for="dg-dec9"><strong>O que vai no kit</strong>, e se tem produto pra levar e voucher.<span class="por">Se houver voucher, usar o mesmo do Sorvete de Graça — dois vouchers diferentes na mesma temporada é confusão de balcão sem ganho.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-prod" hidden><span class="ptit">Produto</span>
-        <span class="psub">o bloqueio nº 2 · vem antes de qualquer data</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-prod1" data-g="prod"><label for="dg-prod1"><span class="prazo ja">bloqueio nº 2</span><strong>Garantir execução consistente</strong> dos produtos que vão ser servidos.<span class="por">Não da lista inteira — dos servidos. Produto que sai diferente cada vez vai ser julgado pela vez que saiu pior, na frente de dez pessoas que vivem de comparar comida.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-prod2" data-g="prod"><label for="dg-prod2"><span class="prazo ja">destrava a data</span><strong>Fechar as fichas técnicas</strong> dos produtos que entram.<span class="por">Já é tarefa aberta no projeto do cardápio de verão, com prazo &ldquo;depois da degustação da equipe&rdquo;. Sem ficha, cada montagem sai diferente — e é essa dependência que define a data possível.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-prod3" data-g="prod"><label for="dg-prod3"><strong>Passar o portão de estabilidade da loja.</strong><span class="por">O critério de produto, experiência e ambiente já existe no projeto de experiência da loja. Campanha de fidelização falha em silêncio; degustação falha na frente de dez criadores.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-prod4" data-g="prod"><label for="dg-prod4"><strong>Definir se são 10 ou 12 produtos</strong> no cardápio.<span class="por">Dez fechados mais duas sugestões: Cookie Gateau e a bolacha que o Fred chama de piscininha. O roteiro e a folha dos nomes precisam saber antes.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-prod5" data-g="prod"><label for="dg-prod5"><strong>Ter o preço de cada produto na mão de quem apresenta.</strong><span class="por">&ldquo;Quanto custa&rdquo; vem sempre. O preço sai do CMV, que está sendo levantado no laboratório do Sistema-HC. Se não estiver pronto, a frase é &ldquo;esse ainda está fechando preço, eu te mando&rdquo; — preço improvisado na frente de dez criadores vira preço publicado.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-prod6" data-g="prod"><label for="dg-prod6"><strong>Calcular o insumo em dobro</strong> dos produtos de foto.<span class="por">Cada produto aparece duas vezes: um montado pra câmera e um em micro-porção pra provar. É custo de campanha, não desperdício — e se não estiver previsto, no dia alguém serve o prato da foto e o bloco de filmagem acaba sem produto.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-conv" hidden><span class="ptit">Convidados e convite</span>
-        <span class="psub">dez convidados é mais trabalho de produção do que parece</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-conv1" data-g="conv"><label for="dg-conv1"><span class="prazo ja">Paulínia tem 4</span><strong>Levantar os 10 nomes da cidade escolhida.</strong><span class="por">A régua aqui é diferente da do Sorvete de Graça: <em>formato antes de tamanho</em> — faz comida com o próprio rosto, publica em sequência, e só então views por seguidor. Em Paulínia, 4 já têm número real e os outros 7 perfis que já marcaram a loja são o primeiro lugar pra procurar.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv2" data-g="conv"><label for="dg-conv2"><strong>Incluir os 4 criadores do Sorvete de Graça entre os 10.</strong><span class="por">Mesma pessoa, duas campanhas: relação mais barata, e quem provou o cardápio divulga o buzinaço sabendo do que fala.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv3" data-g="conv"><label for="dg-conv3"><strong>Escrever o convite</strong>, com a contrapartida dentro.<span class="por">Sete itens obrigatórios e um rascunho de texto estão na aba Os 10 convidados. O maior ativo do convite é &ldquo;a loja vai fechar só pra vocês&rdquo; — não pode ficar implícito.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv4" data-g="conv"><label for="dg-conv4"><strong>Convidar quinze pra ter dez</strong>, um por um.<span class="por">Nunca em lista de transmissão — convite em grupo deixa de ser seleção. Com pelo menos uma semana de antecedência, e com prazo de resposta.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv5" data-g="conv"><label for="dg-conv5"><strong>Perguntar disponibilidade antes de fixar a hora.</strong><span class="por">Criador de comida trabalha à noite e no fim de semana. Se a hora mais barata pra loja derrubar o aceite de 10 pra 5, ela saiu caro.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv6" data-g="conv"><label for="dg-conv6"><strong>Mandar endereço e ponto de referência</strong> na confirmação.<span class="por">Em Piracicaba isso é crítico: a loja não tem ficha no Google Maps, então quem procura não acha — e isso derruba presença.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv7" data-g="conv"><label for="dg-conv7"><span class="prazo antes">dia anterior</span><strong>Lembrete no dia anterior.</strong><span class="por">O item mais barato da lista e o que mais muda a presença — quem confirmou na segunda esquece na quinta.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-rot" hidden><span class="ptit">Roteiro e apresentação</span>
-        <span class="psub">o roteiro escrito é o que tira a campanha da dependência de uma pessoa</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-rot1" data-g="rot"><label for="dg-rot1"><span class="prazo ja">destrava o resto</span><strong>Escrever o roteiro: duas ou três frases por produto.</strong><span class="por">Trinta minutos divididos por dez ou doze produtos dá menos de três minutos cada. Com roteiro, um apresentador médio vai bem; sem roteiro, um bom estoura o tempo e a hora acaba na metade do cardápio.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-rot2" data-g="rot"><label for="dg-rot2"><strong>Pegar a história de criação de cada produto com o Yuri.</strong><span class="por">Meia hora de conversa, duas frases por produto, anotadas. É o conteúdo que mais ninguém tem — e se o apresentador não for ele, é o que falta.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-rot3" data-g="rot"><label for="dg-rot3"><strong>Definir a ordem por blocos.</strong><span class="por">Gelado leve → herói em porção cheia → pausa com água e café → gelado denso em micro-porção → quente por último. O quente fecha porque sai do forno na hora, reacorda o paladar, e a panelinha montada ao vivo é o melhor plano de vídeo do cardápio.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-rot4" data-g="rot"><label for="dg-rot4"><strong>Reservar os 20 minutos de filmagem no roteiro.</strong><span class="por">É o bloco mais importante e o que mais se esquece. Sem ele, eles filmam durante a apresentação — ninguém ouve e o vídeo sai com voz por cima. Os dois resultados pioram juntos e ninguém percebe a causa.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-rot5" data-g="rot"><label for="dg-rot5"><strong>Escrever a frase de diferença de cada produto do bloco denso.</strong><span class="por">São seis itens que se parecem — cookie e sorvete em combinações diferentes. Se o criador não levar a diferença, ele posta &ldquo;tem vários cookies com sorvete&rdquo;, que é o resumo que destrói o trabalho de seis produtos.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-rot6" data-g="rot"><label for="dg-rot6"><strong>Ensaiar uma vez</strong>, com o tempo cronometrado.<span class="por">Obrigatório se quem apresenta for a líder da loja. Útil em qualquer caso: é como se descobre que a apresentação dura 50 minutos e não 30.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-rot7" data-g="rot"><label for="dg-rot7"><strong>Combinar quem monta ao vivo</strong>, se for a opção da dupla.<span class="por">Alguém da cozinha daquela loja, que já faz o produto todo dia. Não precisa apresentar — precisa montar bonito e deixar filmar.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-kit" hidden><span class="ptit">Kit e peças</span>
-        <span class="psub">o conteúdo é escrito depois, em casa — o kit é o que impede o erro</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-kit1" data-g="kit"><label for="dg-kit1"><span class="prazo ja">melhor retorno do kit</span><strong>Fazer a folha com o nome correto de cada produto.</strong><span class="por">Na ordem da apresentação, com uma linha explicando cada um. Doze nomes específicos não se decoram numa hora, e nome errado no post é irreversível: o público aprende o nome errado.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-kit2" data-g="kit"><label for="dg-kit2"><strong>Marcar na folha o que já está à venda</strong> e o que entra depois.<span class="por">Post de produto que a loja ainda não vende gera cliente procurando algo que não existe — pior que não ter o post.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-kit3" data-g="kit"><label for="dg-kit3"><strong>Pôr a @ da loja da cidade no kit, escrita.</strong><span class="por">São três perfis diferentes. Marcar o perfil errado entrega o post pra audiência errada e não tem correção depois de publicado. Junto: endereço, pra entrar na legenda — conteúdo gravado em loja fechada não mostra onde é.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-kit4" data-g="kit"><label for="dg-kit4"><strong>Pôr o pedido por escrito no kit.</strong><span class="por">O mesmo do convite, repetido com data. Ninguém guarda uma combinação feita por mensagem três semanas antes.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-kit5" data-g="kit"><label for="dg-kit5"><strong>Incluir o panfleto do cardápio com QR.</strong><span class="por">A mesma peça do Sorvete de Graça, custo marginal zero. Pro criador ela é o link que ele manda pra quem perguntar nos comentários — é o que faz o post converter em vez de só elogiar. <em>Depende do cardápio online existir.</em></span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-kit6" data-g="kit"><label for="dg-kit6"><strong>Escolher o produto pra levar</strong>, se houver.<span class="por">O motivo não é agradar: é gerar um segundo conteúdo em outro dia, de graça. Escolher o que <em>aguenta transporte</em> — nove dos dez itens dependem de frio, então sobram a torta e os de forno. Produto que derrete no caminho vira conteúdo ruim com a marca marcada.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-loj" hidden><span class="ptit">Loja e logística</span>
-        <span class="psub">o que está em exposição não é só o produto, é a loja</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-loj1" data-g="loj"><label for="dg-loj1"><strong>Puxar a venda por hora da loja</strong> pra escolher a hora de fechar.<span class="por">O dado existe no Sistema-HC. É o que transforma &ldquo;qual hora fechar&rdquo; de opinião em conta.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj2" data-g="loj"><label for="dg-loj2"><strong>Avisar que a loja fecha</strong> — no perfil, na porta e no WhatsApp.<span class="por">Cliente que chega e encontra fechado sem aviso é o custo invisível do evento. E a resposta automática do WhatsApp precisa cobrir aquela hora.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj3" data-g="loj"><label for="dg-loj3"><strong>Definir onde fica a mesa dos produtos</strong>, pensando na luz.<span class="por">Loja fechada à tarde ou à noite tem luz diferente da luz de cliente. Vale olhar antes — é o que decide se dez pessoas filmam bem ou mal.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj4" data-g="loj"><label for="dg-loj4"><strong>Garantir que a marca entre no quadro.</strong><span class="por">Um fundo, uma parede, o letreiro. Conteúdo gravado numa loja vazia sem marca visível não leva ninguém a lugar nenhum.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj5" data-g="loj"><label for="dg-loj5"><strong>Reservar espaço de freezer pro dia.</strong><span class="por">O bloco denso é todo congelado, e cada produto em dobro (foto + prova). Já está aberto no projeto do cardápio se o freezer das lojas comporta o volume normal — o evento chega em cima disso.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj6" data-g="loj"><label for="dg-loj6"><strong>Prever o forno pro bloco quente.</strong><span class="por">Panelinha e torta quente assam na hora e prendem o forno do cookie. Com a loja fechada é tranquilo, mas tem que estar no procedimento.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj7" data-g="loj"><label for="dg-loj7"><strong>Água e café prontos pra pausa.</strong><span class="por">Custa quase nada e é o que recupera o paladar. Sem isso, o bloco 3 é avaliado pelo que sobrou do bloco 2.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-loj8" data-g="loj"><label for="dg-loj8"><strong>Definir quem da equipe fica</strong> na cozinha e no salão.<span class="por">Quem monta na cozinha naquele turno tem que ser quem sabe montar. E alguém disponível pra montar um produto na hora, se alguém quiser filmar a montagem.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-dia" hidden><span class="ptit">No dia</span>
-        <span class="psub">a hora, do primeiro que chega ao último que sai</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-dia1" data-g="dia"><label for="dg-dia1"><span class="prazo dia">antes</span><strong>Montar a mesa antes do primeiro chegar.</strong><span class="por">Dez pessoas chegam ao longo de quinze minutos. Quem chega primeiro precisa ter o que fotografar — senão esses minutos viram espera em vez de conteúdo.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia2" data-g="dia"><label for="dg-dia2"><span class="prazo dia">na chegada</span><strong>Receber pelo nome</strong>, com a lista na mão.</label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia3" data-g="dia"><label for="dg-dia3"><span class="prazo dia">5 min</span><strong>Abertura curta.</strong><span class="por">Cinco minutos, não quinze. O erro clássico é a apresentação institucional longa na abertura: gasta a atenção no único momento em que todos estão prestando atenção. A história da marca entra dentro de cada produto.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia4" data-g="dia"><label for="dg-dia4"><span class="prazo dia">30 min</span><strong>Apresentar e servir, bloco por bloco.</strong><span class="por">Cada produto é provado no momento em que é apresentado, não todos no final.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia5" data-g="dia"><label for="dg-dia5"><span class="prazo dia">na pausa</span><strong>Fazer a pergunta de produto</strong>, se a degustação for teste.<span class="por">A pausa é quando as pessoas falam o que realmente acharam — não quando o apresentador pergunta na frente de todos. E alguém anotando.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia6" data-g="dia"><label for="dg-dia6"><span class="prazo dia">20 min</span><strong>Repor os produtos e abrir o bloco de filmagem.</strong><span class="por">Produtos inteiros, ninguém falando. O apresentador sai de cena e fica disponível — o impulso de continuar explicando enquanto eles gravam arruína o áudio de dez vídeos de uma vez.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia7" data-g="dia"><label for="dg-dia7"><span class="prazo dia">10 min</span><strong>Entregar o kit e dizer o pedido em voz alta.</strong><span class="por">&ldquo;Espero que vocês postem&rdquo; não é pedido. &ldquo;Stories hoje e um post até sexta, marcando @holycook.(cidade)&rdquo; é.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dia8" data-g="dia"><label for="dg-dia8"><span class="prazo dia">durante</span><strong>A loja também grava.</strong><span class="por">A mesa montada, a apresentação, a montagem ao vivo, a mesa cheia de gente. Rende conteúdo da marca e rende o Destaque que serve pra convidar na próxima.</span></label></div>
-        </div></div>
-
-      <div class="painel" data-alvo="ck-dep" hidden><span class="ptit">Depois</span>
-        <span class="psub">a hora na loja é a produção · o resultado é aqui</span>
-        <div class="chk-lista">
-          <div class="chk-item"><input type="checkbox" id="dg-dep1" data-g="dep"><label for="dg-dep1"><span class="prazo dep">mesmo dia</span><strong>Agradecer individualmente.</strong><span class="por">É o que faz o segundo convite ser aceito — e o segundo convite é o do cardápio de Natal, que vem logo depois e hoje não existe no papel.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dep2" data-g="dep"><label for="dg-dep2"><span class="prazo dep">na hora</span><strong>Repostar tudo que sair.</strong><span class="por">Vale como conteúdo da loja e sinaliza a quem ainda não postou que os outros postaram — funciona melhor que qualquer mensagem de cobrança.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dep3" data-g="dep"><label for="dg-dep3"><strong>Anotar quem postou e quem não postou.</strong><span class="por">Sem cobrar. A consequência é a lista da próxima campanha — quem postou entra na do Natal, quem não postou não. Isso é suficiente.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dep4" data-g="dep"><label for="dg-dep4"><span class="prazo dep">na semana</span><strong>Reunir o que eles disseram dos produtos</strong> e levar pro projeto do cardápio.<span class="por">É o ganho de pesquisa — dez pessoas que vivem de comida avaliando antes do público. Se ninguém escrever, se perde em uma semana.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dep5" data-g="dep"><label for="dg-dep5"><strong>Montar um Destaque no perfil</strong> com o melhor material.<span class="por">É a prova social que fica, e é o que se mostra pra convidar da próxima vez.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dep6" data-g="dep"><label for="dg-dep6"><strong>Contar o que saiu:</strong> quantos postaram, quantos stories, quantos posts, alcance somado.<span class="por">É o número que diz se permuta funcionou — e que decide o arranjo de contrapartida da próxima.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-dep7" data-g="dep"><label for="dg-dep7"><strong>Escrever o que o evento ensinou</strong>, pra repetir nas outras cidades.<span class="por">Quanto tempo a apresentação durou de verdade, quantos produtos deu pra servir, o que saturou, quem apareceu. É o que transforma o piloto em formato — e é a parte que sempre se perde.</span></label></div>
-        </div></div>
-
-    </div>
-  </div>
-</section>
-
-</div>
-
 <footer>
   Página do projeto <strong>Menu Degustação — cardápio de verão com influenciadores</strong> · Holy Cook Campinas,
   Paulínia e Piracicaba · montada em 02/10/2026.<br>
@@ -1329,7 +1266,7 @@ Topa? Me confirma até [data] que eu já reservo seu lugar.</div>
 </div>
 
 <script>
-  var ABAS = ['briefing','evento','apresentador','convidados','roteiro','kit','contrapartida','checklist'];
+  var ABAS = ['checklist','briefing','evento','apresentador','convidados','roteiro','kit','contrapartida'];
 
   function abrirAba(nome) {
     document.querySelectorAll('.tab-btn').forEach(function (b) {
@@ -1340,7 +1277,7 @@ Topa? Me confirma até [data] que eu já reservo seu lugar.</div>
     document.querySelectorAll('.tab-panel').forEach(function (p) {
       p.hidden = p.dataset.panel !== nome;
     });
-    if (nome !== 'briefing') location.hash = nome;
+    if (nome !== 'checklist') location.hash = nome;
     else history.replaceState(null, '', location.pathname);
   }
   document.querySelectorAll('.tab-btn').forEach(function (b) {
