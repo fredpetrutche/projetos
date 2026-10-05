@@ -164,6 +164,8 @@
   .tnum .acima { color: var(--bad); font-weight: 700; }
   .tnum .abaixo { color: var(--good); font-weight: 700; }
   .tnum-nota { font-size: .75rem; color: var(--ink-faint); }
+  .tnum .alvo { color: var(--accent); font-weight: 700; }
+  .tnum-obs { font-weight: 400; color: var(--ink-faint); font-size: .6875rem; }
 
   /* ---------- visor de conteúdo ---------- */
   #visor { border: 1px solid var(--rule); border-radius: 6px; background: var(--surface);
@@ -209,7 +211,7 @@
     <div class="grade-grupos">
       <button class="grupo-btn" data-grupo="faturamento">
         <span class="gnome">Crise de Faturamento</span>
-        <span class="gcontagem"><span class="tag acc">meta diária: próximo passo</span><span class="tag bad">verão não lançado</span><span class="tag bad">campanhas não feitas</span><span class="tag warn">calor de out/nov</span></span>
+        <span class="gcontagem"><span class="tag acc">meta diária: placar medido</span><span class="tag bad">verão não lançado</span><span class="tag bad">campanhas não feitas</span><span class="tag warn">calor de out/nov</span></span>
       </button>
       <button class="grupo-btn" data-grupo="equipe">
         <span class="gnome">Crise de Equipe</span>
@@ -226,7 +228,7 @@
     </div>
 
     <div class="grade-topicos" data-grupo="faturamento" hidden>
-      <button class="topico-btn" data-topico="meta-diaria"><span class="tnome">Meta de faturamento diário das 3 lojas</span><span class="tag acc">próximo passo</span></button>
+      <button class="topico-btn" data-topico="meta-diaria"><span class="tnome">Meta de faturamento diário das 3 lojas</span><span class="tag acc">placar na mesa</span></button>
       <button class="topico-btn" data-topico="cardapio-verao"><span class="tnome">Cardápio de Verão / Ação de Calor</span><span class="tag bad">não lançado — out ou nov</span></button>
       <button class="topico-btn" data-topico="campanhas-manutencao"><span class="tnome">Campanhas de manutenção</span><span class="tag bad">não foram feitas</span></button>
       <button class="topico-btn" data-topico="sazonalidade"><span class="tnome">Sazonalidade: o calor derruba a venda</span><span class="tag bad">risco de out e nov</span></button>
@@ -256,32 +258,254 @@
       <p class="visor-vazio">Clique num grupo e depois num card pra ver a situação e a próxima ação.</p>
 
       <div class="topico-conteudo" data-topico="meta-diaria" hidden>
-        <h3>Meta de faturamento diário das 3 lojas<span class="tag acc">próximo passo — 05/10/2026</span></h3>
-        <div class="note-item"><span class="tag acc">o que é</span><span>
-          Definir uma <strong>meta de faturamento diário</strong> para cada uma das três lojas e
-          <strong>trabalhar todos os dias</strong> pra aumentar esse resultado — <strong>de um dia para o
-          outro</strong>, imediatamente, não no fechamento do mês.
+        <h3>Meta de faturamento diário das 3 lojas<span class="tag acc">medido em 05/10/2026</span></h3>
+        <div class="note-item"><span class="tag acc">o número, enfim</span><span>
+          A pergunta aberta deste card era <strong>qual é o número de cada loja</strong>. Com agosto e
+          setembro medidos dia a dia &mdash; <strong>só loja: caixa, mesa e balcão, delivery fora</strong>
+          &mdash; o placar mensal é: <strong>Campinas R$ 48.740</strong> contra 60.000,
+          <strong>Paulínia R$ 40.038</strong> contra 50.000 e <strong>Piracicaba R$ 12.873</strong> contra
+          30.000.
         </span></div>
-        <div class="note-item"><span class="tag warn">por que diária, e não mensal</span><span>
-          Meta de mês só mostra o buraco quando o mês já acabou. A meta diária é a única que permite
-          <strong>corrigir no dia seguinte</strong> — é esse o ganho buscado aqui: resultado imediato, não
-          diagnóstico.
+        <div class="note-item"><span class="tag warn">não é o mesmo problema nas três</span><span>
+          <strong>Paulínia cresceu 34%</strong> de agosto pra setembro e, no ritmo de setembro, já está a
+          <strong>92% da meta</strong>. <strong>Campinas andou de lado</strong> (&minus;3%) e precisa de 23%.
+          <strong>Piracicaba caiu 12%</strong> e precisa de <strong>133%</strong> &mdash; mais que dobrar.
         </span></div>
-        <div class="note-item"><span class="tag acc">por que vem antes das campanhas</span><span>
-          É a meta que diz se a campanha funcionou. Sem ela, anúncio e influenciador rodam e o aumento fica
-          sendo impressão — e nenhuma das duas crises se resolve por impressão.
+        <div class="note-item"><span class="tag bad">o que a meta diária cobra</span><span>
+          No ticket de hoje, fechar o buraco é <strong>+11 pedidos por dia em Campinas</strong>,
+          <strong>+9 em Paulínia</strong> e <strong>+18 em Piracicaba</strong> &mdash; esta última numa loja
+          que hoje faz 13 pedidos por dia. É esse o número que vai pro quadro da loja todo dia.
         </span></div>
-        <div class="note-item"><span class="tag bad">pergunta aberta</span><span>
-          <strong>Qual é o número de cada loja.</strong> As três têm tamanho, custo e maturidade de equipe
-          diferentes — não é uma meta só dividida por três.
-        </span></div>
-        <div class="note-item"><span class="tag good">o que já existe pra apoiar</span><span>
-          O dado de venda diária já está capturado no <strong>Sistema-HC</strong> — o pilar de caixa foi
-          resolvido justamente capturando isso, então a meta tem onde ser medida sem construir nada novo. E a
-          conta que organiza a ação do dia continua a de <a href="../acoes-de-loja/">Ações de Loja</a>:
-          <strong>faturamento = pessoas × frequência × ticket</strong>. Toda ação diária tem que dizer qual
-          dos três fatores ela move.
-        </span></div>
+
+        <h4 class="sub">O placar, loja por loja<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> &mdash; clique num card</span></h4>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="meta-campinas">Campinas &mdash; falta 23%</button>
+          <button class="item-btn" data-item="meta-paulinia">Paulínia &mdash; falta 25%</button>
+          <button class="item-btn" data-item="meta-piracicaba">Piracicaba &mdash; falta 133%</button>
+          <button class="item-btn" data-item="meta-leitura">Onde o dinheiro está parado</button>
+          <button class="item-btn" data-item="meta-base">A base da conta</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa loja para ver a média por dia da semana e a meta.</p>
+
+          <div class="item-conteudo" data-item="meta-campinas" hidden>
+            <h5>Campinas &mdash; R$ 48.740 de 60.000</h5>
+            <span class="item-tags"><span class="tag bad">falta R$ 11.260/mês</span><span class="tag warn">&minus;3% de ago pra set</span></span>
+            <p>Hoje a loja faz <strong>R$ 48.740 por mês</strong> em caixa, mesa e balcão: 1.443 pedidos,
+            3.054 itens, <strong>ticket de R$ 33,77</strong> &mdash; o menor das três. A meta pede
+            <strong>1,23x</strong>, ou <strong>+333 pedidos por mês</strong>, 11 por dia.</p>
+            <h4 class="sub">Média por dia da semana &mdash; hoje</h4>
+            <div class="tnum-wrap"><table class="tnum">
+            <thead><tr><th>Dia</th><th>Dias medidos</th><th>Faturamento</th><th>Pedidos</th><th>Itens</th><th>Ticket</th></tr></thead><tbody>
+            <tr><td>segunda</td><td>9</td><td>1.274</td><td>37,3</td><td>76,2</td><td>34,11</td></tr>
+            <tr><td>terça</td><td>9</td><td>1.857</td><td>72,8</td><td>139,0</td><td>25,52</td></tr>
+            <tr><td>quarta</td><td>9</td><td>1.836</td><td>56,9</td><td>109,2</td><td>32,26</td></tr>
+            <tr><td>quinta</td><td>8</td><td>2.160</td><td>65,6</td><td>127,6</td><td>32,92</td></tr>
+            <tr><td>sexta</td><td>8</td><td>1.963</td><td>56,5</td><td>117,6</td><td>34,75</td></tr>
+            <tr><td>sábado</td><td>9</td><td>1.406</td><td>27,1</td><td>91,4</td><td>51,87</td></tr>
+            <tr><td>domingo</td><td>8</td><td>307</td><td>7,2</td><td>18,1</td><td>42,33</td></tr>
+            </tbody></table></div>
+            <p class="tnum-nota">Base: agosto e setembro de 2026, só venda de loja. Valores em R$.</p>
+            <h4 class="sub">A meta por dia</h4>
+            <div class="tnum-wrap"><table class="tnum">
+            <thead><tr><th>Dia</th><th>Faturamento hoje</th><th>Meta</th><th>Pedidos meta</th><th>Itens meta</th></tr></thead><tbody>
+            <tr><td>segunda</td><td>1.274</td><td class="alvo">1.570</td><td>46,0</td><td>93,8</td></tr>
+            <tr><td>terça</td><td>1.857</td><td class="alvo">2.290</td><td>89,6</td><td>171,1</td></tr>
+            <tr><td>quarta</td><td>1.836</td><td class="alvo">2.260</td><td>70,0</td><td>134,5</td></tr>
+            <tr><td>quinta</td><td>2.160</td><td class="alvo">2.660</td><td>80,8</td><td>157,1</td></tr>
+            <tr><td>sexta</td><td>1.963</td><td class="alvo">2.420</td><td>69,6</td><td>144,8</td></tr>
+            <tr><td>sábado</td><td>1.406</td><td class="alvo">1.730</td><td>33,4</td><td>112,6</td></tr>
+            <tr><td>domingo</td><td>307</td><td class="alvo">380</td><td>8,9</td><td>22,3</td></tr>
+            </tbody><tfoot><tr><td>Mês</td><td>48.740</td><td class="alvo">60.000</td><td>1.777</td><td>3.759</td></tr></tfoot></table></div>
+            <p class="tnum-nota">A meta foi distribuída com o peso que cada dia já tem hoje.</p>
+            <div class="note-item"><span class="tag bad">o domingo é o buraco</span><span>
+              <strong>R$ 307 por domingo, 7 pedidos</strong> &mdash; contra R$ 1.274 na segunda, que já é o
+              pior dia útil. O domingo de Campinas rende <strong>um quarto</strong> do segundo pior dia. Se
+              ele só chegasse no nível da segunda, seriam <strong>+R$ 3.867 por mês: um terço do que
+              falta</strong>, sem campanha nenhuma.
+            </span></div>
+            <div class="note-item"><span class="tag warn">o sábado vende pouco, mas vende caro</span><span>
+              É o dia de <strong>maior ticket (R$ 51,87)</strong> e de <strong>menor movimento útil</strong>
+              &mdash; 27 pedidos, menos da metade da terça. No sábado o problema não é quanto cada um gasta,
+              é <strong>quanta gente entra</strong>. Se o sábado tivesse os pedidos da quinta no ticket que
+              ele já tem, seriam <strong>+R$ 9.989 por mês</strong> &mdash; quase o gap inteiro.
+            </span></div>
+            <div class="note-item"><span class="tag acc">a terça é o contrário</span><span>
+              <strong>73 pedidos por dia</strong>, o maior movimento da semana, no <strong>menor ticket
+              (R$ 25,52)</strong> e 1,91 item por pedido. Ali o fator a mexer é <strong>ticket</strong>, não
+              gente &mdash; é o dia certo pra testar combo e adicional.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="meta-paulinia" hidden>
+            <h5>Paulínia &mdash; R$ 40.038 de 50.000</h5>
+            <span class="item-tags"><span class="tag good">+34% de ago pra set</span><span class="tag warn">falta R$ 9.962/mês</span></span>
+            <p>Hoje a loja faz <strong>R$ 40.038 por mês</strong>: 1.059 pedidos, 2.419 itens,
+            <strong>ticket de R$ 37,81</strong>. A meta pede <strong>1,25x</strong>, ou <strong>+263 pedidos
+            por mês</strong>, 9 por dia.</p>
+            <h4 class="sub">Média por dia da semana &mdash; hoje</h4>
+            <div class="tnum-wrap"><table class="tnum">
+            <thead><tr><th>Dia</th><th>Dias medidos</th><th>Faturamento</th><th>Pedidos</th><th>Itens</th><th>Ticket</th></tr></thead><tbody>
+            <tr><td>segunda</td><td>8</td><td>902</td><td>23,1</td><td>56,0</td><td>38,99</td></tr>
+            <tr><td>terça</td><td>8</td><td>1.364</td><td>44,1</td><td>98,4</td><td>30,91</td></tr>
+            <tr><td>quarta</td><td>8</td><td>1.165</td><td>29,5</td><td>70,2</td><td>39,51</td></tr>
+            <tr><td>quinta</td><td>8</td><td>1.437</td><td>37,1</td><td>81,8</td><td>38,71</td></tr>
+            <tr><td>sexta</td><td>8</td><td>1.593</td><td>45,5</td><td>92,4</td><td>35,00</td></tr>
+            <tr><td>sábado</td><td>9</td><td>1.731</td><td>41,0</td><td>102,0</td><td>42,21</td></tr>
+            <tr><td>domingo</td><td>9</td><td>628</td><td>13,4</td><td>35,0</td><td>46,71</td></tr>
+            </tbody></table></div>
+            <p class="tnum-nota">Base: agosto e setembro de 2026, só venda de loja. Valores em R$.</p>
+            <h4 class="sub">A meta por dia</h4>
+            <div class="tnum-wrap"><table class="tnum">
+            <thead><tr><th>Dia</th><th>Faturamento hoje</th><th>Meta</th><th>Pedidos meta</th><th>Itens meta</th></tr></thead><tbody>
+            <tr><td>segunda</td><td>902</td><td class="alvo">1.130</td><td>28,9</td><td>69,9</td></tr>
+            <tr><td>terça</td><td>1.364</td><td class="alvo">1.700</td><td>55,1</td><td>122,9</td></tr>
+            <tr><td>quarta</td><td>1.165</td><td class="alvo">1.460</td><td>36,8</td><td>87,7</td></tr>
+            <tr><td>quinta</td><td>1.437</td><td class="alvo">1.790</td><td>46,4</td><td>102,1</td></tr>
+            <tr><td>sexta</td><td>1.593</td><td class="alvo">1.990</td><td>56,8</td><td>115,4</td></tr>
+            <tr><td>sábado</td><td>1.731</td><td class="alvo">2.160</td><td>51,2</td><td>127,4</td></tr>
+            <tr><td>domingo</td><td>628</td><td class="alvo">780</td><td>16,8</td><td>43,7</td></tr>
+            </tbody><tfoot><tr><td>Mês</td><td>40.038</td><td class="alvo">50.000</td><td>1.322</td><td>3.021</td></tr></tfoot></table></div>
+            <p class="tnum-nota">A meta foi distribuída com o peso que cada dia já tem hoje.</p>
+            <div class="note-item"><span class="tag good">é a única das três que está subindo</span><span>
+              Agosto equivaleu a R$ 34.540 e setembro a <strong>R$ 46.206</strong> &mdash; <strong>+34%</strong>.
+              No ritmo de setembro a loja já está a <strong>92% da meta</strong>. Se setembro se repetir, o
+              buraco de Paulínia fecha praticamente sozinho.
+            </span></div>
+            <div class="note-item"><span class="tag warn">isso muda a leitura do quadro de custos</span><span>
+              A conclusão registrada era &ldquo;em Paulínia não sobra custo pra cortar, só resta vender
+              mais&rdquo;. O dado mostra que <strong>vender mais já está acontecendo</strong> &mdash; e que a
+              loja foi a que recebeu <strong>zero visita do gerente</strong> na quinzena. O que ela precisa
+              não é atenção de emergência: é não ser interrompida.
+            </span></div>
+            <div class="note-item"><span class="tag acc">onde está a sobra</span><span>
+              Sábado é o melhor dia (<strong>R$ 1.731</strong>) e domingo faz R$ 628 com 13 pedidos. A
+              <strong>segunda é o dia mais fraco</strong> (R$ 902, 23 pedidos) &mdash; mesmo padrão das
+              outras duas lojas.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="meta-piracicaba" hidden>
+            <h5>Piracicaba &mdash; R$ 12.873 de 30.000</h5>
+            <span class="item-tags"><span class="tag bad">precisa de 2,33x</span><span class="tag bad">&minus;12% de ago pra set</span></span>
+            <p>Hoje a loja faz <strong>R$ 12.873 por mês</strong>: 359 pedidos, 810 itens, <strong>ticket de
+            R$ 35,81</strong>. A meta pede <strong>2,33x</strong> &mdash; mais R$ 17.127, que no ticket de
+            hoje são <strong>+478 pedidos por mês, 18 por dia</strong>, numa loja que hoje faz 13.</p>
+            <h4 class="sub">Média por dia da semana &mdash; hoje</h4>
+            <div class="tnum-wrap"><table class="tnum">
+            <thead><tr><th>Dia</th><th>Dias medidos</th><th>Faturamento</th><th>Pedidos</th><th>Itens</th><th>Ticket</th></tr></thead><tbody>
+            <tr><td>segunda</td><td>8</td><td>338</td><td>9,2</td><td>20,8</td><td>36,54</td></tr>
+            <tr><td>terça</td><td>8</td><td>500</td><td>17,2</td><td>36,5</td><td>29,00</td></tr>
+            <tr><td>quarta</td><td>8</td><td>500</td><td>13,5</td><td>34,1</td><td>37,07</td></tr>
+            <tr><td>quinta</td><td>8</td><td>386</td><td>12,2</td><td>22,9</td><td>31,49</td></tr>
+            <tr><td>sexta</td><td>8</td><td>507</td><td>13,8</td><td>29,5</td><td>36,86</td></tr>
+            <tr><td>sábado</td><td>9</td><td>611</td><td>13,9</td><td>36,6</td><td>44,00</td></tr>
+            <tr><td>domingo <span class="tnum-obs">(só 1 domingo em 9)</span></td><td>1</td><td>386</td><td>7,0</td><td>28,0</td><td>55,14</td></tr>
+            </tbody></table></div>
+            <p class="tnum-nota">Base: agosto e setembro de 2026, só venda de loja. Valores em R$.</p>
+            <h4 class="sub">A meta por dia</h4>
+            <div class="tnum-wrap"><table class="tnum">
+            <thead><tr><th>Dia</th><th>Faturamento hoje</th><th>Meta</th><th>Pedidos meta</th><th>Itens meta</th></tr></thead><tbody>
+            <tr><td>segunda</td><td>338</td><td class="alvo">790</td><td>21,6</td><td>48,4</td></tr>
+            <tr><td>terça</td><td>500</td><td class="alvo">1.170</td><td>40,2</td><td>85,1</td></tr>
+            <tr><td>quarta</td><td>500</td><td class="alvo">1.170</td><td>31,5</td><td>79,5</td></tr>
+            <tr><td>quinta</td><td>386</td><td class="alvo">900</td><td>28,5</td><td>53,3</td></tr>
+            <tr><td>sexta</td><td>507</td><td class="alvo">1.180</td><td>32,0</td><td>68,7</td></tr>
+            <tr><td>sábado</td><td>611</td><td class="alvo">1.420</td><td>32,4</td><td>85,2</td></tr>
+            <tr><td>domingo</td><td colspan="4" style="text-align:left;color:var(--ink-faint)">loja fechada &mdash; a meta foi redistribuída nos outros 6 dias</td></tr>
+            </tbody><tfoot><tr><td>Mês</td><td>12.873</td><td class="alvo">30.000</td><td>838</td><td>1.888</td></tr></tfoot></table></div>
+            <p class="tnum-nota">A meta foi distribuída nos 6 dias em que a loja opera.</p>
+            <div class="note-item"><span class="tag bad">a meta não é da mesma natureza das outras duas</span><span>
+              Campinas e Paulínia precisam de 23% e 25%; Piracicaba precisa de <strong>133%</strong>. Isso não
+              sai de ticket nem de campanha pontual &mdash; é <strong>mais que o dobro de gente entrando na
+              loja</strong>. Vale decidir se R$ 30.000 é <strong>meta de agora ou meta de chegada</strong>:
+              são conversas diferentes com a equipe.
+            </span></div>
+            <div class="note-item"><span class="tag warn">a loja não abre domingo</span><span>
+              <strong>Um único domingo com venda em nove</strong> (20/09, R$ 386). A meta acima foi
+              distribuída nos 6 dias que a loja opera. Abrir domingo é uma decisão em aberto &mdash; e sozinha
+              não resolve: no padrão de Campinas, um domingo rende R$ 307.
+            </span></div>
+            <div class="note-item"><span class="tag bad">está caindo, não subindo</span><span>
+              Agosto equivaleu a R$ 13.683 e setembro a <strong>R$ 12.063</strong> &mdash; <strong>&minus;12%</strong>.
+              A equipe nova entrou em outubro e está em treinamento até 18/10: <strong>outubro fechado é a
+              primeira medição que diz se a troca virou venda</strong>. É o mesmo mês em que a loja consome 8
+              idas do gerente &mdash; ver <strong>Gasto de coordenação</strong>.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="meta-leitura" hidden>
+            <h5>Onde o dinheiro está parado</h5>
+            <span class="item-tags"><span class="tag acc">leitura das três juntas</span></span>
+            <p>Olhando as três lojas lado a lado, o padrão se repete &mdash; e não é onde a intuição
+            colocaria:</p>
+            <ul class="pontos">
+              <li><strong>Domingo é o pior dia das três.</strong> Campinas R$ 307, Paulínia R$ 628,
+              Piracicaba fechada. Em Campinas ele rende <strong>um quarto</strong> do segundo pior dia.</li>
+              <li><strong>Segunda é o pior dia útil das três.</strong> R$ 1.274 em Campinas, R$ 902 em
+              Paulínia, R$ 338 em Piracicaba.</li>
+              <li><strong>Sábado é o melhor dia em Paulínia e em Piracicaba &mdash; mas só o 5º em
+              Campinas</strong> (R$ 1.406), atrás de terça, quarta, quinta e sexta. Campinas tem um problema
+              de sábado que as outras duas não têm.</li>
+              <li><strong>O ticket de sábado é o maior nas três lojas.</strong> Quem vai no sábado gasta mais
+              &mdash; falta gente, não valor.</li>
+            </ul>
+            <div class="note-item"><span class="tag acc">qual fator mexer, dia a dia</span><span>
+              Pela conta de <a href="../acoes-de-loja/">Ações de Loja</a> &mdash; <strong>faturamento =
+              pessoas × frequência × ticket</strong> &mdash; os dias se dividem sozinhos: <strong>sábado e
+              domingo têm ticket alto e gente de menos</strong> (é fluxo), e <strong>terça em Campinas tem
+              gente e ticket baixo</strong> (é ticket). A ação de cada dia tem que atacar o fator daquele
+              dia; &ldquo;vender mais&rdquo; não é ação.
+            </span></div>
+            <div class="note-item"><span class="tag warn">o que o placar diz sobre a atenção</span><span>
+              A loja mais perto da meta (Paulínia, 92% no ritmo de setembro) é a que recebeu
+              <strong>zero visita</strong> na quinzena. A que mais caiu (Piracicaba, &minus;12%) é a que
+              recebeu <strong>oito</strong>. As idas são de outubro e têm motivo &mdash; o treinamento da
+              equipe nova &mdash;, mas a coincidência vale olhar na próxima medição.
+            </span></div>
+          </div>
+
+          <div class="item-conteudo" data-item="meta-base" hidden>
+            <h5>A base da conta</h5>
+            <span class="item-tags"><span class="tag acc">como o número foi apurado</span></span>
+            <div class="note-item"><span class="tag acc">o que entra</span><span>
+              <strong>Só venda de loja: caixa, mesa e balcão.</strong> Delivery &mdash; iFood, 99Food e
+              entrega própria &mdash; está <strong>fora</strong>, a pedido. Em Campinas o delivery é maior que
+              a loja (R$ 85 a 95 mil/mês), então misturar os dois esconderia o número que importa aqui.
+            </span></div>
+            <div class="note-item"><span class="tag acc">o período e a fonte</span><span>
+              <strong>Agosto e setembro de 2026</strong>, dia a dia, do Consumer (PDV) no
+              <strong>Sistema-HC</strong>. Conferido contra as duas tabelas do sistema &mdash; o agregado
+              diário e o pedido a pedido <strong>batem até o centavo</strong> nas seis combinações de
+              loja e mês.
+            </span></div>
+            <div class="note-item"><span class="tag acc">como a média é feita</span><span>
+              Média <strong>por dia da semana</strong>, contando só os dias em que a loja vendeu. Dia sem
+              movimento confirmado (loja fechada) <strong>fica fora da média</strong> em vez de virar zero e
+              puxar o número pra baixo &mdash; é o que separa &ldquo;domingo fraco&rdquo; de &ldquo;domingo
+              fechado&rdquo;.
+            </span></div>
+            <div class="note-item"><span class="tag acc">o mês-equivalente</span><span>
+              A média de cada dia da semana multiplicada pelas ocorrências daquele dia em
+              <strong>outubro de 2026</strong> (4 segundas, 4 terças, 4 quartas, 5 quintas, 5 sextas, 5
+              sábados, 4 domingos). É o que torna a comparação com a meta mensal justa mesmo com dias
+              faltando na importação.
+            </span></div>
+            <div class="note-item"><span class="tag warn">o que ainda precisa ser fechado</span><span>
+              A <strong>importação de setembro está incompleta</strong> em Paulínia e Piracicaba &mdash;
+              faltam os dias <strong>28, 29 e 30</strong>. E <strong>42 pedidos</strong> do período estão
+              marcados pelo próprio sistema como <strong>atípicos</strong> (compra grande ou ajuste de
+              operação); foram <strong>mantidos</strong> na conta. O maior deles &mdash; R$ 1.400 com 141
+              itens, Campinas, 05/09 &mdash; merece revisão: sozinho ele vale R$ 1.400 do número de Campinas.
+            </span></div>
+            <div class="note-item"><span class="tag warn">a escolha que dá pra mudar</span><span>
+              A meta por dia foi distribuída <strong>com o peso que cada dia já tem</strong>. É proposital:
+              exigir o mesmo crescimento de um domingo e de uma sexta ignora o que a loja é. Se a escolha for
+              outra &mdash; puxar o domingo mais que proporcionalmente, por exemplo &mdash; a conta muda e
+              vale refazer.
+            </span></div>
+          </div>
+        </div>
       </div>
 
       <div class="topico-conteudo" data-topico="cardapio-verao" hidden>
@@ -1328,8 +1552,7 @@
     coordenação &mdash; este agora com o <strong>orçamento de gestão fechado: R$ 1.733 por loja, R$ 5.200/mês nas três lojas</strong>, contra as 10 idas das duas semanas da virada de outubro) e o risco de calor em out/nov. <strong>Corrigido na mesma conversa:</strong> o Cardápio de Verão
     <strong>não foi lançado</strong> — o lançamento é em outubro ou novembro e o trabalho é deste mês — e as
     <strong>campanhas de manutenção não foram feitas</strong>, com as duas primeiras sendo anúncios na região
-    (tráfego) e influenciadores, com foco grande em Piracicaba. Entrou a <strong>meta de faturamento diário das
-    3 lojas</strong> como próximo passo, e o ambiente foi pra stand by menos em Campinas e em Piracicaba
+    (tráfego) e influenciadores, com foco grande em Piracicaba. Entrou a <strong>meta de faturamento diário das 3 lojas</strong>, agora <strong>medida</strong>: em venda de loja (caixa, mesa e balcão, sem delivery), Campinas faz R$ 48.740 de 60.000, Paulínia R$ 40.038 de 50.000 e Piracicaba R$ 12.873 de 30.000, com média por dia da semana e meta diária por loja como próximo passo, e o ambiente foi pra stand by menos em Campinas e em Piracicaba
     (proteção de calor e placa de estacionamento). Se algo aqui estiver desatualizado, esta página é a fonte da
     verdade.
   </footer>
