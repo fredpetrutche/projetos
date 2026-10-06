@@ -77,8 +77,9 @@
     <span class="marca">Holy Cook Campinas · material de balcão</span>
     <h1>Cartaz do QR code do cardápio</h1>
     <p class="lede">Dois cartazes com a mesma arte rosa dos outros: um leva ao cardápio da loja,
-    o outro ao comparativo de preço com o iFood. Cada um sai em A6 avulso ou em folha A4 com
-    quatro por página, para cortar na loja.</p>
+    o outro ao comparativo de preço com o iFood. Sem foto — a peça existe para ser lida, e o QR
+    ocupa quase a largura inteira. Cada um sai em A6 avulso ou em folha A4 com quatro por
+    página, para cortar na loja.</p>
   </header>
 
   <section>
@@ -137,7 +138,7 @@
     <h2>O que está dentro do código</h2>
     <div class="ficha">
       <div><span class="v" id="url-ficha">holycampinas.github.io/cardapio-holy-cook-campinas/</span><span class="s">endereço que o QR abre</span></div>
-      <div><span class="v">4,1 cm</span><span class="s">lado do QR, nos dois tamanhos</span></div>
+      <div><span class="v" id="qr-ficha">6,6 cm</span><span class="s">lado do QR, nos dois tamanhos</span></div>
       <div><span class="v">correção H</span><span class="s">o QR ainda lê com 30% dele sujo ou rasgado</span></div>
       <div><span class="v">vetorial</span><span class="s">não perde nitidez em nenhuma ampliação</span></div>
     </div>
@@ -156,6 +157,7 @@
   const ROTULO = { 'a6': 'A6, 10,5 × 14,8 cm', 'a4-4up': 'A4 com 4 peças A6' };
   const PROPORCAO = { 'a6': [640, 902], 'a4-4up': [700, 989] };
   const NOME = { 'cardapio-campinas': 'do cardápio', 'comparativo-campinas': 'do comparativo com o iFood' };
+  const QR = { 'cardapio-campinas': '6,6 cm', 'comparativo-campinas': '7,6 cm' };
 
   let peca = 'cardapio-campinas', tam = 'a6';
 
@@ -173,7 +175,8 @@
     previa.alt = 'Prévia do cartaz ' + NOME[peca] + ' em ' + ROTULO[tam];
     baixar.href = base + '.pdf'; baixar.setAttribute('download', base + '.pdf');
     abrir.href = base + '.pdf';
-    nota.textContent = 'PDF vetorial, ' + ROTULO[tam] + ' — QR de 4,1 cm.';
+    nota.textContent = 'PDF vetorial, ' + ROTULO[tam] + ' — QR de ' + QR[peca] + '.';
+    document.getElementById('qr-ficha').textContent = QR[peca];
     ficha.textContent = URLS[peca];
   }
 
