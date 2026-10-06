@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#17130D" media="(prefers-color-scheme: dark)">
-<title>Cartaz do QR code do cardápio — Holy Cook Campinas</title>
-<meta name="description" content="Os cartazes de QR code do cardápio e do comparativo com o iFood, em A6 avulso e em A4 com quatro por folha para cortar.">
+<title>Cartaz do QR code do cardápio — Holy Cook</title>
+<meta name="description" content="Os cartazes de QR code do cardápio e do comparativo com o iFood, em A5 avulso e em A4 com dois por folha para cortar.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23EF5B25'/><g fill='white'><rect x='20' y='20' width='24' height='24' rx='5'/><rect x='56' y='20' width='24' height='24' rx='5'/><rect x='20' y='56' width='24' height='24' rx='5'/><rect x='58' y='58' width='10' height='10'/><rect x='70' y='70' width='10' height='10'/></g></svg>">
 <style>
   :root {
@@ -40,10 +40,6 @@
   .prose { color: var(--ink-soft); max-width: 68ch; }
   .prose strong { color: var(--ink); font-weight: 600; }
 
-  .aviso { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--marca); border-radius: 5px; padding: 1rem 1.15rem; display: flex; flex-direction: column; gap: .3rem; }
-  .aviso .tit { font-weight: 700; }
-  .aviso p { color: var(--ink-soft); }
-
   .escolhas { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .7rem; }
   .op { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--rule); border-radius: 5px; padding: .9rem 1rem; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: .25rem; color: inherit; font-family: inherit; }
   .op:hover { border-color: var(--marca); }
@@ -59,7 +55,7 @@
   .nota { font-size: .8rem; color: var(--ink-faint); }
 
   .palco { display: flex; justify-content: center; padding-top: .3rem; }
-  .folha { max-width: min(24rem, 100%); width: 100%; height: auto; display: block; border-radius: 3px;
+  .folha { max-width: min(23rem, 100%); width: 100%; height: auto; display: block; border-radius: 3px;
            box-shadow: 0 1px 2px rgba(0,0,0,.16), 0 16px 44px rgba(0,0,0,.18); background: #fff; }
 
   .ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
@@ -74,26 +70,41 @@
   <a class="voltar" href="../">← ações de loja</a>
 
   <header>
-    <span class="marca">Holy Cook Campinas · material de balcão</span>
+    <span class="marca">Holy Cook · material de balcão</span>
     <h1>Cartaz do QR code do cardápio</h1>
-    <p class="lede">Dois cartazes com a mesma arte rosa dos outros: um leva ao cardápio da loja,
-    o outro ao comparativo de preço com o iFood. Sem foto — a peça existe para ser lida, e o QR
-    ocupa quase a largura inteira. Cada um sai em A6 avulso ou em folha A4 com quatro por
-    página, para cortar na loja.</p>
+    <p class="lede">A mesma arte do cartaz que a loja já usa, refeita em vetor: logo, título,
+    pílula creme, o QR num card branco e os dados da loja embaixo. Muda só para onde o código
+    leva — o cardápio da loja ou o comparativo de preço com o iFood.</p>
   </header>
 
   <section>
-    <h2>Qual cartaz</h2>
-    <div class="escolhas" id="pecas">
-      <button class="op" data-p="cardapio-campinas" aria-pressed="true">
-        <span class="med">VEM VER O CARDÁPIO</span>
-        <span class="nome">Cardápio da loja</span>
-        <span class="uso">Abre o cardápio inteiro, com foto e preço de cada item. Vai na mesa, no balcão e na sacola.</span>
+    <h2>Loja</h2>
+    <div class="escolhas" id="lojas">
+      <button class="op" data-l="campinas" aria-pressed="true">
+        <span class="med">@HOLYCOOK.CAMPINAS</span>
+        <span class="nome">Campinas</span>
+        <span class="uso">R. Cônego Nery, 463</span>
       </button>
-      <button class="op" data-p="comparativo-campinas" aria-pressed="false">
-        <span class="med">MAIS BARATO AQUI NA LOJA</span>
+      <button class="op" data-l="paulinia" aria-pressed="false">
+        <span class="med">@HOLYCOOK.PAULINIA</span>
+        <span class="nome">Paulínia</span>
+        <span class="uso">Av. José Paulino, 1615</span>
+      </button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Para onde o QR leva</h2>
+    <div class="escolhas" id="destinos">
+      <button class="op" data-d="cardapio" aria-pressed="true">
+        <span class="med">ACESSE O CARDÁPIO</span>
+        <span class="nome">Cardápio da loja</span>
+        <span class="uso">O cardápio inteiro, com foto e preço de cada item.</span>
+      </button>
+      <button class="op" data-d="comparativo" aria-pressed="false">
+        <span class="med">AQUI SAI MAIS BARATO</span>
         <span class="nome">Loja ou iFood</span>
-        <span class="uso">Abre o comparativo: o preço do app riscado ao lado do preço da loja, item por item.</span>
+        <span class="uso">O preço do app riscado ao lado do preço da loja, item por item.</span>
       </button>
     </div>
   </section>
@@ -101,65 +112,69 @@
   <section>
     <h2>Tamanho</h2>
     <div class="escolhas" id="tamanhos">
-      <button class="op" data-t="a6" aria-pressed="true">
-        <span class="med">A6 · 10,5 × 14,8 CM</span>
-        <span class="nome">A6 avulso</span>
-        <span class="uso">Uma peça por página. É o arquivo para mandar para a gráfica.</span>
+      <button class="op" data-t="a5" aria-pressed="true">
+        <span class="med">A5 · 14,8 × 21 CM</span>
+        <span class="nome">A5 avulso</span>
+        <span class="uso">Uma peça por página, do tamanho do cartaz que já está na loja. É o arquivo da gráfica.</span>
       </button>
-      <button class="op" data-t="a4-4up" aria-pressed="false">
-        <span class="med">A4 · 4 POR FOLHA</span>
+      <button class="op" data-t="a4-2up" aria-pressed="false">
+        <span class="med">A4 · 2 POR FOLHA</span>
         <span class="nome">A4 para cortar</span>
-        <span class="uso">Quatro A6 numa folha A4, com a linha de corte tracejada. É o arquivo para imprimir na loja.</span>
+        <span class="uso">Duas A5 numa folha A4, com a linha de corte. É o arquivo para imprimir na loja.</span>
       </button>
     </div>
     <div class="acoes">
-      <a class="btn" id="baixar" href="cartaz-cardapio-campinas-a6.pdf" download>Baixar o PDF</a>
-      <a class="btn sec" id="abrir" href="cartaz-cardapio-campinas-a6.pdf" target="_blank" rel="noopener">Abrir para imprimir</a>
+      <a class="btn" id="baixar" href="cartaz-cardapio-campinas-a5.pdf" download>Baixar o PDF</a>
+      <a class="btn sec" id="abrir" href="cartaz-cardapio-campinas-a5.pdf" target="_blank" rel="noopener">Abrir para imprimir</a>
       <span class="nota" id="nota"></span>
     </div>
   </section>
 
   <div class="palco">
-    <img class="folha" id="previa" src="previas/cartaz-cardapio-campinas-a6.jpg"
-         alt="Prévia do cartaz do cardápio em A6" width="640" height="902">
+    <img class="folha" id="previa" src="previas/cartaz-cardapio-campinas-a5.jpg"
+         alt="Prévia do cartaz do cardápio de Campinas em A5" width="560" height="794">
   </div>
 
   <section>
-    <h2>Por que quatro por folha, e não seis</h2>
-    <p class="prose">Porque o A6 é a quarta parte exata do A4. Duas colunas de 10,5 cm dão os 21 cm
-    da largura e duas linhas de 14,8 cm dão 29,6 cm dos 29,7 cm da altura — sobra meio milímetro.
-    Para caber seis, as peças teriam que ser menores que A6, e aí não seriam mais A6.</p>
-    <p class="prose">Na folha A4 as quatro peças vêm <strong>coladas umas nas outras</strong>, com uma
-    linha tracejada em cima do corte. Imprima <strong>em tamanho real</strong> — se a impressora
-    estiver em "ajustar à página", ela encolhe tudo e o corte sai torto.</p>
+    <h2>Como imprimir</h2>
+    <p class="prose">Na A4 vêm <strong>duas peças deitadas</strong>, uma sobre a outra, com a linha
+    de corte tracejada no meio. É assim porque o A4 é exatamente duas A5: cortando a folha ao meio
+    você fica com duas metades de 21 × 14,8 cm — que é uma A5. Depois do corte, vire o papel e o
+    cartaz está em pé.</p>
+    <p class="prose">Imprima <strong>em tamanho real</strong>. Se a impressora estiver em "ajustar
+    à página", ela encolhe tudo e o corte sai torto.</p>
   </section>
 
   <section>
     <h2>O que está dentro do código</h2>
     <div class="ficha">
       <div><span class="v" id="url-ficha">holycampinas.github.io/cardapio-holy-cook-campinas/</span><span class="s">endereço que o QR abre</span></div>
-      <div><span class="v" id="qr-ficha">6,6 cm</span><span class="s">lado do QR, nos dois tamanhos</span></div>
-      <div><span class="v">correção H</span><span class="s">o QR ainda lê com 30% dele sujo ou rasgado</span></div>
+      <div><span class="v">6,8 cm</span><span class="s">lado do QR, nos dois tamanhos</span></div>
+      <div><span class="v">correção H</span><span class="s">o QR ainda lê com 30% dele sujo ou coberto</span></div>
       <div><span class="v">vetorial</span><span class="s">não perde nitidez em nenhuma ampliação</span></div>
     </div>
-    <p class="prose">Os quatro PDFs foram conferidos de volta: cada QR foi lido por um decodificador
-    e devolveu exatamente o endereço esperado — inclusive os quatro da folha A4, um a um.</p>
-    <p class="prose">Para fazer o cartaz de outra loja, troque a URL em
-    <strong>gerar-cartaz-cardapio.py</strong> e rode. A arte, a foto e o texto saem do mesmo arquivo.</p>
+    <p class="prose">O selo redondo com o cookie no meio do código apaga módulos, então ele precisa
+    caber na correção de erro. Ocupa <strong>25% do lado</strong>, ou seja 4,9% da área, contra os
+    30% que a correção H recupera. Os oito PDFs foram conferidos de volta: cada QR foi lido por um
+    decodificador e devolveu exatamente o endereço esperado.</p>
+    <p class="prose">Para mudar a loja, o destino ou o texto, tudo está nas tabelas
+    <strong>LOJAS</strong> e <strong>DESTINOS</strong> no fim de
+    <strong>gerar-cartaz-cardapio.py</strong>. As medidas da arte vieram do PDF original e estão
+    anotadas no topo do mesmo arquivo.</p>
   </section>
 </div>
 
 <script>
-  const URLS = {
-    'cardapio-campinas':    'holycampinas.github.io/cardapio-holy-cook-campinas/',
-    'comparativo-campinas': 'holycampinas.github.io/cardapio-holy-cook-campinas/comparativo/'
+  const BASES = {
+    campinas: 'holycampinas.github.io/cardapio-holy-cook-campinas/',
+    paulinia: 'holycampinas.github.io/cardapio-holy-cook-paulinia/'
   };
-  const ROTULO = { 'a6': 'A6, 10,5 × 14,8 cm', 'a4-4up': 'A4 com 4 peças A6' };
-  const PROPORCAO = { 'a6': [640, 902], 'a4-4up': [700, 989] };
-  const NOME = { 'cardapio-campinas': 'do cardápio', 'comparativo-campinas': 'do comparativo com o iFood' };
-  const QR = { 'cardapio-campinas': '6,6 cm', 'comparativo-campinas': '7,6 cm' };
+  const SUFIXO = { cardapio: '', comparativo: 'comparativo/' };
+  const ROTULO = { 'a5': 'A5, 14,8 × 21 cm', 'a4-2up': 'A4 com 2 peças A5' };
+  const PROPORCAO = { 'a5': [560, 794], 'a4-2up': [560, 792] };
+  const NOME = { cardapio: 'do cardápio', comparativo: 'do comparativo com o iFood' };
 
-  let peca = 'cardapio-campinas', tam = 'a6';
+  let loja = 'campinas', destino = 'cardapio', tam = 'a5';
 
   const previa = document.getElementById('previa');
   const baixar = document.getElementById('baixar');
@@ -168,30 +183,28 @@
   const ficha  = document.getElementById('url-ficha');
 
   function aplica() {
-    const base = 'cartaz-' + peca + '-' + tam;
+    const base = 'cartaz-' + destino + '-' + loja + '-' + tam;
     const [w, h] = PROPORCAO[tam];
     previa.width = w; previa.height = h;
     previa.src = 'previas/' + base + '.jpg';
-    previa.alt = 'Prévia do cartaz ' + NOME[peca] + ' em ' + ROTULO[tam];
+    previa.alt = 'Prévia do cartaz ' + NOME[destino] + ' de ' + loja + ' em ' + ROTULO[tam];
     baixar.href = base + '.pdf'; baixar.setAttribute('download', base + '.pdf');
     abrir.href = base + '.pdf';
-    nota.textContent = 'PDF vetorial, ' + ROTULO[tam] + ' — QR de ' + QR[peca] + '.';
-    document.getElementById('qr-ficha').textContent = QR[peca];
-    ficha.textContent = URLS[peca];
+    nota.textContent = 'PDF vetorial, ' + ROTULO[tam] + ' — QR de 6,8 cm.';
+    ficha.textContent = BASES[loja] + SUFIXO[destino];
   }
 
-  document.querySelectorAll('#pecas .op').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('#pecas .op').forEach(o => o.setAttribute('aria-pressed', o === b));
-      peca = b.dataset.p; aplica();
+  function liga(id, campo) {
+    document.querySelectorAll('#' + id + ' .op').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('#' + id + ' .op').forEach(o => o.setAttribute('aria-pressed', o === b));
+        const v = b.dataset.l || b.dataset.d || b.dataset.t;
+        if (campo === 'loja') loja = v; else if (campo === 'destino') destino = v; else tam = v;
+        aplica();
+      });
     });
-  });
-  document.querySelectorAll('#tamanhos .op').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('#tamanhos .op').forEach(o => o.setAttribute('aria-pressed', o === b));
-      tam = b.dataset.t; aplica();
-    });
-  });
+  }
+  liga('lojas', 'loja'); liga('destinos', 'destino'); liga('tamanhos', 'tam');
   aplica();
 </script>
 

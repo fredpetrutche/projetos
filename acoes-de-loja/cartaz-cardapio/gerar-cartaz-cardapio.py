@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
-"""Cartaz de QR code do cardápio — A6 avulso e A4 com quatro A6 para cortar.
+"""Cartaz de QR code — réplica do modelo A5 que a loja já usa.
 
-Identidade dos outros cartazes da Holy Cook: fundo rosa, marrom, pílula creme,
-Lilita One nos títulos. A arte nasceu do cartaz do sorteio
-(`sorteio-condominios/cartaz/gerar-cartaz-torta.py`), SEM a foto: aqui a peça
-serve para ser lida, e a foto disputava a atenção com o QR. O espaço que ela
-ocupava foi todo para o código.
+O original é `Holy Cook - QR Cardapio Paulinia (A5).pdf`. Este script refaz a
+mesma arte em vetor, com as medidas tiradas do próprio PDF (148 × 210 mm):
 
-Cabem exatamente QUATRO A6 numa folha A4 — 2 × 105mm de largura e 2 × 148mm de
-altura dão 210 × 296mm, e o A4 tem 297. Sobra meio milímetro em cima e embaixo.
+    logo lockup   topo 11,0 mm · altura 34,1 mm
+    título        topo 50,3 mm · 2 linhas, a mais larga com 65,7 mm
+    pílula creme  topo 78,1 mm · 94,7 × 10,3 mm
+    card branco   topo 95,2 mm · 84,2 mm de lado, QR de 67,9 mm dentro
+    @ do perfil   topo 187,4 mm
+    endereço      topo 196,7 mm
+
+O que muda de uma peça para outra é só o destino do QR, o título, a frase da
+pílula e os dados da loja. Em A4 cabem duas peças A5 — o A5 é a metade exata.
 """
 import os
 import segno
@@ -22,40 +26,42 @@ from PIL import Image
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 
-ROSA    = HexColor("#FBD4D9")
-MARROM  = HexColor("#4A2B20")
-CREME   = HexColor("#FDE6C9")
-LARANJA = HexColor("#EE5A24")
-BRANCO  = HexColor("#FFFFFF")
-CORTE   = HexColor("#C9A6AC")
+ROSA     = HexColor("#FBD4D9")
+MARROM   = HexColor("#4A2B20")
+CREME    = HexColor("#FDE6C9")
+LARANJA  = HexColor("#EF5B25")
+ENDERECO = HexColor("#6D4C45")
+BRANCO   = HexColor("#FFFFFF")
+SOMBRA   = HexColor("#ECC6C9")
+CORTE    = HexColor("#C9A6AC")
 
 pdfmetrics.registerFont(TTFont("Lilita", os.path.join(AQUI, "fontes", "LilitaOne-Regular.ttf")))
-pdfmetrics.registerFont(TTFont("Poppins-Med", os.path.join(AQUI, "fontes", "Poppins-Medium.ttf")))
+pdfmetrics.registerFont(TTFont("QS", os.path.join(AQUI, "fontes", "Quicksand-SemiBold.ttf")))
 
 LOGO = os.path.join(AQUI, "img", "holy-cook-logo.png")
 LOGO_RAZAO = (lambda i: i.width / i.height)(Image.open(LOGO))
 
-# O cookie com a auréola, recortado do lockup — vai no miolo do QR.
-SIMBOLO = os.path.join(AQUI, "img", "holy-cook-simbolo.png")
-SIMBOLO_RAZAO = (lambda i: i.width / i.height)(Image.open(SIMBOLO))
-
-# Fração do LADO do QR que o selo central ocupa. Com correção H o código tolera
-# ~30% de área perdida; 0,26 do lado dá 6,8% de área, com folga de sobra. Mexeu
-# aqui, roda o decodificador de novo antes de mandar imprimir.
-SELO = 0.26
+# ── medidas do modelo, em mm de uma folha A5 ────────────────────────────────
+LOGO_TOPO, LOGO_ALT = 11.0, 34.1
+TIT_TOPO, TIT_LARG_MAX = 50.3, 65.7
+TIT_PT, TIT_ENTRELINHA = 39.0, 12.2
+PIL_TOPO, PIL_LARG, PIL_ALT, PIL_PT = 78.1, 94.7, 10.3, 11.8
+CARD_TOPO, CARD_LADO, QR_LADO = 95.2, 84.2, 67.9
+AT_TOPO, AT_PT = 187.4, 18.0   # o @ do modelo é Lilita One, não Quicksand
+END_TOPO, END_PT = 196.7, 9.8
+# Fração do lado do QR tomada pelo selo redondo do meio. No modelo são ~25%.
+# Com correção H o código tolera ~30% de área perdida; 25% do lado dá 4,9%.
+SELO = 0.25
 
 
 def cap(fonte, tam):
-    """Altura de caixa alta — é por ela que os títulos se empilham."""
     return pdfmetrics.getAscent(fonte) / 1000.0 * tam * 0.72
 
 
-def tamanho_para_cap(alvo):
-    return alvo / (pdfmetrics.getAscent("Lilita") / 1000.0 * 0.72)
-
-
-def tamanho_para_largura(texto, fonte, largura):
-    return 100.0 * largura / pdfmetrics.stringWidth(texto, fonte, 100)
+def cabe(texto, fonte, pt, larg_mm):
+    """Reduz o corpo se a frase for mais longa que a do modelo."""
+    larg = pdfmetrics.stringWidth(texto, fonte, pt)
+    return pt * min(1.0, (larg_mm * mm) / larg)
 
 
 def desenha_qr(c, matriz, x, y, lado):
@@ -74,134 +80,128 @@ def desenha_qr(c, matriz, x, y, lado):
                 col += 1
 
 
-def selo(c, cx, cy, qr_lado):
-    """Abre um quadrado branco no miolo do QR e põe o cookie da Holy dentro."""
-    lado = qr_lado * SELO
-    c.setFillColor(BRANCO)
-    c.roundRect(cx - lado / 2, cy - lado / 2, lado, lado, lado * 0.22, stroke=0, fill=1)
-    alt = lado * 0.78
-    larg = alt * SIMBOLO_RAZAO
-    c.drawImage(ImageReader(SIMBOLO), cx - larg / 2, cy - alt / 2, larg, alt, mask="auto")
-
-
-def arte(c, peca, x0, y0, larg_mm, alt_mm):
-    """Desenha uma peça inteira com a origem em (x0, y0). Serve pro A6 e pro A4."""
-    W, H = larg_mm * mm, alt_mm * mm
-    s = larg_mm / 210.0
-    margem = 0.072 * W
-    cw = W - 2 * margem
-    util = H - 2 * (0.075 * H)
+def arte(c, peca, x0, y0):
+    """Uma peça A5 inteira, com a origem no canto inferior esquerdo dela."""
+    W, H = 148 * mm, 210 * mm
+    meio = x0 + W / 2
+    topo = lambda t: y0 + H - t * mm          # mm medidos do alto da folha
 
     c.setFillColor(ROSA)
     c.rect(x0, y0, W, H, stroke=0, fill=1)
 
-    # Palavra curta vira fonte gigante se só a largura mandar — daí o teto por altura.
-    h1 = min(tamanho_para_largura(peca["titulo"], "Lilita", cw), tamanho_para_cap(0.082 * H))
-    f_chapeu = h1 * 0.335
-    f_sub    = h1 * 0.335
-    f_pilula = h1 * 0.175
+    # logo
+    alt = LOGO_ALT * mm
+    c.drawImage(ImageReader(LOGO), meio - alt * LOGO_RAZAO / 2, topo(LOGO_TOPO) - alt,
+                alt * LOGO_RAZAO, alt, mask="auto")
 
-    a_chapeu, a_h1, a_sub = cap("Lilita", f_chapeu), cap("Lilita", h1), cap("Lilita", f_sub)
+    # título, duas linhas
+    pt = min(TIT_PT, *(cabe(l, "Lilita", TIT_PT, TIT_LARG_MAX) for l in peca["titulo"]))
+    c.setFont("Lilita", pt); c.setFillColor(MARROM)
+    y = topo(TIT_TOPO) - cap("Lilita", pt)
+    for linha in peca["titulo"]:
+        c.drawCentredString(meio, y, linha)
+        y -= TIT_ENTRELINHA * mm
 
-    # cap() mede a caixa alta; o acento sobe acima dela e bateria no chapéu
-    acento = 0.24 * a_h1 if any(ch in peca["titulo"] for ch in "ÁÀÃÂÉÊÍÓÕÔÚÜÇ") else 0.0
-    g_chapeu = 0.30 * a_chapeu + acento
-    g_sub    = 0.34 * a_sub
-    g_pilula = 9.0 * mm * s
-    g_card   = 6.0 * mm * s
-    g_logo   = 7.0 * mm * s
-
-    alt_pilula = f_pilula * 2.05
-    alt_logo   = 0.11 * W
-    pad_card   = 5.0 * mm * s
-
-    # Sem a foto, o que sobra é todo do QR.
-    sem_card = (a_chapeu + g_chapeu + a_h1 + g_sub + a_sub
-                + g_pilula + alt_pilula + g_card + g_logo + alt_logo)
-    lado_card = max(0.44 * W, min(0.80 * W, util - sem_card))
-    qr_lado = lado_card - 2 * pad_card
-    bloco = sem_card + lado_card
-
-    y = y0 + H - (H - bloco) * 0.46 - a_chapeu
-    meio = x0 + W / 2
-
-    c.setFont("Lilita", f_chapeu); c.setFillColor(MARROM)
-    c.drawCentredString(meio, y, peca["chapeu"])
-
-    y -= g_chapeu + a_h1
-    c.setFont("Lilita", h1)
-    c.drawCentredString(meio, y, peca["titulo"])
-
-    y -= g_sub + a_sub
-    c.setFont("Lilita", f_sub); c.setFillColor(LARANJA)
-    c.drawCentredString(meio, y, peca["sub"])
-
-    texto = peca["pilula"]
-    larg_pilula = pdfmetrics.stringWidth(texto, "Poppins-Med", f_pilula) + 2 * (f_pilula * 1.1)
-    y -= g_pilula + alt_pilula
+    # pílula
     c.setFillColor(CREME)
-    c.roundRect(meio - larg_pilula / 2, y, larg_pilula, alt_pilula, alt_pilula / 2, stroke=0, fill=1)
-    c.setFillColor(MARROM); c.setFont("Poppins-Med", f_pilula)
-    c.drawCentredString(meio, y + alt_pilula / 2 - f_pilula * 0.35, texto)
+    c.roundRect(meio - PIL_LARG * mm / 2, topo(PIL_TOPO) - PIL_ALT * mm,
+                PIL_LARG * mm, PIL_ALT * mm, PIL_ALT * mm / 2, stroke=0, fill=1)
+    pt = cabe(peca["pilula"], "QS", PIL_PT, PIL_LARG - 10)
+    c.setFillColor(MARROM); c.setFont("QS", pt)
+    c.drawCentredString(meio, topo(PIL_TOPO) - PIL_ALT * mm / 2 - pt * 0.34, peca["pilula"])
 
-    y -= g_card + lado_card
+    # card branco com sombra, e o QR dentro
+    lado = CARD_LADO * mm
+    c.setFillColor(SOMBRA)
+    c.roundRect(meio - lado / 2, topo(CARD_TOPO) - lado - 2.2 * mm, lado, lado, 7 * mm, stroke=0, fill=1)
     c.setFillColor(BRANCO)
-    c.roundRect(meio - lado_card / 2, y, lado_card, lado_card, 5.5 * mm * s, stroke=0, fill=1)
-    desenha_qr(c, peca["_qr"], meio - qr_lado / 2, y + pad_card, qr_lado)
-    selo(c, meio, y + pad_card + qr_lado / 2, qr_lado)
+    c.roundRect(meio - lado / 2, topo(CARD_TOPO) - lado, lado, lado, 7 * mm, stroke=0, fill=1)
+    qr = QR_LADO * mm
+    qx, qy = meio - qr / 2, topo(CARD_TOPO) - lado + (lado - qr) / 2
+    desenha_qr(c, peca["_qr"], qx, qy, qr)
 
-    y -= g_logo + alt_logo
-    c.drawImage(ImageReader(LOGO), meio - alt_logo * LOGO_RAZAO / 2, y,
-                alt_logo * LOGO_RAZAO, alt_logo, mask="auto")
-    return qr_lado
+    # selo redondo com o logo no miolo do código
+    d = qr * SELO
+    c.setFillColor(BRANCO)
+    c.circle(meio, qy + qr / 2, d / 2, stroke=0, fill=1)
+    alt = d * 0.70
+    c.drawImage(ImageReader(LOGO), meio - alt * LOGO_RAZAO / 2, qy + qr / 2 - alt / 2,
+                alt * LOGO_RAZAO, alt, mask="auto")
+
+    # @ do perfil e endereço
+    pt = cabe(peca["arroba"], "Lilita", AT_PT, 100)
+    c.setFillColor(LARANJA); c.setFont("Lilita", pt)
+    c.drawCentredString(meio, topo(AT_TOPO) - cap("Lilita", pt), peca["arroba"])
+    pt = cabe(peca["endereco"], "QS", END_PT, 110)
+    c.setFillColor(ENDERECO); c.setFont("QS", pt)
+    c.drawCentredString(meio, topo(END_TOPO) - cap("QS", pt), peca["endereco"])
 
 
-def a6(peca, arquivo):
-    W, H = 105 * mm, 148 * mm
-    c = canvas.Canvas(arquivo, pagesize=(W, H))
+def a5(peca, arquivo):
+    c = canvas.Canvas(arquivo, pagesize=(148 * mm, 210 * mm))
     c.setTitle(peca["pdf_titulo"])
-    qr = arte(c, peca, 0, 0, 105, 148)
+    arte(c, peca, 0, 0)
     c.showPage(); c.save()
-    print(f"ok {os.path.basename(arquivo)}  A6 105x148mm | QR {qr/mm:.1f}mm")
+    print(f"ok {os.path.basename(arquivo)}  A5 148x210mm | QR {QR_LADO}mm")
 
 
-def a4_quatro(peca, arquivo):
-    """Quatro A6 numa A4, com as linhas de corte."""
+def a4_duas(peca, arquivo):
+    """Duas peças A5 numa A4, uma em cima da outra, com a linha de corte."""
     W, H = 210 * mm, 297 * mm
     c = canvas.Canvas(arquivo, pagesize=(W, H))
-    c.setTitle(peca["pdf_titulo"] + " — 4 por folha A4")
-    folga = (H - 2 * 148 * mm) / 2          # 0,5mm em cima e embaixo
-    for col in (0, 1):
-        for lin in (0, 1):
-            qr = arte(c, peca, col * 105 * mm, folga + lin * 148 * mm, 105, 148)
+    c.setTitle(peca["pdf_titulo"] + " — 2 por folha A4")
+    # A4 (210 × 297) é exatamente duas A5. Cortando a folha ao meio, cada metade
+    # mede 210 × 148,5 — que é uma A5 deitada. Por isso a peça entra girada 90°:
+    # depois do corte, é só virar o papel e ela está em pé.
+    c.setFillColor(ROSA)             # forra a folha: some com a emenda de meio milímetro
+    c.rect(0, 0, W, H, stroke=0, fill=1)
+    for i in (0, 1):
+        c.saveState()
+        c.translate(W, i * 148.5 * mm)
+        c.rotate(90)
+        arte(c, peca, 0, 0)
+        c.restoreState()
     c.setStrokeColor(CORTE); c.setLineWidth(0.25); c.setDash(2, 3)
-    c.line(105 * mm, 0, 105 * mm, H)
-    c.line(0, folga + 148 * mm, W, folga + 148 * mm)
+    c.line(0, 148.5 * mm, W, 148.5 * mm)
     c.setDash()
     c.showPage(); c.save()
-    print(f"ok {os.path.basename(arquivo)}  A4 com 4 peças A6 | QR {qr/mm:.1f}mm cada")
+    print(f"ok {os.path.basename(arquivo)}  A4 com 2 peças A5 (giradas) | QR {QR_LADO}mm cada")
 
 
-BASE = "https://holycampinas.github.io/cardapio-holy-cook-campinas/"
-PECAS = [
-    {"slug": "cardapio-campinas",
-     "url": BASE,
-     "chapeu": "VEM VER O",
-     "titulo": "CARDÁPIO",
-     "sub": "DA HOLY",
-     "pilula": "Leia o QR Code para ver o cardápio",
-     "pdf_titulo": "Cardápio Holy Cook Campinas — QR code"},
-    {"slug": "comparativo-campinas",
-     "url": BASE + "comparativo/",
-     "chapeu": "O MESMO COOKIE",
-     "titulo": "MAIS BARATO",
-     "sub": "AQUI NA LOJA",
-     "pilula": "Leia o QR Code e compare com o iFood",
-     "pdf_titulo": "Loja ou iFood — Holy Cook Campinas — QR code"},
-]
+LOJAS = {
+    "campinas": {
+        "base": "https://holycampinas.github.io/cardapio-holy-cook-campinas/",
+        "arroba": "@holycook.campinas",
+        "endereco": "R. Cônego Nery, 463 — Campinas",
+    },
+    "paulinia": {
+        "base": "https://holycampinas.github.io/cardapio-holy-cook-paulinia/",
+        "arroba": "@holycook.paulinia",
+        "endereco": "Av. José Paulino, 1615 — Paulínia",
+    },
+}
+DESTINOS = {
+    "cardapio": {
+        "sufixo": "",
+        "titulo": ["ACESSE O", "CARDÁPIO"],
+        "pilula": "Aponte a câmera do celular para o código",
+    },
+    "comparativo": {
+        "sufixo": "comparativo/",
+        "titulo": ["AQUI SAI", "MAIS BARATO"],
+        "pilula": "Compare o preço do iFood com o da loja",
+    },
+}
 
 if __name__ == "__main__":
-    for p in PECAS:
-        p["_qr"] = [list(r) for r in segno.make(p["url"], error="H").matrix]
-        a6(p, os.path.join(AQUI, f"cartaz-{p['slug']}-a6.pdf"))
-        a4_quatro(p, os.path.join(AQUI, f"cartaz-{p['slug']}-a4-4up.pdf"))
+    for lj, loja in LOJAS.items():
+        for ds, destino in DESTINOS.items():
+            peca = {
+                "arroba": loja["arroba"], "endereco": loja["endereco"],
+                "titulo": destino["titulo"], "pilula": destino["pilula"],
+                "pdf_titulo": f"Holy Cook {lj.capitalize()} — QR {ds}",
+            }
+            peca["_qr"] = [list(r) for r in
+                           segno.make(loja["base"] + destino["sufixo"], error="H").matrix]
+            a5(peca, os.path.join(AQUI, f"cartaz-{ds}-{lj}-a5.pdf"))
+            a4_duas(peca, os.path.join(AQUI, f"cartaz-{ds}-{lj}-a4-2up.pdf"))
