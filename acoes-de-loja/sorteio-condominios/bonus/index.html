@@ -56,6 +56,16 @@
   button.acao:hover:not(:disabled) { filter: brightness(1.08); }
   button.acao:disabled { opacity: .5; cursor: not-allowed; }
 
+  .leva { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.15rem; }
+  .leva .rot { display: block; font-family: var(--mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin-bottom: .6rem; }
+  .leva .linha { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+  .leva input { font-family: var(--mono); font-size: 1.35rem; font-weight: 700; width: 5.5rem; padding: .5rem .6rem; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper); color: var(--ink); -moz-appearance: textfield; }
+  .leva input::-webkit-outer-spin-button, .leva input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .leva .atalho { font-family: var(--mono); font-size: .82rem; padding: .5rem .7rem; border: 1px solid var(--rule); border-radius: 5px; background: var(--paper); color: var(--ink-soft); cursor: pointer; }
+  .leva .atalho:hover { border-color: var(--marca); color: var(--marca); }
+  .leva .atalho[aria-pressed="true"] { border-color: var(--marca); background: var(--marca); color: var(--marca-ink); }
+  .leva .dica { font-size: .82rem; color: var(--ink-faint); margin-top: .7rem; }
+
   .recado { font-size: .9rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem; color: var(--ink-soft); }
   .recado[hidden] { display: none; }
   .recado.bom { border-color: var(--good); color: var(--good); }
@@ -75,7 +85,7 @@
 
   <div id="tela">
     <div class="placar" style="margin-bottom:1.5rem">
-      <div><span class="v" id="vTotal">—</span><span class="s">participantes</span></div>
+      <div><span class="v" id="vFaltam">—</span><span class="s">ainda não receberam</span></div>
       <div><span class="v ativo" id="vFila">—</span><span class="s">na fila agora</span></div>
       <div><span class="v" id="vEnviados">—</span><span class="s">vouchers enviados</span></div>
       <div><span class="v" id="vUsados">—</span><span class="s">já utilizados</span></div>
@@ -89,23 +99,38 @@
       <p>Por isso o envio é lento e em ordem aleatória: <b>3 por rodada, ~40 segundos entre cada um,
       uma rodada a cada 5 minutos</b>. Dá mais ou menos <b>36 vouchers por hora</b>. Pode fechar esta
       página — a fila continua andando sozinha.</p>
+      <p>E por isso você escolhe o tamanho da leva. Mande um punhado, veja chegar, e volte aqui pra
+      mandar o resto quando quiser. Quem já recebeu nunca volta pra fila, e a leva é <b>sorteada</b>
+      entre quem falta — não sai um condomínio inteiro de uma vez.</p>
     </div>
 
     <div class="previa" style="margin-bottom:1.5rem">
       <div class="tit">O que cada pessoa recebe</div>
-      <div class="balao">Maria, tem bônus pra você! 🍪
+      <div class="balao">Maria, você <b>ganhou um cookie</b> da Holy Cook! 🍪
 
-Você participou do nosso sorteio, e por isso ganhou <b>1 cookie grátis</b> na loja — qualquer sabor.
+Você estava no evento no Café do Síndico, participou do nosso sorteio e, por isso, estamos te presenteando com <b>um cookie grátis</b> na loja — qualquer sabor.
 
 Só chegar e apresentar este voucher no balcão.
 
 📍 Rua Quinze de Novembro, 630 — Centro, Piracicaba/SP
 🗓️ Válido até <b>18/10/2026</b></div>
-      <p class="anexo">Junto vai a imagem do voucher, com o nome, o condomínio, o cargo, o WhatsApp, o código e o número do cadastro.</p>
+      <p class="anexo">Junto vai o vale-presente: foto do cookie, o nome e o condomínio da pessoa, o endereço da loja em destaque e, miúdo no rodapé, o código de conferência.</p>
+    </div>
+
+    <div class="leva" style="margin-bottom:1rem">
+      <label class="rot" for="quantos">Quantas pessoas nesta leva</label>
+      <div class="linha">
+        <input id="quantos" type="number" min="1" step="1" value="10" inputmode="numeric">
+        <button class="atalho" data-q="5">5</button>
+        <button class="atalho" data-q="10">10</button>
+        <button class="atalho" data-q="25">25</button>
+        <button class="atalho" data-q="todos">todos</button>
+      </div>
+      <p class="dica" id="dica">—</p>
     </div>
 
     <div class="botoes" style="margin-bottom:1rem">
-      <button class="acao" id="btDisparar">Disparar o bônus surpresa</button>
+      <button class="acao" id="btDisparar">Disparar esta leva</button>
       <button class="acao vazado" id="btParar">Parar a fila</button>
     </div>
 
@@ -129,16 +154,64 @@ function dizer(msg, tipo) {
   recado.hidden = false;
 }
 
+const campo  = document.getElementById("quantos");
+const dica   = document.getElementById("dica");
+const atalhos = [...document.querySelectorAll(".atalho")];
+
+/** Quantos a leva vai levar. "todos" = campo vazio = manda tudo que falta. */
+function daLeva() {
+  const n = parseInt(campo.value, 10);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function pintarAtalhos() {
+  const n = daLeva();
+  for (const b of atalhos) {
+    const q = b.dataset.q;
+    b.setAttribute("aria-pressed", String(q === "todos" ? n === null : Number(q) === n));
+  }
+}
+
+/** O tamanho real da leva nunca passa de quem falta. */
+function tamanhoReal(faltam) {
+  const n = daLeva();
+  return n === null ? faltam : Math.min(n, faltam);
+}
+
+function atualizarDica(faltam) {
+  if (faltam === 0) { dica.textContent = "Todo mundo já recebeu — não falta ninguém."; return; }
+  const n = tamanhoReal(faltam);
+  const min = Math.ceil(n / 3) * 5;
+  const tempo = min < 60
+    ? `${min} minutos`
+    : `${(min / 60).toFixed(1).replace(".", ",")} horas`;
+  dica.textContent =
+    `${n} de ${faltam} que ainda não receberam · leva cerca de ${tempo} para escoar` +
+    (n < faltam ? ` · sobram ${faltam - n} para as próximas` : "");
+}
+
+for (const b of atalhos) {
+  b.addEventListener("click", () => {
+    campo.value = b.dataset.q === "todos" ? "" : b.dataset.q;
+    pintarAtalhos();
+    situacao().catch(() => {});
+  });
+}
+campo.addEventListener("input", () => { pintarAtalhos(); situacao().catch(() => {}); });
+
 async function situacao() {
   const res = await fetch(`${API}/bonus`, { headers: cab() });
   const d = await res.json();
 
-  document.getElementById("vTotal").textContent    = d.total;
+  document.getElementById("vFaltam").textContent   = d.faltam;
   document.getElementById("vFila").textContent     = d.naFila;
   document.getElementById("vEnviados").textContent = d.enviados;
   document.getElementById("vUsados").textContent   = d.utilizados;
 
-  document.getElementById("btDisparar").disabled = d.total === 0 || d.naFila > 0;
+  atualizarDica(d.faltam);
+  pintarAtalhos();
+
+  document.getElementById("btDisparar").disabled = d.faltam === 0 || d.naFila > 0;
   document.getElementById("btParar").disabled    = d.naFila === 0;
 
   // Enquanto a fila anda, a tela se atualiza sozinha. Parada, não fica
@@ -151,10 +224,17 @@ async function situacao() {
 
 document.getElementById("btDisparar").addEventListener("click", async () => {
   const d = await situacao();
-  const horas = (d.total / 36).toFixed(1).replace(".", ",");
+  if (d.faltam === 0) return dizer("Todo mundo já recebeu.", "bom");
+
+  const n = tamanhoReal(d.faltam);
+  const min = Math.ceil(n / 3) * 5;
+  const tempo = min < 60 ? `${min} minutos` : `cerca de ${(min / 60).toFixed(1).replace(".", ",")} horas`;
+
   if (!confirm(
-    `Disparar o voucher para ${d.total} pessoa(s)?\n\n` +
-    `No ritmo de 3 a cada 5 minutos, isso leva cerca de ${horas} hora(s) para terminar.\n\n` +
+    `Disparar o voucher para ${n} pessoa(s)?\n\n` +
+    `São sorteadas entre as ${d.faltam} que ainda não receberam.\n` +
+    `No ritmo de 3 a cada 5 minutos, essa leva leva ${tempo}.\n\n` +
+    (n < d.faltam ? `Sobram ${d.faltam - n} para as próximas levas.\n\n` : "") +
     `Depois de começar, dá pra parar a fila — mas o que já saiu não volta.`
   )) return;
 
@@ -162,11 +242,16 @@ document.getElementById("btDisparar").addEventListener("click", async () => {
   bt.disabled = true;
   try {
     const res = await fetch(`${API}/bonus`, {
-      method: "POST", headers: cab(), body: JSON.stringify({ acao: "enfileirar" }),
+      method: "POST", headers: cab(),
+      body: JSON.stringify({ acao: "enfileirar", quantos: daLeva() ?? undefined }),
     });
     const r = await res.json();
     if (!res.ok) return dizer(r.erro || "Não deu pra enfileirar.", "ruim");
-    dizer(`${r.enfileirados} pessoa(s) na fila. O primeiro lote sai na próxima rodada do relógio (até 5 minutos).`, "bom");
+    dizer(
+      `${r.enfileirados} pessoa(s) na fila. O primeiro lote sai na próxima rodada do relógio (até 5 minutos).` +
+      (r.faltam > r.naFila ? ` Depois desta leva ainda sobram ${r.faltam - r.naFila}.` : ""),
+      "bom",
+    );
     await situacao();
   } catch {
     dizer("Sem conexão.", "ruim");
@@ -181,7 +266,7 @@ document.getElementById("btParar").addEventListener("click", async () => {
     });
     const r = await res.json();
     if (!res.ok) return dizer(r.erro || "Não deu pra parar.", "ruim");
-    dizer("Fila parada. O que já tinha saído continua valendo.", "bom");
+    dizer("Fila parada. Quem ficou de fora volta a aparecer em \u201cainda não receberam\u201d.", "bom");
     await situacao();
   } catch {
     dizer("Sem conexão.", "ruim");
