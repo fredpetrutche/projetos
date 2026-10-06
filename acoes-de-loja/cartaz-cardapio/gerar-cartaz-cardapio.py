@@ -35,6 +35,15 @@ pdfmetrics.registerFont(TTFont("Poppins-Med", os.path.join(AQUI, "fontes", "Popp
 LOGO = os.path.join(AQUI, "img", "holy-cook-logo.png")
 LOGO_RAZAO = (lambda i: i.width / i.height)(Image.open(LOGO))
 
+# O cookie com a auréola, recortado do lockup — vai no miolo do QR.
+SIMBOLO = os.path.join(AQUI, "img", "holy-cook-simbolo.png")
+SIMBOLO_RAZAO = (lambda i: i.width / i.height)(Image.open(SIMBOLO))
+
+# Fração do LADO do QR que o selo central ocupa. Com correção H o código tolera
+# ~30% de área perdida; 0,26 do lado dá 6,8% de área, com folga de sobra. Mexeu
+# aqui, roda o decodificador de novo antes de mandar imprimir.
+SELO = 0.26
+
 
 def cap(fonte, tam):
     """Altura de caixa alta — é por ela que os títulos se empilham."""
@@ -63,6 +72,16 @@ def desenha_qr(c, matriz, x, y, lado):
                 c.rect(x + ini * m, y + lado - (r + 1) * m, (col - ini) * m, m, stroke=0, fill=1)
             else:
                 col += 1
+
+
+def selo(c, cx, cy, qr_lado):
+    """Abre um quadrado branco no miolo do QR e põe o cookie da Holy dentro."""
+    lado = qr_lado * SELO
+    c.setFillColor(BRANCO)
+    c.roundRect(cx - lado / 2, cy - lado / 2, lado, lado, lado * 0.22, stroke=0, fill=1)
+    alt = lado * 0.78
+    larg = alt * SIMBOLO_RAZAO
+    c.drawImage(ImageReader(SIMBOLO), cx - larg / 2, cy - alt / 2, larg, alt, mask="auto")
 
 
 def arte(c, peca, x0, y0, larg_mm, alt_mm):
@@ -129,6 +148,7 @@ def arte(c, peca, x0, y0, larg_mm, alt_mm):
     c.setFillColor(BRANCO)
     c.roundRect(meio - lado_card / 2, y, lado_card, lado_card, 5.5 * mm * s, stroke=0, fill=1)
     desenha_qr(c, peca["_qr"], meio - qr_lado / 2, y + pad_card, qr_lado)
+    selo(c, meio, y + pad_card + qr_lado / 2, qr_lado)
 
     y -= g_logo + alt_logo
     c.drawImage(ImageReader(LOGO), meio - alt_logo * LOGO_RAZAO / 2, y,
