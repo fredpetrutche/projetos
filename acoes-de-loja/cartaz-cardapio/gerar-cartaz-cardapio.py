@@ -182,7 +182,7 @@ LOJAS = {
     "piracicaba": {
         "base": "https://holycampinas.github.io/cardapio-holy-cook-piracicaba/",
         "arroba": "@holycook.piracicaba",
-        "endereco": "R. Quinze de Novembro, 630 — Piracicaba",
+        "endereco": "Rua 15 de Novembro, 630 — Centro, Piracicaba",
     },
 }
 DESTINOS = {
