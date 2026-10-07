@@ -179,6 +179,11 @@ LOJAS = {
         "arroba": "@holycook.paulinia",
         "endereco": "Av. José Paulino, 1615 — Paulínia",
     },
+    "piracicaba": {
+        "base": "https://holycampinas.github.io/cardapio-holy-cook-piracicaba/",
+        "arroba": "@holycook.piracicaba",
+        "endereco": "R. Quinze de Novembro, 630 — Piracicaba",
+    },
 }
 DESTINOS = {
     "cardapio": {
