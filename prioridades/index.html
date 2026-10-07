@@ -211,7 +211,7 @@
     <div class="grade-grupos">
       <button class="grupo-btn" data-grupo="faturamento">
         <span class="gnome">Crise de Faturamento</span>
-        <span class="gcontagem"><span class="tag acc">meta diária: placar medido</span><span class="tag bad">verão não lançado</span><span class="tag bad">campanhas não feitas</span><span class="tag warn">calor de out/nov</span></span>
+        <span class="gcontagem"><span class="tag acc">meta diária: placar medido</span><span class="tag acc">5 ações de curto prazo</span><span class="tag bad">verão não lançado</span><span class="tag bad">campanhas não feitas</span><span class="tag warn">calor de out/nov</span></span>
       </button>
       <button class="grupo-btn" data-grupo="equipe">
         <span class="gnome">Crise de Equipe</span>
@@ -232,7 +232,8 @@
       <button class="topico-btn" data-topico="cardapio-verao"><span class="tnome">Cardápio de Verão / Ação de Calor</span><span class="tag bad">não lançado — out ou nov</span></button>
       <button class="topico-btn" data-topico="campanhas-manutencao"><span class="tnome">Campanhas de manutenção</span><span class="tag bad">não foram feitas</span></button>
       <button class="topico-btn" data-topico="sazonalidade"><span class="tnome">Sazonalidade: o calor derruba a venda</span><span class="tag bad">risco de out e nov</span></button>
-      <button class="topico-btn" data-topico="vendas-paulinia"><span class="tnome">Ações de vendas — Paulínia</span><span class="tag acc">com a Luciana e o Tiago</span></button>
+      <button class="topico-btn" data-topico="vendas-campinas"><span class="tnome">Ações de vendas — Campinas</span><span class="tag acc">3 ações de curto prazo</span></button>
+      <button class="topico-btn" data-topico="vendas-paulinia"><span class="tnome">Ações de vendas — Paulínia</span><span class="tag acc">delivery com moto própria</span></button>
       <button class="topico-btn" data-topico="ambiente-lojas"><span class="tnome">Ambiente e experiência das lojas</span><span class="tag warn">só Campinas e Piracicaba</span></button>
     </div>
 
@@ -684,8 +685,83 @@
         </div>
       </div>
 
+      <div class="topico-conteudo" data-topico="vendas-campinas" hidden>
+        <h3>Ações de vendas — Campinas<span class="tag acc">curto prazo — 07/10/2026</span></h3>
+        <div class="note-item"><span class="tag acc">o que é</span><span>
+          Três ações de <strong>curto prazo</strong> pra loja de Campinas, nomeadas em 07/10/2026: colocar a
+          <strong>meta de vendas</strong> da loja, um <strong>carrinho na calçada</strong> e
+          <strong>disparos de WhatsApp</strong>. Curto prazo quer dizer: não esperam o lançamento do verão nem
+          a contratação travada no 6x1.
+        </span></div>
+        <div class="note-item"><span class="tag warn">a régua já está medida</span><span>
+          A loja faz <strong>R$ 48.740 de 60.000</strong> por mês — falta <strong>R$ 11.260</strong>, ou
+          <strong>+11 pedidos por dia</strong>, com ticket de R$ 33,77. Toda ação daqui se mede contra isso:
+          <strong>quantos dos 11 ela traz</strong>. Placar no card <strong>Meta de faturamento diário das 3
+          lojas</strong>.
+        </span></div>
+        <div class="note-item"><span class="tag good">duas pegam fluxo, uma pega cliente antigo</span><span>
+          Carrinho e disparo atacam fatores diferentes da conta de <a href="../acoes-de-loja/">Ações de
+          Loja</a>: o carrinho mexe em <strong>pessoas</strong> (quem passa na calçada e não entraria), o
+          disparo mexe em <strong>frequência</strong> (quem já comprou e volta). Não competem — somam.
+        </span></div>
+
+        <h4 class="sub">As três ações<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — clique numa pra ver o detalhe</span></h4>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="vc-meta">1. Meta de vendas da loja</button>
+          <button class="item-btn" data-item="vc-carrinho">2. Carrinho na calçada</button>
+          <button class="item-btn" data-item="vc-whatsapp">3. Disparos de WhatsApp</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa ação para ver o detalhe.</p>
+
+          <div class="item-conteudo" data-item="vc-meta" hidden>
+            <h5>1. Meta de vendas da loja de Campinas</h5>
+            <span class="item-tags"><span class="tag acc">primeira da lista</span></span>
+            <p>Primeira coisa da lista: <strong>colocar meta de vendas na loja de Campinas</strong>.</p>
+            <p>O número já existe medido: <strong>R$ 60.000/mês</strong> contra os R$ 48.740 de hoje — 1,23x,
+            ou <strong>+11 pedidos por dia</strong>. O que falta não é calcular, é a meta <strong>chegar na
+            loja</strong>.</p>
+            <p><strong>Pergunta aberta:</strong> é a mensal que já está medida, ou uma <strong>meta diária por
+            turno/equipe</strong> dentro da loja? São coisas diferentes — a primeira já existe na página, a
+            segunda é instrumento de gestão novo e precisa de quem acompanha todo dia.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="vc-carrinho" hidden>
+            <h5>2. Carrinho na calçada</h5>
+            <span class="item-tags"><span class="tag acc">segunda da lista</span><span class="tag bad">depende de produto que não derreta</span></span>
+            <p>Colocar um <strong>carrinho na calçada da loja</strong> oferecendo os <strong>produtos de
+            verão</strong> — vender pra quem está passando, sem depender de a pessoa decidir entrar.</p>
+            <p><strong>O requisito que vem junto:</strong> os produtos do carrinho têm que ser <strong>de
+            biscoito</strong>, porque <strong>biscoito não derrete</strong>. Calçada é sol; o que derrete não
+            pode ir pro carrinho.</p>
+            <p><strong>Isso cobra uma coisa do Cardápio de Verão:</strong> além dos 10 produtos fechados em
+            21/08, precisa existir uma <strong>linha que aguenta ficar fora da loja</strong>. Se nenhum dos 10
+            servir ao carrinho, o carrinho não é ação de curto prazo — passa a depender de produto novo. Ver o
+            card <strong>Cardápio de Verão / Ação de Calor</strong>.</p>
+            <p>É parente da <strong>placa de estacionamento</strong> de Piracicaba: trabalhar o fluxo que já
+            está na calçada antes de pagar por fluxo novo.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="vc-whatsapp" hidden>
+            <h5>3. Disparos de WhatsApp</h5>
+            <span class="item-tags"><span class="tag acc">terceira da lista</span><span class="tag good">modelo já roda em Paulínia</span></span>
+            <p>Fazer <strong>disparos de WhatsApp</strong> em Campinas, <strong>do jeito que já é feito em
+            Paulínia</strong>. Não é construir canal do zero: é replicar o que já roda.</p>
+            <p><strong>O que existe hoje, verificado:</strong> Campinas <strong>tem</strong> agente de WhatsApp
+            (<code>agente-whatsapp-campinas</code>), mas <strong>não tem o módulo de disparo</strong> —
+            listas, templates e resultados de retenção existem só em <code>agente-whatsapp-paulinia</code> e
+            <code>agente-whatsapp-piracicaba</code>. Então o trabalho é <strong>portar o módulo</strong> pro
+            agente de Campinas, não escrever um canal novo.</p>
+            <p>Move <strong>frequência</strong>: é a única das três que fala com quem <strong>já
+            comprou</strong>, em vez de buscar cliente novo. Também é a mais barata — base própria, sem
+            mídia.</p>
+            <p><strong>Pergunta aberta:</strong> qual é a base de contatos de Campinas e quem aperta o botão.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="topico-conteudo" data-topico="vendas-paulinia" hidden>
-        <h3>Ações de vendas — Paulínia<span class="tag acc">novo — 05/10/2026</span></h3>
+        <h3>Ações de vendas — Paulínia<span class="tag acc">delivery com moto própria</span></h3>
         <div class="note-item"><span class="tag warn">por que vira faturamento, e não custo</span><span>
           Em Paulínia o quadro de custos chegou no fim: a folha vai ser definida com Luciana, Tiago e Renata e,
           fora isso, a leitura do Fred é que <strong>não tem mais custo pra reduzir</strong> —
@@ -697,15 +773,57 @@
           Tiago</strong> (novo funcionário a entrar). É a primeira loja com dupla de operação pra executar
           ação de venda — por isso é dela que começa.
         </span></div>
-        <div class="note-item"><span class="tag bad">pergunta aberta</span><span>
-          <strong>Quais</strong> ações de vendas. Nenhuma está definida ainda — o que está decidido é que
-          existem, que são em Paulínia e que são com os dois. Enquanto não tiver nome, não entra no cronograma
-          de campanhas.
+        <div class="note-item"><span class="tag good">a primeira ação tem nome — 07/10/2026</span><span>
+          <strong>Delivery com moto própria</strong>, pelo Tiago, com meta de <strong>R$ 400 por dia</strong>.
+          Era a pergunta aberta desta página em 05/10 (&ldquo;quais ações de vendas?&rdquo;) e está respondida.
         </span></div>
         <div class="note-item"><span class="tag acc">amarração</span><span>
           Depende da <strong>data de entrada do Tiago</strong>, que está em aberto no card
-          <strong>Paulínia</strong> do grupo Equipe.
+          <strong>Paulínia</strong> do grupo Equipe. Enquanto a data não sai, a ação tem dono mas não tem
+          começo.
         </span></div>
+
+        <h4 class="sub">As ações da loja<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-faint)"> — clique numa pra ver o detalhe</span></h4>
+        <div class="grade-itens">
+          <button class="item-btn" data-item="vp-delivery">Delivery com moto própria</button>
+          <button class="item-btn" data-item="vp-whatsapp">Disparos de WhatsApp</button>
+        </div>
+        <div class="item-visor">
+          <p class="item-visor-vazio">Clique numa ação para ver o detalhe.</p>
+
+          <div class="item-conteudo" data-item="vp-delivery" hidden>
+            <h5>Delivery com moto própria — R$ 400 por dia</h5>
+            <span class="item-tags"><span class="tag acc">novo — 07/10/2026</span><span class="tag warn">depende da entrada do Tiago</span></span>
+            <p>Ver se dá pra fazer <strong>entrega com moto própria</strong> em Paulínia, <strong>através do
+            Tiago</strong> — o novo funcionário, marido da Luciana. Entrega própria em vez de depender só de
+            aplicativo.</p>
+            <p><strong>A meta, pequena de propósito: R$ 400 por dia.</strong> Em 25 dias de mês isso dá
+            <strong>R$ 10.000</strong> — e esses R$ 400 são <strong>sem a taxa de entrega</strong>, só produto.</p>
+            <p><strong>A conta por dentro:</strong> com taxa de quase <strong>R$ 10</strong> e cerca de
+            <strong>12 entregas</strong> pra fechar os R$ 400, dá <strong>~R$ 33 por entrega</strong> de produto
+            (abaixo do ticket de loja da Paulínia, R$ 37,81) e cerca de <strong>R$ 120 por dia só de
+            taxa</strong>, que corre por fora da meta — algo como R$ 3.000 no mês. A taxa não é faturamento da
+            meta: é o que paga a moto.</p>
+            <p><strong>Onde esse número cai — ponto de atenção:</strong> o placar da página mede
+            <strong>venda de loja</strong> (caixa, mesa e balcão, <strong>sem delivery</strong>). Os R$ 10.000
+            de delivery são quase exatamente o que falta pra Paulínia bater os R$ 50.000
+            (R$ 9.962) — mas <strong>não entram nesse placar</strong>. Ou seja: a ação resolve o caixa e
+            <strong>não</strong> move o indicador que está na mesa. Vale decidir se o placar passa a ter uma
+            linha de delivery ou se a meta de loja segue separada.</p>
+            <p><strong>Pergunta aberta:</strong> se a moto é do Tiago ou da loja, e se a entrega entra na
+            jornada dele ou é remunerada à parte — mexe na folha que ainda está sendo fechada.</p>
+          </div>
+
+          <div class="item-conteudo" data-item="vp-whatsapp" hidden>
+            <h5>Disparos de WhatsApp</h5>
+            <span class="item-tags"><span class="tag good">já roda</span></span>
+            <p>Paulínia <strong>já faz</strong> disparos de WhatsApp — é o modelo que Campinas vai copiar. O
+            módulo de retenção (listas, templates, resultados) vive no
+            <code>agente-whatsapp-paulinia</code>.</p>
+            <p>Entra aqui como <strong>ativo que já trabalha</strong>, não como ação a criar — e é a prova de
+            que o canal funciona antes de ser portado pra outra loja.</p>
+          </div>
+        </div>
       </div>
 
       <div class="topico-conteudo" data-topico="ambiente-lojas" hidden>
@@ -1627,13 +1745,14 @@
     <h2 class="titulo">Ordem sugerida de ações<span class="hint">clique nas caixinhas</span></h2>
     <div class="fluxo">
       <button class="passo-caixa" data-detalhe="É o próximo passo declarado: uma meta de faturamento diário por loja, e trabalho todos os dias pra subir esse resultado de um dia para o outro. Vem antes das campanhas porque é ela que diz se a campanha funcionou — sem meta diária, o aumento vira impressão. O dado de venda já está no Sistema-HC; falta o número de cada loja.">1. Meta de faturamento diário das 3 lojas</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="O cardápio está pronto desde 21/08 e NÃO foi lançado. O lançamento é em outubro ou novembro, e o trabalho é deste mês de qualquer jeito. É o chamariz: é ele que dá motivo pra pessoa vir, e sem ele o tráfego pago fica caro. Decidir a data é o que ancora todo o resto do marketing.">2. Lançar o Cardápio de Verão</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="As campanhas de manutenção não foram feitas — a frente está no zero. As duas primeiras são anúncios na região (tráfego pago) e influenciadores, com foco grande na cidade de Piracicaba: é lá que a equipe nova de atendimento permite trazer gente pra loja sem espalhar problema. A lista não está fechada, tem mais ação pra entrar.">3. Tráfego na região + influenciadores em Piracicaba</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="A líder nova e a atendente nova estão em treinamento com o Eduardo de 05 a 18/10, e no fim de semana de 17 a 19/10 tem que validar se o atendimento delas está bom. É a validação que sustenta o foco de influenciadores na cidade — se o atendimento não passar, trazer gente pra lá vira risco em vez de venda. Junto, resolver COMO validar a checklist 80/20 à distância.">4. Validar a equipe nova de Piracicaba até 19/10</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="O Tiago está esperando resposta sobre quando começa, e a folha da loja só fecha com a data dele e com a decisão da Renata. A dela tem prazo marcado: o seguro-desemprego que a mantinha dentro da regra do &quot;algo a perder&quot; acaba neste mês ou no próximo, e aí ela fica informal sem nada a perder. São três nomes e uma conta só — e é a conta que libera as ações de vendas da loja.">5. Fechar Tiago, Renata e a folha de Paulínia</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Montar a projeção de custos do mês, começar a emitir a nota fiscal de Piracicaba e verificar se o gasto de coordenação cabe no orçamento. É o quadro que o Fred quer acompanhar mais de perto, e a projeção é o instrumento que faz os outros dois aparecerem.">6. Projeção de custos, NF de Piracicaba e coordenação</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Campinas não consegue contratar porque o mercado local — supermercados, McDonald's, Burger King — já paga o mesmo salário em 5x2. Decidir o que fazer com relação aos colaboradores: é decisão de política, vale pra todas as lojas, e sem ela o seletivo de Campinas continua girando em falso.">7. Decidir a jornada 6x1 vs 5x2</button><span class="seta">→</span>
-      <button class="passo-caixa" data-detalhe="Ambiente fica em stand by, com duas exceções: Campinas (fachada e depois a experiência interna) e Piracicaba (proteção de calor — película ou toldo — e a placa de estacionamento). Paulínia espera. A placa é o item mais barato da lista e destrava gente que já está passando na porta.">8. Ambiente: só Campinas e Piracicaba</button>
+      <button class="passo-caixa" data-detalhe="As de curto prazo, que não esperam nada: em Campinas, colocar a meta na loja, o carrinho na calçada (com produto de biscoito, que não derrete) e os disparos de WhatsApp &mdash; Campinas tem o agente mas não tem o módulo de disparo, então é portar o que já roda em Paulínia. Em Paulínia, delivery com moto própria pelo Tiago, meta de R$ 400/dia de produto. Vêm antes do lançamento do verão porque nenhuma delas depende dele &mdash; menos o carrinho, que precisa de um produto que aguente a calçada.">2. Ações de vendas de curto prazo</button><span class="seta">&rarr;</span>
+      <button class="passo-caixa" data-detalhe="O cardápio está pronto desde 21/08 e NÃO foi lançado. O lançamento é em outubro ou novembro, e o trabalho é deste mês de qualquer jeito. É o chamariz: é ele que dá motivo pra pessoa vir, e sem ele o tráfego pago fica caro. Decidir a data é o que ancora todo o resto do marketing.">3. Lançar o Cardápio de Verão</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="As campanhas de manutenção não foram feitas — a frente está no zero. As duas primeiras são anúncios na região (tráfego pago) e influenciadores, com foco grande na cidade de Piracicaba: é lá que a equipe nova de atendimento permite trazer gente pra loja sem espalhar problema. A lista não está fechada, tem mais ação pra entrar.">4. Tráfego na região + influenciadores em Piracicaba</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="A líder nova e a atendente nova estão em treinamento com o Eduardo de 05 a 18/10, e no fim de semana de 17 a 19/10 tem que validar se o atendimento delas está bom. É a validação que sustenta o foco de influenciadores na cidade — se o atendimento não passar, trazer gente pra lá vira risco em vez de venda. Junto, resolver COMO validar a checklist 80/20 à distância.">5. Validar a equipe nova de Piracicaba até 19/10</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="O Tiago está esperando resposta sobre quando começa, e a folha da loja só fecha com a data dele e com a decisão da Renata. A dela tem prazo marcado: o seguro-desemprego que a mantinha dentro da regra do &quot;algo a perder&quot; acaba neste mês ou no próximo, e aí ela fica informal sem nada a perder. São três nomes e uma conta só — e é a conta que libera as ações de vendas da loja.">6. Fechar Tiago, Renata e a folha de Paulínia</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Montar a projeção de custos do mês, começar a emitir a nota fiscal de Piracicaba e verificar se o gasto de coordenação cabe no orçamento. É o quadro que o Fred quer acompanhar mais de perto, e a projeção é o instrumento que faz os outros dois aparecerem.">7. Projeção de custos, NF de Piracicaba e coordenação</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Campinas não consegue contratar porque o mercado local — supermercados, McDonald's, Burger King — já paga o mesmo salário em 5x2. Decidir o que fazer com relação aos colaboradores: é decisão de política, vale pra todas as lojas, e sem ela o seletivo de Campinas continua girando em falso.">8. Decidir a jornada 6x1 vs 5x2</button><span class="seta">→</span>
+      <button class="passo-caixa" data-detalhe="Ambiente fica em stand by, com duas exceções: Campinas (fachada e depois a experiência interna) e Piracicaba (proteção de calor — película ou toldo — e a placa de estacionamento). Paulínia espera. A placa é o item mais barato da lista e destrava gente que já está passando na porta.">9. Ambiente: só Campinas e Piracicaba</button>
     </div>
     <div class="passo-detalhe"></div>
   </section>
@@ -1651,7 +1770,12 @@
     <strong>não foi lançado</strong> — o lançamento é em outubro ou novembro e o trabalho é deste mês — e as
     <strong>campanhas de manutenção não foram feitas</strong>, com as duas primeiras sendo anúncios na região
     (tráfego) e influenciadores, com foco grande em Piracicaba. Entrou a <strong>meta de faturamento diário das 3 lojas</strong>, agora <strong>medida</strong>: em venda de loja (caixa, mesa e balcão, sem delivery), Campinas faz R$ 48.740 de 60.000, Paulínia R$ 40.038 de 50.000 e Piracicaba R$ 12.873 de 30.000, com média por dia da semana e meta diária por loja como próximo passo, e o ambiente foi pra stand by menos em Campinas e em Piracicaba
-    (proteção de calor e placa de estacionamento). Se algo aqui estiver desatualizado, esta página é a fonte da
+    (proteção de calor e placa de estacionamento). <strong>Atualizado em 07/10/2026</strong> com as ações de vendas de curto
+    prazo: em Campinas, meta de vendas na loja, carrinho na calçada (produto de biscoito, que não derrete) e
+    disparos de WhatsApp portando o módulo que já roda em Paulínia; em Paulínia, delivery com moto própria pelo
+    Tiago com meta de R$ 400/dia de produto, fora a taxa. Também nesta data: o turno da noite de Piracicaba
+    <strong>não tem ninguém</strong>, e os nomes da equipe nova são <strong>Aurea</strong> (líder) e
+    <strong>Babi</strong> (atendente). Se algo aqui estiver desatualizado, esta página é a fonte da
     verdade.
   </footer>
 
