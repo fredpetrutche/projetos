@@ -47,7 +47,7 @@
   .placar .s { font-size: .72rem; color: var(--ink-faint); }
 
   .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
-  table { border-collapse: collapse; width: 100%; font-size: .875rem; min-width: 62rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .875rem; min-width: 66rem; }
   th, td { padding: .4rem .55rem; text-align: left; vertical-align: middle; }
   thead th { font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; border-bottom: 1px solid var(--rule); white-space: nowrap; position: sticky; top: 0; background: var(--surface); }
   tbody tr + tr td { border-top: 1px solid var(--rule-soft); }
@@ -55,6 +55,12 @@
 
   td.num { font-family: var(--mono); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--marca); white-space: nowrap; }
   td input.cel { font-family: var(--sans); font-size: .875rem; width: 100%; min-width: 7rem; padding: .35rem .45rem; border: 1px solid transparent; border-radius: 4px; background: transparent; color: var(--ink); }
+  /* "(19) 99788-0020" são 15 caracteres: com 7rem o último dígito ficava
+     escondido dentro do campo. */
+  td input.cel.largo { min-width: 9.5rem; }
+  td .comlink { display: flex; align-items: center; gap: .15rem; }
+  .zaplink { display: inline-flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; flex: 0 0 auto; border-radius: 4px; color: var(--ink-faint); text-decoration: none; }
+  .zaplink:hover { color: #25D366; background: color-mix(in srgb, #25D366 14%, transparent); }
   td input.cel:hover { border-color: var(--rule); }
   td input.cel:focus { outline: none; border-color: var(--marca); background: var(--paper); }
   td input.cel.salvando { border-color: var(--ink-faint); }
@@ -153,10 +159,10 @@ async function carregar() {
 }
 
 /** Campo editável: salva ao sair, e a borda conta o que aconteceu. */
-function celulaEditavel(p, campo, valorVisivel) {
+function celulaEditavel(p, campo, valorVisivel, extra) {
   const td = document.createElement("td");
   const input = document.createElement("input");
-  input.className = "cel";
+  input.className = "cel" + (extra ? " largo" : "");
   input.value = valorVisivel;
   const original = valorVisivel;
 
@@ -186,8 +192,34 @@ function celulaEditavel(p, campo, valorVisivel) {
   });
 
   input.addEventListener("keydown", e => { if (e.key === "Enter") input.blur(); });
-  td.append(input);
+
+  if (extra) {
+    // O campo continua editável; o link mora ao lado, senão não dava pra
+    // corrigir um número errado sem antes abrir conversa com ele.
+    const caixa = document.createElement("div");
+    caixa.className = "comlink";
+    caixa.append(input, extra);
+    td.append(caixa);
+  } else {
+    td.append(input);
+  }
   return td;
+}
+
+/** Abre a conversa no WhatsApp Web (ou no app, se for celular). */
+function linkWhatsapp(jid) {
+  const so = String(jid || "").replace(/\D/g, "");
+  const a = document.createElement("a");
+  a.className = "zaplink";
+  a.href = "https://wa.me/" + so;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.title = "Abrir conversa no WhatsApp";
+  a.setAttribute("aria-label", "Abrir conversa no WhatsApp");
+  a.innerHTML = '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">'
+    + '<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.05 0 1.2.87 2.37.99 2.53.12.17 1.71 2.61 4.15 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.29Z"/>'
+    + '</svg>';
+  return a;
 }
 
 function desenhar() {
@@ -254,7 +286,7 @@ function desenhar() {
       celulaEditavel(p, "nome", p.nome),
       celulaEditavel(p, "condominio", p.condominio),
       celulaEditavel(p, "cargo", p.cargo),
-      celulaEditavel(p, "whatsapp", zap(p.whatsapp)),
+      celulaEditavel(p, "whatsapp", zap(p.whatsapp), linkWhatsapp(p.whatsapp)),
       tdConf, tdPremio, tdCod, tdEnv, tdUsado,
     );
     corpo.append(tr);
@@ -264,12 +296,17 @@ function desenhar() {
 /* Excel brasileiro: separador ';' e BOM, senão acento vira caractere estranho
    e tudo cai numa coluna só. */
 function exportar() {
-  const colunas = ["Numero","Nome","Condominio","Cargo","WhatsApp","Confirmou","Premio","Codigo do voucher","Voucher enviado em","Voucher utilizado","Utilizado em","Cadastrado em"];
+  const colunas = ["Numero","Nome","Condominio","Cargo","WhatsApp","WhatsApp internacional","Link do WhatsApp","Confirmou","Premio","Codigo do voucher","Voucher enviado em","Voucher utilizado","Utilizado em","Cadastrado em"];
   const campo = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
 
   const corpoCsv = linhas.map(p => [
     String(p.numero).padStart(3, "0"),
-    p.nome, p.condominio, p.cargo, zap(p.whatsapp),
+    p.nome, p.condominio, p.cargo,
+    zap(p.whatsapp),
+    // Os dígitos crus também: é o formato que o wa.me come, e serve de prova
+    // caso o Excel resolva reinterpretar o número formatado.
+    String(p.whatsapp || "").replace(/\D/g, ""),
+    "https://wa.me/" + String(p.whatsapp || "").replace(/\D/g, ""),
     p.confirmado ? "sim" : "nao",
     p.premio === "torta" ? "Torta Kinder" : p.premio === "caixa" ? "Caixa Misteriosa" : "",
     p.voucher_codigo || "",
