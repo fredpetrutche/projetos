@@ -274,7 +274,7 @@
           <div class="chk-item"><input type="checkbox" id="dg-conv4" data-g="conv"><label for="dg-conv4"><span class="prazo ja">antes de contatar</span><strong>Revalidar os handles da lista antes de mandar qualquer mensagem.</strong><span class="por">Em Piracicaba, <strong>5 dos 27 handles de um ano atrás não servem mais</strong>: 4 contas não existem e <strong>uma trocou de dono</strong> — @tifannyabreu tinha 15.200 seguidores e hoje é uma conta de 359 com bio que sugere alguém muito jovem. Mandar convite sem conferir é mandar mensagem pra outra pessoa.</span></label>
           </div><div class="chk-item"><input type="checkbox" id="dg-conv4b" data-g="conv"><label for="dg-conv4b"><strong>Convidar quinze pra ter dez</strong>, um por um.<span class="por">Nunca em lista de transmissão — convite em grupo deixa de ser seleção. Com pelo menos uma semana de antecedência, e com prazo de resposta.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="dg-conv5" data-g="conv"><label for="dg-conv5"><strong>Perguntar disponibilidade antes de fixar a hora.</strong><span class="por">Criador de comida trabalha à noite e no fim de semana. Se a hora mais barata pra loja derrubar o aceite de 10 pra 5, ela saiu caro.</span></label></div>
-          <div class="chk-item"><input type="checkbox" id="dg-conv6" data-g="conv"><label for="dg-conv6"><strong>Mandar endereço e ponto de referência</strong> na confirmação.<span class="por">Em Piracicaba isso é crítico: a loja não tem ficha no Google Maps, então quem procura não acha. O endereço é <strong>Rua Quinze de Novembro, 630, Centro</strong> — achado num post da marca, vale confirmar.</span></label></div>
+          <div class="chk-item"><input type="checkbox" id="dg-conv6" data-g="conv"><label for="dg-conv6"><strong>Mandar endereço e ponto de referência</strong> na confirmação.<span class="por">Em Piracicaba isso é crítico: a loja não tem ficha no Google Maps, então quem procura não acha. O endereço é <strong>Rua Quinze de Novembro, 630, Centro</strong> — confirmado por duas fontes: um post da marca e o post da @story.maker_b.i, que escreve o endereço na legenda.</span></label></div>
           <div class="chk-item"><input type="checkbox" id="dg-conv7" data-g="conv"><label for="dg-conv7"><span class="prazo antes">dia anterior</span><strong>Lembrete no dia anterior.</strong><span class="por">O item mais barato da lista e o que mais muda a presença — quem confirmou na segunda esquece na quinta.</span></label></div>
         </div></div>
 
@@ -1190,36 +1190,50 @@
 <section>
   <h2><span class="n">4</span> A lista inteira<span class="hint">clique na cidade · 125 perfis</span></h2>
   <p class="prose">Tudo o que existe de lista nas três cidades: <strong>quem já fez algo com a loja e quem
-  não</strong>, o link do perfil, <strong>o link do post da marcação</strong> quando ele existe, e os números
-  medidos. Em cada cidade, os que já fizeram vêm primeiro.</p>
-  <p class="prose"><strong>31 perfis têm post provado, com link.</strong> Outros <strong>10 de Campinas estão
-  marcados como tendo divulgado na planilha de 2025, mas sem post recuperável</strong> — rodei a busca no feed de
-  cada um e não há nada: ou foi story, que expira em 24 h e a API da Meta não expõe, ou não marcaram a marca no
-  texto. Esses aparecem como &ldquo;sim&rdquo; com a ressalva escrita, porque a diferença entre
-  <em>provado</em> e <em>anotado</em> importa.</p>
+  não</strong>, o link do perfil, <strong>o link do post</strong> quando ele existe, e os números medidos. Em cada
+  cidade, quem já fez vem primeiro.</p>
+  <div class="notes">
+    <div class="note-item"><span class="tag good">28 com post sobre a loja</span><span>
+      Link clicável, data e quantas views aquele post fez. É o grupo que serve de prova: dá pra ver o que foi
+      publicado e quanto rendeu.</span></div>
+    <div class="note-item"><span class="tag warn">3 que só marcaram a loja</span><span>
+      Apareceram na busca de menções, mas <strong>o conteúdo do post não é a loja</strong> — uma festa em outro
+      estabelecimento, um post sobre dieta e um de &ldquo;bastidores da escrita&rdquo;. O link está lá pra você
+      conferir. <strong>Isso era um erro meu:</strong> eu tinha contado os três como divulgação, e o Fred
+      pegou o da @giufantinato.</span></div>
+    <div class="note-item"><span class="tag mudo">10 anotados sem post</span><span>
+      Em Campinas, a planilha de seeding de 2025 marcou dez como tendo divulgado. Rodei a busca no feed de cada um
+      e <strong>nenhum tem post recuperável</strong>: ou foi story, que expira em 24 h e a API da Meta não expõe, ou
+      não marcaram a marca no texto. Ficam como &ldquo;sim&rdquo; com a ressalva, porque a diferença entre
+      <em>provado</em> e <em>anotado</em> importa.</span></div>
+    <div class="note-item"><span class="tag mudo">os 11 de Paulínia</span><span>
+      Vieram do levantamento do Cookie de Graça, de setembro de 2026, que já os tinha verificado um por um.
+      <strong>Não reauditei a legenda de cada um</strong> — se quiser, roda a mesma checagem que pegou os três
+      acima.</span></div>
+  </div>
   <p class="prose">Linha destacada é <strong>alc/seg acima de 1,00</strong>: perfil que entrega mais views do que
   tem seguidor. <em>Telefone e endereço não entram aqui</em> — existem só para Piracicaba, vieram da planilha
   original, e dado pessoal não vai para página publicada.</p>
   <div class="bloco">
     <div class="grade">
       <button class="card-btn" data-alvo="li-pau"><span class="cnome">Paulínia</span><span class="cmeta">19 perfis · 11 com post</span></button>
-      <button class="card-btn" data-alvo="li-cps"><span class="cnome">Campinas</span><span class="cmeta">72 perfis · 12 com post</span></button>
-      <button class="card-btn" data-alvo="li-pir"><span class="cnome">Piracicaba</span><span class="cmeta">34 perfis · 8 com post</span></button>
+      <button class="card-btn" data-alvo="li-cps"><span class="cnome">Campinas</span><span class="cmeta">72 perfis · 10 com post</span></button>
+      <button class="card-btn" data-alvo="li-pir"><span class="cnome">Piracicaba</span><span class="cmeta">34 perfis · 7 com post</span></button>
     </div>
     <div class="visor">
       <div class="painel" data-alvo="li-pau" hidden><span class="ptit">Paulínia</span>
         <div class="strip">
           <div><span class="v">19</span><span class="s">perfis na lista</span></div>
-          <div><span class="v">11</span><span class="s">com post provado e link</span></div>
+          <div><span class="v">11</span><span class="s">já fizeram, com post da loja</span></div>
           <div><span class="v">8</span><span class="s">ainda não fizeram</span></div>
         </div>
         <div class="bloco">
           <div class="grade">
-            <button class="card-btn" data-alvo="li-pau-s"><span class="cnome">Já fizeram, com post</span><span class="cmeta">11 perfis · link de cada um</span></button>
+            <button class="card-btn" data-alvo="li-pau-s"><span class="cnome">Já fizeram, com post da loja</span><span class="cmeta">11 perfis</span></button>
             <button class="card-btn" data-alvo="li-pau-n"><span class="cnome">Ainda não fizeram</span><span class="cmeta">8 perfis</span></button>
           </div>
           <div class="visor">
-            <div class="painel" data-alvo="li-pau-s" hidden><span class="ptit">Já fizeram, com post — Paulínia</span>
+            <div class="painel" data-alvo="li-pau-s" hidden><span class="ptit">Já fizeram, com post da loja — Paulínia</span>
               <div class="tablewrap"><table>
                 <thead><tr><th>Perfil</th><th>Já fez com a gente</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th><th>Melhor reel</th><th>Em 2025</th><th>Nota</th></tr></thead>
                 <tbody>
@@ -1255,18 +1269,20 @@
       <div class="painel" data-alvo="li-cps" hidden><span class="ptit">Campinas</span>
         <div class="strip">
           <div><span class="v">72</span><span class="s">perfis na lista</span></div>
-          <div><span class="v">12</span><span class="s">com post provado e link</span></div>
-          <div><span class="v">10</span><span class="s">divulgação anotada, sem post</span></div>
+          <div><span class="v">10</span><span class="s">já fizeram, com post da loja</span></div>
+          <div><span class="v">2</span><span class="s">só marcaram a loja</span></div>
+          <div><span class="v">10</span><span class="s">anotados sem post</span></div>
           <div><span class="v">50</span><span class="s">ainda não fizeram</span></div>
         </div>
         <div class="bloco">
           <div class="grade">
-            <button class="card-btn" data-alvo="li-cps-s"><span class="cnome">Já fizeram, com post</span><span class="cmeta">12 perfis · link de cada um</span></button>
-            <button class="card-btn" data-alvo="li-cps-p"><span class="cnome">Divulgação sem post</span><span class="cmeta">10 perfis · só a planilha de 2025</span></button>
+            <button class="card-btn" data-alvo="li-cps-s"><span class="cnome">Já fizeram, com post da loja</span><span class="cmeta">10 perfis</span></button>
+            <button class="card-btn" data-alvo="li-cps-m"><span class="cnome">Só marcaram a loja</span><span class="cmeta">2 perfis</span></button>
+            <button class="card-btn" data-alvo="li-cps-p"><span class="cnome">Anotados sem post</span><span class="cmeta">10 perfis</span></button>
             <button class="card-btn" data-alvo="li-cps-n"><span class="cnome">Ainda não fizeram</span><span class="cmeta">50 perfis</span></button>
           </div>
           <div class="visor">
-            <div class="painel" data-alvo="li-cps-s" hidden><span class="ptit">Já fizeram, com post — Campinas</span>
+            <div class="painel" data-alvo="li-cps-s" hidden><span class="ptit">Já fizeram, com post da loja — Campinas</span>
               <div class="tablewrap"><table>
                 <thead><tr><th>Perfil</th><th>Já fez com a gente</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th><th>Melhor reel</th><th>Em 2025</th><th>Nota</th></tr></thead>
                 <tbody>
@@ -1275,30 +1291,37 @@
                   <tr><td><a href="https://www.instagram.com/agata.queirozz/" target="_blank" rel="noopener">@agata.queirozz</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DSVWczcjmOn/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-12-16</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">145.293 views</span></td><td>67.911</td><td><strong>33.857</strong></td><td>0,50</td><td>6,4%</td><td>6.861.889</td><td>—</td><td>descoberto via menções à marca</td></tr>
                   <tr><td><a href="https://www.instagram.com/isa_milan/" target="_blank" rel="noopener">@isa_milan</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Isabella Milan</span></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DWSLCzCkUbm/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-03-24</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">4.939 views</span></td><td>94.674</td><td><strong>7.256</strong></td><td>0,08</td><td>5,7%</td><td>879.028</td><td>—</td><td>ficou de responder 29/04</td></tr>
                   <tr><td><a href="https://www.instagram.com/beatrizchavesbc/" target="_blank" rel="noopener">@beatrizchavesbc</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Baetriz Chaves</span></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DWjkVX3Ar-5/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-03-31</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">2.286 views</span></td><td>15.084</td><td><strong>4.341</strong></td><td>0,29</td><td>2,9%</td><td>13.003</td><td>—</td><td>veio a loja</td></tr>
-                  <tr class="mark"><td><a href="https://www.instagram.com/fernandarodriguescerimonial/" target="_blank" rel="noopener">@fernandarodriguescerimonial</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DWdzUVbAM9l/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-03-29</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">3.556 views</span></td><td>1.768</td><td><strong>2.892</strong></td><td><strong>1,64</strong></td><td>2,9%</td><td>13.834</td><td>—</td><td>descoberto via menções à marca</td></tr>
                   <tr><td><a href="https://www.instagram.com/by.juliaeduarda/" target="_blank" rel="noopener">@by.juliaeduarda</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DTd8ig5kRgq/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-01-13</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">2.356 views</span></td><td>17.360</td><td><strong>1.528</strong></td><td>0,09</td><td>5,0%</td><td>15.562</td><td>—</td><td>descoberto via menções à marca</td></tr>
                   <tr class="mark"><td><a href="https://www.instagram.com/rolezices/" target="_blank" rel="noopener">@rolezices</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DMoDqoMxLbi/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-07-27</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">419 views</span></td><td>206</td><td><strong>1.137</strong></td><td><strong>5,52</strong></td><td>2,3%</td><td>6.097</td><td>—</td><td>descoberto via menções à marca</td></tr>
-                  <tr><td><a href="https://www.instagram.com/oquebelavive/" target="_blank" rel="noopener">@oquebelavive</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DPsFGpdDhFe/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-12</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">1.014 views</span></td><td>2.111</td><td><strong>891</strong></td><td>0,42</td><td>4,8%</td><td>9.401</td><td>—</td><td>descoberto via menções à marca</td></tr>
                   <tr class="mark"><td><a href="https://www.instagram.com/autistilo_criativo/" target="_blank" rel="noopener">@autistilo_criativo</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DNGscomS04I/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-08-08</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">551 views</span></td><td>139</td><td><strong>592</strong></td><td><strong>4,26</strong></td><td>2,9%</td><td>3.764</td><td>—</td><td>descoberto via menções à marca</td></tr>
                   <tr class="mark"><td><a href="https://www.instagram.com/dailyfrantomaz/" target="_blank" rel="noopener">@dailyfrantomaz</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DNzB8bCWHtq/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-08-26</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">489 views</span></td><td>67</td><td><strong>575</strong></td><td><strong>8,58</strong></td><td>4,1%</td><td>788</td><td>—</td><td>descoberto via menções à marca</td></tr>
                   <tr><td><a href="https://www.instagram.com/nunes_ana_/" target="_blank" rel="noopener">@nunes_ana_</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DUJFx2bkYn6/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-01-30</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">618 views</span></td><td>1.349</td><td><strong>527</strong></td><td>0,39</td><td>5,2%</td><td>1.335</td><td>—</td><td>descoberto via menções à marca</td></tr>
                 </tbody>
               </table></div></div>
-            <div class="painel" data-alvo="li-cps-p" hidden><span class="ptit">Divulgação sem post recuperável — Campinas</span>
-              <p class="prose">A planilha de seeding de 2025 marcou estes dez como tendo divulgado, mas <strong>a busca no feed de cada um não achou post nenhum</strong>. Provavelmente foi story. Não dá pra linkar, e não dá pra conferir o que foi publicado.</p>
+            <div class="painel" data-alvo="li-cps-m" hidden><span class="ptit">Só marcaram a loja — Campinas</span>
+              <p class="prose">A loja aparece marcada, mas <strong>o post não é sobre ela</strong>. O link está na tabela pra conferir. Não conta como divulgação.</p>
               <div class="tablewrap"><table>
                 <thead><tr><th>Perfil</th><th>Já fez com a gente</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th><th>Melhor reel</th><th>Em 2025</th><th>Nota</th></tr></thead>
                 <tbody>
-                  <tr><td><a href="https://www.instagram.com/ferpenachim/" target="_blank" rel="noopener">@ferpenachim</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Fer Penachim</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>26.246</td><td><strong>9.156</strong></td><td>0,35</td><td>2,6%</td><td>64.091</td><td>—</td><td>—</td></tr>
-                  <tr><td><a href="https://www.instagram.com/laizcormanich/" target="_blank" rel="noopener">@laizcormanich</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Laiz Cormanich</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>15.070</td><td><strong>4.772</strong></td><td>0,32</td><td>3,4%</td><td>45.108</td><td>—</td><td>recebeu dia 03/05 (amou e divulgou)</td></tr>
-                  <tr><td><a href="https://www.instagram.com/_carolboscolo/" target="_blank" rel="noopener">@_carolboscolo</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Carolina Boscolo</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>18.031</td><td><strong>3.892</strong></td><td>0,22</td><td>4,6%</td><td>111.158</td><td>—</td><td>recebeu dia 04/05</td></tr>
-                  <tr><td><a href="https://www.instagram.com/vicky__beatriz/" target="_blank" rel="noopener">@vicky__beatriz</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Vitória Beatriz</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>5.202</td><td><strong>3.881</strong></td><td>0,75</td><td>5,1%</td><td>9.328</td><td>—</td><td>buscou na loja 04/05</td></tr>
-                  <tr><td><a href="https://www.instagram.com/gigicagil.oficial/" target="_blank" rel="noopener">@gigicagil.oficial</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Giovanna Gil</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>103.150</td><td><strong>3.278</strong></td><td>0,03</td><td>4,0%</td><td>11.331</td><td>—</td><td>Enviado: 11/03/2025 e nao respondeu mais</td></tr>
-                  <tr><td><a href="https://www.instagram.com/lannymaartinss/" target="_blank" rel="noopener">@lannymaartinss</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Lanny Martins</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>13.528</td><td><strong>3.133</strong></td><td>0,23</td><td>6,5%</td><td>12.891</td><td>—</td><td>recebido dia 03/05 ( divulgou )</td></tr>
-                  <tr><td><a href="https://www.instagram.com/nandasalless/" target="_blank" rel="noopener">@nandasalless</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Nanda Salles</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>24.072</td><td><strong>3.013</strong></td><td>0,13</td><td>5,3%</td><td>5.626.872</td><td>—</td><td>—</td></tr>
-                  <tr><td><a href="https://www.instagram.com/dranilanaalmeida/" target="_blank" rel="noopener">@dranilanaalmeida</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Nilana Almeida</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>20.074</td><td><strong>2.095</strong></td><td>0,10</td><td>3,0%</td><td>24.517</td><td>—</td><td>21/03/2025</td></tr>
-                  <tr><td><a href="https://www.instagram.com/acamilanatale/" target="_blank" rel="noopener">@acamilanatale</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Camile Natale</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>13.846</td><td><strong>1.463</strong></td><td>0,11</td><td>4,5%</td><td>8.956</td><td>—</td><td>AMOU</td></tr>
-                  <tr><td><a href="https://www.instagram.com/nicolekevellin/" target="_blank" rel="noopener">@nicolekevellin</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">𝑵𝒊𝒄𝒐𝒍𝒆 𝑲𝒆𝒗𝒆𝒍𝒍𝒊𝒏</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">registrado na planilha de 2025, <strong>sem post recuperável</strong> — provavelmente story</span></td><td>66.399</td><td><strong>1.224</strong></td><td>0,02</td><td>3,6%</td><td>4.983</td><td>—</td><td>ja divulgou</td></tr>
+                  <tr class="mark"><td><a href="https://www.instagram.com/fernandarodriguescerimonial/" target="_blank" rel="noopener">@fernandarodriguescerimonial</a></td><td><strong style="color:var(--warn)">só marcou</strong><br><a href="https://www.instagram.com/p/DWdzUVbAM9l/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-03-29</span></td><td>1.768</td><td><strong>2.892</strong></td><td><strong>1,64</strong></td><td>2,9%</td><td>13.834</td><td>—</td><td>descoberto via menções à marca · <strong style="color:var(--warn)">o post é de uma festa de 15 anos em outro estabelecimento (@monet_gastronomia); a loja só aparece marcada</strong></td></tr>
+                  <tr><td><a href="https://www.instagram.com/oquebelavive/" target="_blank" rel="noopener">@oquebelavive</a></td><td><strong style="color:var(--warn)">só marcou</strong><br><a href="https://www.instagram.com/p/DPsFGpdDhFe/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-12</span></td><td>2.111</td><td><strong>891</strong></td><td>0,42</td><td>4,8%</td><td>9.401</td><td>—</td><td>descoberto via menções à marca · <strong style="color:var(--warn)">post sobre dieta e refeição livre, com a loja marcada — comeu um cookie, não divulgou a loja</strong></td></tr>
+                </tbody>
+              </table></div></div>
+            <div class="painel" data-alvo="li-cps-p" hidden><span class="ptit">Anotados sem post — Campinas</span>
+              <p class="prose">A planilha de seeding de 2025 marcou estes como tendo divulgado, mas a busca no feed de cada um <strong>não achou post nenhum</strong>. Provavelmente story.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Já fez com a gente</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th><th>Melhor reel</th><th>Em 2025</th><th>Nota</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.instagram.com/ferpenachim/" target="_blank" rel="noopener">@ferpenachim</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Fer Penachim</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>26.246</td><td><strong>9.156</strong></td><td>0,35</td><td>2,6%</td><td>64.091</td><td>—</td><td>—</td></tr>
+                  <tr><td><a href="https://www.instagram.com/laizcormanich/" target="_blank" rel="noopener">@laizcormanich</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Laiz Cormanich</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>15.070</td><td><strong>4.772</strong></td><td>0,32</td><td>3,4%</td><td>45.108</td><td>—</td><td>recebeu dia 03/05 (amou e divulgou)</td></tr>
+                  <tr><td><a href="https://www.instagram.com/_carolboscolo/" target="_blank" rel="noopener">@_carolboscolo</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Carolina Boscolo</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>18.031</td><td><strong>3.892</strong></td><td>0,22</td><td>4,6%</td><td>111.158</td><td>—</td><td>recebeu dia 04/05</td></tr>
+                  <tr><td><a href="https://www.instagram.com/vicky__beatriz/" target="_blank" rel="noopener">@vicky__beatriz</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Vitória Beatriz</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>5.202</td><td><strong>3.881</strong></td><td>0,75</td><td>5,1%</td><td>9.328</td><td>—</td><td>buscou na loja 04/05</td></tr>
+                  <tr><td><a href="https://www.instagram.com/gigicagil.oficial/" target="_blank" rel="noopener">@gigicagil.oficial</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Giovanna Gil</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>103.150</td><td><strong>3.278</strong></td><td>0,03</td><td>4,0%</td><td>11.331</td><td>—</td><td>Enviado: 11/03/2025 e nao respondeu mais</td></tr>
+                  <tr><td><a href="https://www.instagram.com/lannymaartinss/" target="_blank" rel="noopener">@lannymaartinss</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Lanny Martins</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>13.528</td><td><strong>3.133</strong></td><td>0,23</td><td>6,5%</td><td>12.891</td><td>—</td><td>recebido dia 03/05 ( divulgou )</td></tr>
+                  <tr><td><a href="https://www.instagram.com/nandasalless/" target="_blank" rel="noopener">@nandasalless</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Nanda Salles</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>24.072</td><td><strong>3.013</strong></td><td>0,13</td><td>5,3%</td><td>5.626.872</td><td>—</td><td>—</td></tr>
+                  <tr><td><a href="https://www.instagram.com/dranilanaalmeida/" target="_blank" rel="noopener">@dranilanaalmeida</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Nilana Almeida</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>20.074</td><td><strong>2.095</strong></td><td>0,10</td><td>3,0%</td><td>24.517</td><td>—</td><td>21/03/2025</td></tr>
+                  <tr><td><a href="https://www.instagram.com/acamilanatale/" target="_blank" rel="noopener">@acamilanatale</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Camile Natale</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>13.846</td><td><strong>1.463</strong></td><td>0,11</td><td>4,5%</td><td>8.956</td><td>—</td><td>AMOU</td></tr>
+                  <tr><td><a href="https://www.instagram.com/nicolekevellin/" target="_blank" rel="noopener">@nicolekevellin</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">𝑵𝒊𝒄𝒐𝒍𝒆 𝑲𝒆𝒗𝒆𝒍𝒍𝒊𝒏</span></td><td><strong>sim</strong><br><span style="font-size:.6875rem;color:var(--ink-faint)">anotado na planilha de 2025, <strong>sem post recuperável</strong></span></td><td>66.399</td><td><strong>1.224</strong></td><td>0,02</td><td>3,6%</td><td>4.983</td><td>—</td><td>ja divulgou</td></tr>
                 </tbody>
               </table></div></div>
             <div class="painel" data-alvo="li-cps-n" hidden><span class="ptit">Ainda não fizeram — Campinas</span>
@@ -1362,16 +1385,18 @@
       <div class="painel" data-alvo="li-pir" hidden><span class="ptit">Piracicaba</span>
         <div class="strip">
           <div><span class="v">34</span><span class="s">perfis na lista</span></div>
-          <div><span class="v">8</span><span class="s">com post provado e link</span></div>
+          <div><span class="v">7</span><span class="s">já fizeram, com post da loja</span></div>
+          <div><span class="v">1</span><span class="s">só marcaram a loja</span></div>
           <div><span class="v">26</span><span class="s">ainda não fizeram</span></div>
         </div>
         <div class="bloco">
           <div class="grade">
-            <button class="card-btn" data-alvo="li-pir-s"><span class="cnome">Já fizeram, com post</span><span class="cmeta">8 perfis · link de cada um</span></button>
+            <button class="card-btn" data-alvo="li-pir-s"><span class="cnome">Já fizeram, com post da loja</span><span class="cmeta">7 perfis</span></button>
+            <button class="card-btn" data-alvo="li-pir-m"><span class="cnome">Só marcaram a loja</span><span class="cmeta">1 perfis</span></button>
             <button class="card-btn" data-alvo="li-pir-n"><span class="cnome">Ainda não fizeram</span><span class="cmeta">26 perfis</span></button>
           </div>
           <div class="visor">
-            <div class="painel" data-alvo="li-pir-s" hidden><span class="ptit">Já fizeram, com post — Piracicaba</span>
+            <div class="painel" data-alvo="li-pir-s" hidden><span class="ptit">Já fizeram, com post da loja — Piracicaba</span>
               <div class="tablewrap"><table>
                 <thead><tr><th>Perfil</th><th>Já fez com a gente</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th><th>Melhor reel</th><th>Em 2025</th><th>Nota</th></tr></thead>
                 <tbody>
@@ -1379,10 +1404,17 @@
                   <tr><td><a href="https://www.instagram.com/piracicabacomcriancas/" target="_blank" rel="noopener">@piracicabacomcriancas</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DV9ppTFEwn-/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2026-03-16</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">2.290 views</span></td><td>22.812</td><td><strong>5.625</strong></td><td>0,25</td><td>1,9%</td><td>44.399</td><td>—</td><td>—</td></tr>
                   <tr><td><a href="https://www.instagram.com/piracicabasperegiaoindicacoes/" target="_blank" rel="noopener">@piracicabasperegiaoindicacoes</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DQZVBfkDow7/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-29</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">5.347 views</span></td><td>8.871</td><td><strong>5.244</strong></td><td>0,59</td><td>3,0%</td><td>225.791</td><td>—</td><td>—</td></tr>
                   <tr><td><a href="https://www.instagram.com/story.maker_b.i/" target="_blank" rel="noopener">@story.maker_b.i</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DP7QfnMEuG3/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-17</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">3.930 views</span></td><td>4.471</td><td><strong>3.035</strong></td><td>0,68</td><td>1,1%</td><td>5.415</td><td>—</td><td>—</td></tr>
-                  <tr><td><a href="https://www.instagram.com/giufantinato/" target="_blank" rel="noopener">@giufantinato</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Giulia Fantinato</span></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DQcF33ZjY7Y/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-30</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">4.062 views</span></td><td>4.051</td><td><strong>1.880</strong></td><td>0,46</td><td>12,0%</td><td>289.497</td><td>perdida</td><td>acho que cobra · Viagem na data</td></tr>
                   <tr><td><a href="https://www.instagram.com/angeladelucaf/" target="_blank" rel="noopener">@angeladelucaf</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Angela de Luca</span></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DPZgu8vCrCN/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-04</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">8.257 views</span></td><td>1.735</td><td><strong>1.556</strong></td><td>0,90</td><td>4,0%</td><td>8.257</td><td>confirmada</td><td>—</td></tr>
                   <tr><td><a href="https://www.instagram.com/ficadica.piracicaba/" target="_blank" rel="noopener">@ficadica.piracicaba</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DSiQULrkYBR/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-12-21</span><br><span style="font-size:.6875rem;color:var(--ink-faint)">565 views</span></td><td>32.178</td><td><strong>548</strong></td><td>0,02</td><td>3,4%</td><td>13.397</td><td>—</td><td>—</td></tr>
                   <tr><td><a href="https://www.instagram.com/albacristinasantoscosta/" target="_blank" rel="noopener">@albacristinasantoscosta</a></td><td><strong>sim</strong><br><a href="https://www.instagram.com/p/DPrENjNES01/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-11</span></td><td>1.729</td><td><strong>294</strong></td><td>0,17</td><td>3,3%</td><td>6.232</td><td>—</td><td>—</td></tr>
+                </tbody>
+              </table></div></div>
+            <div class="painel" data-alvo="li-pir-m" hidden><span class="ptit">Só marcaram a loja — Piracicaba</span>
+              <p class="prose">A loja aparece marcada, mas <strong>o post não é sobre ela</strong>. O link está na tabela pra conferir. Não conta como divulgação.</p>
+              <div class="tablewrap"><table>
+                <thead><tr><th>Perfil</th><th>Já fez com a gente</th><th>Seguidores</th><th>Views mediana</th><th>Alc/seg</th><th>Eng.</th><th>Melhor reel</th><th>Em 2025</th><th>Nota</th></tr></thead>
+                <tbody>
+                  <tr><td><a href="https://www.instagram.com/giufantinato/" target="_blank" rel="noopener">@giufantinato</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">Giulia Fantinato</span></td><td><strong style="color:var(--warn)">só marcou</strong><br><a href="https://www.instagram.com/p/DQcF33ZjY7Y/" target="_blank" rel="noopener" style="font-size:.75rem;font-weight:600">ver o post &rarr;</a><br><span style="font-size:.6875rem;color:var(--ink-faint)">2025-10-30</span></td><td>4.051</td><td><strong>1.880</strong></td><td>0,46</td><td>12,0%</td><td>289.497</td><td>perdida</td><td>acho que cobra · Viagem na data · <strong style="color:var(--warn)">o post marca e co-publica a loja, mas o conteúdo é &quot;bastidores da escrita&quot; — não fala da loja</strong></td></tr>
                 </tbody>
               </table></div></div>
             <div class="painel" data-alvo="li-pir-n" hidden><span class="ptit">Ainda não fizeram — Piracicaba</span>
