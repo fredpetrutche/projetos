@@ -80,27 +80,22 @@
   <header>
     <span class="eyebrow">Holy Cookie · gestão · rascunho para validação</span>
     <h1>Processo de Perdas</h1>
-    <p class="lede">O que acontece quando um produto sai do estoque sem ser vendido: um fluxograma geral e um por motivo. Montado a partir da conversa de 13/11/2026 e do manual da franquia (§5.7, AB-POP-006). Ainda não é material para os funcionários.</p>
-    <div class="legenda">
-      <span><span class="selo ok">Decidido</span> já combinado e, onde cabe, já no sistema</span>
-      <span><span class="selo aberto">Em aberto</span> falta decisão sua</span>
-    </div>
+    <p class="lede">O que acontece quando um produto sai do estoque sem ser vendido: um fluxograma geral e um por motivo. </p>
   </header>
 
   <nav class="indice" aria-label="Motivos">
-    <a href="#geral"><span class="ponto ok"></span>Fluxo geral</a>
-    <a href="#vencimento"><span class="ponto ok"></span>Vencimento</a>
-    <a href="#avaria"><span class="ponto ok"></span>Avaria ou quebra</a>
-    <a href="#producao"><span class="ponto ok"></span>Perda de produção</a>
-    <a href="#devolucao"><span class="ponto ok"></span>Devolução do cliente</a>
-    <a href="#cortesia"><span class="ponto ok"></span>Cortesia</a>
-    <a href="#equipe"><span class="ponto ok"></span>Consumo da equipe</a>
-    <a href="#inventario"><span class="ponto aberto"></span>Inventário</a>
-    <a href="#pendencias"><span class="ponto aberto"></span>Pendências</a>
+    <a href="#geral">Fluxo geral</a>
+    <a href="#vencimento">Vencimento</a>
+    <a href="#avaria">Avaria ou quebra</a>
+    <a href="#producao">Perda de produção</a>
+    <a href="#devolucao">Devolução do cliente</a>
+    <a href="#cortesia">Cortesia</a>
+    <a href="#equipe">Consumo da equipe</a>
+    <a href="#inventario">Inventário</a>
   </nav>
 
   <section id="geral">
-    <h2><span class="num">0</span> Fluxo geral <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">0</span> Fluxo geral</h2>
     <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Todo produto passa pela caixa de perdas</strong>: quem encontra separa na hora, e o responsável avalia e lança depois, quando não está no meio do atendimento. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -122,7 +117,7 @@ flowchart TD
   </section>
 
   <section id="vencimento">
-    <h2><span class="num">1</span> Vencimento <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">1</span> Vencimento</h2>
     <p class="prosa">Aparece em dois momentos: na <strong>contagem semanal</strong> ou <strong>durante a operação</strong>. O cookie assado que não pode ir para o dia seguinte também é vencimento; como ele não tem etiqueta, a foto é do produto. Pelo manual, vencido nunca é reaproveitado.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -136,7 +131,7 @@ flowchart TD
   </section>
 
   <section id="avaria">
-    <h2><span class="num">2</span> Avaria ou quebra <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">2</span> Avaria ou quebra</h2>
     <p class="prosa">Três tipos, porque o processo muda. <strong>Quebra na loja</strong> é o que estragou na mão de alguém da equipe: caiu, quebrou, derramou, rasgou ao abrir. Só <strong>chegou avariado</strong> tem ressarcimento; a perda é aprovada normalmente e o ressarcimento aparece separado no relatório.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -160,7 +155,7 @@ flowchart TD
   </section>
 
   <section id="producao">
-    <h2><span class="num">3</span> Perda de produção <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">3</span> Perda de produção</h2>
     <p class="prosa">Problema percebido antes de sair para o cliente: queimou, saiu cru, montagem errada.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -173,7 +168,7 @@ flowchart TD
   </section>
 
   <section id="devolucao">
-    <h2><span class="num">4</span> Devolução do cliente <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">4</span> Devolução do cliente</h2>
     <p class="prosa"><strong>Saiu para o cliente e voltou é devolução.</strong> Na loja, o produto volta e segue o caminho de sempre. No delivery o produto não volta: a evidência é o <strong>número do pedido</strong>, e quem lança marca se teve <strong>reembolso</strong> (a plataforma devolveu ao cliente e cobrou da loja) ou foi <strong>só perda</strong>. Com reembolso, a contestação é acompanhada depois: contestado, ganhou ou perdeu.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -197,7 +192,7 @@ flowchart TD
   </section>
 
   <section id="cortesia">
-    <h2><span class="num">5</span> Cortesia <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">5</span> Cortesia</h2>
     <p class="prosa">Produtos dados de presente: a clientes, a influenciadores, em ação de marketing ou para resolver uma reclamação.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -212,7 +207,7 @@ flowchart TD
   </section>
 
   <section id="equipe">
-    <h2><span class="num">6</span> Consumo da equipe <span class="selo ok">Decidido</span></h2>
+    <h2><span class="num">6</span> Consumo da equipe</h2>
     <p class="prosa">Consumo feito pelos funcionários, que vai sendo acumulado num saldo para pagamento futuro. Só vale para produto final do cardápio, pelo preço de balcão com 40% de desconto.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -227,26 +222,16 @@ flowchart TD
   </section>
 
   <section id="inventario">
-    <h2><span class="num">7</span> Inventário <span class="selo aberto">Em aberto</span></h2>
-    <p class="prosa">Decidido: <strong>saiu da tela de Perdas</strong>. Só o gerente lança, pela Conferência de Estoque, quando a contagem mostra falta sem causa. Vai testar na prática.</p>
+    <h2><span class="num">7</span> Inventário</h2>
+    <p class="prosa">Baixa da falta apurada na Conferência de Estoque, quando a contagem mostra diferença sem causa. Só o gerente lança, pela Conferência.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
   A[Conferência mostra falta] --> B[Gerente: realizar perda por inventário]
   B --> C[Descrição do que foi apurado]
   C --> D[Assina com o rosto]
-  D --> E{Quem aprova?}
-  classDef aberto stroke-dasharray: 5 4
-  class E aberto
     </pre></div>
   </section>
 
-  <section id="pendencias">
-    <h2><span class="num">8</span> Pendências <span class="selo aberto">Em aberto</span></h2>
-    <ul>
-      <li><strong>Inventário</strong>: quem aprova a baixa do gerente.</li>
-      <li><strong>Itens sem custo</strong>: 55 de 187 itens de estoque não têm custo cadastrado e ficam fora do total em R$.</li>
-    </ul>
-  </section>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
