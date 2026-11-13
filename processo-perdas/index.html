@@ -125,7 +125,7 @@ flowchart TD
     <h2><span class="num">1</span> Vencimento <span class="selo ok">Decidido</span></h2>
     <p class="prosa">Aparece em dois momentos: na <strong>contagem semanal</strong> ou <strong>durante a operação</strong>. O cookie assado que não pode ir para o dia seguinte também é vencimento; como ele não tem etiqueta, a foto é do produto. Pelo manual, vencido nunca é reaproveitado.</p>
     <div class="diagrama"><pre class="mermaid">
-flowchart LR
+flowchart TD
   A[Contagem semanal] --> C[Caixa de perdas]
   B[Durante a operação] --> C
   C --> D[Foto]
@@ -163,7 +163,7 @@ flowchart TD
     <h2><span class="num">3</span> Perda de produção <span class="selo ok">Decidido</span></h2>
     <p class="prosa">Problema percebido <strong>antes de sair para o cliente</strong>. Sem subcategoria: queimou, saiu cru, montagem errada vão na descrição. Massa esfarelada não é perda: o manual manda remodelar.</p>
     <div class="diagrama"><pre class="mermaid">
-flowchart LR
+flowchart TD
   A[Produto com problema] --> B{Já saiu para o cliente?}
   B -- não --> C{É massa esfarelada?}
   C -- sim --> D[Remodelar até o ponto<br/>não é perda]
@@ -208,7 +208,7 @@ flowchart TD
     <h2><span class="num">5</span> Cortesia <span class="selo ok">Decidido</span></h2>
     <p class="prosa">Sem foto. Não é perda: é custo de relacionamento. <strong>Para quem foi</strong> é obrigatório. Degustação saiu da lista.</p>
     <div class="diagrama"><pre class="mermaid">
-flowchart LR
+flowchart TD
   A[Resolver reclamação] --> B[Para quem foi: o cliente]
   C[Cortesia] --> D[Para quem foi: ex. amigo que ganhou um café]
   E[Ação de marketing] --> F[Para quem foi + nome da ação]
@@ -229,7 +229,7 @@ flowchart LR
     <h2><span class="num">6</span> Consumo da equipe <span class="selo ok">Decidido</span></h2>
     <p class="prosa">Vira a <strong>conta do funcionário</strong>. Só produto final do cardápio (funcionário não leva insumo). Valor = <strong>preço de balcão − 40%</strong>. Quem lança vê o valor a cobrar, nunca o CMV. Nome digitado livre; o relatório soma nomes iguais sem acento ou maiúscula.</p>
     <div class="diagrama"><pre class="mermaid">
-flowchart LR
+flowchart TD
   A[Funcionário consumiu] --> B[Quem consumiu: nome]
   B --> C[Só produto do cardápio]
   C --> D[Valor a cobrar = balcão − 40%]
@@ -244,7 +244,7 @@ flowchart LR
     <h2><span class="num">7</span> Inventário <span class="selo aberto">Em aberto</span></h2>
     <p class="prosa">Decidido: <strong>saiu da tela de Perdas</strong>. Só o gerente lança, pela Conferência de Estoque, quando a contagem mostra falta sem causa. Vai testar na prática.</p>
     <div class="diagrama"><pre class="mermaid">
-flowchart LR
+flowchart TD
   A[Conferência mostra falta] --> B[Gerente: realizar perda por inventário]
   B --> C[Descrição do que foi apurado]
   C --> D[Assina com o rosto]
