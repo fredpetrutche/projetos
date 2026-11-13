@@ -192,14 +192,13 @@ flowchart TD
   B6 -- ganhou --> B7[Ganhou]
   B6 -- perdeu --> B8[Perdeu]
 
-  R[Produto refeito para o cliente<br/>NÃO é perda]
     </pre></div>
     
   </section>
 
   <section id="cortesia">
     <h2><span class="num">5</span> Cortesia <span class="selo ok">Decidido</span></h2>
-    <p class="prosa">Sem foto. Não é perda: é custo de relacionamento. <strong>Para quem foi</strong> é obrigatório. Degustação saiu da lista.</p>
+    <p class="prosa">Produtos dados de presente: a clientes, a influenciadores, em ação de marketing ou para resolver uma reclamação.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
   A[Resolver reclamação] --> B[Para quem foi: o cliente]
@@ -209,13 +208,7 @@ flowchart TD
   D --> G
   F --> G
   G --> H[Gerente aprova]
-  classDef aberto stroke-dasharray: 5 4
-  class E,F aberto
     </pre></div>
-    <div class="aberto-box">
-      <span class="t">Falta confirmar</span>
-      <ul><li>"Ação de marketing" fica como tipo dentro da Cortesia (está assim no sistema), ou ação de marketing é lançada em outro lugar?</li></ul>
-    </div>
   </section>
 
   <section id="equipe">
@@ -245,17 +238,12 @@ flowchart TD
   classDef aberto stroke-dasharray: 5 4
   class E aberto
     </pre></div>
-    <div class="aberto-box">
-      <span class="t">Falta decidir</span>
-      <ul><li>Quem dá a baixa quase sempre é o próprio gerente. Ele aprova a própria baixa, ou ela já entra aprovada?</li></ul>
-    </div>
   </section>
 
   <section id="pendencias">
     <h2><span class="num">8</span> Pendências <span class="selo aberto">Em aberto</span></h2>
     <ul>
       <li><strong>Inventário</strong>: quem aprova a baixa do gerente.</li>
-      <li><strong>Ação de marketing</strong>: confirmar se é tipo da Cortesia.</li>
       <li><strong>Itens sem custo</strong>: 55 de 187 itens de estoque não têm custo cadastrado e ficam fora do total em R$.</li>
     </ul>
   </section>
