@@ -97,18 +97,22 @@
 
   <section id="geral">
     <h2><span class="num">0</span> Fluxo geral</h2>
-    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Todo produto passa pela caixa de perdas</strong>: quem encontra avisa o líder, que avalia, põe na caixa e lança depois, quando não está no meio do atendimento. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
+    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Produto saiu do estoque sem venda] --> B[Quem encontra avisa o líder]
-  B --> C[Líder avalia e põe na caixa de perdas]
-  C --> D[Durante o turno, o líder lança e assina]
-  D --> E[Descarta, guarda ou reaproveita<br/>total ou parcial]
-  E --> F[Esvazia a caixa no fechamento]
-  D --> G[Aguardando aprovação]
-  G --> H{Gerente}
-  H -- aprova --> I[Baixa o estoque na Conferência<br/>e entra no relatório de prejuízo]
-  H -- recusa com motivo --> J[Não baixa nada]
+  A[Produto saiu do estoque sem venda] --> B[Funcionário mostra para o líder]
+  B --> C[Líder libera]
+  C --> D[Funcionário põe na caixa de perdas]
+  D --> E1[Líder lança e assina]
+  D --> E2[Funcionário lança<br/>líder confere e assina]
+  E1 --> F[Descarta, guarda ou reaproveita<br/>total ou parcial]
+  E2 --> F
+  F --> G[Esvazia a caixa no fechamento]
+  E1 --> H[Aguardando aprovação]
+  E2 --> H
+  H --> I{Gerente}
+  I -- aprova --> J[Baixa o estoque na Conferência<br/>e entra no relatório de prejuízo]
+  I -- recusa com motivo --> K[Não baixa nada]
     </pre></div>
   </section>
 
