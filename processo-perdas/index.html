@@ -137,19 +137,28 @@ flowchart LR
 
   <section id="avaria">
     <h2><span class="num">2</span> Avaria ou quebra <span class="selo ok">Decidido</span></h2>
-    <p class="prosa">Três tipos, porque o processo muda. Só <strong>chegou avariado</strong> tem ressarcimento. A perda é aprovada normalmente: o ressarcimento não desfaz a perda, só aparece separado no relatório.</p>
+    <p class="prosa">Três tipos, porque o processo muda. <strong>Quebra na loja</strong> é o que estragou na mão de alguém da equipe: caiu, quebrou, derramou, rasgou ao abrir. Só <strong>chegou avariado</strong> tem ressarcimento; a perda é aprovada normalmente e o ressarcimento aparece separado no relatório.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Quebra na loja] --> B[Fluxo padrão<br/>como aconteceu na descrição]
-  E[Chegou avariado] --> F[Marca: fornecedor vai ressarcir]
-  F --> G[Fluxo padrão + gerente aprova]
-  G --> H[Ressarcimento pendente]
+  A[Quebra na loja] --> A1[Caixa de perdas]
+  A1 --> A2[Foto do produto]
+  A2 --> A3[Lança e assina<br/>descrição: como quebrou]
+  A3 --> A4[Descarta]
+  A4 --> A5[Gerente aprova]
+
+  E[Chegou avariado] --> E1[Foto do produto e da embalagem]
+  E1 --> E2[Lança marcando<br/>fornecedor vai ressarcir]
+  E2 --> E3[Descarta<br/>ou guarda, se o fornecedor pedir]
+  E3 --> E4[Gerente aprova]
+  E4 --> H[Ressarcimento pendente]
   H --> I{Fornecedor}
   I -- repôs ou estornou --> J[Ressarcido]
   I -- não aceitou --> K[Não ressarcido]
-  J --> L[Relatório: prejuízo líquido menor]
-  K --> L
-  C[Equipamento falhou] --> D[Fluxo padrão<br/>geralmente um lote com vários produtos]
+
+  C[Equipamento falhou] --> C1[Foto dos produtos]
+  C1 --> C2[Lança todos de uma vez<br/>descrição: qual equipamento e o que houve]
+  C2 --> C3[Descarta]
+  C3 --> C4[Gerente aprova]
     </pre></div>
   </section>
 
@@ -161,7 +170,11 @@ flowchart LR
   A[Produto com problema] --> B{Já saiu para o cliente?}
   B -- não --> C{É massa esfarelada?}
   C -- sim --> D[Remodelar até o ponto<br/>não é perda]
-  C -- não --> E[Perda de produção<br/>fluxo padrão]
+  C -- não --> E[Caixa de perdas]
+  E --> E1[Foto do produto]
+  E1 --> E2[Lança e assina<br/>descrição: o que deu errado]
+  E2 --> E3[Descarta]
+  E3 --> E4[Gerente aprova]
   B -- sim, e voltou --> F[Devolução do cliente]
     </pre></div>
   </section>
@@ -172,7 +185,10 @@ flowchart LR
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
   A[Na loja] --> C[Produto volta na mão]
-  C --> D[Fluxo padrão com foto do produto]
+  C --> D[Foto do produto]
+  D --> D1[Lança e assina<br/>descrição: o que o cliente reclamou]
+  D1 --> D2[Descarta]
+  D2 --> D3[Gerente aprova]
   B[Delivery] --> E[Produto quase nunca volta]
   E --> F[Evidência: print da reclamação?]
   F --> G[Plataforma reembolsa e cobra da loja?]
