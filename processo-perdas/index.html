@@ -140,16 +140,16 @@ flowchart LR
     <p class="prosa">Três tipos, porque o processo muda. Só <strong>chegou avariado</strong> tem ressarcimento. A perda é aprovada normalmente: o ressarcimento não desfaz a perda, só aparece separado no relatório.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A{Tipo} -- Quebra na loja --> B[Fluxo padrão<br/>como aconteceu na descrição]
-  A -- Equipamento falhou --> C[Fluxo padrão<br/>geralmente um lote com vários produtos]
-  A -- Chegou avariado --> D[Marca: fornecedor vai ressarcir]
-  D --> E[Fluxo padrão + gerente aprova]
-  E --> F[Ressarcimento pendente]
-  F --> G{Fornecedor}
-  G -- repôs ou estornou --> H[Ressarcido]
-  G -- não aceitou --> I[Não ressarcido]
-  H --> J[Relatório: prejuízo líquido menor]
-  I --> J
+  A[Quebra na loja] --> B[Fluxo padrão<br/>como aconteceu na descrição]
+  C[Equipamento falhou] --> D[Fluxo padrão<br/>geralmente um lote com vários produtos]
+  E[Chegou avariado] --> F[Marca: fornecedor vai ressarcir]
+  F --> G[Fluxo padrão + gerente aprova]
+  G --> H[Ressarcimento pendente]
+  H --> I{Fornecedor}
+  I -- repôs ou estornou --> J[Ressarcido]
+  I -- não aceitou --> K[Não ressarcido]
+  J --> L[Relatório: prejuízo líquido menor]
+  K --> L
     </pre></div>
   </section>
 
@@ -171,16 +171,15 @@ flowchart LR
     <p class="prosa">Decidido: <strong>saiu para o cliente e voltou é devolução</strong> (ex.: cookie cru devolvido); o produto refeito para o cliente não é perda, só o devolvido. A divisão entre loja e delivery abaixo é proposta, ainda sem sua resposta.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Cliente reclamou de um produto] --> B{Onde?}
-  B -- na loja --> C[Produto volta na mão]
+  A[Na loja] --> C[Produto volta na mão]
   C --> D[Fluxo padrão com foto do produto]
-  B -- delivery --> E[Produto quase nunca volta]
+  B[Delivery] --> E[Produto quase nunca volta]
   E --> F[Evidência: print da reclamação?]
   F --> G[Plataforma reembolsa e cobra da loja?]
   G --> H[Contestação: contestado / ganhou / perdeu?]
-  A --> I[Produto refeito para o cliente<br/>NÃO é perda]
+  I[Produto refeito para o cliente<br/>NÃO é perda]
   classDef aberto stroke-dasharray: 5 4
-  class E,F,G,H aberto
+  class B,E,F,G,H aberto
     </pre></div>
     <div class="aberto-box">
       <span class="t">Falta decidir</span>
@@ -197,15 +196,15 @@ flowchart TD
     <p class="prosa">Sem foto. Não é perda: é custo de relacionamento. <strong>Para quem foi</strong> é obrigatório. Degustação saiu da lista.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart LR
-  A{Tipo} -- Resolver reclamação --> B[Para quem foi: o cliente]
-  A -- Cortesia --> C[Para quem foi: ex. amigo que ganhou um café]
-  A -- Ação de marketing --> D[Para quem foi + nome da ação]
-  B --> E[Lança e assina, sem foto]
-  C --> E
-  D --> E
-  E --> F[Gerente aprova]
+  A[Resolver reclamação] --> B[Para quem foi: o cliente]
+  C[Cortesia] --> D[Para quem foi: ex. amigo que ganhou um café]
+  E[Ação de marketing] --> F[Para quem foi + nome da ação]
+  B --> G[Lança e assina, sem foto]
+  D --> G
+  F --> G
+  G --> H[Gerente aprova]
   classDef aberto stroke-dasharray: 5 4
-  class D aberto
+  class E,F aberto
     </pre></div>
     <div class="aberto-box">
       <span class="t">Falta confirmar</span>
