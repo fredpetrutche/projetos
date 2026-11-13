@@ -123,14 +123,12 @@ flowchart TD
 
   <section id="vencimento">
     <h2><span class="num">1</span> Vencimento <span class="selo ok">Decidido</span></h2>
-    <p class="prosa">Aparece quase sempre na <strong>contagem semanal</strong>. A <strong>sobra do fim do dia</strong> (assado que não pode ir para o dia seguinte) também é vencimento, lançada no fechamento. Pelo manual, vencido nunca é reaproveitado.</p>
+    <p class="prosa">Aparece em dois momentos: na <strong>contagem semanal</strong> ou <strong>durante a operação</strong>. Pelo manual, vencido nunca é reaproveitado.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart LR
-  A{Onde apareceu?} -- contagem semanal --> B[Caixa de perdas]
-  A -- no dia a dia --> B
-  A -- sobra do dia --> C[Lança no fechamento]
-  B --> D[Foto da etiqueta de validade]
-  C --> D
+  A[Contagem semanal] --> C[Caixa de perdas]
+  B[Durante a operação] --> C
+  C --> D[Foto da etiqueta de validade]
   D --> E[Lança e assina]
   E --> F[Descarta]
   F --> G[Gerente aprova]
