@@ -161,18 +161,14 @@ flowchart TD
 
   <section id="producao">
     <h2><span class="num">3</span> Perda de produção <span class="selo ok">Decidido</span></h2>
-    <p class="prosa">Problema percebido <strong>antes de sair para o cliente</strong>. Sem subcategoria: queimou, saiu cru, montagem errada vão na descrição. Massa esfarelada não é perda: o manual manda remodelar.</p>
+    <p class="prosa">Problema percebido <strong>antes de sair para o cliente</strong>: queimou, saiu cru, montagem errada. Se já saiu e voltou, é <strong>Devolução do cliente</strong>. Quando o produto vai ser usado de outro jeito (ex.: massa que deu problema e vai para o milkshake), marca <strong>"produto será reaproveitado (total ou parcialmente)"</strong>.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Produto com problema] --> B{Já saiu para o cliente?}
-  B -- não --> C{É massa esfarelada?}
-  C -- sim --> D[Remodelar até o ponto<br/>não é perda]
-  C -- não --> E[Caixa de perdas]
-  E --> E1[Foto]
-  E1 --> E2[Lança e assina]
-  E2 --> E3[Descarta]
-  E3 --> E4[Gerente aprova]
-  B -- sim, e voltou --> F[Devolução do cliente]
+  A[Perda de produção] --> B[Caixa de perdas]
+  B --> C[Foto]
+  C --> D[Lança e assina<br/>marcando, se for o caso: produto será reaproveitado]
+  D --> E[Descarta ou reaproveita]
+  E --> F[Gerente aprova]
     </pre></div>
   </section>
 
@@ -261,7 +257,6 @@ flowchart TD
   <section id="pendencias">
     <h2><span class="num">8</span> Pendências <span class="selo aberto">Em aberto</span></h2>
     <ul>
-      <li><strong>Quebras parciais.</strong> Ex.: massa de cookie deu problema e foi reaproveitada no milkshake. A massa saiu do estoque, mas virou parte de uma venda cuja ficha não tem massa; na Conferência aparece como falta. Não é bem perda nem consumo de ficha.</li>
       <li><strong>Devolução no delivery</strong>: as três perguntas acima.</li>
       <li><strong>Inventário</strong>: quem aprova a baixa do gerente.</li>
       <li><strong>Ação de marketing</strong>: confirmar se é tipo da Cortesia.</li>
