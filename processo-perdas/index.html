@@ -101,18 +101,14 @@
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
   A[Produto saiu do estoque sem venda] --> B[Quem encontra avisa o líder]
-  B --> B1[Líder avalia e põe na caixa de perdas]
-  B1 --> C[Até o fim do turno, o líder lança]
-  C --> F{Motivo pede foto?}
-  F -- sim --> G[Foto de evidência obrigatória]
-  F -- não --> H
-  G --> H[Confere o total em R$ e assina com o rosto]
-  H --> I[Descarta o produto]
-  I --> J[Fechamento confere a caixa vazia]
-  H --> K[Aguardando aprovação]
-  K --> L{Gerente}
-  L -- aprova --> M[Baixa o estoque na Conferência<br/>e entra no relatório de prejuízo]
-  L -- recusa com motivo --> N[Não baixa nada]
+  B --> C[Líder avalia e põe na caixa de perdas]
+  C --> D[Durante o turno, o líder lança e assina]
+  D --> E[Descarta, guarda ou reaproveita<br/>total ou parcial]
+  E --> F[Esvazia a caixa no fechamento]
+  D --> G[Aguardando aprovação]
+  G --> H{Gerente}
+  H -- aprova --> I[Baixa o estoque na Conferência<br/>e entra no relatório de prejuízo]
+  H -- recusa com motivo --> J[Não baixa nada]
     </pre></div>
   </section>
 
