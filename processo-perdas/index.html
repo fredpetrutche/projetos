@@ -92,7 +92,7 @@
     <a href="#vencimento"><span class="ponto ok"></span>Vencimento</a>
     <a href="#avaria"><span class="ponto ok"></span>Avaria ou quebra</a>
     <a href="#producao"><span class="ponto ok"></span>Perda de produção</a>
-    <a href="#devolucao"><span class="ponto aberto"></span>Devolução do cliente</a>
+    <a href="#devolucao"><span class="ponto ok"></span>Devolução do cliente</a>
     <a href="#cortesia"><span class="ponto ok"></span>Cortesia</a>
     <a href="#equipe"><span class="ponto ok"></span>Consumo da equipe</a>
     <a href="#inventario"><span class="ponto aberto"></span>Inventário</a>
@@ -173,31 +173,28 @@ flowchart TD
   </section>
 
   <section id="devolucao">
-    <h2><span class="num">4</span> Devolução do cliente <span class="selo aberto">Em aberto</span></h2>
-    <p class="prosa">Decidido: <strong>saiu para o cliente e voltou é devolução</strong> (ex.: cookie cru devolvido); o produto refeito para o cliente não é perda, só o devolvido. A divisão entre loja e delivery abaixo é proposta, ainda sem sua resposta.</p>
+    <h2><span class="num">4</span> Devolução do cliente <span class="selo ok">Decidido</span></h2>
+    <p class="prosa"><strong>Saiu para o cliente e voltou é devolução.</strong> Na loja, o produto volta e segue o caminho de sempre. No delivery o produto não volta: a evidência é o <strong>número do pedido</strong>, e quem lança marca se teve <strong>reembolso</strong> (a plataforma devolveu ao cliente e cobrou da loja) ou foi <strong>só perda</strong>. Com reembolso, a contestação é acompanhada depois: contestado, ganhou ou perdeu.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Na loja] --> C[Produto volta na mão]
-  C --> D[Foto]
-  D --> D1[Lança e assina]
-  D1 --> D2[Descarta]
-  D2 --> D3[Gerente aprova]
-  B[Delivery] --> E[Produto quase nunca volta]
-  E --> F[Evidência: print da reclamação?]
-  F --> G[Plataforma reembolsa e cobra da loja?]
-  G --> H[Contestação: contestado / ganhou / perdeu?]
-  I[Produto refeito para o cliente<br/>NÃO é perda]
-  classDef aberto stroke-dasharray: 5 4
-  class B,E,F,G,H aberto
+  A[Na loja] --> A1[Caixa de perdas]
+  A1 --> A2[Foto]
+  A2 --> A3[Lança e assina]
+  A3 --> A4[Descarta]
+  A4 --> A5[Gerente aprova]
+
+  B[Delivery] --> B1[Lança e assina<br/>com o número do pedido, sem foto]
+  B1 --> B2{Reembolso ou perda?}
+  B2 -- perda --> B3[Gerente aprova]
+  B2 -- reembolso --> B4[Gerente aprova]
+  B4 --> B5[Contestação na plataforma]
+  B5 --> B6{Resultado}
+  B6 -- ganhou --> B7[Ganhou]
+  B6 -- perdeu --> B8[Perdeu]
+
+  R[Produto refeito para o cliente<br/>NÃO é perda]
     </pre></div>
-    <div class="aberto-box">
-      <span class="t">Falta decidir</span>
-      <ul>
-        <li>Devolução é mais na loja ou no delivery? São mesmo dois processos (duas subcategorias)?</li>
-        <li>No delivery, vale o print da reclamação como evidência, ou a foto deixa de ser obrigatória?</li>
-        <li>Alguém contesta reembolso no iFood/99 hoje? Acompanhar o resultado como no ressarcimento?</li>
-      </ul>
-    </div>
+    
   </section>
 
   <section id="cortesia">
@@ -257,7 +254,6 @@ flowchart TD
   <section id="pendencias">
     <h2><span class="num">8</span> Pendências <span class="selo aberto">Em aberto</span></h2>
     <ul>
-      <li><strong>Devolução no delivery</strong>: as três perguntas acima.</li>
       <li><strong>Inventário</strong>: quem aprova a baixa do gerente.</li>
       <li><strong>Ação de marketing</strong>: confirmar se é tipo da Cortesia.</li>
       <li><strong>Itens sem custo</strong>: 55 de 187 itens de estoque não têm custo cadastrado e ficam fora do total em R$.</li>
