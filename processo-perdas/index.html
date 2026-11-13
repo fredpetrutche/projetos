@@ -123,12 +123,12 @@ flowchart TD
 
   <section id="vencimento">
     <h2><span class="num">1</span> Vencimento <span class="selo ok">Decidido</span></h2>
-    <p class="prosa">Aparece em dois momentos: na <strong>contagem semanal</strong> ou <strong>durante a operação</strong>. Pelo manual, vencido nunca é reaproveitado.</p>
+    <p class="prosa">Aparece em dois momentos: na <strong>contagem semanal</strong> ou <strong>durante a operação</strong>. O cookie assado que não pode ir para o dia seguinte também é vencimento; como ele não tem etiqueta, a foto é do produto. Pelo manual, vencido nunca é reaproveitado.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart LR
   A[Contagem semanal] --> C[Caixa de perdas]
   B[Durante a operação] --> C
-  C --> D[Foto da etiqueta de validade]
+  C --> D[Foto do produto<br/>com a etiqueta, quando tiver]
   D --> E[Lança e assina]
   E --> F[Descarta]
   F --> G[Gerente aprova]
