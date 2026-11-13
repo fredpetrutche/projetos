@@ -96,14 +96,13 @@
 
   <section id="geral">
     <h2><span class="num">0</span> Fluxo geral</h2>
-    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Todo produto passa pela caixa de perdas</strong>: quem encontra separa na hora, e o responsável avalia e lança depois, quando não está no meio do atendimento. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
+    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Todo produto passa pela caixa de perdas</strong>: quem encontra avisa o líder, que avalia, põe na caixa e lança depois, quando não está no meio do atendimento. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Produto saiu do estoque sem venda] --> B[Quem encontra põe na CAIXA DE PERDAS<br/>fora do preparo e do balcão]
-  B --> C[Até o fim do turno, o RESPONSÁVEL lança]
-  C --> D[Motivo → tipo → nome → data → produtos]
-  D --> E[Descrição: o que aconteceu e a causa]
-  E --> F{Motivo pede foto?<br/>vencimento, avaria,<br/>produção, devolução}
+  A[Produto saiu do estoque sem venda] --> B[Quem encontra avisa o líder]
+  B --> B1[Líder avalia e põe na caixa de perdas]
+  B1 --> C[Até o fim do turno, o líder lança]
+  C --> F{Motivo pede foto?<br/>vencimento, avaria,<br/>produção, devolução}
   F -- sim --> G[Foto de evidência obrigatória]
   F -- não --> H
   G --> H[Confere o total em R$ e assina com o rosto]
