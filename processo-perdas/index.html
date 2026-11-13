@@ -88,9 +88,8 @@
     <a href="#vencimento">Produto vencido</a>
     <a href="#chegou-estragado">Chegou estragado</a>
     <a href="#quebra-loja">Quebra na loja</a>
-    <a href="#equipamento">Perda por equipamento</a>
-    <a href="#producao">Perda de produção</a>
-    <a href="#devolucao">Devolução de venda</a>
+    <a href="#producao">Perda durante produção</a>
+    <a href="#devolucao">Devolução do cliente</a>
     <a href="#cortesia">Cortesia</a>
     <a href="#equipe">Consumo da equipe</a>
     <a href="#inventario">Inventário</a>
@@ -161,25 +160,12 @@ flowchart TD
     </pre></div>
   </section>
 
-  <section id="equipamento">
-    <h2><span class="num">4</span> Perda por equipamento</h2>
-    <p class="prosa">Freezer ou geladeira parou e estragou o que estava dentro.</p>
-    <div class="diagrama"><pre class="mermaid">
-flowchart TD
-  A[Perda por equipamento] --> B[Caixa de perdas]
-  B --> C[Foto]
-  C --> D[Lança e assina]
-  D --> E[Descarta]
-  E --> F[Gerente aprova]
-    </pre></div>
-  </section>
-
   <section id="producao">
-    <h2><span class="num">5</span> Perda de produção</h2>
+    <h2><span class="num">4</span> Perda durante produção</h2>
     <p class="prosa">Problema percebido antes de sair para o cliente: queimou, saiu cru, montagem errada.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Perda de produção] --> B[Caixa de perdas]
+  A[Perda durante produção] --> B[Caixa de perdas]
   B --> C[Foto]
   C --> D[Lança e assina<br/>marcando, se for o caso: produto será reaproveitado]
   D --> E[Descarta ou reaproveita]
@@ -188,7 +174,7 @@ flowchart TD
   </section>
 
   <section id="devolucao">
-    <h2><span class="num">6</span> Devolução de venda</h2>
+    <h2><span class="num">5</span> Devolução do cliente</h2>
     <p class="prosa"><strong>Saiu para o cliente e voltou é devolução.</strong> Na loja, o produto volta e segue o caminho de sempre. No delivery o produto não volta: a evidência é o <strong>número do pedido</strong>, e quem lança marca se teve <strong>reembolso</strong> (a plataforma devolveu ao cliente e cobrou da loja) ou foi <strong>só perda</strong>. Com reembolso, a contestação é acompanhada depois: contestado, ganhou ou perdeu.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -212,7 +198,7 @@ flowchart TD
   </section>
 
   <section id="cortesia">
-    <h2><span class="num">7</span> Cortesia</h2>
+    <h2><span class="num">6</span> Cortesia</h2>
     <p class="prosa">Produtos dados de presente: a clientes, a influenciadores, em ação de marketing ou para resolver uma reclamação.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -227,7 +213,7 @@ flowchart TD
   </section>
 
   <section id="equipe">
-    <h2><span class="num">8</span> Consumo da equipe</h2>
+    <h2><span class="num">7</span> Consumo da equipe</h2>
     <p class="prosa">Consumo feito pelos funcionários, que vai sendo acumulado num saldo para pagamento futuro. Só vale para produto final do cardápio, pelo preço de balcão com 40% de desconto.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
@@ -242,7 +228,7 @@ flowchart TD
   </section>
 
   <section id="inventario">
-    <h2><span class="num">9</span> Inventário</h2>
+    <h2><span class="num">8</span> Inventário</h2>
     <p class="prosa">Baixa da falta apurada na Conferência de Estoque, quando a contagem mostra diferença sem causa. Só o gerente lança, pela Conferência.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
