@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Rascunho do processo de perdas de estoque para validação: fluxograma geral e um por motivo, com o que está decidido e o que está em aberto.">
+<title>Processo de Perdas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  /* Layout: coluna única de leitura; cada motivo é um bloco com selo de status, fluxograma e o que está em aberto. */
+  :root {
+    --bg: #F4F2EE; --surface: #FFFFFF; --ink: #1E1B18; --soft: #625B52; --faint: #9A9187;
+    --rule: #DDD7CE; --accent: #9C3D22;
+    --ok: #2E6B48; --ok-bg: #E3EEE6; --open: #8A5A0E; --open-bg: #F6EAD3;
+    --display: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --body: "IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15130F; --surface: #1E1B16; --ink: #EFEAE2; --soft: #A69E92; --faint: #756D62;
+      --rule: #34302A; --accent: #E08A6B;
+      --ok: #7CC198; --ok-bg: #1C2C22; --open: #E2B666; --open-bg: #33281A;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15130F; --surface: #1E1B16; --ink: #EFEAE2; --soft: #A69E92; --faint: #756D62;
+    --rule: #34302A; --accent: #E08A6B;
+    --ok: #7CC198; --ok-bg: #1C2C22; --open: #E2B666; --open-bg: #33281A;
+    color-scheme: dark;
+  }
+  body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.6; }
+  .wrap { max-width: 56rem; margin: 0 auto; padding-block: 2.5rem 5rem;
+          padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+          display: flex; flex-direction: column; gap: 2.25rem; }
+  header { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow { font-family: var(--display); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 600; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+  .lede { color: var(--soft); max-width: 62ch; }
+  .legenda { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .8rem; color: var(--soft); }
+  .selo { font-family: var(--display); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+          padding: .15rem .45rem; border-radius: 3px; white-space: nowrap; }
+  .selo.ok { background: var(--ok-bg); color: var(--ok); }
+  .selo.aberto { background: var(--open-bg); color: var(--open); }
+
+  section { display: flex; flex-direction: column; gap: .9rem; }
+  h2 { font-family: var(--display); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+       padding-bottom: .5rem; border-bottom: 2px solid var(--ink); display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  h2 .num { color: var(--faint); }
+  .prosa { color: var(--soft); max-width: 66ch; }
+  .prosa strong, li strong { color: var(--ink); font-weight: 600; }
+  ul { padding-left: 1.2rem; display: flex; flex-direction: column; gap: .3rem; color: var(--soft); font-size: .92rem; }
+  li::marker { color: var(--accent); }
+
+  .diagrama { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; overflow-x: auto; }
+  .diagrama pre.mermaid { margin: 0; text-align: center; background: transparent; }
+
+  .aberto-box { background: var(--open-bg); border-radius: 6px; padding: .8rem 1rem; display: flex; flex-direction: column; gap: .35rem; }
+  .aberto-box .t { font-family: var(--display); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--open); }
+  .aberto-box ul { color: var(--ink); }
+
+  .indice { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .indice a { font-size: .82rem; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); background: var(--surface);
+              border-radius: 4px; padding: .3rem .6rem; display: inline-flex; gap: .4rem; align-items: center; }
+  .indice a:hover, .indice a:focus-visible { border-color: var(--accent); outline: none; }
+  .ponto { width: .5rem; height: .5rem; border-radius: 50%; display: inline-block; }
+  .ponto.ok { background: var(--ok); } .ponto.aberto { background: var(--open); }
+
+  .voltar { font-family: var(--display); font-size: .68rem; letter-spacing: .11em; text-transform: uppercase;
+            color: var(--faint); text-decoration: none; display: inline-flex; align-items: center; gap: .45rem; align-self: flex-start; }
+  .voltar:hover { color: var(--accent); }
+  .voltar svg { width: .7rem; height: .7rem; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  * { box-sizing: border-box; } body { margin: 0; } h1, h2, p, ul { margin: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="voltar" href="../"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>Projetos</a>
+  <header>
+    <span class="eyebrow">Holy Cookie · gestão · rascunho para validação</span>
+    <h1>Processo de Perdas</h1>
+    <p class="lede">O que acontece quando um produto sai do estoque sem ser vendido: um fluxograma geral e um por motivo. Montado a partir da conversa de 13/11/2026 e do manual da franquia (§5.7, AB-POP-006). Ainda não é material para os funcionários.</p>
+    <div class="legenda">
+      <span><span class="selo ok">Decidido</span> já combinado e, onde cabe, já no sistema</span>
+      <span><span class="selo aberto">Em aberto</span> falta decisão sua</span>
+    </div>
+  </header>
+
+  <nav class="indice" aria-label="Motivos">
+    <a href="#geral"><span class="ponto ok"></span>Fluxo geral</a>
+    <a href="#vencimento"><span class="ponto ok"></span>Vencimento</a>
+    <a href="#avaria"><span class="ponto ok"></span>Avaria ou quebra</a>
+    <a href="#producao"><span class="ponto ok"></span>Perda de produção</a>
+    <a href="#devolucao"><span class="ponto aberto"></span>Devolução do cliente</a>
+    <a href="#cortesia"><span class="ponto ok"></span>Cortesia</a>
+    <a href="#equipe"><span class="ponto ok"></span>Consumo da equipe</a>
+    <a href="#inventario"><span class="ponto aberto"></span>Inventário</a>
+    <a href="#pendencias"><span class="ponto aberto"></span>Pendências</a>
+  </nav>
+
+  <section id="geral">
+    <h2><span class="num">0</span> Fluxo geral <span class="selo ok">Decidido</span></h2>
+    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart TD
+  A[Produto saiu do estoque sem venda] --> B[Quem encontra põe na CAIXA DE PERDAS<br/>fora do preparo e do balcão]
+  B --> C[Até o fim do turno, o RESPONSÁVEL lança]
+  C --> D[Motivo → tipo → nome → data → produtos]
+  D --> E[Descrição: o que aconteceu e a causa]
+  E --> F{Motivo pede foto?<br/>vencimento, avaria,<br/>produção, devolução}
+  F -- sim --> G[Foto de evidência obrigatória]
+  F -- não --> H
+  G --> H[Confere o total em R$ e assina com o rosto]
+  H --> I[Descarta o produto]
+  I --> J[Fechamento confere a caixa vazia]
+  H --> K[Aguardando aprovação]
+  K --> L{Gerente}
+  L -- aprova --> M[Baixa o estoque na Conferência<br/>e entra no relatório de prejuízo]
+  L -- recusa com motivo --> N[Não baixa nada]
+    </pre></div>
+  </section>
+
+  <section id="vencimento">
+    <h2><span class="num">1</span> Vencimento <span class="selo ok">Decidido</span></h2>
+    <p class="prosa">Aparece quase sempre na <strong>contagem semanal</strong>. A <strong>sobra do fim do dia</strong> (assado que não pode ir para o dia seguinte) também é vencimento, lançada no fechamento. Pelo manual, vencido nunca é reaproveitado.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart LR
+  A{Onde apareceu?} -- contagem semanal --> B[Caixa de perdas]
+  A -- no dia a dia --> B
+  A -- sobra do dia --> C[Lança no fechamento]
+  B --> D[Foto da etiqueta de validade]
+  C --> D
+  D --> E[Lança e assina]
+  E --> F[Descarta]
+  F --> G[Gerente aprova]
+    </pre></div>
+  </section>
+
+  <section id="avaria">
+    <h2><span class="num">2</span> Avaria ou quebra <span class="selo ok">Decidido</span></h2>
+    <p class="prosa">Três tipos, porque o processo muda. Só <strong>chegou avariado</strong> tem ressarcimento. A perda é aprovada normalmente: o ressarcimento não desfaz a perda, só aparece separado no relatório.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart TD
+  A{Tipo} -- Quebra na loja --> B[Fluxo padrão<br/>como aconteceu na descrição]
+  A -- Equipamento falhou --> C[Fluxo padrão<br/>geralmente um lote com vários produtos]
+  A -- Chegou avariado --> D[Marca: fornecedor vai ressarcir]
+  D --> E[Fluxo padrão + gerente aprova]
+  E --> F[Ressarcimento pendente]
+  F --> G{Fornecedor}
+  G -- repôs ou estornou --> H[Ressarcido]
+  G -- não aceitou --> I[Não ressarcido]
+  H --> J[Relatório: prejuízo líquido menor]
+  I --> J
+    </pre></div>
+  </section>
+
+  <section id="producao">
+    <h2><span class="num">3</span> Perda de produção <span class="selo ok">Decidido</span></h2>
+    <p class="prosa">Problema percebido <strong>antes de sair para o cliente</strong>. Sem subcategoria: queimou, saiu cru, montagem errada vão na descrição. Massa esfarelada não é perda: o manual manda remodelar.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart LR
+  A[Produto com problema] --> B{Já saiu para o cliente?}
+  B -- não --> C{É massa esfarelada?}
+  C -- sim --> D[Remodelar até o ponto<br/>não é perda]
+  C -- não --> E[Perda de produção<br/>fluxo padrão]
+  B -- sim, e voltou --> F[Devolução do cliente]
+    </pre></div>
+  </section>
+
+  <section id="devolucao">
+    <h2><span class="num">4</span> Devolução do cliente <span class="selo aberto">Em aberto</span></h2>
+    <p class="prosa">Decidido: <strong>saiu para o cliente e voltou é devolução</strong> (ex.: cookie cru devolvido); o produto refeito para o cliente não é perda, só o devolvido. A divisão entre loja e delivery abaixo é proposta, ainda sem sua resposta.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart TD
+  A[Cliente reclamou de um produto] --> B{Onde?}
+  B -- na loja --> C[Produto volta na mão]
+  C --> D[Fluxo padrão com foto do produto]
+  B -- delivery --> E[Produto quase nunca volta]
+  E --> F[Evidência: print da reclamação?]
+  F --> G[Plataforma reembolsa e cobra da loja?]
+  G --> H[Contestação: contestado / ganhou / perdeu?]
+  A --> I[Produto refeito para o cliente<br/>NÃO é perda]
+  classDef aberto stroke-dasharray: 5 4
+  class E,F,G,H aberto
+    </pre></div>
+    <div class="aberto-box">
+      <span class="t">Falta decidir</span>
+      <ul>
+        <li>Devolução é mais na loja ou no delivery? São mesmo dois processos (duas subcategorias)?</li>
+        <li>No delivery, vale o print da reclamação como evidência, ou a foto deixa de ser obrigatória?</li>
+        <li>Alguém contesta reembolso no iFood/99 hoje? Acompanhar o resultado como no ressarcimento?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cortesia">
+    <h2><span class="num">5</span> Cortesia <span class="selo ok">Decidido</span></h2>
+    <p class="prosa">Sem foto. Não é perda: é custo de relacionamento. <strong>Para quem foi</strong> é obrigatório. Degustação saiu da lista.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart LR
+  A{Tipo} -- Resolver reclamação --> B[Para quem foi: o cliente]
+  A -- Cortesia --> C[Para quem foi: ex. amigo que ganhou um café]
+  A -- Ação de marketing --> D[Para quem foi + nome da ação]
+  B --> E[Lança e assina, sem foto]
+  C --> E
+  D --> E
+  E --> F[Gerente aprova]
+  classDef aberto stroke-dasharray: 5 4
+  class D aberto
+    </pre></div>
+    <div class="aberto-box">
+      <span class="t">Falta confirmar</span>
+      <ul><li>"Ação de marketing" fica como tipo dentro da Cortesia (está assim no sistema), ou ação de marketing é lançada em outro lugar?</li></ul>
+    </div>
+  </section>
+
+  <section id="equipe">
+    <h2><span class="num">6</span> Consumo da equipe <span class="selo ok">Decidido</span></h2>
+    <p class="prosa">Vira a <strong>conta do funcionário</strong>. Só produto final do cardápio (funcionário não leva insumo). Valor = <strong>preço de balcão − 40%</strong>. Quem lança vê o valor a cobrar, nunca o CMV. Nome digitado livre; o relatório soma nomes iguais sem acento ou maiúscula.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart LR
+  A[Funcionário consumiu] --> B[Quem consumiu: nome]
+  B --> C[Só produto do cardápio]
+  C --> D[Valor a cobrar = balcão − 40%]
+  D --> E[Lança e assina, sem foto]
+  E --> F[Gerente aprova]
+  F --> G[Relatório do mês por funcionário]
+  G --> H[Cobrança: folha ou na hora<br/>fora do sistema]
+    </pre></div>
+  </section>
+
+  <section id="inventario">
+    <h2><span class="num">7</span> Inventário <span class="selo aberto">Em aberto</span></h2>
+    <p class="prosa">Decidido: <strong>saiu da tela de Perdas</strong>. Só o gerente lança, pela Conferência de Estoque, quando a contagem mostra falta sem causa. Vai testar na prática.</p>
+    <div class="diagrama"><pre class="mermaid">
+flowchart LR
+  A[Conferência mostra falta] --> B[Gerente: realizar perda por inventário]
+  B --> C[Descrição do que foi apurado]
+  C --> D[Assina com o rosto]
+  D --> E{Quem aprova?}
+  classDef aberto stroke-dasharray: 5 4
+  class E aberto
+    </pre></div>
+    <div class="aberto-box">
+      <span class="t">Falta decidir</span>
+      <ul><li>Quem dá a baixa quase sempre é o próprio gerente. Ele aprova a própria baixa, ou ela já entra aprovada?</li></ul>
+    </div>
+  </section>
+
+  <section id="pendencias">
+    <h2><span class="num">8</span> Pendências <span class="selo aberto">Em aberto</span></h2>
+    <ul>
+      <li><strong>Quebras parciais.</strong> Ex.: massa de cookie deu problema e foi reaproveitada no milkshake. A massa saiu do estoque, mas virou parte de uma venda cuja ficha não tem massa; na Conferência aparece como falta. Não é bem perda nem consumo de ficha.</li>
+      <li><strong>Devolução no delivery</strong>: as três perguntas acima.</li>
+      <li><strong>Inventário</strong>: quem aprova a baixa do gerente.</li>
+      <li><strong>Ação de marketing</strong>: confirmar se é tipo da Cortesia.</li>
+      <li><strong>Itens sem custo</strong>: 55 de 187 itens de estoque não têm custo cadastrado e ficam fora do total em R$.</li>
+    </ul>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+  // Fluxogramas: tema acompanha o claro/escuro do aparelho.
+  const escuro = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  mermaid.initialize({ startOnLoad: true, theme: escuro ? "dark" : "neutral", flowchart: { htmlLabels: true, curve: "basis" } });
+</script>
+</body>
+</html>
