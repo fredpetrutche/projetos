@@ -101,7 +101,7 @@
 
   <section id="geral">
     <h2><span class="num">0</span> Fluxo geral <span class="selo ok">Decidido</span></h2>
-    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
+    <p class="prosa">Vale para todos os motivos lançados na tela de Perdas. <strong>Todo produto passa pela caixa de perdas</strong>: quem encontra separa na hora, e o responsável avalia e lança depois, quando não está no meio do atendimento. <strong>Subcategoria só existe quando o processo muda</strong>; quando só a causa muda, ela vai na descrição.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
   A[Produto saiu do estoque sem venda] --> B[Quem encontra põe na CAIXA DE PERDAS<br/>fora do preparo e do balcão]
@@ -146,7 +146,8 @@ flowchart TD
   A3 --> A4[Descarta]
   A4 --> A5[Gerente aprova]
 
-  E[Chegou avariado] --> E1[Foto do produto e da embalagem]
+  E[Chegou avariado] --> E0[Caixa de perdas]
+  E0 --> E1[Foto do produto e da embalagem]
   E1 --> E2[Lança marcando<br/>fornecedor vai ressarcir]
   E2 --> E3[Descarta<br/>ou guarda, se o fornecedor pedir]
   E3 --> E4[Gerente aprova]
@@ -155,7 +156,8 @@ flowchart TD
   I -- repôs ou estornou --> J[Ressarcido]
   I -- não aceitou --> K[Não ressarcido]
 
-  C[Equipamento falhou] --> C1[Foto dos produtos]
+  C[Equipamento falhou] --> C0[Caixa de perdas<br/>se não couber, lugar separado e identificado]
+  C0 --> C1[Foto dos produtos]
   C1 --> C2[Lança todos de uma vez<br/>descrição: qual equipamento e o que houve]
   C2 --> C3[Descarta]
   C3 --> C4[Gerente aprova]
