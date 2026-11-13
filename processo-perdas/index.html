@@ -140,12 +140,6 @@ flowchart LR
     <p class="prosa">Três tipos, porque o processo muda. <strong>Quebra na loja</strong> é o que estragou na mão de alguém da equipe: caiu, quebrou, derramou, rasgou ao abrir. Só <strong>chegou avariado</strong> tem ressarcimento; a perda é aprovada normalmente e o ressarcimento aparece separado no relatório.</p>
     <div class="diagrama"><pre class="mermaid">
 flowchart TD
-  A[Quebra na loja] --> A1[Caixa de perdas]
-  A1 --> A2[Foto]
-  A2 --> A3[Lança e assina]
-  A3 --> A4[Descarta]
-  A4 --> A5[Gerente aprova]
-
   E[Chegou avariado] --> E0[Caixa de perdas]
   E0 --> E1[Foto]
   E1 --> E2[Lança e assina<br/>marcando: fornecedor vai ressarcir]
@@ -156,11 +150,12 @@ flowchart TD
   I -- repôs ou estornou --> J[Ressarcido]
   I -- não aceitou --> K[Não ressarcido]
 
-  C[Equipamento falhou] --> C0[Caixa de perdas]
-  C0 --> C1[Foto]
-  C1 --> C2[Lança e assina]
-  C2 --> C3[Descarta]
-  C3 --> C4[Gerente aprova]
+  A[Quebra na loja] --> A1[Caixa de perdas]
+  C[Equipamento falhou] --> A1
+  A1 --> A2[Foto]
+  A2 --> A3[Lança e assina]
+  A3 --> A4[Descarta]
+  A4 --> A5[Gerente aprova]
     </pre></div>
   </section>
 
